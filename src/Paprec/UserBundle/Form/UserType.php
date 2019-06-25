@@ -55,11 +55,7 @@ class UserType extends AbstractType
                 "expanded" => true,
                 "multiple" => true
             ))
-            ->add('divisions', ChoiceType::class, array(
-                "choices" => $options['divisions'],
-                "expanded" => true,
-                "multiple" => true
-            ))
+//            ->add('postalCodes', TextType::class)
         ;
     }
     

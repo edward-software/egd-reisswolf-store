@@ -42,9 +42,9 @@ class AccessExtension extends \Twig_Extension
                 if(!$this->container->get('security.authorization_checker')->isGranted($role)) {
                     return false;
                 }
-                if (!in_array($division, $token->getUser()->getDivisions())) {
-                    return false;
-                }
+//                if (!in_array($division, $token->getUser()->getDivisions())) {
+//                    return false;
+//                }
             }
         }
         return true;

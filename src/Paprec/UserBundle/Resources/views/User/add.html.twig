@@ -115,17 +115,15 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <div class="form-label">{{ 'User.User.Divisions'|trans }}</div>
-                                    <div class="form-content">
-                                        {% for checkbox in form.divisions.children %}
-                                            <div class="form__check ml-4">
-                                                {{ form_widget(checkbox) }}
-                                                {{ form_label(checkbox)|nl2br }}
-                                            </div>
-                                        {% endfor %}
-                                    </div>
-                                </div>
+                                {#<div class="form-group">#}
+                                    {#<div class="form-label">{{ 'User.User.Postal-codes'|trans }}</div>#}
+                                    {#<div class="form-content">#}
+                                        {#<div class="form__check ml-4">#}
+                                            {#{{ form_widget(form.postalCodes, {'attr': {'class': 'form-control'}}) }}#}
+                                            {#{{ form_errors(form.postalCodes) }}#}
+                                        {#</div>#}
+                                    {#</div>#}
+                                {#</div>#}
                             </div>
                         </div>
                     </div>

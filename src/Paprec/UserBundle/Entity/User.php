@@ -92,12 +92,13 @@ class User extends BaseUser
      */
     private $firstName;
 
-    /**
-     * @var array
-     *
-     * @ORM\Column(name="divisions", type="simple_array", nullable=true)
-     */
-    private $divisions;
+//    /**
+//     * @var string
+//     *
+//     * @ORM\Column(name="postalCodes", type="string", length=255)
+//     * @Assert\NotBlank()
+//     */
+//    private $postalCodes;
 
     /**
      * #################################
@@ -296,29 +297,29 @@ class User extends BaseUser
         return $this->deleted;
     }
 
-    /**
-     * Set divisions.
-     *
-     * @param array|null $divisions
-     *
-     * @return User
-     */
-    public function setDivisions($divisions = null)
-    {
-        $this->divisions = $divisions;
-
-        return $this;
-    }
-
-    /**
-     * Get divisions.
-     *
-     * @return array|null
-     */
-    public function getDivisions()
-    {
-        return $this->divisions;
-    }
+//    /**
+//     * Set postalCodes.
+//     *
+//     * @param string $postalCodes
+//     *
+//     * @return User
+//     */
+//    public function setPostalCodes($postalCodes)
+//    {
+//        $this->postalCodes = $postalCodes;
+//
+//        return $this;
+//    }
+//
+//    /**
+//     * Get postalCodes.
+//     *
+//     * @return string
+//     */
+//    public function getPostalCodes()
+//    {
+//        return $this->postalCodes;
+//    }
 
     /**
      * Add productDIQuote.

@@ -195,14 +195,8 @@ class UserController extends Controller
             $roles[$role] = $role;
         }
 
-        $divisions = array();
-        foreach($this->getParameter('paprec_divisions') as $division) {
-            $divisions[$division] = $division;
-        }
-
         $form = $this->createForm(UserType::class, $user, array(
-            'roles' => $roles,
-            'divisions' => $divisions
+            'roles' => $roles
         ));
 
         $form->handleRequest($request);
@@ -242,14 +236,8 @@ class UserController extends Controller
             $roles[$role] = $role;
         }
 
-        $divisions = array();
-        foreach($this->getParameter('paprec_divisions') as $division) {
-            $divisions[$division] = $division;
-        }
-
         $form = $this->createForm(UserType::class, $user, array(
-            'roles' => $roles,
-            'divisions' => $divisions
+            'roles' => $roles
         ));
 
         $form->handleRequest($request);
