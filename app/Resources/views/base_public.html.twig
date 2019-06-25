@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ asset('build/public.css') }}">
+    <link rel="stylesheet" href="{{ paprec_public_site_url }}/wp-content/themes/paprec/style.css?ver=1.0">
+    <link rel="stylesheet" href="{{ paprec_public_site_url }}/wp-content/themes/paprec/css/styles.css?te=fesg">
+    <link rel="icon" type="image/png" href="{{ paprec_public_site_url }}/wp-content/themes/paprec/img/favicon.png">
+
+
+    {% block stylesheets %}{% endblock %}
+
+</head>
+<body class="single page-template-default page page-id-2 logged-in page-d-exemple tunnel">
+
+<!-- DESKTOP -->
+<header class="header">
+    <div class="header__shortlinks">
+        <div class="wrapper">
+            <nav role="navigation">
+                <ul>
+                    {{ render(controller('PaprecPublicBundle:Common:getMenuFromWP', {'slug': 'shortlinks-menu'})) }}
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <div class="wrapper">
+        <div class="header__menu">
+
+            <a class="header__cta" href="javascript:void(0);"
+               data-url="{{ path('paprec_public_common_loadPopupRecycle') }}">Recyclez<br>vos déchets</a>
+            <ul class="menu" id="menu-main-menu">
+                {{ render(controller('PaprecPublicBundle:Common:getMenuFromWP', {'slug': 'header-menu'})) }}
+            </ul>
+        </div>
+        <a href="{{ paprec_public_site_url }}" class="header__logo">
+        </a>
+    </div>
+</header>
+<!-- END DESKTOP -->
+
+<!-- MOBILE -->
+<header class="menu-mobile">
+    <div class="menu-mobile__header">
+        <div class="menu-mobile__header__logo">
+            <a href="/"><img class="" src="{{ paprec_public_site_url }}/wp-content/themes/paprec/img/logo_mobile.jpg"
+                             alt="logo_paprec"></a>
+        </div>
+        <i class="fa fa-bars" id="toggleMenuMobile"></i>
+    </div>
+
+
+    <div class="menu-mobile-area">
+        <div class="menu-mobile-area__top">
+            <p>Menu</p>
+            {{ render(controller('PaprecPublicBundle:Common:getMenuFromWP', {'slug': 'header-menu', 'isMobile': true})) }}
+        </div>
+
+        <div class="menu-mobile-area__center">
+            <a class="header__cta" href="javascript:void(0);"
+               data-url="{{ path('paprec_public_common_loadPopupRecycle') }}">Recyclez <br>vos déchets</a>
+        </div>
+
+        <div class="menu-mobile-area__bottom">
+            {{ render(controller('PaprecPublicBundle:Common:getMenuFromWP', {'slug': 'shortlinks-menu', 'isMobile': true})) }}
+        </div>
+    </div>
+</header>
+<!-- END MOBILE-->
+
+{# Affichage du menu fixe à droite tout le temps #}
+<div class="fixedright">
+    <a href="javascript:void(0);" data-url="{{ path('paprec_public_common_loadPopupRecycle') }}" class="green">
+        RECYCLEZ
+        <br>
+        VOS DÉCHETS
+    </a>
+    <a href="{{ path('paprec_public_home_contactForm') }}" class="blue">
+        Contactez-nous
+    </a>
+    <a href="{{ paprec_public_site_url }}/store-locator" class="lightblue">
+        Nous trouver
+    </a>
+</div>
+
+<main role="main">
+    <div class="breadcrumb">
+        <div class="wrapper">
+            <a href="#">Accueil</a> > <a href="#">Recyclez vos déchets</a>
+            <h2>Votre solution
+                <span>EasyRecyclage</span>
+                {% if 'packaged' in  app.request.get('_route') %}
+                    {{ 'Public.Breadcrumb.Packaged'|trans }}
+                    {% if 'chantier' in app.request.get('_route') %}
+                        {{ 'Public.Breadcrumb.Chantier'|trans }}
+                    {% else %}
+                        {{ 'Public.Breadcrumb.D3E'|trans }}
+                    {% endif %}
+
+                {% else %}
+                    {% if 'corp_' in app.request.get('_route') %}
+                        {{ 'Public.Breadcrumb.OnMeasure'|trans }}
+                    {% else %}
+                        {{ 'Public.Breadcrumb.Custom'|trans }}
+                    {% endif %}
+                {% endif %}
+            </h2>
+        </div>
+    </div>
+    {% block whoare %}
+        {#DESKTOP#}
+        <div class="whoare wrapper-top">
+            <div class="wrapper">
+                <div class="righter">
+                    <div class="whoare__title">{{ 'Public.Home.IAm'|trans }}</div>
+                    <a href="{{ path('paprec_public_corp_home_index') }}"
+                       class="whoare__cta {% if app.request.get('_route')|slice(0, 'paprec_public_corp'|length) == 'paprec_public_corp' %} active{% endif %}">Entreprise<br>&
+                        administration</a>
+                    <a href="{{ path('paprec_public_non_corporate_subscription_groupe_step0') }}"
+                       class="whoare__cta {% if app.request.get('_route')|slice(0, 'paprec_public_non_corporate_subscription_groupe'|length) == 'paprec_public_non_corporate_subscription_groupe' %} active{% endif %}">Groupe<br>&
+                        réseaux</a>
+                    <a href="{{ path('paprec_public_non_corporate_subscription_collectivite_step0') }}"
+                       class="whoare__cta whoare__cta--center {% if app.request.get('_route')|slice(0, 'paprec_public_non_corporate_subscription_collectivite'|length) == 'paprec_public_non_corporate_subscription_collectivite' %} active{% endif %}">Collectivité</a>
+                    <a href="{{ path('paprec_public_non_corporate_subscription_particulier_step0') }}"
+                       class="whoare__cta whoare__cta--center {% if app.request.get('_route')|slice(0, 'paprec_public_non_corporate_subscription_particulier'|length) == 'paprec_public_non_corporate_subscription_particulier' %} active{% endif %}">Particulier</a>
+                </div>
+            </div>
+        </div>
+        {#END DESKTOP#}
+        {#MOBILE#}
+        <div class="whoare-mobile whoare wrapper-top">
+            <div class="whoare__title">{{ 'Public.Home.IAm'|trans }}</div>
+            <div class="select-container">
+                <select id="whoare-select">
+                    <option data-url="{{ path('paprec_public_corp_home_index') }}"
+                            {% if app.request.get('_route')|slice(0, 'paprec_public_corp'|length) == 'paprec_public_corp' %} selected="selected"{% endif %}>
+                        Entreprise & Administration
+                    </option>
+                    <option data-url="{{ path('paprec_public_non_corporate_subscription_groupe_step0') }}"
+                            {% if app.request.get('_route')|slice(0, 'paprec_public_non_corporate_subscription_groupe'|length) == 'paprec_public_non_corporate_subscription_groupe' %} selected="selected"{% endif %}>
+                        Groupe & réseaux
+                    </option>
+                    <option data-url="{{ path('paprec_public_non_corporate_subscription_collectivite_step0') }}"
+                            {% if app.request.get('_route')|slice(0, 'paprec_public_non_corporate_subscription_collectivite'|length) == 'paprec_public_non_corporate_subscription_collectivite' %} selected="selected"{% endif %}>
+                        Collectivité
+                    </option>
+                    <option data-url="{{ path('paprec_public_non_corporate_subscription_particulier_step0') }}"
+                            {% if app.request.get('_route')|slice(0, 'paprec_public_non_corporate_subscription_particulier'|length) == 'paprec_public_non_corporate_subscription_particulier' %} selected="selected"{% endif %}>
+                        Particulier
+                    </option>
+                </select>
+            </div>
+        </div>
+        {#END MOBILE#}
+    {% endblock %}
+
+    {% block main_content %}
+        <!-- section -->
+
+        <!-- /section -->
+    {% endblock %}
+</main>
+
+<!-- footer -->
+<footer class="footer" role="contentinfo">
+    <div class="wrapper">
+        <div class="footer__infos">
+            <a href="{{ paprec_public_site_url }}"><img
+                        src="{{ paprec_public_site_url }}/wp-content/themes/paprec/img/logo-group.png"
+                        alt="Paprec Group"></a>
+            <span>PAPREC GROUP</span>
+            <p>
+                Présent sur l'ensemble des filières existantes, le groupe est N°1 du recyclage des plastiques, du
+                papier, du carton, des déchets du bâtiment ainsi que du tri de la collecte sélective des ménages. Il est
+                N°2 du recyclage des déchets d'équipements électriques et électroniques, N°3 pour les déchets verts, le
+                bois, la biomasse et les déchets industriels banals. Grâce à l’arrivée de Coved, le groupe est désormais
+                le troisième acteur français du traitement des déchets et le numéro un du recyclage.
+            </p>
+        </div>
+
+        <div class="footer__mid">
+            <div>
+                <div class="footer__links">
+                    <ul class="menu">
+                        {{ render(controller('PaprecPublicBundle:Common:getMenuFromWP', {'slug': 'footer-menu'})) }}
+                    </ul>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="footer__social">
+            <ul class="menu">
+                {{ render(controller('PaprecPublicBundle:Common:getMenuFromWP', {'slug': 'quicklinksmenu-footer'})) }}
+            </ul>
+        </div>
+        <div class="clearfix"></div>
+        <div class="footer__copyright">
+            EasyRecyclage est une marque de Paprec Group • V.3 © 2018 - Tous droits résevrés
+        </div>
+    </div>
+</footer>
+<!-- /footer -->
+<script src="{{ asset('build/public.js') }}"></script>
+<script src="{{ paprec_public_site_url }}/wp-content/themes/paprec/js/scripts.js"></script>
+{% block javascripts %}
+
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,102 @@
+{% extends "@PaprecPublic/Common/Base/package/base_stepper.html.twig" %}
+
+{#{% block title %}#}
+
+{#{% endblock %}#}
+
+{#{% block stylesheets %}#}
+
+{#{% endblock %}#}
+{% block whoare %}
+{% endblock %}
+
+{% block sidebar %}
+    <div class="payment-form"></div>
+    {# Définition des menus affichés dans la sidebar #}
+    {% set besoin = 'active' %}
+    {% set coordonnees = 'passed' %}
+    {% set livraison = 'passed' %}
+    {% set paiement = 'active' %}
+    {{ parent() }}
+{% endblock %}
+{% block main_content_stepper %}
+    <form id="paymentForm" action="" method="post" class="main">
+        <input type="hidden" id="divisionType" value="{{ cart.division }}">
+        <div class="step">
+            <div class="bold">{% if productD3EOrder.civility == 'M' %}{{ 'General.Mr'|trans }}{% else %}{{ 'General.Mme'|trans }}{% endif %} {{ productD3EOrder.firstName }} {{ productD3EOrder.lastName }}
+                ,
+            </div>
+            <div class="recaptitle">{{ 'Public.Payment.Title'|trans }}</div>
+            <div class="choice">
+
+                <div class="choice__title">{{ 'Public.Payment.ChoiceTitle'|trans }}</div>
+                <input class="input__radio" type="radio" name="payment" id="cb"> <label
+                        for="cb">{% autoescape false %}{{ 'Public.Payment.CBPayment'|trans }}{% endautoescape %}</label>
+                <div class="clearfix"></div>
+
+                <div class="info">
+                    {{ 'Public.Payment.CBInfo'|trans }}
+                </div>
+            </div>
+            <div class="choice">
+                <input class="input__radio" type="radio" name="payment" id="virement"> <label
+                        for="virement">{% autoescape false %}{{ 'Public.Payment.VirementPayment'|trans }}{% endautoescape %}</label>
+                <div class="clearfix"></div>
+            </div>
+            <div class="choice">
+                <input class="input__radio" type="radio" name="sign" id="online"> <label for="online">
+                    {{ 'Public.Payment.OnlineSignature'|trans }}</label>
+                <div class="clearfix"></div>
+
+                <div class="info">
+                    {{ 'Public.Payment.OnlineSignatureInfo'|trans|nl2br }}
+                </div>
+            </div>
+            <div class="choice">
+                <input class="input__radio" type="radio" name="sign" id="offline"> <label
+                        for="offline">{{ 'Public.Payment.DownloadAndSendMail'|trans }}</label>
+                <div class="clearfix"></div>
+            </div>
+
+
+            <a href="#" class="backtohome button button--green">{{ 'Public.Cart.Validate'|trans }}</a>
+
+            {{ render(controller('PaprecPublicBundle:Common:getCTAsBottom', {
+                'label': 'Validate',
+                'cartUuid': cart.id,
+                'division': cart.division,
+                'stepBack': '',
+                'nextStep': '',
+                'idSubmit': ''
+            })) }}
+
+        </div>
+    </form>
+{% endblock %}
+
+{% block bottom_customizable_area %}
+    {% set customAreaImage = paprec_customizable_area('images_banner_' ~ cart.division|lower) %}
+    {% if customAreaImage is not null %}
+        {% autoescape false %}
+            {{ customAreaImage.content }}
+        {% endautoescape %}
+    {% endif %}
+
+    {% set customArea = paprec_customizable_area('reassurance_banner_chantier') %}
+    {% if customArea is not null %}
+        {% autoescape false %}
+            {{ customArea.content }}
+        {% endautoescape %}
+    {% endif %}
+
+    {% set customAreaLogo = paprec_customizable_area('logo_banner_' ~ cart.division|lower) %}
+    {% if customAreaLogo is not null %}
+        {% autoescape false %}
+            {{ customAreaLogo.content }}
+        {% endautoescape %}
+    {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+
+{% endblock %}

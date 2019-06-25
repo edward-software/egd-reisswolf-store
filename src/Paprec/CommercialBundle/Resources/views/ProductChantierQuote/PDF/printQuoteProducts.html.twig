@@ -1,0 +1,46 @@
+{% extends "@PaprecCommercial/Common/PDF/base_pdf_quote_products.html.twig" %}
+
+{% block address %} {{ productChantierQuote.address }} {{ productChantierQuote.postalCode }} {{ productChantierQuote.city }} {% endblock %}
+
+{% block products %}
+    <table>
+        <thead>
+        <tr>
+            <th>Matériel</th>
+            <th>Déchets</th>
+            <th colspan="2">Type de prestation</th>
+            <th>Tarifs à partir de (€ HT)</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for productChantierQuoteLine in productChantierQuote.productChantierQuoteLines %}
+            <tr>
+                <td> {{ productChantierQuoteLine.quantity }} {{ productChantierQuoteLine.productName }}</td>
+                <td> {{ productChantierQuoteLine.categoryName }} </td>
+                <td>
+                    {% if productChantierQuoteLine.productChantier.pictures|length > 0 %}
+                        <img src="{% if productChantierQuoteLine.productChantier.pilotPictures|length > 0 %}{{ absolute_url('/uploads/pictos/' ~ productChantierQuoteLine.productChantier.pilotPictures[0].path) }}{% endif %}"
+                             alt="#">
+                    {% endif %}
+                </td>
+                <td>
+                    - {{ productChantierQuoteLine.productChantier.description }}
+                    <br>
+
+                    - {{ productChantierQuoteLine.productChantier.dimensions }}
+                </td>
+                <td>
+                    {{ productChantierQuoteLine.totalAmount|formatAmount('EUR', app.request.locale) }}
+                </td>
+            </tr>
+        {% endfor %}
+        <tr>
+            <td>TOTAL</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>{{ productChantierQuote.totalAmount|formatAmount('EUR', app.request.locale) }}</td>
+        </tr>
+        </tbody>
+    </table>
+{% endblock %}

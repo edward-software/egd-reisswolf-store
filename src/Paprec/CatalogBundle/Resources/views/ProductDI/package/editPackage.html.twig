@@ -1,0 +1,182 @@
+{% extends "::base_admin.html.twig" %}
+
+{% block title %}
+    {{ 'Catalog.ProductDI.Edit.Packaged'|trans }}
+{% endblock %}
+
+{% block stylesheets %}
+{% endblock %}
+
+{% block content_title %}
+    {{ 'Catalog.ProductDI.ProductDIs'|trans }}
+{% endblock %}
+
+{% block main_content %}
+
+    <form id="catalogProductDIForm" action="" method="post" enctype="multipart/form-data">
+
+        <div class="col-md-12">
+            <!-- BOX -->
+            <div class="card">
+                <div class="card-header">
+                    <h4>
+                        <i class="fa fa-xs fa-pencil-alt"></i> {{ 'Catalog.ProductDI.Edit.Packaged'|trans }} #{{ productDI.id|formatId(6) }}
+                    </h4>
+                    <div class="float-right">
+
+                        <a href="javascript:void(0);" class="btn btn-sm btn-success catalog-ProductDI-save-button"><i
+                                    class="fa fa-xs fa-check"></i> {{ 'Catalog.ProductDI.Save'|trans }}</a>
+                        <a href="javascript:void(0);" class="btn btn-sm btn-danger catalog-ProductDI-cancel-button"><i
+                                    class="fa fa-xs fa-close"></i> {{ 'Catalog.ProductDI.Cancel'|trans }}</a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="col-md-7">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">{{ 'Catalog.ProductDI.Informations'|trans }}</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <div class="form-label">{{ 'Catalog.ProductDI.Name'|trans }}</div>
+                                    <div class="form-content">
+                                        {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_errors(form.name) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-label">{{ 'Catalog.ProductDI.SubName'|trans }}</div>
+                                    <div class="form-content">
+                                        {{ form_widget(form.subName, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_errors(form.subName) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-label">{{ 'Catalog.ProductDI.Description'|trans }}</div>
+                                    <div class="form-content checkbox-list">
+                                        {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_errors(form.description) }}
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <div class="form-label">{{ 'Catalog.ProductDI.Capacity'|trans }}</div>
+                                        <div class="form-content">
+                                            {{ form_widget(form.capacity, {'attr': {'class': 'form-control'}}) }}
+                                            {{ form_errors(form.capacity) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <div class="form-label">{{ 'Catalog.ProductDI.CapacityUnit'|trans }}</div>
+                                        <div class="form-content">
+                                            {{ form_widget(form.capacityUnit, {'attr': {'class': 'form-control'}}) }}
+                                            {{ form_errors(form.capacityUnit) }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-label">{{ 'Catalog.ProductDI.Dimensions'|trans }}</div>
+                                    <div class="form-content">
+                                        {{ form_widget(form.dimensions, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_errors(form.dimensions) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-label">{{ 'Catalog.ProductDI.AvailablePostalCodes'|trans }}</div>
+                                    <div class="form-content">
+                                        {{ form_widget(form.availablePostalCodes, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_errors(form.availablePostalCodes) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-label">{{ 'Catalog.ProductDI.Reference'|trans }}</div>
+                                    <div class="form-content">
+                                        {{ form_widget(form.reference, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_errors(form.reference) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-label">{{ 'Catalog.ProductDI.Arguments'|trans }}</div>
+                                    <div class="form-content">
+                                        {% for checkbox in form.arguments.children %}
+                                            <div class="form__check ml-4">
+                                                {{ form_widget(checkbox) }}
+                                                {{ form_label(checkbox)|nl2br }}
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-label">{{ 'Catalog.ProductDI.IsDisplayed'|trans }}</div>
+                                    <div class="form-content">
+                                        {% for radio in form.isDisplayed.children %}
+                                            <div class="form__check ml-4">
+                                                {{ form_widget(radio) }}
+                                                {{ form_label(radio) }}
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-label">{{ 'Catalog.ProductDI.PackageUnitPrice'|trans }}</div>
+                                    <div class="form-content">
+                                        {{ form_widget(form.packageUnitPrice, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_errors(form.packageUnitPrice) }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{ form_rest(form) }}
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="float-right">
+                    <a href="javascript:void(0);" class="btn btn-sm btn-success catalog-ProductDI-save-button"><i
+                                class="fa fa-xs fa-check"></i> {{ 'Catalog.ProductDI.Save'|trans }}</a>
+                    <a href="javascript:void(0);" class="btn btn-sm btn-danger catalog-ProductDI-cancel-button"><i
+                                class="fa fa-xs fa-close"></i> {{ 'Catalog.ProductDI.Cancel'|trans }}</a>
+                </div>
+            </div>
+        </div>
+        </div>
+    </form>
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+
+    <script>
+        $(function () {
+
+            $('.catalog-ProductDI-save-button').on('click', function () {
+
+                $('#catalogProductDIForm').submit();
+
+            });
+
+
+            $('.catalog-ProductDI-cancel-button').on('click', function () {
+
+                var url = "{{ path("paprec_catalog_productDI_packaged_view", {id: productDI.id}) }}";
+
+                Swal({
+                    title: "{{ 'General.Confirm'|trans }}",
+                    text: "{{ 'Catalog.ProductDI.Confirm-cancel'|trans }}",
+                    showCancelButton: true,
+                    confirmButtonText: "{{ 'General.Yes'|trans }}",
+                    cancelButtonText: "{{ 'General.No'|trans }}"
+                }).then((result) => {
+                    if (result.value) {
+                        $(location).attr('href', url);
+                    }
+                });
+
+            });
+
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,176 @@
+{% extends "@PaprecCommercial/Common/emails/base_email.html.twig" %}
+
+{% block css_rules %}
+    <style>
+        .btn {
+            border-radius: 3px;
+            padding: 5px 15px;
+        }
+    </style>
+{% endblock %}
+
+ {% block picto_header %}
+     <img alt="Logo" src="{{ absolute_url(asset('build/static/new_mail.svg')) }}" width="75px" height="75px"
+          border="0" class="picto-header">
+ {% endblock %}
+
+{% block title_header %}
+    Vous avez une nouvelle demande
+{% endblock %}
+
+{% block subtitle_header %}
+    Formulaire Prestation {{ quoteRequest.division }} - {{ ('Public.Cart.' ~ quoteRequest.frequency|capitalize)|trans }} - N° {{ quoteRequest.id|formatId(6) }}
+{% endblock %}
+
+{% block main_content %}
+    <table class="newRequestEmailTable content-email-detail" border="0" cellpadding="0" cellspacing="0" width="100%"
+           style="margin-top: 20px;">
+        <tr style="border-bottom: 1px solid rgba(0, 0, 0, 0.6);">
+            <td>
+                Détail de la demande N° {{ quoteRequest.id|formatId(6) }}
+                - {{ quoteRequest.dateCreation|date('d/m/Y H:i') }}
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>
+                <div class="label">
+                    {{ 'Commercial.QuoteRequest.BusinessName'|trans }} : &nbsp;
+                </div>
+                <div class="value">
+                    {{ quoteRequest.businessName }}
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="label">
+                    {{ 'Commercial.QuoteRequest.Civility'|trans }} : &nbsp;
+                </div>
+                <div class="value">
+                    {% if quoteRequest.civility == 'M' %}Monsieur{% else %}Madame{% endif %}
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="label">
+                    {{ 'Commercial.QuoteRequest.LastName'|trans }} :&nbsp;
+                </div>
+                <div class="value">
+                    {{ quoteRequest.lastName }}
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="label">
+                    {{ 'Commercial.QuoteRequest.FirstName'|trans }} :&nbsp;
+                </div>
+                <div class="value">
+                    {{ quoteRequest.firstName }}
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="label">
+                    {{ 'Commercial.QuoteRequest.Function'|trans }} :&nbsp;
+                </div>
+                <div class="value">
+                    {{ quoteRequest.function }}
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="label">
+                    {{ 'Commercial.QuoteRequest.PostalCode'|trans }} :&nbsp;
+                </div>
+                <div class="value">
+                    {{ quoteRequest.postalCode }}
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>
+                <div class="label">
+                    {{ 'Commercial.QuoteRequest.Email'|trans }} :&nbsp;
+                </div>
+                <div class="value">
+                    {{ quoteRequest.email }}
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="label">
+                    {{ 'Commercial.QuoteRequest.Phone'|trans }} :&nbsp;
+                </div>
+                <div class="value">
+                    {{ quoteRequest.phone }}
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>
+                <div class="label">
+                    {{ 'Commercial.QuoteRequest.Need'|trans }} :&nbsp;
+                </div>
+                <div class="value">
+                    {{ quoteRequest.need }}
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>
+                <div class="label">
+                    {{ 'Commercial.QuoteRequest.AttachedFiles'|trans }} :&nbsp;
+                </div>
+                <div class="value">
+                    {% if quoteRequest.attachedFiles %}
+                        <a href="{{ absolute_url(path('paprec_commercial_quoteRequest_downloadAttachedFiles', {id: quoteRequest.id})) }}">Pièces
+                            jointes</a>
+                    {% endif %}
+                </div>
+            </td>
+        </tr>
+    </table>
+{% endblock %}
+
+{% block footer %}
+    <tr>
+        <td style="padding: 15px 0 10px 0;" class="footer-repondre-title">
+            Merci de répondre à cette demande sous 48h.
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="{{ absolute_url(path("paprec_commercial_quoteRequest_edit", {id: quoteRequest.id})) }}">
+                <button class="btn btn-green" style="margin: 5px 0px 15px 0px;">
+                    Mettre à jour le statut
+                </button>
+            </a>
+        </td>
+    </tr>
+{% endblock %}
+
+{% block sub_footer %}
+    <tr>
+        <td>
+            Cet email est un message automatique
+        </td>
+    </tr>
+{% endblock %}
+

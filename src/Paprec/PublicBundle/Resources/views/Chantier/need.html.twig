@@ -1,0 +1,261 @@
+{% extends "@PaprecPublic/Common/Base/base_need.html.twig" %}
+
+{#{% block title %}#}
+
+{#{% endblock %}#}
+
+{#{% block stylesheets %}#}
+
+{#{% endblock %}#}
+
+{% block sidebar %}
+    <div class="need-form chantier-need-form"></div>
+    {# Définition des menus affichés dans la sidebar #}
+    {% set besoin = 'active' %}
+    {% set coordonnees = '' %}
+    {% set offre = '' %}
+    {{ parent() }}
+{% endblock %}
+
+{% block cta_panel %}
+    <div class="step__tab__container">
+        <div class="step__tab active  step__tab--cart">{{ 'Public.Cart.NeedEstimation'|trans }}</div>
+        <a class="step__tab step__tab--quote"
+           href="{{ path('paprec_public_corp_home_requestWriting_step1', {cartUuid: cart.id}) }}">{{ 'Public.Cart.FillForm'|trans }}</a>
+        <div class="clearfix"></div>
+    </div>
+{% endblock %}
+
+{# DEBUT affichage des contenants #}
+{% block products_panel %}
+    {% if cart.displayedCategories %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block product_step_title %}
+    {{ 'Public.Cart.MyContainers'|trans }}
+{% endblock %}
+
+{% block products %}
+    {% for category in categories %}
+        {# pour chaque catégorie, si elle fait partie des displayedCategories
+        alors lui ouvre son step_wrapper #}
+        {% if category.id in cart.displayedCategories %}
+            {% set countProductsInCategory = 0 %}
+            {% for items in cart.content %}
+                {% if items['cId'] == category.id %}
+                    {% set countProductsInCategory = countProductsInCategory + 1 %}
+                {% endif %}
+            {% endfor %}
+            <div class="step__wrappertop open"
+                 id="step__wrappertop_{{ category.id }}">
+                {{ category.name }}
+                {% if countProductsInCategory > 1 %}
+                    <span>{{ countProductsInCategory }} {{ 'Public.Cart.SelectedContainers'|trans }}</span>
+                {% elseif countProductsInCategory ==     1 %}
+                    <span>{{ countProductsInCategory }} {{ 'Public.Cart.SelectedContainer'|trans }}</span>
+                {% endif %}
+            </div>
+            <div id="productsWrapper_{{ category.id }}">
+                {% for key, products in productsCategories %}
+                    {# pour chaque productCategory (categoryId => Products[],
+                     on affiche le tableau de produits si ils font partie de la catégorie courante #}
+                    {% if key == category.id %}
+                        <div class="products-container">
+                            {% for product in products %}
+                                <div class="product-container">
+                                    <div class="checkboxPicto productCheckboxPicto {% if product.id in cart.displayedProducts and category.id in cart.displayedProducts|keys %}  active {% endif %}"
+                                         id="productCheckboxPicto_{{ product.id }}_{{ category.id }}"
+                                         data-url="{{ path('paprec_public_corp_chantier_subscription_addOrRemoveDisplayedProduct', {cartUuid: cart.id, categoryId: category.id, productId: product.id}) }}"
+                                         style="{% if product.pictos| length > 0 %}background-image: url({{ asset('/uploads/pictos/' ~ product.pictos[0].path) }}) {% endif %}">
+                                        {{ product.name }}
+                                        <br>{{ product.capacity|nl2br }} {% autoescape false %} {{ product.capacityUnit }}{% endautoescape %}
+                                        {% for items in cart.content %}
+                                            {% if items['cId'] == category.id and items['pId'] == product.id %}
+                                                <span class="number">{{ items['qtty'] }}</span>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                    {% if product.id in cart.displayedProducts and category.id in cart.displayedProducts|keys %}
+                                        <div class="infoproduct-container">
+                                            <div class="infoproduct">
+                                                <div class="left">
+
+                                                    {% if product.pilotPictures | length > 0 %}
+                                                        <div class="mainpicture">
+
+                                                            <img src="{{ asset('/uploads/pictos/' ~ product.pilotPictures[0].path) }}"
+                                                                 alt="#" class="">
+                                                        </div>
+                                                    {% else %}
+                                                        &nbsp;
+                                                    {% endif %}
+                                                    {% if product.getPicturesPictures() %}
+                                                        <div class="container-thumbs">
+                                                            {% for picture in product.getPicturesPictures() %}
+                                                                <div class="container-thumb">
+                                                                    <img src="{{ asset('/uploads/pictos/' ~ picture.path) }}"
+                                                                         class="thumb"
+                                                                         alt="#">
+                                                                </div>
+                                                            {% endfor %}
+                                                        </div>
+                                                    {% endif %}
+
+                                                </div>
+                                                <div class="right">
+                                                    <div class="infoproduct__close"
+                                                         data-url="{{ path('paprec_public_corp_chantier_subscription_addOrRemoveDisplayedProduct', {cartUuid: cart.id, categoryId: category.id, productId: product.id}) }}"
+                                                         id="infoProductClose_{{ product.id }}_{{ category.id }}"></div>
+                                                    <div class="infoproduct__header__container">
+                                                        <div class="infoproduct__title__container">
+
+                                                            <div class="infoproduct__title">
+                                                                {{ product.name }}
+                                                            </div>
+                                                            <div class="infoproduct__subtitle">
+                                                                {{ product.capacity|nl2br }} {% autoescape false %} {{ product.capacityUnit }}{% endautoescape %}
+                                                            </div>
+                                                        </div>
+                                                        {% if product.reference is not null %}
+                                                            <div class="infoproduct__more">
+                                                                <a href="{{ product.reference }}">{{ ('Public.Cart.LearnMore'|trans)|slice(0,14) }}
+                                                                    ...</a>
+                                                            </div>
+                                                        {% endif %}
+                                                    </div>
+                                                    <div class="infoproduct__responsive-image">
+                                                        {% if product.pilotPictures | length > 0 %}
+                                                            <div class="mainpicture">
+                                                                <img src="{{ asset('/uploads/pictos/' ~ product.pilotPictures[0].path) }}"
+                                                                     alt="#" class="">
+                                                            </div>
+                                                        {% else %}
+                                                            &nbsp;
+                                                        {% endif %}
+                                                        {% if product.getPicturesPictures() %}
+                                                            <div class="container-thumbs">
+                                                                {% for picture in product.getPicturesPictures() %}
+                                                                    <div class="container-thumb">
+                                                                        <img src="{{ asset('/uploads/pictos/' ~ picture.path) }}"
+                                                                             class="thumb"
+                                                                             alt="#">
+                                                                    </div>
+                                                                {% endfor %}
+                                                            </div>
+                                                        {% endif %}
+                                                    </div>
+                                                    <div class="infoproduct__desc">
+                                                        {{ product.description|nl2br }}
+                                                    </div>
+                                                    {% for argument in product.arguments|slice(0, 2) %}
+                                                        <div class="{% if loop.index == 1 %}infoproduct__satisfaction{% elseif loop.index == 2 %}infoproduct__tri{% endif %}">
+                                                            {% if argument.picto is not null %}
+                                                                <img src="{{ asset('/uploads/pictos/' ~ argument.picto) }}"
+                                                                     alt="">
+                                                            {% endif %}
+                                                            {{ argument.description|nl2br }}
+                                                        </div>
+                                                    {% endfor %}
+                                                    <div class="clearfix"></div>
+                                                    <div class="infoproduct__disclamer">
+                                                        <div class="infoproduct__disclamer__img"></div>
+                                                        <div class="infoproduct__disclamer__msg">
+                                                            {{ 'Public.Cart.Disclaimer'|trans }}
+                                                        </div>
+                                                    </div>
+                                                    <div class="infoproduct__dimension__container">
+                                                        <div class="infoproduct__dimensiontitle">{{ 'Public.Cart.Dimensions'|trans }}</div>
+                                                        <a href="javascript:void(0);"
+                                                           class="infoproduct__esti">{{ 'Public.Cart.EstimateTrashVolume'|trans }}</a>
+                                                    </div>
+                                                    <div class="infoproduct__dimension">
+                                                        {{ product.dimensions|nl2br }}
+                                                    </div>
+
+                                                    {% set qtty = '' %}
+                                                    {% for items in cart.content %}
+                                                        {% if items['cId'] == category.id and items['pId'] == product.id %}
+                                                            {% set qtty = items['qtty'] %}
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                    <div class="infoproduct__qtytitle">{{ 'Public.Cart.Qtty'|trans }}</div>
+                                                    <select name=""
+                                                            id="quantityProducSelect_{{ product.id }}_{{ category.id }}"
+                                                            class="infoproduct__qty">
+                                                        {% for i in 1..10 %}
+                                                            {% if i == qtty %}
+                                                                <option value="{{ i }}"
+                                                                        selected="selected">{{ i }}</option>
+                                                            {% else %}
+                                                                <option value="{{ i }}">{{ i }}</option>
+
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    </select>
+                                                    <button class="button button--lightgreen addToCartSubmitButton"
+                                                            data-url="{{ path('paprec_public_corp_chantier_subscription_addContent', {cartUuid: cart.id, categoryId: category.id, productId: product.id, quantity: 'quantityTmp'}) }}"
+                                                            id="addToCartSubmitButton_{{ product.id }}_{{ category.id }}"
+                                                            >{{ ('Public.Cart.AddToCart' ~ cart.type|capitalize)|trans }}
+                                                    </button>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endfor %}
+{% endblock %}
+
+{% block cta_bottom_panel %}
+    <div class="step wrapper-button-bottom">
+        {{ render(controller('PaprecPublicBundle:Common:getCTAsBottom', {
+            'label': 'ValidateNeed',
+            'cartUuid': cart.id,
+            'division': cart.division,
+            'stepBack': '',
+            'nextStep': 'step2',
+            'idSubmit': '',
+            'cartEmpty': cart.content is empty
+        })) }}
+    </div>
+{% endblock %}
+
+{% block bottom_customizable_area %}
+
+    {% set customAreaImage = paprec_customizable_area('images_banner_' ~ cart.division|lower) %}
+    {% if customAreaImage is not null %}
+        {% autoescape false %}
+            {{ customAreaImage.content }}
+        {% endautoescape %}
+    {% endif %}
+
+    {% set customArea = paprec_customizable_area('reassurance_banner_' ~ cart.division|lower) %}
+    {% if customArea is not null %}
+        {% autoescape false %}
+            {{ customArea.content }}
+        {% endautoescape %}
+    {% endif %}
+
+    {% set customAreaLogo = paprec_customizable_area('logo_banner_' ~ cart.division|lower) %}
+    {% if customAreaLogo is not null %}
+        {% autoescape false %}
+            {{ customAreaLogo.content }}
+        {% endautoescape %}
+    {% endif %}
+
+{% endblock %}
+
+
+    {% block javascripts %}
+        <script type="text/javascript"
+                src="https://maps.googleapis.com/maps/api/js?libraries=places&key={{ paprec_google_api_key }}">
+        </script>
+    {% endblock %}

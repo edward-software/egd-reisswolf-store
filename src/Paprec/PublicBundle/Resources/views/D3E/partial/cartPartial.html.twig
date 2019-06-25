@@ -1,0 +1,33 @@
+<div class="recap__title">{{ 'Public.Cart.MyTrash'|trans }}</div>
+<div class="recap__cart">
+    {% if loadedCart and loadedCart is not empty %}
+        {% if loadedCart['sum'] == '0' and loadedCart|length < 2 %}
+            <span class="noproduct">{{ 'Public.Cart.NoTrash'|trans }}<br>{{  'Public.Cart.Added'|trans }}</span>
+        {% else %}
+            {% for key,cartLine in loadedCart %}
+                {% if key != 'sum' %}
+                    <div class="recap__item">
+
+                        <div class="quantity">x1</div>
+                        <div class="title">{{ cartLine['pName'] }}</div>
+                        <div class="delete buttonDeleteProduct" id="buttonDeleteProduct_{{ key }}"
+                             data-url="{{ path('paprec_public_corp_d3e_subscription_removeContent', {cartUuid: cartUuid, productId: 'productTmp'}) }}"></div>
+                        <div class="info">
+                            {% for type in cartLine['types'] %}
+                            {{ type['type']|slice(0,6) }}{% if type['type']|length > 5 %}...{% endif %}
+                            • {{ type['nbOptions'] }} option{% if type['nbOptions'] > 1 %}s{% endif %}
+                                {% if not loop.last%}
+                                    <br>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    {% endif %}
+
+</div>
+<div class="recap__info">
+</div>

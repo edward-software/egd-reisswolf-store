@@ -1,0 +1,212 @@
+{% extends "::base_admin.html.twig" %}
+
+{% block title %}
+    {{ 'Commercial.ContactUs.View'|trans }}
+{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}
+
+{% block content_title %}
+    {{ 'Commercial.ContactUs.ContactUss'|trans }}
+{% endblock %}
+
+{% block main_content %}
+
+
+    <div class="col-md-12">
+        <!-- FLASH MESSAGE -->
+        <div class="view-box">
+
+            {% for flashMessage in app.session.flashbag.get('errors') %}
+                <div class="alert alert-danger">{{ ('Commercial.ContactUs.Error.' ~ flashMessage)|trans }}</div>
+            {% endfor %}
+
+            {% for flashMessage in app.session.flashbag.get('success') %}
+                <div class="alert alert-success">{{ ('Commercial.ContactUs.Success.' ~ flashMessage)|trans }}</div>
+            {% endfor %}
+        </div>
+        <!-- CARD -->
+        <div class="card">
+            <div class="card-header">
+                <h4>
+                    <i class="fa fa-xs fa-contactUs"></i> {{ 'Commercial.ContactUs.View'|trans }}
+                </h4>
+                <div class="float-right">
+                    <a href="{{ path("paprec_commercial_contactUs_edit", {id: contactUs.id}) }}"
+                       class="btn btn-sm btn-warning"><i
+                                class="fa fa-xs fa-edit"></i> {{ 'Commercial.ContactUs.Edit'|trans }}</a>
+                    <a id="commmecialContactUsRemoveButton_" href="javascript:void(0);"
+                       class="btn btn-sm btn-danger"><i
+                                class="fa fa-xs fa-trash"></i> {{ 'Commercial.ContactUs.Remove'|trans }}</a>
+                </div>
+                <div class="float-left">
+                    <a href="{{ path('paprec_commercial_contactUs_index') }}" class="btn btn-sm btn-default"><i
+                                class="fa fa-xs fa-chevron-left"></i> {{ 'Commercial.ContactUs.List'|trans }}</a>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">{{ 'Commercial.ContactUs.Informations'|trans }}</h5>
+                        </div>
+                        <div class="card-body row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.ContactUs.BusinessName'|trans }}</label>
+                                    <label class="col-form-label">
+                                        {{ contactUs.businessName }}
+                                    </label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.ContactUs.Civility'|trans }}</label>
+                                    <label class="col-form-label">
+                                        {{ contactUs.civility }}
+                                    </label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.ContactUs.LastName'|trans }}</label>
+                                    <label class="col-form-label">
+                                        {{ contactUs.lastName }}
+                                    </label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.ContactUs.FirstName'|trans }}</label>
+                                    <label class="col-form-label">
+                                        {{ contactUs.firstName }}
+                                    </label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.ContactUs.Email'|trans }}</label>
+                                    <label class="col-form-label">
+                                        {{ contactUs.email }}
+                                    </label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.ContactUs.Phone'|trans }}</label>
+                                    <label class="col-form-label">
+                                        {{ contactUs.phone }}
+                                    </label>
+                                </div>
+
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.ContactUs.Function'|trans }}</label>
+                                    <label class="col-form-label">
+                                        {{ contactUs.function }}
+                                    </label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.ContactUs.Division'|trans }}</label>
+                                    <label class="col-form-label">
+                                        {{ contactUs.division }}
+                                    </label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.ContactUs.AttachedFiles'|trans }}</label>
+                                    <label class="col-form-label">
+                                        {% if contactUs.attachedFiles %}
+                                            <a href="{{ path('paprec_commercial_contactUs_downloadAttachedFiles', {id: contactUs.id}) }}"><i
+                                                        class="fa fa-download"></i></a>
+                                        {% endif %}
+                                    </label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.ContactUs.Need'|trans }}</label>
+                                    <label class="col-form-label">
+                                        {{ contactUs.need }}
+                                    </label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.ContactUs.CartContent'|trans }}</label>
+                                    <label class="col-form-label">
+                                        {% for content in contactUs.cartContent %}
+                                            {% if contactUs.division == 'DI' %}
+                                                <a href="{{ path('paprec_catalog_productDI_view', {id: content['pId']}) }}">Produit
+                                                    n° {{ content['pId'] }}</a> : {{ content['qtty'] }}<br>
+                                            {% elseif contactUs.division == 'CHANTIER' %}
+                                                <a href="{{ path('paprec_catalog_productChantier_view', {id: content['pId']}) }}">Produit
+                                                    n° {{ content['pId'] }}</a> : {{ content['qtty'] }}<br>
+                                            {% else %}
+                                                <a href="{{ path('paprec_catalog_productD3E_view', {id: content['pId']}) }}">Produit
+                                                    n° {{ content['pId'] }}</a> : {{ content['qtty'] }}
+                                                {% set optHandling = content['optHandling'] %}
+                                                {% set optSerialNumberStmt = content['optSerialNumberStmt'] %}
+                                                {% set optDestruction = content['optDestruction'] %}
+                                                {% if optHandling == 1 or optSerialNumberStmt == 1 or optDestruction == 1 %}
+                                                    (options :
+                                                    {% if optSerialNumberStmt == 1 %} "Relevé" {% endif %}
+                                                    {% if optHandling == 1 %} "Manutention" {% endif %}
+                                                    {% if optDestruction == 1 %} "Destruction" {% endif %}
+                                                    ) <br>
+                                                {% endif %}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.ContactUs.TreatmentStatus'|trans }}</label>
+                                    <label class="col-form-label">
+                                        {{ ('Commercial.TreatmentStatusList.' ~ contactUs.treatmentStatus)|trans }}
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 mt-3">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">{{ 'Commercial.ContactUs.System-informations'|trans }}</h5>
+                        </div>
+                        <div class="card-body">
+
+                            <div class="form-group row">
+                                <label class="col-md-4 col-form-label">{{ 'Commercial.ContactUs.Date-creation'|trans }}</label>
+                                <label class="col-form-label">
+                                    {{ contactUs.dateCreation|localizeddate('short', 'medium', app.request.locale) }}
+                                </label>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-md-4 col-form-label">{{ 'Commercial.ContactUs.Date-update'|trans }}</label>
+                                <label class="col-form-label">
+                                    {{ contactUs.dateUpdate is empty ? "" : contactUs.dateUpdate|localizeddate('short', 'medium', app.request.locale) }}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+        {% block javascripts %}
+            <script>
+                $(function () {
+
+                    $('#commmecialContactUsRemoveButton_').on('click', function () {
+
+                        var url = "{{ path("paprec_commercial_contactUs_remove", {id: contactUs.id}) }}";
+
+                        Swal({
+                            title: "{{ 'General.Confirm'|trans }}",
+                            text: "{{ 'Commercial.ContactUs.Confirm-remove'|trans }}",
+                            showCancelButton: true,
+                            confirmButtonText: "{{ 'General.Yes'|trans }}",
+                            cancelButtonText: "{{ 'General.No'|trans }}"
+                        }).then((result) => {
+                            if (result.value) {
+                                $(location).attr('href', url);
+                            }
+                        });
+
+                    });
+                });
+            </script>
+        {% endblock %}

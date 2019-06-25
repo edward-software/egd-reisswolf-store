@@ -1,0 +1,30 @@
+{% extends "@PaprecPublic/Common/Base/package/base_stepper.html.twig" %}
+
+{% block whoare %}
+{% endblock %}
+
+{% block main_content_stepper %}
+    <form action="#">
+        <input type="hidden" id="divisionType" value="{{ cart.division }}">
+        <div class="step step--index" >
+            <div class="step__left">
+                <div class="step__title">{{ 'Public.Home.Location'|trans }}</div>
+            </div>
+            <div class="step__right">
+                <input class="input" type="text" id="locationSelect"
+                       name="locationSelect" {% if cart.location and cart.location != '' %} value="{{ cart.location }}"{% endif %}
+                       data-url="{{ path('paprec_public_corp_home_addLocation', {cartUuid: cart.id, location: 'locationTmp', city: 'cityTmp', postalCode: 'postalCodeTmp', long: 'longTmp', lat:'latTmp' }) }}"
+                       placeholder="{{ 'Public.Cart.PostalCode'|trans }}">
+
+            </div>
+            {% if cart.latitude is defined and cart.latitude != '' and cart.longitude is defined and cart.longitude != '' and cart.division is defined and cart.division in ['DI', 'D3E', 'CHANTIER'] %}
+                <div class="step__agency"
+                     data-url="{{ path('paprec_public_corp_' ~ cart.division|lower ~ '_subscription_loadNearbyAgencies', {cartUuid: cart.id}) }}">
+                </div>
+            {% endif %}
+        </div>
+        {% block main_content_index %}
+            {% block cta_bottom_panel %} {% endblock %}
+        {% endblock %}
+    </form>
+{% endblock %}

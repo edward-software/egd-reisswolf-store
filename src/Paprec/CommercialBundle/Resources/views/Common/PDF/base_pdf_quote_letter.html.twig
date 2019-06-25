@@ -1,0 +1,124 @@
+{% extends "@PaprecCommercial/Common/PDF/base_pdf.html.twig" %}
+{% block pdf_content %}
+    <table width="780" cellpadding="0" cellspacing="0" align="center" style="font-size: 13px">
+        <tr>
+            <td height="280" width="100%"
+                style="background-repeat: no-repeat;">
+                <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                    <tr>
+                        <td width="100%" colspan="2" height="200"></td>
+                    </tr>
+                    <tr>
+                        <td width="500"></td>
+                        <td width="280">
+                            <p style="margin: 0;">{% block businessName %}{% endblock %}</p>
+                            <p style="margin: 0;">{% block location %}{% endblock %}</p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table width="100%" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td width="460">
+                            <p style="line-height: 15px; margin: 20px; text-align: left;">A l'attention
+                                de {% block recipient %}{% endblock %}</p>
+                        </td>
+
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td height="70" width="100%"
+                style="background-repeat: no-repeat;">
+                <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                    <tr>
+                        <td width="100%" colspan="2" height="35"></td>
+                    </tr>
+                    <tr>
+                        <td width="450"></td>
+                        <td width="330">
+                            <p style="margin: 0;">Le {% block date %}{% endblock %}</p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td height="100px">
+                <table width="100%" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td width="100%" colspan="2" height="50"></td>
+                    </tr>
+                    <tr>
+                        <td width="460">
+                            <p style="line-height: 15px; margin: 20px; text-align: left;">ESTIMATION N°
+                                : {% block quoteNumber %}{% endblock %}</p>
+                        </td>
+
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table width="100%" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td>
+                            <p style="line-height: 15px; margin: 20px; text-align: left;">{% block civility %}{% endblock %}</p>
+                            <p style="line-height: 15px; margin: 20px; text-align: left; margin-top: 15px; margin-bottom: 0;">
+                                Nous vous remercions pour l’attention que vous avez bien voulu nous accorder et nous
+                                vous prions de trouver
+                                <nobr>ci-joint :</nobr>
+                            </p>
+                            <p style="line-height: 15px; margin: 20px; text-align: left; margin-top: 16px; margin-bottom: 0;">
+                                Notre proposition estimée pour la gestion de vos déchets.</p>
+                            <p style="line-height: 16px; margin: 20px; text-align: left; padding-right: 70px; margin-top: 16px; margin-bottom: 0;">
+                                Spécialisés dans le recyclage de tous types des déchets, bénéficiant d’une logistique de
+                                pointe, notre but est d’apporter à votre entreprise la solution la plus avantageuse tant
+                                en termes d’efficacité que de coût.</p>
+                            <p style="line-height: 15px; margin: 20px; text-align: left; padding-right: 70px; margin-top: 16px; margin-bottom: 0;">
+                                Nos prix de reprise évoluent conformément aux variations du marché international
+                                départ négociant, publiés mensuellement par la mercuriale « L’Usine Nouvelle » pour
+                                les papiers/cartons et les plastiques. Cette méthode vous assure une parfaite
+                                transparence de nos tarifs ; à savoir que nous indexons systématiquement nos prix de
+                                reprise sur ceux de la mercuriale citée.
+                            </p>
+                            <p style="line-height: 15px; margin: 20px; text-align: left; margin-top: 14px; margin-bottom: 0;">
+                                Nos offres de services sont en totale conformité avec la réglementation qui instaure
+                                :</p>
+                            <p style="line-height: 16px; margin: 20px; text-align: left; padding-left: 61px; padding-right: 63px; margin-top: 15px; margin-bottom: 0; text-indent: -24px;">
+                                -<span style="margin-left: 19px;line-height: 16px">De valoriser les déchets par Recyclage </span>
+                                <nobr>c’est-à-dire</nobr>
+                                l’emploi, recyclage ou toute autre action visant à obtenir, à partir des déchets, des
+                                matériaux réutilisables ou de l’énergie (loi relative à l’élimination des déchets et à
+                                la récupération des matériaux n°
+                                <nobr>92-646</nobr>
+                                du 13 juillet 1992 – Article
+                                <nobr>1er-1)</nobr>
+                            </p>
+                            <p style="line-height: 16px; margin: 20px; text-align: left; padding-left: 61px; padding-right: 70px; margin-top: 14px; margin-bottom: 0; text-indent: -24px;">
+                                -<span style="margin-left: 19px;line-height: 16px">L’obligation de valoriser les déchets d’emballage (cartons, palettes, housses, métaux, etc…) en les cédant par contrat à un tiers agréé (décret </span>
+                                <nobr>n°94-609</nobr>
+                                du 13 juillet 1994 relatif aux déchets d’emballages industriels).
+                            </p>
+                            <p style="line-height: 15px; margin: 20px; text-align: left; margin-top: 14px; margin-bottom: 0;">
+                                Nous vous proposons ainsi de diriger vos chutes de matières vers nos Centres de tri
+                                classés et agréés afin de les valoriser.</p>
+                            <p style="line-height: 15px; margin: 20px; text-align: left; margin-top: 15px; margin-bottom: 0">
+                                Veuillez croire, {% block greetings %}{% endblock %} en l’assurance de notre parfaite
+                                considération.</p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+
+
+{% endblock %}
+
+

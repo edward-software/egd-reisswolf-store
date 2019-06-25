@@ -1,0 +1,7 @@
+{% extends "@PaprecCommercial/Common/PDF/base_pdf_quote_cover.html.twig" %}
+{% block businessName %}
+    {{ productChantierQuote.businessName|upper }}
+{% endblock %}
+{% block date %}
+    {{ date|date('d/m/Y') }}
+{% endblock %}

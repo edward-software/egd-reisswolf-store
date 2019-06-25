@@ -1,0 +1,85 @@
+{% extends "@PaprecPublic/Common/Base/base_stepper.html.twig" %}
+
+{#{% block title %}#}
+
+{#{% endblock %}#}
+
+{#{% block stylesheets %}#}
+
+{#{% endblock %}#}
+
+{% block sidebar %}
+    <div class="contact-form"></div>
+    {# Définition des menus affichés dans la sidebar #}
+    {% set besoin = 'active' %}
+    {% set confirmation = '' %}
+    {{ parent() }}
+{% endblock %}
+
+{% block main_content_stepper %}
+    <form id="contactForm" action="#" method="post" enctype="multipart/form-data">
+        <div class="step">
+            <div class="step__left">
+                <div class="step__title">{{ 'Public.Home.IAm'|trans }}</div>
+            </div>
+            <div class="step__right step__right--small">
+                {{ form_widget(form.businessName, {'attr': {'class': 'input input--full step--marginfield', 'placeholder': 'Commercial.ContactUs.BusinessName'|trans}}) }}
+                {{ form_errors(form.businessName) }}
+
+                {{ form_widget(form.civility, {'attr': {'class': 'input--radio'}}) }}
+                {{ form_errors(form.civility) }}
+
+                <div class="clearfix step--marginfield"></div>
+
+                {{ form_widget(form.lastName, {'attr': {'class': 'input input--mid step--marginfield', 'placeholder': 'Commercial.ContactUs.LastName'|trans}}) }}
+                {{ form_errors(form.lastName) }}
+                {{ form_widget(form.firstName, {'attr': {'class': 'input input--mid step--marginfield', 'placeholder': 'Commercial.ContactUs.FirstName'|trans}}) }}
+                {{ form_errors(form.firstName) }}
+
+                {{ form_widget(form.email, {'attr': {'class': 'input input--full step--marginfield', 'placeholder': 'Commercial.ContactUs.Email'|trans}}) }}
+                {{ form_errors(form.email) }}
+
+                {{ form_widget(form.phone, {'attr': {'class': 'input input--full step--marginfield', 'placeholder': 'Commercial.ContactUs.PhonePlaceholder'|trans}}) }}
+                {{ form_errors(form.phone) }}
+
+                {{ form_widget(form.function, {'attr': {'class': 'input input--full step--marginfield', 'placeholder': 'Commercial.ContactUs.FunctionPlaceholder'|trans}}) }}
+                {{ form_errors(form.function) }}
+
+                <div class="clearfix"></div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="step">
+            <div class="step__left">
+                <div class="step__title">{{ 'Public.Home.MyNeed'|trans }}</div>
+            </div>
+            <div class="step__right step__right--small">
+                {{ form_widget(form.need, {'attr': {'class': 'input input--full input--bordered', 'placeholder': 'Commercial.ContactUs.NeedPlaceholder'|trans}}) }}
+                {{ form_errors(form.need) }}
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="step">
+            <div class="notice">{{ 'Public.Home.FileUploadNotice'|trans }}
+            </div>
+            <br>
+            <div id="listFiles" class="paprec-list-files">
+
+            </div>
+            {{ form_label(form.attachedFiles, "TÉLÉCHARGER DES PIÈCES JOINTES OU DES PHOTOS", {'label_attr': {'class': 'button button--bordered'}}) }}
+            {{ form_widget(form.attachedFiles, {'attr': {'class': 'input-file'}}) }}
+
+            <div class="clearfix"></div>
+
+            <a href="javascript:void(0);" id="contactFormSubmitButton" class="button button--green">
+                {{ ('Public.Cart.SendNeed'|trans)|upper }}
+            </a>
+        </div>
+        {{ form_rest(form) }}
+
+    </form>
+{% endblock %}
+
+{% block javascripts %}
+
+{% endblock %}

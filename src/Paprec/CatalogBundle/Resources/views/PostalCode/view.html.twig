@@ -1,0 +1,95 @@
+{% extends "::base_admin.html.twig" %}
+
+{% block title %}
+    {{ 'Catalog.PostalCode.View'|trans }}
+{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}
+
+{% block content_title %}
+    {{ 'Catalog.PostalCode.PostalCodes'|trans }}
+{% endblock %}
+
+{% block main_content %}
+
+
+    <div class="col-md-12">
+        <!-- CARD -->
+        <div class="card">
+            <div class="card-header">
+                <h4>
+                    <i class="fa fa-xs fa-folder"></i> {{ 'Catalog.PostalCode.View'|trans }}
+                </h4>
+                <div class="float-right">
+                    <a href="{{ path("paprec_catalog_postalCode_edit", {id: postalCode.id}) }}"
+                       class="btn btn-sm btn-warning"><i
+                                class="fa fa-xs fa-edit"></i> {{ 'Catalog.PostalCode.Edit'|trans }}</a>
+                    <a id="catalogPostalCodeRemoveButton" href="javascript:void(0);" class="btn btn-sm btn-danger"><i
+                                class="fa fa-xs fa-trash"></i> {{ 'Catalog.PostalCode.Remove'|trans }}</a>
+                </div>
+                <div class="float-left">
+                    <a href="{{ path('paprec_catalog_postalCode_index') }}" class="btn btn-sm btn-default"><i
+                                class="fa fa-xs fa-chevron-left"></i> {{ 'Catalog.PostalCode.List'|trans }}</a>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="col-md-7">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">{{ 'Catalog.PostalCode.Informations'|trans }}</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group row">
+                                <label class="col-md-4 col-form-label">{{ 'Catalog.PostalCode.Codes'|trans }}</label>
+                                <label class="col-form-label col-md-8">
+                                    {{ postalCode.codes }}
+                                </label>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-4 col-form-label">{{ 'Catalog.PostalCode.Division'|trans }}</label>
+                                <label class="col-form-label col-md-8">
+                                    {{ postalCode.division }}
+                                </label>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-4 col-form-label">{{ 'Catalog.PostalCode.Rate'|trans }}</label>
+                                <label class="col-form-label col-md-8">
+                                    {{ postalCode.rate|formatAmount(null, app.request.locale) }}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+        {% block javascripts %}
+
+            <script>
+                $(function () {
+
+                    $('#catalogPostalCodeRemoveButton').on('click', function () {
+
+                        var url = "{{ path("paprec_catalog_postalCode_remove", {id: postalCode.id}) }}";
+
+                        Swal({
+                            title: "{{ 'General.Confirm'|trans }}",
+                            text: "{{ 'Catalog.PostalCode.Confirm-remove'|trans }}",
+                            showCancelButton: true,
+                            confirmButtonText: "{{ 'General.Yes'|trans }}",
+                            cancelButtonText: "{{ 'General.No'|trans }}"
+                        }).then((result) => {
+                            if (result.value) {
+                                $(location).attr('href', url);
+                            }
+                        });
+
+                    });
+                });
+            </script>
+        {% endblock %}

@@ -1,0 +1,107 @@
+{% extends "::base_admin.html.twig" %}
+
+{% block title %}
+    {{ 'Catalog.Type.View'|trans }}
+{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}
+
+{% block content_title %}
+    {{ 'Catalog.Type.Types'|trans }}
+{% endblock %}
+
+{% block main_content %}
+
+
+    <div class="col-md-12">
+        <!-- CARD -->
+        <div class="card">
+            <div class="card-header">
+                <h4>
+                    <i class="fa fa-xs fa-folder"></i> {{ 'Catalog.Type.View'|trans }}
+                </h4>
+                <div class="float-right">
+                    <a href="{{ path("paprec_catalog_type_edit", {id: type.id}) }}" class="btn btn-sm btn-warning"><i
+                                class="fa fa-xs fa-edit"></i> {{ 'Catalog.Type.Edit'|trans }}</a>
+                    <a id="catalogTypeRemoveButton" href="javascript:void(0);" class="btn btn-sm btn-danger"><i
+                                class="fa fa-xs fa-trash"></i> {{ 'Catalog.Type.Remove'|trans }}</a>
+                </div>
+                <div class="float-left">
+                    <a href="{{ path('paprec_catalog_type_index') }}" class="btn btn-sm btn-default"><i
+                                class="fa fa-xs fa-chevron-left"></i> {{ 'Catalog.Type.List'|trans }}</a>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="col-md-7">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">{{ 'Catalog.Type.Informations'|trans }}</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group row">
+                                <label class="col-md-4 col-form-label">{{ 'Catalog.Type.Name'|trans }}</label>
+                                <label class="col-form-label col-md-8">
+                                    {{ type.name }}
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-7 mt-3">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">{{ 'Catalog.Type.System-informations'|trans }}</h5>
+                        </div>
+                        <div class="card-body">
+
+                            <div class="form-group row">
+                                <label class="col-md-4 col-form-label">{{ 'Catalog.Type.Date-creation'|trans }}</label>
+                                <label class="col-form-label col-md-8">
+                                    {{ type.dateCreation|localizeddate('short', 'medium', app.request.locale) }}
+                                </label>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-md-4 col-form-label">{{ 'Catalog.Type.Date-update'|trans }}</label>
+                                <label class="col-form-label col-md-8">
+                                    {{ type.dateUpdate is empty ? "" : type.dateUpdate|localizeddate('short', 'medium', app.request.locale) }}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+        {% block javascripts %}
+
+            <script>
+                $(function () {
+
+                    $('#catalogTypeRemoveButton').on('click', function () {
+
+                        var url = "{{ path("paprec_catalog_type_remove", {id: type.id}) }}";
+
+
+                        Swal({
+                            title: "{{ 'General.Confirm'|trans }}",
+                            text: "{{ 'Catalog.Type.Confirm-remove'|trans }}",
+                            showCancelButton: true,
+                            confirmButtonText: "{{ 'General.Yes'|trans }}",
+                            cancelButtonText: "{{ 'General.No'|trans }}"
+                        }).then((result) => {
+                            if (result.value) {
+                                $(location).attr('href', url);
+                            }
+                        });
+
+                    });
+                });
+            </script>
+        {% endblock %}

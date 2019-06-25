@@ -1,0 +1,25 @@
+goondi_tools_updateTask_view:
+    pattern:  /updateTask/{id}/view
+    defaults: { _controller: GoondiToolsBundle:UpdateTask:view }
+    requirements:
+        id: \d+
+
+goondi_tools_updateTask_remove:
+    pattern:  /updateTask/{id}/remove
+    defaults: { _controller: GoondiToolsBundle:UpdateTask:remove }
+    requirements:
+        id: \d+
+
+goondi_tools_updateTask_list:
+    path:     /updateTask/list
+    defaults: { _controller: GoondiToolsBundle:UpdateTask:list }
+
+goondi_tools_updateTask_loadList:
+    path:     /updateTask/loadList
+    defaults: { _controller: GoondiToolsBundle:UpdateTask:loadList}
+
+goondi_tools_updateTask_accept:
+    pattern:  /updateTask/{id}/accept
+    defaults: { _controller: GoondiToolsBundle:UpdateTask:accept }
+    requirements:
+        id: \d+

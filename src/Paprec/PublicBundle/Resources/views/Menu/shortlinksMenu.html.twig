@@ -1,0 +1,5 @@
+{% autoescape false %}
+{% for link in items %}
+    <li><a href="{{ link['url'] }}">{{ link['title'] }}</a></li>
+{% endfor %}
+{% endautoescape %}

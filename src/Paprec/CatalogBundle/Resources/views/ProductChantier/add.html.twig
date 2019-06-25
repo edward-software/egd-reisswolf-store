@@ -1,0 +1,169 @@
+{% extends "::base_admin.html.twig" %}
+
+{% block title %}
+    {{ 'Catalog.ProductChantier.Add.Custom'|trans }}
+{% endblock %}
+
+{% block stylesheets %}
+{% endblock %}
+
+{% block content_title %}
+    {{ 'Catalog.ProductChantier.Categories'|trans }}
+{% endblock %}
+
+{% block main_content %}
+
+    <form id="catalogProductChantierForm" action="" method="post">
+
+        <div class="col-md-12">
+            <!-- BOX -->
+            <div class="card">
+                <div class="card-header">
+                    <h4>
+                        <i class="fa fa-xs fa-plus"></i> {{ 'Catalog.ProductChantier.Add.Custom'|trans }}
+                    </h4>
+                    <div class="float-right">
+                        <a href="javascript:void(0);" class="btn btn-sm btn-success catalog-productChantier-save-button"><i
+                                    class="fa fa-xs fa-check"></i> {{ 'Catalog.ProductChantier.Save'|trans }}</a>
+                        <a href="javascript:void(0);"
+                           class="btn btn-sm btn-danger catalog-productChantier-cancel-button"><i
+                                    class="fa fa-xs fa-close"></i> {{ 'Catalog.ProductChantier.Cancel'|trans }}</a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="col-md-7">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">{{ 'Catalog.ProductChantier.Informations'|trans }}</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <div class="form-label">{{ 'Catalog.ProductChantier.Name'|trans }}</div>
+                                    <div class="form-content">
+                                        {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_errors(form.name) }}
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="form-label">{{ 'Catalog.ProductChantier.Description'|trans }}</div>
+                                    <div class="form-content checkbox-list">
+                                        {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_errors(form.description) }}
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <div class="form-label">{{ 'Catalog.ProductChantier.Capacity'|trans }}</div>
+                                        <div class="form-content">
+                                            {{ form_widget(form.capacity, {'attr': {'class': 'form-control'}}) }}
+                                            {{ form_errors(form.capacity) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <div class="form-label">{{ 'Catalog.ProductChantier.CapacityUnit'|trans }}</div>
+                                        <div class="form-content">
+                                            {{ form_widget(form.capacityUnit, {'attr': {'class': 'form-control'}}) }}
+                                            {{ form_errors(form.capacityUnit) }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-label">{{ 'Catalog.ProductChantier.Dimensions'|trans }}</div>
+                                    <div class="form-content">
+                                        {{ form_widget(form.dimensions, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_errors(form.dimensions) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-label">{{ 'Catalog.ProductChantier.AvailablePostalCodes'|trans }}</div>
+                                    <div class="form-content">
+                                        {{ form_widget(form.availablePostalCodes, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_errors(form.availablePostalCodes) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-label">{{ 'Catalog.ProductChantier.Reference'|trans }}</div>
+                                    <div class="form-content">
+                                        {{ form_widget(form.reference, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_errors(form.reference) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-label">{{ 'Catalog.ProductChantier.Arguments'|trans }}</div>
+                                    <div class="form-content">
+                                        {% for checkbox in form.arguments.children %}
+                                            <div class="form__check ml-4">
+                                                {{ form_widget(checkbox) }}
+                                                {{ form_label(checkbox)|nl2br }}
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-label">{{ 'Catalog.ProductChantier.IsDisplayed'|trans }}</div>
+                                    <div class="form-content">
+                                        {% for radio in form.isDisplayed.children %}
+                                            <div class="form__check ml-4">
+                                                {{ form_widget(radio) }}
+                                                {{ form_label(radio) }}
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <div class="float-right">
+                        <a href="javascript:void(0);" class="btn btn-sm btn-success catalog-productChantier-save-button"><i
+                                    class="fa fa-xs fa-check"></i> {{ 'Catalog.ProductChantier.Save'|trans }}</a>
+                        <a href="javascript:void(0);" class="btn btn-sm btn-danger catalog-productChantier-cancel-button"><i
+                                    class="fa fa-xs fa-close"></i> {{ 'Catalog.ProductChantier.Cancel'|trans }}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{ form_rest(form) }}
+    </form>
+    </div>
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+
+    <script>
+        $(function () {
+
+            $('.catalog-productChantier-save-button').on('click', function () {
+                $('#catalogProductChantierForm').submit();
+            });
+
+
+            $('.catalog-productChantier-cancel-button').on('click', function () {
+
+                var url = "{{ path("paprec_catalog_productChantier_index") }}";
+
+
+                Swal({
+                    title: "{{ 'General.Confirm'|trans }}",
+                    text: "{{ 'Catalog.ProductChantier.Confirm-cancel'|trans }}",
+                    showCancelButton: true,
+                    confirmButtonText: "{{ 'General.Yes'|trans }}",
+                    cancelButtonText: "{{ 'General.No'|trans }}"
+                }).then((result) => {
+                    if (result.value) {
+                        $(location).attr('href', url);
+                    }
+                });
+
+            });
+
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,112 @@
+{% extends "@PaprecCommercial/Common/emails/base_email.html.twig" %}
+
+ {% block picto_header %}
+     <img alt="Logo" src="{{ absolute_url(asset('build/static/check.svg')) }}" width="60px" height="60px"
+          border="0" class="picto-header">
+ {% endblock %}
+
+{% block title_header %}
+    Nouvelle commande pour déchets D3E
+{% endblock %}
+
+{% block subtitle_header %}
+    Commande D3E - N° {{ productD3EOrder.id|formatId(6) }}
+{% endblock %}
+
+{% block main_content %}
+<table class="newRequestEmailTable content-email-detail" border="0" cellpadding="0" cellspacing="0" width="80%"
+       style="text-align: right">
+
+    <tr style="border-bottom: 1px solid rgba(0, 0, 0, 0.6); text-align: center">
+        <td style="padding-bottom: 10px">
+        Détail de la commande N° {{ productD3EOrder.id|formatId(6) }} - {{ productD3EOrder.dateCreation|date('d/m/Y H:i:s') }}
+        </td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td class="label">
+            {{ 'Commercial.ProductD3EOrder.BusinessName'|trans }} :&nbsp;
+        </td>
+        <td class="value">
+            {{ productD3EOrder.businessName }}
+        </td>
+    </tr>
+    <tr>
+        <td class="label">
+            {{ 'Commercial.ProductD3EOrder.BusinessLine'|trans }} :&nbsp;
+        </td>
+        <td class="value">
+            {{ productD3EOrder.businessLine.name }}
+        </td>
+    </tr>
+    <tr>
+        <td class="label">
+            {{ 'Commercial.ProductD3EOrder.Civility'|trans }} :&nbsp;
+        </td>
+        <td class="value">
+            {{ productD3EOrder.civility }}
+        </td>
+    </tr>
+    <tr>
+        <td class="label">
+            {{ 'Commercial.ProductD3EOrder.LastName'|trans }} :&nbsp;
+        </td>
+        <td class="value">
+            {{ productD3EOrder.lastName }}
+        </td>
+    </tr>
+    <tr>
+        <td class="label">
+            {{ 'Commercial.ProductD3EOrder.FirstName'|trans }} :&nbsp;
+        </td>
+        <td class="value">
+            {{ productD3EOrder.firstName }}
+        </td>
+    </tr>
+    <tr>
+        <td class="label">
+            {{ 'Commercial.ProductD3EOrder.Function'|trans }} :&nbsp;
+        </td>
+        <td class="value">
+            {{ productD3EOrder.function }}
+        </td>
+    </tr>
+    <tr>
+        <td class="label">
+            {{ 'Commercial.ProductD3EOrder.Email'|trans }} :&nbsp;
+        </td>
+        <td class="value">
+            {{ productD3EOrder.email }}
+        </td>
+    </tr>
+    <tr>
+        <td class="label">
+            {{ 'Commercial.ProductD3EOrder.Phone'|trans }} :&nbsp;
+        </td>
+        <td class="value">
+            {{ productD3EOrder.phone }}
+        </td>
+    </tr>
+</table>
+{% endblock %}
+
+{% block footer %}
+    <tr>
+        <td class="footer-repondre-title" style="padding: 15px;">
+            <a href="{{ absolute_url(path("paprec_commercial_productD3EOrder_view", {id: productD3EOrder.id})) }}">
+                Consulter la commande
+            </a>
+        </td>
+    </tr>
+{% endblock %}
+
+{% block sub_footer %}
+    <tr>
+        <td>
+            Cet email est un message automatique
+        </td>
+    </tr>
+{% endblock %}
+

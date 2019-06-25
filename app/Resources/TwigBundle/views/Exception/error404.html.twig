@@ -1,0 +1,155 @@
+{# app/Resources/TwigBundle/views/Exception/error404.html.twig #}
+{% extends 'TwigBundle:Exception:error.html.twig' %}
+
+{% block error_message %}
+    <main role="main">
+
+        <!-- section -->
+        <section class="page-404">
+
+            <!-- article -->
+            <article id="post-404">
+
+                <!--<h1><?php /*_e( 'Page not found', 'html5blank' ); */?></h1>
+                <h2>
+                    <a href="<?php /*echo home_url(); */?>"><?php /*_e( 'Return home?', 'html5blank' ); */?></a>
+                </h2>-->
+
+                <div class="page-404__header">
+                    <div class="page-404__header__content">
+                        <img src="/wp-content/themes/paprec/img/icons/Icon Recycle.png"
+                             alt="">
+                        <p>Oh non...<span>La page que vous cherchez n’existe pas.</span></p>
+
+                        <p>Nous sommes désolé pour ce désagrément.<br>
+                            Le contenu a pu être supprimé ou l’URL est mal orthographié.
+                        </p>
+
+                        <a href="/" class="button">Retour à l'accueil</a>
+                    </div>
+                </div>
+
+                <div class="page-404__content">
+                    <div class="page-404__content__block">
+
+                        <div class="page-404__content__block__item green">
+                            <h2>
+                                BESOIN D’UNE PRESTATION<br>DE DÉCHETS ?
+                            </h2>
+                            <p>
+                                <b>BACS, BORNES, BENNES, ...</b><br>différentes tailles disponibles<br>à partir de 49€
+                                HT.
+                            </p>
+                            <div class="page-404__content__block__item--bottom">
+                                <a href="#" class="button">RÉALISEZ VOTRE DEVIS</a>
+                            </div>
+                        </div>
+
+                        <div class="page-404__content__block__item blue">
+                            <div class="">
+                                <img src="/wp-content/themes/paprec/img/Easyrecyclage_Box_Papier.png"/>
+                            </div>
+                            <h2>
+                                EASYRECYCLAGE<br>5 FLUX
+                            </h2>
+                            <p>
+                                Bureaux, siège sociaux, …<br>mettez-vous en conformité<br><b>avec le décret 5 Flux</b>
+                            </p>
+                            <div class="page-404__content__block__item--bottom">
+                                <a href="#" class="button">SOUSCRIVEZ EN LIGNE</a>
+                            </div>
+                        </div>
+
+                        <div class="page-404__content__block__item orange">
+                            <div class="">
+                                <img src="/wp-content/themes/paprec/img/big-bag.png"/>
+                            </div>
+                            <h2>
+                                EASYRECYCLAGE<br>CHANTIERS
+                            </h2>
+                            <p>
+                                <b>À PARTIR DE 30€/BIG BAG</b><br>Le forfait idéal<br>pour vos petits volumes !
+                            </p>
+                            <div class="page-404__content__block__item--bottom">
+                                <a href="#" class="button">COMMANDEZ EN 3 MINUTES</a>
+                            </div>
+                        </div>
+
+                        <div class="page-404__content__block__item purple">
+                            <h2>
+                                EASYRECYCLAGE<br>D3E
+                            </h2>
+                            <p>
+                                <b>TRANQUILLITÉ & TRAÇABILITÉ</b><br>PEM, GEM, piles…<br>on s’occupe de tout !
+                            </p>
+                            <div class="page-404__content__block__item--bottom">
+                                <a href="#" class="button">SOUSCRIVEZ EN LIGNE</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="service">
+                    <div class="service__bg-footer">
+                        <div class="service__block-footer">
+
+                            <div class="service__footer">
+                                <div class="service__footer__image">
+                                    <img src="/wp-content/themes/paprec/img/icons/Map-France.svg"/>
+                                </div>
+                                <div class="service__footer__title">
+                                    Au plus près de vous
+                                </div>
+                                <div class="service__footer__desc">
+                                    Un réseau national de + de 200 sites <br>pour vous accompagner.
+                                </div>
+                            </div>
+
+                            <div class="service__footer">
+                                <div class="service__footer__image">
+                                    <img src="/wp-content/themes/paprec/img/icons/Facile.svg"/>
+                                </div>
+                                <div class="service__footer__title">
+                                    Recycler devient facile
+                                </div>
+                                <div class="service__footer__desc">
+                                    À force d’innovations, nous avons <br>rendu le recyclage simple.
+                                </div>
+                            </div>
+
+                            <div class="service__footer">
+                                <div class="service__footer__image">
+                                    <img src="/wp-content/themes/paprec/img/icons/Service-de-qualite.svg"/>
+                                </div>
+                                <div class="service__footer__title">
+                                    Un service de qualité
+                                </div>
+                                <div class="service__footer__desc">
+                                    Une gamme complète d’équipements <br>pour répondre à vos besoins.
+                                </div>
+                            </div>
+
+                            <div class="service__footer">
+                                <div class="service__footer__image">
+                                    <img src="/wp-content/themes/paprec/img/icons/Earth.svg"/>
+                                </div>
+                                <div class="service__footer__title">
+                                    Pour une planète plus verte
+                                </div>
+                                <div class="service__footer__desc">
+                                    80% des déchets collectés et traités <br>par Paprec Recyclage sont valorisés.
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </article>
+            <!-- /article -->
+
+        </section>
+        <!-- /section -->
+    </main>
+{% endblock %}

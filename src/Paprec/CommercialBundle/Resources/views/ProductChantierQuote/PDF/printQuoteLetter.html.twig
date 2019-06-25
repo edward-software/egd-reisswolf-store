@@ -1,0 +1,15 @@
+{% extends "@PaprecCommercial/Common/PDF/base_pdf_quote_letter.html.twig" %}
+
+{% block businessName %} {{ productChantierQuote.businessName|upper }} {% endblock %}
+
+{% block location %} {{ productChantierQuote.postalCode }} {{ productChantierQuote.city|upper }} {% endblock %}
+
+{% block recipient %} {% if productChantierQuote.civility == 'M' %}Monsieur{% else %}Madame{% endif %} {{ productChantierQuote.firstName }} {{ productChantierQuote.lastName|upper }} {% endblock %}
+
+{% block date %} {{ date|date('d/m/Y') }}, {% endblock %}
+
+{% block quoteNumber %} {{ productChantierQuote.id|formatId(6) }}{% endblock %}
+
+{% block civility %} {% if productChantierQuote.civility == 'M' %}Monsieur{% else %}Madame{% endif %}, {% endblock %}
+
+{% block greeting %} {% if productChantierQuote.civility == 'M' %}Monsieur{% else %}Madame{% endif %} {{ productChantierQuote.firstName }} {{ productChantierQuote.lastName|upper }}, {% endblock %}

@@ -1,0 +1,414 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block stylesheets %}
+	<!-- DATA TABLES -->
+	<!--link rel="stylesheet" type="text/css" href="{{ asset('/templates/cloudAdmin/js/datatables/media/css/jquery.dataTables.min.css') }}" />
+	<link rel="stylesheet" type="text/css" href="{{ asset('/templates/cloudAdmin/js/datatables/media/assets/css/datatables.min.css') }}" /-->
+	<link rel="stylesheet" type="text/css" href="{{ asset('/templates/cloudAdmin/js/datatable/css/dataTables.bootstrap.css') }}">
+
+{% endblock %}
+
+{% block breadcrumbs %}
+<li>
+    <i class="icon-home"></i>
+    <a href="{{ path('goondi_tools_updateTask_list') }}">{{ 'UpdateTask.UpdateTask'|trans }}</a>
+</li>
+<li>{{ 'General.List'|trans }}</li>
+{% endblock %}
+
+{% block content_title %}
+{{ 'UpdateTask.UpdateTasks-list'|trans }}
+{% endblock %}
+
+{% block content_title_baseline %}
+
+{% endblock %}
+
+{% block content %}
+
+						<div class="row">
+							<div class="col-md-12">
+								<!-- BOX -->
+								<div class="box border primary">
+									<div class="box-title">
+										<h4><i class="icon-cog"></i>{{ 'UpdateTask.List-of-updateTasks-in-database'|trans }}</h4>
+										<div class="tools">
+										</div>
+									</div>
+									<div class="box-body">
+
+												<div class="tabbable">
+													<ul class="nav nav-tabs">
+														<li class="active"><a href="#tab_updateTask_pending" data-toggle="tab">{{ 'UpdateTask.Pending'|trans }}</a></li>
+														<li class=""><a href="#tab_updateTask_all" data-toggle="tab">{{ 'UpdateTask.All'|trans }}</a></li>
+													</ul>
+													<div class="tab-content">
+														<div class="tab-pane fade in active" id="tab_updateTask_pending">
+
+															<div class="divide-10"></div>
+															<table id="updateTask-list-datatable-pending" class="datatable table table-striped table-bordered table-hover" cellpadding="0" cellspacing="0" border="0" width="100%">
+																<thead>
+																<tr>
+																	<th>#</th>
+																	<th>{{ 'UpdateTask.Status'|trans }}</th>
+																	<th>{{ 'UpdateTask.Action'|trans }}</th>
+																	<th>{{ 'UpdateTask.Object'|trans }}</th>
+																	<th>{{ 'UpdateTask.ObjectId'|trans }}</th>
+																	<th>{{ 'UpdateTask.UserCreation'|trans }}</th>
+																</tr>
+																</thead>
+																<tbody>
+																</tbody>
+															</table>
+														</div>
+														<div class="tab-pane fade in" id="tab_updateTask_all">
+
+															<div class="divide-10"></div>
+															<table id="updateTask-list-datatable-all" class="datatable table table-striped table-bordered table-hover" cellpadding="0" cellspacing="0" border="0" width="100%">
+																<thead>
+																<tr>
+																	<th>#</th>
+																	<th>{{ 'UpdateTask.Status'|trans }}</th>
+																	<th>{{ 'UpdateTask.Action'|trans }}</th>
+																	<th>{{ 'UpdateTask.Object'|trans }}</th>
+																	<th>{{ 'UpdateTask.ObjectId'|trans }}</th>
+																	<th>{{ 'UpdateTask.UserCreation'|trans }}</th>
+																</tr>
+																</thead>
+																<tbody>
+																</tbody>
+															</table>
+														</div>
+													</div>
+												</div>
+
+									    <div id="updateTask-list-context-menu">
+											<ul class="dropdown-menu context" role="menu">
+												<li><a href="#view"><i class="icon-search"></i> {{ 'UpdateTask.View-an-updateTask'|trans }}</a></li>
+												<li><a href="#remove"><i class="icon-trash"></i> {{ 'UpdateTask.Remove-an-updateTask'|trans }}</a></li>
+												<li><a href="#accept"><i class="icon-check"></i> {{ 'UpdateTask.Accept-an-updateTask'|trans }}</a></li>
+											</ul>
+									    </div>
+									</div>
+								</div>
+								<!-- /BOX -->
+							</div>
+						</div>
+
+{% endblock %}
+
+{% block javascripts %}
+	<!-- DATA TABLES -->
+	<script type="text/javascript" src="{{ asset('/templates/cloudAdmin/js/datatable/jquery.dataTables.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('/templates/cloudAdmin/js/datatable/dataTables.bootstrap.js') }}"></script>
+	<script>
+	$(function(){
+ 
+	    $('#updateTask-list-datatable-pending tbody').on('click', 'tr', function (event) {
+	 		var mainLineId = $(this).attr('id');
+
+	        if(event.shiftKey)
+	        {
+	        	var minKey, maxKey;
+	        	var i = 0;
+	        	$('#updateTask-list-datatable-pending tbody tr').each(function(){
+	        		if($(this).attr('id') == mainLineId || $(this).hasClass('selected'))
+	        		{
+	        			if (typeof minKey === "undefined")
+	        			{
+	        				minKey = i;
+	        			}
+
+	        			if(i < minKey)
+	        			{
+	        				minKey = i;
+	        			}
+	        			else
+	        			{
+	        				maxKey = i;
+	        			}
+	        		}
+
+	        		i++;
+	        	});
+
+	        	i = 0;
+	        	$('#updateTask-list-datatable-pending tbody tr').each(function(){
+	        		if(i >= minKey && i <= maxKey)
+	        		{
+						$(this).addClass('selected');
+	        		}
+	        		i++;
+	        	});
+
+	        }
+	        else
+	        {
+	        	if($(this).hasClass('selected'))
+	        	{
+	        		$(this).removeClass('selected')
+	        	} 	
+	        	else
+	        	{
+			 		if(! event.ctrlKey && ! event.metaKey)
+			 		{
+			 			$('#updateTask-list-datatable-pending tbody tr').removeClass('selected');
+			 		}
+			 		$(this).addClass('selected');
+			 	}
+		 	}	
+	        
+	    }).on('dblclick', 'tr', function(event){
+			url = "{{ path('goondi_tools_updateTask_view', {id: '0000'}) }}".replace('0000', $(this).attr('id').replace('row_', ''));
+			$(location).attr('href', url);
+	    }).disableSelection();
+
+		var updateTaskListPending = $('#updateTask-list-datatable-pending').DataTable({
+            "language": {
+                "lengthMenu":       "{{ 'General.Datatable.Records-per-page'|trans }}",
+                "zeroRecords":      "{{ 'General.Datatable.Nothing-found'|trans }}",
+                "info":             "{{ 'General.Datatable.Showing-page'|trans }}",
+                "infoEmpty":        "{{ 'General.Datatable.No-records-available'|trans }}",
+                "search":           "{{ 'General.Datatable.Search'|trans }}:",
+                "sProcessing":      "{{ 'General.Datatable.Loading'|trans }}",
+                "paginate": {
+                    "previous":         "{{ 'General.Datatable.Previous'|trans }}",
+                    "next":             "{{ 'General.Datatable.Next'|trans }}",
+                }
+            },
+	        "processing": true,
+	        "serverSide": true,
+	        "ajax": "{{ path('goondi_tools_updateTask_loadList', {status: 'pending'}) }}",
+	        "columns": [
+				{ "data": "id" },
+				{ "data": "status" },
+				{ "data": "action" },
+				{ "data": "object" },
+				{ "data": "objectId" },
+				{ "data": "userCreationUsername" }
+	        ],
+	        "rowCallback": function(row, data, displayIndex){
+
+	        },
+			"fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+
+				switch (aData['status']) {
+					case 'pending':
+						$(nRow).find(':first-child').next().text('{{ 'UpdateTask.Pending'|trans }}')
+						break;
+					case 'accepted':
+						$(nRow).find(':first-child').next().text('{{ 'UpdateTask.Accepted'|trans }}')
+						break;
+				}
+			},
+	        "fnDrawCallback": function(oSettings){
+
+	        	if(updateTaskListPending.data().length > 0)
+	        	{
+					$("#updateTask-list-datatable-pending tbody tr").contextmenu({
+						target:'#updateTask-list-context-menu',
+						before: function(e,context) {
+							this.$element.addClass('selected');
+							return true;
+						},
+						onItem: function(context,e) {
+							var href = $(e.target).attr('href');
+							var updateTaskId = new Array();
+							$('#updateTask-list-datatable-pending tbody tr.selected').each(function(){
+								updateTaskId.push($(this).attr('id').replace('row_', ''));
+							});
+
+							if(href == '#accept'){
+								bootbox.confirm("{{ 'UpdateTask.Accept-q1'|trans }}", function(result) {
+									if (result === true) {
+
+										url = "{{ path('goondi_tools_updateTask_accept', {id: '0000'}) }}".replace('0000', updateTaskId[0]);
+										$(location).attr('href', url);
+									}
+								});
+							}
+							else if(href == '#view'){
+								url = "{{ path('goondi_tools_updateTask_view', {id: '0000'}) }}".replace('0000', updateTaskId[0]);
+								$(location).attr('href', url);
+							}
+							else if(href == '#remove'){
+								bootbox.confirm("{{ 'UpdateTask.Remove-q1'|trans }}", function(result) {
+									if (result === true) {			
+
+										url = "{{ path('goondi_tools_updateTask_remove', {id: '0000'}) }}".replace('0000', updateTaskId[0]);
+										$(location).attr('href', url);
+									}
+								});
+							}
+
+						}
+					});
+				}
+				else
+				{
+					$("#updateTask-list-datatable-pending tbody tr").bind("contextmenu", function(e) {
+				        return false;
+				    });
+				}
+	        }
+	    });
+
+
+
+
+		$('#updateTask-list-datatable-all tbody').on('click', 'tr', function (event) {
+			var mainLineId = $(this).attr('id');
+
+			if(event.shiftKey)
+			{
+				var minKey, maxKey;
+				var i = 0;
+				$('#updateTask-list-datatable-all tbody tr').each(function(){
+					if($(this).attr('id') == mainLineId || $(this).hasClass('selected'))
+					{
+						if (typeof minKey === "undefined")
+						{
+							minKey = i;
+						}
+
+						if(i < minKey)
+						{
+							minKey = i;
+						}
+						else
+						{
+							maxKey = i;
+						}
+					}
+
+					i++;
+				});
+
+				i = 0;
+				$('#updateTask-list-datatable-all tbody tr').each(function(){
+					if(i >= minKey && i <= maxKey)
+					{
+						$(this).addClass('selected');
+					}
+					i++;
+				});
+
+			}
+			else
+			{
+				if($(this).hasClass('selected'))
+				{
+					$(this).removeClass('selected')
+				}
+				else
+				{
+					if(! event.ctrlKey && ! event.metaKey)
+					{
+						$('#updateTask-list-datatable-all tbody tr').removeClass('selected');
+					}
+					$(this).addClass('selected');
+				}
+			}
+
+		}).on('dblclick', 'tr', function(event){
+			url = "{{ path('goondi_tools_updateTask_view', {id: '0000'}) }}".replace('0000', $(this).attr('id').replace('row_', ''));
+			$(location).attr('href', url);
+		}).disableSelection();
+
+		var updateTaskListAll = $('#updateTask-list-datatable-all').DataTable({
+			"language": {
+				"lengthMenu":       "{{ 'General.Datatable.Records-per-page'|trans }}",
+				"zeroRecords":      "{{ 'General.Datatable.Nothing-found'|trans }}",
+				"info":             "{{ 'General.Datatable.Showing-page'|trans }}",
+				"infoEmpty":        "{{ 'General.Datatable.No-records-available'|trans }}",
+				"search":           "{{ 'General.Datatable.Search'|trans }}:",
+				"sProcessing":      "{{ 'General.Datatable.Loading'|trans }}",
+				"paginate": {
+					"previous":         "{{ 'General.Datatable.Previous'|trans }}",
+					"next":             "{{ 'General.Datatable.Next'|trans }}",
+				}
+			},
+			"processing": true,
+			"serverSide": true,
+			"ajax": "{{ path('goondi_tools_updateTask_loadList') }}",
+			"columns": [
+				{ "data": "id" },
+				{ "data": "status" },
+				{ "data": "action" },
+				{ "data": "object" },
+				{ "data": "objectId" },
+				{ "data": "userCreationUsername" }
+			],
+			"rowCallback": function(row, data, displayIndex){
+
+			},
+			"fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+
+				switch (aData['status']) {
+					case 'pending':
+						$(nRow).find(':first-child').next().text('{{ 'UpdateTask.Pending'|trans }}')
+						break;
+					case 'accepted':
+						$(nRow).find(':first-child').next().text('{{ 'UpdateTask.Accepted'|trans }}')
+						break;
+				}
+			},
+			"fnDrawCallback": function(oSettings){
+
+				if(updateTaskListAll.data().length > 0)
+				{
+					$("#updateTask-list-datatable-all tbody tr").contextmenu({
+						target:'#updateTask-list-context-menu',
+						before: function(e,context) {
+							this.$element.addClass('selected');
+							return true;
+						},
+						onItem: function(context,e) {
+							var href = $(e.target).attr('href');
+							var updateTaskId = new Array();
+							$('#updateTask-list-datatable-all tbody tr.selected').each(function(){
+								updateTaskId.push($(this).attr('id').replace('row_', ''));
+							});
+
+							if(href == '#accept'){
+								bootbox.confirm("{{ 'UpdateTask.Accept-q1'|trans }}", function(result) {
+									if (result === true) {
+
+										url = "{{ path('goondi_tools_updateTask_accept', {id: '0000'}) }}".replace('0000', updateTaskId[0]);
+										$(location).attr('href', url);
+									}
+								});
+							}
+							else if(href == '#view'){
+								url = "{{ path('goondi_tools_updateTask_view', {id: '0000'}) }}".replace('0000', updateTaskId[0]);
+								$(location).attr('href', url);
+							}
+							else if(href == '#remove'){
+								bootbox.confirm("{{ 'UpdateTask.Remove-q1'|trans }}", function(result) {
+									if (result === true) {
+
+										url = "{{ path('goondi_tools_updateTask_remove', {id: '0000'}) }}".replace('0000', updateTaskId[0]);
+										$(location).attr('href', url);
+									}
+								});
+							}
+
+						}
+					});
+				}
+				else
+				{
+					$("#updateTask-list-datatable-all tbody tr").bind("contextmenu", function(e) {
+						return false;
+					});
+				}
+			}
+		});
+
+	});
+	</script>
+{% endblock %}

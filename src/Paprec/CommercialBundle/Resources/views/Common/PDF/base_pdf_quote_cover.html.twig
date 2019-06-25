@@ -1,0 +1,58 @@
+{% extends "@PaprecCommercial/Common/PDF/base_pdf.html.twig" %}
+
+{% block stylesheet %}
+    <style type="text/css">
+        body {
+            margin-top: 0;
+            margin-left: 0;
+            text-align: center;
+        }
+
+        #cover {
+            position: relative;
+            overflow: hidden;
+            margin: 0 auto 0 auto;
+            padding: 0;
+            border: none;
+            width: 850px;
+            height: 1250px;
+            color: #595959;
+            font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+            text-align: center;
+        }
+
+        #cover #backgroundImg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            width: 850px;
+            height: 1250px;
+        }
+
+        #cover #backgroundImg #img1 {
+            width: 850px;
+            height: 1250px;
+        }
+    </style>
+{% endblock %}
+{% block pdf_content %}
+    <div id="cover">
+        <div id="backgroundImg">
+            <img src="{{ absolute_url(asset('build/static/coverBackground.jpg')) }}"
+                 id="img1"></div>
+        <div style="clear:both; float:none; height:1px; margin:0; padding:0; overflow:hidden"></div>
+        <div style="margin-top: 486px; padding-bottom: 20px; background-color: #FFFFFF; width: 100%;">
+            <p style="font-size: 52px; overflow: hidden; font-weight: bold; color: #595959; line-height: 64px; text-align: left; padding-left: 24px; margin-bottom: 0">{% block businessName %} {% endblock %}</p>
+            <p style="font-size: 32px; line-height: 44px; text-align: left; padding-left: 24px; margin-top: 15px; margin-bottom: 0">
+                Estimation tarifaire de la prestation demandée</p>
+            <p style="font-size: 26px; line-height: 33px; text-align: left; padding-left: 24px; margin-top: 13px; margin-bottom: 0">
+                Affaire suivie par votre agence locale</p>
+            <p style="font-size: 19px; line-height: 30px; text-align: left; padding-left: 24px; padding-right: 256px; margin-top: 10px; margin-bottom: 0; letter-spacing: -1px;">
+                L’agence en charge de votre demande vous recontactera sous 48h par email ou telephone afin de valider un
+                devis.</p>
+            <p style="font-size: 24px; line-height: 28px; text-align: left; padding-left: 24px; margin-top: 14px; margin-bottom: 0">
+                Le {% block date %}{% endblock %}</p>
+        </div>
+    </div>
+{% endblock %}

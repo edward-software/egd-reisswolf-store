@@ -1,0 +1,400 @@
+{% extends "::base_admin.html.twig" %}
+
+{% block title %}
+    {{ 'Commercial.ProductD3EQuote.View'|trans }}
+{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}
+
+{% block content_title %}
+    {{ 'Commercial.ProductD3EQuote.ProductD3EQuotes'|trans }}
+{% endblock %}
+
+{% block main_content %}
+
+
+    <div class="col-md-12">
+        <!-- FLASH MESSAGE -->
+        <div class="view-box">
+
+            {% for flashMessage in app.session.flashbag.get('errors') %}
+                <div class="alert alert-danger">{{ ('Commercial.ProductD3EQuote.Error.' ~ flashMessage)|trans }}</div>
+            {% endfor %}
+
+            {% for flashMessage in app.session.flashbag.get('success') %}
+                <div class="alert alert-success">{{ ('Commercial.ProductD3EQuote.Success.' ~ flashMessage)|trans }}</div>
+            {% endfor %}
+        </div>
+        <!-- CARD -->
+        <div class="card">
+            <div class="card-header">
+                <h4>
+                    <i class="fa fa-xs fa-productD3EQuote"></i> {{ 'Commercial.ProductD3EQuote.View'|trans }}
+                </h4>
+                <div class="float-right">
+                    <a id="sendGeneratedQuoteButton" href="javascript:void(0);" class="btn btn-sm btn-success"><i
+                                class="fa fa-xs fa-envelope"></i> {{ 'Commercial.ProductD3EQuote.Send-quote'|trans }}
+                    </a>
+                    <a href="{{ path("paprec_commercial_productD3EQuote_edit", {id: productD3EQuote.id}) }}"
+                       class="btn btn-sm btn-warning"><i
+                                class="fa fa-xs fa-edit"></i> {{ 'Commercial.ProductD3EQuote.Edit'|trans }}</a>
+                    <a id="commmecialProductD3EQuoteRemoveButton_" href="javascript:void(0);"
+                       class="btn btn-sm btn-danger"><i
+                                class="fa fa-xs fa-trash"></i> {{ 'Commercial.ProductD3EQuote.Remove'|trans }}</a>
+                </div>
+                <div class="float-left">
+                    <a href="{{ path('paprec_commercial_productD3EQuote_index') }}" class="btn btn-sm btn-default"><i
+                                class="fa fa-xs fa-chevron-left"></i> {{ 'Commercial.ProductD3EQuote.List'|trans }}</a>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">{{ 'Commercial.ProductD3EQuote.Informations-FO'|trans }}</h5>
+                        </div>
+                        <div class="card-body row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.ProductD3EQuote.BusinessName'|trans }}</label>
+                                    <label class="col-form-label">
+                                        {{ productD3EQuote.businessName }}
+                                    </label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.ProductD3EQuote.BusinessLine'|trans }}</label>
+                                    <label class="col-form-label">
+                                        {% if productD3EQuote.businessLine %}
+                                            <a href="{{ path('paprec_commercial_businessLine_view', {id: productD3EQuote.businessLine.id}) }}">{{ productD3EQuote.businessLine.name }}</a>
+                                        {% endif %}
+                                    </label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.ProductD3EQuote.Civility'|trans }}</label>
+                                    <label class="col-form-label">
+                                        {{ productD3EQuote.civility }}
+                                    </label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.ProductD3EQuote.LastName'|trans }}</label>
+                                    <label class="col-form-label">
+                                        {{ productD3EQuote.lastName }}
+                                    </label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.ProductD3EQuote.FirstName'|trans }}</label>
+                                    <label class="col-form-label">
+                                        {{ productD3EQuote.firstName }}
+                                    </label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.ProductD3EQuote.Function'|trans }}</label>
+                                    <label class="col-form-label">
+                                        {{ productD3EQuote.function }}
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.ProductD3EQuote.Email'|trans }}</label>
+                                    <label class="col-form-label">
+                                        {{ productD3EQuote.email }}
+                                    </label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.ProductD3EQuote.Phone'|trans }}</label>
+                                    <label class="col-form-label">
+                                        {{ productD3EQuote.phone }}
+                                    </label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.ProductD3EQuote.PreferredContact'|trans }}</label>
+                                    <label class="col-form-label">
+                                        {% if productD3EQuote.preferredContact %}
+                                            {{ ('Commercial.QuoteRequest.' ~ productD3EQuote.preferredContact|capitalize)|trans }}
+                                        {% endif %}
+                                    </label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.ProductD3EQuote.QuoteStatus'|trans }}</label>
+                                    <label class="col-form-label">
+                                        {{ ('Commercial.QuoteStatusList.' ~ productD3EQuote.quoteStatus)|trans }}
+                                    </label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.ProductD3EQuote.TotalAmount'|trans }}</label>
+                                    <label class="col-form-label">
+                                        {{ productD3EQuote.totalAmount|formatAmount('EUR', app.request.locale) }}
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="card-title">{{ 'Commercial.ProductD3EQuote.Address'|trans }}</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="form-group row">
+                                            <label class="col-md-4 col-form-label">{{ 'Commercial.ProductD3EQuote.Address'|trans }}</label>
+                                            <label class="col-form-label">
+                                                {{ productD3EQuote.address }}
+                                            </label>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-4 col-form-label">{{ 'Commercial.ProductD3EQuote.PostalCode'|trans }}</label>
+                                            <label class="col-form-label">
+                                                {{ productD3EQuote.postalCode }}
+                                            </label>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-4 col-form-label">{{ 'Commercial.ProductD3EQuote.City'|trans }}</label>
+                                            <label class="col-form-label">
+                                                {{ productD3EQuote.city }}
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="card-title">{{ 'Commercial.ProductD3EQuote.HeadofficeAddress'|trans }}</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="form-group row">
+                                            <label class="col-md-4 col-form-label">{{ 'Commercial.ProductD3EQuote.Address'|trans }}</label>
+                                            <label class="col-form-label">
+                                                {{ productD3EQuote.headofficeAddress }}
+                                            </label>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-4 col-form-label">{{ 'Commercial.ProductD3EQuote.PostalCode'|trans }}</label>
+                                            <label class="col-form-label">
+                                                {{ productD3EQuote.headofficePostalCode }}
+                                            </label>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-4 col-form-label">{{ 'Commercial.ProductD3EQuote.City'|trans }}</label>
+                                            <label class="col-form-label">
+                                                {{ productD3EQuote.headofficeCity }}
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 mt-3">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">{{ 'Commercial.ProductD3EQuote.Informations-BO'|trans }}</h5>
+                        </div>
+                        <div class="card-body row">
+                            <div class="col-md-6">
+
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.ProductD3EQuote.GeneratedTurnover'|trans }}</label>
+                                    <label class="col-form-label">
+                                        {{ productD3EQuote.generatedTurnover|formatAmount('EUR', app.request.locale) }}
+                                    </label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.ProductD3EQuote.Agency'|trans }}</label>
+                                    <label class="col-form-label">
+                                        {% if productD3EQuote.agency %}
+                                            <a href="{{ path('paprec_commercial_agence_view', {id: productD3EQuote.agency.id}) }}">{{ productD3EQuote.agency }}</a>
+                                        {% endif %}
+                                    </label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.ProductD3EQuote.Summary'|trans }}</label>
+                                    <label class="col-form-label">
+                                        {{ productD3EQuote.summary|nl2br }}
+                                    </label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.ProductD3EQuote.Frequency'|trans }}</label>
+                                    <label class="col-form-label">
+                                        {% if productD3EQuote.frequency == 'regular' %}Régulier {% else %}Ponctuel{% endif %}
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.ProductD3EQuote.Tonnage'|trans }}</label>
+                                    <label class="col-form-label">
+                                        {{ productD3EQuote.tonnage }}
+                                    </label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.ProductD3EQuote.KookaburaNumber'|trans }}</label>
+                                    <label class="col-form-label">
+                                        {{ productD3EQuote.kookaburaNumber }}
+                                    </label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.ProductD3EQuote.UserInCharge'|trans }}</label>
+                                    <label class="col-form-label">
+                                        {% if productD3EQuote.userInCharge %}
+                                            <a href="{{ path('paprec_user_user_view', {id: productD3EQuote.userInCharge.id}) }}">{{ productD3EQuote.userInCharge }}</a>
+                                        {% endif %}
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 mt-3">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>
+                                {{ 'Commercial.ProductD3EQuote.ProductsList'|trans }}
+                            </h5>
+                            <div class="float-right">
+                                <a href="{{ path('paprec_commercial_productD3EQuote_addLine', {id: productD3EQuote.id}) }}"
+                                   class="btn btn-sm btn-outline-primary">
+                                    <i class="fa fa-xs fa-plus"></i> {{ 'Commercial.ProductD3EQuote.AddLine'|trans }}
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <table id="productD3EQuoteLinesDatatable"
+                                   class="table table-striped table-bordered table-hover"
+                                   cellpadding="0" cellspacing="0" border="0">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>{{ 'Commercial.ProductD3EQuoteLine.ProductName'|trans }}</th>
+                                    <th>{{ 'Commercial.ProductD3EQuoteLine.TypeName'|trans }}</th>
+
+                                    <th>{{ 'Commercial.ProductD3EQuoteLine.UnitPrice'|trans }}</th>
+                                    <th>{{ 'Commercial.ProductD3EQuoteLine.Quantity'|trans }}</th>
+                                    <th>{{ 'Commercial.ProductD3EQuoteLine.OptHandling'|trans }}</th>
+                                    <th>{{ 'Commercial.ProductD3EQuoteLine.OptSerialNumberStmtShort'|trans }}</th>
+                                    <th>{{ 'Commercial.ProductD3EQuoteLine.OptDestructionShort'|trans }}</th>
+                                    <th>{{ 'Commercial.ProductD3EQuoteLine.TotalAmount'|trans }}</th>
+
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for productD3EQuoteLine in productD3EQuote.productD3EQuoteLines %}
+                                    <tr>
+                                        <td>{{ productD3EQuoteLine.id|formatId(6) }}</td>
+                                        <td>{{ productD3EQuoteLine.productName }}</td>
+                                        <td>{{ productD3EQuoteLine.typeName }}</td>
+                                        <td>{{ productD3EQuoteLine.unitPrice|formatAmount('EUR', app.request.locale) }}</td>
+                                        <td>{{ productD3EQuoteLine.quantity }}</td>
+                                        <td>{% if productD3EQuoteLine.optHandling == 1 %}Oui{% else %}Non{% endif %}</td>
+                                        <td>{% if productD3EQuoteLine.optSerialNumberStmt == 1 %}Oui{% else %}Non{% endif %}</td>
+                                        <td>{% if productD3EQuoteLine.optDestruction == 1 %}Oui{% else %}Non{% endif %}</td>
+                                        <td>{{ productD3EQuoteLine.totalAmount|formatAmount('EUR', app.request.locale) }}</td>
+                                        <td class="text-center">
+                                            <a href="{{ path('paprec_commercial_productD3EQuote_editLine', {id: productD3EQuote.id, quoteLineId: productD3EQuoteLine.id}) }}"
+                                               class="btn btn-sm btn-warning btn-sm mx-1"
+                                               data-id="{{ productD3EQuoteLine.id }}">
+                                                <i class="fa fa-xs fa-edit"></i>
+                                            </a>
+                                            <a href="#"
+                                               class="btn btn-sm btn-danger btn-sm commercialProductD3EQuoteLineRemoveButton"
+                                               data-id="{{ productD3EQuoteLine.id }}">
+                                                <i class="fa fa-xs fa-trash"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 mt-3">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">{{ 'Commercial.ProductD3EQuote.System-informations'|trans }}</h5>
+                        </div>
+                        <div class="card-body">
+
+                            <div class="form-group row">
+                                <label class="col-md-4 col-form-label">{{ 'Commercial.ProductD3EQuote.Date-creation'|trans }}</label>
+                                <label class="col-form-label">
+                                    {{ productD3EQuote.dateCreation|localizeddate('short', 'medium', app.request.locale) }}
+                                </label>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-md-4 col-form-label">{{ 'Commercial.ProductD3EQuote.Date-update'|trans }}</label>
+                                <label class="col-form-label">
+                                    {{ productD3EQuote.dateUpdate is empty ? "" : productD3EQuote.dateUpdate|localizeddate('short', 'medium', app.request.locale) }}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+        {% block javascripts %}
+            <script>
+                $(function () {
+
+                    $('#commmecialProductD3EQuoteRemoveButton_').on('click', function () {
+
+                        var url = "{{ path("paprec_commercial_productD3EQuote_remove", {id: productD3EQuote.id}) }}";
+
+                        Swal({
+                            title: "{{ 'General.Confirm'|trans }}",
+                            text: "{{ 'Commercial.ProductD3EQuote.Confirm-remove'|trans }}",
+                            showCancelButton: true,
+                            confirmButtonText: "{{ 'General.Yes'|trans }}",
+                            cancelButtonText: "{{ 'General.No'|trans }}"
+                        }).then((result) => {
+                            if (result.value) {
+                                $(location).attr('href', url);
+                            }
+                        });
+
+                    });
+                    $('.commercialProductD3EQuoteLineRemoveButton').on('click', function () {
+                        quoteLineId = $(this).data('id');
+                        var url = "{{ path("paprec_commercial_productD3EQuote_removeLine", {id: productD3EQuote.id, quoteLineId: 'quoteLineIdTmp'}) }}".replace('quoteLineIdTmp', quoteLineId);
+
+                        Swal({
+                            title: "{{ 'General.Confirm'|trans }}",
+                            text: "{{ 'Commercial.ProductD3EQuoteLine.Confirm-remove'|trans }}",
+                            showCancelButton: true,
+                            confirmButtonText: "{{ 'General.Yes'|trans }}",
+                            cancelButtonText: "{{ 'General.No'|trans }}"
+                        }).then((result) => {
+                            if (result.value) {
+                                $(location).attr('href', url);
+                            }
+                        });
+                    });
+
+
+                    $('#sendGeneratedQuoteButton').on('click', function () {
+                        var url = "{{ path("paprec_commercial_productD3EQuote_sendGeneratedQuote", {id: productD3EQuote.id}) }}";
+
+                        Swal({
+                            title: "{{ 'General.Confirm'|trans }}",
+                            text: "{{ 'Commercial.ProductD3EQuote.Confirm-send-quote'|trans }}",
+                            showCancelButton: true,
+                            confirmButtonText: "{{ 'General.Yes'|trans }}",
+                            cancelButtonText: "{{ 'General.No'|trans }}"
+                        }).then((result) => {
+                            if (result.value) {
+                                $(location).attr('href', url);
+                            }
+                        });
+                    })
+
+                });
+            </script>
+        {% endblock %}

@@ -1,0 +1,4 @@
+{% extends "@PaprecCommercial/Common/PDF/base_pdf.html.twig" %}
+{% block pdf_content %}
+    {{ productD3EOrder.totalAmount|formatAmount('EUR', app.request.locale) }}
+{% endblock %}

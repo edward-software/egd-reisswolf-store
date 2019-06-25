@@ -1,0 +1,6 @@
+<div class="left">{{ nbAgencies }}</div>
+<div class="middle">
+    <span>Agence{% if nbAgencies > 1 %}s{% endif %}</span>
+    {% if nbAgencies > 1 %}sont{% else %}est{% endif %} à moins de {{ distance }} km
+</div>
+<div class="right"></div>

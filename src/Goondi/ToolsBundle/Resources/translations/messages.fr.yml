@@ -1,0 +1,32 @@
+UpdateTask:
+
+    UpdateTask:                         Tâche de mise à jour
+    UpdateTasks:                        Tâches de mise à jour
+    Status:                             Statut
+    Action:                             Action
+    Object:                             Objet
+    ObjectId:                           Id Objet
+    UserCreation:                       Modificateur
+    UserValidation:                     Validateur
+    Pending:                            En attente
+    Accepted:                           Acceptée
+    All:                                Toutes
+    List-of-updateTasks-in-database:    Liste des tâches de mise à jour
+    UpdateTasks-list:                   Liste des tâches de mise à jour
+
+    View-an-updateTask:                 Voir la tâche de mise à jour
+    Remove-an-updateTask:               Supprimer la tâche de mise à jour
+    Accept-an-updateTask:               Accepter la tâche de mise à jour
+
+    DateCreation:                       Date de création
+    DateValidation:                     Date de validation
+    Accept:                             Accepter
+    View-updateTask:                    Voir la tâche de mise à jour
+
+Goondi:
+
+    Tools:
+        Gender-m:             Mâle
+        Gender-f:             Femelle
+        Gender-name-m:        Homme
+        Gender-name-f:        Femme

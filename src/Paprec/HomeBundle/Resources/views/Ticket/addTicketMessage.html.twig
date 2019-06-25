@@ -1,0 +1,72 @@
+{% extends "::base_admin.html.twig" %}
+
+{% block title %}
+    {{ 'Home.Ticket.Message.Add'|trans }}
+{% endblock %}
+
+{% block stylesheets %}
+{% endblock %}
+
+{% block content_title %}
+    {{ 'Home.Ticket.Messages'|trans }}
+{% endblock %}
+
+{% block main_content %}
+    <form id="homeTicketAddTicketMessageForm" action="" method="post">
+        <div class="col-md-7">
+            <div class="card">
+                <div class="card-header">
+                    <h4>{{ 'Home.Ticket.Message.Add'|trans }}</h4>
+                </div>
+                <div class="card-body">
+                    <div class="form-item mb-2">
+                        <div class="form-label">{{ 'Home.Ticket.Content'|trans }}</div>
+                        <div class="form-content">
+                            {{ form_widget(form.content, {'attr': {'class': 'form-control', 'placeholder': 'Home.Ticket.Content'|trans }}) }}
+                            {{ form_errors(form.content) }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-footer">
+
+                    <button type="submit" class="btn btn-sm btn-success home-ticket-save-button form-block-submit-button"
+                            data-form="#homeTicketAddShortTicketMessageForm"><i
+                                class="fa fa-check"></i> {{ 'General.Save'|trans }}</button>
+
+                    <a href="javascript:void(0);"
+                       class="btn btn-sm btn-danger home-ticket-cancel-button form-block-cancel-button"
+                       data-text="{{ 'General.Confirm-cancel'|trans }}"><i
+                                class="fa fa-close"></i> {{ 'General.Cancel'|trans }}</a>
+
+                </div>
+            </div>
+        </div>
+        {{ form_end(form, {'render_rest': true}) }}
+    </form>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        $(function () {
+            $('.home-ticket-cancel-button').on('click', function () {
+
+                var url = "{{ path("paprec_home_ticket_view", {id: ticket.id}) }}";
+
+                Swal({
+                    title: "{{ 'General.Confirm'|trans }}",
+                    text: "{{ 'Home.Ticket.Confirm-cancel'|trans }}",
+                    showCancelButton: true,
+                    confirmButtonText: "{{ 'General.Yes'|trans }}",
+                    cancelButtonText: "{{ 'General.No'|trans }}"
+                }).then((result) => {
+                    if (result.value) {
+                        $(location).attr('href', url);
+                    }
+                });
+
+            });
+        });
+    </script>
+{% endblock %}
+
+

@@ -1,0 +1,52 @@
+parameters:
+    goondi_tools.task.status:
+        pending: "pending"
+        processing: "processing"
+        error: "error"
+        completed: "completed"
+        canceled: "canceled"
+        stopped: "stopped"
+        deleted: "deleted"
+        
+    goondi_tools.task.timeout: 3600
+    
+    goondi_tools.task.queues:
+#        - "queue1"
+#        - "queue2"
+
+    goondi_tools_updateTask.status:
+        pending: "pending"
+        accepted: "accepted"
+
+services:
+
+    goondi_tools.currency:
+        class: Goondi\ToolsBundle\Services\CurrencyManager
+        arguments: ["@doctrine.orm.entity_manager", "@service_container", "@logger"]
+
+    goondi_tools.task:
+        class: Goondi\ToolsBundle\Services\TaskManager
+        arguments: ["@doctrine.orm.entity_manager", "@service_container", "@logger"]  
+        
+    goondi_tools.datatable:
+        class: Goondi\ToolsBundle\Services\DataTable
+        arguments: ["@service_container"]
+        
+    goondi_tools.logger:
+        class: Goondi\ToolsBundle\Services\Logger
+        arguments: ["@doctrine.orm.entity_manager", "@service_container"]
+
+    goondi_tools.updateTask:
+        class: Goondi\ToolsBundle\Services\UpdateTaskManager
+        arguments: ["@doctrine.orm.entity_manager", "@service_container", "@logger"]
+
+    goondi_tools.security:
+        class: Goondi\ToolsBundle\Services\SecurityManager
+        arguments: ["@security.role_hierarchy"]
+
+#    app.twig_extension:
+#        class: Goondi\ToolsBundle\Twig\Extension\CurrencyExtension
+#        public: false
+#        arguments: ["@goondi_tools.currency"]
+#        tags:
+#            - { name: twig.extension }

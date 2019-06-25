@@ -1,0 +1,120 @@
+{% extends "::base_admin.html.twig" %}
+
+{% block title %}
+    {{ 'Commercial.ProductD3EQuote.Add'|trans }}
+{% endblock %}
+
+{% block stylesheets %}
+{% endblock %}
+
+{% block content_title %}
+    {{ 'Commercial.ProductD3EQuote.ProductD3EQuotes'|trans }}
+{% endblock %}
+
+{% block main_content %}
+
+    <form id="catalogProductD3EQuoteForm" action="" method="post" enctype="multipart/form-data">
+
+        <div class="col-md-12">
+            <!-- BOX -->
+            <div class="card">
+                <div class="card-header">
+                    <h4>
+                        <i class="fa fa-xs fa-plus"></i> {{ 'Commercial.ProductD3EQuote.Add'|trans }}
+                    </h4>
+                    <div class="float-right">
+                        <a href="javascript:void(0);" class="btn btn-sm btn-success catalog-productD3EQuoteLine-save-button"><i
+                                    class="fa fa-xs fa-check"></i> {{ 'Commercial.ProductD3EQuote.Save'|trans }}</a>
+                        <a href="javascript:void(0);" class="btn btn-sm btn-danger catalog-productD3EQuoteLine-cancel-button"><i
+                                    class="fa fa-xs fa-close"></i> {{ 'Commercial.ProductD3EQuote.Cancel'|trans }}</a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="col-md-7">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">{{ 'Commercial.ProductD3EQuote.Informations'|trans }}</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group no-gutters">
+                                    <label class="form-label">{{ 'Commercial.ProductD3EQuoteLine.Quantity'|trans }}</label>
+                                    <div class="form-content col-md-6">
+                                        {{ form_widget(form.quantity, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_errors(form.quantity) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">{{ 'Commercial.ProductD3EQuoteLine.OptHandling'|trans }}</label>
+                                    <div class="form-content">
+                                        {{ form_widget(form.optHandling) }}
+                                        {{ form_errors(form.optHandling) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">{{ 'Commercial.ProductD3EQuoteLine.OptSerialNumberStmt'|trans }}</label>
+                                    <div class="form-content">
+                                        {{ form_widget(form.optSerialNumberStmt) }}
+                                        {{ form_errors(form.optSerialNumberStmt) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">{{ 'Commercial.ProductD3EQuoteLine.OptDestruction'|trans }}</label>
+                                    <div class="form-content">
+                                        {{ form_widget(form.optDestruction) }}
+                                        {{ form_errors(form.optDestruction) }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <div class="float-right">
+                        <a href="javascript:void(0);" class="btn btn-sm btn-success catalog-productD3EQuoteLine-save-button"><i
+                                    class="fa fa-xs fa-check"></i> {{ 'Commercial.ProductD3EQuote.Save'|trans }}</a>
+                        <a href="javascript:void(0);" class="btn btn-sm btn-danger catalog-productD3EQuoteLine-cancel-button"><i
+                                    class="fa fa-xs fa-close"></i> {{ 'Commercial.ProductD3EQuote.Cancel'|trans }}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{ form_rest(form) }}
+    </form>
+    </div>
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+
+    <script>
+        $(function () {
+
+            $('.catalog-productD3EQuoteLine-save-button').on('click', function () {
+                $('#catalogProductD3EQuoteForm').submit();
+            });
+
+
+            $('.catalog-productD3EQuoteLine-cancel-button').on('click', function () {
+
+                var url = "{{ path("paprec_commercial_productD3EQuote_view", { id: productD3EQuote.id }) }}";
+
+                Swal({
+                    title: "{{ 'General.Confirm'|trans }}",
+                    text: "{{ 'Commercial.ProductD3EQuote.Confirm-cancel'|trans }}",
+                    showCancelButton: true,
+                    confirmButtonText: "{{ 'General.Yes'|trans }}",
+                    cancelButtonText: "{{ 'General.No'|trans }}"
+                }).then((result) => {
+                    if (result.value) {
+                        $(location).attr('href', url);
+                    }
+                });
+
+            });
+
+        });
+    </script>
+{% endblock %}

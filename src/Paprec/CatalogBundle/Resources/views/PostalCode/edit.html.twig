@@ -1,0 +1,119 @@
+{% extends "::base_admin.html.twig" %}
+
+{% block title %}
+    {{ 'Catalog.PostalCode.Edit'|trans }}
+{% endblock %}
+
+{% block stylesheets %}
+{% endblock %}
+
+{% block content_title %}
+    {{ 'Catalog.PostalCode.PostalCodes'|trans }}
+{% endblock %}
+
+{% block main_content %}
+
+    <form id="catalogPostalCodeForm" action="" method="post" enctype="multipart/form-data">
+
+        <div class="col-md-12">
+            <!-- BOX -->
+            <div class="card">
+                <div class="card-header">
+                    <h4>
+                        <i class="fa fa-xs fa-pencil-alt"></i> {{ 'Catalog.PostalCode.Edit'|trans }} #{{ postalCode.id|formatId(6) }}
+                    </h4>
+                    <div class="float-right">
+
+                        <a href="javascript:void(0);" class="btn btn-sm btn-success catalog-postalCode-save-button"><i
+                                    class="fa fa-xs fa-check"></i> {{ 'Catalog.PostalCode.Save'|trans }}</a>
+                        <a href="javascript:void(0);" class="btn btn-sm btn-danger catalog-postalCode-cancel-button"><i
+                                    class="fa fa-xs fa-close"></i> {{ 'Catalog.PostalCode.Cancel'|trans }}</a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="col-md-7">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">{{ 'Catalog.PostalCode.Informations'|trans }}</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <div class="form-label">{{ 'Catalog.PostalCode.Codes'|trans }}</div>
+                                    <div class="form-content">
+                                        {{ form_widget(form.codes, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_errors(form.codes) }}
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="form-label">{{ 'Catalog.Category.Division'|trans }}</div>
+                                    <div class="form-content checkbox-list">
+                                        {% for radio in form.division.children %}
+                                            <div class="form__check ml-4">
+                                                {{ form_widget(radio) }}
+                                                {{ form_label(radio) }}
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="form-label">{{ 'Catalog.PostalCode.Rate'|trans }}</div>
+                                    <div class="form-content">
+                                        {{ form_widget(form.rate, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_errors(form.rate) }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{ form_rest(form) }}
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="float-right">
+                        <a href="javascript:void(0);" class="btn btn-sm btn-success catalog-postalCode-save-button"><i
+                                    class="fa fa-xs fa-check"></i> {{ 'Catalog.PostalCode.Save'|trans }}</a>
+                        <a href="javascript:void(0);" class="btn btn-sm btn-danger catalog-postalCode-cancel-button"><i
+                                    class="fa fa-xs fa-close"></i> {{ 'Catalog.PostalCode.Cancel'|trans }}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+
+    <script>
+        $(function () {
+
+            $('.catalog-postalCode-save-button').on('click', function () {
+
+                $('#catalogPostalCodeForm').submit();
+
+            });
+
+
+            $('.catalog-postalCode-cancel-button').on('click', function () {
+
+                var url = "{{ path("paprec_catalog_postalCode_view", {id: postalCode.id}) }}";
+
+                Swal({
+                    title: "{{ 'General.Confirm'|trans }}",
+                    text: "{{ 'Catalog.PostalCode.Confirm-cancel'|trans }}",
+                    showCancelButton: true,
+                    confirmButtonText: "{{ 'General.Yes'|trans }}",
+                    cancelButtonText: "{{ 'General.No'|trans }}"
+                }).then((result) => {
+                    if (result.value) {
+                        $(location).attr('href', url);
+                    }
+                });
+            });
+
+        });
+    </script>
+{% endblock %}

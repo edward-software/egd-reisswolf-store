@@ -1,0 +1,126 @@
+Public:
+
+  Bundle-name:                    Gestion devis
+  CancelSubscription:             En modifiant cette valeur, vous allez perdre votre devis en cours. Etes-vous sûr de vouloir continuer ?
+  Home:
+    Location:                     Je me situe
+    Title:                        Paprec - EasyRecyclage
+    Recycle:                      Je recycle
+    MyNeed:                       Mon besoin
+    IAm:                          Je suis
+    Addresses:                    Adresses
+    TVAStatus:                    Statut TVA
+    FileUploadNotice:             Afin de mieux appréhender votre demande, vous pouvez si vous le souhaitez nous fournir des photos (.jpg, .png, .tiff) ou autres fichiers (.pdf, .doc, .xls)
+
+  CTA:
+    ContactUs:                    Contactez-nous
+    CallBack:                     Être rappelé
+    ChooseNeed:                   Rédigez votre besoin
+
+
+  Confirm:
+    Thanks:                       Merci pour votre confiance !
+    RequestReceived:              Votre demande a bien été prise en compte par nos agences.
+    RequestReceivedMail:          Votre demande a bien été prise en compte par nos agences et vous a été envoyée par mail.
+    AgencyContact:                L'agence en charge de votre demande vous recontactera sous 48h par e-mail ou téléphone.
+    AgencyContactQuote:           L'agence en charge de votre demande vous recontactera sous 48h par e-mail ou téléphone afin de valider un devis.
+    RecapOrder:                   Voici le récapitulatif de votre demande.
+
+
+  Delivery:
+    AccessConditions:             Indiquez vos conditions d'accès
+    SelectRemovalDate:            Sélectionnez une date d'enlèvement
+    SelectInstallationDate:       Sélectionnez une date de pose
+    InstallationDateInfo:         Nous pouvons intervenir <span>à partir de 48h ouvrées</span> dès lors que vous passez votre commande.
+    RemovalDateInfo:              Vous ne pouvez garder votre matériel que <span>10 jours maximum</span>.
+
+  Payment:
+    Title:                        Vous pouvez maintenant procéder au paiement de votre prestation.
+    ChoiceTitle:                  Sélectionnez un mode de paiement et de signature
+    CBPayment:                    Payer en ligne via <span>carte bancaire</span>
+    CBInfo:                       Si vous payez par carte bancaire, vous disposerez de votre prestation plus rapidemment
+    VirementPayment:              Payer en ligne via <span>virement</span>
+    OnlineSignature:              Signer en ligne votre devis
+    OnlineSignatureInfo:          |
+                                  La signature électronique est un procédé technique qui permet de conférer à l'écrit
+                                  électronique la même valeur
+                                  contractuelle que sur support papier. Ce procédé technique assure l'identification du
+                                  signataire, l'intégrité du document
+                                  et manifeste le consentement du signataire au document signé.
+    DownloadAndSendMail:          Télécharger le dossier et renvoyer-le par courrier
+
+  Cart:
+    Back:                         Retour
+    BackHome:                     Retour à la page d'accueil
+    Prestations:                  Mes prestations
+    ContactDetails:               Mes coordonnées
+    Offer:                        Mon offre
+    Ponctual:                     Ponctuel
+    Regular:                      Régulier
+    ChooseTrash:                  Sélectionnez vos déchets
+    Qtty:                         Quantité
+    Dimensions:                   Dimensions
+    Disclaimer:                   Forfait recyclage clé en main
+    SelectedContainer:            contenant séléctionné
+    SelectedContainers:           contenants séléctionnés
+    SelectedCategory:             déchet sélectionné
+    SelectedCategories:           déchets sélectionnés
+    OtherTrash:                   Autres déchets
+    NoSelectedCategory:           Aucun déchet sélectionné
+    AddToCartQuote:               Ajouter au devis
+    AddToCartOrder:               Ajouter au panier
+    SendNeed:                     Envoyer votre besoin
+    NoPrestation:                 Aucune prestation
+    Added:                        ajoutée
+    NoTrash:                      Aucun déchet
+    AddedM:                       ajouté
+    NoContainer:                  Aucun contenant sélectionné
+#    NeedEstimation:               J'estime mon besoin en 3 minutes
+    NeedEstimation:               Je compose mon offre
+#    3MinOrder:                    Je commande en ligne en 3 minutes
+    3MinOrder:                    Je compose ma solution
+#    FillForm:                     Je remplis un formulaire
+    FillForm:                     Je rédige ma demande
+#    QuoteRequest:                 J'établis un devis
+    QuoteRequest:                 Je rédige mon besoin
+    PostalCode:                   Code postal
+    ValidateNeed:                 Validez votre besoin
+    ValidateOrder:                Validez votre commande
+    Confirm:                      Confirmez
+    GoToDelivery:                 Aller à la livraison
+    GoToPayment:                  Aller au paiement
+    MyTrash:                      Mes déchets
+    ToCollect:                    à collecter
+    MyServices:                   Mes prestations
+    MyContainers:                 Mes contenants
+    Pay:                          Payer
+    Validate:                     Valider
+    EstimateTrashVolume:          Estimer mon volume de déchets
+    LearnMore:                    En savoir plus sur le produit
+    Engagment:                    Je m'engage à respecter le type de déchets prévu
+    QuantifyNeed:                 Quantifiez votre besoin
+    TrashType:                    Type déchet
+    NewType:                      Ajouter un autre type de déchet
+    PiecesNumber:                 Nombre de pièces
+    Options:                      Options
+    ServiceDesc:                  Descriptif de la prestation
+    ForfaitRecyclage:             |
+                                  Forfait
+                                  Recyclage*
+    Including:                    |
+                                  *comprend la mise à disposition du matériel, la collecte et le traitement en centre de tri
+    Including2Lines:              |
+                                  *comprend la mise à disposition du matériel,
+                                  la collecte et le traitement en centre de tri
+    From:                         à partir de
+
+  Step1:
+    NextStepQuote:                Valider votre besoin
+    NextStepOrder:                Commander
+
+  Breadcrumb:
+    OnMeasure:                    sur-mesure
+    Custom:                       personnalisée
+    Packaged:                     packagée
+    Chantier:                     chantier
+    D3E:                          D3E

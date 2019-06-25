@@ -1,0 +1,27 @@
+{% autoescape false %}
+    <ul class="menu">
+        {% for menu in items %}
+            <li class="menu-item menu-item-type-post_type menu-item-object-page {% if menu['children']|length > 0 %}menu-item-has-children {% endif %}">
+                <a href="{{ menu['url'] }}">{{ menu['title'] }}</a>
+                {% if menu['children']|length > 0 %}
+                    <ul class="sub-menu">
+                        {% for submenu in menu['children'] %}
+                            <li class="menu-item menu-item-type-custom menu-item-object-custom {% if submenu['children']|length > 0 %}menu-item-has-children {% endif %}">
+                                <a href="{{ submenu['url'] }}">{{ submenu['title'] }}</a>
+                                {% if submenu['children']|length > 0 %}
+                                    <ul class="sub-menu">
+                                        {% for subsubmenu in submenu['children'] %}
+                                            <li>
+                                                <a href="{{ subsubmenu['url'] }}">{{ subsubmenu['title'] }}</a>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+{% endautoescape %}

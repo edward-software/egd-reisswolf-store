@@ -1,0 +1,131 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}
+View UpdateTask #{{ updateTask.id }}
+{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}
+
+{% block breadcrumbs %}
+<li>
+    <i class="fa fa-home"></i>
+    <a href="{{ path('goondi_tools_updateTask_list') }}">{{ 'UpdateTask.UpdateTasks'|trans }}</a>
+</li>
+<li>{{ 'UpdateTask.UpdateTask-sheet'|trans }}</li>
+{% endblock %}
+
+{% block content_title %}
+{{ 'UpdateTask.View-updateTask'|trans }}
+{% endblock %}
+
+{% block content_title_baseline %}
+
+{% endblock %}
+
+{% block content %}
+						
+						<div class="row">
+							<div class="col-md-6">
+								<!-- BOX -->
+								<div class="box border primary">
+									<div class="box-title">
+										<h4><i class="icon-cog"></i>{{ 'UpdateTask.UpdateTask'|trans }} #{{ updateTask.id }}</h4>
+										<div class="tools">
+											<a href="{{ path('goondi_tools_updateTask_accept', {id: updateTask.id}) }}">
+												<i class="icon-check"></i> {{ 'UpdateTask.Accept'|trans }}
+											</a>
+											<a id="button-updateTask-remove" href="{{ path('goondi_tools_updateTask_remove', {id: updateTask.id}) }}">
+												<i class="icon-remove"></i> {{ 'General.Remove'|trans }}
+											</a>
+										</div>
+									</div>
+									<div class="box-body">
+
+										<div class="view-box">
+			
+											<div class="item">
+												<div class="title">{{ 'UpdateTask.DateCreation'|trans }}</div>
+												<div class="value">{{ updateTask.dateCreation is empty ? "" : updateTask.dateCreation|localizeddate('short', 'medium', app.request.locale, timezone) }}</div>
+											</div>
+
+											<div class="item">
+												<div class="title">{{ 'UpdateTask.DateValidation'|trans }}</div>
+												<div class="value">{{ updateTask.dateValidation is empty ? "" : updateTask.dateValidation|localizeddate('short', 'medium', app.request.locale, timezone) }}</div>
+											</div>
+
+											<div class="item">
+												<div class="title">{{ 'UpdateTask.UserCreation'|trans }}</div>
+												<div class="value">{{ updateTask.userCreation.username }}</div>
+											</div>
+
+											<div class="item">
+												<div class="title">{{ 'UpdateTask.UserValidation'|trans }}</div>
+												<div class="value">{{ updateTask.userValidation is empty ? "" : updateTask.userValidation.username }}</div>
+											</div>
+
+											<div class="item">
+												<div class="title">{{ 'UpdateTask.Status'|trans }}</div>
+												<div class="value">{{ updateTask.status }}</div>
+											</div>
+
+											<div class="item">
+												<div class="title">{{ 'UpdateTask.Action'|trans }}</div>
+												<div class="value">{{ updateTask.action }}</div>
+											</div>
+
+											<div class="item">
+												<div class="title">{{ 'UpdateTask.Object'|trans }}</div>
+												<div class="value">{{ updateTask.object }}</div>
+											</div>
+
+											<div class="item">
+												<div class="title">{{ 'UpdateTask.ObjectId'|trans }}</div>
+												<div class="value">{{ updateTask.objectId }}</div>
+											</div>
+
+											<div class="item">
+												<div class="title">{{ 'UpdateTask.CurrentValue'|trans }}</div>
+												<div class="value">{{ updateTask.currentValue }}</div>
+											</div>
+
+											<div class="item">
+												<div class="title">{{ 'UpdateTask.NewValue'|trans }}</div>
+												<div class="value">{{ updateTask.newValue }}</div>
+											</div>
+
+										</div>
+
+									</div>
+								</div>
+								<!-- /BOX -->
+							</div>
+						</div>
+
+
+{% endblock %}
+
+{% block javascripts %}
+
+
+	<script>
+
+	$(function(){
+
+		$('#button-updateTask-remove').on('click', function(){
+			var url = $(this).attr('href');
+			bootbox.confirm("{{ 'UpdateTask.Remove-q1'|trans }}", function(result) {
+				if (result === true) 
+				{
+					$(location).attr('href', url);
+				}
+			});
+			return false;
+		});
+
+	});
+
+	</script>
+
+{% endblock %}

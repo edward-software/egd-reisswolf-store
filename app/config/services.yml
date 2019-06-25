@@ -1,0 +1,79 @@
+# Learn more about services, parameters and containers at
+# https://symfony.com/doc/current/service_container.html
+parameters:
+    #parameter_name: value
+
+
+    paprec_divisions:
+        - DI
+        - CHANTIER
+        - D3E
+
+    paprec_divisions_select:
+        DI: Mes déchets non dangereux (DND)
+        CHANTIER: Mes déchets de chantier
+        D3E: Mes déchets électriques et électroniques
+        5FLUX: Mes déchets de bureau - 5 flux
+
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        # automatically injects dependencies in your services
+        autowire: true
+        # automatically registers your services as commands, event subscribers, etc.
+        autoconfigure: true
+        # this means you cannot fetch services directly from the container via $container->get()
+        # if you need to do this, you can override this setting on individual services
+        public: false
+
+    DataFixtures\DevFixtures:
+        tags: [doctrine.fixtures.orm]
+
+    # On ajoute la définition de ces services pour les injecter dans les fixtures
+    Paprec\CatalogBundle\Repository\ProductDIRepository:
+        public: true
+        factory: 'doctrine.orm.entity_manager:getRepository'
+        arguments: ['Paprec\CatalogBundle\Entity\ProductDI']
+    Paprec\CatalogBundle\Repository\ProductChantierRepository:
+        public: true
+        factory: 'doctrine.orm.entity_manager:getRepository'
+        arguments: ['Paprec\CatalogBundle\Entity\ProductChantier']
+    Paprec\CatalogBundle\Repository\CategoryRepository:
+        public: true
+        factory: 'doctrine.orm.entity_manager:getRepository'
+        arguments: ['Paprec\CatalogBundle\Entity\Category']
+    Paprec\CatalogBundle\Repository\PriceListD3ERepository:
+        public: true
+        factory: 'doctrine.orm.entity_manager:getRepository'
+        arguments: ['Paprec\CatalogBundle\Entity\PriceListD3E']
+
+    # makes classes in src/AppBundle available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+#    AppBundle\:
+#        resource: '../../src/AppBundle/*'
+#        # you can exclude directories or files
+#        # but if a service is unused, it's removed anyway
+#        exclude: '../../src/AppBundle/{Entity,Repository,Tests}'
+#
+#    # controllers are imported separately to make sure they're public
+#    # and have a tag that allows actions to type-hint services
+#    AppBundle\Controller\:
+#        resource: '../../src/AppBundle/Controller'
+#        public: true
+#        tags: ['controller.service_arguments']
+
+    # add more services, or override services that need manual wiring
+    # AppBundle\Service\ExampleService:
+    #     arguments:
+    #         $someArgument: 'some_value'
+
+    twig.extension.intl:
+        class: Twig_Extensions_Extension_Intl
+        tags:
+            - { name: twig.extension }
+
+twig:
+    globals:
+        paprec_public_site_url: "%paprec_public_site_url%"
+        paprec_google_api_key: "%paprec_google_api_key%"

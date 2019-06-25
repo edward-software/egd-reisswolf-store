@@ -1,0 +1,9 @@
+{% autoescape false %}
+    <ul class="menu">
+        {% for link in items %}
+            <li class="menu-item menu-item-type-post_type menu-item-object-page">
+                <a href="{{ link['url'] }}">{{ link['title'] }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endautoescape %}

@@ -1,0 +1,177 @@
+{% extends "@PaprecCommercial/Common/emails/base_email.html.twig" %}
+
+ {% block picto_header %}
+     <img alt="Logo" src="{{ absolute_url(asset('build/static/picto_devis.svg')) }}" width="60px" height="60px"
+          border="0" class="picto-header">
+ {% endblock %}
+
+{% block title_header %}
+    Merci pour votre demande de devis
+{% endblock %}
+
+{% block subtitle_header %}
+    <button class="btn btn-green">Devis au format PDF</button>
+{% endblock %}
+
+{% block main_content %}
+    <table class="newRequestEmailTable content-email-detail" border="0" cellpadding="0" cellspacing="0" width="100%"
+           style="text-align: right">
+        <tr style="border-bottom: 1px solid rgba(0, 0, 0, 0.6); text-align: center">
+            <td style="padding-bottom: 10px">
+                Détail du devis N° {{ productChantierQuote.id|formatId(6) }} - {{ productChantierQuote.dateCreation|date('d/m/Y H:i') }}
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>
+                <div class="label">
+                    {{ 'Commercial.ProductChantierQuote.BusinessName'|trans }} : &nbsp;
+                </div>
+                <div class="value">
+                    {{ productChantierQuote.businessName }}
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="label">
+                    Contact : &nbsp;
+                </div>
+                <div class="value">
+                    {% if productChantierQuote.civility == 'M' %}Monsieur{% else %}Madame{% endif %} {{ productChantierQuote.lastName }} {{ productChantierQuote.firstName }}
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="label">
+                    {{ 'Commercial.ProductChantierQuote.Function'|trans }} :&nbsp;
+                </div>
+                <div class="value">
+                    {{ productChantierQuote.function }}
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="label">
+                    {{ 'Commercial.ProductChantierQuote.Address'|trans }} :&nbsp;
+                </div>
+                <div class="value">
+                    {{ productChantierQuote.address }}
+                    <br>
+                    {{ productChantierQuote.postalCode }} {{ productChantierQuote.city }}
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>
+                <div class="label">
+                    {{ 'Commercial.ProductChantierQuote.Email'|trans }} :&nbsp;
+                </div>
+                <div class="value">
+                    {{ productChantierQuote.email }}
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="label">
+                    {{ 'Commercial.ProductChantierQuote.Phone'|trans }} :&nbsp;
+                </div>
+                <div class="value">
+                    {{ productChantierQuote.phone }}
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+    </table>
+
+    <table class="content-email-detail" border="0" cellpadding="0" cellspacing="0" width="80%"
+           style="margin-top: 20px;">
+        <tr>
+            <td colspan="3" style="text-align: center; padding-bottom: 5px;">
+                Composition du devis :
+            </td>
+        </tr>
+        <tr>
+            <td class="greyrecap" colspan="3">
+                <div class="title">
+                    {{ 'Public.Cart.ForfaitRecyclage'|trans }}
+                </div>
+                <div class="info">
+                    {{ 'Public.Cart.Including2Lines'|trans|nl2br }}
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        {% for productChantierQuoteLine in productChantierQuote.productChantierQuoteLines %}
+            <tr style="border-bottom: 1px solid rgba(0, 0, 0, 0.6);">
+                <td class="picto" style="text-align:center;">
+                    {% if productChantierQuoteLine.productChantier.pictures|length > 0 %}
+                        <img src="{% if productChantierQuoteLine.productChantier.pilotPictures|length > 0 %}{{ absolute_url('/uploads/pictos/' ~ productChantierQuoteLine.productChantier.pilotPictures[0].path) }}{% endif %}"
+                             alt="#" style="height: 75px">
+                    {% endif %}
+                </td>
+                <td class="product" style="padding-left: 15%">
+                    {{ productChantierQuoteLine.quantity }} x {{ productChantierQuoteLine.productName }}<br>
+                    de {{ productChantierQuoteLine.categoryName }}
+                </td>
+                <td class="price" style="display: inline-flex; float: right; margin-right: 10px; line-height: 75px;">
+                    à partir de
+                    <div class="value bigger-value">
+                        &nbsp; {{ productChantierQuoteLine.totalAmount|formatAmount('EUR', app.request.locale) }}</div>
+                </td>
+            </tr>
+        {% endfor %}
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td style="padding-left: 15%">
+                <div class="value bigger-value" style="font-size: 1.3em;line-height: 75px;">TOTAL</div>
+            </td>
+            <td style="display: inline-flex; float: right; margin-right: 10px; line-height: 75px">
+                à partir de
+                <div class="value bigger-value">&nbsp; {{ productChantierQuote.totalAmount|formatAmount('EUR', app.request.locale) }}</div>
+            </td>
+        </tr>
+    </table>
+{% endblock %}
+
+{% block footer %}
+    <tr>
+        <td class="footer-repondre-title" style="padding-top: 15px;">
+            L'agence en charge de votre demande vous recontactera sous 48h
+        </td>
+    </tr>
+    <tr>
+        <td class="footer-repondre-title" style="padding-bottom: 15px;">
+            par e-mail ou téléphone afin de valider un devis.
+        </td>
+    </tr>
+{% endblock %}
+
+{% block sub_footer %}
+    <tr>
+        <td>
+            Cet email est un message automatique, veuillez ne pas y répondre.
+        </td>
+    </tr>
+    <tr>
+        <td>
+            © 2018 Paprec Group
+        </td>
+    </tr>
+{% endblock %}
+

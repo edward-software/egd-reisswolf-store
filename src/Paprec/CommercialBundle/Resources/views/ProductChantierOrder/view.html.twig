@@ -1,0 +1,484 @@
+{% extends "::base_admin.html.twig" %}
+
+{% block title %}
+    {{ 'Commercial.ProductChantierOrder.View'|trans }}
+{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}
+
+{% block content_title %}
+    {{ 'Commercial.ProductChantierOrder.ProductChantierOrders'|trans }}
+{% endblock %}
+
+{% block main_content %}
+
+
+    <div class="col-md-12">
+        <!-- FLASH MESSAGE -->
+        <div class="view-box">
+
+            {% for flashMessage in app.session.flashbag.get('error') %}
+                <div class="alert alert-danger">{{ ('Commercial.ProductChantierOrder.Error.' ~ flashMessage)|trans }}</div>
+            {% endfor %}
+
+            {% for flashMessage in app.session.flashbag.get('success') %}
+                <div class="alert alert-success">{{ ('Commercial.ProductChantierOrder.Success.' ~ flashMessage)|trans }}</div>
+            {% endfor %}
+        </div>
+        <!-- CARD -->
+        <div class="card">
+            <div class="card-header">
+                <h4>
+                    <i class="fa fa-xs fa-productChantierOrder"></i> {{ 'Commercial.ProductChantierOrder.View'|trans }}
+                </h4>
+                <div class="float-right">
+                    <a id="sendInvoiceButton" href="javascript:void(0);" class="btn btn-sm btn-success"><i
+                                class="fa fa-xs fa-envelope"></i> {{ 'Commercial.ProductD3EOrder.SendInvoice'|trans }}
+                    </a>
+                    <a href="{{ path("paprec_commercial_productChantierOrder_edit", {id: productChantierOrder.id}) }}"
+                       class="btn btn-sm btn-warning"><i
+                                class="fa fa-xs fa-edit"></i> {{ 'Commercial.ProductChantierOrder.Edit'|trans }}</a>
+                    <a id="commmecialProductChantierOrderRemoveButton_" href="javascript:void(0);"
+                       class="btn btn-sm btn-danger"><i
+                                class="fa fa-xs fa-trash"></i> {{ 'Commercial.ProductChantierOrder.Remove'|trans }}
+                    </a>
+                </div>
+                <div class="float-left">
+                    <a href="{{ path('paprec_commercial_productChantierOrder_index') }}" class="btn btn-sm btn-default"><i
+                                class="fa fa-xs fa-chevron-left"></i> {{ 'Commercial.ProductChantierOrder.List'|trans }}
+                    </a>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">{{ 'Commercial.ProductChantierOrder.Informations-FO'|trans }}</h5>
+                        </div>
+                        <div class="card-body row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.ProductChantierOrder.BusinessName'|trans }}</label>
+                                    <label class="col-form-label">
+                                        {{ productChantierOrder.businessName }}
+                                    </label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.ProductChantierOrder.BusinessLine'|trans }}</label>
+                                    <label class="col-form-label">
+                                        {% if productChantierOrder.businessLine %}
+                                            <a href="{{ path('paprec_commercial_businessLine_view', {id: productChantierOrder.businessLine.id}) }}">{{ productChantierOrder.businessLine.name }}</a>
+                                        {% endif %}
+                                    </label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.ProductChantierOrder.Civility'|trans }}</label>
+                                    <label class="col-form-label">
+                                        {{ productChantierOrder.civility }}
+                                    </label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.ProductChantierOrder.LastName'|trans }}</label>
+                                    <label class="col-form-label">
+                                        {{ productChantierOrder.lastName }}
+                                    </label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.ProductChantierOrder.FirstName'|trans }}</label>
+                                    <label class="col-form-label">
+                                        {{ productChantierOrder.firstName }}
+                                    </label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.ProductChantierOrder.Function'|trans }}</label>
+                                    <label class="col-form-label">
+                                        {{ productChantierOrder.function }}
+                                    </label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.ProductChantierOrder.Email'|trans }}</label>
+                                    <label class="col-form-label">
+                                        {{ productChantierOrder.email }}
+                                    </label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.ProductChantierOrder.Phone'|trans }}</label>
+                                    <label class="col-form-label">
+                                        {{ productChantierOrder.phone }}
+                                    </label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.ProductD3EQuote.PreferredContact'|trans }}</label>
+                                    <label class="col-form-label">
+                                        {{ productChantierOrder.preferredContact }}
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.ProductChantierOrder.SIRET'|trans }}</label>
+                                    <label class="col-form-label">
+                                        {{ productChantierOrder.siret }}
+                                    </label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.ProductChantierOrder.TVAStatus'|trans }}</label>
+                                    <label class="col-form-label">
+                                        {% if productChantierOrder.tvaStatus %}
+                                            {{ ('Commercial.ProductChantierOrder.TVA.' ~ productChantierOrder.tvaStatus|capitalize) |trans }}
+                                        {% endif %}
+                                    </label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.ProductChantierOrder.TVANumber'|trans }}</label>
+                                    <label class="col-form-label">
+                                        {{ productChantierOrder.tvaNumber }}
+                                    </label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.ProductChantierOrder.OrderStatus'|trans }}</label>
+                                    <label class="col-form-label">
+                                        {{ ('Commercial.OrderStatusList.' ~ productChantierOrder.orderStatus)|trans }}
+                                    </label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.ProductChantierOrder.TotalAmount'|trans }}</label>
+                                    <label class="col-form-label">
+                                        {{ productChantierOrder.totalAmount|formatAmount('EUR', app.request.locale) }}
+                                    </label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.ProductChantierOrder.PaymentMethod'|trans }}</label>
+                                    <label class="col-form-label">
+                                        {{ productChantierOrder.paymentMethod }}
+                                    </label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.ProductChantierOrder.AssociatedInvoice'|trans }}</label>
+                                    <label class="col-form-label">
+                                        {% if productChantierOrder.associatedInvoice %}
+                                            <a href="{{ path('paprec_commercial_productChantierOrder_downloadAssociatedInvoice', {id: productChantierOrder.id}) }}"><i
+                                                        class="fa fa-download"></i></a>
+                                        {% else %}
+                                            <button class="btn btn-sm btn-outline-primary"
+                                                    data-target="#uploadInvoiceModal" data-toggle="modal"
+                                                    id="openModalUploadInvoice">
+                                                <i class="fa fa-xs fa-plus"></i> {{ 'Commercial.ProductChantierOrder.AddInvoice'|trans }}
+                                            </button>
+                                            <div class="modal fade" id="uploadInvoiceModal" tabindex="-1" role="dialog"
+                                                 aria-labelledby="Upload Picture" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <form id="formAddInvoice" name="formAddInvoice"
+                                                              action="{{ path("paprec_commercial_productChantierOrder_addInvoice", {id: productChantierOrder.id}) }}"
+                                                              method="post" enctype="multipart/form-data">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title">{{ 'Commercial.ProductChantierOrder.AddInvoice'|trans }}
+                                                                </h5>
+                                                                <button type="button" class="close" data-dismiss="modal"
+                                                                        aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="form-group">
+                                                                    <div class="form-label">{{ 'Commercial.ChoseFile'|trans }}</div>
+                                                                    <div class="form-content">
+                                                                        {{ form_widget(formAddInvoice.associatedInvoice, {'attr': {'class': 'form-control'}}) }}
+                                                                        {{ form_errors(formAddInvoice.associatedInvoice) }}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-sm btn-secondary"
+                                                                        data-dismiss="modal">
+                                                                    {{ 'General.Cancel'|trans }}
+                                                                </button>
+                                                                <button type="button" class="btn btn-sm btn-primary"
+                                                                        id="formAddInvoiceSubmitButton">
+                                                                    {{ 'General.Save'|trans }}
+                                                                </button>
+                                                            </div>
+                                                            {{ form_rest(formAddInvoice) }}
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mt-4">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="card-title">{{ 'Commercial.ProductChantierOrder.Address'|trans }}</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="form-group row">
+                                            <label class="col-md-4 col-form-label">{{ 'Commercial.ProductChantierOrder.Address'|trans }}</label>
+                                            <label class="col-form-label">
+                                                {{ productChantierOrder.address }}
+                                            </label>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-4 col-form-label">{{ 'Commercial.ProductChantierOrder.PostalCode'|trans }}</label>
+                                            <label class="col-form-label">
+                                                {{ productChantierOrder.postalCode }}
+                                            </label>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-4 col-form-label">{{ 'Commercial.ProductChantierOrder.City'|trans }}</label>
+                                            <label class="col-form-label">
+                                                {{ productChantierOrder.city }}
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mt-4">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="card-title">{{ 'Commercial.ProductChantierOrder.HeadofficeAddress'|trans }}</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="form-group row">
+                                            <label class="col-md-4 col-form-label">{{ 'Commercial.ProductChantierOrder.Address'|trans }}</label>
+                                            <label class="col-form-label">
+                                                {{ productChantierOrder.headofficeAddress }}
+                                            </label>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-4 col-form-label">{{ 'Commercial.ProductChantierOrder.PostalCode'|trans }}</label>
+                                            <label class="col-form-label">
+                                                {{ productChantierOrder.headofficePostalCode }}
+                                            </label>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-4 col-form-label">{{ 'Commercial.ProductChantierOrder.City'|trans }}</label>
+                                            <label class="col-form-label">
+                                                {{ productChantierOrder.headofficeCity }}
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mt-4">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="card-title">{{ 'Commercial.ProductChantierOrder.InvoicingAddress'|trans }}</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="form-group row">
+                                            <label class="col-md-4 col-form-label">{{ 'Commercial.ProductChantierOrder.Address'|trans }}</label>
+                                            <label class="col-form-label">
+                                                {{ productChantierOrder.invoicingAddress }}
+                                            </label>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-4 col-form-label">{{ 'Commercial.ProductChantierOrder.PostalCode'|trans }}</label>
+                                            <label class="col-form-label">
+                                                {{ productChantierOrder.invoicingPostalCode }}
+                                            </label>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-4 col-form-label">{{ 'Commercial.ProductChantierOrder.City'|trans }}</label>
+                                            <label class="col-form-label">
+                                                {{ productChantierOrder.invoicingCity }}
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 mt-3">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">{{ 'Commercial.ProductChantierOrder.Informations-Delivery'|trans }}</h5>
+                        </div>
+                        <div class="card-body row ">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.ProductChantierOrder.InstallationDate'|trans }}</label>
+                                    <label class="col-form-label">
+                                        {{ productChantierOrder.installationDate|date('d/m/Y') }}
+                                    </label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.ProductChantierOrder.RemovalDate'|trans }}</label>
+                                    <label class="col-form-label">
+                                        {{ productChantierOrder.removalDate|date('d/m/Y') }}
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.ProductChantierOrder.DomainType'|trans }}</label>
+                                    <label class="col-form-label">
+                                        {% if productChantierOrder.domainType == 'private' %}
+                                            Privé
+                                        {% else %}
+                                            Public
+                                        {% endif %}
+                                    </label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.ProductChantierOrder.AccessConditions'|trans }}</label>
+                                    <label class="col-form-label">
+                                        {{ productChantierOrder.accessConditions }}
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 mt-3">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>
+                                {{ 'Commercial.ProductChantierOrder.ProductsList'|trans }}
+                            </h5>
+                            <div class="float-right">
+
+                                <a href="{{ path('paprec_commercial_productChantierOrder_addLine', {id: productChantierOrder.id}) }}"
+                                   class="btn btn-sm btn-outline-primary">
+                                    <i class="fa fa-xs fa-plus"></i> {{ 'Commercial.ProductChantierOrder.AddLine'|trans }}
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <table id="productChantierOrderLinesDatatable"
+                                   class="table table-striped table-bordered table-hover"
+                                   cellpadding="0" cellspacing="0" border="0">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>{{ 'Commercial.ProductChantierOrderLine.ProductName'|trans }}</th>
+                                    <th>{{ 'Catalog.ProductD3E.SubName'|trans }}</th>
+                                    <th>{{ 'Commercial.ProductChantierOrderLine.UnitPrice'|trans }}</th>
+                                    <th>{{ 'Commercial.ProductChantierOrderLine.Quantity'|trans }}</th>
+                                    <th>{{ 'Commercial.ProductChantierOrderLine.TotalAmount'|trans }}</th>
+
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for productChantierOrderLine in productChantierOrder.productChantierOrderLines %}
+                                    <tr>
+                                        <td>{{ productChantierOrderLine.id|formatId(6) }}</td>
+                                        <td>{{ productChantierOrderLine.productName }}</td>
+                                        <td>{{ productChantierOrderLine.productSubName }}</td>
+                                        <td>{{ productChantierOrderLine.unitPrice|formatAmount('EUR', app.request.locale) }}</td>
+                                        <td>{{ productChantierOrderLine.quantity }}</td>
+                                        <td>{{ productChantierOrderLine.totalAmount|formatAmount('EUR', app.request.locale) }}</td>
+                                        <td class="text-center">
+                                            <a href="{{ path('paprec_commercial_productChantierOrder_editLine', {id: productChantierOrder.id, orderLineId: productChantierOrderLine.id}) }}"
+                                               class="btn btn-sm btn-warning btn-sm mx-1"
+                                               data-id="{{ productChantierOrderLine.id }}">
+                                                <i class="fa fa-xs fa-edit"></i>
+                                            </a>
+                                            <a href="#"
+                                               class="btn btn-sm btn-danger btn-sm commercialProductChantierOrderLineRemoveButton"
+                                               data-id="{{ productChantierOrderLine.id }}">
+                                                <i class="fa fa-xs fa-trash"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 mt-3">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">{{ 'Commercial.ProductChantierOrder.System-informations'|trans }}</h5>
+                        </div>
+                        <div class="card-body">
+
+                            <div class="form-group row">
+                                <label class="col-md-4 col-form-label">{{ 'Commercial.ProductChantierOrder.Date-creation'|trans }}</label>
+                                <label class="col-form-label">
+                                    {{ productChantierOrder.dateCreation|localizeddate('short', 'medium', app.request.locale) }}
+                                </label>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-md-4 col-form-label">{{ 'Commercial.ProductChantierOrder.Date-update'|trans }}</label>
+                                <label class="col-form-label">
+                                    {{ productChantierOrder.dateUpdate is empty ? "" : productChantierOrder.dateUpdate|localizeddate('short', 'medium', app.request.locale) }}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+        {% block javascripts %}
+            <script>
+                $(function () {
+
+                    $('#commmecialProductChantierOrderRemoveButton_').on('click', function () {
+
+                        var url = "{{ path("paprec_commercial_productChantierOrder_remove", {id: productChantierOrder.id}) }}";
+
+                        Swal({
+                            title: "{{ 'General.Confirm'|trans }}",
+                            text: "{{ 'Commercial.ProductChantierOrder.Confirm-remove'|trans }}",
+                            showCancelButton: true,
+                            confirmButtonText: "{{ 'General.Yes'|trans }}",
+                            cancelButtonText: "{{ 'General.No'|trans }}"
+                        }).then((result) => {
+                            if (result.value) {
+                                $(location).attr('href', url);
+                            }
+                        });
+                    });
+
+                    $('.commercialProductChantierOrderLineRemoveButton').on('click', function () {
+                        orderLineId = $(this).data('id');
+                        var url = "{{ path("paprec_commercial_productChantierOrder_removeLine", {id: productChantierOrder.id, orderLineId: 'orderLineIdTmp'}) }}".replace('orderLineIdTmp', orderLineId);
+
+                        Swal({
+                            title: "{{ 'General.Confirm'|trans }}",
+                            text: "{{ 'Commercial.ProductChantierOrderLine.Confirm-remove'|trans }}",
+                            showCancelButton: true,
+                            confirmButtonText: "{{ 'General.Yes'|trans }}",
+                            cancelButtonText: "{{ 'General.No'|trans }}"
+                        }).then((result) => {
+                            if (result.value) {
+                                $(location).attr('href', url);
+                            }
+                        });
+                    });
+
+                    $('#formAddInvoiceSubmitButton').on('click', function () {
+                        $('#formAddInvoice').submit();
+                    })
+
+                    $('#sendInvoiceButton').on('click', function () {
+                        var url = "{{ path("paprec_commercial_productChantierOrder_sendAssociatedInvoice", {id: productChantierOrder.id}) }}";
+
+                        Swal({
+                            title: "{{ 'General.Confirm'|trans }}",
+                            text: "{{ 'Commercial.ProductChantierOrder.Confirm-send-invoice'|trans }}",
+                            showCancelButton: true,
+                            confirmButtonText: "{{ 'General.Yes'|trans }}",
+                            cancelButtonText: "{{ 'General.No'|trans }}"
+                        }).then((result) => {
+                            if (result.value) {
+                                $(location).attr('href', url);
+                            }
+                        });
+                    })
+                });
+            </script>
+        {% endblock %}

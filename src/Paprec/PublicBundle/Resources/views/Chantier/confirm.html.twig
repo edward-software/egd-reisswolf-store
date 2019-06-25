@@ -1,0 +1,115 @@
+{% extends "@PaprecPublic/Common/Base/base_stepper.html.twig" %}
+
+{#{% block title %}#}
+
+{#{% endblock %}#}
+
+{#{% block stylesheets %}#}
+
+{#{% endblock %}#}
+{% block whoare %}
+{% endblock %}
+
+{% block sidebar %}
+    <div class="confirm"></div>
+    {# Définition des menus affichés dans la sidebar #}
+    {% set besoin = 'active' %}
+    {% set coordonnees = 'passed' %}
+    {% set offre = 'active' %}
+    {{ parent() }}
+{% endblock %}
+
+{% block sidebar_info %}
+    {{ render(controller('PaprecPublicBundle:Common:getSideBarInfo')) }}
+{% endblock %}
+
+{% block main_content_stepper %}
+    <input type="hidden" id="divisionType" value="{{ cart.division }}">
+    <div class="step">
+        <div class="step__sucess">
+            <div class="step__sucess__container">
+                <div class="step__sucess__container__left">
+                </div>
+                <div class="step__sucess__container__right">
+                    <div class="title">{{ 'Public.Confirm.Thanks'|trans|upper }}</div>
+                    <div class="content">{{ 'Public.Confirm.RequestReceivedMail'|trans }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="bold">{% if productChantierQuote.civility == 'M' %}{{ 'General.Mr'|trans }}{% else %}{{ 'General.Mme'|trans }}{% endif %} {{ productChantierQuote.firstName }} {{ productChantierQuote.lastName }}
+            ,
+        </div>
+
+        <div class="recaptitle">{{ 'Public.Confirm.RecapOrder'|trans }}</div>
+        <div class="greyrecap">
+            <div class="title">{{ 'Public.Cart.ForfaitRecyclage'|trans }}</div>
+            <div class="info">
+                {{ 'Public.Cart.Including2Lines'|trans|nl2br }}
+            </div>
+            <div class="right">
+                {{ 'Public.Cart.From'|trans|upper }}
+                <span>{{ productChantierQuote.totalAmount|formatAmount(null, app.request.locale) }}€</span>
+            </div>
+        </div>
+
+        <div class="greennotice">
+            {{ 'Public.Confirm.AgencyContactQuote'|trans }}
+        </div>
+        {% for productChantierQuoteLine in productChantierQuote.productChantierQuoteLines %}
+            <div class="recapproduct">
+                <div class="wrapperimage">
+                    <img src="{% if productChantierQuoteLine.productChantier.pilotPictures| length > 0 %}{{ asset('/uploads/pictos/' ~ productChantierQuoteLine.productChantier.pilotPictures[0].path) }}{% endif %}"
+                         alt="#">
+                </div>
+                <div class="wrapper-col">
+                    <div class="name">{{ productChantierQuoteLine.quantity }}
+                        x {{ productChantierQuoteLine.productChantier.name }}</div>
+                    <div class="nameof">de {{ productChantierQuoteLine.categoryName }}</div>
+                </div>
+                {#                <div class="desc">
+                                    Prestation {% if productChantierQuote.frequency == 'ponctual' %}ponctuelle {% else %} régulière {% endif %}</div>#}
+            </div>
+        {% endfor %}
+
+        <a href="{{ paprec_public_site_url }}"
+           class="backtohome button button--darkblue--outline">{{ ('Public.Cart.BackHome'|trans)|upper }}</a>
+
+        {{ render(controller('PaprecPublicBundle:Common:getCTAsBottom', {
+            'label': 'Validate',
+            'cartUuid': cart.id,
+            'division': cart.division,
+            'stepBack': '',
+            'nextStep': '',
+            'idSubmit': ''
+        })) }}
+    </div>
+{% endblock %}
+
+{% block bottom_customizable_area %}
+    </div>
+    {% set customAreaImage = paprec_customizable_area('images_banner_' ~ cart.division|lower) %}
+    {% if customAreaImage is not null %}
+        {% autoescape false %}
+            {{ customAreaImage.content }}
+        {% endautoescape %}
+    {% endif %}
+
+    {% set customArea = paprec_customizable_area('reassurance_banner_' ~ cart.division|lower) %}
+    {% if customArea is not null %}
+        {% autoescape false %}
+            {{ customArea.content }}
+        {% endautoescape %}
+    {% endif %}
+
+    {% set customAreaLogo = paprec_customizable_area('logo_banner_' ~ cart.division|lower) %}
+    {% if customAreaLogo is not null %}
+        {% autoescape false %}
+            {{ customAreaLogo.content }}
+        {% endautoescape %}
+    {% endif %}
+
+{% endblock %}
+
+{% block javascripts %}
+
+{% endblock %}

@@ -1,0 +1,174 @@
+{% extends "::base_admin.html.twig" %}
+
+{% block title %}
+    {{ 'Catalog.ProductD3E.Edit.Packaged'|trans }}
+{% endblock %}
+
+{% block stylesheets %}
+{% endblock %}
+
+{% block content_title %}
+    {{ 'Catalog.ProductD3E.ProductD3Es'|trans }}
+{% endblock %}
+
+{% block main_content %}
+
+    <form id="catalogProductD3EForm" action="" method="post" enctype="multipart/form-data">
+
+        <div class="col-md-12">
+            <!-- BOX -->
+            <div class="card">
+                <div class="card-header">
+                    <h4>
+                        <i class="fa fa-xs fa-pencil-alt"></i> {{ 'Catalog.ProductD3E.Edit.Packaged'|trans }} #{{ productD3E.id|formatId(6) }}
+                    </h4>
+                    <div class="float-right">
+                        <a href="javascript:void(0);" class="btn btn-sm btn-success catalog-ProductD3E-save-button"><i
+                                    class="fa fa-xs fa-check"></i> {{ 'Catalog.ProductD3E.Save'|trans }}</a>
+                        <a href="javascript:void(0);" class="btn btn-sm btn-danger catalog-ProductD3E-cancel-button"><i
+                                    class="fa fa-xs fa-close"></i> {{ 'Catalog.ProductD3E.Cancel'|trans }}</a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="col-md-7">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">{{ 'Catalog.ProductD3E.Informations'|trans }}</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <div class="form-label">{{ 'Catalog.ProductD3E.Name'|trans }}</div>
+                                    <div class="form-content">
+                                        {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_errors(form.name) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-label">{{ 'Catalog.ProductD3E.SubName'|trans }}</div>
+                                    <div class="form-content">
+                                        {{ form_widget(form.subName, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_errors(form.subName) }}
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="form-label">{{ 'Catalog.ProductD3E.Description'|trans }}</div>
+                                    <div class="form-content checkbox-list">
+                                        {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_errors(form.description) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-label">{{ 'Catalog.ProductD3E.Reference'|trans }}</div>
+                                    <div class="form-content">
+                                        {{ form_widget(form.reference, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_errors(form.reference) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-label">{{ 'Catalog.ProductD3E.Dimensions'|trans }}</div>
+                                    <div class="form-content">
+                                        {{ form_widget(form.dimensions, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_errors(form.dimensions) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-label">{{ 'Catalog.ProductD3E.AvailablePostalCodes'|trans }}</div>
+                                    <div class="form-content">
+                                        {{ form_widget(form.availablePostalCodes, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_errors(form.availablePostalCodes) }}
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-6">
+                                        <div class="form-label">{{ 'Catalog.ProductD3E.Position'|trans }}</div>
+                                        <div class="form-content">
+                                            {{ form_widget(form.position, {'attr': {'class': 'form-control'}}) }}
+                                            {{ form_errors(form.position) }}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-label">{{ 'Catalog.ProductD3E.PackageUnitPrice'|trans }}</div>
+                                        <div class="form-content">
+                                            {{ form_widget(form.packageUnitPrice, {'attr': {'class': 'form-control'}}) }}
+                                            {{ form_errors(form.packageUnitPrice) }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-label">{{ 'Catalog.ProductD3E.Arguments'|trans }}</div>
+                                    <div class="form-content">
+                                        {% for checkbox in form.arguments.children %}
+                                            <div class="form__check ml-4">
+                                                {{ form_widget(checkbox) }}
+                                                {{ form_label(checkbox)|nl2br }}
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-label">{{ 'Catalog.ProductD3E.IsDisplayed'|trans }}</div>
+                                    <div class="form-content">
+                                        {% for radio in form.isDisplayed.children %}
+                                            <div class="form__check ml-4">
+                                                {{ form_widget(radio) }}
+                                                {{ form_label(radio) }}
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{ form_rest(form) }}
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="float-right">
+                    <a href="javascript:void(0);" class="btn btn-sm btn-success catalog-ProductD3E-save-button"><i
+                                class="fa fa-xs fa-check"></i> {{ 'Catalog.ProductD3E.Save'|trans }}</a>
+                    <a href="javascript:void(0);" class="btn btn-sm btn-danger catalog-ProductD3E-cancel-button"><i
+                                class="fa fa-xs fa-close"></i> {{ 'Catalog.ProductD3E.Cancel'|trans }}</a>
+                </div>
+            </div>
+        </div>
+        </div>
+    </form>
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+
+    <script>
+        $(function () {
+
+            $('.catalog-ProductD3E-save-button').on('click', function () {
+
+                $('#catalogProductD3EForm').submit();
+
+            });
+
+
+            $('.catalog-ProductD3E-cancel-button').on('click', function () {
+
+                var url = "{{ path("paprec_catalog_productD3E_view", {id: productD3E.id}) }}";
+
+                Swal({
+                    title: "{{ 'General.Confirm'|trans }}",
+                    text: "{{ 'Catalog.ProductD3E.Confirm-cancel'|trans }}",
+                    showCancelButton: true,
+                    confirmButtonText: "{{ 'General.Yes'|trans }}",
+                    cancelButtonText: "{{ 'General.No'|trans }}"
+                }).then((result) => {
+                    if (result.value) {
+                        $(location).attr('href', url);
+                    }
+                });
+
+            });
+
+        });
+    </script>
+{% endblock %}

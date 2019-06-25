@@ -1,0 +1,88 @@
+services:
+  _defaults: { public: true }
+
+  paprec_catalog.argument_manager:
+    class: Paprec\CatalogBundle\Service\ArgumentManager
+    arguments: ["@doctrine.orm.entity_manager", "@service_container"]
+
+  paprec_catalog.category_manager:
+    class: Paprec\CatalogBundle\Service\CategoryManager
+    arguments: ["@doctrine.orm.entity_manager", "@service_container"]
+
+  paprec_catalog.customizable_area_manager:
+    class: Paprec\CatalogBundle\Service\CustomizableAreaManager
+    arguments: ["@doctrine.orm.entity_manager", "@service_container"]
+
+  paprec_catalog.postal_code_manager:
+    class: Paprec\CatalogBundle\Service\PostalCodeManager
+    arguments: ["@doctrine.orm.entity_manager", "@service_container"]
+
+  paprec_catalog.product_di_manager:
+    class: Paprec\CatalogBundle\Service\ProductDIManager
+    arguments: ["@doctrine.orm.entity_manager", "@service_container"]
+
+  paprec_catalog.product_chantier_manager:
+    class: Paprec\CatalogBundle\Service\ProductChantierManager
+    arguments: ["@doctrine.orm.entity_manager", "@service_container"]
+
+  paprec_catalog.product_d3e_manager:
+    class: Paprec\CatalogBundle\Service\ProductD3EManager
+    arguments: ["@doctrine.orm.entity_manager", "@service_container"]
+
+  paprec_catalog.type_manager:
+    class: Paprec\CatalogBundle\Service\TypeManager
+    arguments: ["@doctrine.orm.entity_manager", "@service_container"]
+
+  paprec_catalog.price_list_d3e_manager:
+    class: Paprec\CatalogBundle\Service\PriceListD3EManager
+    arguments: ["@doctrine.orm.entity_manager", "@service_container"]
+
+  paprec_catalog.number_manager:
+    class: Paprec\CatalogBundle\Service\NumberManager
+    arguments: ["@doctrine.orm.entity_manager", "@service_container"]
+
+
+  twig.formatAmount:
+    class: Paprec\CatalogBundle\Twig\Extension\FormatAmountExtension
+    public: false
+    arguments: ["@service_container"]
+    tags:
+      - { name: twig.extension }
+
+  twig.formatId:
+    class: Paprec\CatalogBundle\Twig\Extension\FormatIdExtension
+    public: false
+    arguments: ["@service_container"]
+    tags:
+      - { name: twig.extension }
+
+parameters:
+
+  paprec_catalog.category.picto_path: "%kernel.root_dir%/../web/uploads/pictos"
+  paprec_catalog.argument.picto_path:  "%kernel.root_dir%/../web/uploads/pictos"
+  paprec_catalog.product.di.picto_path: "%kernel.root_dir%/../web/uploads/pictos"
+  paprec_catalog.product.chantier.picto_path:  "%kernel.root_dir%/../web/uploads/pictos"
+  paprec_catalog.product.d3e.picto_path:  "%kernel.root_dir%/../web/uploads/pictos"
+
+  paprec_types_picture:
+    - PICTO
+    - PICTURE
+    - PILOTPICTURE
+
+  paprec_customizable_area_codes:
+    - collectivite_top_msg
+    - groupe_top_msg
+    - particulier_top_msg
+    - entreprise_top_msg
+    - reassurance_banner_di
+    - logo_banner_di
+    - images_banner_di
+    - reassurance_banner_chantier
+    - logo_banner_chantier
+    - images_banner_chantier
+    - reassurance_banner_d3e
+    - logo_banner_d3e
+    - images_banner_d3e
+    - logo_banner_default
+    - reassurance_banner_default
+

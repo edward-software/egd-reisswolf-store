@@ -1,0 +1,160 @@
+{# BASE COMMUNE A TOUTES LES PAGES DU TUNNEL #}
+{# Comprend la sidebar, la division main #}
+
+{% extends "::base_public.html.twig" %}
+
+{% block title %}
+    {{ 'Public.Home.Title'|trans }}
+{% endblock %}
+{#{% endblock %}#}
+
+{#{% block stylesheets %}#}
+
+{#{% endblock %}#}
+
+{% block main_content %}
+    {% block top_msg_customizable_area %} {% endblock %}
+    <section>
+        <div class="wrapper">
+            {% block sidebar %}
+                <div class="sidebar">
+
+
+                    {# MOBILE #}
+                    {% set cptStepMobile = 0 %}
+
+                    <div class="recap-mb">
+                        <p>
+                            {% if besoin is defined and besoin == 'active' %}Mon besoin{% endif %}
+                            {% if confirmation is defined and confirmation == 'active' %}Ma confirmation{% endif %}
+                            {% if coordonnees is defined and coordonnees == 'active' %}Mes coordonnées{% endif %}
+                            {% if offre is defined and offre == 'active' %}Mon offre{% endif %}
+                            {% if livraison is defined and livraison == 'active' %}Ma livraison{% endif %}
+                            {% if paiement is defined and paiement == 'active' %}Mon paiement{% endif %}
+                        </p>
+                        <div class="recap-mb__block">
+                            {% if besoin is defined %}
+                                {% set cptStepMobile = cptStepMobile + 1 %}
+                                <div class="recap-mb__block__item {{ besoin }}">
+                                    <div class="recap-mb__block__item--step">
+                                        0{{ cptStepMobile }}
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {% if confirmation is defined %}
+                                {% set cptStepMobile = cptStepMobile + 1 %}
+                                <div class="recap-mb__block__item {{ confirmation }}">
+                                    <div class="recap-mb__block__item--step">
+                                        0{{ cptStepMobile }}
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {% if coordonnees is defined %}
+                                {% set cptStepMobile = cptStepMobile + 1 %}
+                                <div class="recap-mb__block__item {{ coordonnees }}">
+                                    <div class="recap-mb__block__item--step">
+                                        0{{ cptStepMobile }}
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {% if offre is defined %}
+                                {% set cptStepMobile = cptStepMobile + 1 %}
+                                <div class="recap-mb__block__item {{ offre }}">
+                                    <div class="recap-mb__block__item--step">
+                                        0{{ cptStepMobile }}
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {% if livraison is defined %}
+                                {% set cptStepMobile = cptStepMobile + 1 %}
+                                <div class="recap-mb__block__item {{ livraison }}">
+                                    <div class="recap-mb__block__item--step">
+                                        0{{ cptStepMobile }}
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {% if paiement is defined %}
+                                {% set cptStepMobile = cptStepMobile + 1 %}
+                                <div class="recap-mb__block__item {{ paiement }}">
+                                    <div class="recap-mb__block__item--step">
+                                        0{{ cptStepMobile }}
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {#END MOBILE#}
+
+                    {# DESKTOP#}
+                    {% set cptStep = 0 %}
+                    {% if besoin is defined %}
+                        {% set cptStep = cptStep + 1 %}
+                        <div class="recap {{ besoin }}">
+                            <div class="recap__step">
+                                <span class="recap__stepNumber">0{{ cptStep }}</span>Mon besoin
+                            </div>
+                            {% if cart is defined and cart is not null and cart.division is not null and cart.division != '5FLUX' %}
+                                <div id="loadedCartPanel"
+                                     data-division="{{ cart.division }}"
+                                     data-url="{{ path('paprec_public_corp_' ~ cart.division|lower ~ '_subscription_loadCart', {cartUuid: cart.id}) }}">
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                    {% if confirmation is defined %}
+                        {% set cptStep = cptStep + 1 %}
+                        <div class="recap {{ confirmation }}">
+                            <div class="recap__step">
+                                <span class="recap__stepNumber">0{{ cptStep }}</span>Ma confirmation
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if coordonnees is defined %}
+                        {% set cptStep = cptStep + 1 %}
+                        <div class="recap {{ coordonnees }}">
+                            <div class="recap__step">
+                                <span class="recap__stepNumber">0{{ cptStep }}</span>Mes coordonnées
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if offre is defined %}
+                        {% set cptStep = cptStep + 1 %}
+                        <div class="recap {{ offre }}">
+                            <div class="recap__step">
+                                <span class="recap__stepNumber">0{{ cptStep }}</span>Mon offre
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if livraison is defined %}
+                        {% set cptStep = cptStep + 1 %}
+                        <div class="recap {{ livraison }}">
+                            <div class="recap__step">
+                                <span class="recap__stepNumber">0{{ cptStep }}</span>Ma livraison
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if paiement is defined %}
+                        {% set cptStep = cptStep + 1 %}
+                        <div class="recap {{ paiement }}">
+                            <div class="recap__step">
+                                <span class="recap__stepNumber">0{{ cptStep }}</span>Mon paiement
+                            </div>
+                        </div>
+                    {% endif %}
+                    {# END DESKTOP#}
+
+
+                    {% block sidebar_info %}
+
+                    {% endblock %}
+                </div>
+            {% endblock %}
+            <div class="main">
+                {% block main_content_stepper %}
+                {% endblock %}
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        {% block bottom_customizable_area %} {% endblock %}
+    </section>
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends "@PaprecPublic/Common/Base/base_stepper.html.twig" %}
+
+{#{% block title %}#}
+
+{#{% endblock %}#}
+
+{#{% block stylesheets %}#}
+
+{#{% endblock %}#}
+
+{% block whoare %}
+    {% if cart and cart.type != 'package' %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block sidebar %}
+    <div class="callBack-form"></div>
+    {# Définition des menus affichés dans la sidebar #}
+    {% set besoin = 'active' %}
+    {% set confirmation = '' %}
+    {{ parent() }}
+{% endblock %}
+
+{% block main_content_stepper %}
+    <input type="hidden" id="divisionType" value="{{ cart.division }}">
+
+    <form id="callBackForm" action="#" method="post" enctype="multipart/form-data">
+        <div class="step">
+            <div class="step__left">
+                <div class="step__title">{{ 'Public.Home.IAm'|trans }}</div>
+            </div>
+            <div class="step__right step__right--small">
+                {{ form_widget(form.businessName, {'attr': {'class': 'input input--full step--marginfield', 'placeholder': 'Commercial.CallBack.BusinessName'|trans}}) }}
+                {{ form_errors(form.businessName) }}
+
+                {{ form_widget(form.civility, {'attr': {'class': 'input--radio'}}) }}
+                {{ form_errors(form.civility) }}
+
+                <div class="clearfix step--marginfield"></div>
+
+                {{ form_widget(form.lastName, {'attr': {'class': 'input input--mid step--marginfield', 'placeholder': 'Commercial.CallBack.LastName'|trans}}) }}
+                {{ form_errors(form.lastName) }}
+                {{ form_widget(form.firstName, {'attr': {'class': 'input input--mid step--marginfield', 'placeholder': 'Commercial.CallBack.FirstName'|trans}}) }}
+                {{ form_errors(form.firstName) }}
+
+                {{ form_widget(form.email, {'attr': {'class': 'input input--full step--marginfield', 'placeholder': 'Commercial.CallBack.Email'|trans}}) }}
+                {{ form_errors(form.email) }}
+
+                {{ form_widget(form.phone, {'attr': {'class': 'input input--full step--marginfield', 'placeholder': 'Commercial.CallBack.PhonePlaceholder'|trans}}) }}
+                {{ form_errors(form.phone) }}
+
+                {{ form_widget(form.function, {'attr': {'class': 'input input--full step--marginfield', 'placeholder': 'Commercial.CallBack.FunctionPlaceholder'|trans}}) }}
+                {{ form_errors(form.function) }}
+
+                <div class="clearfix"></div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="step">
+            <div class="step__left">
+                <div class="step__title">Date et heure de rappel</div>
+            </div>
+            <div class="step__right step__right--small">
+                {{ form_widget(form.timeCallBack, {'attr': {'class': 'input input--mid', 'placeholder': 'Heure'}}) }}
+                {{ form_errors(form.timeCallBack) }}
+                {{ form_widget(form.dateCallBack, {'attr': {'class': 'input input--mid', 'placeholder': 'Date'}}) }}
+                {{ form_errors(form.dateCallBack) }}
+            </div>
+            <div class="clearfix"></div>
+            <a href="javascript:void(0);" id="callBackFormSubmitButton" class="button button--green">
+                {{ ('Public.Cart.SendNeed'|trans)|upper }}
+            </a>
+        </div>
+        {{ form_rest(form) }}
+    </form>
+{% endblock %}
+
+{% block javascripts %}
+
+{% endblock %}

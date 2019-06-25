@@ -1,0 +1,25 @@
+parameters:
+
+  paprec_home.ticket.levels:
+    - LOW
+    - HIGH
+    - BLOCKING
+    - NEW_FEATURE
+
+  paprec_home.ticket.status:
+    - PENDING
+    - PROCESSING
+    - TO_VALIDATE
+    - COMPLETED
+
+  paprec_home.ticket.invoice_status:
+    - PENDING
+    - INVOICED
+
+  paprec_home.ticket_file.general_path: "%kernel.root_dir%/../var/files/ticketFile"
+  paprec_home.ticket.recipient: "support@eggers-digital.com"
+
+services:
+  paprec_home.ticket:
+    class: Paprec\HomeBundle\Service\TicketManager
+    arguments: ["@doctrine.orm.entity_manager", "@service_container"]

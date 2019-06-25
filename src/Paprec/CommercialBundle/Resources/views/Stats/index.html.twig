@@ -1,0 +1,554 @@
+{% extends "::base_admin.html.twig" %}
+
+{% block title %}
+    {{ 'Commercial.QuoteRequestNonCorporate.QuoteRequestNonCorporates'|trans }}
+{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}
+
+{% block content_title %}
+    {{ 'Commercial.QuoteRequestNonCorporate.QuoteRequestNonCorporates'|trans }}
+{% endblock %}
+
+{% block main_content %}
+    <div class="row">
+        <div class="col-md-12">
+            <!-- BOX -->
+            <div class="card">
+                <div class="card-header">
+                    <h4>
+                        <i class="fa fa-xs fa-chart-pie"></i> {{ 'Commercial.Stats.Stats'|trans }}
+                    </h4>
+                </div>
+                <div class="card-body">
+
+                    <form id="statsFilterForm" class="form-inline my-5 align-items-center justify-content-center"
+                          method="POST">
+                        <div class="form-group">
+                            <label for="inputDateStart">Date de début</label>
+                            <input type="text" name="dateStart" autocomplete="off" class="ml-2 form-control datepicker"
+                                   id="inputDateStart" placeholder="Date de début" value="{{ dateStart|default('') }}">
+                        </div>
+
+                        <div class="mx-4 form-group">
+                            <label for="inputDateEnd form-label">Date de fin</label>
+                            <input type="text" name="dateEnd" autocomplete="off" class="ml-2 form-control datepicker"
+                                   id="inputDateEnd"
+                                   placeholder="Date de fin" value="{{ dateEnd|default('') }}">
+                        </div>
+
+                        <button type="submit" class="ml-4 btn btn-primary">Valider</button>
+                    </form>
+
+                    {# ---------------------------------------DEVIS-----------------------------------------#}
+                    {# CARD SUR LES DEVIS DI#}
+                    {% if is_granted('ROLE_ADMIN') or paprec_has_access('ROLE_COMMERCIAL_DIVISION', 'DI') %}
+
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>
+                                    {{ 'Commercial.Stats.Quote.DI'|trans }}
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                {% set type = 'productDIQuote' %}
+                                <table id="quoteDIStatsTable"
+                                       class="table table-striped table-bordered table-hover"
+                                       cellpadding="0" cellspacing="0" border="0" width="100%">
+                                    <thead>
+                                    <tr class="d-flex">
+                                        <th class="col-2"></th>
+                                        <th class="col text-center">
+                                            <a href="{{ path('paprec_commercial_stats_export', {type: type}) }}">
+                                                <i class="fa fa-file-csv"></i>
+                                            </a>
+                                            {{ 'Commercial.Stats.Total'|trans }}
+                                        </th>
+                                        {% for status in quoteStatusList %}
+                                            <th class="col text-center">
+                                                <a href="{{ path('paprec_commercial_stats_export', {type: type, status: status, dateStart: dateStartSql, dateEnd: dateEndSql}) }}">
+                                                    <i class="fa fa-file-csv"></i>
+                                                </a>
+                                                {{ ('Commercial.QuoteStatusList.' ~ status)|trans }}
+                                            </th>
+                                        {% endfor %}
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr class="d-flex">
+                                        <th class="col-2">Nb de devis</th>
+                                        <td class="col text-right">{{ totalQuoteStatus['DI']['total']['nbQuote']|default('') }}</td>
+                                        {% for status in quoteStatusList %}
+                                            <td class="col text-right">{{ totalQuoteStatus['DI'][status]['nbQuote']|default('') }}</td>
+                                        {% endfor %}
+                                    </tr>
+                                    <tr class="d-flex">
+                                        <th class="col-2">Montant total</th>
+                                        <td class="col text-right">{{ totalQuoteStatus['DI']['total']['totalAmount']|default('') }}</td>
+                                        {% for status in quoteStatusList %}
+                                            <td class="col text-right">{{ totalQuoteStatus['DI'][status]['totalAmount']|default('') }}</td>
+                                        {% endfor %}
+                                    </tr>
+                                    <tr class="d-flex">
+                                        <th class="col-2">Montant total moyen</th>
+                                        <td class="col text-right">{{ totalQuoteStatus['DI']['total']['averageTotalAmount']|default('') }}</td>
+                                        {% for status in quoteStatusList %}
+                                            <td class="col text-right">{{ totalQuoteStatus['DI'][status]['averageTotalAmount']|default('') }}</td>
+                                        {% endfor %}
+                                    </tr>
+                                    <tr class="d-flex">
+                                        <th class="col-2">CA généré</th>
+                                        <td class="col text-right">{{ totalQuoteStatus['DI']['total']['generatedTurnover']|default('') }}</td>
+                                        {% for status in quoteStatusList %}
+                                            <td class="col text-right">{{ totalQuoteStatus['DI'][status]['generatedTurnover']|default('') }}</td>
+                                        {% endfor %}
+                                    </tr>
+                                    <tr class="d-flex">
+                                        <th class="col-2">CA généré moyen</th>
+                                        <td class="col text-right">{{ totalQuoteStatus['DI']['total']['averageGeneratedTurnover']|default('') }}</td>
+                                        {% for status in quoteStatusList %}
+                                            <td class="col text-right">{{ totalQuoteStatus['DI'][status]['averageGeneratedTurnover']|default('') }}</td>
+                                        {% endfor %}
+                                    </tr>
+                                    <tr class="d-flex">
+                                        <th class="col-2">% en nombre</th>
+                                        <td class="col text-right">{{ totalQuoteStatus['DI']['total']['percentByNumber']|default('') }}
+                                            %
+                                        </td>
+                                        {% for status in quoteStatusList %}
+                                            <td class="col text-right">{{ totalQuoteStatus['DI'][status]['percentByNumber']|default('') }}
+                                                %
+                                            </td>
+                                        {% endfor %}
+                                    </tr>
+                                    <tr class="d-flex">
+                                        <th class="col-2">% en chiffre d'affaire</th>
+                                        <td class="col text-right">{{ totalQuoteStatus['DI']['total']['percentByTurnover']|default('') }}
+                                            %
+                                        </td>
+                                        {% for status in quoteStatusList %}
+                                            <td class="col text-right">{{ totalQuoteStatus['DI'][status]['percentByTurnover']|default('') }}
+                                                %
+                                            </td>
+                                        {% endfor %}
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <br>
+                    {% endif %}
+                    {# CARD SUR LES DEVIS CHANTIER #}
+                    {% if is_granted('ROLE_ADMIN') or paprec_has_access('ROLE_COMMERCIAL_DIVISION', 'CHANTIER') %}
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>
+                                    {{ 'Commercial.Stats.Quote.CHANTIER'|trans }}
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                {% set type = 'productChantierQuote' %}
+                                <table id="quoteChantierStatsTable"
+                                       class="table table-striped table-bordered table-hover"
+                                       cellpadding="0" cellspacing="0" border="0" width="100%">
+                                    <thead>
+                                    <tr class="d-flex">
+                                        <th class="col-2"></th>
+                                        <th class="col text-center">
+                                            <a href="{{ path('paprec_commercial_stats_export', {type: type}) }}">
+                                                <i class="fa fa-file-csv"></i>
+                                            </a>
+                                            {{ 'Commercial.Stats.Total'|trans }}
+                                        </th>
+                                        {% for status in quoteStatusList %}
+                                            <th class="col text-center">
+                                                <a href="{{ path('paprec_commercial_stats_export', {type: type, status: status, dateStart: dateStartSql, dateEnd: dateEndSql}) }}">
+                                                    <i class="fa fa-file-csv"></i>
+                                                </a>
+                                                {{ ('Commercial.QuoteStatusList.' ~ status)|trans }}
+                                            </th>
+                                        {% endfor %}
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr class="d-flex">
+                                        <th class="col-2">Nb de devis</th>
+                                        <td class="col text-right">{{ totalQuoteStatus['CHANTIER']['total']['nbQuote']|default('') }}</td>
+                                        {% for status in quoteStatusList %}
+                                            <td class="col text-right">{{ totalQuoteStatus['CHANTIER'][status]['nbQuote']|default('') }}</td>
+                                        {% endfor %}
+                                    </tr>
+                                    <tr class="d-flex">
+                                        <th class="col-2">Montant total</th>
+                                        <td class="col text-right">{{ totalQuoteStatus['CHANTIER']['total']['totalAmount']|default('') }}</td>
+                                        {% for status in quoteStatusList %}
+                                            <td class="col text-right">{{ totalQuoteStatus['CHANTIER'][status]['totalAmount']|default('') }}</td>
+                                        {% endfor %}
+                                    </tr>
+                                    <tr class="d-flex">
+                                        <th class="col-2">Montant total moyen</th>
+                                        <td class="col text-right">{{ totalQuoteStatus['CHANTIER']['total']['averageTotalAmount']|default('') }}</td>
+                                        {% for status in quoteStatusList %}
+                                            <td class="col text-right">{{ totalQuoteStatus['CHANTIER'][status]['averageTotalAmount']|default('') }}</td>
+                                        {% endfor %}
+                                    </tr>
+                                    <tr class="d-flex">
+                                        <th class="col-2">CA généré</th>
+                                        <td class="col text-right">{{ totalQuoteStatus['CHANTIER']['total']['generatedTurnover']|default('') }}</td>
+                                        {% for status in quoteStatusList %}
+                                            <td class="col text-right">{{ totalQuoteStatus['CHANTIER'][status]['generatedTurnover']|default('') }}</td>
+                                        {% endfor %}
+                                    </tr>
+                                    <tr class="d-flex">
+                                        <th class="col-2">CA généré moyen</th>
+                                        <td class="col text-right">{{ totalQuoteStatus['CHANTIER']['total']['averageGeneratedTurnover']|default('') }}</td>
+                                        {% for status in quoteStatusList %}
+                                            <td class="col text-right">{{ totalQuoteStatus['CHANTIER'][status]['averageGeneratedTurnover']|default('') }}</td>
+                                        {% endfor %}
+                                    </tr>
+                                    <tr class="d-flex">
+                                        <th class="col-2">% en nombre</th>
+                                        <td class="col text-right">{{ totalQuoteStatus['CHANTIER']['total']['percentByNumber']|default('') }}
+                                            %
+                                        </td>
+                                        {% for status in quoteStatusList %}
+                                            <td class="col text-right">{{ totalQuoteStatus['CHANTIER'][status]['percentByNumber']|default('') }}
+                                                %
+                                            </td>
+                                        {% endfor %}
+                                    </tr>
+                                    <tr class="d-flex">
+                                        <th class="col-2">% en chiffre d'affaire</th>
+                                        <td class="col text-right">{{ totalQuoteStatus['CHANTIER']['total']['percentByTurnover']|default('') }}
+                                            %
+                                        </td>
+                                        {% for status in quoteStatusList %}
+                                            <td class="col text-right">{{ totalQuoteStatus['CHANTIER'][status]['percentByTurnover']|default('') }}
+                                                %
+                                            </td>
+                                        {% endfor %}
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <br>
+                    {% endif %}
+                    {# CARD SUR LES DEVIS D3E #}
+                    {% if is_granted('ROLE_ADMIN') or paprec_has_access('ROLE_COMMERCIAL_DIVISION', 'D3E') %}
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>
+                                    {{ 'Commercial.Stats.Quote.D3E'|trans }}
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                {% set type = 'productD3EQuote' %}
+                                <table id="quoteD3EStatsTable"
+                                       class="table table-striped table-bordered table-hover"
+                                       cellpadding="0" cellspacing="0" border="0" width="100%">
+                                    <thead>
+                                    <tr class="d-flex">
+                                        <th class="col-2"></th>
+                                        <th class="col text-center">
+                                            <a href="{{ path('paprec_commercial_stats_export', {type: type}) }}">
+                                                <i class="fa fa-file-csv"></i>
+                                            </a>
+                                            {{ 'Commercial.Stats.Total'|trans }}
+                                        </th>
+                                        {% for status in quoteStatusList %}
+                                            <th class="col text-center">
+                                                <a href="{{ path('paprec_commercial_stats_export', {type: type, status: status, dateStart: dateStartSql, dateEnd: dateEndSql}) }}">
+                                                    <i class="fa fa-file-csv"></i>
+                                                </a>
+                                                {{ ('Commercial.QuoteStatusList.' ~ status)|trans }}
+                                            </th>
+                                        {% endfor %}
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr class="d-flex">
+                                        <th class="col-2">Nb de devis</th>
+                                        <td class="col text-right">{{ totalQuoteStatus['D3E']['total']['nbQuote']|default('') }}</td>
+                                        {% for status in quoteStatusList %}
+                                            <td class="col text-right">{{ totalQuoteStatus['D3E'][status]['nbQuote']|default('') }}</td>
+                                        {% endfor %}
+                                    </tr>
+                                    <tr class="d-flex">
+                                        <th class="col-2">Montant total</th>
+                                        <td class="col text-right">{{ totalQuoteStatus['D3E']['total']['totalAmount']|default('') }}</td>
+                                        {% for status in quoteStatusList %}
+                                            <td class="col text-right">{{ totalQuoteStatus['D3E'][status]['totalAmount']|default('') }}</td>
+                                        {% endfor %}
+                                    </tr>
+                                    <tr class="d-flex">
+                                        <th class="col-2">Montant total moyen</th>
+                                        <td class="col text-right">{{ totalQuoteStatus['D3E']['total']['averageTotalAmount']|default('') }}</td>
+                                        {% for status in quoteStatusList %}
+                                            <td class="col text-right">{{ totalQuoteStatus['D3E'][status]['averageTotalAmount']|default('') }}</td>
+                                        {% endfor %}
+                                    </tr>
+                                    <tr class="d-flex">
+                                        <th class="col-2">CA généré</th>
+                                        <td class="col text-right">{{ totalQuoteStatus['D3E']['total']['generatedTurnover']|default('') }}</td>
+                                        {% for status in quoteStatusList %}
+                                            <td class="col text-right">{{ totalQuoteStatus['D3E'][status]['generatedTurnover']|default('') }}</td>
+                                        {% endfor %}
+                                    </tr>
+                                    <tr class="d-flex">
+                                        <th class="col-2">CA généré moyen</th>
+                                        <td class="col text-right">{{ totalQuoteStatus['D3E']['total']['averageGeneratedTurnover']|default('') }}</td>
+                                        {% for status in quoteStatusList %}
+                                            <td class="col text-right">{{ totalQuoteStatus['D3E'][status]['averageGeneratedTurnover']|default('') }}</td>
+                                        {% endfor %}
+                                    </tr>
+                                    <tr class="d-flex">
+                                        <th class="col-2">% en nombre</th>
+                                        <td class="col text-right">{{ totalQuoteStatus['D3E']['total']['percentByNumber']|default('') }}
+                                            %
+                                        </td>
+                                        {% for status in quoteStatusList %}
+                                            <td class="col text-right">{{ totalQuoteStatus['D3E'][status]['percentByNumber']|default('') }}
+                                                %
+                                            </td>
+                                        {% endfor %}
+                                    </tr>
+                                    <tr class="d-flex">
+                                        <th class="col-2">% en chiffre d'affaire</th>
+                                        <td class="col text-right">{{ totalQuoteStatus['D3E']['total']['percentByTurnover']|default('') }}
+                                            %
+                                        </td>
+                                        {% for status in quoteStatusList %}
+                                            <td class="col text-right">{{ totalQuoteStatus['D3E'][status]['percentByTurnover']|default('') }}
+                                                %
+                                            </td>
+                                        {% endfor %}
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <br>
+                    {% endif %}
+                    {# ---------------------------------------COMMANDE-----------------------------------------#}
+                    {# CARD SUR LES COMMANDES CHANTIER #}
+                    {% if is_granted('ROLE_ADMIN') or paprec_has_access('ROLE_COMMERCIAL_DIVISION', 'CHANTIER') %}
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>
+                                    {{ 'Commercial.Stats.Order.CHANTIER'|trans }}
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                {% set type = 'productChantierOrder' %}
+                                <table id="orderChantierStatsTable"
+                                       class="table table-striped table-bordered table-hover"
+                                       cellpadding="0" cellspacing="0" border="0" width="100%">
+                                    <thead>
+                                    <tr class="d-flex">
+                                        <th class="col-2"></th>
+                                        <th class="col text-center">
+                                            <a href="{{ path('paprec_commercial_stats_export', {type: type}) }}">
+                                                <i class="fa fa-file-csv"></i>
+                                            </a>
+                                            {{ 'Commercial.Stats.Total'|trans }}
+                                        </th>
+                                        {% for status in orderStatusList %}
+                                            <th class="col text-center">
+                                                <a href="{{ path('paprec_commercial_stats_export', {type: type, status: status, dateStart: dateStartSql, dateEnd: dateEndSql}) }}">
+                                                    <i class="fa fa-file-csv"></i>
+                                                </a>
+                                                {{ ('Commercial.OrderStatusList.' ~ status)|trans }}
+                                            </th>
+                                        {% endfor %}
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr class="d-flex">
+                                        <th class="col-2">Nb de commandes</th>
+                                        <td class="col text-right">{{ totalOrderStatus['CHANTIER']['total']['nbOrder']|default('') }}</td>
+                                        {% for status in orderStatusList %}
+                                            <td class="col text-right">{{ totalOrderStatus['CHANTIER'][status]['nbOrder']|default('') }}</td>
+                                        {% endfor %}
+                                    </tr>
+                                    <tr class="d-flex">
+                                        <th class="col-2">Montant total</th>
+                                        <td class="col text-right">{{ totalOrderStatus['CHANTIER']['total']['totalAmount']|default('') }}</td>
+                                        {% for status in orderStatusList %}
+                                            <td class="col text-right">{{ totalOrderStatus['CHANTIER'][status]['totalAmount']|default('') }}</td>
+                                        {% endfor %}
+                                    </tr>
+                                    <tr class="d-flex">
+                                        <th class="col-2">Montant total moyen</th>
+                                        <td class="col text-right">{{ totalOrderStatus['CHANTIER']['total']['averageTotalAmount']|default('') }}</td>
+                                        {% for status in orderStatusList %}
+                                            <td class="col text-right">{{ totalOrderStatus['CHANTIER'][status]['averageTotalAmount']|default('') }}</td>
+                                        {% endfor %}
+                                    </tr>
+                                    <tr class="d-flex">
+                                        <th class="col-2">% en nombre</th>
+                                        <td class="col text-right">{{ totalOrderStatus['CHANTIER']['total']['percentByNumber']|default('') }}
+                                            %
+                                        </td>
+                                        {% for status in orderStatusList %}
+                                            <td class="col text-right">{{ totalOrderStatus['CHANTIER'][status]['percentByNumber']|default('') }}
+                                                %
+                                            </td>
+                                        {% endfor %}
+                                    </tr>
+                                    <tr class="d-flex">
+                                        <th class="col-2">% en chiffre d'affaire</th>
+                                        <td class="col text-right">{{ totalOrderStatus['CHANTIER']['total']['percentByTurnover']|default('') }}
+                                            %
+                                        </td>
+                                        {% for status in orderStatusList %}
+                                            <td class="col text-right">{{ totalOrderStatus['CHANTIER'][status]['percentByTurnover']|default('') }}
+                                                %
+                                            </td>
+                                        {% endfor %}
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <br>
+                    {% endif %}
+                    {# CARD SUR LES COMMANDES D3E #}
+                    {% if is_granted('ROLE_ADMIN') or paprec_has_access('ROLE_COMMERCIAL_DIVISION', 'D3E') %}
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>
+                                    {{ 'Commercial.Stats.Order.D3E'|trans }}
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                {% set type = 'productD3EOrder' %}
+                                <table id="orderD3EStatsTable"
+                                       class="table table-striped table-bordered table-hover"
+                                       cellpadding="0" cellspacing="0" border="0" width="100%">
+                                    <thead>
+                                    <tr class="d-flex">
+                                        <th class="col-2"></th>
+                                        <th class="col text-center">
+                                            <a href="{{ path('paprec_commercial_stats_export', {type: type}) }}">
+                                                <i class="fa fa-file-csv"></i>
+                                            </a>
+                                            {{ 'Commercial.Stats.Total'|trans }}
+                                        </th>
+                                        {% for status in orderStatusList %}
+                                            <th class="col text-center">
+                                                <a href="{{ path('paprec_commercial_stats_export', {type: type, status: status, dateStart: dateStartSql, dateEnd: dateEndSql}) }}">
+                                                    <i class="fa fa-file-csv"></i>
+                                                </a>
+                                                {{ ('Commercial.OrderStatusList.' ~ status)|trans }}
+                                            </th>
+                                        {% endfor %}
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr class="d-flex">
+                                        <th class="col-2">Nb de commandes</th>
+                                        <td class="col text-right">{{ totalOrderStatus['D3E']['total']['nbOrder']|default('') }}</td>
+                                        {% for status in orderStatusList %}
+                                            <td class="col text-right">{{ totalOrderStatus['D3E'][status]['nbOrder']|default('') }}</td>
+                                        {% endfor %}
+                                    </tr>
+                                    <tr class="d-flex">
+                                        <th class="col-2">Montant total</th>
+                                        <td class="col text-right">{{ totalOrderStatus['D3E']['total']['totalAmount']|default('') }}</td>
+                                        {% for status in orderStatusList %}
+                                            <td class="col text-right">{{ totalOrderStatus['D3E'][status]['totalAmount']|default('') }}</td>
+                                        {% endfor %}
+                                    </tr>
+                                    <tr class="d-flex">
+                                        <th class="col-2">Montant total moyen</th>
+                                        <td class="col text-right">{{ totalOrderStatus['D3E']['total']['averageTotalAmount']|default('') }}</td>
+                                        {% for status in orderStatusList %}
+                                            <td class="col text-right">{{ totalOrderStatus['D3E'][status]['averageTotalAmount']|default('') }}</td>
+                                        {% endfor %}
+                                    </tr>
+                                    <tr class="d-flex">
+                                        <th class="col-2">% en nombre</th>
+                                        <td class="col text-right">{{ totalOrderStatus['D3E']['total']['percentByNumber']|default('') }}
+                                            %
+                                        </td>
+                                        {% for status in orderStatusList %}
+                                            <td class="col text-right">{{ totalOrderStatus['D3E'][status]['percentByNumber']|default('') }}
+                                                %
+                                            </td>
+                                        {% endfor %}
+                                    </tr>
+                                    <tr class="d-flex">
+                                        <th class="col-2">% en chiffre d'affaire</th>
+                                        <td class="col text-right">{{ totalOrderStatus['D3E']['total']['percentByTurnover']|default('') }}
+                                            %
+                                        </td>
+                                        {% for status in orderStatusList %}
+                                            <td class="col text-right">{{ totalOrderStatus['D3E'][status]['percentByTurnover']|default('') }}
+                                                %
+                                            </td>
+                                        {% endfor %}
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+
+    <script>
+        $(function () {
+
+            $('#inputDateStart').datetimepicker({
+                locale: 'fr',
+                format: 'L',
+                icons:
+                    {
+                        up: 'fa fa-angle-up',
+                        down: 'fa fa-angle-down',
+                        date: 'fa fa-calendar',
+                        time: 'fa fa-clock',
+                        next: 'fa fa-angle-right',
+                        previous: 'fa fa-angle-left'
+                    },
+            });
+
+            $('#inputDateEnd').datetimepicker({
+                locale: 'fr',
+                format: 'L',
+                icons:
+                    {
+                        up: 'fa fa-angle-up',
+                        down: 'fa fa-angle-down',
+                        date: 'fa fa-calendar',
+                        time: 'fa fa-clock',
+                        next: 'fa fa-angle-right',
+                        previous: 'fa fa-angle-left'
+                    },
+            });
+
+            $('#inputDateStart').on('dp.change', function(e) {
+                if( e.date ){
+                    e.date.add(1, 'day');
+                }
+                $('#inputDateEnd').data("DateTimePicker").minDate(e.date);
+            });
+
+            $("#inputDateEnd").on("dp.change", function (e) {
+                $('#inputDateStart').data("DateTimePicker").maxDate(e.date);
+            });
+
+        })
+
+    </script>
+
+{% endblock %}

@@ -1,0 +1,65 @@
+General:
+  All:                      All
+  List:                     List
+  Add:                      Add
+  Edit:                     Edit
+  Remove:                   Remove
+  Close:                    Close
+  View:                     View
+  Yes:                      Yes
+  No:                       No
+  Name:                     Name
+  SystemError:              System Error !
+  Users:                    Users
+  Datatable:
+    Records-per-page :                          _MENU_ records per page
+    Nothing-found :                             Nothing found - sorry
+  #        Showing-page :                              Showing page _PAGE_ of _PAGES_
+    Showing-page :                              Showing _START_ to _END_ of _TOTAL_ entries
+    No-records-available :                      No records available
+    Search :                                    Search
+    Loading :                                   Loading...
+    Previous :                                  Previous
+    Next :                                      Next
+  Presence-error:           Presence error
+
+  Menu:
+    Administration:         Administration
+    Users:                  Users
+    Dashboard:              Dashboard
+    Logout:                 Logout
+    MyProfile:              My profile
+    Customers:              Customers
+    My-profile:             My profil
+
+  Form:
+    Submit:                 Submit
+    CreationDate:           Created on
+    UpdatedDate:            Updated on
+    CreationUser:           Created by
+    UpdatedUser:            Updated by
+    NeverUpdated:           Never updated
+    Password:               Password
+    RepeatPassword:         Repeat password
+    Email:                  Email
+    Language:               Language
+    Timezone:               Timezone
+    Enable:                 Enable
+    Username:               Username
+    Roles:                  Roles
+    Permissions:            Permissions
+    Unlock:                 Unlock
+    Name:                   Name
+    FirstName:              FirstName
+    LastName:               LastName
+    Birthday:               Birthday
+    Nationality:            Nationality
+    Email:                  Email
+    FirstName:              First name
+    LastName:               Last name
+    Birthday:               Birthday
+    Address:                Address
+    PostalCode:             Postal Code
+    City:                   City
+    Email:                  Email
+    Access-type:            Access type

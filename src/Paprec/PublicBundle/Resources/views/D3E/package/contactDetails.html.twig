@@ -1,0 +1,192 @@
+{% extends "@PaprecPublic/Common/Base/package/base_stepper.html.twig" %}
+
+
+{#{% block title %}#}
+{#{% endblock %}#}
+
+{#{% block stylesheets %}#}
+
+{#{% endblock %}#}
+{% block whoare %}
+{% endblock %}
+
+{% block sidebar %}
+    <div class="contact-details-form"></div>
+    {# Définition des menus affichés dans la sidebar #}
+    {% set besoin = 'active' %}
+    {% set coordonnees = 'active' %}
+    {% set livraison = '' %}
+    {% set paiement = '' %}
+    {{ parent() }}
+{% endblock %}
+{% block main_content_stepper %}
+    <form id="contactDetailsForm" action="" method="post">
+        <input type="hidden" id="divisionType" value="{{ cart.division }}">
+        <div class="step">
+            <div class="step__left">
+                <div class="step__title">{{ 'Public.Home.IAm'|trans }}</div>
+            </div>
+            <div class="step__right step__right--small">
+                {{ form_widget(form.businessName, {'attr': {'class': 'input input--full step--marginfield', 'placeholder': 'Commercial.ProductD3EQuote.BusinessName'|trans}}) }}
+                {{ form_errors(form.businessName) }}
+
+                {{ form_widget(form.siret, {'attr': {'class': 'input input--full step--marginfield', 'placeholder': 'Commercial.ProductD3EOrder.SIRET'|trans}}) }}
+                {{ form_errors(form.siret) }}
+
+                {{ form_widget(form.businessLine, {'attr': {'class': 'input input--full'}}) }}
+                {{ form_errors(form.businessLine) }}
+
+                {{ form_widget(form.civility, {'attr': {'class': 'input--radio'}}) }}
+                {{ form_errors(form.civility) }}
+
+                <div class="clearfix step--marginfield"></div>
+
+                {{ form_widget(form.lastName, {'attr': {'class': 'input input--mid step--marginfield', 'placeholder': 'Commercial.ProductD3EQuote.LastName'|trans}}) }}
+                {{ form_errors(form.lastName) }}
+                {{ form_widget(form.firstName, {'attr': {'class': 'input input--mid step--marginfield', 'placeholder': 'Commercial.ProductD3EQuote.FirstName'|trans}}) }}
+                {{ form_errors(form.firstName) }}
+
+                {{ form_widget(form.email, {'attr': {'class': 'input input--full step--marginfield', 'placeholder': 'Commercial.ProductD3EQuote.Email'|trans}}) }}
+                {{ form_errors(form.email) }}
+
+                {{ form_widget(form.phone, {'attr': {'class': 'input input--full step--marginfield', 'placeholder': 'Commercial.ProductD3EQuote.PhonePlaceholder'|trans}}) }}
+                {{ form_errors(form.phone) }}
+
+                {{ form_widget(form.function, {'attr': {'class': 'input input--full step--marginfield', 'placeholder': 'Commercial.ProductD3EQuote.FunctionPlaceholder'|trans}}) }}
+                {{ form_errors(form.function) }}
+
+            </div>
+        </div>
+        <div class="step">
+            <div class="step__left">
+                <div class="step__title">
+                    {{ 'Public.Home.Addresses'|trans }}
+                </div>
+            </div>
+            <div class="step__right step__right--small">
+
+                {{ form_widget(form.address, {'attr': {'class': 'input input--full step--marginfield', 'placeholder': 'Commercial.ProductD3EOrder.Address'|trans}}) }}
+                {{ form_errors(form.address) }}
+
+                {{ form_widget(form.postalCode, {'attr': {'class': 'input input--zip step--marginfield', 'placeholder': 'Commercial.ProductD3EOrder.PostalCode'|trans}}) }}
+                {{ form_errors(form.postalCode) }}
+
+                {{ form_widget(form.city, {'attr': {'class': 'input input--city step--marginfield', 'placeholder': 'Commercial.ProductD3EOrder.City'|trans}}) }}
+                {{ form_errors(form.city) }}
+
+                <div class="clearfix"></div>
+                <input type="checkbox" id="headofficeAddressCheckbox" class="address-checkbox">
+                <label for="headofficeAddressCheckbox"
+                       class="address-checkbox-label">{{ 'Commercial.ProductD3EOrder.HeadofficeAddressCheckbox'|trans }}</label>
+                <div id="headofficeAddressContainer" class="address-container">
+                    {{ form_widget(form.headofficeAddress, {'attr': {'class': 'input input--full step--marginfield', 'placeholder': 'Commercial.ProductD3EOrder.HeadofficeAddressPlaceholder'|trans}}) }}
+                    {{ form_errors(form.headofficeAddress) }}
+
+                    {{ form_widget(form.headofficePostalCode, {'attr': {'class': 'input input--zip step--marginfield', 'placeholder': 'Commercial.ProductD3EOrder.PostalCode'|trans}}) }}
+                    {{ form_errors(form.headofficePostalCode) }}
+
+                    {{ form_widget(form.headofficeCity, {'attr': {'class': 'input input--city step--marginfield', 'placeholder': 'Commercial.ProductD3EOrder.City'|trans}}) }}
+                    {{ form_errors(form.headofficeCity) }}
+                </div>
+
+                <div class="clearfix"></div>
+                <input type="checkbox" id="invoicingAddressCheckbox" class="address-checkbox">
+                <label for="invoicingAddressCheckbox"
+                       class="address-checkbox-label">{{ 'Commercial.ProductD3EOrder.InvoicingAddressCheckbox'|trans }}</label>
+                <div id="invoicingAddressContainer" class="address-container">
+                    {{ form_widget(form.invoicingAddress, {'attr': {'class': 'input input--full step--marginfield', 'placeholder': 'Commercial.ProductD3EOrder.InvoicingAddressPlaceholder'|trans}}) }}
+                    {{ form_errors(form.invoicingAddress) }}
+
+                    {{ form_widget(form.invoicingPostalCode, {'attr': {'class': 'input input--zip step--marginfield', 'placeholder': 'Commercial.ProductD3EOrder.PostalCode'|trans}}) }}
+                    {{ form_errors(form.invoicingPostalCode) }}
+
+                    {{ form_widget(form.invoicingCity, {'attr': {'class': 'input input--city step--marginfield', 'placeholder': 'Commercial.ProductD3EOrder.City'|trans}}) }}
+                    {{ form_errors(form.invoicingCity) }}
+                </div>
+            </div>
+        </div>
+
+        <div class="step step--index">
+            <div class="step__left">
+                <div class="step__title">
+                    {{ 'Public.Home.TVAStatus'|trans }}
+                </div>
+            </div>
+            <div class="step__right">
+                {{ form_widget(form.tvaStatus, {'attr': {'class': 'input--radio'}}) }}
+                {{ form_errors(form.tvaStatus) }}
+            </div>
+        </div>
+        <div class="step step--index">
+            <div class="step__left">&nbsp;</div>
+            <div class="step__right step__right--small">
+                {{ form_widget(form.tvaNumber, {'attr': {'class': 'input input--full step--marginfield', 'placeholder': 'Commercial.ProductD3EOrder.TVANumber'|trans}}) }}
+                {{ form_errors(form.tvaNumber) }}
+
+                <div class="clearfix"></div>
+                <div class="preferred-contact">
+                    {{ 'Commercial.QuoteRequest.PreferredContactLabel'|trans }}
+                </div>
+                <div class="preferred-contact--choice">
+                    {{ form_widget(form.preferredContact, {'attr': {'class': 'input--radio'}}) }}
+                    {{ form_errors(form.preferredContact) }}
+                </div>
+
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step__left">&nbsp;</div>
+            <div class="step__right">
+                <div class="cnil">
+                    Les informations recueillies sur ce formulaire sont enregistrées dans un fichier informatisé pour
+                    permettre de vous adresser des contenus adaptés à vos besoins. Ces données sont conservées pendant 3
+                    ans et sont destinées au service marketing. Conformément à la loi
+                    « informatique et libertés », vous pouvez exercer votre droit d’accès aux données vous concernant et
+                    les faire rectifier en contactant : service-data@paprec.com
+                </div>
+
+            </div>
+            <div class="clearfix"></div>
+
+            {{ render(controller('PaprecPublicBundle:Common:getCTAsBottom', {
+                'label': 'ValidateOrder',
+                'cartUuid': cart.id,
+                'division': cart.division,
+                'stepBack': 'packaged_step1',
+                'nextStep': 'packaged_step3',
+                'idSubmit': 'contactDetailsFormSubmitButton'
+            })) }}
+        </div>
+        {{ form_rest(form) }}
+    </form>
+{% endblock %}
+
+{% block bottom_customizable_area %}
+    {% set customAreaImage = paprec_customizable_area('images_banner_' ~ cart.division|lower) %}
+    {% if customAreaImage is not null %}
+        {% autoescape false %}
+            {{ customAreaImage.content }}
+        {% endautoescape %}
+    {% endif %}
+
+    {% set customArea = paprec_customizable_area('reassurance_banner_chantier') %}
+    {% if customArea is not null %}
+        {% autoescape false %}
+            {{ customArea.content }}
+        {% endautoescape %}
+    {% endif %}
+
+    {% set customAreaLogo = paprec_customizable_area('logo_banner_' ~ cart.division|lower) %}
+    {% if customAreaLogo is not null %}
+        {% autoescape false %}
+            {{ customAreaLogo.content }}
+        {% endautoescape %}
+    {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?libraries=places&key={{ paprec_google_api_key }}">
+    </script>
+{% endblock %}

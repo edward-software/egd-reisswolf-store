@@ -1,0 +1,34 @@
+# This file is a "template" of what your parameters.yml file should look like
+# Set parameters here that may be different on each deployment target of the app, e.g. development, staging, production.
+# https://symfony.com/doc/current/best_practices/configuration.html#infrastructure-related-configuration
+parameters:
+    database_host: 127.0.0.1
+    database_port: ~
+    database_name: symfony
+    database_user: root
+    database_password: ~
+    # You should uncomment this if you want to use pdo_sqlite
+    #database_path: '%kernel.project_dir%/var/data/data.sqlite'
+
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: ~
+    mailer_password: ~
+
+    # A secret key that's used to generate certain security-related tokens
+    secret: ThisTokenIsNotSoSecretChangeIt
+
+    paprec_email_sender: digital@eggers-conseil.com
+    paprec_email_call: digital@eggers-conseil.com
+    paprec_email_other_services: digital@eggers-conseil.com
+    paprec_public_site_url: 'https://wwwv3.easyrecyclage.eggers-digital.com'
+    paprec_easyrecyclage_5flux_url: 'https://store.easyrecyclage.com/besoin'
+    paprec_google_api_key: AIzaSyBdYprWZt8V-GkukzTG2ev3-eVdLb3FSCA
+
+    wkhtmltopdf_path: /usr/local/bin/wkhtmltopdf
+
+    paprec_distance_nearby_agencies: 50
+    paprec_assistant_commercial_email: digital@eggers-conseil.com
+    paprec_manager_di_email: digital@eggers-conseil.com
+    paprec_manager_chantier_email: digital@eggers-conseil.com
+    paprec_manager_d3e_email: digital@eggers-conseil.com

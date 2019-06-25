@@ -1,0 +1,97 @@
+services:
+  #    paprec_commercial.example:
+  #        class: Paprec\CommercialBundle\Example
+  #        arguments: ["@service_id", "plain_value", "%parameter%"]
+  paprec_commercial.agency_manager:
+    class: Paprec\CommercialBundle\Service\AgencyManager
+    arguments: ["@doctrine.orm.entity_manager", "@service_container"]
+
+  paprec_commercial.business_line_manager:
+    class: Paprec\CommercialBundle\Service\BusinessLineManager
+    arguments: ["@doctrine.orm.entity_manager", "@service_container"]
+
+  paprec_commercial.call_back_manager:
+    class: Paprec\CommercialBundle\Service\CallBackManager
+    arguments: ["@doctrine.orm.entity_manager", "@service_container"]
+
+  paprec_commercial.contact_us_manager:
+    class: Paprec\CommercialBundle\Service\ContactUsManager
+    arguments: ["@doctrine.orm.entity_manager", "@service_container"]
+
+  paprec_commercial.product_di_quote_manager:
+    public: true
+    class: Paprec\CommercialBundle\Service\ProductDIQuoteManager
+    arguments: ["@doctrine.orm.entity_manager", "@service_container"]
+
+  paprec_commercial.product_chantier_quote_manager:
+    class: Paprec\CommercialBundle\Service\ProductChantierQuoteManager
+    arguments: ["@doctrine.orm.entity_manager", "@service_container"]
+
+  paprec_commercial.product_d3e_quote_manager:
+    class: Paprec\CommercialBundle\Service\ProductD3EQuoteManager
+    arguments: ["@doctrine.orm.entity_manager", "@service_container"]
+
+  paprec_commercial.product_chantier_order_manager:
+    class: Paprec\CommercialBundle\Service\ProductChantierOrderManager
+    arguments: ["@doctrine.orm.entity_manager", "@service_container"]
+
+  paprec_commercial.product_d3e_order_manager:
+    class: Paprec\CommercialBundle\Service\ProductD3EOrderManager
+    arguments: ["@doctrine.orm.entity_manager", "@service_container"]
+
+  paprec_commercial.quote_request_manager:
+    class: Paprec\CommercialBundle\Service\QuoteRequestManager
+    arguments: ["@doctrine.orm.entity_manager", "@service_container"]
+
+  paprec_commercial.quote_request_non_corporate_manager:
+    class: Paprec\CommercialBundle\Service\QuoteRequestNonCorporateManager
+    arguments: ["@doctrine.orm.entity_manager", "@service_container"]
+
+parameters:
+  paprec_commercial.quote_request.files_path: "%kernel.root_dir%/../var/files/quoteRequests"
+  paprec_commercial.contact_us.files_path: "%kernel.root_dir%/../var/files/contactUs"
+
+  paprec_commercial.product_chantier_order.files_path: "%kernel.root_dir%/../var/files/invoices"
+  paprec_commercial.product_d3e_order.files_path: "%kernel.root_dir%/../var/files/invoices"
+
+  paprec_commercial.data_tmp_directory: "%kernel.root_dir%/data/tmp"
+
+  paprec_commercial.quote_pdf_notice_directory: "%kernel.root_dir%/data/pdf/quote_notices"
+  paprec_commercial.di_quote_pdf_notice_directory: "%kernel.root_dir%/data/pdf/di/quote_notices"
+
+  paprec_commercial.quote_pdf_notices:
+    - detail.pdf
+    - cgps.pdf
+    - paprec_presentation.pdf
+    - paprec_activities.pdf
+
+  paprec_commercial.di_quote_pdf_notices:
+    - detail.pdf
+    - cgps.pdf
+    - paprec_presentation.pdf
+    - paprec_activities.pdf
+
+  paprec_quote_status:
+    - CREATED
+    - PENDING
+    - PROCESSING
+    - CLOSED
+
+  paprec_order_status:
+    - CREATED
+    - PENDING
+    - PROCESSING
+    - INVOICED
+    - CANCELED
+
+  paprec_treatment_status:
+    - CREATED
+    - PENDING
+    - PROCESSING
+    - CLOSED
+
+  paprec_order_payment_methods:
+    - CB
+    - Virement
+    - E-signature
+    - Courrier

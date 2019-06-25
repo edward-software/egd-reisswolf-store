@@ -1,0 +1,131 @@
+{% extends "@PaprecPublic/Common/Base/base_stepper.html.twig" %}
+
+{#{% block title %}#}
+
+{#{% endblock %}#}
+
+{#{% block stylesheets %}#}
+
+{#{% endblock %}#}
+
+ {% block top_msg_customizable_area %}
+     {% set customArea = paprec_customizable_area('particulier_top_msg') %}
+     {% if customArea is not null %}
+         {% autoescape false %}
+             <div class="custom-area__top wrapper-top">
+                 <div class="righter wrapper">
+                     <div class="custom-area__top__msg">
+                         {{ customArea.content }}
+                     </div>
+                 </div>
+             </div>
+         {% endautoescape %}
+     {% endif %}
+ {% endblock %}
+
+
+{% block sidebar %}
+    <div class="nonCorporate-form particulier-form"></div>
+    {# Définition des menus affichés dans la sidebar #}
+    {% set besoin = 'active' %}
+    {% set confirmation = '' %}
+    {{ parent() }}
+{% endblock %}
+
+{% block main_content_stepper %}
+    <form id="regularForm" action="#" method="post" enctype="multipart/form-data">
+        <div class="step step--index">
+            <div class="step__left">
+                <div class="step__title">{{ 'Public.Home.Location'|trans }}</div>
+            </div>
+            <div class="step__right step__right--small">
+                <input class="input input--full" type="text"
+                       id="locationSelect" autocomplete="off"
+                       placeholder="{{ 'Public.Cart.PostalCode'|trans }}">
+                {{ form_errors(form.postalCode) }}
+
+            </div>
+        </div>
+        <div class="step step--index">
+            <div class="step__left">
+                <div class="step__title">{{ 'Public.Home.IAm'|trans }}</div>
+            </div>
+            <div class="step__right step__right--small">
+                {% do form.businessName.setRendered() %}
+
+                {{ form_widget(form.civility, {'attr': {'class': 'input--radio'}}) }}
+                {{ form_errors(form.civility) }}
+
+                <div class="clearfix step--marginfield"></div>
+
+                {{ form_widget(form.lastName, {'attr': {'class': 'input input--mid step--marginfield', 'placeholder': 'Commercial.QuoteRequest.LastName'|trans}}) }}
+                {{ form_errors(form.lastName) }}
+                {{ form_widget(form.firstName, {'attr': {'class': 'input input--mid step--marginfield', 'placeholder': 'Commercial.QuoteRequest.FirstName'|trans}}) }}
+                {{ form_errors(form.firstName) }}
+
+                {{ form_widget(form.email, {'attr': {'class': 'input input--full step--marginfield', 'placeholder': 'Commercial.QuoteRequest.Email'|trans}}) }}
+                {{ form_errors(form.email) }}
+
+                {{ form_widget(form.phone, {'attr': {'class': 'input input--full step--marginfield', 'placeholder': 'Commercial.QuoteRequest.PhonePlaceholder'|trans}}) }}
+                {{ form_errors(form.phone) }}
+
+                {{ form_widget(form.function, {'attr': {'class': 'input input--full step--marginfield', 'placeholder': 'Commercial.QuoteRequest.FunctionPlaceholder'|trans}}) }}
+                {{ form_errors(form.function) }}
+
+                <div class="clearfix"></div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="step step--index">
+            <div class="step__left">
+                <div class="step__title">{{ 'Public.Home.MyNeed'|trans }}</div>
+            </div>
+            <div class="step__right step__right--small">
+
+                {{ form_widget(form.need, {'attr': {'class': 'input input--full input--bordered', 'placeholder': 'Commercial.QuoteRequest.NeedPlaceholder'|trans}}) }}
+                {{ form_errors(form.need) }}
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="step">
+            <div class="notice">{{ 'Public.Home.FileUploadNotice'|trans }}
+            </div>
+            <br>
+            <div id="listFiles" class="paprec-list-files">
+
+            </div>
+            {{ form_label(form.attachedFiles, "TÉLÉCHARGER DES PIÈCES JOINTES OU DES PHOTOS", {'label_attr': {'class': 'button button--bordered'}}) }}
+            {{ form_widget(form.attachedFiles, {'attr': {'class': 'input-file'}}) }}
+
+            <div class="clearfix"></div>
+
+            <a href="javascript:void(0);" id="groupFormSubmitButton" class="button button--green button--darkblue">
+                {{ ('Public.Cart.SendNeed'|trans)|upper }}
+            </a>
+        </div>
+        {{ form_rest(form) }}
+    </form>
+{% endblock %}
+
+{% block bottom_customizable_area %}
+    {% set customArea = paprec_customizable_area('reassurance_banner_default') %}
+    {% if customArea is not null %}
+        {% autoescape false %}
+            {{ customArea.content }}
+        {% endautoescape %}
+    {% endif %}
+
+    {% set customAreaLogo = paprec_customizable_area('logo_banner_default') %}
+    {% if customAreaLogo is not null %}
+        {% autoescape false %}
+            {{ customAreaLogo.content }}
+        {% endautoescape %}
+    {% endif %}
+
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?libraries=places&key={{ paprec_google_api_key }}">
+    </script>
+{% endblock %}
