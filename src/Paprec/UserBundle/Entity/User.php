@@ -107,39 +107,17 @@ class User extends BaseUser
      */
 
     /**
-     * @ORM\OneToMany(targetEntity="Paprec\CommercialBundle\Entity\ProductDIQuote", mappedBy="userInCharge")
+     * @ORM\OneToMany(targetEntity="Paprec\CatalogBundle\Entity\Product", mappedBy="userInCharge")
      */
-    private $productDIQuotes;
+    private $products;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Paprec\CommercialBundle\Entity\ProductChantierQuote", mappedBy="userInCharge")
-     */
-    private $productChantierQuotes;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Paprec\CommercialBundle\Entity\ProductD3EQuote", mappedBy="userInCharge")
-     */
-    private $productD3EQuotes;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Paprec\CommercialBundle\Entity\QuoteRequest", mappedBy="userInCharge")
-     */
-    private $quoteRequests;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Paprec\CommercialBundle\Entity\QuoteRequestNonCorporate", mappedBy="userInCharge")
-     */
-    private $quoteRequestNonCorporates;
 
     public function __construct()
     {
         parent::__construct();
 
         $this->dateCreation = new \DateTime();
-        $this->productDIQuotes = new ArrayCollection();
-        $this->productChantierQuotes = new ArrayCollection();
-        $this->productD3EQuotes = new ArrayCollection();
-
+        $this->products = new ArrayCollection();
     }
 
 
@@ -322,182 +300,38 @@ class User extends BaseUser
 //    }
 
     /**
-     * Add productDIQuote.
+     * Add product.
      *
-     * @param \Paprec\CommercialBundle\Entity\productDIQuote $productDIQuote
+     * @param \Paprec\CatalogBundle\Entity\Product $product
      *
      * @return User
      */
-    public function addProductDIQuote(\Paprec\CommercialBundle\Entity\productDIQuote $productDIQuote)
+    public function addProduct(\Paprec\CatalogBundle\Entity\Product $product)
     {
-        $this->productDIQuotes[] = $productDIQuote;
+        $this->products[] = $product;
 
         return $this;
     }
 
     /**
-     * Remove productDIQuote.
+     * Remove product.
      *
-     * @param \Paprec\CommercialBundle\Entity\productDIQuote $productDIQuote
-     *
-     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
-     */
-    public function removeProductDIQuote(\Paprec\CommercialBundle\Entity\productDIQuote $productDIQuote)
-    {
-        return $this->productDIQuotes->removeElement($productDIQuote);
-    }
-
-    /**
-     * Get productDIQuotes.
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getProductDIQuotes()
-    {
-        return $this->productDIQuotes;
-    }
-
-    /**
-     * Add quoteRequest.
-     *
-     * @param \Paprec\CommercialBundle\Entity\QuoteRequest $quoteRequest
-     *
-     * @return User
-     */
-    public function addQuoteRequest(\Paprec\CommercialBundle\Entity\QuoteRequest $quoteRequest)
-    {
-        $this->quoteRequests[] = $quoteRequest;
-
-        return $this;
-    }
-
-    /**
-     * Remove quoteRequest.
-     *
-     * @param \Paprec\CommercialBundle\Entity\QuoteRequest $quoteRequest
+     * @param \Paprec\CatalogBundle\Entity\product $product
      *
      * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
      */
-    public function removeQuoteRequest(\Paprec\CommercialBundle\Entity\QuoteRequest $quoteRequest)
+    public function removeProduct(\Paprec\CatalogBundle\Entity\product $product)
     {
-        return $this->quoteRequests->removeElement($quoteRequest);
+        return $this->products->removeElement($product);
     }
 
     /**
-     * Get quoteRequests.
+     * Get products.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getQuoteRequests()
+    public function getProducts()
     {
-        return $this->quoteRequests;
-    }
-
-    /**
-     * Add productChantierQuote.
-     *
-     * @param \Paprec\CommercialBundle\Entity\ProductChantierQuote $productChantierQuote
-     *
-     * @return User
-     */
-    public function addProductChantierQuote(\Paprec\CommercialBundle\Entity\ProductChantierQuote $productChantierQuote)
-    {
-        $this->productChantierQuotes[] = $productChantierQuote;
-
-        return $this;
-    }
-
-    /**
-     * Remove productChantierQuote.
-     *
-     * @param \Paprec\CommercialBundle\Entity\ProductChantierQuote $productChantierQuote
-     *
-     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
-     */
-    public function removeProductChantierQuote(\Paprec\CommercialBundle\Entity\ProductChantierQuote $productChantierQuote)
-    {
-        return $this->productChantierQuotes->removeElement($productChantierQuote);
-    }
-
-    /**
-     * Get productChantierQuotes.
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getProductChantierQuotes()
-    {
-        return $this->productChantierQuotes;
-    }
-
-    /**
-     * Add productD3EQuote.
-     *
-     * @param \Paprec\CommercialBundle\Entity\ProductD3EQuote $productD3EQuote
-     *
-     * @return User
-     */
-    public function addProductD3EQuote(\Paprec\CommercialBundle\Entity\ProductD3EQuote $productD3EQuote)
-    {
-        $this->productD3EQuotes[] = $productD3EQuote;
-
-        return $this;
-    }
-
-    /**
-     * Remove productD3EQuote.
-     *
-     * @param \Paprec\CommercialBundle\Entity\ProductD3EQuote $productD3EQuote
-     *
-     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
-     */
-    public function removeProductD3EQuote(\Paprec\CommercialBundle\Entity\ProductD3EQuote $productD3EQuote)
-    {
-        return $this->productD3EQuotes->removeElement($productD3EQuote);
-    }
-
-    /**
-     * Get productD3EQuotes.
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getProductD3EQuotes()
-    {
-        return $this->productD3EQuotes;
-    }
-
-    /**
-     * Add quoteRequestNonCorporate.
-     *
-     * @param \Paprec\CommercialBundle\Entity\QuoteRequestNonCorporate $quoteRequestNonCorporate
-     *
-     * @return User
-     */
-    public function addQuoteRequestNonCorporate(\Paprec\CommercialBundle\Entity\QuoteRequestNonCorporate $quoteRequestNonCorporate)
-    {
-        $this->quoteRequestNonCorporates[] = $quoteRequestNonCorporate;
-
-        return $this;
-    }
-
-    /**
-     * Remove quoteRequestNonCorporate.
-     *
-     * @param \Paprec\CommercialBundle\Entity\QuoteRequestNonCorporate $quoteRequestNonCorporate
-     *
-     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
-     */
-    public function removeQuoteRequestNonCorporate(\Paprec\CommercialBundle\Entity\QuoteRequestNonCorporate $quoteRequestNonCorporate)
-    {
-        return $this->quoteRequestNonCorporates->removeElement($quoteRequestNonCorporate);
-    }
-
-    /**
-     * Get quoteRequestNonCorporates.
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getQuoteRequestNonCorporates()
-    {
-        return $this->quoteRequestNonCorporates;
+        return $this->products;
     }
 }

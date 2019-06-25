@@ -25,7 +25,6 @@ class AppKernel extends Kernel
             new Paprec\HomeBundle\PaprecHomeBundle(),
             new Paprec\UserBundle\PaprecUserBundle(),
             new Paprec\CatalogBundle\PaprecCatalogBundle(),
-            new Paprec\CommercialBundle\PaprecCommercialBundle(),
             new Paprec\PublicBundle\PaprecPublicBundle(),
         ];
 

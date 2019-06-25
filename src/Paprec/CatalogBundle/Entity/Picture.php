@@ -42,26 +42,15 @@ class Picture
      */
 
     /**
-     * @ORM\ManyToOne(targetEntity="Paprec\CatalogBundle\Entity\ProductDI", inversedBy="pictures")
+     * @ORM\ManyToOne(targetEntity="Paprec\CatalogBundle\Entity\Product", inversedBy="pictures")
      */
-    private $productDI;
-
+    private $product;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Paprec\CatalogBundle\Entity\ProductChantier", inversedBy="pictures")
+     * Get id.
+     *
+     * @return int
      */
-    private $productChantier;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Paprec\CatalogBundle\Entity\ProductD3E", inversedBy="pictures")
-     */
-    private $productD3E;
-
-        /**
-         * Get id.
-         *
-         * @return int
-         */
     public function getId()
     {
         return $this->id;
@@ -116,74 +105,26 @@ class Picture
     }
 
     /**
-     * Set productDI.
+     * Set product.
      *
-     * @param \Paprec\CatalogBundle\Entity\ProductDI|null $productDI
+     * @param \Paprec\CatalogBundle\Entity\Product|null $product
      *
      * @return Picture
      */
-    public function setProductDI(\Paprec\CatalogBundle\Entity\ProductDI $productDI = null)
+    public function setProduct(\Paprec\CatalogBundle\Entity\Product $product = null)
     {
-        $this->productDI = $productDI;
+        $this->product = $product;
 
         return $this;
     }
 
     /**
-     * Get productDI.
+     * Get product.
      *
-     * @return \Paprec\CatalogBundle\Entity\ProductDI|null
+     * @return \Paprec\CatalogBundle\Entity\Product|null
      */
-    public function getProductDI()
+    public function getProduct()
     {
-        return $this->productDI;
-    }
-
-    /**
-     * Set productChantier.
-     *
-     * @param \Paprec\CatalogBundle\Entity\ProductDI|null $productChantier
-     *
-     * @return Picture
-     */
-    public function setProductChantier(\Paprec\CatalogBundle\Entity\ProductChantier $productChantier = null)
-    {
-        $this->productChantier = $productChantier;
-
-        return $this;
-    }
-
-    /**
-     * Get productChantier.
-     *
-     * @return \Paprec\CatalogBundle\Entity\ProductChantier|null
-     */
-    public function getProductChantier()
-    {
-        return $this->productChantier;
-    }
-
-    /**
-     * Set productD3E.
-     *
-     * @param \Paprec\CatalogBundle\Entity\ProductD3E|null $productD3E
-     *
-     * @return Picture
-     */
-    public function setProductD3E(\Paprec\CatalogBundle\Entity\ProductD3E $productD3E = null)
-    {
-        $this->productD3E = $productD3E;
-
-        return $this;
-    }
-
-    /**
-     * Get productD3E.
-     *
-     * @return \Paprec\CatalogBundle\Entity\ProductD3E|null
-     */
-    public function getProductD3E()
-    {
-        return $this->productD3E;
+        return $this->product;
     }
 }

@@ -27,11 +27,6 @@ paprec_catalog:
     type:     annotation
     prefix:   /devis/admin/catalog
 
-paprec_commercial:
-    resource: "@PaprecCommercialBundle/Controller/"
-    type:     annotation
-    prefix:   /devis/admin/commercial
-
 ### Front Office
 
 paprec_public:

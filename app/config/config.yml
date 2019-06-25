@@ -9,7 +9,6 @@ imports:
 - { resource: "@PaprecHomeBundle/Resources/config/services.yml" }
 - { resource: "@PaprecUserBundle/Resources/config/services.yml" }
 - { resource: "@PaprecCatalogBundle/Resources/config/services.yml" }
-- { resource: "@PaprecCommercialBundle/Resources/config/services.yml" }
 - { resource: "@PaprecPublicBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
