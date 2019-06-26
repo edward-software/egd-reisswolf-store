@@ -2,6 +2,7 @@
 
 namespace Paprec\CatalogBundle\Controller;
 
+use Doctrine\ORM\ORMException;
 use Paprec\CatalogBundle\Entity\Picture;
 use Paprec\CatalogBundle\Entity\Product;
 use Paprec\CatalogBundle\Entity\ProductCategory;
@@ -57,17 +58,25 @@ class ProductController extends Controller
         $search = $request->get('search');
         $columns = $request->get('columns');
 
-        $cols['id'] = array('label' => 'id', 'id' => 'p.id', 'method' => array('getId'));
+        $cols['id'] = array('label' => 'id', 'id' => 'p.id', 'method' => array('getProduct', 'getId'));
         $cols['name'] = array('label' => 'name', 'id' => 'pL.name', 'method' => array('getName'));
-        $cols['dimensions'] = array('label' => 'dimensions', 'id' => 'p.dimensions', 'method' => array('getDimensions'));
+        $cols['dimensions'] = array(
+            'label' => 'dimensions',
+            'id' => 'p.dimensions',
+            'method' => array('getProduct', 'getDimensions')
+        );
+
 
         $queryBuilder = $this->getDoctrine()->getManager()->createQueryBuilder();
 
-        $queryBuilder->select(array('p, pL'))
-            ->from('PaprecCatalogBundle:Product', 'p')
-            ->leftJoin('p.productLabels', 'pL')
-            ->where('p.deleted IS NULL')
-            ->andWhere('pL.language is not NULL');
+        $queryBuilder->select(array('pL', 'p'))
+            ->from('PaprecCatalogBundle:ProductLabel', 'pL')
+            ->leftJoin('pL.product', 'p')
+            ->where('pL.deleted IS NULL')
+            ->andWhere('p.deleted IS NULL')
+            ->andWhere('p IS NOT NULL')
+            ->andWhere('pL.language = :language')
+            ->setParameter('language', 'EN');
 
         if (is_array($search) && isset($search['value']) && $search['value'] != '') {
             if (substr($search['value'], 0, 1) == '#') {
@@ -82,7 +91,8 @@ class ProductController extends Controller
             }
         }
 
-        $datatable = $this->get('goondi_tools.datatable')->generateTable($cols, $queryBuilder, $pageSize, $start, $orders, $columns, $filters);
+        $datatable = $this->get('goondi_tools.datatable')->generateTable($cols, $queryBuilder, $pageSize, $start,
+            $orders, $columns, $filters);
 
         $return['recordsTotal'] = $datatable['recordsTotal'];
         $return['recordsFiltered'] = $datatable['recordsTotal'];
@@ -183,6 +193,16 @@ class ProductController extends Controller
         $language = $request->getLocale();
         $productLabel = $productManager->getProductLabelByProductAndLocale($product, strtoupper($language));
 
+        $otherProductLabels = $productManager->getProductLabels($product);
+
+        $tmp = array();
+        foreach ($otherProductLabels as $pL) {
+            if ($pL->getId() != $productLabel->getId()) {
+                $tmp[] = $pL;
+            }
+        }
+        $otherProductLabels = $tmp;
+
 
         foreach ($this->getParameter('paprec_types_picture') as $type) {
             $types[$type] = $type;
@@ -203,7 +223,8 @@ class ProductController extends Controller
             'product' => $product,
             'productLabel' => $productLabel,
             'formAddPicture' => $formAddPicture->createView(),
-            'formEditPicture' => $formEditPicture->createView()
+            'formEditPicture' => $formEditPicture->createView(),
+            'otherProductLabels' => $otherProductLabels
         ));
     }
 
@@ -216,7 +237,7 @@ class ProductController extends Controller
         $user = $this->getUser();
 
         $languages = array();
-        foreach($this->getParameter('paprec_product_languages') as $language ) {
+        foreach ($this->getParameter('paprec_product_languages') as $language) {
             $languages[$language] = $language;
         }
 
@@ -225,7 +246,8 @@ class ProductController extends Controller
 
         $form1 = $this->createForm(ProductType::class, $product);
         $form2 = $this->createForm(ProductLabelType::class, $productLabel, array(
-            'languages' => $languages
+            'languages' => $languages,
+            'language' => 'EN'
         ));
 
         $form1->handleRequest($request);
@@ -276,7 +298,7 @@ class ProductController extends Controller
         $user = $this->getUser();
 
         $languages = array();
-        foreach($this->getParameter('paprec_product_languages') as $language ) {
+        foreach ($this->getParameter('paprec_product_languages') as $language) {
             $languages[$language] = $language;
         }
 
@@ -286,7 +308,8 @@ class ProductController extends Controller
 
         $form1 = $this->createForm(ProductType::class, $product);
         $form2 = $this->createForm(ProductLabelType::class, $productLabel, array(
-            'languages' => $languages
+            'languages' => $languages,
+            'language' => $productLabel->getLanguage()
         ));
 
         $form1->handleRequest($request);
@@ -376,6 +399,117 @@ class ProductController extends Controller
 
         return $this->redirectToRoute('paprec_catalog_product_index');
     }
+
+    /**
+     * @Route("/product/{id}/addProductLabel",  name="paprec_catalog_product_addProductLabel")
+     * @Security("has_role('ROLE_ADMIN')")
+     */
+    public function addProductLabelAction(Request $request, Product $product)
+    {
+        $user = $this->getUser();
+
+        $productManager = $this->get('paprec_catalog.product_manager');
+        $productManager->isDeleted($product, true);
+
+        $languages = array();
+        foreach ($this->getParameter('paprec_product_languages') as $language) {
+            $languages[$language] = $language;
+        }
+//        try {
+        $productLabel = new ProductLabel();
+
+        $form = $this->createForm(ProductLabelType::class, $productLabel, array(
+            'languages' => $languages,
+            'language' => strtoupper($request->getLocale())
+        ));
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $em = $this->getDoctrine()->getManager();
+
+            $productLabel = $form->getData();
+            $productLabel->setDateCreation(new \DateTime);
+            $productLabel->setUserCreation($user);
+            $productLabel->setProduct($product);
+
+            $em->persist($productLabel);
+            $em->flush();
+
+            return $this->redirectToRoute('paprec_catalog_product_view', array(
+                'id' => $product->getId()
+            ));
+
+        }
+//        } catch (ORMException $e) {
+//            throw new \Exception('error');
+//        }
+
+        return $this->render('@PaprecCatalog/Product/ProductLabel/add.html.twig', array(
+            'form' => $form->createView()
+        ));
+    }
+
+//    /**
+//     * @Route("/product/edit/{id}",  name="paprec_catalog_product_edit")
+//     * @Security("has_role('ROLE_ADMIN')")
+//     * @throws \Doctrine\ORM\EntityNotFoundException
+//     * @throws \Exception
+//     */
+//    public function editAction(Request $request, Product $product)
+//    {
+//        $productManager = $this->get('paprec_catalog.product_manager');
+//        $productManager->isDeleted($product, true);
+//
+//        $user = $this->getUser();
+//
+//        $languages = array();
+//        foreach($this->getParameter('paprec_product_languages') as $language ) {
+//            $languages[$language] = $language;
+//        }
+//
+//        $language = $request->getLocale();
+//        $productLabel = $productManager->getProductLabelByProductAndLocale($product, strtoupper($language));
+//
+//
+//        $form1 = $this->createForm(ProductType::class, $product);
+//        $form2 = $this->createForm(ProductLabelType::class, $productLabel, array(
+//            'languages' => $languages,
+//            'language' => $productLabel->getLanguage()
+//        ));
+//
+//        $form1->handleRequest($request);
+//        $form2->handleRequest($request);
+//
+//        if ($form1->isSubmitted() && $form1->isValid() && $form2->isSubmitted() && $form2->isValid()) {
+//
+//
+//            $em = $this->getDoctrine()->getManager();
+//
+//            $product = $form1->getData();
+//            $product->setDateUpdate(new \DateTime);
+//            $product->setUserUpdate($user);
+//            $em->flush();
+//
+//            $productLabel = $form2->getData();
+//            $productLabel->setDateUpdate(new \DateTime);
+//            $productLabel->setUserUpdate($user);
+//            $productLabel->setProduct($product);
+//
+//            $em->flush();
+//
+//            return $this->redirectToRoute('paprec_catalog_product_view', array(
+//                'id' => $product->getId()
+//            ));
+//        }
+//        return $this->render('PaprecCatalogBundle:Product:edit.html.twig', array(
+//            'form1' => $form1->createView(),
+//            'form2' => $form2->createView(),
+//            'product' => $product,
+//            'productLabel' => $productLabel
+//        ));
+//    }
 
     /**
      * Supprimme un fichier du sytème de fichiers

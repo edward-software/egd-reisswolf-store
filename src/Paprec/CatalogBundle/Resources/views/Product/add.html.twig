@@ -54,7 +54,7 @@
                                 <div class="form-group">
                                     <div class="form-label">{{ 'Catalog.Product.Language'|trans }}</div>
                                     <div class="form-content">
-                                        {{ form_widget(form2.language, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_widget(form2.language, {'attr': {'class': 'form-control product-label-language-input'}}) }}
                                         {{ form_errors(form2.language) }}
                                     </div>
                                 </div>
@@ -177,7 +177,6 @@
                 $('#catalogProductForm').submit();
             });
 
-
             $('.catalog-product-cancel-button').on('click', function () {
 
                 var url = "{{ path("paprec_catalog_product_index") }}";
@@ -194,6 +193,10 @@
                     }
                 });
 
+            });
+
+            $('.product-label-language-input option:not(:selected)').each(function(){
+                $(this).prop('disabled', true);
             });
 
         });

@@ -1,7 +1,7 @@
 {% extends "::base_admin.html.twig" %}
 
 {% block title %}
-    {{ 'Catalog.Product.View.Custom'|trans }}
+    {{ 'Catalog.Product.View'|trans }}
 {% endblock %}
 
 {% block stylesheets %}
@@ -14,20 +14,24 @@
 
 {% block main_content %}
 
+    {{ dump(otherProductLabels) }}
 
     <div class="col-md-12">
         <!-- CARD -->
         <div class="card">
             <div class="card-header">
                 <h4>
-                    <i class="fa fa-xs fa-folder"></i> {{ 'Catalog.Product.View.Custom'|trans }}
+                    <i class="fa fa-xs fa-folder"></i> {{ 'Catalog.Product.View'|trans }}
                 </h4>
                 <div class="float-right">
+                    <a href="{{ path("paprec_catalog_product_addProductLabel", {id: product.id}) }}"
+                       class="btn btn-sm btn-success"><i
+                                class="fa fa-xs fa-plus"></i> {{ 'Catalog.Product.ProductLabel.Add'|trans }}</a>
                     <a href="{{ path("paprec_catalog_product_edit", {id: product.id}) }}"
                        class="btn btn-sm btn-warning"><i
-                                class="fa fa-xs fa-edit"></i> {{ 'Catalog.Product.Edit.Custom'|trans }}</a>
+                                class="fa fa-xs fa-edit"></i> {{ 'Catalog.Product.Edit'|trans }}</a>
                     <a id="catalogProductRemoveButton" href="javascript:void(0);" class="btn btn-sm btn-danger"><i
-                                class="fa fa-xs fa-trash"></i> {{ 'Catalog.Product.Remove.Custom'|trans }}</a>
+                                class="fa fa-xs fa-trash"></i> {{ 'Catalog.Product.Remove'|trans }}</a>
                 </div>
                 <div class="float-left">
                     <a href="{{ path('paprec_catalog_product_index') }}" class="btn btn-sm btn-default"><i
@@ -41,9 +45,6 @@
                             <h5 class="card-title">{{ 'Catalog.Product.Informations'|trans }}</h5>
                         </div>
                         <div class="card-body row">
-                            {#
-                                Affichage des informations du produit
-                            #}
                             <div class="col-md-6">
                                 <div class="form-group row">
                                     <label class="col-md-4 col-form-label">{{ 'Catalog.ProductLabel.Language'|trans }}</label>
@@ -141,7 +142,8 @@
                                                                 </div>
                                                             </div>
                                                             <div class="card-body">
-                                                                <div class="checkboxPicto" style="background-image: url({{ asset('/uploads/pictos/' ~ picture.path) }}"></div>
+                                                                <div class="checkboxPicto"
+                                                                     style="background-image: url({{ asset('/uploads/pictos/' ~ picture.path) }}"></div>
                                                             </div>
                                                         </div>
                                                     {% endfor %}
@@ -377,9 +379,6 @@
                         </div>
                     </div>
                 </div>
-                {#
-                    Card d'affichage des infos système
-                #}
                 <div class="col-md-12 mt-3">
                     <div class="card">
                         <div class="card-header">
@@ -403,6 +402,30 @@
                         </div>
                     </div>
                 </div>
+
+                {% for pL in otherProductLabels %}
+                    <div class="col-md-12 mt-3">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">{{ ('Catalog.Product.ProductLabel.Language.'~pL.language)|trans }}</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Catalog.ProductLabel.Name'|trans }}</label>
+                                    <label class="col-form-label col-md-8">
+                                        {{ productLabel.name }}
+                                    </label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Catalog.ProductLabel.Short-description'|trans }}</label>
+                                    <label class="col-form-label col-md-8">
+                                        {{ productLabel.shortDescription|nl2br }}
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
         </div>
     </div>

@@ -148,6 +148,36 @@ class ProductManager
         return $numberManager->denormalize($unitPrice) * $qtty * $numberManager->denormalize($ratePostalCode);
     }
 
+    public function getProductLabels($product)
+    {
+        $id = $product;
+        if ($product instanceof Product) {
+            $id = $product->getId();
+        }
+        try {
+
+            $productLabels = $this->em->getRepository('PaprecCatalogBundle:ProductLabel')->findBy(array(
+                    'product' => $product,
+                    'deleted' => null
+                )
+            );
+
+            /**
+             * Vérification que le produit existe ou ne soit pas supprimé
+             */
+            if (empty($productLabels)) {
+                throw new EntityNotFoundException('productLabelsNotFound');
+            }
+
+
+            return $productLabels;
+
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage(), $e->getCode());
+        }
+
+    }
+
     public function getProductLabelByProductAndLocale(Product $product, $language)
     {
 
@@ -183,8 +213,6 @@ class ProductManager
                     throw new EntityNotFoundException('productLabelNotFound');
                 }
             }
-
-
 
 
             return $productLabel;

@@ -520,11 +520,11 @@ class Product
     }
 
     /**
-     * Get pictures.
+     * Get productLabels.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getProductLabel()
+    public function getProductLabels()
     {
         return $this->productLabels;
     }

@@ -37,7 +37,6 @@
                         <tr>
                             <th>#</th>
                             <th>{{ 'Catalog.Product.Name'|trans }}</th>
-                            <th>{{ 'Catalog.Product.Reference'|trans }}</th>
                             <th>{{ 'Catalog.Product.Dimensions'|trans }}</th>
                             <th></th>
                         </tr>
@@ -112,11 +111,10 @@
                 "serverSide": true,
                 "lengthMenu": [[5, 10, 20, 50], [5, 10, 20, 50]],
                 "iDisplayLength": 20,
-                "ajax": "{{ path('paprec_catalog_product_loadList', {isPackage: false}) }}",
+                "ajax": "{{ path('paprec_catalog_product_loadList') }}",
                 "columns": [
                     {"data": "id"},
                     {"data": "name"},
-                    {"data": "reference"},
                     {"data": "dimensions"},
                     {"data": "id", "width": "10%", "bSortable": false}
                 ],

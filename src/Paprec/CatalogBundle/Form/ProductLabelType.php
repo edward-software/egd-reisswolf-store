@@ -25,7 +25,8 @@ class ProductLabelType extends AbstractType
             ->add('name')
             ->add('shortDescription', TextareaType::class)
             ->add('language', ChoiceType::class, array(
-                'choices' => $options['languages']
+                'choices' => $options['languages'],
+                'data' => $options['language']
             ));
     }
 
@@ -36,7 +37,8 @@ class ProductLabelType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'Paprec\CatalogBundle\Entity\ProductLabel',
-            'languages' => null
+            'languages' => null,
+            'language' => null
         ));
     }
 
