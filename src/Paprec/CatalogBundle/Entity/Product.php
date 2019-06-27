@@ -72,10 +72,10 @@ class Product
     /**
      * @var boolean
      *
-     * @ORM\Column(name="isDisabled", type="boolean")
+     * @ORM\Column(name="isEnabled", type="boolean")
      * @Assert\NotBlank()
      */
-    private $isDisabled;
+    private $isEnabled;
 
     /**
      * @var text
@@ -352,27 +352,27 @@ class Product
     }
 
     /**
-     * Set isDisabled.
+     * Set IsEnabled.
      *
-     * @param bool $isDisabled
+     * @param bool IsEnabled
      *
      * @return Product
      */
-    public function setIsDisabled($isDisabled)
+    public function setIsEnabled($isEnabled)
     {
-        $this->isDisabled = $isDisabled;
+        $this->isEnabled = $isEnabled;
 
         return $this;
     }
 
     /**
-     * Get isDisabled.
+     * Get isEnabled.
      *
      * @return bool
      */
-    public function getIsDisabled()
+    public function getIsEnabled()
     {
-        return $this->isDisabled;
+        return $this->isEnabled;
     }
 
     /**

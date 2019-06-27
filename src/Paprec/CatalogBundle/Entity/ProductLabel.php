@@ -9,13 +9,17 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 
 
-//, uniqueConstraints={@ORM\UniqueConstraint(columns={"product_id", "language"})}
+
 
 /**
  * Product
  *
  * @ORM\Table(name="productLabels")
  * @ORM\Entity(repositoryClass="Paprec\CatalogBundle\Repository\ProductRepository")
+ * @UniqueEntity(
+ *     fields={"language", "product"},
+ *     message="This language is already defined pour this product."
+ * )
  *
  */
 class ProductLabel

@@ -2,6 +2,7 @@
 
 namespace Paprec\CatalogBundle\Controller;
 
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\ORMException;
 use Paprec\CatalogBundle\Entity\Picture;
 use Paprec\CatalogBundle\Entity\Product;
@@ -29,6 +30,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ProductController extends Controller
 {
+
     /**
      * @Route("/product", name="paprec_catalog_product_index")
      * @Security("has_role('ROLE_ADMIN')")
@@ -58,23 +60,21 @@ class ProductController extends Controller
         $search = $request->get('search');
         $columns = $request->get('columns');
 
-        $cols['id'] = array('label' => 'id', 'id' => 'p.id', 'method' => array('getProduct', 'getId'));
-        $cols['name'] = array('label' => 'name', 'id' => 'pL.name', 'method' => array('getName'));
+        $cols['id'] = array('label' => 'id', 'id' => 'p.id', 'method' => array('getId'));
+        $cols['name'] = array('label' => 'name', 'id' => 'pL.name', 'method' => array(array('getProductLabels', 0), 'getName'));
         $cols['dimensions'] = array(
             'label' => 'dimensions',
             'id' => 'p.dimensions',
-            'method' => array('getProduct', 'getDimensions')
+            'method' => array('getDimensions')
         );
 
 
-        $queryBuilder = $this->getDoctrine()->getManager()->createQueryBuilder();
+        $queryBuilder = $this->getDoctrine()->getManager()->getRepository(Product::class)->createQueryBuilder('p');
 
-        $queryBuilder->select(array('pL', 'p'))
-            ->from('PaprecCatalogBundle:ProductLabel', 'pL')
-            ->leftJoin('pL.product', 'p')
-            ->where('pL.deleted IS NULL')
-            ->andWhere('p.deleted IS NULL')
-            ->andWhere('p IS NOT NULL')
+        $queryBuilder->select(array('p', 'pL'))
+            ->leftJoin('p.productLabels', 'pL')
+            ->where('p.deleted IS NULL')
+            ->andWhere('pL.deleted IS NULL')
             ->andWhere('pL.language = :language')
             ->setParameter('language', 'EN');
 
@@ -392,11 +392,63 @@ class ProductController extends Controller
                 }
 
                 $product->setDeleted(new \DateTime());
-                $product->setIsDisplayed(false);
+                $product->setIsEnabled(false);
             }
             $em->flush();
         }
 
+        return $this->redirectToRoute('paprec_catalog_product_index');
+    }
+
+    /**
+     * @Route("/product/enableMany/{ids}", name="paprec_catalog_product_enableMany")
+     * @Security("has_role('ROLE_ADMIN')")
+     */
+    public function enableManyAction(Request $request)
+    {
+        $ids = $request->get('ids');
+
+        if (!$ids) {
+            throw new NotFoundHttpException();
+        }
+
+        $em = $this->getDoctrine()->getManager();
+
+        $ids = explode(',', $ids);
+
+        if (is_array($ids) && count($ids)) {
+            $Products = $em->getRepository('PaprecCatalogBundle:Product')->findById($ids);
+            foreach ($Products as $product) {
+                $product->setIsEnabled(true);
+            }
+            $em->flush();
+        }
+        return $this->redirectToRoute('paprec_catalog_product_index');
+    }
+
+    /**
+     * @Route("/product/disableMany/{ids}", name="paprec_catalog_product_disableMany")
+     * @Security("has_role('ROLE_ADMIN')")
+     */
+    public function disableManyAction(Request $request)
+    {
+        $ids = $request->get('ids');
+
+        if (!$ids) {
+            throw new NotFoundHttpException();
+        }
+
+        $em = $this->getDoctrine()->getManager();
+
+        $ids = explode(',', $ids);
+
+        if (is_array($ids) && count($ids)) {
+            $Products = $em->getRepository('PaprecCatalogBundle:Product')->findById($ids);
+            foreach ($Products as $product) {
+                $product->setIsEnabled(false);
+            }
+            $em->flush();
+        }
         return $this->redirectToRoute('paprec_catalog_product_index');
     }
 
@@ -415,7 +467,6 @@ class ProductController extends Controller
         foreach ($this->getParameter('paprec_product_languages') as $language) {
             $languages[$language] = $language;
         }
-//        try {
         $productLabel = new ProductLabel();
 
         $form = $this->createForm(ProductLabelType::class, $productLabel, array(
@@ -442,74 +493,67 @@ class ProductController extends Controller
             ));
 
         }
-//        } catch (ORMException $e) {
-//            throw new \Exception('error');
-//        }
 
         return $this->render('@PaprecCatalog/Product/ProductLabel/add.html.twig', array(
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'product' => $product,
         ));
     }
 
-//    /**
-//     * @Route("/product/edit/{id}",  name="paprec_catalog_product_edit")
-//     * @Security("has_role('ROLE_ADMIN')")
-//     * @throws \Doctrine\ORM\EntityNotFoundException
-//     * @throws \Exception
-//     */
-//    public function editAction(Request $request, Product $product)
-//    {
-//        $productManager = $this->get('paprec_catalog.product_manager');
-//        $productManager->isDeleted($product, true);
-//
-//        $user = $this->getUser();
-//
-//        $languages = array();
-//        foreach($this->getParameter('paprec_product_languages') as $language ) {
-//            $languages[$language] = $language;
-//        }
-//
-//        $language = $request->getLocale();
-//        $productLabel = $productManager->getProductLabelByProductAndLocale($product, strtoupper($language));
-//
-//
-//        $form1 = $this->createForm(ProductType::class, $product);
-//        $form2 = $this->createForm(ProductLabelType::class, $productLabel, array(
-//            'languages' => $languages,
-//            'language' => $productLabel->getLanguage()
-//        ));
-//
-//        $form1->handleRequest($request);
-//        $form2->handleRequest($request);
-//
-//        if ($form1->isSubmitted() && $form1->isValid() && $form2->isSubmitted() && $form2->isValid()) {
-//
-//
-//            $em = $this->getDoctrine()->getManager();
-//
-//            $product = $form1->getData();
-//            $product->setDateUpdate(new \DateTime);
-//            $product->setUserUpdate($user);
-//            $em->flush();
-//
-//            $productLabel = $form2->getData();
-//            $productLabel->setDateUpdate(new \DateTime);
-//            $productLabel->setUserUpdate($user);
-//            $productLabel->setProduct($product);
-//
-//            $em->flush();
-//
-//            return $this->redirectToRoute('paprec_catalog_product_view', array(
-//                'id' => $product->getId()
-//            ));
-//        }
-//        return $this->render('PaprecCatalogBundle:Product:edit.html.twig', array(
-//            'form1' => $form1->createView(),
-//            'form2' => $form2->createView(),
-//            'product' => $product,
-//            'productLabel' => $productLabel
-//        ));
-//    }
+    /**
+     * @Route("/product/{id}/editProductLabel/{productLabelId}",  name="paprec_catalog_product_editProductLabel")
+     * @Security("has_role('ROLE_ADMIN')")
+     * @param Request $request
+     * @param Product $product
+     * @param $productLabelId
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @throws \Doctrine\ORM\EntityNotFoundException
+     */
+    public function editProductLabelAction(Request $request, Product $product, $productLabelId)
+    {
+        $user = $this->getUser();
+
+        $productManager = $this->get('paprec_catalog.product_manager');
+        $productLabelManager = $this->get('paprec_catalog.product_label_manager');
+
+        $productManager->isDeleted($product, true);
+
+        $productLabel = $productLabelManager->get($productLabelId);
+
+        $languages = array();
+        foreach ($this->getParameter('paprec_product_languages') as $language) {
+            $languages[$language] = $language;
+        }
+
+        $form = $this->createForm(ProductLabelType::class, $productLabel, array(
+            'languages' => $languages,
+            'language' => $productLabel->getLanguage()
+        ));
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $em = $this->getDoctrine()->getManager();
+
+            $productLabel = $form->getData();
+            $productLabel->setDateUpdate(new \DateTime);
+            $productLabel->setUserUpdate($user);
+
+//            $em->merge($productLabel);
+            $em->flush();
+
+            return $this->redirectToRoute('paprec_catalog_product_view', array(
+                'id' => $product->getId()
+            ));
+
+        }
+
+        return $this->render('@PaprecCatalog/Product/ProductLabel/edit.html.twig', array(
+            'form' => $form->createView(),
+            'product' => $product
+        ));
+    }
 
     /**
      * Supprimme un fichier du sytème de fichiers
@@ -553,7 +597,7 @@ class ProductController extends Controller
                 $pic = $picture->getPath();
                 $pictoFileName = md5(uniqid()) . '.' . $pic->guessExtension();
 
-                $pic->move($this->getParameter('paprec_catalog.product.di.picto_path'), $pictoFileName);
+                $pic->move($this->getParameter('paprec_catalog.product.picto_path'), $pictoFileName);
 
                 $picture->setPath($pictoFileName);
                 $picture->setType($request->get('type'));
@@ -608,10 +652,10 @@ class ProductController extends Controller
                 $pic = $picture->getPath();
                 $pictoFileName = md5(uniqid()) . '.' . $pic->guessExtension();
 
-                $pic->move($this->getParameter('paprec_catalog.product.di.picto_path'), $pictoFileName);
+                $pic->move($this->getParameter('paprec_catalog.product.picto_path'), $pictoFileName);
 
                 $picture->setPath($pictoFileName);
-                $this->removeFile($this->getParameter('paprec_catalog.product.di.picto_path') . '/' . $oldPath);
+                $this->removeFile($this->getParameter('paprec_catalog.product.picto_path') . '/' . $oldPath);
                 $em->flush();
             }
 

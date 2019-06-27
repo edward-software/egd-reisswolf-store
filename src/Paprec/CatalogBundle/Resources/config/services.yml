@@ -10,6 +10,10 @@ services:
     class: Paprec\CatalogBundle\Service\ProductManager
     arguments: ["@doctrine.orm.entity_manager", "@service_container"]
 
+  paprec_catalog.product_label_manager:
+    class: Paprec\CatalogBundle\Service\ProductLabelManager
+    arguments: ["@doctrine.orm.entity_manager", "@service_container"]
+
   paprec_catalog.picture_manager:
     class: Paprec\CatalogBundle\Service\PictureManager
     arguments: ["@doctrine.orm.entity_manager", "@service_container"]

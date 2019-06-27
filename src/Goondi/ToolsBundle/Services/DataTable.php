@@ -1,4 +1,5 @@
 <?php
+
 namespace Goondi\ToolsBundle\Services;
 
 use Doctrine\ORM\Tools\Pagination\Paginator;
@@ -42,16 +43,16 @@ class DataTable
      *
      * @return Array : result data in a table
      */
-    public function generateTable($columns, $queryBuilder, $pageSize, $start, $orders, $columnsFilters, $filters)
+    public function generateTable($columns, $queryBuilder, $pageSize, $start, $orders, $columnsFilters, $filters, $rowPrefix = null)
     {
 
-        // Convert $columns associate array to numeric array
+        // Convert $columns workshopciate array to numeric array
         $cols = array();
         foreach ($columns as $column) {
             $cols[] = $column;
         }
 
-        /* TODO 
+        /* TODO
          * Is There a column filter to apply
         if(isset($columnsFilters) && is_array($columnsFilters))
         {
@@ -76,12 +77,14 @@ class DataTable
                     $parameter = array();
                     $orx = $queryBuilder->expr()->orx();
                     foreach ($valueFilter as $f) {
-                        if ($f == 'null') {
-                            $orx->add($columns[$keyFilter]['id'] . ' IS NULL');
-                        } else {
-                            $orx->add($queryBuilder->expr()->eq($columns[$keyFilter]['id'], '?' . $counter));
-                            $parameter[$counter] = $f;
-                            $counter++;
+                        if (!is_array($columns[$keyFilter]['id'])) {
+                            if ($f == 'null') {
+                                $orx->add($columns[$keyFilter]['id'] . ' IS NULL');
+                            } else {
+                                $orx->add($queryBuilder->expr()->eq($columns[$keyFilter]['id'], '?' . $counter));
+                                $parameter[$counter] = $f;
+                                $counter++;
+                            }
                         }
                     }
                     $queryBuilder->andWhere($orx);
@@ -96,7 +99,13 @@ class DataTable
         if (is_array($orders) && count($orders)) {
             foreach ($orders as $order) {
                 if (isset($order['column']) && isset($cols[$order['column']])) {
-                    $queryBuilder->addOrderBy($cols[$order['column']]['id'], $order['dir']);
+                    if (is_array($cols[$order['column']]['id'])) {
+                        foreach ($cols[$order['column']]['id'] as $colId) {
+                            $queryBuilder->addOrderBy($colId, $order['dir']);
+                        }
+                    } else {
+                        $queryBuilder->addOrderBy($cols[$order['column']]['id'], $order['dir']);
+                    }
                 }
             }
         }
@@ -109,17 +118,16 @@ class DataTable
         // Pagination new system
         // Dans le nouveau system de pagination $start n'est pas le premier élément à afficher mais le numéro de la page à afficher
 
-        if(! $pageSize) {
+        if (!$pageSize) {
             $pageSize = 50;
         }
-        if(! $start) {
+        if (!$start) {
             $start = 1;
-        }
-        else {
+        } else {
             $start = ceil(($start + 1) / $pageSize);
         }
 
-        $paginator  = $this->container->get('knp_paginator');
+        $paginator = $this->container->get('knp_paginator');
         $pagination = $paginator->paginate(
             $queryBuilder,
             $start,
@@ -129,15 +137,19 @@ class DataTable
         $recordsTotal = $pagination->getTotalItemCount();
         $records = $pagination;
 
+        if ($rowPrefix === null) {
+            $rowPrefix = 'row_';
+        }
+
         // Format Datas
         $data = array();
         foreach ($records as $record) {
             $tmp = array();
             if (is_array($record)) {
-                $tmp['DT_RowId'] = 'row_' . $record['id'];
+                $tmp['DT_RowId'] = $rowPrefix . $record['id'];
                 $tmp['DT_RowData']['pkey'] = $record['id'];
             } else {
-                $tmp['DT_RowId'] = 'row_' . $record->getId();
+                $tmp['DT_RowId'] = $rowPrefix . $record->getId();
                 $tmp['DT_RowData']['pkey'] = $record->getId();
             }
 
@@ -149,7 +161,14 @@ class DataTable
                         if ($r && is_array($r)) {
                             $r = $r[$method];
                         } else if ($r && !is_array($r)) {
-                            $r = $r->$method();
+                            if (is_array($method) && isset($method[0])) {
+                                /**
+                                 * Utilisé pour les tables associative par exemple lorsque l'on veut faire ca : $item->getActivies()[0], on met donc un array avec getActivities en première case et 0 en deuxième case
+                                 */
+                                $r = $r->{$method[0]}()[$method[1]];
+                            } else {
+                                $r = $r->$method();
+                            }
                         } else {
                             $r = '';
                         }

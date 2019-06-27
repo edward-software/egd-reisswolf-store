@@ -1,354 +1,86 @@
 Catalog:
 
-    Bundle-name:                    Gestion Catalogue
-    Products:                       Produits
-    Settings:                       Paramétrage
-    PriceList:                      Grilles tarifaires
-    DI:                             DI
-    D3E:                            D3E
-    CHANTIER:                       Chantier
-
-    Category:
-        Categories:                 Catégories
-        List:                       Liste des catégories
-        ListDIs:                    Catégories de la division DI
-        ListChantiers:              Catégories de la division Chantier
-        Date-creation:              Date de création
-        Date-crea:                  Date de créa.
-        Date-update:                Date de mise à jour
-        Name:                       Nom
-        Position:                   Position
-        Picto:                      Picto
-        Description:                Description
-        Informations:               Informations
-        System-informations:        Informations système
-        Enabled:                    Activé
-        Enable:                     Activer
-        Disable:                    Désactiver
-        Division:                   Division
-        Export:                     Exporter les catégories
-        View:                       Visualiser la catégorie
-        Edit:                       Modifier la catégorie
-        Remove:                     Supprimer la catégorie
-        Add:                        Ajouter une catégorie
-        Save:                       Enregistrer
-        Cancel:                     Annuler
-        Confirm-cancel:             Etes-vous sûr de vouloir annuler ?
-        Confirm-remove:             Etes-vous sûr de vouloir supprimer cette catégorie ?
-        Confirm-remove-pc:          Etes-vous sur de vouloir détacher le produit de cette catégorie ?
-        SortProductDI:              Position des produits dans la catégorie
-
-    Argument:
-        Arguments:                  Arguments
-        List:                       Liste des arguments
-        Date-creation:              Date de création
-        Date-crea:                  Date de créa.
-        Date-update:                Date de mise à jour
-        Description:                Texte
-        Picto:                      Picto
-        Informations:               Informations
-        System-informations:        Informations système
-        Export:                     Exporter les arguments
-        View:                       Visualiser l'argument
-        Edit:                       Modifier l'argument
-        Remove:                     Supprimer l'argument
-        Add:                        Ajouter un argument
-        Save:                       Enregistrer
-        Cancel:                     Annuler
-        Confirm-cancel:             Etes-vous sûr de vouloir annuler ?
-        Confirm-remove:             Etes-vous sûr de vouloir supprimer cet argument ?
-
-    Type:
-      Types:                      Types
-      D3E:                        Type D3E
-      List:                       Liste des types
-      Date-creation:              Date de création
-      Date-crea:                  Date de créa.
-      Date-update:                Date de mise à jour
-      Name:                       Nom
-      Informations:               Informations
-      System-informations:        Informations système
-      Export:                     Exporter les types
-      View:                       Visualiser le type
-      Edit:                       Modifier le type
-      Remove:                     Supprimer le type
-      Add:                        Ajouter un type
-      Save:                       Enregistrer
-      Cancel:                     Annuler
-      Confirm-cancel:             Etes-vous sûr de vouloir annuler ?
-      Confirm-remove:             Etes-vous sûr de vouloir supprimer ce type ?
-
-    ProductD3EType:
-      UnitPrice:                  Prix unitaire
-      Confirm-remove:             Etes-vous sûr de vouloir détacher ce type de ce produit ?
+  Bundle-name:                    Gestion Catalogue
+  Products:                       Produits
+  Settings:                       Paramétrage
 
 
-    PostalCode:
+  PostalCode:
 
-        PostalCodes:                Code postaux
-        Name:                       Code postal
-        Date-crea:                  Date de créa.
-        Date-creation:              Date de création
-        Date-update:                Date de mise à jour
-        Informations:               Informations
-        System-informations:        Informations système
-        List:                       Liste des codes postaux
-        Add:                        Ajouter un code postal
-        Export:                     Exporter les codes postaux
-        Codes:                      Code Postaux
-        Division:                   Division
-        Rate:                       Coefficient
-        View:                       Visualiser le code postal
-        Edit:                       Modifier le code postal
-        Remove:                     Supprimer le code postal
-        Save:                       Enregistrer
-        Cancel:                     Annuler
-        Confirm-cancel:             Etes-vous sûr de vouloir annuler ?
-        Confirm-remove:             Etes-vous sûr de vouloir supprimer ce code postal ?
+    PostalCodes:                Code postaux
+    Name:                       Code postal
+    Date-crea:                  Date de créa.
+    Date-creation:              Date de création
+    Date-update:                Date de mise à jour
+    Informations:               Informations
+    System-informations:        Informations système
+    List:                       Liste des codes postaux
+    Add:                        Ajouter un code postal
+    Export:                     Exporter les codes postaux
+    Codes:                      Code Postaux
+    Division:                   Division
+    Rate:                       Coefficient
+    View:                       Visualiser le code postal
+    Edit:                       Modifier le code postal
+    Remove:                     Supprimer le code postal
+    Save:                       Enregistrer
+    Cancel:                     Annuler
+    Confirm-cancel:             Etes-vous sûr de vouloir annuler ?
+    Confirm-remove:             Etes-vous sûr de vouloir supprimer ce code postal ?
 
-    Picture:
-        Path:                       Choisir photo
-        Type:                       Type de la photo
-        AddPilotPicture:            Ajouter une photo principale
-        AddPicto:                   Ajouter un picto
-        AddPicture:                 Ajouter une photo secondaire
+  Picture:
+    Path:                       Choisir photo
+    Type:                       Type de la photo
+    AddPilotPicture:            Ajouter une photo principale
+    AddPicto:                   Ajouter un picto
+    AddPicture:                 Ajouter une photo secondaire
 
-    ProductDI:
-
-        ProductDIs:                 Produits DI
-        Date-crea:                  Date de créa.
-        Date-creation:              Date de création
-        Date-update:                Date de mise à jour
-        Informations:               Informations
-        System-informations:        Informations système
-        Name:                       Nom
-        SubName:                    Sous-titre
-        Description:                Description
-        Capacity:                   Volume
-        CapacityUnit:               Unité
-        Dimensions:                 Dimensions
-        Reference:                  Lien description
-        IsDisplayed:                Affiché
-        Arguments:                  Arguments
-        Categories:                 Catégories
-        PackageUnitPrice:           Prix unitaire du package
-        Picto:                      Picto
-        Pictures:                   Photos
-        PilotPicture:               Photo principale
-        NewPicture:                 Nouvelle photo
-        SetSecondaryPicture:        Photo secondaire
-        EditPicture:                Modificiation de photo
-        AvailablePostalCodes:       Dispo géographique
-        List:                       Liste des produits DI
-        CustomList:                 Liste des produits DI sur mesure
-        PackagedList:               Liste des produits DI packagés
-        CategoriesList:             Liste des catégories
-        AddCategory:                Ajouter une catégorie
-        Add:
-          Custom:                   Ajouter un produit sur mesure
-          Packaged:                 Ajouter un produit packagé
-        AddPicture:                 Ajouter
-        Export:
-          Custom:                   Exporter les produits sur mesure
-          Packaged:                 Exporter les produits packagés
-        View:
-          Custom:                   Visualiser le produit sur mesure
-          Packaged:                 Visualiser le produit packagé
-        Edit:
-          Custom:                   Modifier le produit sur mesure
-          Packaged:                 Modifier le produit packagé
-        Remove:
-          Custom:                   Supprimer le produit sur mesure
-          Packaged:                 Supprimer le produit packagé
-        Save:                       Enregistrer
-        Cancel:                     Annuler
-        Confirm-cancel:             Etes-vous sûr de vouloir annuler ?
-        Confirm-remove:             Etes-vous sûr de vouloir supprimer ce produit ?
-        Confirm-remove-picture:     Etes-vous sûr de vouloir supprimer cette photo ?
-        Confirm-set_pilot:          Etes-vous sûr de vouloir définir cette photo comme photo principale ?
-        Confirm-set_picture:        Etes-vous sûr de vouloir définir cette photo comme photo secondaire ?
-
-    ProductDICategory:
-        UnitPrice:                  Prix unitaire
-        CategoryName:               Catégorie
-        Confirm-remove:             Etes-vous sûr de vouloir détacher ce produit de cette catégorie ?
+  Product:
+    View: Vue du produit
+    Products: Liste des produits
+    Add: Ajouter un produit
+    Edit: Editer un produit
+    Remove: Supprimer
+    List: Liste des produits
+    Information: Information du produit
+    Capacity: Volume
+    Dimensions: Dimensions
+    AvailablePostalCodes: Disponibilités géographiques
+    IsEnabled:
+      IsEnabled: Actif
+      Yes: Oui
+      No: Non
+      Disable: Désactiver
+      Enable: Activer
+    Picto: Picto
+    AddPicture: Ajouter image
+    PilotPicture: Image principale
+    SetSecondaryPicture: Définir en image secondaire
+    Pictures: Images
+    EditPicture: Remplacer image
+    System-information: Informations système
+    Date-creation: Date de création
+    Date-update: Date dernière modification
+    Export: Exporter les produits
+    Details: Details du produit
+    CapacityUnit: Unité de volume
+    Position: Position
+    RentalUnitPrice: PU de location
+    TransportUnitPrice: PU de transport
+    TreatmentUnitPrice: PU de traitement
+    TraceabilityUnitPrice: PU de traçabilité
 
 
+  ProductLabel:
+    Add: Ajouter une traduction
+    Edit: Editer traduction
+    Language:
+      Language: Langue
+      EN: Anglais
+      FR: Français
+      IT: Italien
+      DE: Allemand
+    Name: Nom
+    Short-description: Description courte
+    Information: Informations
 
-    ProductChantier:
-
-      ProductChantiers:           Produits Chantier
-      Date-crea:                  Date de créa.
-      Date-creation:              Date de création
-      Date-update:                Date de mise à jour
-      Informations:               Informations
-      System-informations:        Informations système
-      Name:                       Nom
-      SubName:                    Sous-titre
-      Description:                Description
-      Capacity:                   Volume
-      CapacityUnit:               Unité
-      Dimensions:                 Dimensions
-      UnitPrice:                  Prix unitaire
-      PackageUnitPrice:           Prix unitaire du package
-      Position:                   Position
-      Reference:                  Lien description
-      IsDisplayed:                Affiché
-      Arguments:                  Arguments
-      Categories:                 Catégories
-      Picto:                      Picto
-      Pictures:                   Photos
-      PilotPicture:               Photo principale
-      NewPicture:                 Nouvelle photo
-      SetSecondaryPicture:        Photo secondaire
-      EditPicture:                Modificiation de photo
-      AvailablePostalCodes:       Dispo géographique
-      List:                       Liste des produits Chantier
-      CustomList:                 Liste des produits Chantier sur mesure
-      PackagedList:               Liste des produits Chantier packagés
-      CategoriesList:             Liste des catégories
-      AddCategory:                Ajouter une catégorie
-      Add:
-        Custom:                   Ajouter un produit sur mesure
-        Packaged:                 Ajouter un produit packagé
-      AddPicture:                 Ajouter
-      Export:
-        Custom:                   Exporter les produits sur mesure
-        Packaged:                 Exporter les produits packagés
-      View:
-        Custom:                   Visualiser le produit Chantier sur mesure
-        Packaged:                 Visualiser le produit Chantier packagé
-      Edit:
-        Custom:                   Modifier le produit Chantier sur mesure
-        Packaged:                 Modifier le produit Chantier packagé
-      Remove:
-        Custom:                   Supprimer le produit sur mesure
-        Packaged:                 Supprimer le produit packagé
-      Save:                       Enregistrer
-      Cancel:                     Annuler
-      Confirm-cancel:             Etes-vous sûr de vouloir annuler ?
-      Confirm-remove:             Etes-vous sûr de vouloir supprimer ce produit ?
-      Confirm-remove-picture:     Etes-vous sûr de vouloir supprimer cette photo ?
-      Confirm-set_pilot:          Etes-vous sûr de vouloir définir cette photo comme photo principale ?
-      Confirm-set_picture:        Etes-vous sûr de vouloir définir cette photo comme photo secondaire ?
-
-
-    ProductChantierCategory:
-      UnitPrice:                  Prix unitaire
-      CategoryName:               Catégorie
-      Confirm-remove:             Etes-vous sûr de vouloir détacher ce produit de cette catégorie ?
-
-    ProductD3E:
-
-      ProductD3Es:                Produits D3E
-      Date-crea:                  Date de créa.
-      Date-creation:              Date de création
-      Date-update:                Date de mise à jour
-      Informations:               Informations
-      System-informations:        Informations système
-      Name:                       Nom
-      SubName:                    Sous-titre
-      Description:                Description
-      Dimensions:                 Dimensions
-      Arguments:                  Arguments
-      Reference:                  Lien description
-      CoefHandling:               Coef. de manunention
-      CoefSerialNumberStmt:       Coef. de relevé de n° de série
-      CoefDestruction:            Coef. de destruction par broyage
-      Position:                   Position
-      PackageUnitPrice:           Prix unitaire du package
-      PriceListD3E:               Grille tarifaire
-      IsDisplayed:                Affiché
-      AvailablePostalCodes:       Dispo géographique
-      Picto:                      Picto
-      Pictures:                   Photos
-      PilotPicture:               Photo principale
-      NewPicture:                 Nouvelle photo
-      SetSecondaryPicture:        Photo secondaire
-      EditPicture:                Modificiation de photo
-      List:                       Liste des produits D3E
-      CustomList:                 Liste des produits D3E sur mesure
-      PackagedList:               Liste des produits D3E packagés
-      Types:                      Liste des types du produit D3E sur mesure
-      AddType:                    Ajouter un type
-      EditType:                   Editer un type
-      Add:
-        Custom:                   Ajouter un produit sur mesure
-        Packaged:                 Ajouter un produit packagé
-      AddPicture:                 Ajouter
-      Export:
-        Custom:                   Exporter les produits sur mesure
-        Packaged:                 Exporter les produits packagés
-      View:
-        Custom:                   Visualiser le produit D3E sur mesure
-        Packaged:                 Visualiser le produit D3E packagé
-      Edit:
-        Custom:                   Modifier le produit D3E sur mesure
-        Packaged:                 Modifier le produit D3E packagé
-      Remove:
-        Custom:                   Supprimer le produit sur mesure
-        Packaged:                 Supprimer le produit packagé
-      Save:                       Enregistrer
-      Cancel:                     Annuler
-      Confirm-cancel:             Etes-vous sûr de vouloir annuler ?
-      Confirm-remove:             Etes-vous sûr de vouloir supprimer ce produit ?
-      Confirm-remove-picture:     Etes-vous sûr de vouloir supprimer cette photo ?
-      Confirm-set_pilot:          Etes-vous sûr de vouloir définir cette photo comme photo principale ?
-      Confirm-set_picture:        Etes-vous sûr de vouloir définir cette photo comme photo secondaire ?
-
-    PriceListD3E:
-
-      PriceListD3Es:              Grilles tarifaires D3E
-      List:                       Liste des grilles tarifaires D3E
-      Date-creation:              Date de création
-      Date-crea:                  Date de créa.
-      Date-update:                Date de mise à jour
-      Name:                       Nom
-      Informations:               Informations
-      System-informations:        Informations système
-      Export:                     Exporter les grilles
-      View:                       Visualiser la grille
-      Edit:                       Modifier la grille
-      Remove:                     Supprimer la grille
-      Add:                        Ajouter une grille
-      Save:                       Enregistrer
-      Cancel:                     Annuler
-      Confirm-cancel:             Etes-vous sûr de vouloir annuler ?
-      Confirm-remove:             Etes-vous sûr de vouloir supprimer cette grille ?
-      Error:
-        priceListHasRelatedProduct:   La grille ne peut pas être supprimée car un produit y est rattaché
-        priceListsHaveRelatedProduct: Des grilles ne peuvent pas être supprimées car des produits y sont rattachés
-
-    PriceListLineD3E:
-      PriceListLineD3Es:          Lignes de la grille tarifaire
-      PostalCodes:                Codes postaux
-      Agency:                     Agence
-      MinQuantity:                Quantité min.
-      MaxQuantity:                Quantité max.
-      Price:                      Prix
-      Edit:                       Modifier la ligne
-      Confirm-remove:             Etes-vous sûr de vouloir supprimer cette ligne ?
-      Add:                        Ajouter une ligne
-
-    CustomizableArea:
-
-      CustomizableAreas:          Zones personnalisables
-      Date-crea:                  Date de créa.
-      Date-creation:              Date de création
-      Date-update:                Date de mise à jour
-      Informations:               Informations
-      System-informations:        Informations système
-      List:                       Liste des Zones personnalisables
-      Add:                        Ajouter une zone personnalisable
-      Export:                     Exporter les Zones personnalisables
-      Code:                       Code
-      Content:                    Contenu
-      IsDisplayed:                Affiché
-      Division:                   Division
-      View:                       Visualiser la zone personnalisable
-      Edit:                       Modifier la zone personnalisable
-      Remove:                     Supprimer la zone personnalisable
-      Save:                       Enregistrer
-      Cancel:                     Annuler
-      Confirm-cancel:             Etes-vous sûr de vouloir annuler ?
-      Confirm-remove:             Etes-vous sûr de vouloir supprimer cette zone personnalisable ?

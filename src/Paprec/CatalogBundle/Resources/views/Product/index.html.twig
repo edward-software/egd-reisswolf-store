@@ -18,14 +18,14 @@
             <div class="card">
                 <div class="card-header">
                     <h4>
-                        <i class="fa fa-xs fa-list"></i> {{ 'Catalog.Product.CustomList'|trans }}
+                        <i class="fa fa-xs fa-list"></i> {{ 'Catalog.Product.List'|trans }}
                     </h4>
                     <div class="float-right">
                         <a href="{{ path('paprec_catalog_product_add') }}" class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-xs fa-plus"></i> {{ 'Catalog.Product.Add.Custom'|trans }}
+                            <i class="fa fa-xs fa-plus"></i> {{ 'Catalog.Product.Add'|trans }}
                         </a>
                         <a href="{{ path('paprec_catalog_product_export') }}" class="btn btn-sm btn-primary ">
-                            <i class="fa fa-xs fa-file-excel"></i> {{ 'Catalog.Product.Export.Custom'|trans }}
+                            <i class="fa fa-xs fa-file-excel"></i> {{ 'Catalog.Product.Export'|trans }}
                         </a>
                     </div>
                 </div>
@@ -36,7 +36,7 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>{{ 'Catalog.Product.Name'|trans }}</th>
+                            <th>{{ 'Catalog.ProductLabel.Name'|trans }}</th>
                             <th>{{ 'Catalog.Product.Dimensions'|trans }}</th>
                             <th></th>
                         </tr>
@@ -103,8 +103,58 @@
                                     }
                                 });
                             }
+                        },
+                    },
+                    {
+                        text: '{{ 'Catalog.Product.IsEnabled.Disable'|trans }}',
+                        className: 'btn-sm',
+                        action: function (e, dt) {
+                            if (dt.rows({selected: true}).count() > 0) {
+                                var rowIds = [];
+                                $.each(dt.rows({selected: true}).data(), function () {
+                                    rowIds.push(this.id);
+                                });
+                                var url = "{{ path("paprec_catalog_product_disableMany", {ids: '0000'}) }}".replace('0000', rowIds.join(','));
+
+                                Swal({
+                                    title: "{{ 'General.Confirm'|trans }}",
+                                    text: "{{ 'General.Confirm-disable'|trans }}",
+                                    showCancelButton: true,
+                                    confirmButtonText: "{{ 'General.Yes'|trans }}",
+                                    cancelButtonText: "{{ 'General.No'|trans }}"
+                                }).then((result) => {
+                                    if (result.value) {
+                                        $(location).attr('href', url);
+                                    }
+                                });
+                            }
                         }
                     },
+                    {
+                        text: '{{ 'Catalog.Product.IsEnabled.Enable'|trans }}',
+                        className: 'btn-sm',
+                        action: function (e, dt) {
+                            if (dt.rows({selected: true}).count() > 0) {
+                                var rowIds = [];
+                                $.each(dt.rows({selected: true}).data(), function () {
+                                    rowIds.push(this.id);
+                                });
+                                var url = "{{ path("paprec_catalog_product_enableMany", {ids: '0000'}) }}".replace('0000', rowIds.join(','));
+
+                                Swal({
+                                    title: "{{ 'General.Confirm'|trans }}",
+                                    text: "{{ 'General.Confirm-enable'|trans }}",
+                                    showCancelButton: true,
+                                    confirmButtonText: "{{ 'General.Yes'|trans }}",
+                                    cancelButtonText: "{{ 'General.No'|trans }}"
+                                }).then((result) => {
+                                    if (result.value) {
+                                        $(location).attr('href', url);
+                                    }
+                                });
+                            }
+                        }
+                    }
                 ],
                 "select": true,
                 "processing": true,
@@ -129,7 +179,7 @@
                     $('.dataTables_paginate > .pagination').addClass('pagination-sm');
                 },
                 "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-
+                    console.dir(aData);
                     viewUrl = "{{ path('paprec_catalog_product_view', {id: '0000'}) }}".replace('0000', aData['id']);
                     editUrl = "{{ path('paprec_catalog_product_edit', {id: '0000'}) }}".replace('0000', aData['id']);
 

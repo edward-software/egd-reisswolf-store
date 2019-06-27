@@ -12,7 +12,10 @@ General:
   SystemError:              Erreur système
   Users:                    Utilisateurs
   Confirm:                  Confirmation
+  Confirm-cancel:           Êtes vous sûr de vouloir annuler ?
   Confirm-remove:           Confirmez-vous la suppression ?
+  Confirm-disable:          Êtes-vous sûr de vouloir tous les désactiver ?
+  Confirm-enable:           Êtes-vous sûr de vouloir tous les activer ?
   In-progress:              En cours
   Archiving:                Archivé
   Save:                     Enregistrer

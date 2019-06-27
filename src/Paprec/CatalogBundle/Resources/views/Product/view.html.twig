@@ -14,8 +14,6 @@
 
 {% block main_content %}
 
-    {{ dump(otherProductLabels) }}
-
     <div class="col-md-12">
         <!-- CARD -->
         <div class="card">
@@ -26,7 +24,7 @@
                 <div class="float-right">
                     <a href="{{ path("paprec_catalog_product_addProductLabel", {id: product.id}) }}"
                        class="btn btn-sm btn-success"><i
-                                class="fa fa-xs fa-plus"></i> {{ 'Catalog.Product.ProductLabel.Add'|trans }}</a>
+                                class="fa fa-xs fa-plus"></i> {{ 'Catalog.ProductLabel.Add'|trans }}</a>
                     <a href="{{ path("paprec_catalog_product_edit", {id: product.id}) }}"
                        class="btn btn-sm btn-warning"><i
                                 class="fa fa-xs fa-edit"></i> {{ 'Catalog.Product.Edit'|trans }}</a>
@@ -42,12 +40,12 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title">{{ 'Catalog.Product.Informations'|trans }}</h5>
+                            <h5 class="card-title">{{ 'Catalog.Product.Information'|trans }}</h5>
                         </div>
                         <div class="card-body row">
                             <div class="col-md-6">
                                 <div class="form-group row">
-                                    <label class="col-md-4 col-form-label">{{ 'Catalog.ProductLabel.Language'|trans }}</label>
+                                    <label class="col-md-4 col-form-label">{{ 'Catalog.ProductLabel.Language.Language'|trans }}</label>
                                     <label class="col-form-label col-md-8">
                                         {{ productLabel.language }}
                                     </label>
@@ -83,9 +81,9 @@
                                     </label>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-md-4 col-form-label">{{ 'Catalog.Product.IsDisabled.IsDisabled'|trans }}</label>
+                                    <label class="col-md-4 col-form-label">{{ 'Catalog.Product.IsEnabled.IsEnabled'|trans }}</label>
                                     <label class="col-form-label col-md-8">
-                                        {% if product.isDisabled == 1 %}{{ 'Catalog.Product.IsDisabled.Yes'|trans }}{% else %}{{ 'Catalog.Product.IsDisabled.No'|trans }}{% endif %}
+                                        {% if product.IsEnabled == 1 %}{{ 'Catalog.Product.IsEnabled.Yes'|trans }}{% else %}{{ 'Catalog.Product.IsEnabled.No'|trans }}{% endif %}
                                     </label>
                                 </div>
                             </div>
@@ -382,7 +380,7 @@
                 <div class="col-md-12 mt-3">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title">{{ 'Catalog.Product.System-informations'|trans }}</h5>
+                            <h5 class="card-title">{{ 'Catalog.Product.System-information'|trans }}</h5>
                         </div>
                         <div class="card-body">
 
@@ -402,24 +400,29 @@
                         </div>
                     </div>
                 </div>
-
                 {% for pL in otherProductLabels %}
                     <div class="col-md-12 mt-3">
                         <div class="card">
                             <div class="card-header">
-                                <h5 class="card-title">{{ ('Catalog.Product.ProductLabel.Language.'~pL.language)|trans }}</h5>
+                                <h5 class="card-title">{{ ('Catalog.ProductLabel.Language.'~pL.language)|trans }}</h5>
+                                <div class="float-right">
+                                    <a href="{{ path("paprec_catalog_product_editProductLabel", {id: product.id, productLabelId: pL.id}) }}"
+                                       class="btn btn-sm btn-warning"><i
+                                                class="fa fa-xs fa-edit"></i> {{ 'Catalog.ProductLabel.Edit'|trans }}
+                                    </a>
+                                </div>
                             </div>
                             <div class="card-body">
                                 <div class="form-group row">
                                     <label class="col-md-4 col-form-label">{{ 'Catalog.ProductLabel.Name'|trans }}</label>
                                     <label class="col-form-label col-md-8">
-                                        {{ productLabel.name }}
+                                        {{ pL.name }}
                                     </label>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-4 col-form-label">{{ 'Catalog.ProductLabel.Short-description'|trans }}</label>
                                     <label class="col-form-label col-md-8">
-                                        {{ productLabel.shortDescription|nl2br }}
+                                        {{ pL.shortDescription|nl2br }}
                                     </label>
                                 </div>
                             </div>

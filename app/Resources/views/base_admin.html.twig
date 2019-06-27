@@ -85,7 +85,7 @@
                                 <div class="dropdown-menu">
                                     {% if is_granted('ROLE_ADMIN') or paprec_has_access('ROLE_ADMIN', 'DI') %}
                                         <a class="dropdown-item{% if app.request.get('_route')|slice(0, 'paprec_catalog_product'|length) == 'paprec_catalog_product' %} active{% endif %}"
-                                           href="{{ path('paprec_catalog_product_index') }}">{{ 'Catalog.product'|trans }}</a>
+                                           href="{{ path('paprec_catalog_product_index') }}">{{ 'Catalog.Product.List'|trans }}</a>
                                     {% endif %}
                                 </div>
                             </div>

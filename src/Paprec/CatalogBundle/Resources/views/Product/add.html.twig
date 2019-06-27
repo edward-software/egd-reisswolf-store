@@ -1,7 +1,7 @@
 {% extends "::base_admin.html.twig" %}
 
 {% block title %}
-    {{ 'Catalog.Product.Add.Custom'|trans }}
+    {{ 'Catalog.Product.Add'|trans }}
 {% endblock %}
 
 {% block stylesheets %}
@@ -19,24 +19,24 @@
             <div class="card">
                 <div class="card-header">
                     <h4>
-                        <i class="fa fa-xs fa-plus"></i> {{ 'Catalog.Product.Add.Custom'|trans }}
+                        <i class="fa fa-xs fa-plus"></i> {{ 'Catalog.Product.Add'|trans }}
                     </h4>
                     <div class="float-right">
                         <a href="javascript:void(0);" class="btn btn-sm btn-success catalog-product-save-button"><i
-                                    class="fa fa-xs fa-check"></i> {{ 'Catalog.Product.Save'|trans }}</a>
+                                    class="fa fa-xs fa-check"></i> {{ 'General.Save'|trans }}</a>
                         <a href="javascript:void(0);" class="btn btn-sm btn-danger catalog-product-cancel-button"><i
-                                    class="fa fa-xs fa-close"></i> {{ 'Catalog.Product.Cancel'|trans }}</a>
+                                    class="fa fa-xs fa-close"></i> {{ 'General.Cancel'|trans }}</a>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="col-md-7">
                         <div class="card">
                             <div class="card-header">
-                                <h5 class="card-title">{{ 'Catalog.Product.Informations'|trans }}</h5>
+                                <h5 class="card-title">{{ 'Catalog.Product.Information'|trans }}</h5>
                             </div>
                             <div class="card-body">
                                 <div class="form-group">
-                                    <div class="form-label">{{ 'Catalog.Product.Name'|trans }}</div>
+                                    <div class="form-label">{{ 'Catalog.ProductLabel.Name'|trans }}</div>
                                     <div class="form-content">
                                         {{ form_widget(form2.name, {'attr': {'class': 'form-control'}}) }}
                                         {{ form_errors(form2.name) }}
@@ -44,7 +44,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <div class="form-label">{{ 'Catalog.Product.Short-description'|trans }}</div>
+                                    <div class="form-label">{{ 'Catalog.ProductLabel.Short-description'|trans }}</div>
                                     <div class="form-content">
                                         {{ form_widget(form2.shortDescription, {'attr': {'class': 'form-control'}}) }}
                                         {{ form_errors(form2.shortDescription) }}
@@ -52,7 +52,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <div class="form-label">{{ 'Catalog.Product.Language'|trans }}</div>
+                                    <div class="form-label">{{ 'Catalog.ProductLabel.Language.Language'|trans }}</div>
                                     <div class="form-content">
                                         {{ form_widget(form2.language, {'attr': {'class': 'form-control product-label-language-input'}}) }}
                                         {{ form_errors(form2.language) }}
@@ -128,9 +128,9 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <div class="form-label">{{ 'Catalog.Product.IsDisabled'|trans }}</div>
+                                    <div class="form-label">{{ 'Catalog.Product.IsEnabled'|trans }}</div>
                                     <div class="form-content checkbox-list">
-                                        {% for radio in form1.isDisabled.children %}
+                                        {% for radio in form1.isEnabled.children %}
                                             <div class="form__check ml-4">
                                                 {{ form_widget(radio) }}
                                                 {{ form_label(radio) }}
@@ -153,9 +153,9 @@
                 <div class="card-footer">
                     <div class="float-right">
                         <a href="javascript:void(0);" class="btn btn-sm btn-success catalog-product-save-button"><i
-                                    class="fa fa-xs fa-check"></i> {{ 'Catalog.Product.Save'|trans }}</a>
+                                    class="fa fa-xs fa-check"></i> {{ 'General.Save'|trans }}</a>
                         <a href="javascript:void(0);" class="btn btn-sm btn-danger catalog-product-cancel-button"><i
-                                    class="fa fa-xs fa-close"></i> {{ 'Catalog.Product.Cancel'|trans }}</a>
+                                    class="fa fa-xs fa-close"></i> {{ 'General.Cancel'|trans }}</a>
                     </div>
                 </div>
             </div>
@@ -183,7 +183,7 @@
 
                 Swal({
                     title: "{{ 'General.Confirm'|trans }}",
-                    text: "{{ 'Catalog.Product.Confirm-cancel'|trans }}",
+                    text: "{{ 'General.Confirm-cancel'|trans }}",
                     showCancelButton: true,
                     confirmButtonText: "{{ 'General.Yes'|trans }}",
                     cancelButtonText: "{{ 'General.No'|trans }}"

@@ -23,7 +23,7 @@ class ProductType extends AbstractType
             ->add('capacity')
             ->add('capacityUnit')
             ->add('dimensions', TextareaType::class)
-            ->add('isDisabled', ChoiceType::class, array(
+            ->add('isEnabled', ChoiceType::class, array(
                 "choices" => array(
                     'Non' => 0,
                     'Oui' => 1
