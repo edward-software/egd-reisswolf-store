@@ -17,7 +17,7 @@ class PostalCodeController extends Controller
 
     /**
      * @Route("/postalCode", name="paprec_catalog_postalCode_index")
-     * @Security("has_role('ROLE_ADMIN') or has_role('ROLE_MANAGER_DIVISION')")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function indexAction()
     {
@@ -26,7 +26,7 @@ class PostalCodeController extends Controller
 
     /**
      * @Route("/postalCode/loadList", name="paprec_catalog_postalCode_loadList")
-     * @Security("has_role('ROLE_ADMIN') or has_role('ROLE_MANAGER_DIVISION')")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function loadListAction(Request $request)
     {
@@ -41,41 +41,30 @@ class PostalCodeController extends Controller
         $search = $request->get('search');
         $columns = $request->get('columns');
 
-        $cols['id'] = array('label' => 'id', 'id' => 'p.id', 'method' => array('getId'));
-        $cols['codes'] = array('label' => 'codes', 'id' => 'p.codes', 'method' => array('getCodes'));
-        $cols['division'] = array('label' => 'division', 'id' => 'c.division', 'method' => array('getDivision'));
-        $cols['rate'] = array('label' => 'rate', 'id' => 'p.rate', 'method' => array('getRate'));
+        $cols['id'] = array('label' => 'id', 'id' => 'pC.id', 'method' => array('getId'));
+        $cols['code'] = array('label' => 'code', 'id' => 'pC.code', 'method' => array('getCode'));
+        $cols['region'] = array('label' => 'region', 'id' => 'pC.region', 'method' => array('getRegion'));
 
-        $queryBuilder = $this->getDoctrine()->getManager()->createQueryBuilder();
+        $queryBuilder = $this->getDoctrine()->getManager()->getRepository(PostalCode::class)->createQueryBuilder('pC');
 
-        $queryBuilder->select(array('p'))
-            ->from('PaprecCatalogBundle:PostalCode', 'p')
-            ->where('p.deleted IS NULL');
+
+        $queryBuilder->select(array('pC'))
+            ->where('pC.deleted IS NULL');
 
         if (is_array($search) && isset($search['value']) && $search['value'] != '') {
             if (substr($search['value'], 0, 1) == '#') {
                 $queryBuilder->andWhere($queryBuilder->expr()->orx(
-                    $queryBuilder->expr()->eq('p.id', '?1')
+                    $queryBuilder->expr()->eq('pC.id', '?1')
                 ))->setParameter(1, substr($search['value'], 1));
             } else {
                 $queryBuilder->andWhere($queryBuilder->expr()->orx(
-                    $queryBuilder->expr()->like('p.codes', '?1'),
-                    $queryBuilder->expr()->like('p.division', '?1'),
-                    $queryBuilder->expr()->like('p.rate', '?1')
+                    $queryBuilder->expr()->like('pC.code', '?1')
                 ))->setParameter(1, '%' . $search['value'] . '%');
             }
         }
 
         $datatable = $this->get('goondi_tools.datatable')->generateTable($cols, $queryBuilder, $pageSize, $start, $orders, $columns, $filters);
 
-        // Reformatage de certaines données
-        $tmp = array();
-        foreach ($datatable['data'] as $data) {
-            $line = $data;
-            $line['rate'] = $numberManager->formatAmount($data['rate'], null, $request->getLocale());
-            $tmp[] = $line;
-        }
-        $datatable['data'] = $tmp;
 
         $return['recordsTotal'] = $datatable['recordsTotal'];
         $return['recordsFiltered'] = $datatable['recordsTotal'];
@@ -89,7 +78,7 @@ class PostalCodeController extends Controller
 
     /**
      * @Route("/postalCode/export", name="paprec_catalog_postalCode_export")
-     * @Security("has_role('ROLE_ADMIN') or has_role('ROLE_MANAGER_DIVISION')")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function exportAction(Request $request)
     {
@@ -97,24 +86,26 @@ class PostalCodeController extends Controller
 
         $phpExcelObject = $this->container->get('phpexcel')->createPHPExcelObject();
 
-        $queryBuilder = $this->getDoctrine()->getManager()->createQueryBuilder();
+        $queryBuilder = $this->getDoctrine()->getManager()->getRepository(PostalCode::class)->createQueryBuilder('pC');
 
-        $queryBuilder->select(array('p'))
-            ->from('PaprecCatalogBundle:PostalCode', 'p')
-            ->where('p.deleted IS NULL');
+        $queryBuilder->select(array('pC'))
+            ->where('pC.deleted IS NULL');
 
         $postalCodes = $queryBuilder->getQuery()->getResult();
 
-        $phpExcelObject->getProperties()->setCreator("Paprec Easy Recyclage")
-            ->setLastModifiedBy("Paprec Easy Recyclage")
-            ->setTitle("Paprec Easy Recyclage - Codes Postaux")
+        $phpExcelObject->getProperties()->setCreator("Reisswolf Shop")
+            ->setLastModifiedBy("Reisswolf Shop")
+            ->setTitle("Reisswolf Shop - Codes Postaux")
             ->setSubject("Extraction");
 
         $phpExcelObject->setActiveSheetIndex(0)
             ->setCellValue('A1', 'ID')
-            ->setCellValue('B1', 'Codes')
-            ->setCellValue('C1', 'Division')
-            ->setCellValue('D1', 'Coef. Mult.');
+            ->setCellValue('B1', 'Code')
+            ->setCellValue('C1', 'Coef de transport')
+            ->setCellValue('D1', 'Coef de traitement')
+            ->setCellValue('E1', 'Coef de traçabilité')
+            ->setCellValue('F1', 'Commercial en charge')
+            ->setCellValue('G1', 'Région');
 
         $phpExcelObject->getActiveSheet()->setTitle('Codes Postaux');
         $phpExcelObject->setActiveSheetIndex(0);
@@ -124,15 +115,18 @@ class PostalCodeController extends Controller
 
             $phpExcelObject->setActiveSheetIndex(0)
                 ->setCellValue('A' . $i, $postalCode->getId())
-                ->setCellValue('B' . $i, $postalCode->getCodes())
-                ->setCellValue('C' . $i, $postalCode->getDivision())
-                ->setCellValue('D' . $i, $numberManager->denormalize($postalCode->getRate()));
+                ->setCellValue('B' . $i, $postalCode->getCode())
+                ->setCellValue('C' . $i, $numberManager->denormalize($postalCode->getTransportRate()))
+                ->setCellValue('D' . $i, $numberManager->denormalize($postalCode->getTreatmentRate()))
+                ->setCellValue('E' . $i, $numberManager->denormalize($postalCode->getTraceabilityRate()))
+                ->setCellValue('F' . $i, ($postalCode->getUserInCharge()) ? $postalCode->getUserInCharge()->getUsername() : '')
+                ->setCellValue('G' . $i, ($postalCode->getRegion()) ? $postalCode->getRegion()->getName() : '');
             $i++;
         }
 
         $writer = $this->container->get('phpexcel')->createWriter($phpExcelObject, 'Excel2007');
 
-        $fileName = 'PaprecEasyRecyclage-Extraction-Codes-Postaux-' . date('Y-m-d') . '.xlsx';
+        $fileName = 'ReisswolfShop-Extraction-Codes-Postaux-' . date('Y-m-d') . '.xlsx';
 
         // create the response
         $response = $this->container->get('phpexcel')->createStreamedResponse($writer);
@@ -152,7 +146,7 @@ class PostalCodeController extends Controller
 
     /**
      * @Route("/postalCode/view/{id}", name="paprec_catalog_postalCode_view")
-     * @Security("has_role('ROLE_ADMIN') or has_role('ROLE_MANAGER_DIVISION')")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function viewAction(Request $request, PostalCode $postalCode)
     {
@@ -166,10 +160,12 @@ class PostalCodeController extends Controller
 
     /**
      * @Route("/postalCode/add", name="paprec_catalog_postalCode_add")
-     * @Security("has_role('ROLE_ADMIN') or has_role('ROLE_MANAGER_DIVISION')")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function addAction(Request $request)
     {
+        $user = $this->getUser();
+
         $numberManager = $this->get('paprec_catalog.number_manager');
 
         $postalCode = new PostalCode();
@@ -188,7 +184,12 @@ class PostalCodeController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
 
             $postalCode = $form->getData();
-            $postalCode->setRate($numberManager->normalize($postalCode->getRate()));
+            $postalCode->setTransportRate($numberManager->normalize($postalCode->getTransportRate()));
+            $postalCode->setTreatmentRate($numberManager->normalize($postalCode->getTreatmentRate()));
+            $postalCode->setTraceabilityRate($numberManager->normalize($postalCode->getTraceabilityRate()));
+
+            $postalCode->setDateCreation(new \DateTime);
+            $postalCode->setUserCreation($user);
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($postalCode);
@@ -207,11 +208,13 @@ class PostalCodeController extends Controller
 
     /**
      * @Route("/postalCode/edit/{id}", name="paprec_catalog_postalCode_edit")
-     * @Security("has_role('ROLE_ADMIN') or has_role('ROLE_MANAGER_DIVISION')")
+     * @Security("has_role('ROLE_ADMIN')")
      * @throws \Doctrine\ORM\EntityNotFoundException
      */
     public function editAction(Request $request, PostalCode $postalCode)
     {
+        $user = $this->getUser();
+
         $numberManager = $this->get('paprec_catalog.number_manager');
         $postalCodeManager = $this->get('paprec_catalog.postal_code_manager');
         $postalCodeManager->isDeleted($postalCode, true);
@@ -221,7 +224,9 @@ class PostalCodeController extends Controller
             $divisions[$division] = $division;
         }
 
-        $postalCode->setRate($numberManager->denormalize($postalCode->getRate()));
+        $postalCode->setTransportRate($numberManager->denormalize($postalCode->getTransportRate()));
+        $postalCode->setTreatmentRate($numberManager->denormalize($postalCode->getTreatmentRate()));
+        $postalCode->setTraceabilityRate($numberManager->denormalize($postalCode->getTraceabilityRate()));
 
         $form = $this->createForm(PostalCodeType::class, $postalCode, array(
             'division' => $divisions
@@ -232,7 +237,12 @@ class PostalCodeController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
 
             $postalCode = $form->getData();
-            $postalCode->setRate($numberManager->normalize($postalCode->getRate()));
+            $postalCode->setTransportRate($numberManager->normalize($postalCode->getTransportRate()));
+            $postalCode->setTreatmentRate($numberManager->normalize($postalCode->getTreatmentRate()));
+            $postalCode->setTraceabilityRate($numberManager->normalize($postalCode->getTraceabilityRate()));
+
+            $postalCode->setDateUpdate(new \DateTime);
+            $postalCode->setUserUpdate($user);
 
             $em = $this->getDoctrine()->getManager();
             $em->flush();
@@ -251,7 +261,7 @@ class PostalCodeController extends Controller
 
     /**
      * @Route("/postalCode/remove/{id}", name="paprec_catalog_postalCode_remove")
-     * @Security("has_role('ROLE_ADMIN') or has_role('ROLE_MANAGER_DIVISION')")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function removeAction(Request $request, PostalCode $postalCode)
     {
@@ -265,7 +275,7 @@ class PostalCodeController extends Controller
 
     /**
      * @Route("/postalCode/removeMany/{ids}", name="paprec_catalog_postalCode_removeMany")
-     * @Security("has_role('ROLE_ADMIN') or has_role('ROLE_MANAGER_DIVISION')")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function removeManyAction(Request $request)
     {

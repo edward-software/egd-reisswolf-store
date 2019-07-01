@@ -117,9 +117,9 @@ class ProductController extends Controller
 
         $Products = $queryBuilder->getQuery()->getResult();
 
-        $phpExcelObject->getProperties()->setCreator("Paprec Easy Recyclage")
-            ->setLastModifiedBy("Paprec Easy Recyclage")
-            ->setTitle("Paprec Easy Recyclage - Produits DI")
+        $phpExcelObject->getProperties()->setCreator("Reisswolf Shop")
+            ->setLastModifiedBy("Reisswolf Shop")
+            ->setTitle("Reisswolf Shop - Produits DI")
             ->setSubject("Extraction");
 
         $phpExcelObject->setActiveSheetIndex(0)
@@ -157,7 +157,7 @@ class ProductController extends Controller
 
         $writer = $this->container->get('phpexcel')->createWriter($phpExcelObject, 'Excel2007');
 
-        $fileName = 'PaprecEasyRecyclage-Extraction-Produits-DI-' . date('Y-m-d') . '.xlsx';
+        $fileName = 'ReisswolfShop-Extraction-Produits-DI-' . date('Y-m-d') . '.xlsx';
 
         // create the response
         $response = $this->container->get('phpexcel')->createStreamedResponse($writer);

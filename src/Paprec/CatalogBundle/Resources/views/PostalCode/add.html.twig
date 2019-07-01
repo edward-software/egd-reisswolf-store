@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block content_title %}
-    {{ 'Catalog.PostalCode.Categories'|trans }}
+    {{ 'Catalog.PostalCode.Add'|trans }}
 {% endblock %}
 
 {% block main_content %}
@@ -24,43 +24,59 @@
                     </h4>
                     <div class="float-right">
                         <a href="javascript:void(0);" class="btn btn-sm btn-success catalog-postalCode-save-button"><i
-                                    class="fa fa-xs fa-check"></i> {{ 'Catalog.PostalCode.Save'|trans }}</a>
+                                    class="fa fa-xs fa-check"></i> {{ 'General.Save'|trans }}</a>
                         <a href="javascript:void(0);" class="btn btn-sm btn-danger catalog-postalCode-cancel-button"><i
-                                    class="fa fa-xs fa-close"></i> {{ 'Catalog.PostalCode.Cancel'|trans }}</a>
+                                    class="fa fa-xs fa-close"></i> {{ 'General.Cancel'|trans }}</a>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="col-md-7">
                         <div class="card">
                             <div class="card-header">
-                                <h5 class="card-title">{{ 'Catalog.PostalCode.Informations'|trans }}</h5>
+                                <h5 class="card-title">{{ 'General.Information'|trans }}</h5>
                             </div>
                             <div class="card-body">
                                 <div class="form-group">
-                                    <div class="form-label">{{ 'Catalog.PostalCode.Codes'|trans }}</div>
+                                    <div class="form-label">{{ 'Catalog.PostalCode.Code'|trans }}</div>
                                     <div class="form-content">
-                                        {{ form_widget(form.codes, {'attr': {'class': 'form-control'}}) }}
-                                        {{ form_errors(form.codes) }}
+                                        {{ form_widget(form.code, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_errors(form.code) }}
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <div class="form-label">{{ 'Catalog.Category.Division'|trans }}</div>
-                                    <div class="form-content checkbox-list">
-                                        {% for radio in form.division.children %}
-                                            <div class="form__check ml-4">
-                                                {{ form_widget(radio) }}
-                                                {{ form_label(radio) }}
-                                            </div>
-                                        {% endfor %}
+                                    <div class="form-label">{{ 'Catalog.PostalCode.TransportRate'|trans }}</div>
+                                    <div class="form-content">
+                                        {{ form_widget(form.transportRate, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_errors(form.transportRate) }}
                                     </div>
                                 </div>
-
                                 <div class="form-group">
-                                    <div class="form-label">{{ 'Catalog.PostalCode.Rate'|trans }}</div>
+                                    <div class="form-label">{{ 'Catalog.PostalCode.TreatmentRate'|trans }}</div>
                                     <div class="form-content">
-                                        {{ form_widget(form.rate, {'attr': {'class': 'form-control'}}) }}
-                                        {{ form_errors(form.rate) }}
+                                        {{ form_widget(form.treatmentRate, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_errors(form.treatmentRate) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-label">{{ 'Catalog.PostalCode.TraceabilityRate'|trans }}</div>
+                                    <div class="form-content">
+                                        {{ form_widget(form.traceabilityRate, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_errors(form.traceabilityRate) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-label">{{ 'Catalog.PostalCode.Region'|trans }}</div>
+                                    <div class="form-content">
+                                        {{ form_widget(form.region, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_errors(form.region) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-label">{{ 'Catalog.PostalCode.UserInCharge'|trans }}</div>
+                                    <div class="form-content">
+                                        {{ form_widget(form.userInCharge, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_errors(form.userInCharge) }}
                                     </div>
                                 </div>
 
@@ -72,9 +88,9 @@
                 <div class="card-footer">
                     <div class="float-right">
                         <a href="javascript:void(0);" class="btn btn-sm btn-success catalog-postalCode-save-button"><i
-                                    class="fa fa-xs fa-check"></i> {{ 'Catalog.PostalCode.Save'|trans }}</a>
+                                    class="fa fa-xs fa-check"></i> {{ 'General.Save'|trans }}</a>
                         <a href="javascript:void(0);" class="btn btn-sm btn-danger catalog-postalCode-cancel-button"><i
-                                    class="fa fa-xs fa-close"></i> {{ 'Catalog.PostalCode.Cancel'|trans }}</a>
+                                    class="fa fa-xs fa-close"></i> {{ 'General.Cancel'|trans }}</a>
                     </div>
                 </div>
             </div>
@@ -102,7 +118,7 @@
 
                 Swal({
                     title: "{{ 'General.Confirm'|trans }}",
-                    text: "{{ 'Catalog.PostalCode.Confirm-cancel'|trans }}",
+                    text: "{{ 'General.Confirm-cancel'|trans }}",
                     showCancelButton: true,
                     confirmButtonText: "{{ 'General.Yes'|trans }}",
                     cancelButtonText: "{{ 'General.No'|trans }}"

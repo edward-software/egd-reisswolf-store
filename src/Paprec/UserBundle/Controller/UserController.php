@@ -19,7 +19,7 @@ class UserController extends Controller
 
     /**
      * @Route("/", name="paprec_user_user_index")
-     * @Security("has_role('ROLE_ADMIN') or has_role('ROLE_MANAGER_DIVISION')")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function indexAction()
     {
@@ -28,7 +28,7 @@ class UserController extends Controller
 
     /**
      * @Route("/loadList", name="paprec_user_user_loadList")
-     * @Security("has_role('ROLE_ADMIN') or has_role('ROLE_MANAGER_DIVISION')")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function loadListAction(Request $request)
     {
@@ -86,7 +86,7 @@ class UserController extends Controller
 
     /**
      * @Route("/export", name="paprec_user_user_export")
-     * @Security("has_role('ROLE_ADMIN') or has_role('ROLE_MANAGER_DIVISION')")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function exportAction(Request $request)
     {
@@ -103,9 +103,9 @@ class UserController extends Controller
 
         $users = $queryBuilder->getQuery()->getResult();
 
-        $phpExcelObject->getProperties()->setCreator("Paprec Easy Recyclage")
-            ->setLastModifiedBy("Paprec Easy Recyclage")
-            ->setTitle("Paprec Easy Recyclage - Utilisateurs")
+        $phpExcelObject->getProperties()->setCreator("Reisswolf Shop")
+            ->setLastModifiedBy("Reisswolf Shop")
+            ->setTitle("Reisswolf Shop - Utilisateurs")
             ->setSubject("Extraction");
 
         $phpExcelObject->setActiveSheetIndex(0)
@@ -148,7 +148,7 @@ class UserController extends Controller
 
         $writer = $this->container->get('phpexcel')->createWriter($phpExcelObject, 'Excel2007');
 
-        $fileName = 'PaprecEasyRecyclage-Extraction-Utilisateurs-'.date('Y-m-d').'.xlsx';
+        $fileName = 'ReisswolfShop-Extraction-Utilisateurs-'.date('Y-m-d').'.xlsx';
 
         // create the response
         $response = $this->container->get('phpexcel')->createStreamedResponse($writer);
@@ -168,7 +168,7 @@ class UserController extends Controller
 
     /**
      * @Route("/view/{id}", name="paprec_user_user_view")
-     * @Security("has_role('ROLE_ADMIN') or has_role('ROLE_MANAGER_DIVISION')")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function viewAction(Request $request, User $user)
     {
@@ -183,7 +183,7 @@ class UserController extends Controller
 
     /**
      * @Route("/add", name="paprec_user_user_add")
-     * @Security("has_role('ROLE_ADMIN') or has_role('ROLE_MANAGER_DIVISION')")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function addAction(Request $request)
     {
@@ -223,7 +223,7 @@ class UserController extends Controller
 
     /**
      * @Route("/edit/{id}", name="paprec_user_user_edit")
-     * @Security("has_role('ROLE_ADMIN') or has_role('ROLE_MANAGER_DIVISION')")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function editAction(Request $request, User $user)
     {
@@ -295,7 +295,7 @@ class UserController extends Controller
 
     /**
      * @Route("/sendAccess/{id}", name="paprec_user_user_sendAccess")
-     * @Security("has_role('ROLE_ADMIN') or has_role('ROLE_MANAGER_DIVISION')")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function sendAccessAction(Request $request, User $user)
     {
@@ -340,7 +340,7 @@ class UserController extends Controller
 
     /**
      * @Route("/sendAccessMany/{ids}", name="paprec_user_user_sendAccessMany")
-     * @Security("has_role('ROLE_ADMIN') or has_role('ROLE_MANAGER_DIVISION')")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function sendAccessManyAction(Request $request)
     {
@@ -393,7 +393,7 @@ class UserController extends Controller
 
     /**
      * @Route("/remove/{id}", name="paprec_user_user_remove")
-     * @Security("has_role('ROLE_ADMIN') or has_role('ROLE_MANAGER_DIVISION')")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function removeAction(Request $request, User $user)
     {
@@ -408,7 +408,7 @@ class UserController extends Controller
 
     /**
      * @Route("/removeMany/{ids}", name="paprec_user_user_removeMany")
-     * @Security("has_role('ROLE_ADMIN') or has_role('ROLE_MANAGER_DIVISION')")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function removeManyAction(Request $request)
     {

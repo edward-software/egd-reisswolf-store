@@ -40,6 +40,5 @@ User:
 'No':                             Non
 'Yes':                            Oui
 'ROLE_ADMIN':                     Administrateur
-'ROLE_MANAGER_DIVISION':          Manager de division
-'ROLE_COMMERCIAL_DIVISION':       Commercial
+'ROLE_COMMERCIAL':       Commercial
 'ROLE_SUPER_ADMIN':               Super administrateur

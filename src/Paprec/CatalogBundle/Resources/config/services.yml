@@ -6,6 +6,10 @@ services:
     class: Paprec\CatalogBundle\Service\PostalCodeManager
     arguments: ["@doctrine.orm.entity_manager", "@service_container"]
 
+  paprec_catalog.region_manager:
+    class: Paprec\CatalogBundle\Service\RegionManager
+    arguments: ["@doctrine.orm.entity_manager", "@service_container"]
+
   paprec_catalog.product_manager:
     class: Paprec\CatalogBundle\Service\ProductManager
     arguments: ["@doctrine.orm.entity_manager", "@service_container"]

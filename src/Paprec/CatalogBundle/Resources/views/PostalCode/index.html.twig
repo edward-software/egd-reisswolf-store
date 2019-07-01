@@ -37,9 +37,8 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>{{ 'Catalog.PostalCode.Codes'|trans }}</th>
-                            <th>{{ 'Catalog.PostalCode.Division'|trans }}</th>
-                            <th>{{ 'Catalog.PostalCode.Rate'|trans }}</th>
+                            <th>{{ 'Catalog.PostalCode.Code'|trans }}</th>
+                            <th>{{ 'Catalog.PostalCode.Region'|trans }}</th>
                             <th></th>
                         </tr>
                         </thead>
@@ -116,9 +115,8 @@
                 "ajax": "{{ path('paprec_catalog_postalCode_loadList') }}",
                 "columns": [
                     {"data": "id"},
-                    {"data": "codes"},
-                    {"data": "division"},
-                    {"data": "rate"},
+                    {"data": "code"},
+                    {"data": "region"},
                     {"data": "id", "width": "10%", "bSortable": false}
                 ],
                 "rowCallback": function (row, data, displayIndex) {

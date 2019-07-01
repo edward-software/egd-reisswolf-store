@@ -17,16 +17,22 @@ Catalog:
     List:                       Liste des codes postaux
     Add:                        Ajouter un code postal
     Export:                     Exporter les codes postaux
-    Codes:                      Code Postaux
+    Code:                      Code Postal
     Division:                   Division
     Rate:                       Coefficient
-    View:                       Visualiser le code postal
+    View:                       Vue du code postal
     Edit:                       Modifier le code postal
     Remove:                     Supprimer le code postal
     Save:                       Enregistrer
     Cancel:                     Annuler
     Confirm-cancel:             Etes-vous sûr de vouloir annuler ?
     Confirm-remove:             Etes-vous sûr de vouloir supprimer ce code postal ?
+    TransportRate: Coef de transport
+    TreatmentRate: Coef de traitement
+    TraceabilityRate: Coef de traçabilité
+    UserInCharge: Commercial en charge
+    Region: Région
+    System-information: Informations système
 
   Picture:
     Path:                       Choisir photo
@@ -85,3 +91,16 @@ Catalog:
     Information: Informations
     Remove: Supprimer
 
+
+  Region:
+    Regions: Régions
+    Name: Nom
+    List: Liste des régions
+    Add: Ajouter une région
+    Export: Exporter les régions
+    View: Vue de la région
+    Edit: Modifier région
+    Remove: Supprimer région
+    Informations: Informations
+    System-informations:        Informations système
+    PostalCodes: Codes postaux

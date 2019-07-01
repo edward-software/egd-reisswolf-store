@@ -23,36 +23,36 @@ class PostalCode
     private $id;
 
     /**
-     * @var text
-     * @ORM\Column(name="codes", type="text", nullable=true)
-     * @Assert\Regex(
-     *     pattern="/^(\d{2}(\*|(?:\d{3}))(,\s*)?)+$/",
-     *     match=true,
-     *     message="Les codes postaux doivent être des nombres séparés par des virgules. (ex: 75*, 92150, 36*)"
-     * )
-     */
-    private $codes;
-    
-    /**
-     * @var int
+     * @var \DateTime
      *
-     * @ORM\Column(name="rate", type="integer")
-     * @Assert\NotBlank()
-     * @Assert\Regex(
-     *     pattern="/^\d{1,2}((\.|\,)\d{1,2})?$/",
-     *     match=true,
-     *     message="la valeur doit être un nombre entre 0 et 99,99 (ou 99.99)"
-     * )
+     * @ORM\Column(name="dateCreation", type="datetime")
      */
-    private $rate;
+    private $dateCreation;
 
     /**
-     * @var array|null
+     * @var \DateTime
      *
-     * @ORM\Column(name="division", type="string", nullable=true)
-     * @Assert\NotBlank()
+     * @ORM\Column(name="dateUpdate", type="datetime", nullable=true)
      */
-    private $division;
+    private $dateUpdate;
+
+    /**
+     * #################################
+     *              SYSTEM USER ASSOCIATION
+     * #################################
+     */
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Paprec\UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="userCreationId", referencedColumnName="id", nullable=false)
+     */
+    private $userCreation;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Paprec\UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="userUpdateId", referencedColumnName="id", nullable=true)
+     */
+    private $userUpdate;
 
     /**
      * @var \DateTime
@@ -62,6 +62,74 @@ class PostalCode
     private $deleted;
 
     /**
+     * @var text
+     * @ORM\Column(name="code", type="string")
+     * @Assert\Regex(
+     *     pattern="/^\d{2}(\*|(?:\d{2}))$/",
+     *     match=true,
+     *     message="Le codes postal doivent être un nombre de 4 caractères ou 2 suivis d'une *. (ex: 15*, 1530)"
+     * )
+     */
+    private $code;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="transportRate", type="integer")
+     * @Assert\NotBlank()
+     * @Assert\Regex(
+     *     pattern="/^\d{1,2}((\.|\,)\d{1,2})?$/",
+     *     match=true,
+     *     message="la valeur doit être un nombre entre 0 et 99,99 (ou 99.99)"
+     * )
+     */
+    private $transportRate;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="treatmentRate", type="integer")
+     * @Assert\NotBlank()
+     * @Assert\Regex(
+     *     pattern="/^\d{1,2}((\.|\,)\d{1,2})?$/",
+     *     match=true,
+     *     message="la valeur doit être un nombre entre 0 et 99,99 (ou 99.99)"
+     * )
+     */
+    private $treatmentRate;
+
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="traceabilityRate", type="integer")
+     * @Assert\NotBlank()
+     * @Assert\Regex(
+     *     pattern="/^\d{1,2}((\.|\,)\d{1,2})?$/",
+     *     match=true,
+     *     message="la valeur doit être un nombre entre 0 et 99,99 (ou 99.99)"
+     * )
+     */
+    private $traceabilityRate;
+
+
+    /**
+     * #################################
+     *              Relations
+     * #################################
+     */
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Paprec\UserBundle\Entity\User", inversedBy="postalCodes")
+     */
+    private $userInCharge;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Paprec\CatalogBundle\Entity\Region", inversedBy="postalCodes")
+     */
+    private $region;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -69,46 +137,71 @@ class PostalCode
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer 
+     * @return int
      */
     public function getId()
     {
         return $this->id;
     }
-    
+
     /**
-     * Set division.
+     * Set dateCreation.
      *
-     * @param array|null $division
+     * @param \DateTime $dateCreation
      *
      * @return PostalCode
      */
-    public function setDivision($division = null)
+    public function setDateCreation($dateCreation)
     {
-        $this->division = $division;
+        $this->dateCreation = $dateCreation;
 
         return $this;
     }
 
     /**
-     * Get division.
+     * Get dateCreation.
      *
-     * @return array|null
+     * @return \DateTime
      */
-    public function getDivision()
+    public function getDateCreation()
     {
-        return $this->division;
+        return $this->dateCreation;
     }
 
     /**
-     * Set deleted
+     * Set dateUpdate.
      *
-     * @param \DateTime $deleted
+     * @param \DateTime|null $dateUpdate
+     *
      * @return PostalCode
      */
-    public function setDeleted($deleted)
+    public function setDateUpdate($dateUpdate = null)
+    {
+        $this->dateUpdate = $dateUpdate;
+
+        return $this;
+    }
+
+    /**
+     * Get dateUpdate.
+     *
+     * @return \DateTime|null
+     */
+    public function getDateUpdate()
+    {
+        return $this->dateUpdate;
+    }
+
+    /**
+     * Set deleted.
+     *
+     * @param \DateTime|null $deleted
+     *
+     * @return PostalCode
+     */
+    public function setDeleted($deleted = null)
     {
         $this->deleted = $deleted;
 
@@ -116,62 +209,204 @@ class PostalCode
     }
 
     /**
-     * Get deleted
+     * Get deleted.
      *
-     * @return \DateTime 
+     * @return \DateTime|null
      */
     public function getDeleted()
     {
         return $this->deleted;
     }
 
-
-
     /**
-     * Set rate.
+     * Set code.
      *
-     * @param int $rate
+     * @param string $code
      *
      * @return PostalCode
      */
-    public function setRate($rate)
+    public function setCode($code)
     {
-        $this->rate = $rate;
+        $this->code = $code;
 
         return $this;
     }
 
     /**
-     * Get rate.
+     * Get code.
+     *
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * Set transportRate.
+     *
+     * @param int $transportRate
+     *
+     * @return PostalCode
+     */
+    public function setTransportRate($transportRate)
+    {
+        $this->transportRate = $transportRate;
+
+        return $this;
+    }
+
+    /**
+     * Get transportRate.
      *
      * @return int
      */
-    public function getRate()
+    public function getTransportRate()
     {
-        return $this->rate;
+        return $this->transportRate;
     }
 
     /**
-     * Set codes.
+     * Set treatmentRate.
      *
-     * @param string|null $codes
+     * @param int $treatmentRate
      *
      * @return PostalCode
      */
-    public function setCodes($codes = null)
+    public function setTreatmentRate($treatmentRate)
     {
-        $this->codes = $codes;
+        $this->treatmentRate = $treatmentRate;
 
         return $this;
     }
 
     /**
-     * Get codes.
+     * Get treatmentRate.
      *
-     * @return string|null
+     * @return int
      */
-    public function getCodes()
+    public function getTreatmentRate()
     {
-        return $this->codes;
+        return $this->treatmentRate;
+    }
+
+    /**
+     * Set traceabilityRate.
+     *
+     * @param int $traceabilityRate
+     *
+     * @return PostalCode
+     */
+    public function setTraceabilityRate($traceabilityRate)
+    {
+        $this->traceabilityRate = $traceabilityRate;
+
+        return $this;
+    }
+
+    /**
+     * Get traceabilityRate.
+     *
+     * @return int
+     */
+    public function getTraceabilityRate()
+    {
+        return $this->traceabilityRate;
+    }
+
+    /**
+     * Set userCreation.
+     *
+     * @param \Paprec\UserBundle\Entity\User $userCreation
+     *
+     * @return PostalCode
+     */
+    public function setUserCreation(\Paprec\UserBundle\Entity\User $userCreation)
+    {
+        $this->userCreation = $userCreation;
+
+        return $this;
+    }
+
+    /**
+     * Get userCreation.
+     *
+     * @return \Paprec\UserBundle\Entity\User
+     */
+    public function getUserCreation()
+    {
+        return $this->userCreation;
+    }
+
+    /**
+     * Set userUpdate.
+     *
+     * @param \Paprec\UserBundle\Entity\User|null $userUpdate
+     *
+     * @return PostalCode
+     */
+    public function setUserUpdate(\Paprec\UserBundle\Entity\User $userUpdate = null)
+    {
+        $this->userUpdate = $userUpdate;
+
+        return $this;
+    }
+
+    /**
+     * Get userUpdate.
+     *
+     * @return \Paprec\UserBundle\Entity\User|null
+     */
+    public function getUserUpdate()
+    {
+        return $this->userUpdate;
+    }
+
+    /**
+     * Set userInCharge.
+     *
+     * @param \Paprec\UserBundle\Entity\User|null $userInCharge
+     *
+     * @return PostalCode
+     */
+    public function setUserInCharge(\Paprec\UserBundle\Entity\User $userInCharge = null)
+    {
+        $this->userInCharge = $userInCharge;
+
+        return $this;
+    }
+
+    /**
+     * Get userInCharge.
+     *
+     * @return \Paprec\UserBundle\Entity\User|null
+     */
+    public function getUserInCharge()
+    {
+        return $this->userInCharge;
+    }
+
+    /**
+     * Set region.
+     *
+     * @param \Paprec\CatalogBundle\Entity\Region|null $region
+     *
+     * @return PostalCode
+     */
+    public function setRegion(\Paprec\CatalogBundle\Entity\Region $region = null)
+    {
+        $this->region = $region;
+
+        return $this;
+    }
+
+    /**
+     * Get region.
+     *
+     * @return \Paprec\CatalogBundle\Entity\Region|null
+     */
+    public function getRegion()
+    {
+        return $this->region;
     }
 }

@@ -2,9 +2,12 @@
 
 namespace Paprec\CatalogBundle\Form;
 
+use Paprec\CatalogBundle\Entity\Region;
+use Paprec\CatalogBundle\Repository\RegionRepository;
+use Paprec\UserBundle\Entity\User;
+use Paprec\UserBundle\Repository\UserRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -19,20 +22,41 @@ class PostalCodeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('codes', TextareaType::class, array(
+            ->add('code', TextType::class, array(
                 "required" => true
             ))
-            ->add('rate', TextType::class, array(
+            ->add('transportRate', TextType::class, array(
                 "required" => true
             ))
-            ->add('division', ChoiceType::class, array(
-                "choices" => $options['division'],
-                "expanded" => true,
-                "multiple" => false
+            ->add('treatmentRate', TextType::class, array(
+                "required" => true
             ))
-        ;
+            ->add('traceabilityRate', TextType::class, array(
+                "required" => true
+            ))
+            ->add('region', EntityType::class, array(
+                'class' => Region::class,
+                'choice_label' => 'name',
+                'multiple' => false,
+                'expanded' => false,
+                'query_builder' => function (RegionRepository $rr) {
+                    return $rr->createQueryBuilder('r')
+                        ->where('r.deleted IS NULL');
+                }
+            ))
+            ->add('userInCharge', EntityType::class, array(
+                'class' => User::class,
+                'choice_label' => 'username',
+                'multiple' => false,
+                'expanded' => false,
+                'query_builder' => function (UserRepository $ur) {
+                    return $ur->createQueryBuilder('u')
+                        ->where('u.deleted IS NULL')
+                        ->andWhere('u.roles LIKE \'%ROLE_COMMERCIAL%\'');
+                }
+            ));
     }
-    
+
     /**
      * @param OptionsResolver $resolver
      */

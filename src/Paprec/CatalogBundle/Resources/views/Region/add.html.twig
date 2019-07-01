@@ -1,30 +1,31 @@
 {% extends "::base_admin.html.twig" %}
 
 {% block title %}
-    {{ 'Catalog.ProductLabel.Add'|trans }}
+    {{ 'Catalog.Region.Add'|trans }}
 {% endblock %}
 
 {% block stylesheets %}
 {% endblock %}
 
 {% block content_title %}
-    {{ 'Catalog.ProductLabel.Add'|trans }}
+    {{ 'Catalog.Region.Add'|trans }}
 {% endblock %}
 
 {% block main_content %}
-    <form id="catalogProductForm" action="" method="post" enctype="multipart/form-data">
+
+    <form id="catalogRegionForm" action="" method="post" enctype="multipart/form-data">
 
         <div class="col-md-12">
             <!-- BOX -->
             <div class="card">
                 <div class="card-header">
                     <h4>
-                        <i class="fa fa-xs fa-plus"></i> {{ 'Catalog.ProductLabel.Add'|trans }}
+                        <i class="fa fa-xs fa-plus"></i> {{ 'Catalog.Region.Add'|trans }}
                     </h4>
                     <div class="float-right">
-                        <a href="javascript:void(0);" class="btn btn-sm btn-success catalog-product-product-label-save-button"><i
+                        <a href="javascript:void(0);" class="btn btn-sm btn-success catalog-region-save-button"><i
                                     class="fa fa-xs fa-check"></i> {{ 'General.Save'|trans }}</a>
-                        <a href="javascript:void(0);" class="btn btn-sm btn-danger catalog-product-product-label-cancel-button"><i
+                        <a href="javascript:void(0);" class="btn btn-sm btn-danger catalog-region-cancel-button"><i
                                     class="fa fa-xs fa-close"></i> {{ 'General.Cancel'|trans }}</a>
                     </div>
                 </div>
@@ -36,26 +37,10 @@
                             </div>
                             <div class="card-body">
                                 <div class="form-group">
-                                    <div class="form-label">{{ 'Catalog.ProductLabel.Name'|trans }}</div>
+                                    <div class="form-label">{{ 'Catalog.Region.Name'|trans }}</div>
                                     <div class="form-content">
                                         {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
                                         {{ form_errors(form.name) }}
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="form-label">{{ 'Catalog.ProductLabel.Short-description'|trans }}</div>
-                                    <div class="form-content">
-                                        {{ form_widget(form.shortDescription, {'attr': {'class': 'form-control'}}) }}
-                                        {{ form_errors(form.shortDescription) }}
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="form-label">{{ 'Catalog.ProductLabel.Language.Language'|trans }}</div>
-                                    <div class="form-content">
-                                        {{ form_widget(form.language, {'attr': {'class': 'form-control product-label-language-input'}}) }}
-                                        {{ form_errors(form.language) }}
                                     </div>
                                 </div>
                             </div>
@@ -65,9 +50,9 @@
 
                 <div class="card-footer">
                     <div class="float-right">
-                        <a href="javascript:void(0);" class="btn btn-sm btn-success catalog-product-product-label-save-button"><i
+                        <a href="javascript:void(0);" class="btn btn-sm btn-success catalog-region-save-button"><i
                                     class="fa fa-xs fa-check"></i> {{ 'General.Save'|trans }}</a>
-                        <a href="javascript:void(0);" class="btn btn-sm btn-danger catalog-product-product-label-cancel-button"><i
+                        <a href="javascript:void(0);" class="btn btn-sm btn-danger catalog-region-cancel-button"><i
                                     class="fa fa-xs fa-close"></i> {{ 'General.Cancel'|trans }}</a>
                     </div>
                 </div>
@@ -85,13 +70,14 @@
     <script>
         $(function () {
 
-            $('.catalog-product-product-label-save-button').on('click', function () {
-                $('#catalogProductForm').submit();
+            $('.catalog-region-save-button').on('click', function () {
+                $('#catalogRegionForm').submit();
             });
 
-            $('.catalog-product-product-label-cancel-button').on('click', function () {
 
-                var url = "{{ path("paprec_catalog_product_view", {id: product.id}) }}";
+            $('.catalog-region-cancel-button').on('click', function () {
+
+                var url = "{{ path("paprec_catalog_region_index") }}";
 
                 Swal({
                     title: "{{ 'General.Confirm'|trans }}",

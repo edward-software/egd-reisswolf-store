@@ -28,7 +28,7 @@
                                 class="fa fa-xs fa-edit"></i> {{ 'Home.Ticket.Edit'|trans }}</a>
                     <a href="javascript:void(0);" class="btn btn-sm btn-danger view-confirm-button"
                        data-url="{{ path("paprec_home_ticket_remove", {id: ticket.id}) }}"
-                       data-text="{{ 'Home.Ticket.Confirm-remove'|trans }}"><i
+                       data-text="{{ 'General.Confirm-remove'|trans }}"><i
                                 class="fa fa-xs fa-trash"></i> {{ 'Home.Ticket.Remove'|trans }}</a>
                 </div>
                 <div class="float-left">
@@ -41,7 +41,7 @@
                 <div class="col-md-7">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title">{{ 'Home.Ticket.Informations'|trans }}</h5>
+                            <h5 class="card-title">{{ 'General.Information'|trans }}</h5>
                         </div>
                         <div class="card-body">
 
@@ -123,10 +123,10 @@
                                         <div class="card-header">
 
                                             {% if message.dateUpdate is not null %}
-                                                {{ 'Home.Ticket.Date-update'|trans }} : {{ message.dateUpdate is empty ? "" : message.dateUpdate|localizeddate('short', 'short', app.request.locale) }}
+                                                {{ 'General.Date-update'|trans }} : {{ message.dateUpdate is empty ? "" : message.dateUpdate|localizeddate('short', 'short', app.request.locale) }}
                                                 - {{ message.userUpdate.firstName }} {{ message.userUpdate.lastName }}
                                             {% else %}
-                                                {{ 'Home.Ticket.Date-creation'|trans }}
+                                                {{ 'General.Date-creation'|trans }}
                                                 : {{ message.dateCreation is empty ? "" : message.dateCreation|localizeddate('short', 'short', app.request.locale) }}
                                                 - {{ message.userCreation.firstName }} {{ message.userCreation.lastName }}
                                             {% endif %}
