@@ -410,6 +410,10 @@
                                        class="btn btn-sm btn-warning"><i
                                                 class="fa fa-xs fa-edit"></i> {{ 'Catalog.ProductLabel.Edit'|trans }}
                                     </a>
+                                    <a id="catalogProductLabelRemoveButton_{{ pL.id }}"  href="javascript:void(0);"
+                                       class="btn btn-sm btn-danger catalogProductLabelRemoveButton"><i
+                                                class="fa fa-xs fa-trash"></i> {{ 'Catalog.ProductLabel.Remove'|trans }}
+                                    </a>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -446,6 +450,26 @@
                     Swal({
                         title: "{{ 'General.Confirm'|trans }}",
                         text: "{{ 'Catalog.Product.Confirm-remove'|trans }}",
+                        showCancelButton: true,
+                        confirmButtonText: "{{ 'General.Yes'|trans }}",
+                        cancelButtonText: "{{ 'General.No'|trans }}"
+                    }).then((result) => {
+                        if (result.value) {
+                            $(location).attr('href', url);
+                        }
+                    });
+
+                });
+
+                $('.catalogProductLabelRemoveButton').on('click', function () {
+
+                    var pLId = $(this).attr('id').replace('catalogProductLabelRemoveButton_', '');
+
+                    var url = "{{ path("paprec_catalog_product_removeProductLabel", {id: product.id, productLabelId: 'productLabelId'}) }}".replace('productLabelId', pLId);
+
+                    Swal({
+                        title: "{{ 'General.Confirm'|trans }}",
+                        text: "{{ 'General.Confirm-remove'|trans }}",
                         showCancelButton: true,
                         confirmButtonText: "{{ 'General.Yes'|trans }}",
                         cancelButtonText: "{{ 'General.No'|trans }}"

@@ -2,8 +2,6 @@
 
 namespace Paprec\CatalogBundle\Controller;
 
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\ORMException;
 use Paprec\CatalogBundle\Entity\Picture;
 use Paprec\CatalogBundle\Entity\Product;
 use Paprec\CatalogBundle\Entity\ProductCategory;
@@ -15,8 +13,6 @@ use Paprec\CatalogBundle\Form\ProductPackageType;
 use Paprec\CatalogBundle\Form\ProductType;
 use Paprec\CommercialBundle\Form\ProductCategoryEditType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Config\Definition\Exception\Exception;
@@ -27,6 +23,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\Annotation\Route;
 
 class ProductController extends Controller
 {
@@ -47,8 +44,6 @@ class ProductController extends Controller
     public function loadListAction(Request $request)
     {
         $productManager = $this->get('paprec_catalog.product_manager');
-
-        $language = $request->getLocale();
 
         $return = array();
         $locale = $request->getLocale();
@@ -74,7 +69,6 @@ class ProductController extends Controller
         $queryBuilder->select(array('p', 'pL'))
             ->leftJoin('p.productLabels', 'pL')
             ->where('p.deleted IS NULL')
-            ->andWhere('pL.deleted IS NULL')
             ->andWhere('pL.language = :language')
             ->setParameter('language', 'EN');
 
@@ -552,6 +546,31 @@ class ProductController extends Controller
         return $this->render('@PaprecCatalog/Product/ProductLabel/edit.html.twig', array(
             'form' => $form->createView(),
             'product' => $product
+        ));
+    }
+
+    /**
+     * @Route("/product/{id}/removeProductLabel/{productLabelId}",  name="paprec_catalog_product_removeProductLabel")
+     * @Security("has_role('ROLE_ADMIN')")
+     * @param Request $request
+     * @param Product $product
+     * @param $productLabelId
+     */
+    public function removeProductLabelAction(Request $request, Product $product, $productLabelId)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $productManager = $this->get('paprec_catalog.product_manager');
+        $productLabelManager = $this->get('paprec_catalog.product_label_manager');
+
+        $productManager->isDeleted($product, true);
+
+        $productLabel = $productLabelManager->get($productLabelId);
+        $em->remove($productLabel);
+
+        $em->flush();
+
+        return $this->redirectToRoute('paprec_catalog_product_view', array(
+            'id' => $product->getId()
         ));
     }
 
