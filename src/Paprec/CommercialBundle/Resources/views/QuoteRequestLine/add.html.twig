@@ -1,0 +1,127 @@
+{% extends "::base_admin.html.twig" %}
+
+{% block title %}
+    {{ 'Commercial.QuoteRequest.Add'|trans }}
+{% endblock %}
+
+{% block stylesheets %}
+{% endblock %}
+
+{% block content_title %}
+    {{ 'Commercial.QuoteRequest.ProductDIQuotes'|trans }}
+{% endblock %}
+
+{% block main_content %}
+
+    <form id="commercialProductDIQuoteForm" action="" method="post" enctype="multipart/form-data">
+        <input type="hidden" id="submitFormInput" name="submitForm" value="">
+        <input type="hidden" id="selectedProductInput" name="selectedProductId" value="">
+
+        <div class="col-md-12">
+            <!-- BOX -->
+            <div class="card">
+                <div class="card-header">
+                    <h4>
+                        <i class="fa fa-xs fa-plus"></i> {{ 'Commercial.QuoteRequest.AddLine'|trans }}
+                    </h4>
+                    <div class="float-right">
+                        <a href="javascript:void(0);" class="btn btn-sm btn-success commercial-productDIQuoteLine-save-button"><i
+                                    class="fa fa-xs fa-check"></i> {{ 'Commercial.QuoteRequest.Save'|trans }}</a>
+                        <a href="javascript:void(0);" class="btn btn-sm btn-danger commercial-productDIQuoteLine-cancel-button"><i
+                                    class="fa fa-xs fa-close"></i> {{ 'Commercial.QuoteRequest.Cancel'|trans }}</a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="col-md-7">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">{{ 'Commercial.QuoteRequest.Informations'|trans }}</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label class="form-label">{{ 'Commercial.QuoteRequestLine.ProductName'|trans }}</label>
+                                    <div class="form-content">
+                                        {{ form_widget(form.productDI, {'attr': {'class': 'form-control select-product'}}) }}
+                                        {{ form_errors(form.productDI) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">{{ 'Commercial.QuoteRequestLine.CategoryName'|trans }}</label>
+                                    <div class="form-content">
+                                        {{ form_widget(form.category, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_errors(form.category) }}
+                                    </div>
+                                </div>
+                                <div class="form-group no-gutters">
+                                    <label class="form-label">{{ 'Commercial.QuoteRequestLine.Quantity'|trans }}</label>
+                                    <div class="form-content col-md-6">
+                                        {{ form_widget(form.quantity, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_errors(form.quantity) }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <div class="float-right">
+                        <a href="javascript:void(0);" class="btn btn-sm btn-success commercial-productDIQuoteLine-save-button"><i
+                                    class="fa fa-xs fa-check"></i> {{ 'Commercial.QuoteRequest.Save'|trans }}</a>
+                        <a href="javascript:void(0);" class="btn btn-sm btn-danger commercial-productDIQuoteLine-cancel-button"><i
+                                    class="fa fa-xs fa-close"></i> {{ 'Commercial.QuoteRequest.Cancel'|trans }}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{ form_rest(form) }}
+    </form>
+    </div>
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+
+    <script>
+        $(function () {
+            $('#selectedProductInput').val($('.select-product').val());
+
+
+            $('.commercial-productDIQuoteLine-save-button').on('click', function () {
+                $('#submitFormInput').val(1);
+                $('#commercialProductDIQuoteForm').submit();
+            });
+
+
+            $('.commercial-productDIQuoteLine-cancel-button').on('click', function () {
+
+                var url = "{{ path("paprec_commercial_productDIQuote_view", { id: productDIQuote.id }) }}";
+
+                Swal({
+                    title: "{{ 'General.Confirm'|trans }}",
+                    text: "{{ 'Commercial.QuoteRequest.Confirm-cancel'|trans }}",
+                    showCancelButton: true,
+                    confirmButtonText: "{{ 'General.Yes'|trans }}",
+                    cancelButtonText: "{{ 'General.No'|trans }}"
+                }).then((result) => {
+                    if (result.value) {
+                        $(location).attr('href', url);
+                    }
+                });
+
+            });
+
+            $('.select-product').on('change', function(){
+                $('#selectedProductInput').val($(this).val());
+                $('#submitFormInput').val('');
+                if($(this).val() != '')
+                {
+                    $('#commercialProductDIQuoteForm').submit();
+                }
+            });
+
+        });
+    </script>
+{% endblock %}

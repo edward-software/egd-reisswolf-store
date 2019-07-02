@@ -145,7 +145,7 @@ class SubscriptionController extends Controller
         $cartManager = $this->get('paprec.cart_manager');
         $em = $this->getDoctrine()->getManager();
 
-        $productDIQuote = $em->getRepository('PaprecCommercialBundle:ProductDIQuote')->find($quoteId);
+        $productDIQuote = $em->getRepository('PaprecCommercialBundle:QuoteRequest')->find($quoteId);
         $cart = $cartManager->get($cartUuid);
 
         return $this->render('@PaprecPublic/DI/offerDetails.html.twig', array(

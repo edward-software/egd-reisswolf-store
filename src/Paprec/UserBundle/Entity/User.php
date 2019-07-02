@@ -105,6 +105,11 @@ class User extends BaseUser
      */
     private $postalCodes;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Paprec\CommercialBundle\Entity\QuoteRequest", mappedBy="userInCharge")
+     */
+    private $quoteRequests;
+
 
     public function __construct()
     {
@@ -363,5 +368,41 @@ class User extends BaseUser
     public function getPostalCodes()
     {
         return $this->postalCodes;
+    }
+
+    /**
+     * Add quoteRequest.
+     *
+     * @param \Paprec\CommercialBundle\Entity\QuoteRequest $quoteRequest
+     *
+     * @return User
+     */
+    public function addQuoteRequest(\Paprec\CommercialBundle\Entity\QuoteRequest $quoteRequest)
+    {
+        $this->quoteRequests[] = $quoteRequest;
+
+        return $this;
+    }
+
+    /**
+     * Remove quoteRequest.
+     *
+     * @param \Paprec\CommercialBundle\Entity\QuoteRequest $quoteRequest
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeQuoteRequest(\Paprec\CommercialBundle\Entity\QuoteRequest $quoteRequest)
+    {
+        return $this->quoteRequests->removeElement($quoteRequest);
+    }
+
+    /**
+     * Get quoteRequests.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getQuoteRequests()
+    {
+        return $this->quoteRequests;
     }
 }

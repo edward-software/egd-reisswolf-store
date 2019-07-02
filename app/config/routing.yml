@@ -1,3 +1,8 @@
+commercial:
+    resource: "@PaprecCommercialBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 ### Back Office
 
 fos_user_security_login:
@@ -26,6 +31,11 @@ paprec_catalog:
     resource: "@PaprecCatalogBundle/Controller/"
     type:     annotation
     prefix:   /devis/admin/catalog
+
+paprec_commercial:
+    resource: "@PaprecCommercialBundle/Controller/"
+    type:     annotation
+    prefix:   /devis/admin/commercial
 
 ### Front Office
 

@@ -639,7 +639,7 @@ class HomeController extends Controller
      */
     public function showMailNewDIQuote(ProductDIQuote $productDIQuote)
     {
-        return $this->render('@PaprecCommercial/ProductDIQuote/emails/sendNewQuoteEmail.html.twig', array(
+        return $this->render('@PaprecCommercial/QuoteRequest/emails/sendNewQuoteEmail.html.twig', array(
             'productDIQuote' => $productDIQuote
         ));
     }
@@ -653,7 +653,7 @@ class HomeController extends Controller
      */
     public function showMailConfirmDIQuote(ProductDIQuote $productDIQuote)
     {
-        return $this->render('@PaprecCommercial/ProductDIQuote/emails/sendGeneratedQuoteEmail.html.twig', array(
+        return $this->render('@PaprecCommercial/QuoteRequest/emails/sendGeneratedQuoteEmail.html.twig', array(
             'productDIQuote' => $productDIQuote
         ));
     }
@@ -857,7 +857,7 @@ class HomeController extends Controller
     public function showDevisDICover(ProductDIQuote $productDIQuote)
     {
         $today = new \DateTime();
-        return $this->render('@PaprecCommercial/ProductDIQuote/PDF/printQuoteCover.html.twig', array(
+        return $this->render('@PaprecCommercial/QuoteRequest/PDF/printQuoteCover.html.twig', array(
                 'productDIQuote' => $productDIQuote,
                 'date' => $today
             )
@@ -872,7 +872,7 @@ class HomeController extends Controller
     public function showDevisDILetter(ProductDIQuote $productDIQuote)
     {
         $today = new \DateTime();
-        return $this->render('@PaprecCommercial/ProductDIQuote/PDF/printQuoteLetter.html.twig', array(
+        return $this->render('@PaprecCommercial/QuoteRequest/PDF/printQuoteLetter.html.twig', array(
                 'productDIQuote' => $productDIQuote,
                 'date' => $today
             )
@@ -886,7 +886,7 @@ class HomeController extends Controller
      */
     public function showDevisDIProducts(ProductDIQuote $productDIQuote)
     {
-        return $this->render('@PaprecCommercial/ProductDIQuote/PDF/printQuoteProducts.html.twig', array(
+        return $this->render('@PaprecCommercial/QuoteRequest/PDF/printQuoteProducts.html.twig', array(
                 'productDIQuote' => $productDIQuote
             )
         );

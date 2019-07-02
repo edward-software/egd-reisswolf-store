@@ -170,6 +170,19 @@
                 {#{% endif %}#}
 
                 {% if is_granted('ROLE_ADMIN') %}
+                    <li class="nav-item dropdown{% if app.request.get('_route')|slice(0, 'paprec_commercial'|length) == 'paprec_commercial' %} active{% endif %}">
+                        <a href="#" class="dropdown-toggle nav-link" id="navbarDropdownCommercial" data-toggle="dropdown"
+                           role="button" aria-haspopup="true" aria-expanded="false">{{ 'Commercial.Bundle-name'|trans }}
+                            <span class="caret"></span>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownCommercial">
+                            <a class="dropdown-item{% if app.request.get('_route')|slice(0, 'paprec_user_quoteRequest'|length) == 'paprec_user_quoteRequest' %} active{% endif %}"
+                               href="{{ path('paprec_commercial_quoteRequest_index') }}">{{ 'Commercial.QuoteRequests'|trans }}</a>
+                        </div>
+                    </li>
+                {% endif %}
+
+                {% if is_granted('ROLE_ADMIN') %}
                     <li class="nav-item dropdown{% if app.request.get('_route')|slice(0, 'paprec_user'|length) == 'paprec_user' %} active{% endif %}">
                         <a href="#" class="dropdown-toggle nav-link" id="navbarDropdownUser" data-toggle="dropdown"
                            role="button" aria-haspopup="true" aria-expanded="false">{{ 'User.Bundle-name'|trans }}

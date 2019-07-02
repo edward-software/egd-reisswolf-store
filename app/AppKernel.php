@@ -26,6 +26,7 @@ class AppKernel extends Kernel
             new Paprec\UserBundle\PaprecUserBundle(),
             new Paprec\CatalogBundle\PaprecCatalogBundle(),
             new Paprec\PublicBundle\PaprecPublicBundle(),
+            new Paprec\CommercialBundle\PaprecCommercialBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
