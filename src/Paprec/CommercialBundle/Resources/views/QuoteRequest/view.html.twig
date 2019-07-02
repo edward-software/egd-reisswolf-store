@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block content_title %}
-    {{ 'Commercial.QuoteRequest.ProductDIQuotes'|trans }}
+    {{ 'Commercial.QuoteRequest.QuoteRequests'|trans }}
 {% endblock %}
 
 {% block main_content %}
@@ -31,21 +31,21 @@
         <div class="card">
             <div class="card-header">
                 <h4>
-                    <i class="fa fa-xs fa-productDIQuote"></i> {{ 'Commercial.QuoteRequest.View'|trans }}
+                    <i class="fa fa-xs fa-quoteRequest"></i> {{ 'Commercial.QuoteRequest.View'|trans }}
                 </h4>
                 <div class="float-right">
                     <a id="sendGeneratedQuoteButton" href="javascript:void(0);" class="btn btn-sm btn-success"><i
                                 class="fa fa-xs fa-envelope"></i> {{ 'Commercial.QuoteRequest.Send-quote'|trans }}
                     </a>
-                    <a href="{{ path("paprec_commercial_productDIQuote_edit", {id: productDIQuote.id}) }}"
+                    <a href="{{ path("paprec_commercial_quoteRequest_edit", {id: quoteRequest.id}) }}"
                        class="btn btn-sm btn-warning"><i
                                 class="fa fa-xs fa-edit"></i> {{ 'Commercial.QuoteRequest.Edit'|trans }}</a>
-                    <a id="commmecialProductDIQuoteRemoveButton" href="javascript:void(0);"
+                    <a id="commmecialQuoteRequestRemoveButton" href="javascript:void(0);"
                        class="btn btn-sm btn-danger"><i
-                                class="fa fa-xs fa-trash"></i> {{ 'Commercial.QuoteRequest.Remove'|trans }}</a>
+                                class="fa fa-xs fa-trash"></i> {{ 'General.Remove'|trans }}</a>
                 </div>
                 <div class="float-left">
-                    <a href="{{ path('paprec_commercial_productDIQuote_index') }}" class="btn btn-sm btn-default"><i
+                    <a href="{{ path('paprec_commercial_quoteRequest_index') }}" class="btn btn-sm btn-default"><i
                                 class="fa fa-xs fa-chevron-left"></i> {{ 'Commercial.QuoteRequest.List'|trans }}</a>
                 </div>
             </div>
@@ -58,128 +58,90 @@
                         <div class="card-body row">
                             <div class="col-md-6">
                                 <div class="form-group row">
-                                    <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.BusinessName'|trans }}</label>
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.Canton'|trans }}</label>
                                     <label class="col-form-label">
-                                        {{ productDIQuote.businessName }}
+                                        {{ quoteRequest.canton }}
                                     </label>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.BusinessLine'|trans }}</label>
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.BusinessName'|trans }}</label>
                                     <label class="col-form-label">
-                                        {% if productDIQuote.businessLine %}
-                                            <a href="{{ path('paprec_commercial_businessLine_view', {id: productDIQuote.businessLine.id}) }}">{{ productDIQuote.businessLine.name }}</a>
-                                        {% endif %}
+                                        {{ quoteRequest.businessName }}
                                     </label>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.Civility'|trans }}</label>
                                     <label class="col-form-label">
-                                        {{ productDIQuote.civility }}
+                                        {{ quoteRequest.civility }}
                                     </label>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.LastName'|trans }}</label>
                                     <label class="col-form-label">
-                                        {{ productDIQuote.lastName }}
+                                        {{ quoteRequest.lastName }}
                                     </label>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.FirstName'|trans }}</label>
                                     <label class="col-form-label">
-                                        {{ productDIQuote.firstName }}
+                                        {{ quoteRequest.firstName }}
                                     </label>
                                 </div>
-                                <div class="form-group row">
-                                    <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.Function'|trans }}</label>
-                                    <label class="col-form-label">
-                                        {{ productDIQuote.function }}
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
                                 <div class="form-group row">
                                     <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.Email'|trans }}</label>
                                     <label class="col-form-label">
-                                        {{ productDIQuote.email }}
+                                        {{ quoteRequest.email }}
                                     </label>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.Phone'|trans }}</label>
                                     <label class="col-form-label">
-                                        {{ productDIQuote.phone }}
-                                    </label>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.PreferredContact'|trans }}</label>
-                                    <label class="col-form-label">
-                                        {{ ('Commercial.QuoteRequest.' ~ productDIQuote.preferredContact|capitalize)|trans }}
-                                    </label>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.QuoteStatus'|trans }}</label>
-                                    <label class="col-form-label">
-                                        {{ ('Commercial.QuoteStatusList.' ~ productDIQuote.quoteStatus)|trans }}
-                                    </label>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.TotalAmount'|trans }}</label>
-                                    <label class="col-form-label">
-                                        {{ productDIQuote.totalAmount|formatAmount('EUR', app.request.locale) }}
+                                        {{ quoteRequest.phone }}
                                     </label>
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h5 class="card-title">{{ 'Commercial.QuoteRequest.HeadOfficeAddress'|trans }}</h5>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="form-group row">
-                                            <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.Address'|trans }}</label>
-                                            <label class="col-form-label">
-                                                {{ productDIQuote.headofficeAddress }}
-                                            </label>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.PostalCode'|trans }}</label>
-                                            <label class="col-form-label">
-                                                {{ productDIQuote.headofficePostalCode }}
-                                            </label>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.City'|trans }}</label>
-                                            <label class="col-form-label">
-                                                {{ productDIQuote.headofficeCity }}
-                                            </label>
-                                        </div>
-                                    </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.Frequency'|trans }}</label>
+                                    <label class="col-form-label">
+                                        {{ quoteRequest.frequency }}
+                                    </label>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h5 class="card-title">{{ 'Commercial.QuoteRequest.SiteAddress'|trans }}</h5>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="form-group row">
-                                            <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.Address'|trans }}</label>
-                                            <label class="col-form-label">
-                                                {{ productDIQuote.address }}
-                                            </label>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.PostalCode'|trans }}</label>
-                                            <label class="col-form-label">
-                                                {{ productDIQuote.postalCode }}
-                                            </label>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.City'|trans }}</label>
-                                            <label class="col-form-label">
-                                                {{ productDIQuote.city }}
-                                            </label>
-                                        </div>
-                                    </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.IsMultisite'|trans }}</label>
+                                    <label class="col-form-label">
+                                        {{ ('General.' ~ quoteRequest.isMultisite)|trans }}
+                                    </label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.Address'|trans }}</label>
+                                    <label class="col-form-label">
+                                        {{ quoteRequest.address }}
+                                    </label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.PostalCode'|trans }}</label>
+                                    <label class="col-form-label">
+                                        {{ quoteRequest.postalCode }}
+                                    </label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.City'|trans }}</label>
+                                    <label class="col-form-label">
+                                        {{ quoteRequest.city }}
+                                    </label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.Comment'|trans }}</label>
+                                    <label class="col-form-label">
+                                        {{ quoteRequest.comment }}
+                                    </label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.CoworkerNumber'|trans }}</label>
+                                    <label class="col-form-label">
+                                        {{ quoteRequest.coworkerNumber|formatAmount(null, app.request.locale) }}
+                                    </label>
                                 </div>
                             </div>
                         </div>
@@ -192,53 +154,38 @@
                         </div>
                         <div class="card-body row">
                             <div class="col-md-6">
-
                                 <div class="form-group row">
-                                    <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.GeneratedTurnover'|trans }}</label>
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.UserInCharge'|trans }}</label>
                                     <label class="col-form-label">
-                                        {{ productDIQuote.generatedTurnover|formatAmount('EUR', app.request.locale) }}
-                                    </label>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.Agency'|trans }}</label>
-                                    <label class="col-form-label">
-                                        {% if productDIQuote.agency %}
-                                            <a href="{{ path('paprec_commercial_agence_view', {id: productDIQuote.agency.id}) }}">{{ productDIQuote.agency }}</a>
+                                        {% if quoteRequest.userInCharge %}
+                                            <a href="{{ path('paprec_user_user_view', {id: quoteRequest.userInCharge.id}) }}">{{ quoteRequest.userInCharge }}</a>
                                         {% endif %}
                                     </label>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.Summary'|trans }}</label>
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.QuoteStatus'|trans }}</label>
                                     <label class="col-form-label">
-                                        {{ productDIQuote.summary|nl2br }}
+                                        {{ ('Commercial.QuoteStatusList.' ~ quoteRequest.quoteStatus)|trans }}
                                     </label>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.Frequency'|trans }}</label>
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.OverallDiscount'|trans }}</label>
                                     <label class="col-form-label">
-                                        {% if productDIQuote.frequency == 'regular' %}Régulier {% else %}Ponctuel{% endif %}
+                                        {{ quoteRequest.overallDiscount|formatAmount(null, app.request.locale) }}
                                     </label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group row">
-                                    <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.Tonnage'|trans }}</label>
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.MonthlyBudget'|trans }}</label>
                                     <label class="col-form-label">
-                                        {{ productDIQuote.tonnage }}
+                                        {{ quoteRequest.monthlyBudget|formatAmount(null, app.request.locale) }}
                                     </label>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.KookaburaNumber'|trans }}</label>
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.SalesmanComment'|trans }}</label>
                                     <label class="col-form-label">
-                                        {{ productDIQuote.kookaburaNumber }}
-                                    </label>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.UserInCharge'|trans }}</label>
-                                    <label class="col-form-label">
-                                        {% if productDIQuote.userInCharge %}
-                                            <a href="{{ path('paprec_user_user_view', {id: productDIQuote.userInCharge.id}) }}">{{ productDIQuote.userInCharge }}</a>
-                                        {% endif %}
+                                        {{ quoteRequest.salesmanComment }}
                                     </label>
                                 </div>
                             </div>
@@ -253,22 +200,20 @@
                             </h5>
                             <div class="float-right">
 
-                                <a href="{{ path('paprec_commercial_productDIQuote_addLine', {id: productDIQuote.id}) }}"
+                                <a href="{{ path('paprec_commercial_quoteRequest_addLine', {id: quoteRequest.id}) }}"
                                    class="btn btn-sm btn-outline-primary">
                                     <i class="fa fa-xs fa-plus"></i> {{ 'Commercial.QuoteRequest.AddLine'|trans }}
                                 </a>
                             </div>
                         </div>
                         <div class="card-body">
-                            <table id="productDIQuoteLinesDatatable"
+                            <table id="quoteRequestLinesDatatable"
                                    class="table table-striped table-bordered table-hover"
                                    cellpadding="0" cellspacing="0" border="0">
                                 <thead>
                                 <tr>
                                     <th>#</th>
                                     <th>{{ 'Commercial.QuoteRequestLine.ProductName'|trans }}</th>
-                                    <th>{{ 'Commercial.QuoteRequestLine.CategoryName'|trans }}</th>
-                                    <th>{{ 'Commercial.QuoteRequestLine.UnitPrice'|trans }}</th>
                                     <th>{{ 'Commercial.QuoteRequestLine.Quantity'|trans }}</th>
                                     <th>{{ 'Commercial.QuoteRequestLine.TotalAmount'|trans }}</th>
 
@@ -276,23 +221,21 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {% for productDIQuoteLine in productDIQuote.productDIQuoteLines %}
+                                {% for quoteRequestLine in quoteRequest.quoteRequestLines %}
                                     <tr>
-                                        <td>{{ productDIQuoteLine.id|formatId(6) }}</td>
-                                        <td>{{ productDIQuoteLine.productName }}</td>
-                                        <td>{{ productDIQuoteLine.categoryName }}</td>
-                                        <td>{{ productDIQuoteLine.unitPrice|formatAmount('EUR', app.request.locale) }}</td>
-                                        <td>{{ productDIQuoteLine.quantity }}</td>
-                                        <td>{{ productDIQuoteLine.totalAmount|formatAmount('EUR', app.request.locale) }}</td>
+                                        <td>{{ quoteRequestLine.id|formatId(6) }}</td>
+                                        <td>{{ quoteRequestLine.productName }}</td>
+                                        <td>{{ quoteRequestLine.quantity }}</td>
+                                        <td>{{ quoteRequestLine.totalAmount|formatAmount('EUR', app.request.locale) }}</td>
                                         <td class="text-center">
-                                            <a href="{{ path('paprec_commercial_productDIQuote_editLine', {id: productDIQuote.id, quoteLineId: productDIQuoteLine.id}) }}"
+                                            <a href="{{ path('paprec_commercial_quoteRequest_editLine', {id: quoteRequest.id, quoteLineId: quoteRequestLine.id}) }}"
                                                class="btn btn-sm btn-warning btn-sm mx-1"
-                                               data-id="{{ productDIQuoteLine.id }}">
+                                               data-id="{{ quoteRequestLine.id }}">
                                                 <i class="fa fa-xs fa-edit"></i>
                                             </a>
                                             <a href="#"
-                                               class="btn btn-sm btn-danger btn-sm commercialProductDIQuoteLineRemoveButton"
-                                               data-id="{{ productDIQuoteLine.id }}">
+                                               class="btn btn-sm btn-danger btn-sm commercialQuoteRequestLineRemoveButton"
+                                               data-id="{{ quoteRequestLine.id }}">
                                                 <i class="fa fa-xs fa-trash"></i>
                                             </a>
                                         </td>
@@ -306,21 +249,21 @@
                 <div class="col-md-12 mt-3">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title">{{ 'Commercial.QuoteRequest.System-informations'|trans }}</h5>
+                            <h5 class="card-title">{{ 'General.System-information'|trans }}</h5>
                         </div>
                         <div class="card-body">
 
                             <div class="form-group row">
-                                <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.Date-creation'|trans }}</label>
+                                <label class="col-md-4 col-form-label">{{ 'General.Date-creation'|trans }}</label>
                                 <label class="col-form-label">
-                                    {{ productDIQuote.dateCreation|localizeddate('short', 'medium', app.request.locale) }}
+                                    {{ quoteRequest.dateCreation|localizeddate('short', 'medium', app.request.locale) }}
                                 </label>
                             </div>
 
                             <div class="form-group row">
-                                <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.Date-update'|trans }}</label>
+                                <label class="col-md-4 col-form-label">{{ 'General.Date-update'|trans }}</label>
                                 <label class="col-form-label">
-                                    {{ productDIQuote.dateUpdate is empty ? "" : productDIQuote.dateUpdate|localizeddate('short', 'medium', app.request.locale) }}
+                                    {{ quoteRequest.dateUpdate is empty ? "" : quoteRequest.dateUpdate|localizeddate('short', 'medium', app.request.locale) }}
                                 </label>
                             </div>
                         </div>
@@ -336,13 +279,13 @@
             <script>
                 $(function () {
 
-                    $('#commmecialProductDIQuoteRemoveButton').on('click', function () {
+                    $('#commmecialQuoteRequestRemoveButton').on('click', function () {
 
-                        var url = "{{ path("paprec_commercial_productDIQuote_remove", {id: productDIQuote.id}) }}";
+                        var url = "{{ path("paprec_commercial_quoteRequest_remove", {id: quoteRequest.id}) }}";
 
                         Swal({
                             title: "{{ 'General.Confirm'|trans }}",
-                            text: "{{ 'Commercial.QuoteRequest.Confirm-remove'|trans }}",
+                            text: "{{ 'General.Confirm-remove'|trans }}",
                             showCancelButton: true,
                             confirmButtonText: "{{ 'General.Yes'|trans }}",
                             cancelButtonText: "{{ 'General.No'|trans }}"
@@ -353,14 +296,14 @@
                         });
 
                     });
-                    $('.commercialProductDIQuoteLineRemoveButton').on('click', function () {
+                    $('.commercialQuoteRequestLineRemoveButton').on('click', function () {
                         quoteLineId = $(this).data('id');
-                        var url = "{{ path("paprec_commercial_productDIQuote_removeLine", {id: productDIQuote.id, quoteLineId: 'quoteLineIdTmp'}) }}".replace('quoteLineIdTmp', quoteLineId);
+                        var url = "{{ path("paprec_commercial_quoteRequest_removeLine", {id: quoteRequest.id, quoteLineId: 'quoteLineIdTmp'}) }}".replace('quoteLineIdTmp', quoteLineId);
 
 
                         Swal({
                             title: "{{ 'General.Confirm'|trans }}",
-                            text: "{{ 'Commercial.QuoteRequestLine.Confirm-remove'|trans }}",
+                            text: "{{ 'General.Confirm-remove'|trans }}",
                             showCancelButton: true,
                             confirmButtonText: "{{ 'General.Yes'|trans }}",
                             cancelButtonText: "{{ 'General.No'|trans }}"
@@ -373,7 +316,7 @@
                     });
 
                     $('#sendGeneratedQuoteButton').on('click', function () {
-                        var url = "{{ path("paprec_commercial_productDIQuote_sendGeneratedQuote", {id: productDIQuote.id}) }}";
+                        var url = "{{ path("paprec_commercial_quoteRequest_sendGeneratedQuote", {id: quoteRequest.id}) }}";
 
                         Swal({
                             title: "{{ 'General.Confirm'|trans }}",

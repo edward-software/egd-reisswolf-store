@@ -1,21 +1,19 @@
 {% extends "::base_admin.html.twig" %}
 
 {% block title %}
-    {{ 'Commercial.QuoteRequest.Add'|trans }}
+    {{ 'Commercial.QuoteRequestLine.Add'|trans }}
 {% endblock %}
 
 {% block stylesheets %}
 {% endblock %}
 
 {% block content_title %}
-    {{ 'Commercial.QuoteRequest.ProductDIQuotes'|trans }}
+    {{ 'Commercial.QuoteRequestLine.Add'|trans }}
 {% endblock %}
 
 {% block main_content %}
 
-    <form id="commercialProductDIQuoteForm" action="" method="post" enctype="multipart/form-data">
-        <input type="hidden" id="submitFormInput" name="submitForm" value="">
-        <input type="hidden" id="selectedProductInput" name="selectedProductId" value="">
+    <form id="commercialQuoteRequestForm" action="" method="post" enctype="multipart/form-data">
 
         <div class="col-md-12">
             <!-- BOX -->
@@ -25,31 +23,26 @@
                         <i class="fa fa-xs fa-plus"></i> {{ 'Commercial.QuoteRequest.AddLine'|trans }}
                     </h4>
                     <div class="float-right">
-                        <a href="javascript:void(0);" class="btn btn-sm btn-success commercial-productDIQuoteLine-save-button"><i
-                                    class="fa fa-xs fa-check"></i> {{ 'Commercial.QuoteRequest.Save'|trans }}</a>
-                        <a href="javascript:void(0);" class="btn btn-sm btn-danger commercial-productDIQuoteLine-cancel-button"><i
-                                    class="fa fa-xs fa-close"></i> {{ 'Commercial.QuoteRequest.Cancel'|trans }}</a>
+                        <a href="javascript:void(0);"
+                           class="btn btn-sm btn-success commercial-quoteRequestLine-save-button"><i
+                                    class="fa fa-xs fa-check"></i> {{ 'General.Save'|trans }}</a>
+                        <a href="javascript:void(0);"
+                           class="btn btn-sm btn-danger commercial-quoteRequestLine-cancel-button"><i
+                                    class="fa fa-xs fa-close"></i> {{ 'General.Cancel'|trans }}</a>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="col-md-7">
                         <div class="card">
                             <div class="card-header">
-                                <h5 class="card-title">{{ 'Commercial.QuoteRequest.Informations'|trans }}</h5>
+                                <h5 class="card-title">{{ 'General.Information'|trans }}</h5>
                             </div>
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label class="form-label">{{ 'Commercial.QuoteRequestLine.ProductName'|trans }}</label>
+                                    <label class="form-label">{{ 'Commercial.QuoteRequestLine.Product'|trans }}</label>
                                     <div class="form-content">
-                                        {{ form_widget(form.productDI, {'attr': {'class': 'form-control select-product'}}) }}
-                                        {{ form_errors(form.productDI) }}
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">{{ 'Commercial.QuoteRequestLine.CategoryName'|trans }}</label>
-                                    <div class="form-content">
-                                        {{ form_widget(form.category, {'attr': {'class': 'form-control'}}) }}
-                                        {{ form_errors(form.category) }}
+                                        {{ form_widget(form.product, {'attr': {'class': 'form-control select-product'}}) }}
+                                        {{ form_errors(form.product) }}
                                     </div>
                                 </div>
                                 <div class="form-group no-gutters">
@@ -66,17 +59,18 @@
 
                 <div class="card-footer">
                     <div class="float-right">
-                        <a href="javascript:void(0);" class="btn btn-sm btn-success commercial-productDIQuoteLine-save-button"><i
-                                    class="fa fa-xs fa-check"></i> {{ 'Commercial.QuoteRequest.Save'|trans }}</a>
-                        <a href="javascript:void(0);" class="btn btn-sm btn-danger commercial-productDIQuoteLine-cancel-button"><i
-                                    class="fa fa-xs fa-close"></i> {{ 'Commercial.QuoteRequest.Cancel'|trans }}</a>
+                        <a href="javascript:void(0);"
+                           class="btn btn-sm btn-success commercial-quoteRequestLine-save-button"><i
+                                    class="fa fa-xs fa-check"></i> {{ 'General.Save'|trans }}</a>
+                        <a href="javascript:void(0);"
+                           class="btn btn-sm btn-danger commercial-quoteRequestLine-cancel-button"><i
+                                    class="fa fa-xs fa-close"></i> {{ 'General.Cancel'|trans }}</a>
                     </div>
                 </div>
             </div>
         </div>
         {{ form_rest(form) }}
     </form>
-    </div>
 
 
 
@@ -86,22 +80,19 @@
 
     <script>
         $(function () {
-            $('#selectedProductInput').val($('.select-product').val());
 
-
-            $('.commercial-productDIQuoteLine-save-button').on('click', function () {
-                $('#submitFormInput').val(1);
-                $('#commercialProductDIQuoteForm').submit();
+            $('.commercial-quoteRequestLine-save-button').on('click', function () {
+                $('#commercialQuoteRequestForm').submit();
             });
 
 
-            $('.commercial-productDIQuoteLine-cancel-button').on('click', function () {
+            $('.commercial-quoteRequestLine-cancel-button').on('click', function () {
 
-                var url = "{{ path("paprec_commercial_productDIQuote_view", { id: productDIQuote.id }) }}";
+                var url = "{{ path("paprec_commercial_quoteRequest_view", { id: quoteRequest.id }) }}";
 
                 Swal({
                     title: "{{ 'General.Confirm'|trans }}",
-                    text: "{{ 'Commercial.QuoteRequest.Confirm-cancel'|trans }}",
+                    text: "{{ 'General.Confirm-cancel'|trans }}",
                     showCancelButton: true,
                     confirmButtonText: "{{ 'General.Yes'|trans }}",
                     cancelButtonText: "{{ 'General.No'|trans }}"
@@ -111,15 +102,6 @@
                     }
                 });
 
-            });
-
-            $('.select-product').on('change', function(){
-                $('#selectedProductInput').val($(this).val());
-                $('#submitFormInput').val('');
-                if($(this).val() != '')
-                {
-                    $('#commercialProductDIQuoteForm').submit();
-                }
             });
 
         });

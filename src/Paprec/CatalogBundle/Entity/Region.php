@@ -214,6 +214,7 @@ class Region
      */
     public function __construct()
     {
+        $this->dateCreation = new \DateTime();
         $this->postalCodes = new \Doctrine\Common\Collections\ArrayCollection();
     }
 

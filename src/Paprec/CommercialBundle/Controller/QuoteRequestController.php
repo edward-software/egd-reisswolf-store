@@ -4,14 +4,16 @@ namespace Paprec\CommercialBundle\Controller;
 
 use Paprec\CommercialBundle\Entity\QuoteRequest;
 use Paprec\CommercialBundle\Entity\QuoteRequestLine;
+use Paprec\CommercialBundle\Form\QuoteRequestLineAddType;
+use Paprec\CommercialBundle\Form\QuoteRequestType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\Annotation\Route;
 
 class QuoteRequestController extends Controller
 {
@@ -200,7 +202,7 @@ class QuoteRequestController extends Controller
      */
     public function viewAction(Request $request, QuoteRequest $quoteRequest)
     {
-        $quoteRequestManager = $this->get('paprec_commercial.product_di_quote_manager');
+        $quoteRequestManager = $this->get('paprec_commercial.quote_request_manager');
         $quoteRequestManager->isDeleted($quoteRequest, true);
 
         return $this->render('PaprecCommercialBundle:QuoteRequest:view.html.twig', array(
@@ -214,6 +216,8 @@ class QuoteRequestController extends Controller
      */
     public function addAction(Request $request)
     {
+        $user = $this->getUser();
+
         $numberManager = $this->get('paprec_catalog.number_manager');
 
         $quoteRequest = new QuoteRequest();
@@ -232,7 +236,12 @@ class QuoteRequestController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
 
             $quoteRequest = $form->getData();
-            $quoteRequest->setGeneratedTurnover($numberManager->normalize($quoteRequest->getGeneratedTurnover()));
+
+            $quoteRequest->setCoworkerNumber($numberManager->normalize($quoteRequest->getCoworkerNumber()));
+            $quoteRequest->setOverallDiscount($numberManager->normalize($quoteRequest->getOverallDiscount()));
+            $quoteRequest->setMonthlyBudget($numberManager->normalize($quoteRequest->getMonthlyBudget()));
+
+            $quoteRequest->setUserCreation($user);
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($quoteRequest);
@@ -257,8 +266,10 @@ class QuoteRequestController extends Controller
      */
     public function editAction(Request $request, QuoteRequest $quoteRequest)
     {
+        $user = $this->getUser();
+
         $numberManager = $this->get('paprec_catalog.number_manager');
-        $quoteRequestManager = $this->get('paprec_commercial.product_di_quote_manager');
+        $quoteRequestManager = $this->get('paprec_commercial.quote_request_manager');
         $quoteRequestManager->isDeleted($quoteRequest, true);
 
         $status = array();
@@ -266,8 +277,9 @@ class QuoteRequestController extends Controller
             $status[$s] = $s;
         }
 
-        $quoteRequest->setGeneratedTurnover($numberManager->denormalize($quoteRequest->getGeneratedTurnover()));
-
+        $quoteRequest->setCoworkerNumber($numberManager->denormalize($quoteRequest->getCoworkerNumber()));
+        $quoteRequest->setOverallDiscount($numberManager->denormalize($quoteRequest->getOverallDiscount()));
+        $quoteRequest->setMonthlyBudget($numberManager->denormalize($quoteRequest->getMonthlyBudget()));
 
         $form = $this->createForm(QuoteRequestType::class, $quoteRequest, array(
             'status' => $status
@@ -278,9 +290,13 @@ class QuoteRequestController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
 
             $quoteRequest = $form->getData();
-            $quoteRequest->setGeneratedTurnover($numberManager->normalize($quoteRequest->getGeneratedTurnover()));
+            $quoteRequest->setCoworkerNumber($numberManager->normalize($quoteRequest->getCoworkerNumber()));
+            $quoteRequest->setOverallDiscount($numberManager->normalize($quoteRequest->getOverallDiscount()));
+            $quoteRequest->setMonthlyBudget($numberManager->normalize($quoteRequest->getMonthlyBudget()));
 
             $quoteRequest->setDateUpdate(new \DateTime());
+            $quoteRequest->setUserUpdate($user);
+
 
             $em = $this->getDoctrine()->getManager();
             $em->flush();
@@ -346,8 +362,6 @@ class QuoteRequestController extends Controller
     {
 
         $em = $this->getDoctrine()->getManager();
-        $selectedProductId = $request->get('selectedProductId');
-        $submitForm = $request->get('submitForm');
 
         if ($quoteRequest->getDeleted() !== null) {
             throw new NotFoundHttpException();
@@ -355,15 +369,12 @@ class QuoteRequestController extends Controller
 
         $quoteRequestLine = new QuoteRequestLine();
 
-        $form = $this->createForm(QuoteRequestLineAddType::class, $quoteRequestLine,
-            array(
-                'selectedProductId' => $selectedProductId
-            ));
+        $form = $this->createForm(QuoteRequestLineAddType::class, $quoteRequestLine);
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid() && $submitForm) {
-            $quoteRequestManager = $this->get('paprec_commercial.product_di_quote_manager');
+        if ($form->isSubmitted() && $form->isValid()) {
+            $quoteRequestManager = $this->get('paprec_commercial.quote_request_manager');
 
             $quoteRequestLine = $form->getData();
             $quoteRequestManager->addLine($quoteRequest, $quoteRequestLine);

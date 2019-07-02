@@ -13,6 +13,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\ORM\ORMException;
 use Exception;
+use Paprec\CatalogBundle\Entity\PostalCode;
 use Paprec\CatalogBundle\Entity\Product;
 use Paprec\CatalogBundle\Entity\ProductLabel;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -138,14 +139,21 @@ class ProductManager
      * @param $qtty
      * @return float|int
      */
-    public function calculatePrice($postalCode, $unitPrice, $qtty)
+    public function calculatePrice($code, Product $product, $qtty)
     {
         $numberManager = $this->container->get('paprec_catalog.number_manager');
-        $postalCodeManager = $this->container->get('paprec_catalog.postal_code_manager');
+        $postalCode = $this->em->getRepository('PaprecCatalogBundle:PostalCode')->findOneBy(array(
+                'code' => $code
+            )
+        );
 
-        $ratePostalCode = $postalCodeManager->getRateByPostalCodeDivision($postalCode, 'DI');
+        return ($numberManager->denormalize($product->getRentalUnitPrice())
+                + $numberManager->denormalize($product->getTransportUnitPrice()) * $numberManager->denormalize($postalCode->getTransportRate())
+                + $numberManager->denormalize($product->getTreatmentUnitPrice()) * $numberManager->denormalize($postalCode->getTreatmentRate())
+                + $numberManager->denormalize($product->getTraceabilityUnitPrice()) * $numberManager->denormalize($postalCode->getTraceabilityRate()))
+            * $qtty;
 
-        return $numberManager->denormalize($unitPrice) * $qtty * $numberManager->denormalize($ratePostalCode);
+
     }
 
     public function getProductLabels($product)

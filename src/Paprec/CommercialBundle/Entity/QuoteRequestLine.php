@@ -53,9 +53,33 @@ class QuoteRequestLine
     /**
      * @var int
      *
-     * @ORM\Column(name="unitPrice", type="integer")
+     * @ORM\Column(name="rentalUnitPrice", type="integer", nullable=true)
+
      */
-    private $unitPrice;
+    private $rentalUnitPrice;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="transportUnitPrice", type="integer", nullable=true)
+
+     */
+    private $transportUnitPrice;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="treatmentUnitPrice", type="integer", nullable=true)
+
+     */
+    private $treatmentUnitPrice;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="traceabilityUnitPrice", type="integer", nullable=true)
+     */
+    private $traceabilityUnitPrice;
 
     /**
      * @var int
@@ -326,5 +350,101 @@ class QuoteRequestLine
     public function getQuoteRequest()
     {
         return $this->quoteRequest;
+    }
+
+    /**
+     * Set rentalUnitPrice.
+     *
+     * @param int|null $rentalUnitPrice
+     *
+     * @return QuoteRequestLine
+     */
+    public function setRentalUnitPrice($rentalUnitPrice = null)
+    {
+        $this->rentalUnitPrice = $rentalUnitPrice;
+
+        return $this;
+    }
+
+    /**
+     * Get rentalUnitPrice.
+     *
+     * @return int|null
+     */
+    public function getRentalUnitPrice()
+    {
+        return $this->rentalUnitPrice;
+    }
+
+    /**
+     * Set transportUnitPrice.
+     *
+     * @param int|null $transportUnitPrice
+     *
+     * @return QuoteRequestLine
+     */
+    public function setTransportUnitPrice($transportUnitPrice = null)
+    {
+        $this->transportUnitPrice = $transportUnitPrice;
+
+        return $this;
+    }
+
+    /**
+     * Get transportUnitPrice.
+     *
+     * @return int|null
+     */
+    public function getTransportUnitPrice()
+    {
+        return $this->transportUnitPrice;
+    }
+
+    /**
+     * Set treatmentUnitPrice.
+     *
+     * @param int|null $treatmentUnitPrice
+     *
+     * @return QuoteRequestLine
+     */
+    public function setTreatmentUnitPrice($treatmentUnitPrice = null)
+    {
+        $this->treatmentUnitPrice = $treatmentUnitPrice;
+
+        return $this;
+    }
+
+    /**
+     * Get treatmentUnitPrice.
+     *
+     * @return int|null
+     */
+    public function getTreatmentUnitPrice()
+    {
+        return $this->treatmentUnitPrice;
+    }
+
+    /**
+     * Set traceabilityUnitPrice.
+     *
+     * @param int|null $traceabilityUnitPrice
+     *
+     * @return QuoteRequestLine
+     */
+    public function setTraceabilityUnitPrice($traceabilityUnitPrice = null)
+    {
+        $this->traceabilityUnitPrice = $traceabilityUnitPrice;
+
+        return $this;
+    }
+
+    /**
+     * Get traceabilityUnitPrice.
+     *
+     * @return int|null
+     */
+    public function getTraceabilityUnitPrice()
+    {
+        return $this->traceabilityUnitPrice;
     }
 }

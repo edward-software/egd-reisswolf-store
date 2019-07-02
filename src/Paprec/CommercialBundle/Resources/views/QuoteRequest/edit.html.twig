@@ -8,28 +8,27 @@
 {% endblock %}
 
 {% block content_title %}
-    {{ 'Commercial.QuoteRequest.ProductDIQuotes'|trans }}
+    {{ 'Commercial.QuoteRequest.Edit'|trans }}
 {% endblock %}
 
 {% block main_content %}
 
-    <form id="commercialProductDIQuoteForm" action="" method="post" enctype="multipart/form-data">
+    <form id="commercialQuoteRequestForm" action="" method="post" enctype="multipart/form-data">
 
         <div class="col-md-12">
             <!-- BOX -->
             <div class="card">
                 <div class="card-header">
                     <h4>
-                        <i class="fa fa-xs fa-pencil-alt"></i> {{ 'Commercial.QuoteRequest.Edit'|trans }}
-                        #{{ productDIQuote.id|formatId(6)}}
+                        <i class="fa fa-xs fa-plus"></i> {{ 'Commercial.QuoteRequest.Edit'|trans }}
                     </h4>
                     <div class="float-right">
-
-                        <a href="javascript:void(0);" class="btn btn-sm btn-success commercial-productDIQuote-save-button"><i
-                                    class="fa fa-xs fa-check"></i> {{ 'Commercial.QuoteRequest.Save'|trans }}</a>
                         <a href="javascript:void(0);"
-                           class="btn btn-sm btn-danger commercial-productDIQuote-cancel-button"><i
-                                    class="fa fa-xs fa-close"></i> {{ 'Commercial.QuoteRequest.Cancel'|trans }}</a>
+                           class="btn btn-sm btn-success commercial-quoteRequest-save-button"><i
+                                    class="fa fa-xs fa-check"></i> {{ 'General.Save'|trans }}</a>
+                        <a href="javascript:void(0);"
+                           class="btn btn-sm btn-danger commercial-quoteRequest-cancel-button"><i
+                                    class="fa fa-xs fa-close"></i> {{ 'General.Cancel'|trans }}</a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -41,17 +40,17 @@
                             <div class="card-body row">
                                 <div class="col-md-6">
                                     <div class="form-group">
+                                        <label class="form-label">{{ 'Commercial.QuoteRequest.Canton'|trans }}</label>
+                                        <div class="form-content">
+                                            {{ form_widget(form.canton, {'attr': {'class': 'form-control'}}) }}
+                                            {{ form_errors(form.canton) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
                                         <label class="form-label">{{ 'Commercial.QuoteRequest.BusinessName'|trans }}</label>
                                         <div class="form-content">
                                             {{ form_widget(form.businessName, {'attr': {'class': 'form-control'}}) }}
                                             {{ form_errors(form.businessName) }}
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label">{{ 'Commercial.QuoteRequest.BusinessLine'|trans }}</label>
-                                        <div class="form-content">
-                                            {{ form_widget(form.businessLine, {'attr': {'class': 'form-control'}}) }}
-                                            {{ form_errors(form.businessLine) }}
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -79,8 +78,6 @@
                                             {{ form_errors(form.firstName) }}
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-label">{{ 'Commercial.QuoteRequest.Email'|trans }}</label>
                                         <div class="form-content">
@@ -95,91 +92,58 @@
                                             {{ form_errors(form.phone) }}
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="form-label">{{ 'Commercial.QuoteRequest.PreferredContact'|trans }}</label>
-                                        <div class="form-content">
-                                            {% for radio in form.preferredContact.children %}
-                                                <div class="form__check ml-4">
-                                                    {{ form_widget(radio) }}
-                                                    {{ form_label(radio) }}
-                                                </div>
-                                            {% endfor %}
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label">{{ 'Commercial.QuoteRequest.Function'|trans }}</label>
-                                        <div class="form-content">
-                                            {{ form_widget(form.function, {'attr': {'class': 'form-control'}}) }}
-                                            {{ form_errors(form.function) }}
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label">{{ 'Commercial.QuoteRequest.QuoteStatus'|trans }}</label>
-                                        <div class="form-content">
-                                            {{ form_widget(form.quoteStatus, {'attr': {'class': 'form-control'}}) }}
-                                            {{ form_errors(form.quoteStatus) }}
-                                        </div>
-                                    </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h5 class="card-title">{{ 'Commercial.QuoteRequest.HeadOfficeAddress'|trans }}</h5>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="form-group row">
-                                                <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.Address'|trans }}</label>
-                                                <label class="col-form-label col-md-8">
-                                                    {{ form_widget(form.headofficeAddress, {'attr': {'class': 'form-control'}}) }}
-                                                    {{ form_errors(form.headofficeAddress) }}
-                                                </label>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.PostalCode'|trans }}</label>
-                                                <label class="col-form-label col-md-8">
-                                                    {{ form_widget(form.headofficePostalCode, {'attr': {'class': 'form-control'}}) }}
-                                                    {{ form_errors(form.headofficePostalCode) }}
-                                                </label>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.City'|trans }}</label>
-                                                <label class="col-form-label col-md-8">
-                                                    {{ form_widget(form.headofficeCity, {'attr': {'class': 'form-control'}}) }}
-                                                    {{ form_errors(form.headofficeCity) }}
-                                                </label>
-                                            </div>
+                                    <div class="form-group">
+                                        <label class="form-label">{{ 'Commercial.QuoteRequest.Frequency'|trans }}</label>
+                                        <div class="form-content">
+                                            {{ form_widget(form.frequency, {'attr': {'class': 'form-control'}}) }}
+                                            {{ form_errors(form.frequency) }}
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h5 class="card-title">{{ 'Commercial.QuoteRequest.SiteAddress'|trans }}</h5>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="form-group row">
-                                                <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.Address'|trans }}</label>
-                                                <label class="col-form-label col-md-8">
-                                                    {{ form_widget(form.address, {'attr': {'class': 'form-control'}}) }}
-                                                    {{ form_errors(form.address) }}
-                                                </label>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.PostalCode'|trans }}</label>
-                                                <label class="col-form-label col-md-8">
-                                                    {{ form_widget(form.postalCode, {'attr': {'class': 'form-control'}}) }}
-                                                    {{ form_errors(form.postalCode) }}
-                                                </label>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.City'|trans }}</label>
-                                                <label class="col-form-label col-md-8">
-                                                    {{ form_widget(form.city, {'attr': {'class': 'form-control'}}) }}
-                                                    {{ form_errors(form.city) }}
-                                                </label>
-                                            </div>
+                                    <div class="form-group">
+                                        <label class="form-label">{{ 'Commercial.QuoteRequest.IsMultisite'|trans }}</label>
+                                        <div class="form-content">
+                                            {{ form_widget(form.isMultisite, {'attr': {'class': 'form-control'}}) }}
+                                            {{ form_errors(form.isMultisite) }}
                                         </div>
                                     </div>
+                                    <div class="form-group">
+                                        <label class="form-label">{{ 'Commercial.QuoteRequest.Address'|trans }}</label>
+                                        <div class="form-content">
+                                            {{ form_widget(form.address, {'attr': {'class': 'form-control'}}) }}
+                                            {{ form_errors(form.address) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">{{ 'Commercial.QuoteRequest.PostalCode'|trans }}</label>
+                                        <div class="form-content">
+                                            {{ form_widget(form.postalCode, {'attr': {'class': 'form-control'}}) }}
+                                            {{ form_errors(form.postalCode) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">{{ 'Commercial.QuoteRequest.City'|trans }}</label>
+                                        <div class="form-content">
+                                            {{ form_widget(form.city, {'attr': {'class': 'form-control'}}) }}
+                                            {{ form_errors(form.city) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">{{ 'Commercial.QuoteRequest.Comment'|trans }}</label>
+                                        <div class="form-content">
+                                            {{ form_widget(form.comment, {'attr': {'class': 'form-control'}}) }}
+                                            {{ form_errors(form.comment) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">{{ 'Commercial.QuoteRequest.CoworkerNumber'|trans }}</label>
+                                        <div class="form-content">
+                                            {{ form_widget(form.coworkerNumber, {'attr': {'class': 'form-control'}}) }}
+                                            {{ form_errors(form.coworkerNumber) }}
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -192,77 +156,64 @@
                             <div class="card-body row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="form-label">{{ 'Commercial.QuoteRequest.GeneratedTurnover'|trans }}</label>
-                                        <div class="form-content">
-                                            {{ form_widget(form.generatedTurnover, {'attr': {'class': 'form-control'}}) }}
-                                            {{ form_errors(form.generatedTurnover) }}
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label">{{ 'Commercial.QuoteRequest.Agency'|trans }}</label>
-                                        <div class="form-content">
-                                            {{ form_widget(form.agency, {'attr': {'class': 'form-control'}}) }}
-                                            {{ form_errors(form.agency) }}
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label">{{ 'Commercial.QuoteRequest.Summary'|trans }}</label>
-                                        <div class="form-content">
-                                            {{ form_widget(form.summary, {'attr': {'class': 'form-control'}}) }}
-                                            {{ form_errors(form.summary) }}
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label">{{ 'Commercial.QuoteRequest.Frequency'|trans }}</label>
-                                        <div class="form-content">
-                                            {% for radio in form.frequency.children %}
-                                                <div class="form__check ml-4">
-                                                    {{ form_widget(radio) }}
-                                                    {{ form_label(radio) }}
-                                                </div>
-                                            {% endfor %}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-label">{{ 'Commercial.QuoteRequest.Tonnage'|trans }}</label>
-                                        <div class="form-content">
-                                            {{ form_widget(form.tonnage, {'attr': {'class': 'form-control'}}) }}
-                                            {{ form_errors(form.tonnage) }}
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label">{{ 'Commercial.QuoteRequest.KookaburaNumber'|trans }}</label>
-                                        <div class="form-content">
-                                            {{ form_widget(form.kookaburaNumber, {'attr': {'class': 'form-control'}}) }}
-                                            {{ form_errors(form.kookaburaNumber) }}
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
                                         <label class="form-label">{{ 'Commercial.QuoteRequest.UserInCharge'|trans }}</label>
                                         <div class="form-content">
                                             {{ form_widget(form.userInCharge, {'attr': {'class': 'form-control'}}) }}
                                             {{ form_errors(form.userInCharge) }}
                                         </div>
                                     </div>
+                                    <div class="form-group">
+                                        <label class="form-label">{{ 'Commercial.QuoteRequest.QuoteStatus'|trans }}</label>
+                                        <div class="form-content">
+                                            {{ form_widget(form.quoteStatus, {'attr': {'class': 'form-control'}}) }}
+                                            {{ form_errors(form.quoteStatus) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">{{ 'Commercial.QuoteRequest.OverallDiscount'|trans }}</label>
+                                        <div class="form-content">
+                                            {{ form_widget(form.overallDiscount, {'attr': {'class': 'form-control'}}) }}
+                                            {{ form_errors(form.overallDiscount) }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label">{{ 'Commercial.QuoteRequest.MonthlyBudget'|trans }}</label>
+                                        <div class="form-content">
+                                            {{ form_widget(form.monthlyBudget, {'attr': {'class': 'form-control'}}) }}
+                                            {{ form_errors(form.monthlyBudget) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">{{ 'Commercial.QuoteRequest.SalesmanComment'|trans }}</label>
+                                        <div class="form-content">
+                                            {{ form_widget(form.salesmanComment, {'attr': {'class': 'form-control'}}) }}
+                                            {{ form_errors(form.salesmanComment) }}
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
                 <div class="card-footer">
                     <div class="float-right">
-                        <a href="javascript:void(0);" class="btn btn-sm btn-success commercial-productDIQuote-save-button"><i
-                                    class="fa fa-xs fa-check"></i> {{ 'Commercial.QuoteRequest.Save'|trans }}</a>
-                        <a href="javascript:void(0);" class="btn btn-sm btn-danger commercial-productDIQuote-cancel-button"><i
-                                    class="fa fa-xs fa-close"></i> {{ 'Commercial.QuoteRequest.Cancel'|trans }}</a>
+                        <a href="javascript:void(0);"
+                           class="btn btn-sm btn-success commercial-quoteRequest-save-button"><i
+                                    class="fa fa-xs fa-check"></i> {{ 'General.Save'|trans }}</a>
+                        <a href="javascript:void(0);"
+                           class="btn btn-sm btn-danger commercial-quoteRequest-cancel-button"><i
+                                    class="fa fa-xs fa-close"></i> {{ 'General.Cancel'|trans }}</a>
                     </div>
                 </div>
             </div>
         </div>
         {{ form_rest(form) }}
     </form>
+    </div>
 
 
 
@@ -273,20 +224,18 @@
     <script>
         $(function () {
 
-            $('.commercial-productDIQuote-save-button').on('click', function () {
-
-                $('#commercialProductDIQuoteForm').submit();
-
+            $('.commercial-quoteRequest-save-button').on('click', function () {
+                $('#commercialQuoteRequestForm').submit();
             });
 
 
-            $('.commercial-productDIQuote-cancel-button').on('click', function () {
+            $('.commercial-quoteRequest-cancel-button').on('click', function () {
 
-                var url = "{{ path("paprec_commercial_productDIQuote_view", {id: productDIQuote.id}) }}";
+                var url = "{{ path("paprec_commercial_quoteRequest_index") }}";
 
                 Swal({
                     title: "{{ 'General.Confirm'|trans }}",
-                    text: "{{ 'Commercial.QuoteRequest.Confirm-cancel'|trans }}",
+                    text: "{{ 'General.Confirm-cancel'|trans }}",
                     showCancelButton: true,
                     confirmButtonText: "{{ 'General.Yes'|trans }}",
                     cancelButtonText: "{{ 'General.No'|trans }}"

@@ -134,6 +134,7 @@ class PostalCode
      */
     public function __construct()
     {
+        $this->dateCreation = new \DateTime();
     }
 
     /**

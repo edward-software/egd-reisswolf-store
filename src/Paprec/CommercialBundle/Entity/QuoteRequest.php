@@ -156,7 +156,6 @@ class QuoteRequest
     private $city;
 
 
-
     /**
      * "Commentaire client" rempli par l'utilisateur Front Office
      * @var string
@@ -179,6 +178,14 @@ class QuoteRequest
      * @ORM\Column(name="quoteStatus", type="string", length=255)
      */
     private $quoteStatus;
+
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="totalAmount", type="integer", nullable=true)
+     */
+    private $totalAmount;
 
     /**
      * @var int
@@ -224,6 +231,7 @@ class QuoteRequest
      * @ORM\OneToMany(targetEntity="Paprec\CommercialBundle\Entity\QuoteRequestLine", mappedBy="quoteRequest")
      */
     private $quoteRequestLines;
+
     /**
      * Get id.
      *
@@ -233,11 +241,13 @@ class QuoteRequest
     {
         return $this->id;
     }
+
     /**
      * Constructor
      */
     public function __construct()
     {
+        $this->dateCreation = new \DateTime();
         $this->quoteRequestLines = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -851,5 +861,29 @@ class QuoteRequest
     public function getQuoteRequestLines()
     {
         return $this->quoteRequestLines;
+    }
+
+    /**
+     * Set totalAmount.
+     *
+     * @param int|null $totalAmount
+     *
+     * @return QuoteRequest
+     */
+    public function setTotalAmount($totalAmount = null)
+    {
+        $this->totalAmount = $totalAmount;
+
+        return $this;
+    }
+
+    /**
+     * Get totalAmount.
+     *
+     * @return int|null
+     */
+    public function getTotalAmount()
+    {
+        return $this->totalAmount;
     }
 }

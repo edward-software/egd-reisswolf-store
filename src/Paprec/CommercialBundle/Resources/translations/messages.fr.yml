@@ -14,3 +14,42 @@ Commercial:
     TotalAmount: Montant total
     QuoteStatus: Status devis
     Date-crea: Date créa.
+    Canton: Canton
+    Civility: Civilité
+    LastName: Nom
+    FirstName: Prénom
+    Email: Email
+    Phone: Téléphone
+    Address: Addresse
+    PostalCode: Code postal
+    City: Ville
+    Informations-BO: Informations Back-Office
+    Informations-FO: Informations Front-Office
+    Frequency: Fréquence
+    CoworkerNumber: Nombre de collaborateurs
+    UserInCharge: Commercial en charge
+    IsMultisite: Prestation multi-sites
+    Comment: Commentaire client
+    OverallDiscount: Remise globale
+    SalesmanComment: Commentaire commercial
+    MonthlyBudget: Budget mensuel
+    View: Vue du devis
+    Send-quote: Envoyer devis au client
+    ProductsList: Liste des produits
+    AddLine: Ajouter un produit
+    Confirm-send-quote: Êtes-vous sûr de vouloir envoyer le devis au client ?
+    Edit: Edition du devis
+
+  QuoteStatusList:
+    CREATED: Créé
+    PENDING: En attente
+    PROCESSING: En traitement
+    CLOSED: Fermé
+
+  QuoteRequestLine:
+    ProductName: Nom du produit
+    UnitPrice: Prix unitaire
+    Quantity: Quantité
+    TotalAmount: Montant total
+    Add: Ajout d'un produit
+    Product: Produit

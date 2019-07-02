@@ -2,3 +2,14 @@ services:
 #    commercial.example:
 #        class: PaprecCommercialBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
+  paprec_commercial.quote_request_manager:
+    class: Paprec\CommercialBundle\Service\QuoteRequestManager
+    arguments: ["@doctrine.orm.entity_manager", "@service_container"]
+
+
+parameters:
+  paprec_quote_status:
+    - CREATED
+    - PENDING
+    - PROCESSING
+    - CLOSED
