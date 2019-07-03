@@ -102,10 +102,13 @@ class ProductController extends Controller
      * @Route("/product/export",  name="paprec_catalog_product_export")
      * @Security("has_role('ROLE_ADMIN')")
      */
-    public function exportAction()
+    public function exportAction(Request $request)
     {
+        $language = $request->getLocale();
 
         $translator = $this->container->get('translator');
+        $productManager = $this->container->get('paprec_catalog.product_manager');
+        $numberManager = $this->container->get('paprec_catalog.number_manager');
 
         $phpExcelObject = $this->container->get('phpexcel')->createPHPExcelObject();
 
@@ -129,10 +132,13 @@ class ProductController extends Controller
             ->setCellValue('D1', 'Volume')
             ->setCellValue('E1', 'Unité Vol')
             ->setCellValue('F1', 'Dimensions')
-            ->setCellValue('G1', 'Lien description')
-            ->setCellValue('H1', 'Statut affichage')
-            ->setCellValue('I1', 'Dispo géographique')
-            ->setCellValue('J1', 'Date création');
+            ->setCellValue('G1', 'Actif')
+            ->setCellValue('H1', 'Dispo géographique')
+            ->setCellValue('I1', 'PU location')
+            ->setCellValue('J1', 'PU transport')
+            ->setCellValue('K1', 'PU traitement')
+            ->setCellValue('L1', 'PU traçabilité')
+            ->setCellValue('M1', 'Date création');
 
 
         $phpExcelObject->getActiveSheet()->setTitle('Produits DI');
@@ -141,17 +147,22 @@ class ProductController extends Controller
         $i = 2;
         foreach ($Products as $product) {
 
+            $productLabel =$productManager->getProductLabelByProductAndLocale($product, strtoupper($language));
+
             $phpExcelObject->setActiveSheetIndex(0)
                 ->setCellValue('A' . $i, $product->getId())
-                ->setCellValue('B' . $i, $product->getName())
-                ->setCellValue('C' . $i, $product->getDescription())
+                ->setCellValue('B' . $i, $productLabel ->getname())
+                ->setCellValue('C' . $i, $productLabel ->getShortDescription())
                 ->setCellValue('D' . $i, $product->getCapacity())
                 ->setCellValue('E' . $i, $product->getCapacityUnit())
                 ->setCellValue('F' . $i, $product->getDimensions())
-                ->setCellValue('G' . $i, $product->getReference())
-                ->setCellValue('H' . $i, $product->getIsDisplayed())
-                ->setCellValue('I' . $i, $product->getAvailablePostalCodes())
-                ->setCellValue('J' . $i, $product->getDateCreation()->format('Y-m-d'));
+                ->setCellValue('G' . $i, $product->getIsEnabled())
+                ->setCellValue('H' . $i, $product->getAvailablePostalCodes())
+                ->setCellValue('I' . $i, $numberManager->denormalize($product->getRentalUnitPrice()))
+                ->setCellValue('J' . $i, $numberManager->denormalize($product->getTransportUnitPrice()))
+                ->setCellValue('K' . $i, $numberManager->denormalize($product->getTreatmentUnitPrice()))
+                ->setCellValue('L' . $i, $numberManager->denormalize($product->getTraceabilityUnitPrice()))
+                ->setCellValue('M' . $i, $product->getDateCreation()->format('Y-m-d'));
             $i++;
         }
 
@@ -230,8 +241,10 @@ class ProductController extends Controller
     {
         $user = $this->getUser();
 
+        $numberManager = $this->get('paprec_catalog.number_manager');
+
         $languages = array();
-        foreach ($this->getParameter('paprec_product_languages') as $language) {
+        foreach ($this->getParameter('paprec_languages') as $language) {
             $languages[$language] = $language;
         }
 
@@ -252,6 +265,13 @@ class ProductController extends Controller
             $em = $this->getDoctrine()->getManager();
 
             $product = $form1->getData();
+
+
+            $product->setRentalUnitPrice($numberManager->normalize($product->getRentalUnitPrice()));
+            $product->setTransportUnitPrice($numberManager->normalize($product->getTransportUnitPrice()));
+            $product->setTreatmentUnitPrice($numberManager->normalize($product->getTreatmentUnitPrice()));
+            $product->setTraceabilityUnitPrice($numberManager->normalize($product->getTraceabilityUnitPrice()));
+
             $product->setDateCreation(new \DateTime);
             $product->setUserCreation($user);
 
@@ -287,18 +307,23 @@ class ProductController extends Controller
     public function editAction(Request $request, Product $product)
     {
         $productManager = $this->get('paprec_catalog.product_manager');
+        $numberManager = $this->get('paprec_catalog.number_manager');
         $productManager->isDeleted($product, true);
 
         $user = $this->getUser();
 
         $languages = array();
-        foreach ($this->getParameter('paprec_product_languages') as $language) {
+        foreach ($this->getParameter('paprec_languages') as $language) {
             $languages[$language] = $language;
         }
 
         $language = $request->getLocale();
         $productLabel = $productManager->getProductLabelByProductAndLocale($product, strtoupper($language));
 
+        $product->setRentalUnitPrice($numberManager->denormalize($product->getRentalUnitPrice()));
+        $product->setTransportUnitPrice($numberManager->denormalize($product->getTransportUnitPrice()));
+        $product->setTreatmentUnitPrice($numberManager->denormalize($product->getTreatmentUnitPrice()));
+        $product->setTraceabilityUnitPrice($numberManager->denormalize($product->getTraceabilityUnitPrice()));
 
         $form1 = $this->createForm(ProductType::class, $product);
         $form2 = $this->createForm(ProductLabelType::class, $productLabel, array(
@@ -315,6 +340,13 @@ class ProductController extends Controller
             $em = $this->getDoctrine()->getManager();
 
             $product = $form1->getData();
+
+            $product->setRentalUnitPrice($numberManager->normalize($product->getRentalUnitPrice()));
+            $product->setTransportUnitPrice($numberManager->normalize($product->getTransportUnitPrice()));
+            $product->setTreatmentUnitPrice($numberManager->normalize($product->getTreatmentUnitPrice()));
+            $product->setTraceabilityUnitPrice($numberManager->normalize($product->getTraceabilityUnitPrice()));
+
+
             $product->setDateUpdate(new \DateTime);
             $product->setUserUpdate($user);
             $em->flush();
@@ -458,7 +490,7 @@ class ProductController extends Controller
         $productManager->isDeleted($product, true);
 
         $languages = array();
-        foreach ($this->getParameter('paprec_product_languages') as $language) {
+        foreach ($this->getParameter('paprec_languages') as $language) {
             $languages[$language] = $language;
         }
         $productLabel = new ProductLabel();
@@ -515,7 +547,7 @@ class ProductController extends Controller
         $productLabel = $productLabelManager->get($productLabelId);
 
         $languages = array();
-        foreach ($this->getParameter('paprec_product_languages') as $language) {
+        foreach ($this->getParameter('paprec_languages') as $language) {
             $languages[$language] = $language;
         }
 

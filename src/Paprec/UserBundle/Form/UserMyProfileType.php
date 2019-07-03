@@ -35,6 +35,9 @@ class UserMyProfileType extends AbstractType
             ->add('email', EmailType::class, array(
                 "required" => true
             ))
+            ->add('lang', ChoiceType::class, array(
+                'choices' => $options['languages']
+            ))
             ->add('plainPassword', RepeatedType::class, array(
                 'type' => PasswordType::class,
                 'invalid_message' => 'The password fields must match.',
@@ -52,7 +55,8 @@ class UserMyProfileType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Paprec\UserBundle\Entity\User'
+            'data_class' => 'Paprec\UserBundle\Entity\User',
+            'languages' => null
         ));
     }
 }

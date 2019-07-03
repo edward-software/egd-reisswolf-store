@@ -76,6 +76,13 @@
                                             {{ form_errors(form.email) }}
                                         </div>
                                     </div>
+                                    <div class="form-group">
+                                        <div class="form-label">{{ 'User.User.Lang'|trans }}</div>
+                                        <div class="form-content">
+                                            {{ form_widget(form.lang, {'attr': {'class': 'form-control'}}) }}
+                                            {{ form_errors(form.lang) }}
+                                        </div>
+                                    </div>
                                     {% if is_granted('ROLE_ADMIN') %}
 
                                         <div class="form-group ">

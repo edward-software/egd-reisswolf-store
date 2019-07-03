@@ -140,7 +140,7 @@
                                 <div class="form-group row">
                                     <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.CoworkerNumber'|trans }}</label>
                                     <label class="col-form-label">
-                                        {{ quoteRequest.coworkerNumber|formatAmount(null, app.request.locale) }}
+                                        {{ quoteRequest.coworkerNumber }}
                                     </label>
                                 </div>
                             </div>
@@ -171,7 +171,7 @@
                                 <div class="form-group row">
                                     <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.OverallDiscount'|trans }}</label>
                                     <label class="col-form-label">
-                                        {{ quoteRequest.overallDiscount|formatAmount(null, app.request.locale) }}
+                                        {{ quoteRequest.overallDiscount|formatAmount('EUR', app.request.locale) }}
                                     </label>
                                 </div>
                             </div>
@@ -179,13 +179,19 @@
                                 <div class="form-group row">
                                     <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.MonthlyBudget'|trans }}</label>
                                     <label class="col-form-label">
-                                        {{ quoteRequest.monthlyBudget|formatAmount(null, app.request.locale) }}
+                                        {{ quoteRequest.monthlyBudget|formatAmount('EUR', app.request.locale) }}
                                     </label>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.SalesmanComment'|trans }}</label>
                                     <label class="col-form-label">
                                         {{ quoteRequest.salesmanComment }}
+                                    </label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.TotalAmount'|trans }}</label>
+                                    <label class="col-form-label">
+                                        {{ quoteRequest.totalAmount|formatAmount('EUR', app.request.locale) }}
                                     </label>
                                 </div>
                             </div>
@@ -224,7 +230,11 @@
                                 {% for quoteRequestLine in quoteRequest.quoteRequestLines %}
                                     <tr>
                                         <td>{{ quoteRequestLine.id|formatId(6) }}</td>
-                                        <td>{{ quoteRequestLine.productName }}</td>
+                                        <td>
+                                            <a href="{{ path('paprec_catalog_product_view', {id: quoteRequestLine.product.id}) }}">
+                                                {{ quoteRequestLine.product|productNameTranslation(app.user) }}
+                                            </a>
+                                        </td>
                                         <td>{{ quoteRequestLine.quantity }}</td>
                                         <td>{{ quoteRequestLine.totalAmount|formatAmount('EUR', app.request.locale) }}</td>
                                         <td class="text-center">
@@ -272,7 +282,6 @@
             </div>
         </div>
     </div>
-
 {% endblock %}
 
         {% block javascripts %}

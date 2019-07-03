@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * QuoteRequest
  *
- * @ORM\Table(name="quote_request")
+ * @ORM\Table(name="quoteRequests")
  * @ORM\Entity(repositoryClass="Paprec\CommercialBundle\Repository\QuoteRequestRepository")
  */
 class QuoteRequest

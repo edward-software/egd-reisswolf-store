@@ -80,7 +80,7 @@
                                 <label class="col-form-label col-md-8">
                                     {% if postalCode.userInCharge %}
                                         <a href="{{ path('paprec_user_user_view', {id: postalCode.userInCharge.id}) }}">
-                                            {{ postalCode.userInCharge.username }}
+                                            {{ postalCode.userInCharge.firstName }} {{ postalCode.userInCharge.lastName }}
                                         </a>
                                     {% endif %}
                                 </label>

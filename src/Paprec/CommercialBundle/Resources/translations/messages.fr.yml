@@ -53,3 +53,6 @@ Commercial:
     TotalAmount: Montant total
     Add: Ajout d'un produit
     Product: Produit
+User:
+  User:
+    Lang: Langue

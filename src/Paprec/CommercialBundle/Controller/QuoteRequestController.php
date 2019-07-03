@@ -5,6 +5,7 @@ namespace Paprec\CommercialBundle\Controller;
 use Paprec\CommercialBundle\Entity\QuoteRequest;
 use Paprec\CommercialBundle\Entity\QuoteRequestLine;
 use Paprec\CommercialBundle\Form\QuoteRequestLineAddType;
+use Paprec\CommercialBundle\Form\QuoteRequestLineEditType;
 use Paprec\CommercialBundle\Form\QuoteRequestType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -104,8 +105,8 @@ class QuoteRequestController extends Controller
 
         $queryBuilder = $this->getDoctrine()->getManager()->createQueryBuilder();
 
-        $queryBuilder->select(array('p'))
-            ->from('PaprecCommercialBundle:QuoteRequest', 'p')
+        $queryBuilder->select(array('q'))
+            ->from('PaprecCommercialBundle:QuoteRequest', 'q')
             ->where('q.deleted IS NULL');
         if ($status != null && !empty($status)) {
             $queryBuilder->andWhere('q.quoteStatus = :status')
@@ -120,30 +121,29 @@ class QuoteRequestController extends Controller
         $quoteRequests = $queryBuilder->getQuery()->getResult();
 
         $phpExcelObject->getProperties()->setCreator("Paprec Easy Recyclage")
-            ->setLastModifiedBy("Paprec Easy Recyclage")
-            ->setTitle("Paprec Easy Recyclage - Devis DI")
+            ->setLastModifiedBy("Reisswolf Shop")
+            ->setTitle("Paprec Easy Recyclage - Devis")
             ->setSubject("Extraction");
 
         $phpExcelObject->setActiveSheetIndex(0)
             ->setCellValue('A1', 'ID')
             ->setCellValue('B1', 'Raison sociale')
-            ->setCellValue('C1', 'Secteur d\'activité')
+            ->setCellValue('C1', 'Canton')
             ->setCellValue('D1', 'Civilité')
             ->setCellValue('E1', 'Nom')
             ->setCellValue('F1', 'Prénom')
             ->setCellValue('G1', 'Email')
-            ->setCellValue('H1', 'Adresse')
-            ->setCellValue('I1', 'Code postal')
-            ->setCellValue('J1', 'Ville')
-            ->setCellValue('K1', 'Téléphone')
+            ->setCellValue('H1', 'Téléphone')
+            ->setCellValue('I1', 'Adresse')
+            ->setCellValue('J1', 'Code postal')
+            ->setCellValue('K1', 'Ville')
             ->setCellValue('L1', 'Statut')
-            ->setCellValue('M1', 'Montant total')
-            ->setCellValue('N1', 'CA généré')
-            ->setCellValue('O1', 'Agence associée')
-            ->setCellValue('P1', 'Résumé du besoin')
+            ->setCellValue('M1', 'Comment. client')
+            ->setCellValue('N1', 'Nb collab.')
+            ->setCellValue('O1', 'Commercial en charge')
+            ->setCellValue('P1', 'Bduget mensuel')
             ->setCellValue('Q1', 'Fréquence')
-            ->setCellValue('R1', 'Tonnage')
-            ->setCellValue('S1', 'Date création');
+            ->setCellValue('R1', 'Date création');
 
         $phpExcelObject->getActiveSheet()->setTitle('Devis DI');
         $phpExcelObject->setActiveSheetIndex(0);
@@ -154,30 +154,29 @@ class QuoteRequestController extends Controller
             $phpExcelObject->setActiveSheetIndex(0)
                 ->setCellValue('A' . $i, $quoteRequest->getId())
                 ->setCellValue('B' . $i, $quoteRequest->getBusinessName())
-                ->setCellValue('C' . $i, $quoteRequest->getBusinessLine()->getName())
+                ->setCellValue('C' . $i, $quoteRequest->getCanton())
                 ->setCellValue('D' . $i, $quoteRequest->getCivility())
                 ->setCellValue('E' . $i, $quoteRequest->getLastName())
                 ->setCellValue('F' . $i, $quoteRequest->getFirstName())
                 ->setCellValue('G' . $i, $quoteRequest->getEmail())
-                ->setCellValue('H' . $i, $quoteRequest->getAddress())
-                ->setCellValue('I' . $i, $quoteRequest->getPostalCode())
-                ->setCellValue('J' . $i, $quoteRequest->getCity())
-                ->setCellValue('K' . $i, $quoteRequest->getPhone())
+                ->setCellValue('H' . $i, $quoteRequest->getPhone())
+                ->setCellValue('I' . $i, $quoteRequest->getAddress())
+                ->setCellValue('J' . $i, $quoteRequest->getPostalCode())
+                ->setCellValue('K' . $i, $quoteRequest->getCity())
                 ->setCellValue('L' . $i, $quoteRequest->getQuoteStatus())
-                ->setCellValue('M' . $i, $numberManager->denormalize($quoteRequest->getTotalAmount()))
-                ->setCellValue('N' . $i, $numberManager->denormalize($quoteRequest->getGeneratedTurnover()))
-                ->setCellValue('O' . $i, $quoteRequest->getAgency())
-                ->setCellValue('P' . $i, $quoteRequest->getSummary())
+                ->setCellValue('M' . $i, $quoteRequest->getComment())
+                ->setCellValue('N' . $i, $quoteRequest->getCoworkerNumber())
+                ->setCellValue('O' . $i, $quoteRequest->getUserInCharge()->getFirstName() . ' ' . $quoteRequest->getUserInCharge()->getLastName())
+                ->setCellValue('P' . $i, $numberManager->denormalize($quoteRequest->getMonthlyBudget()))
                 ->setCellValue('Q' . $i, $quoteRequest->getFrequency())
-                ->setCellValue('R' . $i, $quoteRequest->getTonnage())
-                ->setCellValue('S' . $i, $quoteRequest->getDateCreation()->format('Y-m-d'));
+                ->setCellValue('R' . $i, $quoteRequest->getDateCreation()->format('Y-m-d'));
 
             $i++;
         }
 
         $writer = $this->container->get('phpexcel')->createWriter($phpExcelObject, 'Excel2007');
 
-        $fileName = 'PaprecEasyRecyclage-Extraction-Devis-DI-' . date('Y-m-d') . '.xlsx';
+        $fileName = 'ReisswolfShop-Extraction-Devis--' . date('Y-m-d') . '.xlsx';
 
         // create the response
         $response = $this->container->get('phpexcel')->createStreamedResponse($writer);
@@ -237,7 +236,6 @@ class QuoteRequestController extends Controller
 
             $quoteRequest = $form->getData();
 
-            $quoteRequest->setCoworkerNumber($numberManager->normalize($quoteRequest->getCoworkerNumber()));
             $quoteRequest->setOverallDiscount($numberManager->normalize($quoteRequest->getOverallDiscount()));
             $quoteRequest->setMonthlyBudget($numberManager->normalize($quoteRequest->getMonthlyBudget()));
 
@@ -277,7 +275,6 @@ class QuoteRequestController extends Controller
             $status[$s] = $s;
         }
 
-        $quoteRequest->setCoworkerNumber($numberManager->denormalize($quoteRequest->getCoworkerNumber()));
         $quoteRequest->setOverallDiscount($numberManager->denormalize($quoteRequest->getOverallDiscount()));
         $quoteRequest->setMonthlyBudget($numberManager->denormalize($quoteRequest->getMonthlyBudget()));
 
@@ -290,7 +287,6 @@ class QuoteRequestController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
 
             $quoteRequest = $form->getData();
-            $quoteRequest->setCoworkerNumber($numberManager->normalize($quoteRequest->getCoworkerNumber()));
             $quoteRequest->setOverallDiscount($numberManager->normalize($quoteRequest->getOverallDiscount()));
             $quoteRequest->setMonthlyBudget($numberManager->normalize($quoteRequest->getMonthlyBudget()));
 
@@ -361,6 +357,8 @@ class QuoteRequestController extends Controller
     public function addLineAction(Request $request, QuoteRequest $quoteRequest)
     {
 
+        $user = $this->getUser();
+
         $em = $this->getDoctrine()->getManager();
 
         if ($quoteRequest->getDeleted() !== null) {
@@ -377,7 +375,7 @@ class QuoteRequestController extends Controller
             $quoteRequestManager = $this->get('paprec_commercial.quote_request_manager');
 
             $quoteRequestLine = $form->getData();
-            $quoteRequestManager->addLine($quoteRequest, $quoteRequestLine);
+            $quoteRequestManager->addLine($quoteRequest, $quoteRequestLine, $user);
 
             return $this->redirectToRoute('paprec_commercial_quoteRequest_view', array(
                 'id' => $quoteRequest->getId()
@@ -407,15 +405,16 @@ class QuoteRequestController extends Controller
             throw new NotFoundHttpException();
         }
 
+        $user = $this->getUser();
 
         $form = $this->createForm(QuoteRequestLineEditType::class, $quoteRequestLine);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $quoteRequestManager = $this->get('paprec_commercial.product_di_quote_manager');
+            $quoteRequestManager = $this->get('paprec_commercial.quote_request_manager');
 
-            $quoteRequestManager->editLine($quoteRequest, $quoteRequestLine);
+            $quoteRequestManager->editLine($quoteRequest, $quoteRequestLine, $user);
 
             return $this->redirectToRoute('paprec_commercial_quoteRequest_view', array(
                 'id' => $quoteRequest->getId()
@@ -451,7 +450,7 @@ class QuoteRequestController extends Controller
         $em->remove($quoteRequestLine);
         $em->flush();
 
-        $quoteRequestManager = $this->get('paprec_commercial.product_di_quote_manager');
+        $quoteRequestManager = $this->get('paprec_commercial.quote_request_manager');
         $total = $quoteRequestManager->calculateTotal($quoteRequest);
         $quoteRequest->setTotalAmount($total);
         $em->flush();

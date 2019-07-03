@@ -5,6 +5,7 @@ namespace Paprec\CommercialBundle\Service;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityNotFoundException;
+use DoctrineExtensions\Query\Mysql\Date;
 use Exception;
 use Paprec\CommercialBundle\Entity\QuoteRequest;
 use Paprec\CommercialBundle\Entity\QuoteRequestLine;
@@ -78,7 +79,7 @@ class QuoteRequestManager
      * @param QuoteRequest $quoteRequest
      * @param QuoteRequestLine $quoteRequestLine
      */
-    public function addLine(QuoteRequest $quoteRequest, QuoteRequestLine $quoteRequestLine)
+    public function addLine(QuoteRequest $quoteRequest, QuoteRequestLine $quoteRequestLine, $user)
     {
 
         // On check s'il existe déjà une ligne pour ce produit, pour l'incrémenter
@@ -117,6 +118,27 @@ class QuoteRequestManager
 
         $total = $this->calculateTotal($quoteRequest);
         $quoteRequest->setTotalAmount($total);
+        $quoteRequest->setDateUpdate(new \DateTime());
+        $quoteRequest->setUserUpdate($user);
+        $this->em->flush();
+    }
+
+    /**
+     * Met à jour les montants totaux après l'édition d'une ligne
+     */
+    public function editLine(QuoteRequest $quoteRequest, QuoteRequestLine $quoteRequestLine, $user)
+    {
+        $now = new \DateTime();
+
+        $totalLine = $this->calculateTotalLine($quoteRequestLine);
+        $quoteRequestLine->setTotalAmount($totalLine);
+        $quoteRequestLine->setDateUpdate($now);
+
+        $total = $this->calculateTotal($quoteRequest);
+        $quoteRequest->setTotalAmount($total);
+        $quoteRequest->setDateUpdate($now);
+        $quoteRequest->setUserUpdate($user);
+
         $this->em->flush();
     }
 
@@ -147,8 +169,10 @@ class QuoteRequestManager
     public function calculateTotal(QuoteRequest $quoteRequest)
     {
         $totalAmount = 0;
-        foreach ($quoteRequest->getQuoteRequestLines() as $quoteRequestLine) {
-            $totalAmount += $this->calculateTotalLine($quoteRequestLine);
+        if ($quoteRequest->getQuoteRequestLines() && count($quoteRequest->getQuoteRequestLines())) {
+            foreach ($quoteRequest->getQuoteRequestLines() as $quoteRequestLine) {
+                $totalAmount += $this->calculateTotalLine($quoteRequestLine);
+            }
         }
         return $totalAmount;
     }

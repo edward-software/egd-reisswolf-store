@@ -8,12 +8,12 @@
 {% endblock %}
 
 {% block content_title %}
-    {{ 'Commercial.QuoteRequest.ProductDIQuotes'|trans }}
+    {{ 'Commercial.QuoteRequest.QuoteRequests'|trans }}
 {% endblock %}
 
 {% block main_content %}
 
-    <form id="catalogProductDIQuoteForm" action="" method="post" enctype="multipart/form-data">
+    <form id="catalogQuoteRequestForm" action="" method="post" enctype="multipart/form-data">
 
         <div class="col-md-12">
             <!-- BOX -->
@@ -23,9 +23,9 @@
                         <i class="fa fa-xs fa-plus"></i> {{ 'Commercial.QuoteRequest.Add'|trans }}
                     </h4>
                     <div class="float-right">
-                        <a href="javascript:void(0);" class="btn btn-sm btn-success catalog-productDIQuoteLine-save-button"><i
+                        <a href="javascript:void(0);" class="btn btn-sm btn-success catalog-quoteRequestLine-save-button"><i
                                     class="fa fa-xs fa-check"></i> {{ 'General.Save'|trans }}</a>
-                        <a href="javascript:void(0);" class="btn btn-sm btn-danger catalog-productDIQuoteLine-cancel-button"><i
+                        <a href="javascript:void(0);" class="btn btn-sm btn-danger catalog-quoteRequestLine-cancel-button"><i
                                     class="fa fa-xs fa-close"></i> {{ 'General.Cancel'|trans }}</a>
                     </div>
                 </div>
@@ -33,7 +33,7 @@
                     <div class="col-md-7">
                         <div class="card">
                             <div class="card-header">
-                                <h5 class="card-title">{{ 'Commercial.QuoteRequest.Informations'|trans }}</h5>
+                                <h5 class="card-title">{{ 'General.Information'|trans }}</h5>
                             </div>
                             <div class="card-body">
                                 <div class="form-group no-gutters">
@@ -50,9 +50,9 @@
 
                 <div class="card-footer">
                     <div class="float-right">
-                        <a href="javascript:void(0);" class="btn btn-sm btn-success catalog-productDIQuoteLine-save-button"><i
+                        <a href="javascript:void(0);" class="btn btn-sm btn-success catalog-quoteRequestLine-save-button"><i
                                     class="fa fa-xs fa-check"></i> {{ 'General.Save'|trans }}</a>
-                        <a href="javascript:void(0);" class="btn btn-sm btn-danger catalog-productDIQuoteLine-cancel-button"><i
+                        <a href="javascript:void(0);" class="btn btn-sm btn-danger catalog-quoteRequestLine-cancel-button"><i
                                     class="fa fa-xs fa-close"></i> {{ 'General.Cancel'|trans }}</a>
                     </div>
                 </div>
@@ -71,18 +71,18 @@
     <script>
         $(function () {
 
-            $('.catalog-productDIQuoteLine-save-button').on('click', function () {
-                $('#catalogProductDIQuoteForm').submit();
+            $('.catalog-quoteRequestLine-save-button').on('click', function () {
+                $('#catalogQuoteRequestForm').submit();
             });
 
 
-            $('.catalog-productDIQuoteLine-cancel-button').on('click', function () {
+            $('.catalog-quoteRequestLine-cancel-button').on('click', function () {
 
-                var url = "{{ path("paprec_commercial_productDIQuote_view", { id: productDIQuote.id }) }}";
+                var url = "{{ path("paprec_commercial_quoteRequest_view", { id: quoteRequest.id }) }}";
 
                 Swal({
                     title: "{{ 'General.Confirm'|trans }}",
-                    text: "{{ 'Commercial.QuoteRequest.Confirm-cancel'|trans }}",
+                    text: "{{ 'General.Confirm-cancel'|trans }}",
                     showCancelButton: true,
                     confirmButtonText: "{{ 'General.Yes'|trans }}",
                     cancelButtonText: "{{ 'General.No'|trans }}"

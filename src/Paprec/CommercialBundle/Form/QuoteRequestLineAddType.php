@@ -27,9 +27,13 @@ class QuoteRequestLineAddType extends AbstractType
                 'class' => 'PaprecCatalogBundle:Product',
                 'query_builder' => function (ProductRepository $er) {
                     return $er->createQueryBuilder('p')
-                        ->where('p.deleted is NULL');
+                        ->select(array('p', 'pL'))
+                        ->leftJoin('p.productLabels', 'pL')
+                        ->where('p.deleted IS NULL')
+                        ->andWhere('pL.language = :language')
+                        ->setParameter('language', 'EN');
                 },
-                'choice_label' => 'id',
+                'choice_label' => 'productLabels[0].name',
                 'placeholder' => '',
                 'empty_data' => null,
             ));

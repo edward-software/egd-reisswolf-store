@@ -53,8 +53,7 @@ class UserController extends Controller
 
         $queryBuilder->select(array('u'))
             ->from('PaprecUserBundle:User', 'u')
-            ->where('u.deleted IS NULL')
-        ;
+            ->where('u.deleted IS NULL');
 
         if (is_array($search) && isset($search['value']) && $search['value'] != '') {
             if (substr($search['value'], 0, 1) == '#') {
@@ -123,32 +122,32 @@ class UserController extends Controller
         $phpExcelObject->setActiveSheetIndex(0);
 
         $i = 2;
-        foreach($users as $user) {
+        foreach ($users as $user) {
 
             $roles = array();
 
-            foreach($user->getRoles() as $role) {
-                if($role != 'ROLE_USER') {
+            foreach ($user->getRoles() as $role) {
+                if ($role != 'ROLE_USER') {
                     $roles[] = $translator->trans($role);
                 }
             }
 
             $phpExcelObject->setActiveSheetIndex(0)
-                ->setCellValue('A'.$i, $user->getId())
-                ->setCellValue('B'.$i, $user->getCompanyName())
-                ->setCellValue('C'.$i, $user->getFirstName())
-                ->setCellValue('D'.$i, $user->getLastName())
-                ->setCellValue('E'.$i, $user->getEmail())
-                ->setCellValue('F'.$i, $user->getUsername())
-                ->setCellValue('G'.$i, implode(',', $roles))
-                ->setCellValue('H'.$i, $user->isEnabled())
-                ->setCellValue('I'.$i, $user->getDateCreation()->format('Y-m-d'));
+                ->setCellValue('A' . $i, $user->getId())
+                ->setCellValue('B' . $i, $user->getCompanyName())
+                ->setCellValue('C' . $i, $user->getFirstName())
+                ->setCellValue('D' . $i, $user->getLastName())
+                ->setCellValue('E' . $i, $user->getEmail())
+                ->setCellValue('F' . $i, $user->getUsername())
+                ->setCellValue('G' . $i, implode(',', $roles))
+                ->setCellValue('H' . $i, $user->isEnabled())
+                ->setCellValue('I' . $i, $user->getDateCreation()->format('Y-m-d'));
             $i++;
         }
 
         $writer = $this->container->get('phpexcel')->createWriter($phpExcelObject, 'Excel2007');
 
-        $fileName = 'ReisswolfShop-Extraction-Utilisateurs-'.date('Y-m-d').'.xlsx';
+        $fileName = 'ReisswolfShop-Extraction-Utilisateurs-' . date('Y-m-d') . '.xlsx';
 
         // create the response
         $response = $this->container->get('phpexcel')->createStreamedResponse($writer);
@@ -172,7 +171,7 @@ class UserController extends Controller
      */
     public function viewAction(Request $request, User $user)
     {
-        if($user->getDeleted() !== null) {
+        if ($user->getDeleted() !== null) {
             throw new NotFoundHttpException();
         }
 
@@ -191,12 +190,17 @@ class UserController extends Controller
         $user = new User();
 
         $roles = array();
-        foreach($this->getParameter('security.role_hierarchy.roles') as $role => $children) {
+        foreach ($this->getParameter('security.role_hierarchy.roles') as $role => $children) {
             $roles[$role] = $role;
+        }
+        $languages = array();
+        foreach ($this->getParameter('paprec_languages') as $language) {
+            $languages[$language] = $language;
         }
 
         $form = $this->createForm(UserType::class, $user, array(
-            'roles' => $roles
+            'roles' => $roles,
+            'languages' => $languages
         ));
 
         $form->handleRequest($request);
@@ -227,17 +231,23 @@ class UserController extends Controller
      */
     public function editAction(Request $request, User $user)
     {
-        if($user->getDeleted() !== null) {
+        if ($user->getDeleted() !== null) {
             throw new NotFoundHttpException();
         }
 
         $roles = array();
-        foreach($this->getParameter('security.role_hierarchy.roles') as $role => $children) {
+        foreach ($this->getParameter('security.role_hierarchy.roles') as $role => $children) {
             $roles[$role] = $role;
         }
 
+        $languages = array();
+        foreach ($this->getParameter('paprec_languages') as $language) {
+            $languages[$language] = $language;
+        }
+
         $form = $this->createForm(UserType::class, $user, array(
-            'roles' => $roles
+            'roles' => $roles,
+            'languages' => $languages
         ));
 
         $form->handleRequest($request);
@@ -271,7 +281,14 @@ class UserController extends Controller
 
         $user = $this->getUser();
 
-        $form = $this->createForm(UserMyProfileType::class, $user);
+        $languages = array();
+        foreach ($this->getParameter('paprec_languages') as $language) {
+            $languages[$language] = $language;
+        }
+
+        $form = $this->createForm(UserMyProfileType::class, $user, array(
+            'languages' => $languages
+        ));
 
         $form->handleRequest($request);
 
@@ -300,7 +317,7 @@ class UserController extends Controller
     public function sendAccessAction(Request $request, User $user)
     {
 
-        if(! $user->isEnabled()) {
+        if (!$user->isEnabled()) {
 
             $this->get('session')->getFlashBag()->add('errors', 'userIsNotEnabled');
 
@@ -324,13 +341,11 @@ class UserController extends Controller
             ->setBody($this->container->get('templating')->render('PaprecUserBundle:User:sendAccessEmail.html.twig', array(
                 'user' => $user,
                 'password' => $password,
-            )), 'text/html')
-        ;
+            )), 'text/html');
 
-        if($this->container->get('mailer')->send($message)) {
+        if ($this->container->get('mailer')->send($message)) {
             $this->get('session')->getFlashBag()->add('success', 'accessHasBeenSent');
-        }
-        else {
+        } else {
             $this->get('session')->getFlashBag()->add('error', 'accessCannotBeSent');
         }
         return $this->redirectToRoute('paprec_user_user_view', array(
@@ -347,17 +362,17 @@ class UserController extends Controller
         $em = $this->getDoctrine()->getManager();
         $ids = $request->get('ids');
 
-        if(! $ids) {
+        if (!$ids) {
             throw new NotFoundHttpException();
         }
 
         $ids = explode(',', $ids);
 
-        if(is_array($ids) && count($ids)) {
+        if (is_array($ids) && count($ids)) {
             $users = $em->getRepository('PaprecUserBundle:User')->findById($ids);
             foreach ($users as $user) {
 
-                if($user->isEnabled()) {
+                if ($user->isEnabled()) {
 
                     $tokenGenerator = $this->container->get('fos_user.util.token_generator');
                     $password = substr($tokenGenerator->generateToken(), 0, 8);
@@ -373,14 +388,12 @@ class UserController extends Controller
                         ->setBody($this->container->get('templating')->render('PaprecUserBundle:User:sendAccessEmail.html.twig', array(
                             'user' => $user,
                             'password' => $password,
-                        )), 'text/html')
-                    ;
+                        )), 'text/html');
 
 
-                    if($this->container->get('mailer')->send($message)) {
+                    if ($this->container->get('mailer')->send($message)) {
                         $this->get('session')->getFlashBag()->add('success', array('msg' => 'accessHasBeenSent', 'var' => $user->getEmail()));
-                    }
-                    else {
+                    } else {
                         $this->get('session')->getFlashBag()->add('error', array('msg' => 'accessCannotBeSent', 'var' => $user->getEmail()));
                     }
                 }
@@ -414,7 +427,7 @@ class UserController extends Controller
     {
         $ids = $request->get('ids');
 
-        if(! $ids) {
+        if (!$ids) {
             throw new NotFoundHttpException();
         }
 
@@ -422,9 +435,9 @@ class UserController extends Controller
 
         $ids = explode(',', $ids);
 
-        if(is_array($ids) && count($ids)) {
+        if (is_array($ids) && count($ids)) {
             $users = $em->getRepository('PaprecUserBundle:User')->findById($ids);
-            foreach ($users as $user){
+            foreach ($users as $user) {
                 $user->setDeleted(new \DateTime);
                 $user->setEnabled(false);
             }

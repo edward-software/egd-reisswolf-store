@@ -41,6 +41,13 @@ services:
     tags:
       - { name: twig.extension }
 
+  twig.productNameTranslation:
+    class: Paprec\CatalogBundle\Twig\Extension\ProductNameTranslationExtension
+    public: false
+    arguments: ["@service_container"]
+    tags:
+      - { name: twig.extension }
+
 parameters:
 
   paprec_catalog.product.picto_path: "%kernel.root_dir%/../web/uploads/pictos"
@@ -50,7 +57,7 @@ parameters:
     - PICTURE
     - PILOTPICTURE
 
-  paprec_product_languages:
+  paprec_languages:
     - DE
     - FR
     - IT

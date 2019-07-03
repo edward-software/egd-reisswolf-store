@@ -79,6 +79,16 @@ class Region
      */
     private $postalCodes;
 
+    public function __construct()
+    {
+        $this->dateCreation = new \DateTime();
+        $this->postalCodes = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->getName();
+    }
 
     /**
      * Get id.
@@ -212,11 +222,6 @@ class Region
     /**
      * Constructor
      */
-    public function __construct()
-    {
-        $this->dateCreation = new \DateTime();
-        $this->postalCodes = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
      * Add postalCode.

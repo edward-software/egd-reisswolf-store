@@ -84,25 +84,24 @@ class RegionController extends Controller
 
         $phpExcelObject = $this->container->get('phpexcel')->createPHPExcelObject();
 
-        $queryBuilder = $this->getDoctrine()->getManager()->getRepository(Region::class)->createQueryBuilder('pC');
+        $queryBuilder = $this->getDoctrine()->getManager()->getRepository(Region::class)->createQueryBuilder('r');
 
-        $queryBuilder->select(array('pC'))
-            ->where('pC.deleted IS NULL');
+        $queryBuilder->select(array('r'))
+            ->where('r.deleted IS NULL');
 
         $regions = $queryBuilder->getQuery()->getResult();
 
         $phpExcelObject->getProperties()->setCreator("Reisswolf Shop")
             ->setLastModifiedBy("Reisswolf Shop")
-            ->setTitle("Reisswolf Shop - Codes Postaux")
+            ->setTitle("Reisswolf Shop - Régions")
             ->setSubject("Extraction");
 
         $phpExcelObject->setActiveSheetIndex(0)
             ->setCellValue('A1', 'ID')
-            ->setCellValue('B1', 'Codes')
-            ->setCellValue('C1', 'Division')
-            ->setCellValue('D1', 'Coef. Mult.');
+            ->setCellValue('B1', 'Nom')
+            ->setCellValue('C1', 'Date création');
 
-        $phpExcelObject->getActiveSheet()->setTitle('Codes Postaux');
+        $phpExcelObject->getActiveSheet()->setTitle('Régions');
         $phpExcelObject->setActiveSheetIndex(0);
 
         $i = 2;
@@ -110,15 +109,14 @@ class RegionController extends Controller
 
             $phpExcelObject->setActiveSheetIndex(0)
                 ->setCellValue('A' . $i, $region->getId())
-                ->setCellValue('B' . $i, $region->getCodes())
-                ->setCellValue('C' . $i, $region->getDivision())
-                ->setCellValue('D' . $i, $numberManager->denormalize($region->getRate()));
+                ->setCellValue('B' . $i, $region->getName())
+                ->setCellValue('C' . $i, $region->getDateCreation()->format('Y-m-d'));
             $i++;
         }
 
         $writer = $this->container->get('phpexcel')->createWriter($phpExcelObject, 'Excel2007');
 
-        $fileName = 'ReisswolfShop-Extraction-Codes-Postaux-' . date('Y-m-d') . '.xlsx';
+        $fileName = 'ReisswolfShop-Extraction-Regions-' . date('Y-m-d') . '.xlsx';
 
         // create the response
         $response = $this->container->get('phpexcel')->createStreamedResponse($writer);

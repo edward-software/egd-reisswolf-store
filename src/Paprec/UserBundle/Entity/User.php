@@ -92,6 +92,13 @@ class User extends BaseUser
      */
     private $firstName;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="lang", type="string", length=255, nullable=true)
+     */
+    private $lang;
+
 
     /**
      * #################################
@@ -404,5 +411,29 @@ class User extends BaseUser
     public function getQuoteRequests()
     {
         return $this->quoteRequests;
+    }
+
+    /**
+     * Set lang.
+     *
+     * @param string|null $lang
+     *
+     * @return User
+     */
+    public function setLang($lang = null)
+    {
+        $this->lang = $lang;
+
+        return $this;
+    }
+
+    /**
+     * Get lang.
+     *
+     * @return string|null
+     */
+    public function getLang()
+    {
+        return $this->lang;
     }
 }
