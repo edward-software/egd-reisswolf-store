@@ -255,21 +255,17 @@ class ProductManager
         return false;
     }
 
-//    /**
-//     * Fonction appelée par le twigExtension ProductNameTranslationExtension
-//     * On lui passe un produit et une langue (celle de l'utilisateur connecté pour le BO)
-//     * Retourne le nom du produit dans la langue souhaitée en parcourant les productLabels du produit
-//     *
-//     * Ici on ne se préoccupe par de savoir si le produit a été supprimé
-//     *
-//     * @param Product $product
-//     * @param $lang
-//     */
-//    public function getTranslatedProductLabelName(Product $product, $lang) {
-//
-//
-//
-//    }
+    public function getAvailableProducts()
+    {
+        $queryBuilder = $this->em->getRepository(Product::class)->createQueryBuilder('p');
+
+        $queryBuilder->select(array('p'))
+            ->where('p.deleted IS NULL')
+            ->andWhere('p.isEnabled = 1')
+            ->orderBy('p.position');
+
+        return $queryBuilder->getQuery()->getResult();
+    }
 
 
 }

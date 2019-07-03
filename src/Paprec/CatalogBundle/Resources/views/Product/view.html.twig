@@ -116,65 +116,6 @@
                             #}
                             <div class="col-md-6">
                                 {#
-                                    Affichage des photos Pictos
-                                #}
-                                <div class="col-md-12 no-gutters">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            {{ 'Catalog.Product.Picto'|trans }}
-                                            <div class="float-right">
-                                                <button class="btn btn-sm btn-outline-primary"
-                                                        data-target="#uploadPictureModal" data-toggle="modal"
-                                                        data-type="PICTO" id="openModalUploadPicture">
-                                                    <i class="fa fa-xs fa-plus"></i> {{ 'Catalog.Product.AddPicture'|trans }}
-                                                </button>
-                                            </div>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="card-group">
-                                                {% if (product.pictos) %}
-                                                    {% for picture in product.pictos %}
-                                                        <div class="card card-sec">
-                                                            <div class="card-header">
-                                                                {#<div class="float-left"> {{ 'Catalog.Product.Picto'|trans }}</div>#}
-                                                                <div class="dropdown float-right">
-                                                                    <button class="p-0 btn btn-sm btn-light dropdown-toggle btn-sm"
-                                                                            type="button" id="{{ picture.id }}"
-                                                                            data-toggle="dropdown" aria-haspopup="true"
-                                                                            aria-expanded="false">
-                                                                        <i class="fa fa-xs fa-cog"></i>
-                                                                    </button>
-                                                                    <div class="dropdown-menu"
-                                                                         aria-labelledby="{{ picture.id }}">
-                                                                        <button id="pictureEditButton"
-                                                                                class="dropdown-item"
-                                                                                type="button"
-                                                                                data-target="#editPictureModal"
-                                                                                data-toggle="modal"
-                                                                                data-type="PICTO"
-                                                                                data-id="{{ picture.id }}">
-                                                                            <i class="fa fa-xs fa-pencil-alt"></i> {{ 'General.Edit'|trans }}
-                                                                        </button>
-                                                                        <button data-id="{{ picture.id }}"
-                                                                                class="dropdown-item removePictureButton"
-                                                                                type="button">
-                                                                            <i class="fa fa-xs fa-trash"></i> {{ 'General.Remove'|trans }}
-                                                                        </button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="card-body">
-                                                                <div class="checkboxPicto"
-                                                                     style="background-image: url({{ asset('/uploads/pictos/' ~ picture.path) }}"></div>
-                                                            </div>
-                                                        </div>
-                                                    {% endfor %}
-                                                {% endif %}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                {#
                                     Affichage des photos PilotPicture
                                 #}
                                 <div class="col-md-12 mt-2 no-gutters">
@@ -238,227 +179,164 @@
                                     </div>
                                 </div>
                                 {#
-                                    Affichage photo de type Picture
+                                    Affichage photo de type PilotPicture
                                 #}
-                                <div class="col-md-12 mt-2 no-gutters">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            {{ 'Catalog.Product.Pictures'|trans }}
-                                            <div class="float-right">
-
-                                                <button class="btn btn-sm btn-outline-primary"
-                                                        data-target="#uploadPictureModal" data-toggle="modal"
-                                                        data-type="PICTURE" id="openModalUploadPicture">
-                                                    <i class="fa fa-xs fa-plus"></i> {{ 'Catalog.Product.AddPicture'|trans }}
-                                                </button>
-                                            </div>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="card-group">
-                                                {% if (product.picturesPictures) %}
-                                                    {% for picture in product.picturesPictures %}
-                                                        <div class="card card-sec">
-                                                            <div class="card-header">
-                                                                {#<div class="float-left"> {{ 'Catalog.Product.Pictures'|trans }}</div>#}
-                                                                <div class="dropdown float-right">
-                                                                    <button class="p-0 btn btn-sm btn-light dropdown-toggle btn-sm"
-                                                                            type="button" id="{{ picture.id }}"
-                                                                            data-toggle="dropdown" aria-haspopup="true"
-                                                                            aria-expanded="false">
-                                                                        <i class="fa fa-xs fa-cog"></i>
-                                                                    </button>
-                                                                    <div class="dropdown-menu"
-                                                                         aria-labelledby="{{ picture.id }}">
-                                                                        <button id="pictureEditButton"
-                                                                                class="dropdown-item"
-                                                                                type="button"
-                                                                                data-target="#editPictureModal"
-                                                                                data-toggle="modal"
-                                                                                data-type="PICTURE"
-                                                                                data-id="{{ picture.id }}">
-                                                                            <i class="fa fa-xs fa-pencil-alt"></i> {{ 'General.Edit'|trans }}
-                                                                        </button>
-                                                                        <button data-id="{{ picture.id }}"
-                                                                                class="dropdown-item setPilotPictureButton"
-                                                                                type="button">
-                                                                            <i class="fa fa-xs fa-exchange-alt"></i> {{ 'Catalog.Product.PilotPicture'|trans }}
-                                                                        </button>
-                                                                        <button data-id="{{ picture.id }}"
-                                                                                class="dropdown-item removePictureButton"
-                                                                                type="button">
-                                                                            <i class="fa fa-xs fa-trash"></i> {{ 'General.Remove'|trans }}
-                                                                        </button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="card-body" style="text-align: center">
-                                                                <img class="card-img-top"
-                                                                     style="max-width: 60px; width: 60px;"
-                                                                     src="{{ asset('/uploads/pictos/' ~ picture.path) }}"
-                                                                     alt="{{ 'Catalog.Product.Pictures'|trans }}">
-                                                            </div>
-                                                        </div>
-                                                    {% endfor %}
-                                                {% endif %}
-                                            </div>
-                                        </div>
-                                    </div> <!-- fin de la Card affichage des Pictures -->
-                                </div>
                             </div>
-                            {#
-                                Modal d'affichage des formulaires
-                            #}
-                            <div class="modal fade" id="uploadPictureModal" tabindex="-1" role="dialog"
-                                 aria-labelledby="Upload Picture" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                        <form id="formAddPicture" name="formAddPicture"
-                                                {% set params = {id: product.id, type: 'Picture' } %}
-                                              action="{{ path("paprec_catalog_product_addPicture", params) }}"
-                                              method="post" enctype="multipart/form-data">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="uploadPictureModalTitle">
-                                                </h5>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="form-group">
-                                                    <div class="form-label">
-                                                        {{ 'Catalog.Picture.Path'|trans }}
-                                                        <span id="uploadPictureSizeInfo">
+                        </div>
+                        {#
+                            Modal d'affichage des formulaires
+                        #}
+                        <div class="modal fade" id="uploadPictureModal" tabindex="-1" role="dialog"
+                             aria-labelledby="Upload Picture" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <form id="formAddPicture" name="formAddPicture"
+                                            {% set params = {id: product.id, type: 'Picture' } %}
+                                          action="{{ path("paprec_catalog_product_addPicture", params) }}"
+                                          method="post" enctype="multipart/form-data">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="uploadPictureModalTitle">
+                                            </h5>
+                                            <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <div class="form-label">
+                                                    {{ 'Catalog.Picture.Path'|trans }}
+                                                    <span id="uploadPictureSizeInfo">
 
                                                         </span>
-                                                    </div>
-                                                    <div class="form-content">
-                                                        {{ form_widget(formAddPicture.path, {'attr': {'class': 'form-control'}}) }}
-                                                        {{ form_errors(formAddPicture.path) }}
-                                                    </div>
+                                                </div>
+                                                <div class="form-content">
+                                                    {{ form_widget(formAddPicture.path, {'attr': {'class': 'form-control'}}) }}
+                                                    {{ form_errors(formAddPicture.path) }}
                                                 </div>
                                             </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-sm btn-secondary"
-                                                        data-dismiss="modal">
-                                                    {{ 'General.Cancel'|trans }}
-                                                </button>
-                                                <button type="button" class="btn btn-sm btn-primary"
-                                                        id="formAddPictureSubmitButton">
-                                                    {{ 'General.Save'|trans }}
-                                                </button>
-                                            </div>
-                                            {{ form_rest(formAddPicture) }}
-                                        </form>
-                                    </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-sm btn-secondary"
+                                                    data-dismiss="modal">
+                                                {{ 'General.Cancel'|trans }}
+                                            </button>
+                                            <button type="button" class="btn btn-sm btn-primary"
+                                                    id="formAddPictureSubmitButton">
+                                                {{ 'General.Save'|trans }}
+                                            </button>
+                                        </div>
+                                        {{ form_rest(formAddPicture) }}
+                                    </form>
                                 </div>
                             </div>
-                            <div class="modal fade" id="editPictureModal" tabindex="-1" role="dialog"
-                                 aria-labelledby="Edit Picture" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                        <form id="formEditPicture" name="formEditPicture"
-                                              action=""
-                                              method="post" enctype="multipart/form-data">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="editPictureModalTitle">
-                                                    {{ 'Catalog.Product.EditPicture'|trans }}
-                                                </h5>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="form-group">
-                                                    <div class="form-label">
-                                                        {{ 'Catalog.Picture.Path'|trans }}
-                                                        <span id="editPictureSizeInfo">
+                        </div>
+                        <div class="modal fade" id="editPictureModal" tabindex="-1" role="dialog"
+                             aria-labelledby="Edit Picture" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <form id="formEditPicture" name="formEditPicture"
+                                          action=""
+                                          method="post" enctype="multipart/form-data">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="editPictureModalTitle">
+                                                {{ 'Catalog.Product.EditPicture'|trans }}
+                                            </h5>
+                                            <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <div class="form-label">
+                                                    {{ 'Catalog.Picture.Path'|trans }}
+                                                    <span id="editPictureSizeInfo">
 
                                                         </span>
-                                                    </div>
-                                                    <div class="form-content">
-                                                        {{ form_widget(formEditPicture.path, {'attr': {'class': 'form-control'}}) }}
-                                                        {{ form_errors(formEditPicture.path) }}
-                                                    </div>
+                                                </div>
+                                                <div class="form-content">
+                                                    {{ form_widget(formEditPicture.path, {'attr': {'class': 'form-control'}}) }}
+                                                    {{ form_errors(formEditPicture.path) }}
                                                 </div>
                                             </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-sm btn-secondary"
-                                                        data-dismiss="modal">
-                                                    {{ 'General.Cancel'|trans }}
-                                                </button>
-                                                <button type="button" class="btn btn-sm btn-primary"
-                                                        id="formEditPictureSubmitButton">
-                                                    {{ 'General.Save'|trans }}
-                                                </button>
-                                            </div>
-                                            {{ form_rest(formEditPicture) }}
-                                        </form>
-                                    </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-sm btn-secondary"
+                                                    data-dismiss="modal">
+                                                {{ 'General.Cancel'|trans }}
+                                            </button>
+                                            <button type="button" class="btn btn-sm btn-primary"
+                                                    id="formEditPictureSubmitButton">
+                                                {{ 'General.Save'|trans }}
+                                            </button>
+                                        </div>
+                                        {{ form_rest(formEditPicture) }}
+                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="col-md-12 mt-3">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">{{ 'General.System-information'|trans }}</h5>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label">{{ 'General.Date-creation'|trans }}</label>
+                            <label class="col-form-label col-md-8">
+                                {{ product.dateCreation|localizeddate('short', 'medium', app.request.locale) }}
+                            </label>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label">{{ 'General.Date-update'|trans }}</label>
+                            <label class="col-form-label col-md-8">
+                                {{ product.dateUpdate is empty ? "" : product.dateUpdate|localizeddate('short', 'medium', app.request.locale) }}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% for pL in otherProductLabels %}
                 <div class="col-md-12 mt-3">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title">{{ 'General.System-information'|trans }}</h5>
+                            <h5 class="card-title">{{ ('Catalog.ProductLabel.Language.'~pL.language)|trans }}</h5>
+                            <div class="float-right">
+                                <a href="{{ path("paprec_catalog_product_editProductLabel", {id: product.id, productLabelId: pL.id}) }}"
+                                   class="btn btn-sm btn-warning"><i
+                                            class="fa fa-xs fa-edit"></i> {{ 'Catalog.ProductLabel.Edit'|trans }}
+                                </a>
+                                <a id="catalogProductLabelRemoveButton_{{ pL.id }}" href="javascript:void(0);"
+                                   class="btn btn-sm btn-danger catalogProductLabelRemoveButton"><i
+                                            class="fa fa-xs fa-trash"></i> {{ 'Catalog.ProductLabel.Remove'|trans }}
+                                </a>
+                            </div>
                         </div>
                         <div class="card-body">
-
                             <div class="form-group row">
-                                <label class="col-md-4 col-form-label">{{ 'General.Date-creation'|trans }}</label>
+                                <label class="col-md-4 col-form-label">{{ 'Catalog.ProductLabel.Name'|trans }}</label>
                                 <label class="col-form-label col-md-8">
-                                    {{ product.dateCreation|localizeddate('short', 'medium', app.request.locale) }}
+                                    {{ pL.name }}
                                 </label>
                             </div>
-
                             <div class="form-group row">
-                                <label class="col-md-4 col-form-label">{{ 'General.Date-update'|trans }}</label>
+                                <label class="col-md-4 col-form-label">{{ 'Catalog.ProductLabel.Short-description'|trans }}</label>
                                 <label class="col-form-label col-md-8">
-                                    {{ product.dateUpdate is empty ? "" : product.dateUpdate|localizeddate('short', 'medium', app.request.locale) }}
+                                    {{ pL.shortDescription|nl2br }}
                                 </label>
                             </div>
                         </div>
                     </div>
                 </div>
-                {% for pL in otherProductLabels %}
-                    <div class="col-md-12 mt-3">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5 class="card-title">{{ ('Catalog.ProductLabel.Language.'~pL.language)|trans }}</h5>
-                                <div class="float-right">
-                                    <a href="{{ path("paprec_catalog_product_editProductLabel", {id: product.id, productLabelId: pL.id}) }}"
-                                       class="btn btn-sm btn-warning"><i
-                                                class="fa fa-xs fa-edit"></i> {{ 'Catalog.ProductLabel.Edit'|trans }}
-                                    </a>
-                                    <a id="catalogProductLabelRemoveButton_{{ pL.id }}" href="javascript:void(0);"
-                                       class="btn btn-sm btn-danger catalogProductLabelRemoveButton"><i
-                                                class="fa fa-xs fa-trash"></i> {{ 'Catalog.ProductLabel.Remove'|trans }}
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <div class="form-group row">
-                                    <label class="col-md-4 col-form-label">{{ 'Catalog.ProductLabel.Name'|trans }}</label>
-                                    <label class="col-form-label col-md-8">
-                                        {{ pL.name }}
-                                    </label>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-md-4 col-form-label">{{ 'Catalog.ProductLabel.Short-description'|trans }}</label>
-                                    <label class="col-form-label col-md-8">
-                                        {{ pL.shortDescription|nl2br }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
+            {% endfor %}
         </div>
+    </div>
     </div>
 {% endblock %}
 

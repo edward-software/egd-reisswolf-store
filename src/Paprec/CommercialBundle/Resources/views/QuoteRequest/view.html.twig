@@ -232,7 +232,7 @@
                                         <td>{{ quoteRequestLine.id|formatId(6) }}</td>
                                         <td>
                                             <a href="{{ path('paprec_catalog_product_view', {id: quoteRequestLine.product.id}) }}">
-                                                {{ quoteRequestLine.product|productNameTranslation(app.user) }}
+                                                {{ quoteRequestLine.product|productLabelTranslation(app.user.lang) }}
                                             </a>
                                         </td>
                                         <td>{{ quoteRequestLine.quantity }}</td>

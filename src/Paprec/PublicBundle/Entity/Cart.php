@@ -44,48 +44,12 @@ class Cart
      */
     private $disabled;
 
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="division", type="string", length=255, nullable=true)
-     */
-    private $division;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="location", type="string", length=255, nullable=true)
-     */
-    private $location;
-
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="latitude", type="decimal", precision=18, scale=15, nullable=true)
-     */
-    private $latitude;
-
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="longitude", type="decimal", precision=18, scale=15, nullable=true)
-     */
-    private $longitude;
     /**
      * @var string
      *
      * @ORM\Column(name="city", type="string", length=255, nullable=true)
      */
     private $city;
-
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="postalCode", type="string", length=255, nullable=true)
-     */
-    private $postalCode;
 
     /**
      * @var string
@@ -95,53 +59,24 @@ class Cart
     private $frequency;
 
     /**
-     * 'Order' ou 'Quote' ou 'null' pour DI
-     * @var string
-     *
-     * @ORM\Column(name="type", type="string", length=255, nullable=true)
-     */
-    private $type;
-
-    /**
-     * @var array
-     *
-     * @ORM\Column(name="displayedCategories", type="simple_array", nullable=true)
-     */
-    private $displayedCategories;
-
-    /**
-     * @var array
-     *
-     * @ORM\Column(name="displayedProducts", type="array", nullable=true)
-     */
-    private $displayedProducts;
-
-    /**
      * @var array|null
      *
      * @ORM\Column(name="content", type="json", nullable=true)
      */
     private $content;
 
-    /**
-     * Etape dans lequel se trouve le Cart (créé, division choisie, livraison,...)
-     *
-     * @var string
-     *
-     * @ORM\Column(name="step", type="string", length=255, nullable=true)
-     */
-    private $step;
-
 
     public function __construct()
     {
         $this->dateCreation = new \DateTime();
-        $this->setDisplayedProducts = array();
         $this->content = array();
     }
+    
 
     /**
      * Get id.
+     *
+     * @return uuid
      */
     public function getId()
     {
@@ -197,171 +132,27 @@ class Cart
     }
 
     /**
-     * Set division.
+     * Set disabled.
      *
-     * @param string $division
+     * @param \DateTime|null $disabled
      *
      * @return Cart
      */
-    public function setDivision($division)
+    public function setDisabled($disabled = null)
     {
-        $this->division = $division;
+        $this->disabled = $disabled;
 
         return $this;
     }
 
     /**
-     * Get division.
+     * Get disabled.
      *
-     * @return string
+     * @return \DateTime|null
      */
-    public function getDivision()
+    public function getDisabled()
     {
-        return $this->division;
-    }
-
-    /**
-     * Set location.
-     *
-     * @param string $location
-     *
-     * @return Cart
-     */
-    public function setLocation($location)
-    {
-        $this->location = $location;
-
-        return $this;
-    }
-
-    /**
-     * Get location.
-     *
-     * @return string
-     */
-    public function getLocation()
-    {
-        return $this->location;
-    }
-
-    /**
-     * Set frequency.
-     *
-     * @param string $frequency
-     *
-     * @return Cart
-     */
-    public function setFrequency($frequency)
-    {
-        $this->frequency = $frequency;
-
-        return $this;
-    }
-
-    /**
-     * Get frequency.
-     *
-     * @return string
-     */
-    public function getFrequency()
-    {
-        return $this->frequency;
-    }
-
-    /**
-     * Set displayedCategories.
-     *
-     * @param array|null $displayedCategories
-     *
-     * @return Cart
-     */
-    public function setDisplayedCategories($displayedCategories = null)
-    {
-        $this->displayedCategories = $displayedCategories;
-
-        return $this;
-    }
-
-    /**
-     * Get displayedCategories.
-     *
-     * @return array|null
-     */
-    public function getDisplayedCategories()
-    {
-        return $this->displayedCategories;
-    }
-
-    /**
-     * Set displayedProducts.
-     *
-     * @param array|null $displayedProducts
-     *
-     * @return Cart
-     */
-    public function setDisplayedProducts($displayedProducts = null)
-    {
-        $this->displayedProducts = $displayedProducts;
-
-        return $this;
-    }
-
-    /**
-     * Get displayedProducts.
-     *
-     * @return array|null
-     */
-    public function getDisplayedProducts()
-    {
-        return $this->displayedProducts;
-    }
-
-    /**
-     * Set content.
-     *
-     * @param json|null $content
-     *
-     * @return Cart
-     */
-    public function setContent($content = null)
-    {
-        $this->content = $content;
-
-        return $this;
-    }
-
-    /**
-     * Get content.
-     *
-     * @return json|null
-     */
-    public function getContent()
-    {
-        return $this->content;
-    }
-
-    /**
-     * Set type.
-     *
-     * @param string|null $type
-     *
-     * @return Cart
-     */
-    public function setType($type = null)
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    /**
-     * Get type.
-     *
-     * @return string|null
-     */
-    public function getType()
-    {
-        return $this->type;
+        return $this->disabled;
     }
 
     /**
@@ -389,122 +180,50 @@ class Cart
     }
 
     /**
-     * Set postalCode.
+     * Set frequency.
      *
-     * @param string|null $postalCode
+     * @param string|null $frequency
      *
      * @return Cart
      */
-    public function setPostalCode($postalCode = null)
+    public function setFrequency($frequency = null)
     {
-        $this->postalCode = $postalCode;
+        $this->frequency = $frequency;
 
         return $this;
     }
 
     /**
-     * Get postalCode.
+     * Get frequency.
      *
      * @return string|null
      */
-    public function getPostalCode()
+    public function getFrequency()
     {
-        return $this->postalCode;
+        return $this->frequency;
     }
 
     /**
-     * Set latitude.
+     * Set content.
      *
-     * @param string|null $latitude
+     * @param json|null $content
      *
      * @return Cart
      */
-    public function setLatitude($latitude = null)
+    public function setContent($content = null)
     {
-        $this->latitude = $latitude;
+        $this->content = $content;
 
         return $this;
     }
 
     /**
-     * Get latitude.
+     * Get content.
      *
-     * @return string|null
+     * @return json|null
      */
-    public function getLatitude()
+    public function getContent()
     {
-        return $this->latitude;
-    }
-
-    /**
-     * Set longitude.
-     *
-     * @param string|null $longitude
-     *
-     * @return Cart
-     */
-    public function setLongitude($longitude = null)
-    {
-        $this->longitude = $longitude;
-
-        return $this;
-    }
-
-    /**
-     * Get longitude.
-     *
-     * @return string|null
-     */
-    public function getLongitude()
-    {
-        return $this->longitude;
-    }
-
-    /**
-     * Set disabled.
-     *
-     * @param \DateTime|null $disabled
-     *
-     * @return Cart
-     */
-    public function setDisabled($disabled = null)
-    {
-        $this->disabled = $disabled;
-
-        return $this;
-    }
-
-    /**
-     * Get disabled.
-     *
-     * @return \DateTime|null
-     */
-    public function getDisabled()
-    {
-        return $this->disabled;
-    }
-
-    /**
-     * Set step.
-     *
-     * @param string|null $step
-     *
-     * @return Cart
-     */
-    public function setStep($step = null)
-    {
-        $this->step = $step;
-
-        return $this;
-    }
-
-    /**
-     * Get step.
-     *
-     * @return string|null
-     */
-    public function getStep()
-    {
-        return $this->step;
+        return $this->content;
     }
 }

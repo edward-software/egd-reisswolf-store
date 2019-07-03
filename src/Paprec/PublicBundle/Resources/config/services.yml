@@ -7,10 +7,3 @@ services:
   paprec.cart_manager:
     class: Paprec\PublicBundle\Service\CartManager
     arguments: ["@doctrine.orm.entity_manager", "@service_container"]
-
-  twig.paprec_customizable_area:
-    class: Paprec\PublicBundle\Twig\Extension\PaprecCustomizableAreaExtension
-    public: false
-    arguments: ["@service_container"]
-    tags:
-      - { name: twig.extension }

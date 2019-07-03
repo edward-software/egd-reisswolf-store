@@ -41,8 +41,8 @@ services:
     tags:
       - { name: twig.extension }
 
-  twig.productNameTranslation:
-    class: Paprec\CatalogBundle\Twig\Extension\ProductNameTranslationExtension
+  twig.productLabelTranslation:
+    class: Paprec\CatalogBundle\Twig\Extension\ProductLabelTranslationExtension
     public: false
     arguments: ["@service_container"]
     tags:
