@@ -78,8 +78,10 @@ class QuoteRequestManager
      * Ajoute une quoteRequestLine à un quoteRequest
      * @param QuoteRequest $quoteRequest
      * @param QuoteRequestLine $quoteRequestLine
+     * @param null $user
+     * @throws Exception
      */
-    public function addLine(QuoteRequest $quoteRequest, QuoteRequestLine $quoteRequestLine, $user)
+    public function addLine(QuoteRequest $quoteRequest, QuoteRequestLine $quoteRequestLine, $user = null)
     {
 
         // On check s'il existe déjà une ligne pour ce produit, pour l'incrémenter
@@ -123,8 +125,37 @@ class QuoteRequestManager
         $this->em->flush();
     }
 
+
+    /**
+     * Pour ajouter une QuoteRequestLine depuis le Cart, il faut d'abord retrouver le Product
+     * @param $productId
+     * @param $qtty
+     * @throws Exception
+     */
+    public function addLineFromCart(QuoteRequest $quoteRequest, $productId, $qtty)
+    {
+        $productManager = $this->container->get('paprec_catalog.product_manager');
+
+        try {
+            $product = $productManager->get($productId);
+            $quoteRequestLine = new QuoteRequestLine();
+
+            $quoteRequestLine->setProduct($product);
+            $quoteRequestLine->setQuantity($qtty);
+            $this->addLine($quoteRequest, $quoteRequestLine);
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage(), $e->getCode());
+        }
+
+
+    }
+
     /**
      * Met à jour les montants totaux après l'édition d'une ligne
+     * @param QuoteRequest $quoteRequest
+     * @param QuoteRequestLine $quoteRequestLine
+     * @param $user
+     * @throws Exception
      */
     public function editLine(QuoteRequest $quoteRequest, QuoteRequestLine $quoteRequestLine, $user)
     {

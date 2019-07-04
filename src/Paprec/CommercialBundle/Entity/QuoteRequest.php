@@ -66,6 +66,7 @@ class QuoteRequest
      * @var string
      *
      * @ORM\Column(name="canton", type="string", length=255, nullable=true)
+     * @Assert\NotBlank(groups={"public"})
      */
     private $canton;
 
@@ -73,6 +74,7 @@ class QuoteRequest
      * @var string
      *
      * @ORM\Column(name="businessName", type="string", length=255, nullable=true)
+     * @Assert\NotBlank(groups={"public"})
      */
     private $businessName;
 
@@ -81,6 +83,7 @@ class QuoteRequest
      * @var string
      *
      * @ORM\Column(name="civility", type="string", length=10, nullable=true)
+     * @Assert\NotBlank(groups={"public"})
      */
     private $civility;
 
@@ -88,6 +91,7 @@ class QuoteRequest
      * @var string
      *
      * @ORM\Column(name="lastName", type="string", length=255, nullable=true)
+     * @Assert\NotBlank(groups={"public"})
      */
     private $lastName;
 
@@ -95,6 +99,7 @@ class QuoteRequest
      * @var string
      *
      * @ORM\Column(name="firstName", type="string", length=255, nullable=true)
+     * @Assert\NotBlank(groups={"public"})
      */
     private $firstName;
 
@@ -102,8 +107,9 @@ class QuoteRequest
     /**
      * @var string
      * @ORM\Column(name="email", type="string", length=255, nullable=true)
+     * @Assert\NotBlank(groups={"public"})
      * @Assert\Email(
-     *      groups={"details"},
+     *      groups={"public"},
      *      message = "L'email '{{ value }}' n'a pas un format valide"
      * )
      */
@@ -114,9 +120,9 @@ class QuoteRequest
      * @var string
      *
      * @ORM\Column(name="phone", type="string", length=255, nullable=true)
-     * @Assert\NotBlank(groups={"details"})
+     * @Assert\NotBlank(groups={"public"})
      * @Assert\Regex(
-     *     groups={"details"},
+     *     groups={"public"},
      *     pattern="/^((\+)?33|0)[1-9](\d{2}){4}$/",
      *     match=true,
      *     message="Le n° de téléphone doit être au format français (ex: +33601020304, 0601020304)"
@@ -128,7 +134,7 @@ class QuoteRequest
      * @var boolean
      *
      * @ORM\Column(name="isMultisite", type="boolean")
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(groups={"public"})
      */
     private $isMultisite;
 
@@ -136,7 +142,7 @@ class QuoteRequest
      * @var string
      *
      * @ORM\Column(name="address", type="text", nullable=true)
-     * @Assert\NotBlank(groups={"details"})
+     * @Assert\NotBlank(groups={"public"})
      */
     private $address;
 
@@ -144,6 +150,7 @@ class QuoteRequest
      * @var string
      *
      * @ORM\Column(name="postalCode", type="string", length=255)
+     * @Assert\NotBlank(groups={"public"})
      */
     private $postalCode;
 
@@ -152,6 +159,7 @@ class QuoteRequest
      * @var string
      *
      * @ORM\Column(name="city", type="string", length=255, nullable=true)
+     * @Assert\NotBlank(groups={"public"})
      */
     private $city;
 
@@ -168,6 +176,7 @@ class QuoteRequest
      * @var integer
      *
      * @ORM\Column(name="coworkerNumber", type="integer", nullable=true)
+     * @Assert\NotBlank(groups={"public"})
      */
     private $coworkerNumber;
 

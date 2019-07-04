@@ -1,0 +1,29 @@
+{% extends 'base_public.html.twig' %}
+{% block main_content %}
+
+    <section class="page-section confirmation">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-xs-12">
+                    <div class="row">
+                        <div class="col-12">
+                            <h2>Votre demande a bien été prise en compte et
+                                envoyée au service commercial de votre région.
+                            </h2>
+                            <div class="divider"></div>
+                        </div>
+                        <div class="col-12">
+                            Vous devriez recevoir un e-mail de confirmation, cette opération peut prendre plusieurs minutes.
+                            Si vous ne recevez pas la confirmation, vérifiez dans votre dossier à spam, sinon contactez
+                            notre <a href="mailto:contact@contact.fr">service technique</a>.
+                        </div>
+                    </div>
+                </div>
+                <div class="d-none d-lg-block col-lg-6 text-center">
+                    <img src="./assets/img/paperplane.png" alt="">
+                </div>
+            </div>
+
+        </div>
+    </section>
+{% endblock %}

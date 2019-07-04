@@ -26,10 +26,10 @@ Commercial:
     Informations-BO: Informations Back-Office
     Informations-FO: Informations Front-Office
     Frequency: Fréquence
-    CoworkerNumber: Nombre de collaborateurs
+    CoworkerNumber: Effectif
     UserInCharge: Commercial en charge
     IsMultisite: Prestation multi-sites
-    Comment: Commentaire client
+    Comment: Commentaire
     OverallDiscount: Remise globale
     SalesmanComment: Commentaire commercial
     MonthlyBudget: Budget mensuel
