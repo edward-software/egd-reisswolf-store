@@ -226,6 +226,20 @@ class QuoteRequest
     private $frequency;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="frequencyTimes", type="string", length=255, nullable=true)
+     */
+    private $frequencyTimes;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="frequencyInterval", type="string", length=255, nullable=true)
+     */
+    private $frequencyInterval;
+
+    /**
      * #################################
      *              Relations
      * #################################
@@ -894,5 +908,53 @@ class QuoteRequest
     public function getTotalAmount()
     {
         return $this->totalAmount;
+    }
+
+    /**
+     * Set frequencyTimes.
+     *
+     * @param string|null $frequencyTimes
+     *
+     * @return QuoteRequest
+     */
+    public function setFrequencyTimes($frequencyTimes = null)
+    {
+        $this->frequencyTimes = $frequencyTimes;
+
+        return $this;
+    }
+
+    /**
+     * Get frequencyTimes.
+     *
+     * @return string|null
+     */
+    public function getFrequencyTimes()
+    {
+        return $this->frequencyTimes;
+    }
+
+    /**
+     * Set frequencyInterval.
+     *
+     * @param string|null $frequencyInterval
+     *
+     * @return QuoteRequest
+     */
+    public function setFrequencyInterval($frequencyInterval = null)
+    {
+        $this->frequencyInterval = $frequencyInterval;
+
+        return $this;
+    }
+
+    /**
+     * Get frequencyInterval.
+     *
+     * @return string|null
+     */
+    public function getFrequencyInterval()
+    {
+        return $this->frequencyInterval;
     }
 }

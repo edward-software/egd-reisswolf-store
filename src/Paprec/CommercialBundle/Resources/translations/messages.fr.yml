@@ -26,6 +26,10 @@ Commercial:
     Informations-BO: Informations Back-Office
     Informations-FO: Informations Front-Office
     Frequency: Fréquence
+    month: mois
+    quarter: trimestre
+    year: an
+    week: semaine
     CoworkerNumber: Effectif
     UserInCharge: Commercial en charge
     IsMultisite: Prestation multi-sites
@@ -39,6 +43,7 @@ Commercial:
     AddLine: Ajouter un produit
     Confirm-send-quote: Êtes-vous sûr de vouloir envoyer le devis au client ?
     Edit: Edition du devis
+    Ponctual: A la demande
 
   QuoteStatusList:
     CREATED: Créé

@@ -8,6 +8,7 @@ use Paprec\CommercialBundle\Form\QuoteRequestPublicType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class SubscriptionController extends Controller
@@ -80,6 +81,10 @@ class SubscriptionController extends Controller
             $quoteRequest = $form->getData();
             $quoteRequest->setQuoteStatus('CREATED');
 
+            $quoteRequest->setFrequency($cart->getFrequency());
+            $quoteRequest->setFrequencyTimes($cart->getFrequencyTimes());
+            $quoteRequest->setFrequencyInterval($cart->getFrequencyInterval());
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($quoteRequest);
             $em->flush();
@@ -91,10 +96,14 @@ class SubscriptionController extends Controller
                 }
             }
 
-            return $this->redirectToRoute('paprec_public_confirm_index', array(
-                'cartUuid' => $cart->getId(),
-                'quoteRequestId' => $quoteRequest->getId()
-            ));
+            $sendConfirmEmail = $quoteRequestManager->sendConfirmRequestEmail($quoteRequest);
+
+            if ($sendConfirmEmail) {
+                return $this->redirectToRoute('paprec_public_confirm_index', array(
+                    'cartUuid' => $cart->getId(),
+                    'quoteRequestId' => $quoteRequest->getId()
+                ));
+            }
         }
 
 
@@ -153,7 +162,34 @@ class SubscriptionController extends Controller
         } catch (\Exception $e) {
             return new JsonResponse(null, 400);
         }
+    }
 
+    /**
+     * @Route("/addFrequency/{cartUuid}", defaults={"cartUuid"=null}, name="paprec_public_catalog_addFrequency", condition="request.isXmlHttpRequest()")
+     */
+    public function addFrequencyAction(Request $request, $cartUuid)
+    {
+        $cartManager = $this->get('paprec.cart_manager');
 
+        $frequency = $request->get('frequency');
+        $frequencyTimes = $request->get('frequency_times');
+        $frequencyInterval = $request->get('frequency_interval');
+
+        try {
+            $cartManager->addFrequency($cartUuid, $frequency, $frequencyTimes, $frequencyInterval);
+            $content = json_encode(array('message' => 'frequency_added'));
+            return new JsonResponse($content, 204);
+
+        } catch (\Exception $e) {
+            return new JsonResponse(array('error' => $e->getMessage()), 400);
+        }
+    }
+
+    /**
+     * @Route("/confirmEmail", name="paprec_public_confirm_confirm_email")
+     */
+    public function showConfirmEmail()
+    {
+        return $this->render('@PaprecCommercial/QuoteRequest/emails/confirmQuoteEmail.html.twig');
     }
 }

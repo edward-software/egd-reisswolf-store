@@ -30,7 +30,7 @@ class CartManager
     }
 
     /**
-     * Retourne un Cart en pasant son Id ou un object Cart
+     * Retourne un Cart en passant son Id ou un object Cart
      * @param $cart
      * @return null|object|Cart
      * @throws Exception
@@ -163,10 +163,31 @@ class CartManager
             }
         }
         $cart->setContent($products);
-        $this->em->persist($cart);
         $this->em->flush();
         return $cart;
     }
 
+
+    /**
+     *
+     * @param $id
+     * @param $frequency
+     * @param $frequencyTimes
+     * @param $frequencyInterval
+     * @throws Exception
+     */
+    public function addFrequency($id, $frequency, $frequencyTimes, $frequencyInterval)
+    {
+        $cart = $this->get($id);
+
+        if ($frequency === 'regular' || $frequency === 'ponctual') {
+            $cart->setFrequency($frequency);
+            $cart->setFrequencyTimes($frequencyTimes);
+            $cart->setFrequencyInterval($frequencyInterval);
+            $this->em->flush();
+        } else {
+            throw new Exception('frequency_invalid');
+        }
+    }
 
 }

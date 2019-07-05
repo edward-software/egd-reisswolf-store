@@ -5,6 +5,7 @@ namespace Paprec\CommercialBundle\Service;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityNotFoundException;
+use Doctrine\ORM\ORMException;
 use DoctrineExtensions\Query\Mysql\Date;
 use Exception;
 use Paprec\CommercialBundle\Entity\QuoteRequest;
@@ -206,6 +207,49 @@ class QuoteRequestManager
             }
         }
         return $totalAmount;
+    }
+
+
+    /**
+     * Envoie un mail à la personne ayant fait une demande de devis
+     * @throws Exception
+     */
+    public function sendConfirmRequestEmail(QuoteRequest $quoteRequest)
+    {
+
+        try {
+            $from = $this->container->getParameter('paprec_email_sender');
+            $this->get($quoteRequest);
+
+            $rcptTo = $quoteRequest->getEmail();
+
+            if ($rcptTo == null || $rcptTo == '') {
+                return false;
+            }
+
+            $message = \Swift_Message::newInstance()
+                ->setSubject('Reisswolf E-shop : Votre demande de devis' . ' N°' . $quoteRequest->getId())
+                ->setFrom($from)
+                ->setTo($rcptTo)
+                ->setBody(
+                    $this->container->get('templating')->render(
+                        '@PaprecCommercial/QuoteRequest/emails/confirmQuoteEmail.html.twig',
+                        array(
+                            'quoteRequest' => $quoteRequest
+                        )
+                    ),
+                    'text/html'
+                );
+            if ($this->container->get('mailer')->send($message)) {
+                return true;
+            }
+            return false;
+
+        } catch (ORMException $e) {
+            throw new Exception('unableToSendConfirmQuoteRequest', 500);
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage(), $e->getCode());
+        }
     }
 
 }
