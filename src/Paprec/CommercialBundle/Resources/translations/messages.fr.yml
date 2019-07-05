@@ -44,6 +44,10 @@ Commercial:
     Confirm-send-quote: Êtes-vous sûr de vouloir envoyer le devis au client ?
     Edit: Edition du devis
     Ponctual: A la demande
+    Error:
+      generatedQuoteNotSent:    Erreur lors de la génération et l'envoi du devis.
+    Success:
+      generatedQuoteSent:       Le devis a bien été généré et envoyé au client.
 
   QuoteStatusList:
     CREATED: Créé

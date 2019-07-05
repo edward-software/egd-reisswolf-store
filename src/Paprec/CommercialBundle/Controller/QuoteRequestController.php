@@ -469,11 +469,11 @@ class QuoteRequestController extends Controller
      */
     public function sendGeneratedQuoteAction(QuoteRequest $quoteRequest)
     {
-        $quoteRequestManager = $this->get('paprec_commercial.product_di_quote_manager');
+        $quoteRequestManager = $this->get('paprec_commercial.quote_request_manager');
         $quoteRequestManager->isDeleted($quoteRequest, true);
 
 
-        $sendQuote = $quoteRequestManager->sendGeneratedQuoteEmail($quoteRequest);
+        $sendQuote = $quoteRequestManager->sendConfirmRequestEmail($quoteRequest);
         if ($sendQuote) {
             $this->get('session')->getFlashBag()->add('success', 'generatedQuoteSent');
         } else {
