@@ -53,7 +53,7 @@
                                     {% for postalCode in region.postalCodes %}
                                         <a href="{{ path('paprec_catalog_postalCode_view', {id: postalCode.id}) }}">
                                             {{ postalCode.code }}
-                                        </a>
+                                        </a>,
                                     {% endfor %}
                                 </label>
                             </div>
