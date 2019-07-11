@@ -24,10 +24,10 @@
                             </div>
                             <div class="col-xl-8">
                                 <div class="product__title">
-                                    <h3>{{ product|productLabelTranslation(lang) }}</h3>
+                                    <h3>{{ product|productLabelTranslation(locale) }}</h3>
                                 </div>
                                 <div class="product__description">
-                                    <p>{{ product|productLabelTranslation(lang, 'shortDescription') }}</p>
+                                    <p>{{ product|productLabelTranslation(locale, 'shortDescription') }}</p>
                                 </div>
                                 <div class="product__quantity">
                                     {{ 'Public.Catalog.Quantity'|trans }}
@@ -50,7 +50,7 @@
                                         {% endfor %}
                                     </select>
                                     <button type="button"
-                                            data-url="{{ path('paprec_public_catalog_addContent', {cartUuid: cart.id}) }}"
+                                            data-url="{{ path('paprec_public_catalog_addContent', {locale: locale, cartUuid: cart.id}) }}"
                                             data-product="{{ product.id }}"
                                             class="btn btn__blue addProductToQuoteButton">
                                         {{ 'Public.Catalog.AddToQuote'|trans }}</button>
@@ -76,7 +76,7 @@
                                             {% if item['pId'] == product.id %}
                                                 <div class="devis__recap__item" id="devis-recap-item-{{ product.id }}">
                                                     <p class="mr-2 font-weight-bold">{{ item['qtty'] }}x</p>
-                                                    <p>{{ product|productLabelTranslation(lang) }}</p>
+                                                    <p>{{ product|productLabelTranslation(locale) }}</p>
                                                 </div>
                                             {% endif %}
                                         {% endfor %}
@@ -119,8 +119,8 @@
                                     </div>
                                     <button type="button"
                                             class="btn btn__blue btn__large"
-                                            data-url="{{ path('paprec_public_contact_index', {cartUuid: cart.id}) }}"
-                                            data-ajax="{{ path('paprec_public_catalog_addFrequency', {cartUuid: cart.id}) }}"
+                                            data-url="{{ path('paprec_public_contact_index', {locale: locale, cartUuid: cart.id}) }}"
+                                            data-ajax="{{ path('paprec_public_catalog_addFrequency', {locale: locale, cartUuid: cart.id}) }}"
                                             id="catalog_next_step_button">
                                         {{ 'Public.Catalog.NextStep'|trans }}
                                     </button>

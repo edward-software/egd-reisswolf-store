@@ -15,23 +15,23 @@ class SubscriptionController extends Controller
 {
 
     /**
-     * @Route("/", name="paprec_public_devis_home")
+     * @Route("/{locale}", name="paprec_public_devis_home")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function redirectToIndexAction()
+    public function redirectToIndexAction(Request $request, $locale)
     {
-        return $this->redirectToRoute('paprec_public_catalog_index');
+        return $this->redirectToRoute('paprec_public_catalog_index', array('locale' => $locale));
     }
 
 
     /**
-     * @Route("/step0/{cartUuid}", defaults={"cartUuid"=null}, name="paprec_public_catalog_index")
+     * @Route("/{locale}/step0/{cartUuid}", defaults={"cartUuid"=null}, name="paprec_public_catalog_index")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function catalogAction(Request $request, $cartUuid)
+    public function catalogAction(Request $request, $locale, $cartUuid)
     {
         $em = $this->getDoctrine()->getManager();
         $cartManager = $this->get('paprec.cart_manager');
@@ -42,6 +42,7 @@ class SubscriptionController extends Controller
             $em->persist($cart);
             $em->flush();
             return $this->redirectToRoute('paprec_public_catalog_index', array(
+                'locale' => $locale,
                 'cartUuid' => $cart->getId()
             ));
         } else {
@@ -52,19 +53,19 @@ class SubscriptionController extends Controller
         }
 
         return $this->render('@PaprecPublic/Common/catalog.html.twig', array(
-            'lang' => 'FR',
+            'locale' => $locale,
             'cart' => $cart,
             'products' => $products
         ));
     }
 
     /**
-     * @Route("/step1/{cartUuid}",  name="paprec_public_contact_index")
+     * @Route("/{locale}/step1/{cartUuid}",  name="paprec_public_contact_index")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function contactDetailAction(Request $request, $cartUuid)
+    public function contactDetailAction(Request $request, $locale, $cartUuid)
     {
         $cartManager = $this->get('paprec.cart_manager');
         $quoteRequestManager = $this->get('paprec_commercial.quote_request_manager');
@@ -100,6 +101,7 @@ class SubscriptionController extends Controller
 
             if ($sendConfirmEmail) {
                 return $this->redirectToRoute('paprec_public_confirm_index', array(
+                    'locale' => $locale,
                     'cartUuid' => $cart->getId(),
                     'quoteRequestId' => $quoteRequest->getId()
                 ));
@@ -115,12 +117,12 @@ class SubscriptionController extends Controller
     }
 
     /**
-     * @Route("/step2/{cartUuid}/{quoteRequestId}", name="paprec_public_confirm_index")
+     * @Route("/{locale}/step2/{cartUuid}/{quoteRequestId}", name="paprec_public_confirm_index")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function confirmAction(Request $request, $cartUuid, $quoteRequestId)
+    public function confirmAction(Request $request, $locale, $cartUuid, $quoteRequestId)
     {
         $quoteRequestManager = $this->get('paprec_commercial.quote_request_manager');
         $cartManager = $this->get('paprec.cart_manager');
@@ -137,9 +139,9 @@ class SubscriptionController extends Controller
 
 
     /**
-     * @Route("/addContent/{cartUuid}", defaults={"cartUuid"=null}, name="paprec_public_catalog_addContent", condition="request.isXmlHttpRequest()")
+     * @Route("/{locale}/addContent/{cartUuid}", defaults={"cartUuid"=null}, name="paprec_public_catalog_addContent", condition="request.isXmlHttpRequest()")
      */
-    public function addContentAction(Request $request, $cartUuid)
+    public function addContentAction(Request $request, $locale, $cartUuid)
     {
         $cartManager = $this->get('paprec.cart_manager');
         $productManager = $this->container->get('paprec_catalog.product_manager');
@@ -165,9 +167,9 @@ class SubscriptionController extends Controller
     }
 
     /**
-     * @Route("/addFrequency/{cartUuid}", defaults={"cartUuid"=null}, name="paprec_public_catalog_addFrequency", condition="request.isXmlHttpRequest()")
+     * @Route("/{locale}/addFrequency/{cartUuid}", defaults={"cartUuid"=null}, name="paprec_public_catalog_addFrequency", condition="request.isXmlHttpRequest()")
      */
-    public function addFrequencyAction(Request $request, $cartUuid)
+    public function addFrequencyAction(Request $request, $locale, $cartUuid)
     {
         $cartManager = $this->get('paprec.cart_manager');
 
@@ -186,9 +188,9 @@ class SubscriptionController extends Controller
     }
 
     /**
-     * @Route("/confirmEmail", name="paprec_public_confirm_confirm_email")
+     * @Route("/{locale}/confirmEmail", name="paprec_public_confirm_confirm_email")
      */
-    public function showConfirmEmail()
+    public function showConfirmEmail(Request $request, $locale)
     {
         return $this->render('@PaprecCommercial/QuoteRequest/emails/confirmQuoteEmail.html.twig');
     }
