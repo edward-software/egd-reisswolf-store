@@ -1,107 +1,106 @@
 Catalog:
 
-  Bundle-name:                    Gestion Catalogue
-  Products:                       Produits
-  Settings:                       Paramétrage
+  Bundle-name:                    Catalog management
+  Products:                       Products
+  Settings:                       Settings
 
 
   PostalCode:
 
-    PostalCodes:                Code postaux
-    Name:                       Code postal
-    Date-crea:                  Date de créa.
-    Date-creation:              Date de création
-    Date-update:                Date de mise à jour
-    Informations:               Informations
-    System-informations:        Informations système
-    List:                       Liste des codes postaux
-    Add:                        Ajouter un code postal
-    Export:                     Exporter les codes postaux
-    Code:                      Code Postal
-    Division:                   Division
-    Rate:                       Coefficient
-    View:                       Vue du code postal
-    Edit:                       Modifier le code postal
-    Remove:                     Supprimer le code postal
-    Save:                       Enregistrer
-    Cancel:                     Annuler
+    PostalCodes:                Postal codes
+    Name:                       Postal code
+    Date-crea:                  Crea. date
+    Date-creation:              Creation date
+    Date-update:                Last update
+    Informations:               Information
+    System-informations:        System information
+    List:                       Postal codes list
+    Add:                        Add postal code
+    Export:                     Export postal codes
+    Code:                       Code
+    Rate:                       Rate
+    View:                       View postal code
+    Edit:                       Edit postal code
+    Remove:                     Delete postal code
+    Save:                       Save
+    Cancel:                     Cancel
     Confirm-cancel:             Etes-vous sûr de vouloir annuler ?
     Confirm-remove:             Etes-vous sûr de vouloir supprimer ce code postal ?
-    TransportRate: Coef de transport
-    TreatmentRate: Coef de traitement
-    TraceabilityRate: Coef de traçabilité
-    UserInCharge: Commercial en charge
-    Region: Région
-    System-information: Informations système
+    TransportRate: Transport rate
+    TreatmentRate: Treatment rate
+    TraceabilityRate: Traceability rate
+    UserInCharge: Salesman in charge
+    Region: Region
+    System-information: System information
 
   Picture:
-    Path:                       Choisir photo
-    Type:                       Type de la photo
-    AddPilotPicture:            Ajouter une photo principale
-    AddPicto:                   Ajouter un picto
-    AddPicture:                 Ajouter une photo secondaire
+    Path:                       Choose picture
+    Type:                       Photo type
+    AddPilotPicture:            Add main picture
+    AddPicto:                   Add picto
+    AddPicture:                 Add secondary picture
 
   Product:
-    View: Vue du produit
-    Products: Liste des produits
-    Add: Ajouter un produit
-    Edit: Editer un produit
-    Remove: Supprimer
-    List: Liste des produits
-    Information: Information du produit
-    Capacity: Volume
+    View: View product
+    Products: Products
+    Add: Add product
+    Edit: Edit product
+    Remove: Delete
+    List: Products list
+    Information: Product information
+    Capacity: Capacity
     Dimensions: Dimensions
-    AvailablePostalCodes: Disponibilités géographiques
+    AvailablePostalCodes: Available postal codes
     IsEnabled:
-      IsEnabled: Actif
-      Yes: Oui
-      No: Non
-      Disable: Désactiver
-      Enable: Activer
+      IsEnabled: Active
+      Yes: Yes
+      No: No
+      Disable: Disabme
+      Enable: Enable
     Picto: Picto
-    AddPicture: Ajouter image
-    PilotPicture: Image principale
-    SetSecondaryPicture: Définir en image secondaire
-    Pictures: Images
-    EditPicture: Remplacer image
-    System-information: Informations système
-    Date-creation: Date de création
-    Date-update: Date dernière modification
-    Export: Exporter les produits
-    Details: Details du produit
-    CapacityUnit: Unité de volume
+    AddPicture: Add picture
+    PilotPicture: Main picture
+    SetSecondaryPicture: Set as secondary picture
+    Pictures: Pictures
+    EditPicture: Replace picture
+    System-information: System information
+    Date-creation: Creation date
+    Date-update: Last update
+    Export: Export products
+    Details: Product details
+    CapacityUnit: Capacity unit
     Position: Position
-    RentalUnitPrice: PU de location
-    TransportUnitPrice: PU de transport
-    TreatmentUnitPrice: PU de traitement
-    TraceabilityUnitPrice: PU de traçabilité
+    RentalUnitPrice: Rental unit price
+    TransportUnitPrice: Transport unit price
+    TreatmentUnitPrice: Treatment unit price
+    TraceabilityUnitPrice: Traceability unit price
 
 
   ProductLabel:
-    Add: Ajouter une traduction
-    Edit: Editer traduction
+    Add: Add translation
+    Edit: Edit translation
     Language:
-      Language: Langue
-      EN: Anglais
-      FR: Français
-      IT: Italien
-      DE: Allemand
-    Name: Nom
-    Short-description: Description courte
-    Information: Informations
-    Remove: Supprimer
+      Language: Locale
+      EN: English
+      FR: French
+      IT: Italian
+      DE: German
+    Name: Name
+    Short-description: Short description
+    Information: Information
+    Remove: Remove
 
 
   Region:
-    Regions: Régions
-    Name: Nom
-    List: Liste des régions
-    Add: Ajouter une région
-    Export: Exporter les régions
-    View: Vue de la région
-    Edit: Modifier région
-    Remove: Supprimer région
-    Informations: Informations
-    System-informations:        Informations système
-    PostalCodes: Codes postaux
+    Regions: Regions
+    Name: Name
+    List: Regions list
+    Add: Add region
+    Export: Export regions
+    View: View region
+    Edit: Edit region
+    Remove: Delete region
+    Informations: Information
+    System-informations:        System information
+    PostalCodes: Postal codes
 
