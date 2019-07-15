@@ -214,7 +214,7 @@ class QuoteRequestManager
      * Envoie un mail à la personne ayant fait une demande de devis
      * @throws Exception
      */
-    public function sendConfirmRequestEmail(QuoteRequest $quoteRequest)
+    public function sendConfirmRequestEmail(QuoteRequest $quoteRequest, $locale)
     {
 
         try {
@@ -235,7 +235,8 @@ class QuoteRequestManager
                     $this->container->get('templating')->render(
                         '@PaprecCommercial/QuoteRequest/emails/confirmQuoteEmail.html.twig',
                         array(
-                            'quoteRequest' => $quoteRequest
+                            'quoteRequest' => $quoteRequest,
+                            'locale' => $locale
                         )
                     ),
                     'text/html'
@@ -257,7 +258,7 @@ class QuoteRequestManager
      * Envoie un mail au commercial associé lui indiquant la nouvelle demande de devis créée
      * @throws Exception
      */
-    public function sendnewRequestEmail(QuoteRequest $quoteRequest)
+    public function sendnewRequestEmail(QuoteRequest $quoteRequest, $locale)
     {
 
         try {
@@ -278,7 +279,8 @@ class QuoteRequestManager
                     $this->container->get('templating')->render(
                         '@PaprecCommercial/QuoteRequest/emails/newQuoteEmail.html.twig',
                         array(
-                            'quoteRequest' => $quoteRequest
+                            'quoteRequest' => $quoteRequest,
+                            'locale' => $locale
                         )
                     ),
                     'text/html'

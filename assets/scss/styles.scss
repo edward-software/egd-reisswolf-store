@@ -47,6 +47,29 @@ a {
 
 .breadcrumb {
   background-color: $lightgray;
+
+  &__title {
+    font-family: $font-family-1;
+    font-size: 32px;
+    font-weight: $font-medium;
+    color: #313131;
+    line-height: 47px;
+  }
+
+  &__content {
+    font-size: 11px;
+    font-family: $font-family-2;
+    line-height: 12px;
+    &__link {
+
+      font-weight: $font-regular !important;
+      color: #A8A8A8 !important;
+    }
+
+    &__last {
+      color: #2c4491 !important;
+    }
+  }
 }
 
 /*BUTTON*/

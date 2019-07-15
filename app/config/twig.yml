@@ -4,4 +4,5 @@ twig:
   strict_variables: '%kernel.debug%'
   globals:
     reisswolf_public_site_url: "%reisswolf_public_site_url%"
+    reisswolf_public_technical_service: "%reisswolf_public_technical_service%"
 

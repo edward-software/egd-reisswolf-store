@@ -16,6 +16,7 @@ Public:
     Month:                        month
     Quarter:                      quarter
     Year:                         year
+    BreadcrumbContent:            Services catalog
 
   Contact:
     BreadcrumbTitle:              Customer details
@@ -34,6 +35,8 @@ Public:
     City: City
     Comment: Comment
     SendRequest: Send request
+    BreadcrumbContent: Customer details
+
 
   Confirm:
     BreadcrumbTitle: Confirmation of the request
@@ -42,3 +45,7 @@ Public:
       If you do not receive confirmation, check your spam folder, otherwise contact
       our
     TechnicalService: technical service
+    BreadcrumbContent: Confirmation of the request
+
+  Home: Home
+  Quote: Quote

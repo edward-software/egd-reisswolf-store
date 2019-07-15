@@ -17,6 +17,7 @@ Public:
     Month: mois
     Quarter: trimestre
     Year: an
+    BreadcrumbContent: Catalogue de services
 
   Contact:
     BreadcrumbTitle: Coordonnées du client
@@ -35,9 +36,16 @@ Public:
     City: Ville
     Comment: Commentaire
     SendRequest: Envoyer la demande
+    BreadcrumbContent: Coordonnées du client
+
 
   Confirm:
     BreadcrumbTitle: Confirmation de la demande
     Title: Votre demande a bien été prise en compte et envoyée au service commercial de votre région.
     Message: Vous devriez recevoir un e-mail de confirmation, cette opération peut prendre plusieurs minutes. Si vous ne recevez pas la confirmation, vérifiez dans votre dossier à spam, sinon contactez notre
     TechnicalService: service technique
+    BreadcrumbContent: Confirmation de la demande
+
+
+  Home: Accueil
+  Quote: Devis

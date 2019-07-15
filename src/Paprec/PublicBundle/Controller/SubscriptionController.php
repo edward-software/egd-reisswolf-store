@@ -61,6 +61,8 @@ class SubscriptionController extends Controller
     /**
      * @Route("/{locale}/step1/{cartUuid}",  name="paprec_public_contact_index")
      * @param Request $request
+     * @param $locale
+     * @param $cartUuid
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
@@ -95,10 +97,10 @@ class SubscriptionController extends Controller
                     $quoteRequestManager->addLineFromCart($quoteRequest, $item['pId'], $item['qtty']);
                 }
             }
+            $sendConfirmEmail = $quoteRequestManager->sendConfirmRequestEmail($quoteRequest, $locale);
+            $sendNewRequestEmail = $quoteRequestManager->sendnewRequestEmail($quoteRequest, $locale);
 
-            $sendConfirmEmail = $quoteRequestManager->sendConfirmRequestEmail($quoteRequest);
-
-            if ($sendConfirmEmail) {
+            if ($sendConfirmEmail && $sendNewRequestEmail) {
                 return $this->redirectToRoute('paprec_public_confirm_index', array(
                     'locale' => $locale,
                     'cartUuid' => $cart->getId(),
