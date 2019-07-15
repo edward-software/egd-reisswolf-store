@@ -1,0 +1,98 @@
+/***** Page catalogue de service ******/
+select {
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+  background: url('/build/static/arrow-down.svg') 125%/65% no-repeat;
+  padding: 0 20px 0 8px;
+  border-radius: 0;
+}
+
+.page-section {
+  h2 {
+    span {
+      display: block;
+    }
+  }
+}
+
+.product-container {
+  margin-right: -40px;
+  margin-left: -40px;
+
+  .col-md-6 {
+    padding-right: 40px;
+    padding-left: 40px;
+  }
+}
+
+
+.product {
+  margin-bottom: 50px;
+  //border: 1px solid;
+
+  &__image {
+    img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      margin-bottom: 15px;
+    }
+  }
+
+  &__description {
+    text-align: justify;
+    max-height: 135px;
+    overflow: hidden;
+  }
+
+  &__quantity {
+    text-align: right;
+    margin-top: 20px;
+    color: #4A4A4A;
+    font-size: 14px;
+    font-weight: $font-bold;
+
+    button {
+      margin-left: 20px;
+    }
+  }
+}
+
+.devis {
+  background-color: $lightgray;
+  padding: 15px;
+
+  h3 {
+    text-transform: initial;
+  }
+
+  &__recap {
+    background-color: $mdgray;
+    padding: 15px 15px 10px;
+    margin-bottom: 15px;
+
+    &__item {
+      display: flex;
+      margin-bottom: 5px;
+    }
+  }
+
+  &__frequence {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+
+    select:last-child {
+      background-size: 28%;
+      background-position: 107%;
+    }
+  }
+
+  & .custom-control-input:checked~.custom-control-label::before {
+    color: #fff;
+    border-color: $secondary;
+    background-color: $secondary;
+  }
+}

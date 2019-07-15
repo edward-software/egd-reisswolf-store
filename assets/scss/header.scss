@@ -1,8 +1,4 @@
-/*
-#top-bar {
-  z-index: 9999;
-}
-*/
+
 .custom-toggler.navbar-toggler {
   border-color: rgba(255, 196, 0, 1);
 }
@@ -35,6 +31,7 @@
 
       li {
         display: inline-block;
+        margin: 0px 3px;
       }
     }
 
@@ -50,6 +47,7 @@
 
       li {
         display: inline-block;
+        margin: 0px 3px;
         a {
           margin-right: 5px;
         }
@@ -72,7 +70,7 @@
 
     i.fa-plus {
       position: absolute;
-      top: 26px;
+      top: 25px;
       right: 20px;
       font-size: 25px;
       color: rgba(255, 196, 0, 1);
@@ -88,7 +86,7 @@
     justify-content: center;
 
     & li:hover .dropdown-menu { //hover off
-      display: block;
+      display: block ;
       /*visibility: visible;
       opacity: 1;*/
   }
@@ -128,9 +126,9 @@
       }
     }
 
-    &.show {
+    /*&.show {
       display: block !important;
-    }
+    }*/
   }
   & .menu {
     flex-wrap: wrap;
