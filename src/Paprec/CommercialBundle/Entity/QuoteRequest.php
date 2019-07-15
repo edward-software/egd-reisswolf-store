@@ -162,7 +162,7 @@ class QuoteRequest
      * @Assert\Regex(
      *     pattern="/^\d{2}(\*|(?:\d{2}))$/",
      *     match=true,
-     *     message="Le codes postal doivent être un nombre de 4 caractères ou 2 suivis d'une *. (ex: 15*, 1530)",
+     *     message="Le codes postal doivent être un nombre de 4 caractères. (ex: 1530)",
      *     groups={"public_multisite"}
      * )
      */
