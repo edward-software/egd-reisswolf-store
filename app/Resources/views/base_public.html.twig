@@ -10,6 +10,10 @@
     <link rel="icon" type="image/png" href="{{ asset('build/static/favicon.png') }}">
     <link href="https://fonts.googleapis.com/css?family=Arimo:400,700|Oswald:300,400,500&display=swap&subset=latin-ext"
           rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+          integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <!--Font awesome-->
+    <script src="https://kit.fontawesome.com/6247656702.js"></script>
 
 
     {% block stylesheets %}{% endblock %}
@@ -17,17 +21,280 @@
 </head>
 <body>
 <header>
-    <div class="container">
-        {{ app.request.locale }}
-        top header
+    <div class="top-bar">
+        <div class="container">
+            <div class="row align-items-center pt-1 pb-1">
+                <!-- Top Contact -->
+                <div class="col-md-8">
+                    <div class="top-bar__top-contact">
+                        <a href="/contact">
+                            <i class="fas fa-phone-alt"></i>Appelez-nous ou demandez-nous un devis sans
+                            engagement.
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Top Social Icon -->
+                <div class="col-md-2 pr-0 pl-0 text-center">
+                    <div class="top-bar__top-social-icon">
+                        <ul>
+                            <li>
+                                <a href="https://www.facebook.com/Lottner-AG-124475410963566/?fref=ts"
+                                   target="_blank" rel="noopener noreferrer">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://plus.google.com/102577579817338404444" target="_blank"
+                                   rel="noopener noreferrer">
+                                    <i class="fab fa-google-plus-g"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.linkedin.com/showcase/reisswolf-aktenvernichtung-schweiz/"
+                                   target="_blank" rel="noopener noreferrer">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.youtube.com/channel/UCH8kRN0OFEvKsvd55JG-ZAg"
+                                   target="_blank" rel="noopener noreferrer">
+                                    <i class="fab fa-youtube"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <!-- Top Flags -->
+                <div class="col-md-2 pr-0 pl-0 text-center">
+                    <div class="top-bar__top-social-flags">
+                        <ul>
+                            <li>
+                                <a href="#">
+                                    <img src="/build/static/de.gif" alt="Germany" title="">
+                                </a>
+                            </li>
+                            <li class="lang-active">
+                                <a href="#">
+                                    <img src="/build/static/fr.gif" alt="French" title="">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <img src="/build/static/it.gif" alt="Italian" title="">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <img src="/build/static/en.gif" alt="English (UK)" title="">
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
+    {#Navigation#}
+    <nav class="navbar navbar-expand-md navbar-light static-top">
+        <div class="container menu">
+            {#             <div class="row align-items-center">
+                             <div class="col-lg-3 col text-center">
+                                 <a class="navbar-brand" href="#">
+                                     <img src="/build/static/reisswolf_logo.png" alt="">
+                                 </a>
+                                 <button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse"
+                                         data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                                         aria-label="Toggle navigation">
+                                     <span class="navbar-toggler-icon"></span>
+                                 </button>
+                             </div>
+                             <div class="col-lg-9 text-center">
+                                 <div class="collapse navbar-collapse" id="navbarResponsive">
+
+                                     <ul class="navbar-nav ml-auto">
+                                         <li class="nav-item active">
+                                             <a class="nav-link" href="#">Accueil
+                                                 <span class="sr-only">(current)</span>
+                                             </a>
+                                         </li>
+                                         <li class="nav-item dropdown">
+                                             <a class="nav-link" href="#" id="navbarDropdown">
+                                                 Types de destruction
+                                             </a>
+                                             <div class="dropdown-menu mt-0" aria-labelledby="navbarDropdown">
+                                                 <a class="dropdown-item" href="#">Action</a>
+                                                 <a class="dropdown-item" href="#">Another action</a>
+                                                 <div class="dropdown-divider"></div>
+                                                 <a class="dropdown-item" href="#">Something else here</a>
+                                             </div>
+                                         </li>
+                                         <li class="nav-item dropdown">
+                                             <a class="nav-link" href="#" id="navbarDropdown">
+                                                 Procès
+                                             </a>
+                                             <div class="dropdown-menu mt-0" aria-labelledby="navbarDropdown">
+                                                 <a class="dropdown-item" href="#">Action</a>
+                                                 <a class="dropdown-item" href="#">Another action</a>
+                                                 <div class="dropdown-divider"></div>
+                                                 <a class="dropdown-item" href="#">Something else here</a>
+                                             </div>
+                                         </li>
+                                         <li class="nav-item dropdown">
+                                             <a class="nav-link" href="#" id="navbarDropdown">
+                                                 Séurité
+                                             </a>
+                                             <div class="dropdown-menu mt-0" aria-labelledby="navbarDropdown">
+                                                 <a class="dropdown-item" href="#">Action</a>
+                                                 <a class="dropdown-item" href="#">Another action</a>
+                                                 <div class="dropdown-divider"></div>
+                                                 <a class="dropdown-item" href="#">Something else here</a>
+                                             </div>
+                                         </li>
+                                         <li class="nav-item dropdown">
+                                             <a class="nav-link" href="#" id="navbarDropdown">
+                                                 La Société
+                                             </a>
+                                             <div class="dropdown-menu mt-0" aria-labelledby="navbarDropdown">
+                                                 <a class="dropdown-item" href="#">Action</a>
+                                                 <a class="dropdown-item" href="#">Another action</a>
+                                                 <div class="dropdown-divider"></div>
+                                                 <a class="dropdown-item" href="#">Something else here</a>
+                                             </div>
+                                         </li>
+                                         <li class="nav-item dropdown">
+                                             <a class="nav-link" href="#" id="navbarDropdown">
+                                                 Actualités et Service
+                                             </a>
+                                             <div class="dropdown-menu mt-0" aria-labelledby="navbarDropdown">
+                                                 <a class="dropdown-item" href="#">Action</a>
+                                                 <a class="dropdown-item" href="#">Another action</a>
+                                                 <div class="dropdown-divider"></div>
+                                                 <a class="dropdown-item" href="#">Something else here</a>
+                                             </div>
+                                         </li>
+                                         <li class="nav-item dropdown">
+                                             <a class="nav-link" href="#" id="navbarDropdown">
+                                                 Contact
+                                             </a>
+                                             <div class="dropdown-menu mt-0" aria-labelledby="navbarDropdown">
+                                                 <a class="dropdown-item" href="#">Action</a>
+                                                 <a class="dropdown-item" href="#">Another action</a>
+                                                 <div class="dropdown-divider"></div>
+                                                 <a class="dropdown-item" href="#">Something else here</a>
+                                             </div>
+                                         </li>
+                                     </ul>
+                                 </div>
+                             </div>
+                         </div>#}
+
+            <a class="navbar-brand" href="#">
+                <img src="/build/static/reisswolf_logo.png" alt="">
+            </a>
+            <button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarResponsive" style="margin-top: 10px;">
+
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Accueil
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Types de destruction <i class="fas fa-plus"></i>
+                        </a>
+                        <div class="dropdown-menu mt-0" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Destruction confidentielle documents</a>
+                            <a class="dropdown-item" href="#">Désarchivage</a>
+                            {#<div class="dropdown-divider"></div>#}
+                            <a class="dropdown-item" href="#">Destruction des supports numériques</a>
+                            <a class="dropdown-item" href="#">Recyclage des Radiographies</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Procès <i class="fas fa-plus"></i>
+                        </a>
+                        <div class="dropdown-menu mt-0" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Destruction standard</a>
+                            <a class="dropdown-item" href="#">Destruction mobile </a>
+                            <a class="dropdown-item" href="#">Destruction par camion broyeur</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Sécurité <i class="fas fa-plus"></i>
+                        </a>
+                        <div class="dropdown-menu mt-0" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Conteneurs de transport sécurisés</a>
+                            <a class="dropdown-item" href="#">Verrou de sécurité elsy</a>
+                            <a class="dropdown-item" href="#">Norme DIN</a>
+                            <a class="dropdown-item" href="#">Destruction de documents - protection des données</a>
+                            <a class="dropdown-item" href="#">Certificats IQ NET et SQS</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            La Société <i class="fas fa-plus"></i>
+                        </a>
+                        <div class="dropdown-menu mt-0" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">À propos de Reisswolf</a>
+                            <a class="dropdown-item" href="#">Groupe Paprec</a>
+                            <a class="dropdown-item" href="#">Durabilité</a>
+                            <a class="dropdown-item" href="#">Direction</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Actualités et Service <i class="fas fa-plus"></i>
+                        </a>
+                        <div class="dropdown-menu mt-0" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Actualités</a>
+                            <a class="dropdown-item" href="#">Téléchargement</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Contact <i class="fas fa-plus"></i>
+                        </a>
+                        <div class="dropdown-menu mt-0" aria-labelledby="navbarDropdown" style=" top: auto; left: -90px;">
+                            <a class="dropdown-item" href="#">Interlocuteurs</a>
+                            <a class="dropdown-item" href="#">Demander un devis</a>
+                        </div>
+                    </li>
+
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link">
+                            <i class="fa fa-search"></i>
+                        </a>
+                        <div class="dropdown-menu mt-0" aria-labelledby="navbarDropdown" style=" top: auto; left: -190px; padding: 10px;">
+                            <form class="navbar-form navbar-left" action="" method="post">
+                                <div class="form-group">
+                                    <input class="form-control" name="searchword" id="mod-search-searchword"
+                                           maxlength="200" type="text" value="Recherche...">
+                                </div>
+                            </form>
+                        </div>
+                    </li>
+
+
+                </ul>
+            </div>
+
+        </div>
+    </nav>
 </header>
-<nav>
-    <div class="container">
-        logo
-        navigation
-    </div>
-</nav>
 <section class="breadcrumb">
     <div class="container">
         Catalogue de service

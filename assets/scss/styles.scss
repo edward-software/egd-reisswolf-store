@@ -1,5 +1,7 @@
 @import "variables.scss";
 @import "reset.scss";
+@import "header.scss";
+@import "footer.scss";
 
 
 body {
@@ -33,70 +35,11 @@ h3 {
 a {
   color: $secondary;
   font-weight: $font-bold;
+
   &:hover {
     text-decoration: none !important;
   }
 }
-/*FOOTER*/
-
-footer {
-  background-color: $lightgray;
-  margin-top: 100px;
-
-  .footer {
-    padding: 25px 0 45px;
-    h3 {
-      color: $primary;
-      font-size: 20px;
-      font-weight: $font-regular;
-      border-bottom: 1px solid $mdgray;
-      padding-bottom: 20px;
-      margin-top: 20px;
-    }
-
-    img {
-      margin-right: 20px;
-      width: 80px;
-    }
-
-    i {
-      margin-right: 15px;
-    }
-
-    &__list {
-      margin-left: 10px;
-      li {
-        position: relative;
-        margin-left: 20px;
-        list-style: none;
-        i {
-          position: absolute;
-          left: -30px;
-          top: 3px;
-        }
-      }
-    }
-  }
-
-  .copyright {
-    font-family: $font-family-1;
-    font-weight: $font-light;
-    line-height: 28px;
-    background-color: $secondary;
-    padding: 30px 0 40px;
-    color: $white;
-    font-size: 24px;
-    text-align: center;
-
-    a {
-      color: $white;
-      font-weight: $font-medium;
-      text-decoration: underline;
-    }
-  }
-}
-
-
 
 /*BREADCRUMB*/
 
@@ -155,6 +98,7 @@ footer {
 .product-container {
   margin-right: -40px;
   margin-left: -40px;
+
   .col-md-6 {
     padding-right: 40px;
     padding-left: 40px;
@@ -196,7 +140,7 @@ footer {
       -webkit-appearance: none !important;
       -moz-appearance: none !important;
       appearance: none !important;
-      background: url(../img/arrow-down.svg) 125%/65% no-repeat;
+      background: url('/build/static/arrow-down.svg') 125%/65% no-repeat;
       padding: 0 17px 0 8px;
     }
 
@@ -235,9 +179,11 @@ footer {
 
 form {
   color: $primary;
+
   .form-container {
     margin-right: -40px;
     margin-left: -40px;
+
     .col-md-6 {
       padding-right: 40px;
       padding-left: 40px;
@@ -250,21 +196,24 @@ form {
     margin-bottom: 10px;
     display: block;
   }
+
   button {
     background-color: $mdgray !important;
     color: $white !important;
     float: right;
+
     &.valid {
       background-color: $secondary !important;
     }
   }
+
   .form-control {
     border: 1px solid #979797;
     color: $primary;
 
-    -webkit-appearance: none !important;
-    -moz-appearance: none !important;
-    appearance: none !important;
+    -webkit-appearance:  none !important;
+    -moz-appearance:  none !important;
+    appearance:  none !important;
   }
 
   .invalid-feedback {
@@ -276,11 +225,13 @@ form {
   // input radio
   .radio-form {
     height: calc(1.5em + .75rem + 2px);
+
     label {
       font-weight: $font-regular;
       margin: 0 20px 0 8px;
     }
   }
+
   .form-check-inline .form-check-input {
     margin-top: -3px;
   }
@@ -293,7 +244,7 @@ form {
     appearance: none !important;
     color: $mdgray !important;
 
-    background: url(../img/arrow-down.svg) 100%/5% no-repeat ;
+    background: url('/build/static/arrow-down.svg') 100%/5% no-repeat;
   }
 }
 
@@ -314,12 +265,51 @@ form {
   }
 }
 
+@media (min-width: 990px) {
+  .navbar-expand-md .navbar-nav .nav-link {
+    padding-right: 10px ;
+    padding-left: 10px ;
+  }
+}
+
+@media (min-width: 768px) {
+
+  /* Navigation */
+
+  .navbar {
+    .navbar-brand {
+      margin: auto;
+    }
+
+    .menu {
+      align-items: flex-start;
+    }
+
+    .nav-link i {
+      display: none;
+    }
+  }
+
+
+
+
+}
+
+@media (max-width: 990px) {
+  .navbar-expand-md .navbar-nav .nav-link {
+    padding-right: 5px ;
+    padding-left: 5px ;
+  }
+}
+
 
 @media (max-width: 768px) {
 
+  /* Page product */
   .product-container {
     margin-right: -15px;
     margin-left: -15px;
+
     .col-md-6 {
       padding-right: 15px;
       padding-left: 15px;
@@ -329,6 +319,7 @@ form {
     .form-container {
       margin-right: -15px;
       margin-left: -15px;
+
       .col-md-6 {
         padding-right: 15px;
         padding-left: 15px;
@@ -351,8 +342,42 @@ form {
   footer {
     margin-top: 15px;
   }
+
+  /* Navigation */
+  .top-bar__top-social-icon, .top-bar__top-social-flags {
+    margin: 5px 0;
+  }
+  .navbar {
+    & .navbar-nav {
+      margin: auto !important;
+    }
+
+    & .nav-link {
+      padding-top: 20px;
+      background: #eee;
+      margin: 5px 0;
+    }
+    & .dropdown-menu {
+      border: 0;
+      box-shadow: none;
+    }
+    & .dropdown-menu a {
+      color: $darkgray;
+    }
+  }
 }
 
+@media (max-width: 767px) {
+  .top-bar__top-contact a {
+    text-align: center;
+  }
+}
+
+@media (max-width: 500px) {
+  .top-bar__top-social-icon, .top-bar__top-social-flags {
+    display: none;
+  }
+}
 
 @media (max-width: 425px) {
   h2 {

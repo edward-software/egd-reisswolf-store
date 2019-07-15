@@ -1,0 +1,144 @@
+/*
+#top-bar {
+  z-index: 9999;
+}
+*/
+.custom-toggler.navbar-toggler {
+  border-color: rgba(255, 196, 0, 1);
+}
+
+.custom-toggler .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,196,0,1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+
+
+.top-bar {
+  z-index: 9999;
+  background-color: #2c4491;
+
+  &__top-contact {
+    a {
+      color: $white !important;
+      font-weight: $font-light;
+      display: block;
+      padding: 8px 0;
+    }
+
+    i {
+      margin-right: 10px;
+    }
+  }
+
+  &__top-social-icon {
+    ul {
+      list-style: none;
+
+      li {
+        display: inline-block;
+      }
+    }
+
+    i {
+      color: $white;
+      margin-right: 5px;
+    }
+  }
+
+  &__top-social-flags {
+    ul {
+      list-style: none;
+
+      li {
+        display: inline-block;
+        a {
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+}
+
+
+.navbar {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+  a {
+    font-weight: $font-light;
+  }
+  & .nav-link {
+    padding-bottom: 20px;
+    &:hover {
+      color: $secondary !important;
+    }
+
+    i.fa-plus {
+      position: absolute;
+      top: 26px;
+      right: 20px;
+      font-size: 25px;
+      color: rgba(255, 196, 0, 1);
+    }
+
+    .dropdown-toggle::after {
+      display: none !important;
+    }
+  }
+
+  & .navbar-nav {
+    flex-wrap: wrap;
+    justify-content: center;
+
+    & li:hover .dropdown-menu { //hover off
+      display: block;
+      /*visibility: visible;
+      opacity: 1;*/
+  }
+
+  & > li > a {
+      color: #222 !important;
+    }
+  }
+
+
+  & .dropdown-menu {
+    border-color: #ccc;
+    border-top: 3px solid #2c4491;
+    -webkit-box-shadow: 1px 3px 10px -1px rgba(0,0,0,0.3);
+    -moz-box-shadow: 1px 3px 10px -1px rgba(0,0,0,0.3);
+    box-shadow: 1px 3px 10px -1px rgba(0,0,0,0.3);
+    padding-right: 15px;
+    padding-left: 15px;
+
+   /* opacity: 0;
+    visibility: hidden;
+    -webkit-transition: opacity .3s, visibility .3s;
+    transition: opacity .3s, visibility .3s;
+    display: block;
+*/
+    a {
+      font-size: 14px;
+      padding: 5px 0;
+      position: relative;
+      top: 0;
+      left: 0;
+      -webkit-transition: all 0.3s!important;
+      transition: all 0.3s!important;
+        &:hover {
+          color: $secondary;
+          left: 5px;
+      }
+    }
+
+    &.show {
+      display: block !important;
+    }
+  }
+  & .menu {
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+}
+
+
+
+
