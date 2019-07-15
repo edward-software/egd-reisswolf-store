@@ -1,0 +1,44 @@
+User:
+  Bundle-name:                Users management
+  User:
+    Users:                    Users
+    List:                     Users List
+    Company-name:             Company
+    Last-name:                Last name
+    First-name:               First name
+    Email:                    Email
+    Date-creation:            Creation date
+    Date-crea:                Crea. date
+    Date-update:              Last update
+    Informations:             Information
+    System-informations:      System information
+    Add:                      Add user
+    Export:                   Export users
+    View:                     View uer
+    Edit:                     Edit user
+    Remove:                   Delete user
+    Confirm-cancel:           Etes-vous sûr de vouloir annuler ?
+    Confirm-remove:           Etes-vous sûr de vouloir supprimer cet utilisateur ?
+    Save:                     Enregistrer
+    Cancel:                   Annuler
+    Username:                 Identifiant
+    Enabled:                  Activé
+    Confirm-send-access:      Etes-vous sûr de vouloir envoyer les accès ?
+    Send-access:              Envoyer les accès
+    Roles:                    Rôle de l'utilisateur
+    Postal-codes:              Code postaux
+    Divisions:                Divisions
+    Password:                 Mot de passe
+    Edit-my-profile:          Modifier mon profil
+    Success:
+      accessHasBeenSent:    Les accès ont été correctement envoyés
+    Error:
+      accessCannotBeSent:   Les accès n'ont pu être envoyés
+
+'Password':                       Mot de passe
+'Repeat Password':                Confirmation du mot de passe
+'No':                             Non
+'Yes':                            Oui
+'ROLE_ADMIN':                     Administrateur
+'ROLE_COMMERCIAL':       Commercial
+'ROLE_SUPER_ADMIN':               Super administrateur

@@ -170,8 +170,8 @@
                     <tr>
                         <td class="mobile-padding-txt"
                             style="padding: 30px 80px 30px; text-align: center; text-transform: uppercase; font-size: 21px; mso-height-rule: exactly; line-height: 31px; font-family: 'Oswald', 'Arial', sans-serif">
-                            Votre demande a bien été prise<br> en compte et envoyée au service commercial de votre
-                            région.
+                            {{ 'Commercial.ConfirmEmail.Title'| trans({}, "messages", locale) }}
+
                         </td>
                     </tr>
                     <tr>
@@ -182,12 +182,11 @@
                     <tr>
                         <td style="padding: 30px 15px 120px; text-align: left; font-size: 17px; mso-height-rule: exactly; line-height: 23px;">
                             <div style="margin: 0 25px !important; font-family: 'Arimo', 'Arial', sans-serif; font-size: 16px; line-height: 22px; color: #333333;">
-                                Nous vous remercions de la confiance que vous nous portez. Notre équipe reviendra vers
-                                vous
-                                avec votre devis personnalisé. Cette opération peut prendre quelques jours.
-                                Notre <a href="#" style="color: #2C4491; text-decoration: none; font-weight: 700;">service
-                                    technique</a> reste
-                                à votre disposition pendant ce temps là.
+                                {{ 'Commercial.ConfirmEmail.Message1'| trans({}, "messages", locale) }}
+                                <a href="#" style="color: #2C4491; text-decoration: none; font-weight: 700;">
+                                    {{ 'Commercial.ConfirmEmail.TechnicalService'| trans({}, "messages", locale) }}
+                                </a>
+                                {{ 'Commercial.ConfirmEmail.Message2'| trans({}, "messages", locale) }}
                             </div>
                         </td>
                     </tr>
@@ -198,9 +197,12 @@
                     <tr>
                         <td style="padding: 40px 15px; text-align: left; mso-height-rule: exactly;">
                             <div style="margin: 0 25px !important; font-family: 'Arimo', 'Arial', sans-serif; font-size: 14px; line-height: 22px; color: #A4A4A4;">
-                                Vous avez reçu cet e-mail pour vous informer de modifications importantes apportées aux
-                                services <a href="#" style="color: #2C4491; text-decoration: none; font-weight: 700;">Reisswolf</a>
-                                que vous utilisez.
+                                {{ 'Commercial.ConfirmEmail.Disclaimer.Message1'| trans({}, "messages", locale) }}
+                                <a href="{{ reisswolf_public_site_url }}" style="color: #2C4491; text-decoration: none; font-weight: 700;">
+                                    Reisswolf
+                                </a>
+                                {{ 'Commercial.ConfirmEmail.Disclaimer.Message2'| trans({}, "messages", locale) }}
+
                             </div>
                         </td>
                     </tr>

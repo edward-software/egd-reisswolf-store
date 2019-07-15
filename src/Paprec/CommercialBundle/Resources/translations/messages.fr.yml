@@ -20,7 +20,7 @@ Commercial:
     FirstName: Prénom
     Email: Email
     Phone: Téléphone
-    Address: Addresse
+    Address: Adresse
     PostalCode: Code postal
     City: Ville
     Informations-BO: Informations Back-Office
@@ -62,6 +62,19 @@ Commercial:
     TotalAmount: Montant total
     Add: Ajout d'un produit
     Product: Produit
+
+  NewQuoteEmail:
+
+    Title: Une nouvelle demande de devis vous a été affectée.
+  ConfirmEmail:
+    Title: Votre demande a bien été prise en compte et envoyée au service commercial de votre région.
+    Message1: Nous vous remercions de la confiance que vous nous portez. Notre équipe reviendra vers vous avec votre devis personnalisé. Cette opération peut prendre quelques jours. Notre
+    TechnicalService: service technique
+    Message2: reste à votre disposition pendant ce temps là.
+    Disclaimer:
+      Message1: Vous avez reçu cet e-mail pour vous informer des modifications importantes appoetées aux services
+      Message2: que vous utilisez
+
 User:
   User:
     Lang: Langue

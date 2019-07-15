@@ -160,7 +160,8 @@
                        class="email-container">
                     <tr>
                         <td class="logo" style="padding-top: 25px;">
-                            <img src="{{ absolute_url(asset('build/static/reisswolf_logo.png')) }}" alt="EDWARD" border="0"
+                            <img src="{{ absolute_url(asset('build/static/reisswolf_logo.png')) }}" alt="EDWARD"
+                                 border="0"
                                  width="200"
                                  align="center">
                         </td>
@@ -170,8 +171,7 @@
                     <tr>
                         <td class="mobile-padding-txt"
                             style="padding: 30px 80px 30px; text-align: center; text-transform: uppercase; font-size: 21px; mso-height-rule: exactly; line-height: 31px; font-family: 'Oswald', 'Arial', sans-serif">
-                            Votre demande a bien été prise<br> en compte et envoyée au service commercial de votre
-                            région.
+                            {{ 'Commercial.NewQuoteEmail.Title'| trans({}, "messages", locale) }}
                         </td>
                     </tr>
                     <tr>
@@ -182,45 +182,10 @@
                     <tr>
                         <td style="padding: 30px 15px 120px; text-align: left; font-size: 17px; mso-height-rule: exactly; line-height: 23px;">
                             <div style="margin: 0 25px !important; font-family: 'Arimo', 'Arial', sans-serif; font-size: 16px; line-height: 22px; color: #333333;">
-                                Nous vous remercions de la confiance que vous nous portez. Notre équipe reviendra vers
-                                vous
-                                avec votre devis personnalisé. Cette opération peut prendre quelques jours.
-                                Notre <a href="#" style="color: #2C4491; text-decoration: none; font-weight: 700;">service
-                                    technique</a> reste
-                                à votre disposition pendant ce temps là.
                             </div>
                         </td>
                     </tr>
 
-                </table>
-                <table style="background-color: #FFFFFF; margin: 25px 50px 0px 50px !important;">
-
-                    <tr>
-                        <td style="padding: 40px 15px; text-align: left; mso-height-rule: exactly;">
-                            <div style="margin: 0 25px !important; font-family: 'Arimo', 'Arial', sans-serif; font-size: 14px; line-height: 22px; color: #A4A4A4;">
-                                Vous avez reçu cet e-mail pour vous informer de modifications importantes apportées aux
-                                services <a href="#" style="color: #2C4491; text-decoration: none; font-weight: 700;">Reisswolf</a>
-                                que vous utilisez.
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-                <table>
-                    <tr>
-                        <td>
-                            <table cellspacing="0" cellpadding="0" border="0" align="center"
-                                   style="max-width: 550px;">
-                                <tr>
-                                    <td style="padding: 30px 10px 40px; text-align: center; font-size: 13px;">
-                                        © 2019 Reisswolf.<br>
-                                        Zurich, Lindenstrasse 3, CH-8108 Dällikon, +41 44 844 24 04<br>
-                                        Bâle, Schlachthofstrasse 18, CH-4056 Bâle, +41 61 386 96 70<br>
-                                        Lucerne, Kantonsstrasse 5, CH-6033 Buchrain, +41 41 448 38 62<br>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
                 </table>
             </td>
         </tr>
@@ -228,3 +193,5 @@
 </center>
 </body>
 </html>
+
+

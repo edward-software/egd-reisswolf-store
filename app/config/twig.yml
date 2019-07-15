@@ -3,7 +3,5 @@ twig:
   debug: '%kernel.debug%'
   strict_variables: '%kernel.debug%'
   globals:
-    paprec_public_site_url: "%paprec_public_site_url%"
-    paprec_google_api_key: "%paprec_google_api_key%"
-    paprec_easyrecyclage_5flux_url: "%paprec_easyrecyclage_5flux_url%"
+    reisswolf_public_site_url: "%reisswolf_public_site_url%"
 

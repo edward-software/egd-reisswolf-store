@@ -1,0 +1,44 @@
+Public:
+
+  Bundle-name:                    Quote Management
+
+  Catalog:
+    BreadcrumbTitle:              Services catalog
+    Title:                        Select desired products to create your quote request in 3 steps.
+    Quantity:                     Quantity
+    AddToQuote:                   Add to quote
+    NextStep:                     Next step
+    Quote:                        Quote
+    Collect-frequency:            Collect frequency
+    OnDemand:                     on demand
+    Regular:                      regular
+    Week:                         week
+    Month:                        month
+    Quarter:                      quarter
+    Year:                         year
+
+  Contact:
+    BreadcrumbTitle:              Customer details
+    Title:                        Enter your details to be contacted and receive your quote.
+    BusinessName: Business name
+    Civility: Civility
+    LastName: Last name
+    FirstName: First name
+    Canton: Canton
+    Email: Email
+    Phone: Phone
+    CoworkerNumber: Number of employees
+    IsMultisite: Multi-site service
+    Address: Addresse
+    PostalCode: Postal code
+    City: City
+    Comment: Comment
+    SendRequest: Send request
+
+  Confirm:
+    BreadcrumbTitle: Confirmation of the request
+    Title: Your request has been taken into account and sent to the sales department in your region.
+    Message: You should receive a confirmation email, this operation may take several minutes.
+      If you do not receive confirmation, check your spam folder, otherwise contact
+      our
+    TechnicalService: technical service

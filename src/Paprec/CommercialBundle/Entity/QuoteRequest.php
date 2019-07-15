@@ -142,15 +142,15 @@ class QuoteRequest
      * @var string
      *
      * @ORM\Column(name="address", type="text", nullable=true)
-     * @Assert\NotBlank(groups={"public"})
+     * @Assert\NotBlank(groups={"public_multisite"})
      */
     private $address;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="postalCode", type="string", length=255)
-     * @Assert\NotBlank(groups={"public"})
+     * @ORM\Column(name="postalCode", type="string", length=255, nullable=true)
+     * @Assert\NotBlank(groups={"public_multisite"})
      */
     private $postalCode;
 
@@ -158,8 +158,8 @@ class QuoteRequest
     /**
      * @var string
      *
-     * @ORM\Column(name="city", type="string", length=255, nullable=true)
-     * @Assert\NotBlank(groups={"public"})
+     * @ORM\Column(name="city", type="string", length=255, nullable=true, nullable=true)
+     * @Assert\NotBlank(groups={"public_multisite"})
      */
     private $city;
 

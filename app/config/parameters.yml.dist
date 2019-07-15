@@ -19,16 +19,6 @@ parameters:
     secret: ThisTokenIsNotSoSecretChangeIt
 
     paprec_email_sender: digital@eggers-conseil.com
-    paprec_email_call: digital@eggers-conseil.com
-    paprec_email_other_services: digital@eggers-conseil.com
-    paprec_public_site_url: 'https://wwwv3.easyrecyclage.eggers-digital.com'
-    paprec_easyrecyclage_5flux_url: 'https://store.easyrecyclage.com/besoin'
-    paprec_google_api_key: AIzaSyBdYprWZt8V-GkukzTG2ev3-eVdLb3FSCA
-
     wkhtmltopdf_path: /usr/local/bin/wkhtmltopdf
+    reisswolf_public_site_url: 'http://dev.easyrecyclage-suisse.com'
 
-    paprec_distance_nearby_agencies: 50
-    paprec_assistant_commercial_email: digital@eggers-conseil.com
-    paprec_manager_di_email: digital@eggers-conseil.com
-    paprec_manager_chantier_email: digital@eggers-conseil.com
-    paprec_manager_d3e_email: digital@eggers-conseil.com

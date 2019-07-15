@@ -252,4 +252,47 @@ class QuoteRequestManager
         }
     }
 
+
+    /**
+     * Envoie un mail au commercial associé lui indiquant la nouvelle demande de devis créée
+     * @throws Exception
+     */
+    public function sendnewRequestEmail(QuoteRequest $quoteRequest)
+    {
+
+        try {
+            $from = $this->container->getParameter('paprec_email_sender');
+            $this->get($quoteRequest);
+
+            $rcptTo = $quoteRequest->getEmail();
+
+            if ($rcptTo == null || $rcptTo == '') {
+                return false;
+            }
+
+            $message = \Swift_Message::newInstance()
+                ->setSubject('Reisswolf E-shop : Votre demande de devis' . ' N°' . $quoteRequest->getId())
+                ->setFrom($from)
+                ->setTo($rcptTo)
+                ->setBody(
+                    $this->container->get('templating')->render(
+                        '@PaprecCommercial/QuoteRequest/emails/newQuoteEmail.html.twig',
+                        array(
+                            'quoteRequest' => $quoteRequest
+                        )
+                    ),
+                    'text/html'
+                );
+            if ($this->container->get('mailer')->send($message)) {
+                return true;
+            }
+            return false;
+
+        } catch (ORMException $e) {
+            throw new Exception('unableToSendConfirmQuoteRequest', 500);
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage(), $e->getCode());
+        }
+    }
+
 }

@@ -8,7 +8,6 @@ use Paprec\CommercialBundle\Form\QuoteRequestPublicType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class SubscriptionController extends Controller
@@ -110,7 +109,7 @@ class SubscriptionController extends Controller
 
 
         return $this->render('@PaprecPublic/Common/contact.html.twig', array(
-            'lang' => 'FR',
+            'locale' => $locale,
             'cart' => $cart,
             'form' => $form->createView()
         ));
@@ -131,7 +130,7 @@ class SubscriptionController extends Controller
         $quoteRequest = $quoteRequestManager->get($quoteRequestId);
 
         return $this->render('@PaprecPublic/Common/confirm.html.twig', array(
-            'lang' => 'FR',
+            'locale' => $locale,
             'quoteRequest' => $quoteRequest,
             'cart' => $cart,
         ));
@@ -156,7 +155,7 @@ class SubscriptionController extends Controller
 
 
             return $this->render('@PaprecPublic/Common/partials/quoteLine.html.twig', array(
-                'lang' => 'FR',
+                'locale' => $locale,
                 'product' => $product,
                 'quantity' => $quantity
             ));

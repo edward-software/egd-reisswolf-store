@@ -1,0 +1,81 @@
+Commercial:
+
+
+  Bundle-name:                    Gestion commerciale
+  QuoteRequests:                  Demandes de devis
+  Settings:                       Paramétrage
+
+  QuoteRequest:
+    QuoteRequests: Quote requests
+    List: Quote requests list
+    Add: Add quote
+    Export: Export quotes
+    BusinessName: Business name
+    TotalAmount: Total amount
+    QuoteStatus: Quote status
+    Date-crea: Crea. date
+    Canton: Canton
+    Civility: Civility
+    LastName: Last name
+    FirstName: First name
+    Email: Email
+    Phone: Phone
+    Address: Addresse
+    PostalCode: Postal code
+    City: City
+    Informations-BO: Back-Office information
+    Informations-FO: Front-office information
+    Frequency: Frequency
+    month: month
+    quarter: quarter
+    year: year
+    week: week
+    CoworkerNumber: Number of employees
+    UserInCharge: Salesman in charge
+    IsMultisite: Multi-site service
+    Comment: Comment
+    OverallDiscount: Overall discount
+    SalesmanComment: Salesman comment
+    MonthlyBudget: Monthly budget
+    View: View quote
+    Send-quote: Send quote to customer
+    ProductsList: Products list
+    AddLine: Add product
+    Confirm-send-quote: Êtes-vous sûr de vouloir envoyer le devis au client ?
+    Edit: Edit quote
+    Ponctual: On demande
+    Error:
+      generatedQuoteNotSent:    Erreur lors de la génération et l'envoi du devis.
+    Success:
+      generatedQuoteSent:       Le devis a bien été généré et envoyé au client.
+
+  QuoteStatusList:
+    CREATED: Created
+    PENDING: Peding
+    PROCESSING: Processing
+    CLOSED: Closed
+
+  QuoteRequestLine:
+    ProductName: Procuct name
+    UnitPrice: Unit price
+    Quantity: Quantity
+    TotalAmount: Total amount
+    Add: Add product
+    Product: Product
+
+  NewQuoteEmail:
+
+    Title: A new quote request has been assiged to you.
+  ConfirmEmail:
+    Title: Your request has been taken into account and sent to the sales department of your region.
+    Message1: We thank you for the trust you have placed in us. Our team will come back to you with your personalized quote. This operation may take a few days. Our
+    TechnicalService: technical service
+    Message2: remains at your disposal during this time.
+    Disclaimer:
+      Message1: You have received this e-mail to inform you of important changes to the services
+      Message2: you use
+
+
+User:
+  User:
+    Lang: Language

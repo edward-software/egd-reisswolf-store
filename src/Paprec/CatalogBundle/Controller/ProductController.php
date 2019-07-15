@@ -192,6 +192,7 @@ class ProductController extends Controller
      */
     public function viewAction(Request $request, Product $product)
     {
+
         $productManager = $this->get('paprec_catalog.product_manager');
         $productManager->isDeleted($product, true);
 

@@ -2,7 +2,42 @@ Public:
 
   Bundle-name:                    Gestion devis
 
+
   Catalog:
+    BreadcrumbTitle: Catalogue de services
+    Title: Sélectionnez les produits souhaités pour créer votre demande de devis en 3 étapes.
     Quantity: Quantité
     AddToQuote: Ajouter au devis
     NextStep: Étape suivante
+    Quote: Devis
+    Collect-frequency: Fréquence de collecte
+    OnDemand: à la demande
+    Regular: régulière
+    Week: semaine
+    Month: mois
+    Quarter: trimestre
+    Year: an
+
+  Contact:
+    BreadcrumbTitle: Coordonnées du client
+    Title: Entrez vos coordonnées pour être contacté et recevoir votre devis.
+    BusinessName: Nom société
+    Civility: Civilité
+    LastName: Nom
+    FirstName: Prénom
+    Canton: Canton
+    Email: E-mail
+    Phone: Téléphone
+    CoworkerNumber: Effectif
+    IsMultisite: Prestation multi-sites
+    Address: Adresse
+    PostalCode: Code postal
+    City: Ville
+    Comment: Commentaire
+    SendRequest: Envoyer la demande
+
+  Confirm:
+    BreadcrumbTitle: Confirmation de la demande
+    Title: Votre demande a bien été prise en compte et envoyée au service commercial de votre région.
+    Message: Vous devriez recevoir un e-mail de confirmation, cette opération peut prendre plusieurs minutes. Si vous ne recevez pas la confirmation, vérifiez dans votre dossier à spam, sinon contactez notre
+    TechnicalService: service technique

@@ -1,5 +1,9 @@
 $(function () {
 
+    /****************************************
+     * CATALOG
+     ***************************************/
+
     $('.addProductToQuoteButton').on('click', function () {
 
         $('.addProductToQuoteButton').prop("disabled", true); // On désactive tous les boutons
@@ -64,8 +68,20 @@ $(function () {
                 $('.catalog_next_step_button').prop("disabled", true);
             }
         });
-    })
+    });
 
+
+    /****************************************
+     * CONTACT FORM
+     ***************************************/
+
+    $('input[name*=isMultisite]').change(function () {
+        if (this.value == 1) {
+            $('.address-field').prop("disabled", true);
+        } else if (this.value == 0) {
+            $('.address-field').prop("disabled", false);
+        }
+    });
 });
 
 

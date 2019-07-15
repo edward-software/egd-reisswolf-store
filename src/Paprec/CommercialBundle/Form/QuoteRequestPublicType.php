@@ -2,12 +2,14 @@
 
 namespace Paprec\CommercialBundle\Form;
 
+use Paprec\CommercialBundle\Entity\QuoteRequest;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class QuoteRequestPublicType extends AbstractType
@@ -52,7 +54,13 @@ class QuoteRequestPublicType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'Paprec\CommercialBundle\Entity\QuoteRequest',
-            'validation_groups' => ['public'],
+            'validation_groups' => function (FormInterface $form) {
+                $data = $form->getData();
+                if ($data->getIsMultisite() === 1) {
+                    return ['public'];
+                }
+                return ['public', 'public_multisite'];
+            },
         ));
     }
 
@@ -61,7 +69,7 @@ class QuoteRequestPublicType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'paprec_catalogbundle_picture';
+        return 'paprec_catalogbundle_quote_request_public';
     }
 
 

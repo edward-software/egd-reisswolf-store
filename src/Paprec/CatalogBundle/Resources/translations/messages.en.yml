@@ -1,0 +1,107 @@
+Catalog:
+
+  Bundle-name:                    Gestion Catalogue
+  Products:                       Produits
+  Settings:                       Paramétrage
+
+
+  PostalCode:
+
+    PostalCodes:                Code postaux
+    Name:                       Code postal
+    Date-crea:                  Date de créa.
+    Date-creation:              Date de création
+    Date-update:                Date de mise à jour
+    Informations:               Informations
+    System-informations:        Informations système
+    List:                       Liste des codes postaux
+    Add:                        Ajouter un code postal
+    Export:                     Exporter les codes postaux
+    Code:                      Code Postal
+    Division:                   Division
+    Rate:                       Coefficient
+    View:                       Vue du code postal
+    Edit:                       Modifier le code postal
+    Remove:                     Supprimer le code postal
+    Save:                       Enregistrer
+    Cancel:                     Annuler
+    Confirm-cancel:             Etes-vous sûr de vouloir annuler ?
+    Confirm-remove:             Etes-vous sûr de vouloir supprimer ce code postal ?
+    TransportRate: Coef de transport
+    TreatmentRate: Coef de traitement
+    TraceabilityRate: Coef de traçabilité
+    UserInCharge: Commercial en charge
+    Region: Région
+    System-information: Informations système
+
+  Picture:
+    Path:                       Choisir photo
+    Type:                       Type de la photo
+    AddPilotPicture:            Ajouter une photo principale
+    AddPicto:                   Ajouter un picto
+    AddPicture:                 Ajouter une photo secondaire
+
+  Product:
+    View: Vue du produit
+    Products: Liste des produits
+    Add: Ajouter un produit
+    Edit: Editer un produit
+    Remove: Supprimer
+    List: Liste des produits
+    Information: Information du produit
+    Capacity: Volume
+    Dimensions: Dimensions
+    AvailablePostalCodes: Disponibilités géographiques
+    IsEnabled:
+      IsEnabled: Actif
+      Yes: Oui
+      No: Non
+      Disable: Désactiver
+      Enable: Activer
+    Picto: Picto
+    AddPicture: Ajouter image
+    PilotPicture: Image principale
+    SetSecondaryPicture: Définir en image secondaire
+    Pictures: Images
+    EditPicture: Remplacer image
+    System-information: Informations système
+    Date-creation: Date de création
+    Date-update: Date dernière modification
+    Export: Exporter les produits
+    Details: Details du produit
+    CapacityUnit: Unité de volume
+    Position: Position
+    RentalUnitPrice: PU de location
+    TransportUnitPrice: PU de transport
+    TreatmentUnitPrice: PU de traitement
+    TraceabilityUnitPrice: PU de traçabilité
+
+
+  ProductLabel:
+    Add: Ajouter une traduction
+    Edit: Editer traduction
+    Language:
+      Language: Langue
+      EN: Anglais
+      FR: Français
+      IT: Italien
+      DE: Allemand
+    Name: Nom
+    Short-description: Description courte
+    Information: Informations
+    Remove: Supprimer
+
+
+  Region:
+    Regions: Régions
+    Name: Nom
+    List: Liste des régions
+    Add: Ajouter une région
+    Export: Exporter les régions
+    View: Vue de la région
+    Edit: Modifier région
+    Remove: Supprimer région
+    Informations: Informations
+    System-informations:        Informations système
+    PostalCodes: Codes postaux
+

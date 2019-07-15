@@ -5,10 +5,12 @@ parameters:
 
 
     available_locales:
-        - FR
-        - EN
+        - fr
+        - en
+        - de
+        - it
 
-    default_locale: FR
+    default_locale: fr
 
     paprec_divisions:
         - DI
@@ -85,5 +87,4 @@ services:
 
 twig:
     globals:
-        paprec_public_site_url: "%paprec_public_site_url%"
-        paprec_google_api_key: "%paprec_google_api_key%"
+        reisswolf_public_site_url: '%reisswolf_public_site_url%'

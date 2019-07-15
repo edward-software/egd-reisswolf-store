@@ -1,6 +1,8 @@
 <?php
+
 namespace Paprec\PublicBundle\EventListener;
 
+use Paprec\UserBundle\Entity\User;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
@@ -16,17 +18,25 @@ class RequestListener
 
     public function onKernelRequest(GetResponseEvent $event)
     {
+        $user = null;
+        if ($this->container->get('security.token_storage')->getToken()) {
+            $user = $this->container->get('security.token_storage')->getToken()->getUser();
+        }
 
         $availableLocales = $this->container->getParameter('available_locales');
         $defaultLocale = $this->container->getParameter('default_locale');
 
         $request = $event->getRequest();
 
-        $locale = $request->get('locale');
+        if ($user && $user instanceof User) {
+            $locale = $user->getLang();
+        } else {
+            $locale = $request->get('locale');
+        }
 
-        $locale = strtoupper($locale);
+        $locale = strtolower($locale);
 
-        if(! in_array($locale, $availableLocales)) {
+        if (!in_array($locale, $availableLocales)) {
             $locale = $defaultLocale;
         }
 
