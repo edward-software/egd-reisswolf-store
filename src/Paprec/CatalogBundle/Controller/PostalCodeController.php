@@ -171,9 +171,6 @@ class PostalCodeController extends Controller
         $postalCode = new PostalCode();
 
         $divisions = array();
-        foreach ($this->getParameter('paprec_divisions') as $division) {
-            $divisions[$division] = $division;
-        }
 
         $form = $this->createForm(PostalCodeType::class, $postalCode, array(
             'division' => $divisions
@@ -219,18 +216,11 @@ class PostalCodeController extends Controller
         $postalCodeManager = $this->get('paprec_catalog.postal_code_manager');
         $postalCodeManager->isDeleted($postalCode, true);
 
-        $divisions = array();
-        foreach ($this->getParameter('paprec_divisions') as $division) {
-            $divisions[$division] = $division;
-        }
-
         $postalCode->setTransportRate($numberManager->denormalize($postalCode->getTransportRate()));
         $postalCode->setTreatmentRate($numberManager->denormalize($postalCode->getTreatmentRate()));
         $postalCode->setTraceabilityRate($numberManager->denormalize($postalCode->getTraceabilityRate()));
 
-        $form = $this->createForm(PostalCodeType::class, $postalCode, array(
-            'division' => $divisions
-        ));
+        $form = $this->createForm(PostalCodeType::class, $postalCode);
 
         $form->handleRequest($request);
 

@@ -64,7 +64,6 @@ class PostalCodeType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'Paprec\CatalogBundle\Entity\PostalCode',
-            'division' => null
         ));
     }
 }

@@ -70,7 +70,6 @@ class UserType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => 'Paprec\UserBundle\Entity\User',
             'roles' => null,
-            'divisions' => null,
             'languages' => null
         ));
     }

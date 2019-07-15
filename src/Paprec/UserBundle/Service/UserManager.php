@@ -93,10 +93,10 @@ class UserManager
                 return null;
             }
 
-            $user = null;
-            $user = $this->em->getRepository('PaprecUserBundle:User')->findOneBy(array(
-                'postalCodes' => $postalCode
+            $postalCode = $this->em->getRepository('PaprecCatalogBundle:PostalCode')->findOneBy(array(
+                'code' => $postalCode
             ));
+            $user = $postalCode->getUserInCharge();
 
             return $user;
         } catch (Exception $e) {
