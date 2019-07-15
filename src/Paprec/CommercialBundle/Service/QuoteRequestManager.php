@@ -265,7 +265,7 @@ class QuoteRequestManager
             $from = $this->container->getParameter('paprec_email_sender');
             $this->get($quoteRequest);
 
-            $rcptTo = ($quoteRequest->getUserInCharge()) ? $quoteRequest->getUserInCharge()->getEmail() : 'frederic.laine@eggers-digital.com';
+            $rcptTo = ($quoteRequest->getUserInCharge()) ? $quoteRequest->getUserInCharge()->getEmail() : $this->container->getParameter('reisswolf_salesman_multisite_email');
 
             if ($rcptTo == null || $rcptTo == '') {
                 return false;

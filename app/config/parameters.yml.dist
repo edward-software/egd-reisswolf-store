@@ -22,4 +22,6 @@ parameters:
     wkhtmltopdf_path: /usr/local/bin/wkhtmltopdf
     reisswolf_public_site_url: 'http://dev.easyrecyclage-suisse.com'
     reisswolf_public_technical_service: 'contact@reisswolf.ch'
+    reisswolf_salesman_multisite_email: 'digital@eggers-digital.com'
+
 

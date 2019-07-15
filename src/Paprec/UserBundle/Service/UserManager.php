@@ -96,7 +96,12 @@ class UserManager
             $postalCode = $this->em->getRepository('PaprecCatalogBundle:PostalCode')->findOneBy(array(
                 'code' => $postalCode
             ));
-            $user = $postalCode->getUserInCharge();
+
+            $user = null;
+            if ($postalCode != null) {
+
+                $user = $postalCode->getUserInCharge();
+            }
 
             return $user;
         } catch (Exception $e) {
