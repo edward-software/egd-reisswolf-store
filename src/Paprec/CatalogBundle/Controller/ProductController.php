@@ -122,7 +122,7 @@ class ProductController extends Controller
 
         $phpExcelObject->getProperties()->setCreator("Reisswolf Shop")
             ->setLastModifiedBy("Reisswolf Shop")
-            ->setTitle("Reisswolf Shop - Produits DI")
+            ->setTitle("Reisswolf Shop - Produits")
             ->setSubject("Extraction");
 
         $phpExcelObject->setActiveSheetIndex(0)
@@ -141,7 +141,7 @@ class ProductController extends Controller
             ->setCellValue('M1', 'Date création');
 
 
-        $phpExcelObject->getActiveSheet()->setTitle('Produits DI');
+        $phpExcelObject->getActiveSheet()->setTitle('Produits');
         $phpExcelObject->setActiveSheetIndex(0);
 
         $i = 2;
@@ -168,7 +168,7 @@ class ProductController extends Controller
 
         $writer = $this->container->get('phpexcel')->createWriter($phpExcelObject, 'Excel2007');
 
-        $fileName = 'ReisswolfShop-Extraction-Produits-DI-' . date('Y-m-d') . '.xlsx';
+        $fileName = 'ReisswolfShop-Extraction-Produits-' . date('Y-m-d') . '.xlsx';
 
         // create the response
         $response = $this->container->get('phpexcel')->createStreamedResponse($writer);

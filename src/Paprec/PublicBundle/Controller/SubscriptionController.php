@@ -21,6 +21,7 @@ class SubscriptionController extends Controller
     public function redirectToIndexAction(Request $request, $locale)
     {
         return $this->redirectToRoute('paprec_public_catalog_index', array('locale' => $locale));
+
     }
 
 
@@ -70,6 +71,7 @@ class SubscriptionController extends Controller
     {
         $cartManager = $this->get('paprec.cart_manager');
         $quoteRequestManager = $this->get('paprec_commercial.quote_request_manager');
+        $userManager = $this->get('paprec.user_manager');
 
         $cart = $cartManager->get($cartUuid);
 
@@ -87,6 +89,9 @@ class SubscriptionController extends Controller
             $quoteRequest->setFrequencyTimes($cart->getFrequencyTimes());
             $quoteRequest->setFrequencyInterval($cart->getFrequencyInterval());
 
+            $quoteRequest->setUserInCharge($userManager->getUserInChargeByPostalCode($quoteRequest->getPostalCode()));
+            $quoteRequest->setLocale($locale);
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($quoteRequest);
             $em->flush();
@@ -97,6 +102,7 @@ class SubscriptionController extends Controller
                     $quoteRequestManager->addLineFromCart($quoteRequest, $item['pId'], $item['qtty']);
                 }
             }
+
             $sendConfirmEmail = $quoteRequestManager->sendConfirmRequestEmail($quoteRequest, $locale);
             $sendNewRequestEmail = $quoteRequestManager->sendnewRequestEmail($quoteRequest, $locale);
 

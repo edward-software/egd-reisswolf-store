@@ -265,14 +265,14 @@ class QuoteRequestManager
             $from = $this->container->getParameter('paprec_email_sender');
             $this->get($quoteRequest);
 
-            $rcptTo = $quoteRequest->getEmail();
+            $rcptTo = ($quoteRequest->getUserInCharge()) ? $quoteRequest->getUserInCharge()->getEmail() : 'frederic.laine@eggers-digital.com';
 
             if ($rcptTo == null || $rcptTo == '') {
                 return false;
             }
 
             $message = \Swift_Message::newInstance()
-                ->setSubject('Reisswolf E-shop : Votre demande de devis' . ' N°' . $quoteRequest->getId())
+                ->setSubject('Reisswolf E-shop : Nouvelle demande de devis' . ' N°' . $quoteRequest->getId())
                 ->setFrom($from)
                 ->setTo($rcptTo)
                 ->setBody(
@@ -291,7 +291,7 @@ class QuoteRequestManager
             return false;
 
         } catch (ORMException $e) {
-            throw new Exception('unableToSendConfirmQuoteRequest', 500);
+            throw new Exception('unableToSendNewQuoteRequest', 500);
         } catch (Exception $e) {
             throw new Exception($e->getMessage(), $e->getCode());
         }

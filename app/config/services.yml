@@ -12,17 +12,6 @@ parameters:
 
     default_locale: fr
 
-    paprec_divisions:
-        - DI
-        - CHANTIER
-        - D3E
-
-    paprec_divisions_select:
-        DI: Mes déchets non dangereux (DND)
-        CHANTIER: Mes déchets de chantier
-        D3E: Mes déchets électriques et électroniques
-        5FLUX: Mes déchets de bureau - 5 flux
-
 
 services:
     # default configuration for services in *this* file
@@ -41,24 +30,6 @@ services:
     Paprec\PublicBundle\EventListener\RequestListener:
         tags:
             - { name: 'kernel.event_listener', event: 'kernel.request' }
-
-    # On ajoute la définition de ces services pour les injecter dans les fixtures
-    Paprec\CatalogBundle\Repository\ProductDIRepository:
-        public: true
-        factory: 'doctrine.orm.entity_manager:getRepository'
-        arguments: ['Paprec\CatalogBundle\Entity\ProductDI']
-    Paprec\CatalogBundle\Repository\ProductChantierRepository:
-        public: true
-        factory: 'doctrine.orm.entity_manager:getRepository'
-        arguments: ['Paprec\CatalogBundle\Entity\ProductChantier']
-    Paprec\CatalogBundle\Repository\CategoryRepository:
-        public: true
-        factory: 'doctrine.orm.entity_manager:getRepository'
-        arguments: ['Paprec\CatalogBundle\Entity\Category']
-    Paprec\CatalogBundle\Repository\PriceListD3ERepository:
-        public: true
-        factory: 'doctrine.orm.entity_manager:getRepository'
-        arguments: ['Paprec\CatalogBundle\Entity\PriceListD3E']
 
     # makes classes in src/AppBundle available to be used as services
     # this creates a service per class whose id is the fully-qualified class name

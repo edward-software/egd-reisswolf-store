@@ -40,6 +40,13 @@
                             <div class="card-body row">
                                 <div class="col-md-6">
                                     <div class="form-group">
+                                        <label class="form-label">{{ 'Commercial.QuoteRequest.Locale'|trans }}</label>
+                                        <div class="form-content">
+                                            {{ form_widget(form.locale, {'attr': {'class': 'form-control'}}) }}
+                                            {{ form_errors(form.locale) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
                                         <label class="form-label">{{ 'Commercial.QuoteRequest.Canton'|trans }}</label>
                                         <div class="form-content">
                                             {{ form_widget(form.canton, {'attr': {'class': 'form-control'}}) }}

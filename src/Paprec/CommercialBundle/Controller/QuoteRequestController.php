@@ -145,7 +145,7 @@ class QuoteRequestController extends Controller
             ->setCellValue('Q1', 'Fréquence')
             ->setCellValue('R1', 'Date création');
 
-        $phpExcelObject->getActiveSheet()->setTitle('Devis DI');
+        $phpExcelObject->getActiveSheet()->setTitle('Devis');
         $phpExcelObject->setActiveSheetIndex(0);
 
         $i = 2;
@@ -226,8 +226,14 @@ class QuoteRequestController extends Controller
             $status[$s] = $s;
         }
 
+        $locales = array();
+        foreach ($this->getParameter('paprec_languages') as $language) {
+            $locales[$language] = strtolower($language);
+        }
+
         $form = $this->createForm(QuoteRequestType::class, $quoteRequest, array(
-            'status' => $status
+            'status' => $status,
+            'locales' => $locales
         ));
 
         $form->handleRequest($request);
@@ -275,11 +281,17 @@ class QuoteRequestController extends Controller
             $status[$s] = $s;
         }
 
+        $locales = array();
+        foreach ($this->getParameter('paprec_languages') as $language) {
+            $locales[$language] = strtolower($language);
+        }
+
         $quoteRequest->setOverallDiscount($numberManager->denormalize($quoteRequest->getOverallDiscount()));
         $quoteRequest->setMonthlyBudget($numberManager->denormalize($quoteRequest->getMonthlyBudget()));
 
         $form = $this->createForm(QuoteRequestType::class, $quoteRequest, array(
-            'status' => $status
+            'status' => $status,
+            'locales' => $locales
         ));
 
         $form->handleRequest($request);
@@ -473,7 +485,7 @@ class QuoteRequestController extends Controller
         $quoteRequestManager->isDeleted($quoteRequest, true);
 
 
-        $sendQuote = $quoteRequestManager->sendConfirmRequestEmail($quoteRequest);
+        $sendQuote = $quoteRequestManager->sendConfirmRequestEmail($quoteRequest, $quoteRequest->getLocale());
         if ($sendQuote) {
             $this->get('session')->getFlashBag()->add('success', 'generatedQuoteSent');
         } else {

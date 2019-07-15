@@ -20,6 +20,9 @@ class QuoteRequestType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('locale', ChoiceType::class, array(
+                'choices' => $options['locales']
+            ))
             ->add('canton')
             ->add('businessName')
             ->add('civility', ChoiceType::class, array(
@@ -78,7 +81,8 @@ class QuoteRequestType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'Paprec\CommercialBundle\Entity\QuoteRequest',
-            'status' => null
+            'status' => null,
+            'locales' => null
         ));
     }
 

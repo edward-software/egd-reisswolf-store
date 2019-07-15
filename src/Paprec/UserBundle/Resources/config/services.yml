@@ -8,3 +8,7 @@ services:
     arguments: ["@service_container", "@security.token_storage"]
     tags:
       - { name: twig.extension }
+
+  paprec.user_manager:
+    class: Paprec\UserBundle\Service\UserManager
+    arguments: ["@doctrine.orm.entity_manager", "@service_container"]

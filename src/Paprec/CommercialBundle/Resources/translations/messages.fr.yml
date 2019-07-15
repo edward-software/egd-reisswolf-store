@@ -48,6 +48,7 @@ Commercial:
       generatedQuoteNotSent:    Erreur lors de la génération et l'envoi du devis.
     Success:
       generatedQuoteSent:       Le devis a bien été généré et envoyé au client.
+    Locale: Langue
 
   QuoteStatusList:
     CREATED: Créé

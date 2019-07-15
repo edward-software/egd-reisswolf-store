@@ -65,6 +65,14 @@ class QuoteRequest
     /**
      * @var string
      *
+     * @ORM\Column(name="locale", type="string", length=255)
+     */
+    private $locale;
+
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="canton", type="string", length=255, nullable=true)
      * @Assert\NotBlank(groups={"public"})
      */
@@ -956,5 +964,29 @@ class QuoteRequest
     public function getFrequencyInterval()
     {
         return $this->frequencyInterval;
+    }
+
+    /**
+     * Set locale.
+     *
+     * @param string|null $locale
+     *
+     * @return QuoteRequest
+     */
+    public function setLocale($locale = null)
+    {
+        $this->locale = $locale;
+
+        return $this;
+    }
+
+    /**
+     * Get locale.
+     *
+     * @return string|null
+     */
+    public function getLocale()
+    {
+        return $this->locale;
     }
 }
