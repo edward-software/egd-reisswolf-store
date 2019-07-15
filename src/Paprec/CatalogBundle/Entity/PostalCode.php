@@ -3,6 +3,7 @@
 namespace Paprec\CatalogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -10,6 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="postalCodes")
  * @ORM\Entity(repositoryClass="Paprec\CatalogBundle\Repository\PostalCodeRepository")
+ * @UniqueEntity("code")
  */
 class PostalCode
 {
