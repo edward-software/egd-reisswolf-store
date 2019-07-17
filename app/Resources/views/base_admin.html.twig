@@ -103,7 +103,8 @@
                 {% endif %}
                 {% if is_granted('ROLE_ADMIN') %}
                     <li class="nav-item dropdown{% if app.request.get('_route')|slice(0, 'paprec_commercial'|length) == 'paprec_commercial' %} active{% endif %}">
-                        <a href="#" class="dropdown-toggle nav-link" id="navbarDropdownCommercial" data-toggle="dropdown"
+                        <a href="#" class="dropdown-toggle nav-link" id="navbarDropdownCommercial"
+                           data-toggle="dropdown"
                            role="button" aria-haspopup="true" aria-expanded="false">{{ 'Commercial.Bundle-name'|trans }}
                             <span class="caret"></span>
                         </a>
@@ -154,7 +155,10 @@
     </div>
 
 </div>
+<!--[if IE]>
 <script src="https://cdn.jsdelivr.net/npm/promise-polyfill@7.1.0/dist/promise.min.js"></script>
+<![endif]-->
+
 <script src="{{ asset('build/app.js') }}"></script>
 {#<script src="{{ asset('build/manifest.json') }}"></script>#}
 {% block javascripts %}
