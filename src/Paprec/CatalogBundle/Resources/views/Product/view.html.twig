@@ -355,7 +355,7 @@
                         showCancelButton: true,
                         confirmButtonText: "{{ 'General.Yes'| trans({}, "messages", app.request.locale) }}",
                         cancelButtonText: "{{ 'General.No'| trans({}, "messages", app.request.locale) }}"
-                    }).then((result) => {
+                    }).then(function(result){
                         if (result.value) {
                             $(location).attr('href', url);
                         }
@@ -375,7 +375,7 @@
                         showCancelButton: true,
                         confirmButtonText: "{{ 'General.Yes'| trans({}, "messages", app.request.locale) }}",
                         cancelButtonText: "{{ 'General.No'| trans({}, "messages", app.request.locale) }}"
-                    }).then((result) => {
+                    }).then(function(result) {
                         if (result.value) {
                             $(location).attr('href', url);
                         }
@@ -453,7 +453,7 @@
                         showCancelButton: true,
                         confirmButtonText: "{{ 'General.Yes'| trans({}, "messages", app.request.locale) }}",
                         cancelButtonText: "{{ 'General.No'| trans({}, "messages", app.request.locale) }}"
-                    }).then((result) => {
+                    }).then((functionresult) {
                         if (result.value) {
                             var url = "{{ path("paprec_catalog_product_removePicture", {id: product.id, pictureID: 'pictureTmp'}) }}";
                             url = url.replace('pictureTmp', picId);
@@ -472,7 +472,7 @@
                         showCancelButton: true,
                         confirmButtonText: "{{ 'General.Yes'| trans({}, "messages", app.request.locale) }}",
                         cancelButtonText: "{{ 'General.No'| trans({}, "messages", app.request.locale) }}"
-                    }).then((result) => {
+                    }).then(function(result) {
                         if (result.value) {
                             var url = "{{ path("paprec_catalog_product_setPilotPicture", {id: product.id, pictureID: 'pictureTmp'}) }}";
                             url = url.replace('pictureTmp', picId);
@@ -490,7 +490,7 @@
                         showCancelButton: true,
                         confirmButtonText: "{{ 'General.Yes'| trans({}, "messages", app.request.locale) }}",
                         cancelButtonText: "{{ 'General.No'| trans({}, "messages", app.request.locale) }}"
-                    }).then((result) => {
+                    }).then(function(result) {
                         if (result.value) {
                             var url = "{{ path("paprec_catalog_product_setPicture", {id: product.id, pictureID: 'pictureTmp'}) }}";
                             url = url.replace('pictureTmp', picId);

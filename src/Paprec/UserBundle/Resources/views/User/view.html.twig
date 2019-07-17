@@ -182,7 +182,7 @@
                             showCancelButton: true,
                             confirmButtonText: "{{ 'General.Yes'|trans }}",
                             cancelButtonText: "{{ 'General.No'|trans }}"
-                        }).then((result) => {
+                        }).then(function(result) {
                             if (result.value) {
                                 $(location).attr('href', url);
                             }
@@ -200,7 +200,7 @@
                             showCancelButton: true,
                             confirmButtonText: "{{ 'General.Yes'|trans }}",
                             cancelButtonText: "{{ 'General.No'|trans }}"
-                        }).then((result) => {
+                        }).then(function(result) {
                             if (result.value) {
                                 $(location).attr('href', url);
                             }
