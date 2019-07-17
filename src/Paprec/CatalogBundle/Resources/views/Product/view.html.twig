@@ -24,16 +24,20 @@
                 <div class="float-right">
                     <a href="{{ path("paprec_catalog_product_addProductLabel", {id: product.id}) }}"
                        class="btn btn-sm btn-success"><i
-                                class="fa fa-xs fa-plus"></i> {{ 'Catalog.ProductLabel.Add'| trans({}, "messages", app.request.locale) }}</a>
+                                class="fa fa-xs fa-plus"></i> {{ 'Catalog.ProductLabel.Add'| trans({}, "messages", app.request.locale) }}
+                    </a>
                     <a href="{{ path("paprec_catalog_product_edit", {id: product.id}) }}"
                        class="btn btn-sm btn-warning"><i
-                                class="fa fa-xs fa-edit"></i> {{ 'Catalog.Product.Edit'| trans({}, "messages", app.request.locale) }}</a>
+                                class="fa fa-xs fa-edit"></i> {{ 'Catalog.Product.Edit'| trans({}, "messages", app.request.locale) }}
+                    </a>
                     <a id="catalogProductRemoveButton" href="javascript:void(0);" class="btn btn-sm btn-danger"><i
-                                class="fa fa-xs fa-trash"></i> {{ 'Catalog.Product.Remove'| trans({}, "messages", app.request.locale) }}</a>
+                                class="fa fa-xs fa-trash"></i> {{ 'Catalog.Product.Remove'| trans({}, "messages", app.request.locale) }}
+                    </a>
                 </div>
                 <div class="float-left">
                     <a href="{{ path('paprec_catalog_product_index') }}" class="btn btn-sm btn-default"><i
-                                class="fa fa-xs fa-chevron-left"></i> {{ 'Catalog.Product.List'| trans({}, "messages", app.request.locale) }}</a>
+                                class="fa fa-xs fa-chevron-left"></i> {{ 'Catalog.Product.List'| trans({}, "messages", app.request.locale) }}
+                    </a>
                 </div>
             </div>
             <div class="card-body">
@@ -337,7 +341,6 @@
             {% endfor %}
         </div>
     </div>
-    </div>
 {% endblock %}
 
     {% block javascripts %}
@@ -355,7 +358,7 @@
                         showCancelButton: true,
                         confirmButtonText: "{{ 'General.Yes'| trans({}, "messages", app.request.locale) }}",
                         cancelButtonText: "{{ 'General.No'| trans({}, "messages", app.request.locale) }}"
-                    }).then(function(result){
+                    }).then(function (result) {
                         if (result.value) {
                             $(location).attr('href', url);
                         }
@@ -375,7 +378,7 @@
                         showCancelButton: true,
                         confirmButtonText: "{{ 'General.Yes'| trans({}, "messages", app.request.locale) }}",
                         cancelButtonText: "{{ 'General.No'| trans({}, "messages", app.request.locale) }}"
-                    }).then(function(result) {
+                    }).then(function (result) {
                         if (result.value) {
                             $(location).attr('href', url);
                         }
@@ -453,7 +456,7 @@
                         showCancelButton: true,
                         confirmButtonText: "{{ 'General.Yes'| trans({}, "messages", app.request.locale) }}",
                         cancelButtonText: "{{ 'General.No'| trans({}, "messages", app.request.locale) }}"
-                    }).then(function(result) {
+                    }).then(function (result) {
                         if (result.value) {
                             var url = "{{ path("paprec_catalog_product_removePicture", {id: product.id, pictureID: 'pictureTmp'}) }}";
                             url = url.replace('pictureTmp', picId);
@@ -472,7 +475,7 @@
                         showCancelButton: true,
                         confirmButtonText: "{{ 'General.Yes'| trans({}, "messages", app.request.locale) }}",
                         cancelButtonText: "{{ 'General.No'| trans({}, "messages", app.request.locale) }}"
-                    }).then(function(result) {
+                    }).then(function (result) {
                         if (result.value) {
                             var url = "{{ path("paprec_catalog_product_setPilotPicture", {id: product.id, pictureID: 'pictureTmp'}) }}";
                             url = url.replace('pictureTmp', picId);
@@ -490,7 +493,7 @@
                         showCancelButton: true,
                         confirmButtonText: "{{ 'General.Yes'| trans({}, "messages", app.request.locale) }}",
                         cancelButtonText: "{{ 'General.No'| trans({}, "messages", app.request.locale) }}"
-                    }).then(function(result) {
+                    }).then(function (result) {
                         if (result.value) {
                             var url = "{{ path("paprec_catalog_product_setPicture", {id: product.id, pictureID: 'pictureTmp'}) }}";
                             url = url.replace('pictureTmp', picId);
