@@ -196,7 +196,7 @@
                                     <form id="formAddPicture" name="formAddPicture"
                                             {% set params = {id: product.id, type: 'Picture' } %}
                                           action="{{ path("paprec_catalog_product_addPicture", params) }}"
-                                          method="post">
+                                          method="post" enctype="multipart/form-data">
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="uploadPictureModalTitle">
                                             </h5>
@@ -240,7 +240,7 @@
                                 <div class="modal-content">
                                     <form id="formEditPicture" name="formEditPicture"
                                           action=""
-                                          method="post">
+                                          method="post" enctype="multipart/form-data">
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="editPictureModalTitle">
                                                 {{ 'Catalog.Product.EditPicture'| trans({}, "messages", app.request.locale) }}
