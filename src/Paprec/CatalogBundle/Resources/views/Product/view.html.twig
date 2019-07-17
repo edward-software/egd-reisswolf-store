@@ -453,7 +453,7 @@
                         showCancelButton: true,
                         confirmButtonText: "{{ 'General.Yes'| trans({}, "messages", app.request.locale) }}",
                         cancelButtonText: "{{ 'General.No'| trans({}, "messages", app.request.locale) }}"
-                    }).then((function(result) {
+                    }).then(function(result) {
                         if (result.value) {
                             var url = "{{ path("paprec_catalog_product_removePicture", {id: product.id, pictureID: 'pictureTmp'}) }}";
                             url = url.replace('pictureTmp', picId);
