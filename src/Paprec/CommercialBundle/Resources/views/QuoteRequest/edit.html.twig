@@ -102,6 +102,20 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
+                                        <label class="form-label">{{ 'Public.Contact.Access'|trans }}</label>
+                                        <div class="form-content">
+                                            {{ form_widget(form.access, {'attr': {'class': 'form-control'}}) }}
+                                            {{ form_errors(form.access) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">{{ 'Public.Contact.Staff'|trans }}</label>
+                                        <div class="form-content">
+                                            {{ form_widget(form.staff, {'attr': {'class': 'form-control'}}) }}
+                                            {{ form_errors(form.staff) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
                                         <label class="form-label">{{ 'Commercial.QuoteRequest.Frequency'|trans }}</label>
                                         <div class="form-content">
                                             {{ form_widget(form.frequency, {'attr': {'class': 'form-control'}}) }}
@@ -141,13 +155,6 @@
                                         <div class="form-content">
                                             {{ form_widget(form.comment, {'attr': {'class': 'form-control'}}) }}
                                             {{ form_errors(form.comment) }}
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label">{{ 'Commercial.QuoteRequest.CoworkerNumber'|trans }}</label>
-                                        <div class="form-content">
-                                            {{ form_widget(form.coworkerNumber, {'attr': {'class': 'form-control'}}) }}
-                                            {{ form_errors(form.coworkerNumber) }}
                                         </div>
                                     </div>
 
@@ -246,7 +253,7 @@
                     showCancelButton: true,
                     confirmButtonText: "{{ 'General.Yes'|trans }}",
                     cancelButtonText: "{{ 'General.No'|trans }}"
-                }).then(function(result) {
+                }).then(function (result) {
                     if (result.value) {
                         $(location).attr('href', url);
                     }

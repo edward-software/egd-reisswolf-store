@@ -32,6 +32,18 @@ class QuoteRequestType extends AbstractType
                 ),
                 'expanded' => true
             ))
+            ->add('access', ChoiceType::class, array(
+                "choices" => $options['access'],
+                "choice_label" => function ($choiceValue, $key, $value) {
+                    return 'Commercial.AccessList.' . $choiceValue;
+                },
+            ))
+            ->add('staff', ChoiceType::class, array(
+                "choices" => $options['staff'],
+                "choice_label" => function ($choiceValue, $key, $value) {
+                    return 'Commercial.StaffList.' . $choiceValue;
+                },
+            ))
             ->add('lastName', TextType::class)
             ->add('firstName', TextType::class)
             ->add('email', TextType::class)
@@ -47,7 +59,6 @@ class QuoteRequestType extends AbstractType
             ->add('postalCode', TextType::class)
             ->add('city', TextType::class)
             ->add('comment', TextareaType::class)
-            ->add('coworkerNumber')
             ->add('quoteStatus', ChoiceType::class, array(
                 "choices" => $options['status'],
                 "choice_label" => function ($choiceValue, $key, $value) {
@@ -82,7 +93,9 @@ class QuoteRequestType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => 'Paprec\CommercialBundle\Entity\QuoteRequest',
             'status' => null,
-            'locales' => null
+            'locales' => null,
+            'staff' => null,
+            'access' => null
         ));
     }
 

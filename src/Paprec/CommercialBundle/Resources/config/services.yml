@@ -13,3 +13,26 @@ parameters:
     - PENDING
     - PROCESSING
     - CLOSED
+
+  paprec_quote_access:
+    - stairs
+    - elevator
+    - ground
+
+  paprec_quote_staff:
+    - '19'
+    - '1019'
+    - '2029'
+    - '3039'
+    - '4049'
+    - '5059'
+    - '6069'
+    - '7079'
+    - '8089'
+    - '9099'
+    - '100109'
+    - '110119'
+    - '120129'
+    - '130139'
+    - '140149'
+    - '150+'

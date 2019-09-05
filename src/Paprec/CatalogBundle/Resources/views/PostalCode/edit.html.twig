@@ -20,7 +20,8 @@
             <div class="card">
                 <div class="card-header">
                     <h4>
-                        <i class="fa fa-xs fa-pencil-alt"></i> {{ 'Catalog.PostalCode.Edit'|trans }} #{{ postalCode.id|formatId(6) }}
+                        <i class="fa fa-xs fa-pencil-alt"></i> {{ 'Catalog.PostalCode.Edit'|trans }}
+                        #{{ postalCode.id|formatId(6) }}
                     </h4>
                     <div class="float-right">
 
@@ -42,6 +43,20 @@
                                     <div class="form-content">
                                         {{ form_widget(form.code, {'attr': {'class': 'form-control'}}) }}
                                         {{ form_errors(form.code) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-label">{{ 'Catalog.PostalCode.City'|trans }}</div>
+                                    <div class="form-content">
+                                        {{ form_widget(form.city, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_errors(form.city) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-label">{{ 'Catalog.PostalCode.Zone'|trans }}</div>
+                                    <div class="form-content">
+                                        {{ form_widget(form.zone, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_errors(form.zone) }}
                                     </div>
                                 </div>
 
@@ -123,7 +138,7 @@
                     showCancelButton: true,
                     confirmButtonText: "{{ 'General.Yes'|trans }}",
                     cancelButtonText: "{{ 'General.No'|trans }}"
-                }).then(function(result) {
+                }).then(function (result) {
                     if (result.value) {
                         $(location).attr('href', url);
                     }

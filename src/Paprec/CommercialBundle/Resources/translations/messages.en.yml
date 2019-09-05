@@ -55,6 +55,29 @@ Commercial:
     PENDING: Peding
     PROCESSING: Processing
     CLOSED: Closed
+    
+  StaffList:
+    19: From 1 to 9 employees
+    1019: From 10 to 19 employees
+    2029: From 20 to 29 employees
+    3039: From 30 to 39 employees
+    4049: From 40 to 49 employees
+    5059: From 50 to 59 employees
+    6069: From 60 to 69 employees
+    7079: From 70 to 79 employees
+    8089: From 80 to 89 employees
+    9099: From 90 to 99 employees
+    100109: From 100 to 109 employees
+    110119: From 110 to 119 employees
+    120129: From 120 to 129 employees
+    130139: From 130 to 139 employees
+    140149: From 140 to 149 employees
+    150+: More than 150 employees
+
+  AccessList:
+    stairs: By stairs
+    elevator: By elevator
+    ground: Street level without steps
 
   QuoteRequestLine:
     ProductName: Procuct name

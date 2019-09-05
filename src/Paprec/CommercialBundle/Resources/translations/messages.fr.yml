@@ -56,6 +56,29 @@ Commercial:
     PROCESSING: En traitement
     CLOSED: Fermé
 
+  StaffList:
+    19: De 1 à 9 employés
+    1019: De 10 à 19 employés
+    2029: De 20 à 29 employés
+    3039: De 30 à 39 employés
+    4049: De 40 à 49 employés
+    5059: De 50 à 59 employés
+    6069: De 60 à 69 employés
+    7079: De 70 à 79 employés
+    8089: De 80 à 89 employés
+    9099: De 90 à 99 employés
+    100109: De 100 à 109 employés
+    110119: De 110 à 119 employés
+    120129: De 120 à 129 employés
+    130139: De 130 à 139 employés
+    140149: De 140 à 149 employés
+    150+: Plus de 150 employés
+
+  AccessList:
+    stairs: Par escalier
+    elevator: Par ascenseur
+    ground: Niveau rue sans marche
+
   QuoteRequestLine:
     ProductName: Nom du produit
     UnitPrice: Prix unitaire

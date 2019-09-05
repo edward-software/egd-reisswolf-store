@@ -30,6 +30,8 @@ Public:
     Phone: Phone
     CoworkerNumber: Number of employees
     IsMultisite: Multi-site service
+    Access: Access
+    Staff: Staff
     Address: Addresse
     PostalCode: Postal code
     City: City

@@ -231,9 +231,21 @@ class QuoteRequestController extends Controller
             $locales[$language] = strtolower($language);
         }
 
+        $access = array();
+        foreach ($this->getParameter('paprec_quote_access') as $a) {
+            $access[$a] = $a;
+        }
+
+        $staff = array();
+        foreach ($this->getParameter('paprec_quote_staff') as $s) {
+            $staff[$s] = $s;
+        }
+
         $form = $this->createForm(QuoteRequestType::class, $quoteRequest, array(
             'status' => $status,
-            'locales' => $locales
+            'locales' => $locales,
+            'access' => $access,
+            'staff' => $staff
         ));
 
         $form->handleRequest($request);
@@ -286,12 +298,24 @@ class QuoteRequestController extends Controller
             $locales[$language] = strtolower($language);
         }
 
+        $access = array();
+        foreach ($this->getParameter('paprec_quote_access') as $a) {
+            $access[$a] = $a;
+        }
+
+        $staff = array();
+        foreach ($this->getParameter('paprec_quote_staff') as $s) {
+            $staff[$s] = $s;
+        }
+
         $quoteRequest->setOverallDiscount($numberManager->denormalize($quoteRequest->getOverallDiscount()));
         $quoteRequest->setMonthlyBudget($numberManager->denormalize($quoteRequest->getMonthlyBudget()));
 
         $form = $this->createForm(QuoteRequestType::class, $quoteRequest, array(
             'status' => $status,
-            'locales' => $locales
+            'locales' => $locales,
+            'access' => $access,
+            'staff' => $staff
         ));
 
         $form->handleRequest($request);

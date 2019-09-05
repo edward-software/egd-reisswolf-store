@@ -25,6 +25,12 @@ class PostalCodeType extends AbstractType
             ->add('code', TextType::class, array(
                 "required" => true
             ))
+            ->add('city', TextType::class, array(
+                "required" => true
+            ))
+            ->add('zone', TextType::class, array(
+                "required" => true
+            ))
             ->add('transportRate', TextType::class, array(
                 "required" => true
             ))

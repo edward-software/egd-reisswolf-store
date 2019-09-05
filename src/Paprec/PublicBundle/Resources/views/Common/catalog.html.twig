@@ -62,6 +62,16 @@
                                             data-product="{{ product.id }}"
                                             class="btn btn__blue addProductToQuoteButton">
                                         {{ 'Public.Catalog.AddToQuote'| trans({}, "messages", locale) }}</button>
+                                    <button class="addOneToCartButton"
+                                            id="addOneToCartButton{{ product.id }}"
+                                            data-url="{{ path('paprec_public_catalog_addOneContent', {locale: locale, cartUuid: cart.id, productId: product.id}) }}">
+                                        +
+                                    </button>
+                                    <button class="removeOneToCartButton"
+                                            id="removeOneToCartButton{{ product.id }}"
+                                            data-url="{{ path('paprec_public_catalog_removeOneContent', {locale: locale, cartUuid: cart.id, productId: product.id}) }}">
+                                        -
+                                    </button>
                                 </div>
                             </div>
                         </div>

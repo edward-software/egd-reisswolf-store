@@ -17,7 +17,9 @@ Catalog:
     List:                       Liste des codes postaux
     Add:                        Ajouter un code postal
     Export:                     Exporter les codes postaux
-    Code:                      Code Postal
+    Code:                       Code Postal
+    City:                       Commune
+    Zone:                       Zone tarifaire
     Division:                   Division
     Rate:                       Coefficient
     View:                       Vue du code postal

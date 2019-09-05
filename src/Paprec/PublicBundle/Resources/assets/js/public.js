@@ -70,6 +70,50 @@ $(function () {
         });
     });
 
+    /**
+     * Ajout un seul produit au clic sur le +
+     */
+    $('.addOneToCartButton').click(function () {
+        var url = $(this).data('url');
+
+        var productId = (this.id).replace('addOneToCartButton', '');
+        $.ajax({
+            type: "POST",
+            url: url,
+            success: function (response) {
+                // On récupère l'HTML du du produit ajouté et on l'insère dans le récap du devis (=panier)
+                var htmlToDisplay = response.trim();
+                $("#devis-recap-item-" + productId).remove();
+                $("#devis-recap").append(htmlToDisplay);
+                // On met à jour la valeur du <select> de qtty du produit
+                $('#quantityProductSelect_' + productId).val(+($('#quantityProductSelect_' + productId).val()) + 1);
+            }
+        })
+    });
+
+    /**
+     * Enlève un seul produit au clic sur le -
+     */
+    $('.removeOneToCartButton').click(function () {
+        var url = $(this).data('url');
+
+        var productId = (this.id).replace('removeOneToCartButton', '');
+        $.ajax({
+            type: "POST",
+            url: url,
+            success: function (response) {
+                $("#devis-recap-item-" + productId).remove();
+                if (JSON.stringify(response) !== '{}') {
+                    // On récupère l'HTML du du produit ajouté et on l'insère dans le récap du devis (=panier)
+                    var htmlToDisplay = response.trim();
+                    $("#devis-recap").append(htmlToDisplay);
+                }
+                // On met à jour la valeur du <select> de qtty du produit
+                $('#quantityProductSelect_' + productId).val(+($('#quantityProductSelect_' + productId).val()) - 1);
+            }
+        })
+    });
+
 
     /****************************************
      * CONTACT FORM
@@ -82,6 +126,14 @@ $(function () {
             $('.address-field').prop("disabled", false);
         }
     });
+
+    $('#contact_staff_select').change(function () {
+        $('.contact_staff_input').val(this.value);
+    });
+
+    $('#contact_access_select').change(function () {
+        $('.contact_access_input').val(this.value);
+    })
 });
 
 

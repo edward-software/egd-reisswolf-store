@@ -75,9 +75,23 @@ class SubscriptionController extends Controller
 
         $cart = $cartManager->get($cartUuid);
 
+        $access = array();
+        foreach ($this->getParameter('paprec_quote_access') as $a) {
+            $access[$a] = $a;
+        }
+
+        $staff = array();
+        foreach ($this->getParameter('paprec_quote_staff') as $s) {
+            $staff[$s] = $s;
+        }
+
         $quoteRequest = new QuoteRequest();
 
-        $form = $this->createForm(QuoteRequestPublicType::class, $quoteRequest);
+        $form = $this->createForm(QuoteRequestPublicType::class, $quoteRequest, array(
+            'access' => $access,
+            'staff' => $staff,
+            'locale' => $locale
+        ));
 
         $form->handleRequest($request);
 
@@ -89,7 +103,11 @@ class SubscriptionController extends Controller
             $quoteRequest->setFrequencyTimes($cart->getFrequencyTimes());
             $quoteRequest->setFrequencyInterval($cart->getFrequencyInterval());
 
-            $quoteRequest->setUserInCharge($userManager->getUserInChargeByPostalCode($quoteRequest->getPostalCode()));
+            if ($quoteRequest->getIsMultisite()) {
+                // TODO : Ajouter un commercial par défaut si pas de code postal saisi car Multisite
+            } else {
+                $quoteRequest->setUserInCharge($userManager->getUserInChargeByPostalCode($quoteRequest->getPostalCode()));
+            }
             $quoteRequest->setLocale($locale);
 
             $em = $this->getDoctrine()->getManager();
@@ -104,7 +122,7 @@ class SubscriptionController extends Controller
             }
 
             $sendConfirmEmail = $quoteRequestManager->sendConfirmRequestEmail($quoteRequest, $locale);
-            $sendNewRequestEmail = $quoteRequestManager->sendnewRequestEmail($quoteRequest, $locale);
+            $sendNewRequestEmail = $quoteRequestManager->sendNewRequestEmail($quoteRequest, $locale);
 
             if ($sendConfirmEmail && $sendNewRequestEmail) {
                 return $this->redirectToRoute('paprec_public_confirm_index', array(
@@ -191,6 +209,68 @@ class SubscriptionController extends Controller
 
         } catch (\Exception $e) {
             return new JsonResponse(array('error' => $e->getMessage()), 400);
+        }
+    }
+
+    /**
+     * Augmente la quantité d'un produit dans le panier de 1
+     * L'ajoute au panier si produit non présent
+     *
+     * @Route("/{locale}/addOneContent/{cartUuid}/{productId}", name="paprec_public_catalog_addOneContent", condition="request.isXmlHttpRequest()")
+     * @throws \Exception
+     */
+    public function addOneProductAction(Request $request, $locale, $cartUuid, $productId)
+    {
+        $cartManager = $this->get('paprec.cart_manager');
+        $productManager = $this->container->get('paprec_catalog.product_manager');
+
+        try {
+            $product = $productManager->get($productId);
+            // On ajoute ou on supprime le produit sélecionné au tableau des displayedCategories du Cart
+            $qtty = $cartManager->addOneProduct($cartUuid, $productId);
+
+
+            return $this->render('@PaprecPublic/Common/partials/quoteLine.html.twig', array(
+                'locale' => $locale,
+                'product' => $product,
+                'quantity' => $qtty
+            ));
+
+        } catch (\Exception $e) {
+            return new JsonResponse(null, 400);
+        }
+    }
+
+    /**
+     * Diminue la quantité d'un produit dans le panier de 1
+     * Le supprime du panier si quantité = 0
+     *
+     * @Route("/{locale}/removeOneContent/{cartUuid}/{productId}", name="paprec_public_catalog_removeOneContent", condition="request.isXmlHttpRequest()")
+     * @throws \Exception
+     */
+    public function removeOneProductAction(Request $request, $locale, $cartUuid, $productId)
+    {
+        $cartManager = $this->get('paprec.cart_manager');
+        $productManager = $this->container->get('paprec_catalog.product_manager');
+
+        try {
+            $product = $productManager->get($productId);
+            // On ajoute ou on supprime le produit sélecionné au tableau des displayedCategories du Cart
+            $qtty = $cartManager->removeOneProduct($cartUuid, $productId);
+
+            if ($qtty > 0) {
+                return $this->render('@PaprecPublic/Common/partials/quoteLine.html.twig', array(
+                    'locale' => $locale,
+                    'product' => $product,
+                    'quantity' => $qtty
+                ));
+            } else {
+                return new JsonResponse(null, 200);
+            }
+
+
+        } catch (\Exception $e) {
+            return new JsonResponse(null, 400);
         }
     }
 

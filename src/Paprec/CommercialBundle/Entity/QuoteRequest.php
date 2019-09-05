@@ -149,6 +149,22 @@ class QuoteRequest
     /**
      * @var string
      *
+     * @ORM\Column(name="staff", type="text")
+     * @Assert\NotBlank(groups={"public"})
+     */
+    private $staff;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="access", type="text")
+     * @Assert\NotBlank(groups={"public"})
+     */
+    private $access;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="address", type="text", nullable=true)
      * @Assert\NotBlank(groups={"public_multisite"})
      */
@@ -186,13 +202,7 @@ class QuoteRequest
      */
     private $comment;
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="coworkerNumber", type="integer", nullable=true)
-     * @Assert\NotBlank(groups={"public"})
-     */
-    private $coworkerNumber;
+
 
 
     /**
@@ -649,30 +659,6 @@ class QuoteRequest
     }
 
     /**
-     * Set coworkerNumber.
-     *
-     * @param int|null $coworkerNumber
-     *
-     * @return QuoteRequest
-     */
-    public function setCoworkerNumber($coworkerNumber = null)
-    {
-        $this->coworkerNumber = $coworkerNumber;
-
-        return $this;
-    }
-
-    /**
-     * Get coworkerNumber.
-     *
-     * @return int|null
-     */
-    public function getCoworkerNumber()
-    {
-        return $this->coworkerNumber;
-    }
-
-    /**
      * Set quoteStatus.
      *
      * @param string $quoteStatus
@@ -994,5 +980,53 @@ class QuoteRequest
     public function getLocale()
     {
         return $this->locale;
+    }
+
+    /**
+     * Set staff.
+     *
+     * @param string $staff
+     *
+     * @return QuoteRequest
+     */
+    public function setStaff($staff)
+    {
+        $this->staff = $staff;
+
+        return $this;
+    }
+
+    /**
+     * Get staff.
+     *
+     * @return string
+     */
+    public function getStaff()
+    {
+        return $this->staff;
+    }
+
+    /**
+     * Set access.
+     *
+     * @param string $access
+     *
+     * @return QuoteRequest
+     */
+    public function setAccess($access)
+    {
+        $this->access = $access;
+
+        return $this;
+    }
+
+    /**
+     * Get access.
+     *
+     * @return string
+     */
+    public function getAccess()
+    {
+        return $this->access;
     }
 }

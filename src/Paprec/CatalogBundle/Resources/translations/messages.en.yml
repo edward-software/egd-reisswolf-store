@@ -18,6 +18,8 @@ Catalog:
     Add:                        Add postal code
     Export:                     Export postal codes
     Code:                       Code
+    City:                       City
+    Zone:                       Tariff zone
     Rate:                       Rate
     View:                       View postal code
     Edit:                       Edit postal code

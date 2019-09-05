@@ -29,6 +29,20 @@ class QuoteRequestPublicType extends AbstractType
                 ),
                 'expanded' => true
             ))
+            ->add('access', ChoiceType::class, array(
+                "choices" => $options['access'],
+                "choice_label" => function ($choiceValue, $key, $value) {
+                    return 'Commercial.AccessList.' . $choiceValue;
+                },
+                'empty_data' => null
+            ))
+            ->add('staff', ChoiceType::class, array(
+                "choices" => $options['staff'],
+                "choice_label" => function ($choiceValue, $key, $value) {
+                    return 'Commercial.StaffList.' . $choiceValue;
+                },
+                'empty_data' => null
+            ))
             ->add('lastName', TextType::class)
             ->add('firstName', TextType::class)
             ->add('email', TextType::class)
@@ -43,7 +57,6 @@ class QuoteRequestPublicType extends AbstractType
             ->add('address', TextType::class)
             ->add('postalCode', TextType::class)
             ->add('city', TextType::class)
-            ->add('coworkerNumber', IntegerType::class)
             ->add('comment', TextareaType::class);
     }
 
@@ -61,6 +74,9 @@ class QuoteRequestPublicType extends AbstractType
                 }
                 return ['public', 'public_multisite'];
             },
+            'access' => null,
+            'staff' => null,
+            'locale' => null
         ));
     }
 

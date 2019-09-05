@@ -258,7 +258,7 @@ class QuoteRequestManager
      * Envoie un mail au commercial associé lui indiquant la nouvelle demande de devis créée
      * @throws Exception
      */
-    public function sendnewRequestEmail(QuoteRequest $quoteRequest, $locale)
+    public function sendNewRequestEmail(QuoteRequest $quoteRequest, $locale)
     {
 
         try {

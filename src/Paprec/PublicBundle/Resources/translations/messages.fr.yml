@@ -31,6 +31,8 @@ Public:
     Phone: Téléphone
     CoworkerNumber: Effectif
     IsMultisite: Prestation multi-sites
+    Access: Accès
+    Staff: Effectif
     Address: Adresse
     PostalCode: Code postal
     City: Ville

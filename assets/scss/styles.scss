@@ -176,9 +176,15 @@ form {
     -webkit-appearance: none !important;
     -moz-appearance: none !important;
     appearance: none !important;
-    color: $mdgray !important;
+    //color: $mdgray !important;
 
     background: url('/build/static/arrow-down.svg') 100%/5% no-repeat;
+  }
+
+  .contact_access_input, .contact_staff_input {
+    opacity: 0;
+    visibility: hidden;
+    height: 0;
   }
 }
 

@@ -116,6 +116,20 @@ class PostalCode
 
 
     /**
+     * @var text
+     * @ORM\Column(name="city", type="string")
+     */
+    private $city;
+
+    /**
+     * @var text
+     * @ORM\Column(name="zone", type="string")
+     */
+    private $zone;
+
+
+
+    /**
      * #################################
      *              Relations
      * #################################
@@ -411,5 +425,53 @@ class PostalCode
     public function getRegion()
     {
         return $this->region;
+    }
+
+    /**
+     * Set city.
+     *
+     * @param string $city
+     *
+     * @return PostalCode
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * Get city.
+     *
+     * @return string
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    /**
+     * Set zone.
+     *
+     * @param string $zone
+     *
+     * @return PostalCode
+     */
+    public function setZone($zone)
+    {
+        $this->zone = $zone;
+
+        return $this;
+    }
+
+    /**
+     * Get zone.
+     *
+     * @return string
+     */
+    public function getZone()
+    {
+        return $this->zone;
     }
 }
