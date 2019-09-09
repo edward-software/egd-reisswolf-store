@@ -73,6 +73,7 @@ Catalog:
     Details: Details du produit
     CapacityUnit: Unité de volume
     Position: Position
+    FolderNumber: Nombre de dossiers
     RentalUnitPrice: PU de location
     TransportUnitPrice: PU de transport
     TreatmentUnitPrice: PU de traitement
@@ -90,6 +91,8 @@ Catalog:
       DE: Allemand
     Name: Nom
     Short-description: Description courte
+    Lock: Verrou
+    Version: Version
     Information: Informations
     Remove: Supprimer
 

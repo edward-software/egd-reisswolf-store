@@ -105,6 +105,8 @@
                             {{ form_errors(form.comment) }}
                         </div>
                         <button type="submit"
+                                id="contactDetailFormSubmitButton"
+                                data-key="{{ recaptcha_site_key }}"
                                 class="btn valid">{{ 'Public.Contact.SendRequest'| trans({}, "messages", locale) }}</button>
                     </div>
                 </div>
@@ -114,3 +116,10 @@
         </div>
     </section>
 {% endblock %}
+{% block javascripts %}
+    <script src="https://www.google.com/recaptcha/api.js?render={{ recaptcha_site_key }}"></script>
+    <script>
+
+    </script>
+{% endblock %}
+

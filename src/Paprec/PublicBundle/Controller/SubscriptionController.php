@@ -3,6 +3,10 @@
 namespace Paprec\PublicBundle\Controller;
 
 
+use GuzzleHttp\Client;
+use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Middleware;
+use GuzzleHttp\RequestOptions;
 use Paprec\CommercialBundle\Entity\QuoteRequest;
 use Paprec\CommercialBundle\Form\QuoteRequestPublicType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -95,7 +99,7 @@ class SubscriptionController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid() && $this->captchaVerify($request->get('g-recaptcha-response'))) {
             $quoteRequest = $form->getData();
             $quoteRequest->setQuoteStatus('CREATED');
 
@@ -139,6 +143,30 @@ class SubscriptionController extends Controller
             'cart' => $cart,
             'form' => $form->createView()
         ));
+    }
+
+    /**
+     * A partir du token reCaptcha récupéré dans le formulaire
+     * On fait une requête vers google pour vérifier la validité du Captcha
+     *
+     * @param $recaptchaToken
+     * @return mixed
+     */
+    private function captchaVerify($recaptchaToken)
+    {
+        $url = "https://www.google.com/recaptcha/api/siteverify";
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, array(
+            "secret" => $this->getParameter('recaptcha_secret_key'), "response" => $recaptchaToken));
+        $response = curl_exec($ch);
+        curl_close($ch);
+        $data = json_decode($response);
+
+        return $data->success;
     }
 
     /**

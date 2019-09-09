@@ -66,6 +66,24 @@
                                     </label>
                                 </div>
                                 <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Catalog.ProductLabel.Lock'| trans({}, "messages", app.request.locale) }}</label>
+                                    <label class="col-form-label col-md-8">
+                                        {{ productLabel.lockType }}
+                                    </label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Catalog.ProductLabel.Version'| trans({}, "messages", app.request.locale) }}</label>
+                                    <label class="col-form-label col-md-8">
+                                        {{ productLabel.version }}
+                                    </label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Catalog.Product.FolderNumber'| trans({}, "messages", app.request.locale) }}</label>
+                                    <label class="col-form-label col-md-8">
+                                        {{ product.folderNumber }}
+                                    </label>
+                                </div>
+                                <div class="form-group row">
                                     <label class="col-md-4 col-form-label">{{ 'Catalog.Product.Capacity'| trans({}, "messages", app.request.locale) }}</label>
                                     <label class="col-form-label col-md-8">
                                         {{ product.capacity }} {% autoescape false %} {{ product.capacityUnit }} {% endautoescape %}
@@ -99,12 +117,6 @@
                                     <label class="col-md-4 col-form-label">{{ 'Catalog.Product.TraceabilityUnitPrice'| trans({}, "messages", app.request.locale) }}</label>
                                     <label class="col-form-label col-md-8">
                                         {{ product.traceabilityUnitPrice|formatAmount('EUR', app.request.locale) }}
-                                    </label>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-md-4 col-form-label">{{ 'Catalog.Product.AvailablePostalCodes'| trans({}, "messages", app.request.locale) }}</label>
-                                    <label class="col-form-label col-md-8">
-                                        {{ product.availablePostalCodes|nl2br }}
                                     </label>
                                 </div>
                                 <div class="form-group row">
@@ -332,6 +344,18 @@
                                 <label class="col-md-4 col-form-label">{{ 'Catalog.ProductLabel.Short-description'| trans({}, "messages", app.request.locale) }}</label>
                                 <label class="col-form-label col-md-8">
                                     {{ pL.shortDescription|nl2br }}
+                                </label>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-4 col-form-label">{{ 'Catalog.ProductLabel.Lock'| trans({}, "messages", app.request.locale) }}</label>
+                                <label class="col-form-label col-md-8">
+                                    {{ pL.lockType }}
+                                </label>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-4 col-form-label">{{ 'Catalog.ProductLabel.Version'| trans({}, "messages", app.request.locale) }}</label>
+                                <label class="col-form-label col-md-8">
+                                    {{ pL.version }}
                                 </label>
                             </div>
                         </div>

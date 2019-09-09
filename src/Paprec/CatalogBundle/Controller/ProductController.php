@@ -388,7 +388,7 @@ class ProductController extends Controller
         }
 
         $product->setDeleted(new \DateTime);
-        $product->setIsDisplayed(false);
+        $product->setIsEnabled(false);
         $em->flush();
 
         return $this->redirectToRoute('paprec_catalog_product_index');

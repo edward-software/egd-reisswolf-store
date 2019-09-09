@@ -23,6 +23,8 @@ $(function () {
                 var htmlToDisplay = response.trim();
                 $("#devis-recap-item-" + productId).remove();
                 $("#devis-recap").append(htmlToDisplay);
+                $('#quantityProductSelect_' + productId).val($('#devis-recap-item-' + productId).data('qtty'));
+                disableButtonsFromQuantity($('#quantityProductSelect_' + productId).val(), productId);
             },
             complete: function () {
                 $('.addProductToQuoteButton').prop("disabled", false);
@@ -86,7 +88,9 @@ $(function () {
                 $("#devis-recap-item-" + productId).remove();
                 $("#devis-recap").append(htmlToDisplay);
                 // On met à jour la valeur du <select> de qtty du produit
-                $('#quantityProductSelect_' + productId).val(+($('#quantityProductSelect_' + productId).val()) + 1);
+                $('#quantityProductSelect_' + productId).val($('#devis-recap-item-' + productId).data('qtty'));
+                disableButtonsFromQuantity($('#quantityProductSelect_' + productId).val(), productId);
+
             }
         })
     });
@@ -96,7 +100,6 @@ $(function () {
      */
     $('.removeOneToCartButton').click(function () {
         var url = $(this).data('url');
-
         var productId = (this.id).replace('removeOneToCartButton', '');
         $.ajax({
             type: "POST",
@@ -109,11 +112,11 @@ $(function () {
                     $("#devis-recap").append(htmlToDisplay);
                 }
                 // On met à jour la valeur du <select> de qtty du produit
-                $('#quantityProductSelect_' + productId).val(+($('#quantityProductSelect_' + productId).val()) - 1);
+                $('#quantityProductSelect_' + productId).val($('#devis-recap-item-' + productId).data('qtty'));
+                disableButtonsFromQuantity($('#quantityProductSelect_' + productId).val(), productId);
             }
         })
     });
-
 
     /****************************************
      * CONTACT FORM
@@ -133,10 +136,45 @@ $(function () {
 
     $('#contact_access_select').change(function () {
         $('.contact_access_input').val(this.value);
+    });
+
+    /**
+     * Ajout du token du captcha dans le formulaire
+     */
+    var isContactDetailFormSubimitted = false;
+    $('#contactDetailForm').submit(function (event) {
+        if (!isContactDetailFormSubimitted) {
+            isContactDetailFormSubimitted = true;
+            event.preventDefault();
+            const siteKey = $('#contactDetailFormSubmitButton').data('key');
+            grecaptcha.ready(function () {
+                grecaptcha.execute(siteKey, {action: 'homepage'}).then(function (token) {
+                    $('#contactDetailForm').prepend('<input type="hidden" name="g-recaptcha-response" value="' + token + '">')
+                    $('#contactDetailForm').submit();
+                });
+            });
+        }
     })
+
 });
 
 
+/*******************************************
+ * Functions
+ ******************************************/
 
-
+/**
+ * Désactive les buttons d'un produit sur la page catalog en fonction de la quantité et du productId
+ * si la quantité est égale à 0, alors on ne peut pas "Add One" ou "Add to quote"
+ * @param quantity
+ */
+function disableButtonsFromQuantity(quantity, productId) {
+    if (quantity < 1) {
+        $('#addProductToQuoteButton_' + productId).prop('disabled', true);
+        $('#removeOneToCartButton' + productId).prop('disabled', true);
+    } else {
+        $('#addProductToQuoteButton_' + productId).prop('disabled', false);
+        $('#removeOneToCartButton' + productId).prop('disabled', false);
+    }
+}
 

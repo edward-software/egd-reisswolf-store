@@ -45,7 +45,8 @@
     "symfony/symfony": "3.4.*",
     "symfony/translation": "^4.1",
     "twig/extensions": "^1.5",
-    "twig/twig": "^1.0||^2.0"
+    "twig/twig": "^1.0||^2.0",
+    "ext-curl": "*"
   },
   "require-dev": {
     "doctrine/doctrine-fixtures-bundle": "^3.0",

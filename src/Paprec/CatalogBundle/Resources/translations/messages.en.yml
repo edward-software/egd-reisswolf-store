@@ -73,6 +73,7 @@ Catalog:
     CapacityUnit: Capacity unit
     Position: Position
     RentalUnitPrice: Rental unit price
+    FolderNumber: Number of folders
     TransportUnitPrice: Transport unit price
     TreatmentUnitPrice: Treatment unit price
     TraceabilityUnitPrice: Traceability unit price
@@ -89,6 +90,8 @@ Catalog:
       DE: German
     Name: Name
     Short-description: Short description
+    Lock: Lock
+    Version: Version
     Information: Information
     Remove: Remove
 

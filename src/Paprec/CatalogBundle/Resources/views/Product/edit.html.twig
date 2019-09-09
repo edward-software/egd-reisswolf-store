@@ -38,13 +38,19 @@
                             </div>
                             <div class="card-body">
                                 <div class="form-group">
+                                    <div class="form-label">{{ 'Catalog.ProductLabel.Language.Language'|trans }}</div>
+                                    <div class="form-content">
+                                        {{ form_widget(form2.language, {'attr': {'class': 'form-control product-label-language-input'}}) }}
+                                        {{ form_errors(form2.language) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <div class="form-label">{{ 'Catalog.ProductLabel.Name'|trans }}</div>
                                     <div class="form-content">
                                         {{ form_widget(form2.name, {'attr': {'class': 'form-control'}}) }}
                                         {{ form_errors(form2.name) }}
                                     </div>
                                 </div>
-
                                 <div class="form-group">
                                     <div class="form-label">{{ 'Catalog.ProductLabel.Short-description'|trans }}</div>
                                     <div class="form-content">
@@ -52,12 +58,18 @@
                                         {{ form_errors(form2.shortDescription) }}
                                     </div>
                                 </div>
-
                                 <div class="form-group">
-                                    <div class="form-label">{{ 'Catalog.ProductLabel.Language.Language'|trans }}</div>
+                                    <div class="form-label">{{ 'Catalog.ProductLabel.Lock'|trans }}</div>
                                     <div class="form-content">
-                                        {{ form_widget(form2.language, {'attr': {'class': 'form-control product-label-language-input'}}) }}
-                                        {{ form_errors(form2.language) }}
+                                        {{ form_widget(form2.lockType, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_errors(form2.lockType) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-label">{{ 'Catalog.ProductLabel.Version'|trans }}</div>
+                                    <div class="form-content">
+                                        {{ form_widget(form2.version, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_errors(form2.version) }}
                                     </div>
                                 </div>
                             </div>
@@ -70,7 +82,13 @@
                                 <h5 class="card-title">{{ 'Catalog.Product.Details'|trans }}</h5>
                             </div>
                             <div class="card-body">
-
+                                <div class="form-group">
+                                    <div class="form-label">{{ 'Catalog.Product.FolderNumber'|trans }}</div>
+                                    <div class="form-content">
+                                        {{ form_widget(form1.folderNumber, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_errors(form1.folderNumber) }}
+                                    </div>
+                                </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <div class="form-label">{{ 'Catalog.Product.Capacity'|trans }}</div>
@@ -140,13 +158,6 @@
                                         {% endfor %}
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <div class="form-label">{{ 'Catalog.Product.AvailablePostalCodes'|trans }}</div>
-                                    <div class="form-content">
-                                        {{ form_widget(form1.availablePostalCodes, {'attr': {'class': 'form-control'}}) }}
-                                        {{ form_errors(form1.availablePostalCodes) }}
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -189,7 +200,7 @@
                     showCancelButton: true,
                     confirmButtonText: "{{ 'General.Yes'|trans }}",
                     cancelButtonText: "{{ 'General.No'|trans }}"
-                }).then(function(result) {
+                }).then(function (result) {
                     if (result.value) {
                         $(location).attr('href', url);
                     }

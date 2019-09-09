@@ -22,6 +22,7 @@ class ProductType extends AbstractType
 
             ->add('capacity')
             ->add('capacityUnit')
+            ->add('folderNumber')
             ->add('dimensions', TextareaType::class)
             ->add('isEnabled', ChoiceType::class, array(
                 "choices" => array(
@@ -30,7 +31,6 @@ class ProductType extends AbstractType
                 ),
                 "expanded" => true,
             ))
-            ->add('availablePostalCodes')
             ->add('rentalUnitPrice')
             ->add('transportUnitPrice')
             ->add('treatmentUnitPrice')

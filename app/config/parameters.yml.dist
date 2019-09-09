@@ -23,5 +23,7 @@ parameters:
     reisswolf_public_site_url: 'http://dev.easyrecyclage-suisse.com'
     reisswolf_public_technical_service: 'contact@reisswolf.ch'
     reisswolf_salesman_multisite_email: 'digital@eggers-digital.com'
+    recaptcha_site_key: 6LeLarcUAAAAAP0bX_qrqmJj2UAjmObQVE_BlRNn
+    recaptcha_secret_key: 6LeLarcUAAAAAMIwN-lUrym-Xiy-PvCi6V98jpHz
 
 

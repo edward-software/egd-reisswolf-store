@@ -70,6 +70,15 @@ class Product
     private $dimensions;
 
     /**
+     * @var string
+     * Le nombre de documents accepté
+     * @ORM\Column(name="folder_number", type="string", length=255)
+     * @Assert\NotBlank()
+     */
+    private $folderNumber;
+
+
+    /**
      * @var boolean
      *
      * @ORM\Column(name="isEnabled", type="boolean")
@@ -77,16 +86,6 @@ class Product
      */
     private $isEnabled;
 
-    /**
-     * @var text
-     * @ORM\Column(name="availablePostalCodeIds", type="text", nullable=true)
-     * @Assert\Regex(
-     *     pattern="/^(\d{2}(\*|(?:\d{3}))(,\s*)?)+$/",
-     *     match=true,
-     *     message="Les codes postaux doivent être des nombres séparés par des virgules. (ex: 75*, 92150, 36*)"
-     * )
-     */
-    private $availablePostalCodes;
 
     /**
      * @var int
@@ -674,4 +673,28 @@ class Product
         return $this->position;
     }
 
+
+    /**
+     * Set folderNumber.
+     *
+     * @param string $folderNumber
+     *
+     * @return Product
+     */
+    public function setFolderNumber($folderNumber)
+    {
+        $this->folderNumber = $folderNumber;
+
+        return $this;
+    }
+
+    /**
+     * Get folderNumber.
+     *
+     * @return string
+     */
+    public function getFolderNumber()
+    {
+        return $this->folderNumber;
+    }
 }

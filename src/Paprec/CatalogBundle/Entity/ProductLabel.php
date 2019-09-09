@@ -8,9 +8,6 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
-
-
-
 /**
  * Product
  *
@@ -70,6 +67,22 @@ class ProductLabel
      * @Assert\NotBlank()
      */
     private $shortDescription;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="product_version", type="string", length=255, nullable=true)
+     * @Assert\NotBlank()
+     */
+    private $version;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="lock_type", type="string", length=255, nullable=true)
+     * @Assert\NotBlank()
+     */
+    private $lockType;
 
     /**
      * @var string
@@ -345,5 +358,77 @@ class ProductLabel
     public function getProduct()
     {
         return $this->product;
+    }
+
+    /**
+     * Set version.
+     *
+     * @param string $version
+     *
+     * @return ProductLabel
+     */
+    public function setVersion($version)
+    {
+        $this->version = $version;
+
+        return $this;
+    }
+
+    /**
+     * Get version.
+     *
+     * @return string
+     */
+    public function getVersion()
+    {
+        return $this->version;
+    }
+
+    /**
+     * Set lock.
+     *
+     * @param string $lock
+     *
+     * @return ProductLabel
+     */
+    public function setLock($lock)
+    {
+        $this->lock = $lock;
+
+        return $this;
+    }
+
+    /**
+     * Get lock.
+     *
+     * @return string
+     */
+    public function getLock()
+    {
+        return $this->lock;
+    }
+
+    /**
+     * Set lockType.
+     *
+     * @param string|null $lockType
+     *
+     * @return ProductLabel
+     */
+    public function setLockType($lockType = null)
+    {
+        $this->lockType = $lockType;
+
+        return $this;
+    }
+
+    /**
+     * Get lockType.
+     *
+     * @return string|null
+     */
+    public function getLockType()
+    {
+        return $this->lockType;
     }
 }
