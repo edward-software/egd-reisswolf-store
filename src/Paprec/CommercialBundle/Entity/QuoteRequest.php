@@ -3,6 +3,7 @@
 namespace Paprec\CommercialBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -10,6 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="quoteRequests")
  * @ORM\Entity(repositoryClass="Paprec\CommercialBundle\Repository\QuoteRequestRepository")
+ * @UniqueEntity("number")
  */
 class QuoteRequest
 {
@@ -69,6 +71,12 @@ class QuoteRequest
      */
     private $locale;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="number", type="string", length=255, nullable=true)
+     */
+    private $number;
 
     /**
      * @var string
@@ -170,20 +178,6 @@ class QuoteRequest
      */
     private $address;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="postalCode", type="string", length=255, nullable=true)
-     * @Assert\NotBlank(groups={"public_multisite"})
-     * @Assert\Regex(
-     *     pattern="/^\d{2}(\*|(?:\d{2}))$/",
-     *     match=true,
-     *     message="Le codes postal doivent être un nombre de 4 caractères. (ex: 1530)",
-     *     groups={"public_multisite"}
-     * )
-     */
-    private $postalCode;
-
 
     /**
      * @var string
@@ -201,8 +195,6 @@ class QuoteRequest
      * @ORM\Column(name="comment", type="text", nullable=true)
      */
     private $comment;
-
-
 
 
     /**
@@ -273,6 +265,12 @@ class QuoteRequest
      * @ORM\ManyToOne(targetEntity="Paprec\UserBundle\Entity\User", inversedBy="quoteRequests")
      */
     private $userInCharge;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Paprec\CatalogBundle\Entity\PostalCode", inversedBy="quoteRequests")
+     */
+    private $postalCode;
+
 
     /**
      * @ORM\OneToMany(targetEntity="Paprec\CommercialBundle\Entity\QuoteRequestLine", mappedBy="quoteRequest")
@@ -584,30 +582,6 @@ class QuoteRequest
     public function getAddress()
     {
         return $this->address;
-    }
-
-    /**
-     * Set postalCode.
-     *
-     * @param string $postalCode
-     *
-     * @return QuoteRequest
-     */
-    public function setPostalCode($postalCode)
-    {
-        $this->postalCode = $postalCode;
-
-        return $this;
-    }
-
-    /**
-     * Get postalCode.
-     *
-     * @return string
-     */
-    public function getPostalCode()
-    {
-        return $this->postalCode;
     }
 
     /**
@@ -1028,5 +1002,53 @@ class QuoteRequest
     public function getAccess()
     {
         return $this->access;
+    }
+
+    /**
+     * Set postalCode.
+     *
+     * @param \Paprec\CatalogBundle\Entity\PostalCode|null $postalCode
+     *
+     * @return QuoteRequest
+     */
+    public function setPostalCode(\Paprec\CatalogBundle\Entity\PostalCode $postalCode = null)
+    {
+        $this->postalCode = $postalCode;
+
+        return $this;
+    }
+
+    /**
+     * Get postalCode.
+     *
+     * @return \Paprec\CatalogBundle\Entity\PostalCode|null
+     */
+    public function getPostalCode()
+    {
+        return $this->postalCode;
+    }
+
+    /**
+     * Set number.
+     *
+     * @param string|null $number
+     *
+     * @return QuoteRequest
+     */
+    public function setNumber($number = null)
+    {
+        $this->number = $number;
+
+        return $this;
+    }
+
+    /**
+     * Get number.
+     *
+     * @return string|null
+     */
+    public function getNumber()
+    {
+        return $this->number;
     }
 }

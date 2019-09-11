@@ -2,18 +2,29 @@
 
 namespace Paprec\CommercialBundle\Form;
 
-use Paprec\CommercialBundle\Entity\QuoteRequest;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Paprec\CommercialBundle\Form\DataTransformer\PostalCodeToStringTransformer;
 
 class QuoteRequestPublicType extends AbstractType
 {
+
+    private $transformer;
+
+    /**
+     * QuoteRequestPublicType constructor.
+     * @param $transformer
+     */
+    public function __construct(PostalCodeToStringTransformer $transformer)
+    {
+        $this->transformer = $transformer;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -55,9 +66,14 @@ class QuoteRequestPublicType extends AbstractType
                 "expanded" => true,
             ))
             ->add('address', TextType::class)
-            ->add('postalCode', TextType::class)
+            ->add('postalCode', TextType::class, array(
+                'invalid_message' => 'That is not a valid postal code. Choose from the results of the drop-down list'
+            ))
             ->add('city', TextType::class)
             ->add('comment', TextareaType::class);
+
+        $builder->get('postalCode')
+            ->addModelTransformer($this->transformer);
     }
 
     /**

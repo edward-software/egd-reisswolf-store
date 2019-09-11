@@ -174,11 +174,8 @@ class PostalCodeController extends Controller
 
         $postalCode = new PostalCode();
 
-        $divisions = array();
 
-        $form = $this->createForm(PostalCodeType::class, $postalCode, array(
-            'division' => $divisions
-        ));
+        $form = $this->createForm(PostalCodeType::class, $postalCode);
 
         $form->handleRequest($request);
 
@@ -294,5 +291,31 @@ class PostalCodeController extends Controller
         return $this->redirectToRoute('paprec_catalog_postalCode_index');
     }
 
+    /**
+     * @Route("/postalCode/autocomplete", name="paprec_catalog_postalCode_autocomplete")
+     */
+    public function autocompleteAction(Request $request)
+    {
+        $codes = array();
+        $term = trim(strip_tags($request->get('term')));
+
+        $em = $this->getDoctrine()->getManager();
+
+        $entities = $em->getRepository(PostalCode::class)->createQueryBuilder('pC')
+            ->where('pC.code LIKE :code')
+            ->setParameter('code', '%'.$term.'%')
+            ->getQuery()
+            ->getResult();
+
+        foreach ($entities as $entity)
+        {
+            $codes[] = $entity->getCode();
+        }
+
+        $response = new JsonResponse();
+        $response->setData($codes);
+
+        return $response;
+    }
 
 }

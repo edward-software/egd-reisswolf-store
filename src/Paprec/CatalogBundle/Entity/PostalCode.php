@@ -146,6 +146,11 @@ class PostalCode
     private $region;
 
     /**
+     * @ORM\OneToMany(targetEntity="Paprec\CommercialBundle\Entity\QuoteRequest", mappedBy="userInCharge")
+     */
+    private $quoteRequests;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -473,5 +478,41 @@ class PostalCode
     public function getZone()
     {
         return $this->zone;
+    }
+
+    /**
+     * Add quoteRequest.
+     *
+     * @param \Paprec\CommercialBundle\Entity\QuoteRequest $quoteRequest
+     *
+     * @return PostalCode
+     */
+    public function addQuoteRequest(\Paprec\CommercialBundle\Entity\QuoteRequest $quoteRequest)
+    {
+        $this->quoteRequests[] = $quoteRequest;
+
+        return $this;
+    }
+
+    /**
+     * Remove quoteRequest.
+     *
+     * @param \Paprec\CommercialBundle\Entity\QuoteRequest $quoteRequest
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeQuoteRequest(\Paprec\CommercialBundle\Entity\QuoteRequest $quoteRequest)
+    {
+        return $this->quoteRequests->removeElement($quoteRequest);
+    }
+
+    /**
+     * Get quoteRequests.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getQuoteRequests()
+    {
+        return $this->quoteRequests;
     }
 }

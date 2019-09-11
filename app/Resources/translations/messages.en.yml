@@ -7,20 +7,22 @@ General:
   Close:                    Close
   View:                     View
   Yes:                      Yes
+  1:                        Yes
   No:                       No
+  0:                        No
   Name:                     Name
   SystemError:              System Error !
   Users:                    Users
   Datatable:
-    Records-per-page :                          _MENU_ records per page
-    Nothing-found :                             Nothing found - sorry
-  #        Showing-page :                              Showing page _PAGE_ of _PAGES_
-    Showing-page :                              Showing _START_ to _END_ of _TOTAL_ entries
-    No-records-available :                      No records available
-    Search :                                    Search
-    Loading :                                   Loading...
-    Previous :                                  Previous
-    Next :                                      Next
+    Records-per-page:                          _MENU_ records per page
+    Nothing-found:                             Nothing found - sorry
+    #        Showing-page :                              Showing page _PAGE_ of _PAGES_
+    Showing-page:                              Showing _START_ to _END_ of _TOTAL_ entries
+    No-records-available:                      No records available
+    Search:                                    Search
+    Loading:                                   Loading...
+    Previous:                                  Previous
+    Next:                                      Next
   Presence-error:           Presence error
 
   Menu:

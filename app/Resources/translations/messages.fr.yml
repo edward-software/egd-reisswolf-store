@@ -1,6 +1,4 @@
 General:
-  0:                        Non
-  1:                        Oui
   All:                      Tous
   List:                     Liste
   Add:                      Ajouter
@@ -9,7 +7,9 @@ General:
   Close:                    Fermer
   View:                     Visualiser
   Yes:                      Oui
+  1:                        Oui
   No:                       Non
+  0:                        Non
   Name:                     Nom
   SystemError:              Erreur système
   Users:                    Utilisateurs

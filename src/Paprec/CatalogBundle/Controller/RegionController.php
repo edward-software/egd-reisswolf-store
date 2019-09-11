@@ -42,6 +42,7 @@ class RegionController extends Controller
 
         $cols['id'] = array('label' => 'id', 'id' => 'r.id', 'method' => array('getId'));
         $cols['name'] = array('label' => 'name', 'id' => 'r.name', 'method' => array('getName'));
+        $cols['email'] = array('label' => 'email', 'id' => 'r.email', 'method' => array('getEmail'));
 
         $queryBuilder = $this->getDoctrine()->getManager()->getRepository(Region::class)->createQueryBuilder('r');
 
@@ -56,7 +57,8 @@ class RegionController extends Controller
                 ))->setParameter(1, substr($search['value'], 1));
             } else {
                 $queryBuilder->andWhere($queryBuilder->expr()->orx(
-                    $queryBuilder->expr()->like('r.name', '?1')
+                    $queryBuilder->expr()->like('r.name', '?1'),
+                    $queryBuilder->expr()->like('r.email', '?1')
                 ))->setParameter(1, '%' . $search['value'] . '%');
             }
         }

@@ -38,6 +38,7 @@
                         <tr>
                             <th>#</th>
                             <th>{{ 'Catalog.Region.Name'|trans }}</th>
+                            <th>{{ 'Catalog.Region.Email'|trans }}</th>
                             <th></th>
                         </tr>
                         </thead>
@@ -115,6 +116,7 @@
                 "columns": [
                     {"data": "id"},
                     {"data": "name"},
+                    {"data": "email"},
                     {"data": "id", "width": "10%", "bSortable": false}
                 ],
                 "rowCallback": function (row, data, displayIndex) {

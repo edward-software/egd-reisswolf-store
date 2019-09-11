@@ -1,11 +1,23 @@
 services:
-#    commercial.example:
-#        class: PaprecCommercialBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+  #    commercial.example:
+  #        class: PaprecCommercialBundle\Example
+  #        arguments: ["@service_id", "plain_value", "%parameter%"]
   paprec_commercial.quote_request_manager:
     class: Paprec\CommercialBundle\Service\QuoteRequestManager
     arguments: ["@doctrine.orm.entity_manager", "@service_container"]
 
+
+  paprec_commercial.postal_code_transformer:
+    class: Paprec\CommercialBundle\Form\DataTransformer\PostalCodeToStringTransformer
+    arguments:
+      ['@doctrine.orm.entity_manager']
+
+  paprec_commercial.quote_request_public_form:
+    class: Paprec\CommercialBundle\Form\QuoteRequestPublicType
+    tags: ['form.type']
+    public: true
+    arguments:
+      ['@paprec_commercial.postal_code_transformer']
 
 parameters:
   paprec_quote_status:

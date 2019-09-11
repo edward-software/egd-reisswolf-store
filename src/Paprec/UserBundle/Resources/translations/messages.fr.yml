@@ -27,7 +27,6 @@ User:
         Send-access:              Envoyer les accès
         Roles:                    Rôle de l'utilisateur
         Postal-codes:              Code postaux
-        Divisions:                Divisions
         Password:                 Mot de passe
         Edit-my-profile:          Modifier mon profil
         Success:

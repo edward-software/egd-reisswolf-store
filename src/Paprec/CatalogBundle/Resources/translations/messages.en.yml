@@ -99,6 +99,7 @@ Catalog:
   Region:
     Regions: Regions
     Name: Name
+    Email: Contact email
     List: Regions list
     Add: Add region
     Export: Export regions

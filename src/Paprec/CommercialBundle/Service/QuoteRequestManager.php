@@ -297,4 +297,11 @@ class QuoteRequestManager
         }
     }
 
+
+    public function generateNumber(QuoteRequest $quoteRequest)
+    {
+        $quoteRequest->setNumber(time());
+        return $quoteRequest;
+    }
+
 }

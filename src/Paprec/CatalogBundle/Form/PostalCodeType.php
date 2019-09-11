@@ -53,6 +53,9 @@ class PostalCodeType extends AbstractType
             ->add('userInCharge', EntityType::class, array(
                 'class' => User::class,
                 'choice_label' => 'username',
+                'placeholder' => '',
+                'empty_data' => null,
+                'required' => false,
                 'multiple' => false,
                 'expanded' => false,
                 'query_builder' => function (UserRepository $ur) {

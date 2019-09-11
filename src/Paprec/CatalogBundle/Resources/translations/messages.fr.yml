@@ -100,6 +100,7 @@ Catalog:
   Region:
     Regions: Régions
     Name: Nom
+    Email: Email contact
     List: Liste des régions
     Add: Ajouter une région
     Export: Exporter les régions

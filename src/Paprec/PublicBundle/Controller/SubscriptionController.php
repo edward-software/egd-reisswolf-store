@@ -102,10 +102,11 @@ class SubscriptionController extends Controller
         if ($form->isSubmitted() && $form->isValid() && $this->captchaVerify($request->get('g-recaptcha-response'))) {
             $quoteRequest = $form->getData();
             $quoteRequest->setQuoteStatus('CREATED');
-
             $quoteRequest->setFrequency($cart->getFrequency());
             $quoteRequest->setFrequencyTimes($cart->getFrequencyTimes());
             $quoteRequest->setFrequencyInterval($cart->getFrequencyInterval());
+
+            $quoteRequest = $quoteRequestManager->generateNumber($quoteRequest);
 
             if ($quoteRequest->getIsMultisite()) {
                 // TODO : Ajouter un commercial par défaut si pas de code postal saisi car Multisite

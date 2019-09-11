@@ -154,6 +154,11 @@ $(function () {
                 });
             });
         }
+    });
+
+    $('#paprec_catalogbundle_quote_request_public_postalCode').autocomplete({
+        source: '' + $('#paprec_catalogbundle_quote_request_public_postalCode').data('url'),
+        minLength: 2
     })
 
 });
@@ -167,6 +172,7 @@ $(function () {
  * Désactive les buttons d'un produit sur la page catalog en fonction de la quantité et du productId
  * si la quantité est égale à 0, alors on ne peut pas "Add One" ou "Add to quote"
  * @param quantity
+ * @param productId
  */
 function disableButtonsFromQuantity(quantity, productId) {
     if (quantity < 1) {

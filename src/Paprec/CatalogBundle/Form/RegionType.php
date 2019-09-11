@@ -19,7 +19,8 @@ class RegionType extends AbstractType
         $builder
             ->add('name', TextType::class, array(
                 "required" => true
-            ));
+            ))
+            ->add('email', TextType::class);
     }
 
     /**
@@ -28,8 +29,7 @@ class RegionType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Paprec\CatalogBundle\Entity\Region',
-            'division' => null
+            'data_class' => 'Paprec\CatalogBundle\Entity\Region'
         ));
     }
 }

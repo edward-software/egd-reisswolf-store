@@ -135,7 +135,7 @@
                                 <div class="form-group row">
                                     <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.IsMultisite'|trans }}</label>
                                     <label class="col-form-label">
-                                        {{ ('General.' ~ quoteRequest.isMultisite)|trans }}
+                                        {{ ('General.' ~ (quoteRequest.isMultisite ? 'Yes' : 'No'))|trans }}
                                     </label>
                                 </div>
                                 <div class="form-group row">
@@ -147,7 +147,7 @@
                                 <div class="form-group row">
                                     <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.PostalCode'|trans }}</label>
                                     <label class="col-form-label">
-                                        {{ quoteRequest.postalCode }}
+                                        {{ quoteRequest.postalCode.code }}
                                     </label>
                                 </div>
                                 <div class="form-group row">

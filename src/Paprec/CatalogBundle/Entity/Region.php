@@ -3,6 +3,7 @@
 namespace Paprec\CatalogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Region
@@ -67,6 +68,16 @@ class Region
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
+
+    /**
+     * @var string
+     * @ORM\Column(name="email", type="string", length=255, nullable=true)
+     * @Assert\NotBlank()
+     * @Assert\Email(
+     *      message = "L'email '{{ value }}' n'a pas un format valide"
+     * )
+     */
+    private $email;
 
     /**
      * #################################
@@ -281,5 +292,29 @@ class Region
     public function getDeleted()
     {
         return $this->deleted;
+    }
+
+    /**
+     * Set email.
+     *
+     * @param string|null $email
+     *
+     * @return Region
+     */
+    public function setEmail($email = null)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email.
+     *
+     * @return string|null
+     */
+    public function getEmail()
+    {
+        return $this->email;
     }
 }
