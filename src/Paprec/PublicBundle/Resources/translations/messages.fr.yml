@@ -14,6 +14,7 @@ Public:
     OnDemand: à la demande
     Regular: régulière
     Week: semaine
+    Times: fois par
     Month: mois
     Quarter: trimestre
     Year: an

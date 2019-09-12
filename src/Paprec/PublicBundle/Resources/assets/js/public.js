@@ -178,9 +178,11 @@ function disableButtonsFromQuantity(quantity, productId) {
     if (quantity < 1) {
         $('#addProductToQuoteButton_' + productId).prop('disabled', true);
         $('#removeOneToCartButton' + productId).prop('disabled', true);
+        $('#removeOneToCartButton' + productId).addClass('round-btn--disable');
     } else {
         $('#addProductToQuoteButton_' + productId).prop('disabled', false);
         $('#removeOneToCartButton' + productId).prop('disabled', false);
+        $('#removeOneToCartButton' + productId).removeClass('round-btn--disable');
     }
 }
 
