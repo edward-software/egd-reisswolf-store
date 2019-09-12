@@ -385,30 +385,6 @@ class ProductLabel
     }
 
     /**
-     * Set lock.
-     *
-     * @param string $lock
-     *
-     * @return ProductLabel
-     */
-    public function setLock($lock)
-    {
-        $this->lock = $lock;
-
-        return $this;
-    }
-
-    /**
-     * Get lock.
-     *
-     * @return string
-     */
-    public function getLock()
-    {
-        return $this->lock;
-    }
-
-    /**
      * Set lockType.
      *
      * @param string|null $lockType

@@ -1,0 +1,39 @@
+{% extends "@PaprecCommercial/Common/PDF/base_pdf.html.twig" %}
+
+
+{% block pdf_content %}
+    <div class="cover">
+        <div class="pdf-cover-title">
+            <h1>Paprec group</h1>
+            <h2>Offre commerciale</h2>
+        </div>
+
+        <div class="pdf-cover-image">
+            <div class="blue-bg"></div>
+            <div>
+                {% block cover_image %}{% endblock %}
+            </div>
+            <div class="pdf-cover-image-infos">
+                <p style="margin-bottom: 25px;font-size: 32px;">{% block businessName %} {% endblock %}</p>
+                <p style="text-transform: uppercase; font-size: 26px; font-weight: 300">Estimation tarifaire de la
+                    prestation demandée</p>
+                <p style="font-size: 22px; letter-spacing: 2px; font-weight: 300">Affaire suivie par votre agence
+                    locale</p>
+                <p style="font-weight: normal; letter-spacing: 3px; font-size: 17px">
+                    L’agence en charge de votre demande vous<br>
+                    recontactera sous 48h par email ou téléphone<br>
+                    afin de valider
+                    un
+                    devis.</p>
+            </div>
+        </div>
+
+        <div class="pdf-cover-footer">
+            <img src="{{ absolute_url(asset('build/static/logo.png')) }}" alt="Logo easy recyclage"
+                 style="margin-right: 15px;">
+            <img src="{{ absolute_url(asset('build/static/logo-group.png')) }}" alt="Logo easy recyclage">
+        </div>
+    </div>
+
+
+{% endblock %}

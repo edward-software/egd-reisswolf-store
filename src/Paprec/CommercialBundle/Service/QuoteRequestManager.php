@@ -8,6 +8,9 @@ use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\ORM\ORMException;
 use DoctrineExtensions\Query\Mysql\Date;
 use Exception;
+use iio\libmergepdf\Merger;
+use Knp\Snappy\Pdf;
+use Paprec\CommercialBundle\Entity\ProductDIQuote;
 use Paprec\CommercialBundle\Entity\QuoteRequest;
 use Paprec\CommercialBundle\Entity\QuoteRequestLine;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -297,11 +300,168 @@ class QuoteRequestManager
         }
     }
 
-
+    /**
+     * Génération du numéro de l'offre
+     *
+     * @param QuoteRequest $quoteRequest
+     * @return QuoteRequest
+     */
     public function generateNumber(QuoteRequest $quoteRequest)
     {
         $quoteRequest->setNumber(time());
         return $quoteRequest;
+    }
+
+
+    /**
+     * Envoi de l'offre contrat généré au client
+     *
+     * @param QuoteRequest $quoteRequest
+     * @return bool
+     * @throws Exception
+     */
+    public function sendGeneratedQuoteEmail(QuoteRequest $quoteRequest, $locale)
+    {
+        try {
+            $from = $this->container->getParameter('paprec_email_sender');
+
+
+            $rcptTo = $quoteRequest->getEmail();
+
+            if ($rcptTo == null || $rcptTo == '') {
+                return false;
+            }
+
+            $pdfFilename = date('Y-m-d') . '-Reisswolf-Devis-' . $quoteRequest->getNumber() . '.pdf';
+
+            $pdfFile = $this->generatePDF($quoteRequest);
+
+            if (!$pdfFile) {
+                return false;
+            }
+
+            $attachment = \Swift_Attachment::newInstance(file_get_contents($pdfFile), $pdfFilename, 'application/pdf');
+
+
+            $message = \Swift_Message::newInstance()
+                ->setSubject('Reisswolf : Votre devis de prestation ponctuelle pour déchets non dangereux')
+                ->setFrom($from)
+                ->setTo($rcptTo)
+                ->setBody(
+                    $this->container->get('templating')->render(
+                        '@PaprecCommercial/QuoteRequest/emails/generatedQuoteEmail.html.twig',
+                        array(
+                            'quoteRequest' => $quoteRequest
+                        )
+                    ),
+                    'text/html'
+                )
+                ->attach($attachment);
+
+            if ($this->container->get('mailer')->send($message)) {
+                if (file_exists($pdfFile)) {
+                    unlink($pdfFile);
+                }
+                return true;
+            }
+            return false;
+
+        } catch (ORMException $e) {
+            throw new Exception('unableToSendGeneratedQuote', 500);
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage(), $e->getCode());
+        }
+    }
+
+    /**
+     * Génère le devis au format PDF et retoune le nom du fichier généré (placé dans /data/tmp)
+     *
+     * @param QuoteRequest $quoteRequest
+     * @return bool|string
+     * @throws Exception
+     */
+    public function generatePDF(QuoteRequest $quoteRequest)
+    {
+        try {
+            $pdfTmpFolder = $this->container->getParameter('paprec_commercial.data_tmp_directory');
+            $noticeFileDirectory = $this->container->getParameter('paprec_commercial.quote_pdf_notice_directory');
+            $noticeFiles = $this->container->getParameter('paprec_commercial.quote_pdf_notices');
+
+            if (!is_dir($pdfTmpFolder)) {
+                mkdir($pdfTmpFolder, 0755, true);
+            }
+
+            $filename = $pdfTmpFolder . '/' . md5(uniqid()) . '.pdf';
+
+            $today = new \DateTime();
+
+            $snappy = new Pdf($this->container->getParameter('wkhtmltopdf_path'));
+            $snappy->setOption('javascript-delay', 3000);
+            $snappy->setOption('dpi', 100);
+
+
+            /**
+             * On génère les PDF
+             */
+            $snappy->generateFromHtml(
+                array(
+                    $this->container->get('templating')->render(
+                        '@PaprecCommercial/QuoteRequest/PDF/printQuoteOffer.html.twig',
+                        array(
+                            'quoteRequest' => $quoteRequest,
+                            'date' => $today
+                        )
+                    ),
+                    $this->container->get('templating')->render(
+                        '@PaprecCommercial/ProductDIQuote/PDF/printQuoteLetter.html.twig',
+                        array(
+                            'quoteRequest' => $quoteRequest,
+                            'date' => $today
+                        )
+                    ),
+                    $this->container->get('templating')->render(
+                        '@PaprecCommercial/ProductDIQuote/PDF/printQuoteProducts.html.twig',
+                        array(
+                            'quoteRequest' => $quoteRequest,
+                        )
+                    )
+                ),
+                $filename
+            );
+
+
+            /**
+             * Concaténation des notices
+             */
+            $pdfArray = array();
+            $pdfArray[] = $filename;
+
+            if (is_array($noticeFiles) && count($noticeFiles)) {
+                foreach ($noticeFiles as $noticeFile) {
+                    $noticeFilename = $noticeFileDirectory . '/' . $noticeFile;
+                    if (file_exists($noticeFilename)) {
+                        $pdfArray[] = $noticeFilename;
+                    }
+                }
+            }
+
+            if (count($pdfArray)) {
+                $merger = new Merger();
+                $merger->addIterator($pdfArray);
+                file_put_contents($filename, $merger->merge());
+            }
+
+            if (!file_exists($filename)) {
+                return false;
+            }
+
+            return $filename;
+
+        } catch (ORMException $e) {
+            throw new Exception('unableToGenerateProductQuote', 500);
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage(), $e->getCode());
+        }
     }
 
 }

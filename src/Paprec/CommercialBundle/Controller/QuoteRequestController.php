@@ -509,7 +509,7 @@ class QuoteRequestController extends Controller
         $quoteRequestManager->isDeleted($quoteRequest, true);
 
 
-        $sendQuote = $quoteRequestManager->sendConfirmRequestEmail($quoteRequest, $quoteRequest->getLocale());
+        $sendQuote = $quoteRequestManager->sendGeneratedQuoteEmail($quoteRequest, $quoteRequest->getLocale());
         if ($sendQuote) {
             $this->get('session')->getFlashBag()->add('success', 'generatedQuoteSent');
         } else {

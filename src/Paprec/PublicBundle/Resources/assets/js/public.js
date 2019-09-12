@@ -4,12 +4,12 @@ $(function () {
      * CATALOG
      ***************************************/
 
-    $('.addProductToQuoteButton').on('click', function () {
+    $('.quantityProductSelect').change(function () {
 
-        $('.addProductToQuoteButton').prop("disabled", true); // On désactive tous les boutons
+        $('button').prop("disabled", true); // On désactive tous les select
         const productId = $(this).data('product');
         const url = $(this).data('url');
-        const qtty = $('#quantityProductSelect_' + productId).val();
+        const qtty = $(this).val();
 
         $.ajax({
             url: url,
@@ -27,7 +27,7 @@ $(function () {
                 disableButtonsFromQuantity($('#quantityProductSelect_' + productId).val(), productId);
             },
             complete: function () {
-                $('.addProductToQuoteButton').prop("disabled", false);
+                $('button').prop("disabled", false);
             }
         });
     });

@@ -35,6 +35,12 @@ class ProductLabelTranslationExtension extends AbstractExtension
                 case 'shortDescription':
                     $returnLabel = $productManager->getProductLabelByProductAndLocale($product, $lang)->getShortDescription();
                     break;
+                case 'version':
+                    $returnLabel = $productManager->getProductLabelByProductAndLocale($product, $lang)->getVersion();
+                    break;
+                case 'lockType':
+                    $returnLabel = $productManager->getProductLabelByProductAndLocale($product, $lang)->getLockType();
+                    break;
                 default:
                     $returnLabel = $productManager->getProductLabelByProductAndLocale($product, $lang)->getName();
             }
