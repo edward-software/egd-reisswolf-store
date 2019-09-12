@@ -36,6 +36,19 @@
   .navbar-nav {
     margin: auto;
   }
+  .product__title {
+    margin-top: 15px;
+  }
+  .product__image {
+    margin-top: 10px;
+  }
+  .devis__frequency-container button {
+    align-self: center !important;
+    margin-top: 50px !important;
+  }
+  .product__quantity {
+    margin-bottom: 20px;
+  }
 }
 
 @media (max-width: 990px) {
@@ -49,15 +62,6 @@
 @media (max-width: 768px) {
 
   /* Page product */
-  .product-container {
-    margin-right: -15px;
-    margin-left: -15px;
-
-    .col-md-6 {
-      padding-right: 15px;
-      padding-left: 15px;
-    }
-  }
   form {
     .form-container {
       margin-right: -15px;
@@ -126,6 +130,10 @@
 @media (max-width: 425px) {
   h2 {
     font-size: 21px;
+  }
+  .product {
+    padding-right: initial;
+    padding-left: initial;
   }
 }
 
