@@ -19,6 +19,13 @@ services:
     arguments:
       ['@paprec_commercial.postal_code_transformer']
 
+  paprec_commercial.quote_request_form:
+    class: Paprec\CommercialBundle\Form\QuoteRequestType
+    tags: ['form.type']
+    public: true
+    arguments:
+      ['@paprec_commercial.postal_code_transformer']
+
 parameters:
   paprec_quote_status:
     - CREATED

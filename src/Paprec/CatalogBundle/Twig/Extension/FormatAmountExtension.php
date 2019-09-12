@@ -29,7 +29,9 @@ class FormatAmountExtension extends \Twig_Extension
         }
 
         $formatManager = $this->container->get('paprec_catalog.number_manager');
-
+        if ($type == 'FORMAT15') {
+            return $formatManager->formatAmount15($amount, $locale);
+        }
 
         return $formatManager->formatAmount($amount, $currency, $locale);
 

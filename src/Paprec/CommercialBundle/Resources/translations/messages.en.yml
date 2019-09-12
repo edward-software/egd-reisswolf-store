@@ -49,6 +49,7 @@ Commercial:
     Success:
       generatedQuoteSent:       Le devis a bien été généré et envoyé au client.
     Locale: Locale
+    Number: Number
 
   QuoteStatusList:
     CREATED: Created

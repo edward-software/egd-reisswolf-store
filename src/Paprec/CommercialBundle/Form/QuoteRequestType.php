@@ -2,6 +2,7 @@
 
 namespace Paprec\CommercialBundle\Form;
 
+use Paprec\CommercialBundle\Form\DataTransformer\PostalCodeToStringTransformer;
 use Paprec\UserBundle\Entity\User;
 use Paprec\UserBundle\Repository\UserRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -14,6 +15,18 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class QuoteRequestType extends AbstractType
 {
+
+    private $transformer;
+
+    /**
+     * QuoteRequestPublicType constructor.
+     * @param $transformer
+     */
+    public function __construct(PostalCodeToStringTransformer $transformer)
+    {
+        $this->transformer = $transformer;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -56,7 +69,9 @@ class QuoteRequestType extends AbstractType
                 "expanded" => false,
             ))
             ->add('address', TextType::class)
-            ->add('postalCode', TextType::class)
+            ->add('postalCode', TextType::class, array(
+                'invalid_message' => 'That is not a valid postal code. Choose from the results of the drop-down list'
+            ))
             ->add('city', TextType::class)
             ->add('comment', TextareaType::class)
             ->add('quoteStatus', ChoiceType::class, array(
@@ -83,6 +98,8 @@ class QuoteRequestType extends AbstractType
                         ->where('u.deleted IS NULL');
                 }
             ));
+        $builder->get('postalCode')
+            ->addModelTransformer($this->transformer);
     }
 
     /**
@@ -104,7 +121,7 @@ class QuoteRequestType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'paprec_catalogbundle_picture';
+        return 'paprec_catalogbundle_quote_request';
     }
 
 

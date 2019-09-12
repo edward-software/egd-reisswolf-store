@@ -150,10 +150,10 @@ class ProductManager
         $treatmentRate = ($postalCode) ? $postalCode->getTreatmentRate() : 1;
         $traceabilityRate = ($postalCode) ? $postalCode->getTraceabilityRate() : 1;
 
-        return ($numberManager->denormalize($product->getRentalUnitPrice())
-                + $numberManager->denormalize($product->getTransportUnitPrice()) * $numberManager->denormalize($transportRate)
-                + $numberManager->denormalize($product->getTreatmentUnitPrice()) * $numberManager->denormalize($treatmentRate)
-                + $numberManager->denormalize($product->getTraceabilityUnitPrice()) * $numberManager->denormalize($traceabilityRate))
+        return ($numberManager->denormalize15($product->getRentalUnitPrice())
+                + $numberManager->denormalize15($product->getTransportUnitPrice()) * $numberManager->denormalize15($transportRate)
+                + $numberManager->denormalize15($product->getTreatmentUnitPrice()) * $numberManager->denormalize15($treatmentRate)
+                + $numberManager->denormalize15($product->getTraceabilityUnitPrice()) * $numberManager->denormalize15($traceabilityRate))
             * $qtty;
 
 

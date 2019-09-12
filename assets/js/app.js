@@ -18,6 +18,7 @@ import 'datatables.net-rowreorder';
 import 'jquery-sortable';
 import 'jquery-ui';
 import 'jquery-ui/ui/widgets/sortable';
+import 'jquery-ui/ui/widgets/autocomplete';
 import 'jquery-ui/ui/disable-selection';
 import 'eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min';
 

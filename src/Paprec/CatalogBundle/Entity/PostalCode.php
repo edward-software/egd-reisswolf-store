@@ -77,26 +77,16 @@ class PostalCode
     /**
      * @var int
      *
-     * @ORM\Column(name="transportRate", type="integer")
+     * @ORM\Column(name="transportRate", type="bigint")
      * @Assert\NotBlank()
-     * @Assert\Regex(
-     *     pattern="/^\d{1,2}((\.|\,)\d{1,2})?$/",
-     *     match=true,
-     *     message="la valeur doit être un nombre entre 0 et 99,99 (ou 99.99)"
-     * )
      */
     private $transportRate;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="treatmentRate", type="integer")
+     * @ORM\Column(name="treatmentRate", type="bigint")
      * @Assert\NotBlank()
-     * @Assert\Regex(
-     *     pattern="/^\d{1,2}((\.|\,)\d{1,2})?$/",
-     *     match=true,
-     *     message="la valeur doit être un nombre entre 0 et 99,99 (ou 99.99)"
-     * )
      */
     private $treatmentRate;
 
@@ -104,13 +94,8 @@ class PostalCode
     /**
      * @var int
      *
-     * @ORM\Column(name="traceabilityRate", type="integer")
+     * @ORM\Column(name="traceabilityRate", type="bigint")
      * @Assert\NotBlank()
-     * @Assert\Regex(
-     *     pattern="/^\d{1,2}((\.|\,)\d{1,2})?$/",
-     *     match=true,
-     *     message="la valeur doit être un nombre entre 0 et 99,99 (ou 99.99)"
-     * )
      */
     private $traceabilityRate;
 
@@ -118,15 +103,16 @@ class PostalCode
     /**
      * @var text
      * @ORM\Column(name="city", type="string")
+     * @Assert\NotBlank()
      */
     private $city;
 
     /**
      * @var text
      * @ORM\Column(name="zone", type="string")
+     * @Assert\NotBlank()
      */
     private $zone;
-
 
 
     /**
