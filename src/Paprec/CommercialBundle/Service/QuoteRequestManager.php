@@ -268,7 +268,17 @@ class QuoteRequestManager
             $from = $this->container->getParameter('paprec_email_sender');
             $this->get($quoteRequest);
 
-            $rcptTo = ($quoteRequest->getUserInCharge()) ? $quoteRequest->getUserInCharge()->getEmail() : $this->container->getParameter('reisswolf_salesman_multisite_email');
+            /**
+             * Si la quoteRequest est associé à un commercial, on lui envoie le mail d'information de la création d'une nouvelle demande
+             * Sinon,
+             *      si la demande est multisite alors on envoie au mail générique des demandes multisites
+         *          sinon on envoie au mail générique de la région associée au code postal de la demande
+             */
+            $rcptTo = ($quoteRequest->getUserInCharge())
+                ? $quoteRequest->getUserInCharge()->getEmail()
+                : ($quoteRequest->getIsMultisite())
+                    ? $this->container->getParameter('reisswolf_salesman_multisite_email')
+                    : $quoteRequest->getPostalCode()->getRegion()->getEmail();
 
             if ($rcptTo == null || $rcptTo == '') {
                 return false;

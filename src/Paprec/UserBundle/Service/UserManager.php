@@ -82,6 +82,8 @@ class UserManager
     }
 
     /**
+     * Retourne le commercial en charge du code postal passé en param
+     *
      * @param $postalCode
      * @return object|User|null
      * @throws Exception

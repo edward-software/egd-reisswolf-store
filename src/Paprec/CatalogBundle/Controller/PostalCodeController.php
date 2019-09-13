@@ -120,9 +120,9 @@ class PostalCodeController extends Controller
             $phpExcelObject->setActiveSheetIndex(0)
                 ->setCellValue('A' . $i, $postalCode->getId())
                 ->setCellValue('B' . $i, $postalCode->getCode())
-                ->setCellValue('C' . $i, $numberManager->denormalize($postalCode->getTransportRate()))
-                ->setCellValue('D' . $i, $numberManager->denormalize($postalCode->getTreatmentRate()))
-                ->setCellValue('E' . $i, $numberManager->denormalize($postalCode->getTraceabilityRate()))
+                ->setCellValue('C' . $i, $numberManager->denormalize15($postalCode->getTransportRate()))
+                ->setCellValue('D' . $i, $numberManager->denormalize15($postalCode->getTreatmentRate()))
+                ->setCellValue('E' . $i, $numberManager->denormalize15($postalCode->getTraceabilityRate()))
                 ->setCellValue('F' . $i, ($postalCode->getUserInCharge()) ? $postalCode->getUserInCharge()->getUsername() : '')
                 ->setCellValue('G' . $i, ($postalCode->getRegion()) ? $postalCode->getRegion()->getName() : '');
             $i++;
@@ -182,9 +182,9 @@ class PostalCodeController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
 
             $postalCode = $form->getData();
-            $postalCode->setTransportRate($numberManager->normalize($postalCode->getTransportRate()));
-            $postalCode->setTreatmentRate($numberManager->normalize($postalCode->getTreatmentRate()));
-            $postalCode->setTraceabilityRate($numberManager->normalize($postalCode->getTraceabilityRate()));
+            $postalCode->setTransportRate($numberManager->normalize15($postalCode->getTransportRate()));
+            $postalCode->setTreatmentRate($numberManager->normalize15($postalCode->getTreatmentRate()));
+            $postalCode->setTraceabilityRate($numberManager->normalize15($postalCode->getTraceabilityRate()));
 
             $postalCode->setDateCreation(new \DateTime);
             $postalCode->setUserCreation($user);
@@ -217,9 +217,9 @@ class PostalCodeController extends Controller
         $postalCodeManager = $this->get('paprec_catalog.postal_code_manager');
         $postalCodeManager->isDeleted($postalCode, true);
 
-        $postalCode->setTransportRate($numberManager->denormalize($postalCode->getTransportRate()));
-        $postalCode->setTreatmentRate($numberManager->denormalize($postalCode->getTreatmentRate()));
-        $postalCode->setTraceabilityRate($numberManager->denormalize($postalCode->getTraceabilityRate()));
+        $postalCode->setTransportRate($numberManager->denormalize15($postalCode->getTransportRate()));
+        $postalCode->setTreatmentRate($numberManager->denormalize15($postalCode->getTreatmentRate()));
+        $postalCode->setTraceabilityRate($numberManager->denormalize15($postalCode->getTraceabilityRate()));
 
         $form = $this->createForm(PostalCodeType::class, $postalCode);
 
@@ -228,9 +228,9 @@ class PostalCodeController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
 
             $postalCode = $form->getData();
-            $postalCode->setTransportRate($numberManager->normalize($postalCode->getTransportRate()));
-            $postalCode->setTreatmentRate($numberManager->normalize($postalCode->getTreatmentRate()));
-            $postalCode->setTraceabilityRate($numberManager->normalize($postalCode->getTraceabilityRate()));
+            $postalCode->setTransportRate($numberManager->normalize15($postalCode->getTransportRate()));
+            $postalCode->setTreatmentRate($numberManager->normalize15($postalCode->getTreatmentRate()));
+            $postalCode->setTraceabilityRate($numberManager->normalize15($postalCode->getTraceabilityRate()));
 
             $postalCode->setDateUpdate(new \DateTime);
             $postalCode->setUserUpdate($user);

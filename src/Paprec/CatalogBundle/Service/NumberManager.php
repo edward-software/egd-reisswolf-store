@@ -49,6 +49,21 @@ class NumberManager
     }
 
     /**
+     * Format simplement un nombre qui a été normalisé avec normalize15
+     *
+     * @param $amount
+     * @param $locale
+     * @return string
+     */
+    public function formatAmount15($amount, $locale)
+    {
+        $fmt = numfmt_create($locale, \NumberFormatter::DECIMAL);
+        $fmt->setAttribute(\NumberFormatter::FRACTION_DIGITS, 15);
+
+        return numfmt_format($fmt, $this->denormalize15($amount));
+    }
+
+    /**
      * Prend un number en paramètre et retourne sa valeur divisée par 100
      * Pour récupérer les nombres stockés en base et les afficher
      *
@@ -68,6 +83,7 @@ class NumberManager
      * Pour stocker les nombres en base
      *
      * @param $value
+     * @return number
      */
     public function normalize($value)
     {
@@ -78,6 +94,51 @@ class NumberManager
         return round($value * 100);
     }
 
+    /**
+     * Utilisé pour les coefficients qui ont un grand nombre de décimales
+     *
+     * Prend un number en paramètre et retourne sa valeur divisée par 1000000000000000
+     * Pour récupérer les nombres stockés en base et les afficher
+     *
+     * @param $value
+     * @return number
+     */
+    public function denormalize15($value)
+    {
+        if ($value == null || $value == '') {
+            return null;
+        }
+        return $value / 1000000000000000;
+    }
+
+    /**
+     * Utilisé pour les coefficients qui ont un grand nombre de décimales
+     *
+     * Prend un string en paramètre, le transforme en nombre et le multplie par 1000000000000000
+     * Pour stocker les nombres en base
+     *
+     * @param $value
+     * @return number
+     */
+    public function normalize15($value)
+    {
+        if ($value == null || $value == '') {
+            return null;
+        }
+
+        $value = str_replace(',', '.', $value);
+        return round($value * 1000000000000000);
+    }
+
+    /***
+     * Format un identifiant en ajoutant des 0 jusqu'a atteindre la taille voulue
+     *
+     * @param $id
+     * @param $padlength
+     * @param int $padstring
+     * @param int $pad_type
+     * @return string
+     */
     public function formatId($id, $padlength, $padstring = 0, $pad_type = STR_PAD_LEFT)
     {
         return str_pad($id, $padlength, $padstring, $pad_type);
