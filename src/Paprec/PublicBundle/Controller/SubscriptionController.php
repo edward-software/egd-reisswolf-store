@@ -11,6 +11,7 @@ use Paprec\CommercialBundle\Entity\QuoteRequest;
 use Paprec\CommercialBundle\Form\QuoteRequestPublicType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -304,10 +305,27 @@ class SubscriptionController extends Controller
     }
 
     /**
-     * @Route("/{locale}/confirmEmail", name="paprec_public_confirm_confirm_email")
+     * @Route("/{locale}/contract/{quoteId}", name="paprec_public_confirm_confirm_email")
      */
-    public function showConfirmEmail(Request $request, $locale)
+    public function showContract(Request $request, $quoteId, $locale)
     {
-        return $this->render('@PaprecCommercial/QuoteRequest/emails/confirmQuoteEmail.html.twig');
+        $quoteRequestManager = $this->get('paprec_commercial.quote_request_manager');
+        $quoteRequest = $quoteRequestManager->get($quoteId);
+        return $this->render('@PaprecCommercial/QuoteRequest/PDF/fr/printQuoteContract.html.twig',array(
+            'quoteRequest' => $quoteRequest,
+        ));
+    }
+
+    /**
+     * @Route("/{locale}/pdf/contract/{quoteId}", name="paprec_public_confirm_pdf_confirm_email")
+     */
+    public function showContractPDF(Request $request, $quoteId, $locale)
+    {
+        $quoteRequestManager = $this->get('paprec_commercial.quote_request_manager');
+        $quoteRequest = $quoteRequestManager->get($quoteId);
+        $filename = $quoteRequestManager->generatePDF($quoteRequest, $locale);
+        return $this->render('@PaprecCommercial/QuoteRequest/showPDF.html.twig', array(
+            'filename' => $filename
+        ));
     }
 }

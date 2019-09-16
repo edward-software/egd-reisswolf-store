@@ -1,0 +1,224 @@
+<style type="text/css">
+
+    /* Header */
+
+    .edw-header__status__item {
+        width: 60px;
+        height: 24px;
+        font-size: 9px;
+        text-align: center;
+        text-transform: uppercase;
+        background-color: #D8D8D8;
+        color: #4A4A4A;
+        border-radius: 3px;
+        padding: 8px 0px 8px;
+    }
+
+    .status--passed {
+        background-color: #DDE6FF;
+        color: #072244;
+        font-weight: 700;
+    }
+
+    .status--aborted {
+        color: #D95040;
+        background-color: #F7DCD9;
+        font-weight: 700;
+    }
+
+    /* Body content */
+
+    .edw-content {
+        margin-top: 60px;
+        color: #000000;
+        line-height: 18px;
+    }
+
+    .edw-panel-group {
+        margin-top: 20px;
+    }
+
+    .edw-panel-group > div {
+        margin-right: 10px;
+    }
+
+    .edw-panel-group > div:last-child {
+        margin-right: 0 !important;
+    }
+
+    .edw-panel {
+        width: 317px;
+        border-top: 5px solid #072244;
+        border-right: 1px solid #4A4A4A;
+        border-left: 1px solid #4A4A4A;
+        border-bottom: 1px solid #4A4A4A;
+        border-radius: 3px !important;
+        overflow: hidden;
+    }
+
+    .edw-panel-small {
+        height: 214px;
+    }
+
+    .edw-panel-medium {
+        max-height: 390px;
+        min-height: 280px;
+    }
+
+    .edw-panel-titlebar {
+        height: 30px;
+        border-bottom: 1px solid #4A4A4A;
+        padding: 0 20px;
+        font-weight: 700;
+    }
+
+    .edw-panel-content {
+        border-color: #4A4A4A;
+        padding: 10px;
+    }
+
+    /* PANELS */
+
+    /* panel new project */
+    .new-project .edw-panel-content {
+        height: 235px;
+        padding-top: 20px;
+    }
+
+    .new-project .label {
+        width: 80px;
+        font-weight: 700;
+    }
+
+    .new-project .inplace-text {
+        width: 215px;
+    }
+
+    /* panel ressources */
+
+    .resources span {
+        display: block;
+    }
+
+    .resources table {
+        border-collapse: separate;
+        border-spacing: 0;
+        width: 295px;
+    }
+
+    .resources th {
+        padding: 0;
+        height: 35px;
+        border-style: solid;
+        border-width: 1px;
+        overflow: hidden;
+        word-break: normal;
+        font-size: 12px;
+        text-align: center;
+        font-weight: 900;
+        text-transform: uppercase;
+        border: 1px solid #4A4A4A;
+        border-right: 0px;
+        border-bottom: 0px;
+    }
+
+    .resources tr:first-child {
+        height: 40px;
+    }
+
+    .resources tr:first-child > th:first-child {
+        border-top-left-radius: 3px;
+    }
+
+    .resources tr:first-child > th:last-child {
+        border-top-right-radius: 3px;
+    }
+
+    .resources tr > th:last-child {
+        border-right: 1px solid #4A4A4A;
+    }
+
+    .resources tr:last-child > th {
+        border-bottom: 1px solid #4A4A4A;
+    }
+
+    .resources tr:last-child > th:first-child {
+        border-bottom-left-radius: 3px;
+    }
+
+    .resources tr:last-child > th:last-child {
+        border-bottom-right-radius: 3px;
+    }
+
+
+    /* panel b-case */
+
+    .b-case .edw-panel-content {
+        padding: 0;
+    }
+
+    .b-case .edw-panel-content > div {
+        padding: 10px 20px;
+        height: 53.5px;
+    }
+
+    /*.b-case .edw-panel-content > div:not(:last-child) {
+        border-bottom: 1px solid #4A4A4A;
+    }*/
+
+    .border-bottom {
+        border-bottom: 1px solid #4A4A4A;
+    }
+
+    .b-case .label {
+        width: 80px;
+        font-weight: 700;
+        padding-top: 5px;
+    }
+
+    .b-case .inplace-text {
+        width: 195px;
+        text-align: right;
+        font-weight: 700;
+    }
+
+
+    /* panel Main Objectives / Main Gains */
+
+    .objectives ol {
+        padding-left: 20px;
+        list-style: none;
+        counter-reset: my-awesome-counter;
+        margin: 0;
+        word-break: break-word;
+        hyphens: auto;
+    }
+
+    .objectives ol li {
+        margin: 0px 0 2px 0;
+        counter-increment: my-awesome-counter;
+        position: relative;
+    }
+
+    .objectives ol li::before {
+        content: counter(my-awesome-counter) ". ";
+        font-weight: 900;
+        position: absolute;
+        top: 0;
+        left: -20px;
+    }
+
+    /* panel Main Change Impacts */
+
+    .objectives.impacts ol li::before {
+        color: #4A4A4A;
+    }
+
+    .objectives.impacts ol li span {
+        color: #4A4A4A;
+        font-weight: 700;
+    }
+</style>
+
+<div class="edw-content">
+</div>

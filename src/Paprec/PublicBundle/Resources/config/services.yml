@@ -10,10 +10,3 @@ services:
 
 parameters:
   paprec_commercial.data_tmp_directory: "%kernel.root_dir%/data/tmp"
-  paprec_commercial.quote_pdf_notice_directory: "%kernel.root_dir%/data/pdf/quote_notices"
-
-  paprec_commercial.quote_pdf_notices:
-    - detail.pdf
-    - cgps.pdf
-    - paprec_presentation.pdf
-    - paprec_activities.pdf

@@ -344,7 +344,7 @@ class QuoteRequestManager
 
             $pdfFilename = date('Y-m-d') . '-Reisswolf-Devis-' . $quoteRequest->getNumber() . '.pdf';
 
-            $pdfFile = $this->generatePDF($quoteRequest);
+            $pdfFile = $this->generatePDF($quoteRequest, $locale);
 
             if (!$pdfFile) {
                 return false;
@@ -361,7 +361,8 @@ class QuoteRequestManager
                     $this->container->get('templating')->render(
                         '@PaprecCommercial/QuoteRequest/emails/generatedQuoteEmail.html.twig',
                         array(
-                            'quoteRequest' => $quoteRequest
+                            'quoteRequest' => $quoteRequest,
+                            'locale' => $locale
                         )
                     ),
                     'text/html'
@@ -390,28 +391,27 @@ class QuoteRequestManager
      * @return bool|string
      * @throws Exception
      */
-    public function generatePDF(QuoteRequest $quoteRequest)
+    public function generatePDF(QuoteRequest $quoteRequest, $locale)
     {
         try {
             $pdfTmpFolder = $this->container->getParameter('paprec_commercial.data_tmp_directory');
-            $noticeFileDirectory = $this->container->getParameter('paprec_commercial.quote_pdf_notice_directory');
-            $noticeFiles = $this->container->getParameter('paprec_commercial.quote_pdf_notices');
 
             if (!is_dir($pdfTmpFolder)) {
                 mkdir($pdfTmpFolder, 0755, true);
             }
 
+            $filenameOffer = $pdfTmpFolder . '/' . md5(uniqid()) . '.pdf';
             $filename = $pdfTmpFolder . '/' . md5(uniqid()) . '.pdf';
 
             $today = new \DateTime();
 
             $snappy = new Pdf($this->container->getParameter('wkhtmltopdf_path'));
             $snappy->setOption('javascript-delay', 3000);
-            $snappy->setOption('dpi', 100);
+            $snappy->setOption('dpi', 72);
 
 
             /**
-             * On génère les PDF
+             * On génère la page d'offre
              */
             $snappy->generateFromHtml(
                 array(
@@ -421,18 +421,23 @@ class QuoteRequestManager
                             'quoteRequest' => $quoteRequest,
                             'date' => $today
                         )
-                    ),
+                    )
+                ),
+                $filenameOffer
+            );
+
+            $snappy->setOption('footer-html', $this->container->get('templating')->render('@PaprecCommercial/QuoteRequest/PDF/fr/_footer.html.twig'));
+
+            /**
+             * On génère la page d'offre
+             */
+            $snappy->generateFromHtml(
+                array(
                     $this->container->get('templating')->render(
-                        '@PaprecCommercial/ProductDIQuote/PDF/printQuoteLetter.html.twig',
+                        '@PaprecCommercial/QuoteRequest/PDF/fr/printQuoteContract.html.twig',
                         array(
                             'quoteRequest' => $quoteRequest,
                             'date' => $today
-                        )
-                    ),
-                    $this->container->get('templating')->render(
-                        '@PaprecCommercial/ProductDIQuote/PDF/printQuoteProducts.html.twig',
-                        array(
-                            'quoteRequest' => $quoteRequest,
                         )
                     )
                 ),
@@ -444,22 +449,20 @@ class QuoteRequestManager
              * Concaténation des notices
              */
             $pdfArray = array();
+            $pdfArray[] = $filenameOffer;
             $pdfArray[] = $filename;
 
-            if (is_array($noticeFiles) && count($noticeFiles)) {
-                foreach ($noticeFiles as $noticeFile) {
-                    $noticeFilename = $noticeFileDirectory . '/' . $noticeFile;
-                    if (file_exists($noticeFilename)) {
-                        $pdfArray[] = $noticeFilename;
-                    }
-                }
-            }
 
             if (count($pdfArray)) {
                 $merger = new Merger();
                 $merger->addIterator($pdfArray);
                 file_put_contents($filename, $merger->merge());
             }
+
+            if (file_exists($filenameOffer)) {
+                unlink($filenameOffer);
+            }
+
 
             if (!file_exists($filename)) {
                 return false;
