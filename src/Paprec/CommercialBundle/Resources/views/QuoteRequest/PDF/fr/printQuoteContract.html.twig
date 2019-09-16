@@ -9,11 +9,12 @@
     <style type="text/css">
         html,
         body {
-            margin: 0;
-            padding: 0;
-            font-family: "avenir", Arial, sans-serif;
+            margin: 0 !important;
+            padding: 0 !important;
+            font-family: Arial, sans-serif;
             font-weight: 500;
-            font-size: 12px;
+            font-size: 14px;
+            color: #333333;
         }
 
         * {
@@ -22,124 +23,64 @@
         }
 
         h1 {
-            color: #072244;
-            font-size: 16px;
+            color: #2c4491;
+            font-size: 20px;
             text-transform: uppercase;
             font-weight: 900;
             margin: 0;
         }
 
         h2 {
-            color: #072244;
-            font-size: 22px;
-            font-weight: 700;
+            color: #2c4491;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 5px 0;
         }
         h3 {
-            color: #072244;
-            font-size: 16px;
-            font-weight: 700;
+            font-size: 15px;
+            font-weight: bold;
+            margin-bottom: 20px;
         }
 
         p {
-            margin: 10px 0;
+            margin: 5px 0;
+            text-align: justify;
+            line-height: 17px;
         }
 
-        .edw-container__body {
-            /*overflow: hidden;*/
-            width: 1300px;
-            /*height: 895px;*/
+        .bold {
+            font-weight: bold;
+        }
+
+        .contrat__container {
+            width: 600px;
+            /*height: 1280px;*/
             margin: auto;
             position: relative;
             margin-bottom: 50px;
         }
-
-        /* FONTS */
-
-        @font-face {
-            font-family: "avenir";
-            src: url("https://staging.static.edward.ws/common/fonts/AvenirLTStd-Light.otf") format("truetype");
-            font-style: normal;
-            font-weight: 300;
-        }
-
-        @font-face {
-            font-family: "avenir";
-            src: url("https://staging.static.edward.ws/common/fonts/AvenirLTStd-Medium.otf") format("truetype");
-            font-style: normal;
-            font-weight: 500;
-        }
-
-        @font-face {
-            font-family: "avenir";
-            src: url("https://staging.static.edward.ws/common/fonts/AvenirLTStd-Heavy.otf") format("truetype");
-            font-style: normal;
-            font-weight: 700;
-        }
-
-        @font-face {
-            font-family: "avenir";
-            src: url("https://staging.static.edward.ws/common/fonts/AvenirLTStd-Black.otf") format("truetype");
-            font-style: normal;
-            font-weight: 900;
-        }
-
-        /* Buttons */
-
-        .edw-button--secondary {
-            background-color: #DDE6FF !important;
-            color: #072244 !important;
-        }
-        .edw-button {
-            height: 24px;
-            color: #072244;
-            border-radius: 3px;
-            border: 2px solid #072244;
-            background-color: #fff;
-            text-align: center;
-            font-weight: 500;
-            padding: 2px 5px 0 !important;
-            outline: none !important;
-            font-size: 12px;
-            overflow: hidden;
+        .contrat__content {
+            padding: 30px 0;
         }
 
         /* Margin / Padding */
 
-        .mb-20 {
-            margin-bottom: 20px;
-        }
-
-        .mb-25 {
-            margin-bottom: 25px;
-        }
-        .mr-15 {
-            margin-right: 15px;
-        }
-        .text-center {
+        .center-text {
             text-align: center;
         }
 
-        /* Icons */
-
-        .edw-icon-ppm {
-            content: url("https://staging.static.edward.ws/ppm/img/export_pdf/ppm.png");
-            height: 20px;
-            margin-right: 10px;
+        .w50 {
+            width: 50%;
         }
 
-        .edw-icon-arrow {
-            height: 12px;
-            margin: 0 5px;
+        .mb-20 {
+            margin-bottom: 20px !important;
         }
-        .edw-icon-arrow-blue {
-            content: url("https://staging.static.edward.ws/ppm/img/export_pdf/arrow_bleu.png");
+        .mt-20 {
+            margin-top:20px !important;
         }
-        .edw-icon-arrow-gray {
-            content: url("https://staging.static.edward.ws/ppm/img/export_pdf/arrow_gris.png");
-        }
-        .edw-icon-warning {
-            content: url("https://staging.static.edward.ws/ppm/img/export_pdf/warning.png");
-            width: 13px;
+        .mt-30 {
+            margin-top:30px !important;
         }
 
 
@@ -159,18 +100,34 @@
             -moz-box-align: center;
             -ms-flex-align: center;
             -webkit-align-items: center;
-            box-align : center;
+            box-align: center;
             align-items: center;
         }
 
+        .align-item-end {
+            -webkit-box-align: end;
+            -moz-box-align: end;
+            -ms-flex-align: end;
+            -webkit-align-items: end;
+            box-align: end;
+            align-items: flex-end;
+        }
+
         .justify-center {
-            -webkit-box-pack : center;
-            box-pack : center;
+            -webkit-box-pack: center;
+            box-pack: center;
             justify-content: center;
         }
+
+        .justify-end {
+            -webkit-box-pack: end;
+            box-pack: end;
+            justify-content: flex-end;
+        }
+
         .space-between {
-            -webkit-box-pack : justify;
-            box-pack : justify;
+            -webkit-box-pack: justify;
+            box-pack: justify;
             justify-content: space-between;
         }
 
@@ -184,14 +141,46 @@
 {#--------------------------------------------------------------#}
 
 {# Couverture + article 1er + article 2 #}
-<div class="edw-container__body">
+<div class="contrat__container">
+    {% include("PaprecCommercialBundle:QuoteRequest/PDF/fr:_header.html.twig") %}
     {% include("PaprecCommercialBundle:QuoteRequest/PDF/fr:_page-1.html.twig") %}
 </div>
 
-{# Couverture + article 1er + article 2 #}
-<div class="edw-container__body">
-    {% include("PaprecCommercialBundle:QuoteRequest/PDF/fr:_page-1.html.twig") %}
+{# article 3 #}
+<div class="contrat__container" style="page-break-before:always;">
+    {% include("PaprecCommercialBundle:QuoteRequest/PDF/fr:_header.html.twig") %}
+    {% include("PaprecCommercialBundle:QuoteRequest/PDF/fr:_page-2.html.twig") %}
 </div>
 
+{# article 3-4 #}
+<div class="contrat__container" style="page-break-before:always;">
+    {% include("PaprecCommercialBundle:QuoteRequest/PDF/fr:_header.html.twig") %}
+    {% include("PaprecCommercialBundle:QuoteRequest/PDF/fr:_page-3.html.twig") %}
+</div>
+
+{# article 4-5-6-7 #}
+<div class="contrat__container" style="page-break-before:always;">
+    {% include("PaprecCommercialBundle:QuoteRequest/PDF/fr:_header.html.twig") %}
+    {% include("PaprecCommercialBundle:QuoteRequest/PDF/fr:_page-4.html.twig") %}
+</div>
+
+{# article 7-8-9-10 #}
+<div class="contrat__container" style="page-break-before:always;">
+    {% include("PaprecCommercialBundle:QuoteRequest/PDF/fr:_header.html.twig") %}
+    {% include("PaprecCommercialBundle:QuoteRequest/PDF/fr:_page-5.html.twig") %}
+</div>
+
+
+{# Annexe 1 #}
+<div class="contrat__container" style="page-break-before:always;">
+    {% include("PaprecCommercialBundle:QuoteRequest/PDF/fr:_header.html.twig") %}
+    {% include("PaprecCommercialBundle:QuoteRequest/PDF/fr:_page-6.html.twig") %}
+</div>
+
+{# Annexe 2 #}
+<div class="contrat__container" style="page-break-before:always;">
+    {% include("PaprecCommercialBundle:QuoteRequest/PDF/fr:_header.html.twig") %}
+    {% include("PaprecCommercialBundle:QuoteRequest/PDF/fr:_page-7.html.twig") %}
+</div>
 </body>
 </html>

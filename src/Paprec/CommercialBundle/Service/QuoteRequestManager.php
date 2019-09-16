@@ -426,7 +426,7 @@ class QuoteRequestManager
                 $filenameOffer
             );
 
-            $snappy->setOption('footer-html', $this->container->get('templating')->render('@PaprecCommercial/QuoteRequest/PDF/fr/_footer.html.twig'));
+//            $snappy->setOption('footer-html', $this->container->get('templating')->render('@PaprecCommercial/QuoteRequest/PDF/fr/_footer.html.twig'));
 
             /**
              * On génère la page d'offre

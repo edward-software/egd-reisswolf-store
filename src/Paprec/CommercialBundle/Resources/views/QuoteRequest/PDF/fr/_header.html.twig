@@ -1,79 +1,21 @@
 <style type="text/css">
+
     /*Header*/
-
-    .edw-header__project {
-        min-height: 60px;
-    }
-    .edw-header__project h3 {
-        margin-bottom: 0;
-        width: 300px;
-        word-break: break-word;
-    }
-    .edw-header__project p {
-        margin-top: 3px;
-    }
-    .edw-header__qualification {
-        align-items: center;
+    .contrat__header {
+        padding-top: 25px;
     }
 
-    .edw-header__date {
-        font-size: 11px;
-    }
-
-    .edw-header__infos > div:first-child {
-        float: left !important;
-    }
-
-    .edw-header__infos > div:last-child {
-        float: right;
-    }
-
-    .edw-header__group__item {
-        background-color: #F2F3F7;
-        color: #072244;
-        text-align: center;
-        border-radius: 3px;
-        margin-right: 10px;
-        height: 26px;
-        padding: 5px 10px 4px 10px;
-    }
-
-    .edw-header__group__item p {
-        margin: 0;
-    }
-
-    .edw-header__group__item__tag {
-        width: 9px;
-        height: 9px;
-        border-radius: 50%;
-        margin-right: 5px;
+    .contrat__header > div:first-child {
+        width: 88%;
+        border-bottom: 14px solid #cccccc;
+        margin: 0 5px 13px 0;
     }
 
 </style>
 
-<div class="edw-header">
-    <div class="edw-header__qualification flex align-item-center">
-        <i class="edw-icon-ppm"></i>
-        <h1>{{ data.projectInfo.portfolioName|default("N/A") }}</h1>
+<div class="flex contrat__header">
+    <div></div>
+    <div>
+        <img src="{{ absolute_url(asset('build/static/reisswolf_logo_pdf.png')) }}" alt="logo Reisswolf">
     </div>
-
-    <div class="edw-header__project">
-        <h3>
-            {{ data.projectInfo.name|default("N/A") }}
-        </h3>
-        <p class="edw-header__date">
-            DATE : {% if projectExport.dateCreation is defined %}{{ projectExport.dateCreation|localizeddate('short', 'short', locale) }} UTC{% else %}N/A{% endif %}
-        </p>
-    </div>
-
-    <div class="edw-header__infos">
-        <div class="edw-header__group flex">
-            {% if data.subPortfolios is defined and data.subPortfolios != null %}
-                {% for subPortfolio in data.subPortfolios %}
-                    <div class="edw-header__group__item flex align-item-center">
-                        <div class="edw-header__group__item__tag" style="background: {{ subPortfolio.color }}"></div>
-                        <p>{{ subPortfolio.name }}</p>
-                    </div>
-                {% endfor %}
-            {% endif %}
-        </div>
+</div>
