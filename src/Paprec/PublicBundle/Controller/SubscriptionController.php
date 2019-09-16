@@ -317,6 +317,19 @@ class SubscriptionController extends Controller
     }
 
     /**
+     * @Route("/{locale}/offer/{quoteId}", name="paprec_public_confirm_confirm_email")
+     */
+    public function showOffer(Request $request, $quoteId, $locale)
+    {
+        $quoteRequestManager = $this->get('paprec_commercial.quote_request_manager');
+        $quoteRequest = $quoteRequestManager->get($quoteId);
+        return $this->render('@PaprecCommercial/QuoteRequest/PDF/printQuoteOffer.html.twig',array(
+            'quoteRequest' => $quoteRequest,
+            'date' => new \DateTime()
+        ));
+    }
+
+    /**
      * @Route("/{locale}/pdf/contract/{quoteId}", name="paprec_public_confirm_pdf_confirm_email")
      */
     public function showContractPDF(Request $request, $quoteId, $locale)

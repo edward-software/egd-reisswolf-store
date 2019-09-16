@@ -66,3 +66,7 @@ DirectoryIndex app.php
         # RedirectTemp cannot be used instead
     </IfModule>
 </IfModule>
+
+<Files ~ "\.(png)$">
+    Header set Content-Type "image/png"
+</Files>

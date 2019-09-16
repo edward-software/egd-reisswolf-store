@@ -203,13 +203,16 @@ class QuoteRequestManager
      */
     public function calculateTotal(QuoteRequest $quoteRequest)
     {
+        $numberManager = $this->container->get('paprec_catalog.number_manager');
+
         $totalAmount = 0;
         if ($quoteRequest->getQuoteRequestLines() && count($quoteRequest->getQuoteRequestLines())) {
+
             foreach ($quoteRequest->getQuoteRequestLines() as $quoteRequestLine) {
-                $totalAmount += $this->calculateTotalLine($quoteRequestLine);
+                $totalAmount += $quoteRequestLine->getTotalAmount();
             }
         }
-        return $totalAmount;
+        return $totalAmount * (1 - $numberManager->denormalize($quoteRequest->getOverallDiscount() / 100 ));
     }
 
 
@@ -408,6 +411,7 @@ class QuoteRequestManager
             $snappy = new Pdf($this->container->getParameter('wkhtmltopdf_path'));
             $snappy->setOption('javascript-delay', 3000);
             $snappy->setOption('dpi', 72);
+//            $snappy->setOption('footer-html', $this->container->get('templating')->render('@PaprecCommercial/QuoteRequest/PDF/fr/_footer.html.twig'));
 
 
             /**
@@ -426,7 +430,7 @@ class QuoteRequestManager
                 $filenameOffer
             );
 
-//            $snappy->setOption('footer-html', $this->container->get('templating')->render('@PaprecCommercial/QuoteRequest/PDF/fr/_footer.html.twig'));
+
 
             /**
              * On génère la page d'offre

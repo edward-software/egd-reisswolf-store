@@ -326,6 +326,8 @@ class QuoteRequestController extends Controller
             $quoteRequest->setOverallDiscount($numberManager->normalize($quoteRequest->getOverallDiscount()));
             $quoteRequest->setMonthlyBudget($numberManager->normalize($quoteRequest->getMonthlyBudget()));
 
+            $quoteRequest->setTotalAmount($quoteRequestManager->calculateTotal($quoteRequest));
+
             $quoteRequest->setDateUpdate(new \DateTime());
             $quoteRequest->setUserUpdate($user);
 

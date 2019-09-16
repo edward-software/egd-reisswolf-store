@@ -134,28 +134,28 @@ class ProductManager
      * Utilisée dans le calcul du montant d'un Cart et dans le calcul du montant d'une ligne ProductQuoteLine
      * Si le calcul est modifiée, il faudra donc le modifier uniquement ici
      *
-     * @param $postalCode
-     * @param $unitPrice
+     * @param PostalCode $pC
+     * @param Product $product
      * @param $qtty
      * @return float|int
+     * @throws Exception
      */
-    public function calculatePrice($code, Product $product, $qtty)
+    public function calculatePrice(PostalCode $pC, Product $product, $qtty)
     {
         $numberManager = $this->container->get('paprec_catalog.number_manager');
-        $postalCode = $this->em->getRepository('PaprecCatalogBundle:PostalCode')->findOneBy(array(
-                'code' => $code
-            )
-        );
-        $transportRate = ($postalCode) ? $postalCode->getTransportRate() : 1;
-        $treatmentRate = ($postalCode) ? $postalCode->getTreatmentRate() : 1;
-        $traceabilityRate = ($postalCode) ? $postalCode->getTraceabilityRate() : 1;
+        $postalCodeManager = $this->container->get('paprec_catalog.postal_code_manager');
 
-        return ($numberManager->denormalize15($product->getRentalUnitPrice())
-                + $numberManager->denormalize15($product->getTransportUnitPrice()) * $numberManager->denormalize15($transportRate)
-                + $numberManager->denormalize15($product->getTreatmentUnitPrice()) * $numberManager->denormalize15($treatmentRate)
-                + $numberManager->denormalize15($product->getTraceabilityUnitPrice()) * $numberManager->denormalize15($traceabilityRate))
+        $postalCode = $postalCodeManager->get($pC);
+
+        $transportRate = ($postalCode) ? $postalCode->getTransportRate() : $numberManager->normalize15(1);
+        $treatmentRate = ($postalCode) ? $postalCode->getTreatmentRate() : $numberManager->normalize15(1);
+        $traceabilityRate = ($postalCode) ? $postalCode->getTraceabilityRate() : $numberManager->normalize15(1);
+
+        return ($numberManager->denormalize($product->getRentalUnitPrice())
+                + $numberManager->denormalize($product->getTransportUnitPrice()) * $numberManager->denormalize15($transportRate)
+                + $numberManager->denormalize($product->getTreatmentUnitPrice()) * $numberManager->denormalize15($treatmentRate)
+                + $numberManager->denormalize($product->getTraceabilityUnitPrice()) * $numberManager->denormalize15($traceabilityRate))
             * $qtty;
-
 
     }
 
