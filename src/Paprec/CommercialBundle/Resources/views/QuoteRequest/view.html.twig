@@ -198,7 +198,7 @@
                                 <div class="form-group row">
                                     <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.OverallDiscount'|trans }}</label>
                                     <label class="col-form-label">
-                                        {{ quoteRequest.overallDiscount|formatAmount('EUR', app.request.locale) }}
+                                        {{ quoteRequest.overallDiscount|formatAmount('PERCENTAGE', app.request.locale) }}
                                     </label>
                                 </div>
                             </div>

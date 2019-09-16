@@ -215,7 +215,7 @@ class QuoteRequest
     /**
      * @var int
      *
-     * @ORM\Column(name="overallDiscount", type="integer", nullable=true)
+     * @ORM\Column(name="overallDiscount", type="integer")
      */
     private $overallDiscount;
 
@@ -294,6 +294,7 @@ class QuoteRequest
     {
         $this->dateCreation = new \DateTime();
         $this->quoteRequestLines = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->overallDiscount = 0;
     }
 
     /**
