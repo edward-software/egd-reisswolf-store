@@ -15,8 +15,8 @@
         <p>N° de client (Reprise N° plus haut)</p>
     </div>
 
-    <p class="mb-20">au contrat en date du (reprise plus haut) conclu entre</p>
-    <p>Muster AG</p>
+    <p class="mb-20">au contrat en date du {{ date|date('d/m/Y') }} conclu entre</p>
+    <p>{{quoteRequest.businessName}}</p>
     <p>et</p>
     <p>Reisswolf Aktenvernichtungs-AG</p>
 

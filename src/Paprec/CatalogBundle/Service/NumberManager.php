@@ -71,9 +71,14 @@ class NumberManager
      */
     public function denormalize($value)
     {
+        if ($value === 0) {
+            return 0;
+        }
+
         if ($value == null || $value == '') {
             return null;
         }
+
         return $value / 100;
     }
 
@@ -87,6 +92,10 @@ class NumberManager
      */
     public function normalize($value)
     {
+        if ($value === 0) {
+            return 0;
+        }
+
         if ($value == null || $value == '') {
             return null;
         }
@@ -105,6 +114,10 @@ class NumberManager
      */
     public function denormalize15($value)
     {
+        if ($value === 0) {
+            return 0;
+        }
+
         if ($value == null || $value == '') {
             return null;
         }
@@ -122,6 +135,10 @@ class NumberManager
      */
     public function normalize15($value)
     {
+        if ($value === 0) {
+            return 0;
+        }
+
         if ($value == null || $value == '') {
             return null;
         }

@@ -11,8 +11,8 @@
         <p>N° de client (Reprise N° plus haut)</p>
     </div>
 
-    <p class="mb-20">au contrat en date du (reprise plus haut) conclu entre</p>
-    <p>Raison Sociale Client</p>
+    <p class="mb-20">au contrat en date du {{ date|date('d/m/Y') }} conclu entre</p>
+    <p>{{ quoteRequest.businessName }}</p>
     <p>et</p>
     <p>REISSWOLF Aktenvernichtungs-AG</p>
 
@@ -29,7 +29,7 @@
         <div>
             <p>Tél. : +41 61</p>
             <p>Tél. : +41 61</p>
-            <p>E-Mail :	luzern@reisswolf.ch</p>
+            <p>E-Mail : luzern@reisswolf.ch</p>
         </div>
     </div>
 
@@ -40,7 +40,7 @@
         </div>
         <div>
             <p>Tél. : +41 61 511 25 38</p>
-            <p>E-Mail :	dpo@reisswolf.ch</p>
+            <p>E-Mail : dpo@reisswolf.ch</p>
         </div>
     </div>
 
@@ -55,7 +55,7 @@
         <div>
             <p>Tél. : +41 61</p>
             <p>Tél. : +41 61</p>
-            <p>E-Mail :	muster@reisswolf.com  </p>
+            <p>E-Mail : muster@reisswolf.com </p>
         </div>
     </div>
 </div>

@@ -257,7 +257,7 @@ class QuoteRequestController extends Controller
             $quoteRequest->setOverallDiscount($numberManager->normalize($quoteRequest->getOverallDiscount()));
             $quoteRequest->setMonthlyBudget($numberManager->normalize($quoteRequest->getMonthlyBudget()));
 
-            $quoteRequest->setUserCreation($user);
+            $quoteRequest->setUserCreation($user);@@
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($quoteRequest);
@@ -326,6 +326,11 @@ class QuoteRequestController extends Controller
             $quoteRequest->setOverallDiscount($numberManager->normalize($quoteRequest->getOverallDiscount()));
             $quoteRequest->setMonthlyBudget($numberManager->normalize($quoteRequest->getMonthlyBudget()));
 
+            if ($quoteRequest->getQuoteRequestLines()) {
+                foreach ($quoteRequest->getQuoteRequestLines() as $line) {
+                    $quoteRequestManager->editLine($quoteRequest, $line, $user, false, false);
+                }
+            }
             $quoteRequest->setTotalAmount($quoteRequestManager->calculateTotal($quoteRequest));
 
             $quoteRequest->setDateUpdate(new \DateTime());

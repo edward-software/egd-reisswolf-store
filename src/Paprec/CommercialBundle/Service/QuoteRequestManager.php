@@ -27,7 +27,7 @@ class QuoteRequestManager
         $this->container = $container;
     }
 
-    public function get($quoteRequest)
+    public function get($quoteRequest, $throwException = true)
     {
         $id = $quoteRequest;
         if ($quoteRequest instanceof QuoteRequest) {
@@ -48,7 +48,11 @@ class QuoteRequestManager
             return $quoteRequest;
 
         } catch (Exception $e) {
-            throw new Exception($e->getMessage(), $e->getCode());
+            if ($throwException) {
+                throw new Exception($e->getMessage(), $e->getCode());
+            } else {
+                return null;
+            }
         }
     }
 
@@ -159,9 +163,10 @@ class QuoteRequestManager
      * @param QuoteRequest $quoteRequest
      * @param QuoteRequestLine $quoteRequestLine
      * @param $user
+     * @param bool $doFlush
      * @throws Exception
      */
-    public function editLine(QuoteRequest $quoteRequest, QuoteRequestLine $quoteRequestLine, $user)
+    public function editLine(QuoteRequest $quoteRequest, QuoteRequestLine $quoteRequestLine, $user, $doFlush = true, $editQuoteRequest = true)
     {
         $now = new \DateTime();
 
@@ -169,18 +174,23 @@ class QuoteRequestManager
         $quoteRequestLine->setTotalAmount($totalLine);
         $quoteRequestLine->setDateUpdate($now);
 
-        $total = $this->calculateTotal($quoteRequest);
-        $quoteRequest->setTotalAmount($total);
-        $quoteRequest->setDateUpdate($now);
-        $quoteRequest->setUserUpdate($user);
+        if ($editQuoteRequest) {
+            $total = $this->calculateTotal($quoteRequest);
+            $quoteRequest->setTotalAmount($total);
+            $quoteRequest->setDateUpdate($now);
+            $quoteRequest->setUserUpdate($user);
+        }
 
-        $this->em->flush();
+        if ($doFlush) {
+            $this->em->flush();
+        }
     }
 
     /**
      * Retourne le montant total d'une QuoteRequestLine
      * @param QuoteRequestLine $quoteRequestLine
      * @return float|int
+     * @throws Exception
      */
     public function calculateTotalLine(QuoteRequestLine $quoteRequestLine)
     {
@@ -189,9 +199,9 @@ class QuoteRequestManager
 
         return $numberManager->normalize(
             $productManager->calculatePrice(
-                $quoteRequestLine->getQuoteRequest()->getPostalCode(),
                 $quoteRequestLine->getProduct(),
-                $quoteRequestLine->getQuantity()
+                $quoteRequestLine->getQuantity(),
+                $quoteRequestLine->getQuoteRequest()->getPostalCode()
             )
         );
     }
@@ -212,7 +222,7 @@ class QuoteRequestManager
                 $totalAmount += $quoteRequestLine->getTotalAmount();
             }
         }
-        return $totalAmount * (1 - $numberManager->denormalize($quoteRequest->getOverallDiscount() / 100 ));
+        return $totalAmount * (1 - $numberManager->denormalize($quoteRequest->getOverallDiscount() / 100));
     }
 
 
@@ -275,7 +285,7 @@ class QuoteRequestManager
              * Si la quoteRequest est associé à un commercial, on lui envoie le mail d'information de la création d'une nouvelle demande
              * Sinon,
              *      si la demande est multisite alors on envoie au mail générique des demandes multisites
-         *          sinon on envoie au mail générique de la région associée au code postal de la demande
+             *          sinon on envoie au mail générique de la région associée au code postal de la demande
              */
             $rcptTo = ($quoteRequest->getUserInCharge())
                 ? $quoteRequest->getUserInCharge()->getEmail()
@@ -429,7 +439,6 @@ class QuoteRequestManager
                 ),
                 $filenameOffer
             );
-
 
 
             /**

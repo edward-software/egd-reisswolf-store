@@ -140,12 +140,12 @@ class ProductManager
      * @return float|int
      * @throws Exception
      */
-    public function calculatePrice(PostalCode $pC, Product $product, $qtty)
+    public function calculatePrice(Product $product, $qtty, PostalCode $postalCode = null)
     {
         $numberManager = $this->container->get('paprec_catalog.number_manager');
         $postalCodeManager = $this->container->get('paprec_catalog.postal_code_manager');
 
-        $postalCode = $postalCodeManager->get($pC);
+//        $postalCode = $postalCodeManager->get($pC);
 
         $transportRate = ($postalCode) ? $postalCode->getTransportRate() : $numberManager->normalize15(1);
         $treatmentRate = ($postalCode) ? $postalCode->getTreatmentRate() : $numberManager->normalize15(1);
