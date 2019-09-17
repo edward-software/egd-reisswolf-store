@@ -28,7 +28,7 @@ class PostalCodeToStringTransformer implements DataTransformerInterface
             return '';
         }
 
-        return $postalCode->getId();
+        return $postalCode->getCode();
     }
 
     /**
