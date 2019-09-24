@@ -20,9 +20,7 @@ class QuoteRequestLineAddType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('quantity', IntegerType::class, array(
-                "required" => true
-            ))
+            ->add('quantity')
             ->add('product', EntityType::class, array(
                 'class' => 'PaprecCatalogBundle:Product',
                 'query_builder' => function (ProductRepository $er) {

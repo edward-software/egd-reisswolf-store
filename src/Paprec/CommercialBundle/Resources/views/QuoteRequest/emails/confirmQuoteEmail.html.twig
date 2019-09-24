@@ -160,7 +160,8 @@
                        class="email-container">
                     <tr>
                         <td class="logo" style="padding-top: 25px;">
-                            <img src="{{ absolute_url(asset('build/static/reisswolf_logo.png')) }}" alt="Reisswolf logo" border="0"
+                            <img src="{{ absolute_url(asset('build/static/reisswolf_logo.png')) }}" alt="Reisswolf logo"
+                                 border="0"
                                  width="200"
                                  align="center">
                         </td>
@@ -182,6 +183,9 @@
                     <tr>
                         <td style="padding: 30px 15px 120px; text-align: left; font-size: 17px; mso-height-rule: exactly; line-height: 23px;">
                             <div style="margin: 0 25px !important; font-family: 'Arimo', 'Arial', sans-serif; font-size: 16px; line-height: 22px; color: #333333;">
+                                {% if quoteRequest.civility == 'M' %}Cher Monsieur{% elseif quoteRequest.civility == 'Mme' %} Chère madame{% endif %}
+                                ,
+
                                 {{ 'Commercial.ConfirmEmail.Message1'| trans({}, "messages", locale) }}
                                 <a href="#" style="color: #2C4491; text-decoration: none; font-weight: 700;">
                                     {{ 'Commercial.ConfirmEmail.TechnicalService'| trans({}, "messages", locale) }}
@@ -198,7 +202,8 @@
                         <td style="padding: 40px 15px; text-align: left; mso-height-rule: exactly;">
                             <div style="margin: 0 25px !important; font-family: 'Arimo', 'Arial', sans-serif; font-size: 14px; line-height: 22px; color: #A4A4A4;">
                                 {{ 'Commercial.ConfirmEmail.Disclaimer.Message1'| trans({}, "messages", locale) }}
-                                <a href="{{ reisswolf_public_site_url }}" style="color: #2C4491; text-decoration: none; font-weight: 700;">
+                                <a href="{{ reisswolf_public_site_url }}"
+                                   style="color: #2C4491; text-decoration: none; font-weight: 700;">
                                     Reisswolf
                                 </a>
                                 {{ 'Commercial.ConfirmEmail.Disclaimer.Message2'| trans({}, "messages", locale) }}

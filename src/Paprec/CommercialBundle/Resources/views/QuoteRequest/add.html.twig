@@ -170,6 +170,13 @@
                             <div class="card-body row">
                                 <div class="col-md-6">
                                     <div class="form-group">
+                                        <label class="form-label">{{ 'Commercial.QuoteRequest.CustomerId'|trans }}</label>
+                                        <div class="form-content">
+                                            {{ form_widget(form.customerId, {'attr': {'class': 'form-control'}}) }}
+                                            {{ form_errors(form.customerId) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
                                         <label class="form-label">{{ 'Commercial.QuoteRequest.UserInCharge'|trans }}</label>
                                         <div class="form-content">
                                             {{ form_widget(form.userInCharge, {'attr': {'class': 'form-control'}}) }}

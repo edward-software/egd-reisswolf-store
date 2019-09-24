@@ -35,10 +35,12 @@ Commercial:
     IsMultisite: Multi-site service
     Comment: Comment
     OverallDiscount: Overall discount
+    CustomerId: Customer number
     SalesmanComment: Salesman comment
     MonthlyBudget: Monthly budget
     View: View quote
     Send-quote: Send quote to customer
+    Download-quote: Download PDF
     ProductsList: Products list
     AddLine: Add product
     Confirm-send-quote: Êtes-vous sûr de vouloir envoyer le devis au client ?
@@ -49,7 +51,7 @@ Commercial:
     Success:
       generatedQuoteSent:       Le devis a bien été généré et envoyé au client.
     Locale: Locale
-    Number: Number
+    Number: Offer Number
 
   QuoteStatusList:
     CREATED: Created
@@ -82,7 +84,12 @@ Commercial:
 
   QuoteRequestLine:
     ProductName: Procuct name
+    SetUpPrice: Setup
+    RentalPrice: Rental
     UnitPrice: Unit price
+    Transport: Transport
+    Treatment: Treatment
+    Traceability: Traceability
     Quantity: Quantity
     TotalAmount: Total amount
     Add: Add product

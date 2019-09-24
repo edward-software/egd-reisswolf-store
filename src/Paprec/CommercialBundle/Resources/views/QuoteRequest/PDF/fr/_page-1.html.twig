@@ -14,6 +14,7 @@
     .contrat__articles {
         padding-top: 30px;
     }
+
     .contrat__articles__item p:nth-child(2) {
         padding-left: 50px;
     }
@@ -26,11 +27,11 @@
         <h1>Contrat</h1>
         <p class="mb-20">Entre</p>
         <div class="flex space-between bold">
-            <p style="width: 50%;">{{quoteRequest.firstName}} {{ quoteRequest.lastName }}</p>
-            <p>N° de client Saisie manuelle</p>
+            <p style="width: 50%;">{{ quoteRequest.firstName }} {{ quoteRequest.lastName }}</p>
+            <p>{% if quoteRequest.customerId is defined %}N°{{ quoteRequest.customerId }}{% endif %}</p>
         </div>
 
-{#        <p>SELON INFORMATIONS Formulaire</p>#}
+        {#        <p>SELON INFORMATIONS Formulaire</p>#}
 
         <p class="mt-20 mb-20">(ci-après dénommé <span class="bold">« client »</span>)</p>
 
@@ -85,8 +86,10 @@
         </div>
         <div class="flex contrat__articles__item">
             <p>3°)</p>
-            <p>Le prestataire n’acquiert aucun droit sur les supports de données du client qu’il a pris en charge, ni sur
-                les données qu’ils contiennent. Les données ne seront ni consultées, ni transmises, ni sauvegardées, ni traitées
+            <p>Le prestataire n’acquiert aucun droit sur les supports de données du client qu’il a pris en charge, ni
+                sur
+                les données qu’ils contiennent. Les données ne seront ni consultées, ni transmises, ni sauvegardées, ni
+                traitées
                 d’une autre manière que celle décrite à l’article 3.</p>
         </div>
     </div>

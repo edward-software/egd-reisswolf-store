@@ -72,6 +72,7 @@ Catalog:
     Details: Product details
     CapacityUnit: Capacity unit
     Position: Position
+    SetUpPrice: Setup price
     RentalUnitPrice: Rental unit price
     FolderNumber: Number of folders
     TransportUnitPrice: Transport unit price

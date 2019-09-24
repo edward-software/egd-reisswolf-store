@@ -257,7 +257,8 @@
                 <img src="{{ absolute_url(asset('build/static/reisswolf_logo_pdf.png')) }}" alt="logo Reisswolf">
             </div>
             <div>
-                <img src="{{ absolute_url(asset('build/static/pug.png')) }}" style="width: 80px; margin-left: 10px;" alt="logo Reisswolf">
+                <img src="{{ absolute_url(asset('build/static/pug.png')) }}" style="width: 80px; margin-left: 10px;"
+                     alt="logo Reisswolf">
             </div>
             <div class="flex align-item-end illustrations">
                 <img src="{{ absolute_url(asset('build/static/IMG_2013_70.png')) }}" alt="illstration"
@@ -331,7 +332,9 @@
                             <p class="bold">Notre référence :</p>
                         </div>
                         <div>
-                            <p> {{ quoteRequest.postalCode.region }}</p>
+                            {% if quoteRequest.postalCode is defined %}
+                                <p> {{ quoteRequest.postalCode.region }}</p>
+                            {% endif %}
                         </div>
                     </div>
 
@@ -340,7 +343,11 @@
                             <p class="bold">Notre adresse email :</p>
                         </div>
                         <div>
-                            <p>{{ quoteRequest.postalCode.region.email }}</p>
+                            <p>
+                                {% if quoteRequest.postalCode is defined %}
+                                    {{ quoteRequest.postalCode.region.email }}
+                                {% endif %}
+                            </p>
                         </div>
                     </div>
 
@@ -404,57 +411,58 @@
                     <td>CHF / TVA excl.</td>
                 </tr>
 
-
+                {% for line in quoteRequest.quoteRequestLines %}
                 <tr>
-                    <td class="bold">70</td>
-                    <td class="bold">e.l.sy</td>
-                    <td class="bold">20.00</td>
+                    <td class="bold">{{ line.product.capacity }}</td>
+                    <td class="bold">{{ line.product|productLabelTranslation(locale,'lockType') }}</td>
+                    <td class="bold">{{ line.setUpPrice|formatAmount('', app.request.locale) }}</td>
                     <td class="bold">15,00</td>
                     <td class="bold">30,00</td>
                     <td>inclus</td>
                     <td class="bold">1</td>
                     <td class="bold">50</td>
                 </tr>
-                <tr>
-                    <td class="bold">130</td>
-                    <td class="bold">e.l.sy</td>
-                    <td class="bold">20.00</td>
-                    <td class="bold">15,00</td>
-                    <td class="bold">37,00</td>
-                    <td>inclus</td>
-                    <td class="bold">1</td>
-                    <td class="bold">50</td>
-                </tr>
-                <tr>
-                    <td class="bold">240</td>
-                    <td class="bold">e.l.sy</td>
-                    <td class="bold">20.00</td>
-                    <td class="bold">15,00</td>
-                    <td class="bold">44,00</td>
-                    <td>inclus</td>
-                    <td class="bold">1</td>
-                    <td class="bold">50</td>
-                </tr>
+                {% endfor %}
 {#                <tr>#}
-{#                    <td class="bold">350</td>#}
+{#                    <td class="bold">130</td>#}
 {#                    <td class="bold">e.l.sy</td>#}
 {#                    <td class="bold">20.00</td>#}
 {#                    <td class="bold">15,00</td>#}
-{#                    <td class="bold">63,00</td>#}
+{#                    <td class="bold">37,00</td>#}
 {#                    <td>inclus</td>#}
 {#                    <td class="bold">1</td>#}
 {#                    <td class="bold">50</td>#}
 {#                </tr>#}
-                <tr>
-                    <td class="bold">500</td>
-                    <td class="bold">e.l.sy</td>
-                    <td class="bold">20.00</td>
-                    <td class="bold">15,00</td>
-                    <td class="bold">84,00</td>
-                    <td>inclus</td>
-                    <td class="bold">1</td>
-                    <td class="bold">50</td>
-                </tr>
+{#                <tr>#}
+{#                    <td class="bold">240</td>#}
+{#                    <td class="bold">e.l.sy</td>#}
+{#                    <td class="bold">20.00</td>#}
+{#                    <td class="bold">15,00</td>#}
+{#                    <td class="bold">44,00</td>#}
+{#                    <td>inclus</td>#}
+{#                    <td class="bold">1</td>#}
+{#                    <td class="bold">50</td>#}
+{#                </tr>#}
+{#                #}{#                <tr>#}
+{#                #}{#                    <td class="bold">350</td>#}
+{#                #}{#                    <td class="bold">e.l.sy</td>#}
+{#                #}{#                    <td class="bold">20.00</td>#}
+{#                #}{#                    <td class="bold">15,00</td>#}
+{#                #}{#                    <td class="bold">63,00</td>#}
+{#                #}{#                    <td>inclus</td>#}
+{#                #}{#                    <td class="bold">1</td>#}
+{#                #}{#                    <td class="bold">50</td>#}
+{#                #}{#                </tr>#}
+{#                <tr>#}
+{#                    <td class="bold">500</td>#}
+{#                    <td class="bold">e.l.sy</td>#}
+{#                    <td class="bold">20.00</td>#}
+{#                    <td class="bold">15,00</td>#}
+{#                    <td class="bold">84,00</td>#}
+{#                    <td>inclus</td>#}
+{#                    <td class="bold">1</td>#}
+{#                    <td class="bold">50</td>#}
+{#                </tr>#}
                 <tr class="table-footer1">
                     <td colspan="2" class="bold">Chargement à l'étage</td>
                     <td>par récipient</td>

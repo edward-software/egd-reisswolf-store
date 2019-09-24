@@ -16,6 +16,7 @@ use Exception;
 use Paprec\CatalogBundle\Entity\PostalCode;
 use Paprec\CatalogBundle\Entity\Product;
 use Paprec\CatalogBundle\Entity\ProductLabel;
+use Paprec\CommercialBundle\Entity\QuoteRequestLine;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class ProductManager
@@ -140,22 +141,16 @@ class ProductManager
      * @return float|int
      * @throws Exception
      */
-    public function calculatePrice(Product $product, $qtty, PostalCode $postalCode = null)
+    public function calculatePrice(QuoteRequestLine $quoteRequestLine)
     {
         $numberManager = $this->container->get('paprec_catalog.number_manager');
-        $postalCodeManager = $this->container->get('paprec_catalog.postal_code_manager');
 
-//        $postalCode = $postalCodeManager->get($pC);
-
-        $transportRate = ($postalCode) ? $postalCode->getTransportRate() : $numberManager->normalize15(1);
-        $treatmentRate = ($postalCode) ? $postalCode->getTreatmentRate() : $numberManager->normalize15(1);
-        $traceabilityRate = ($postalCode) ? $postalCode->getTraceabilityRate() : $numberManager->normalize15(1);
-
-        return ($numberManager->denormalize($product->getRentalUnitPrice())
-                + $numberManager->denormalize($product->getTransportUnitPrice()) * $numberManager->denormalize15($transportRate)
-                + $numberManager->denormalize($product->getTreatmentUnitPrice()) * $numberManager->denormalize15($treatmentRate)
-                + $numberManager->denormalize($product->getTraceabilityUnitPrice()) * $numberManager->denormalize15($traceabilityRate))
-            * $qtty;
+        return $numberManager->denormalize($quoteRequestLine->getSetUpPrice())
+            + ($numberManager->denormalize($quoteRequestLine->getRentalUnitPrice())
+                + $numberManager->denormalize($quoteRequestLine->getTransportUnitPrice()) * $numberManager->denormalize15($quoteRequestLine->getTransportRate())
+                + $numberManager->denormalize($quoteRequestLine->getTreatmentUnitPrice()) * $numberManager->denormalize15($quoteRequestLine->getTreatmentRate())
+                + $numberManager->denormalize($quoteRequestLine->getTraceabilityUnitPrice()) * $numberManager->denormalize15($quoteRequestLine->getTraceabilityRate()))
+            * $quoteRequestLine->getQuantity();
 
     }
 

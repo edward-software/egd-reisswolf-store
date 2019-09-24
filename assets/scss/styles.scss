@@ -60,6 +60,7 @@ a {
     font-size: 11px;
     font-family: $font-family-2;
     line-height: 12px;
+
     &__link {
 
       font-weight: $font-regular !important;
@@ -264,4 +265,14 @@ form {
     -webkit-align-items: center;
     align-items: center;
   }
+}
+
+
+/*************************
+HIDE CAPTCHA
+ */
+
+.grecaptcha-badge {
+  visibility: hidden !important;
+  opacity: 0 !important;
 }

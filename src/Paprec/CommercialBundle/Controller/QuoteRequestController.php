@@ -7,9 +7,13 @@ use Paprec\CommercialBundle\Entity\QuoteRequestLine;
 use Paprec\CommercialBundle\Form\QuoteRequestLineAddType;
 use Paprec\CommercialBundle\Form\QuoteRequestLineEditType;
 use Paprec\CommercialBundle\Form\QuoteRequestType;
+use Paprec\UserBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Finder\Finder;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\File\MimeType\FileinfoMimeTypeGuesser;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
@@ -257,7 +261,8 @@ class QuoteRequestController extends Controller
             $quoteRequest->setOverallDiscount($numberManager->normalize($quoteRequest->getOverallDiscount()));
             $quoteRequest->setMonthlyBudget($numberManager->normalize($quoteRequest->getMonthlyBudget()));
 
-            $quoteRequest->setUserCreation($user);@@
+            $quoteRequest->setUserCreation($user);
+            @@
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($quoteRequest);
@@ -412,6 +417,8 @@ class QuoteRequestController extends Controller
 
         $form = $this->createForm(QuoteRequestLineAddType::class, $quoteRequestLine);
 
+
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -528,4 +535,62 @@ class QuoteRequestController extends Controller
         ));
     }
 
+    /**
+     * @Route("/quoteRequest/{id}/downloadQuote", name="paprec_commercial_quote_request_download")
+     * @Security("has_role('ROLE_ADMIN')")
+     * @throws \Exception
+     */
+    public function downloadAssociatedInvoiceAction(QuoteRequest $quoteRequest)
+    {
+
+        /**
+         * On commence par pdf générés (seulement ceux générés dans le BO  pour éviter de supprimer un PDF en cours d'envoi pour un utilisateur
+         */
+        $pdfFolder = $this->container->getParameter('paprec_commercial.data_tmp_directory');
+        $finder = new Finder();
+
+        $finder->files()->in($pdfFolder);
+
+        if ($finder->hasResults()) {
+            foreach ($finder as $file) {
+                $absoluteFilePath = $file->getRealPath();
+//                $fileNameWithExtension = $file->getRelativePathname();
+                if (file_exists($absoluteFilePath)) {
+                    unlink($absoluteFilePath);
+                }
+            }
+        }
+
+        $quoteRequestManager = $this->get('paprec_commercial.quote_request_manager');
+        $user = $this->getUser();
+        $pdfTmpFolder = $pdfFolder . '/';
+        $file = $quoteRequestManager->generatePDF($quoteRequest, $user->getLang());
+
+        $filename = substr($file, strrpos($file, '/') + 1);
+
+        // This should return the file to the browser as response
+        $response = new BinaryFileResponse($pdfTmpFolder . $filename);
+
+        // To generate a file download, you need the mimetype of the file
+        $mimeTypeGuesser = new FileinfoMimeTypeGuesser();
+
+        // Set the mimetype with the guesser or manually
+        if ($mimeTypeGuesser->isSupported()) {
+            // Guess the mimetype of the file according to the extension of the file
+            $response->headers->set('Content-Type', $mimeTypeGuesser->guess($pdfTmpFolder . $filename));
+        } else {
+            // Set the mimetype of the file manually, in this case for a text file is text/plain
+            $response->headers->set('Content-Type', 'application/pdf');
+        }
+
+        // Set content disposition inline of the file
+        $response->setContentDisposition(
+            ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+            'Quote-' . $quoteRequest->getBusinessName() . '-' . $quoteRequest->getId()  . ' .pdf'
+        );
+
+
+
+        return $response;
+    }
 }

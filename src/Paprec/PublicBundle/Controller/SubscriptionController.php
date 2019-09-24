@@ -118,14 +118,14 @@ class SubscriptionController extends Controller
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($quoteRequest);
-            $em->flush();
 
             // On récupère tous les produits ajoutés au Cart
             if ($cart->getContent() !== null) {
                 foreach ($cart->getContent() as $item) {
-                    $quoteRequestManager->addLineFromCart($quoteRequest, $item['pId'], $item['qtty']);
+                    $quoteRequestManager->addLineFromCart($quoteRequest, $item['pId'], $item['qtty'], false);
                 }
             }
+            $em->flush();
 
             $sendConfirmEmail = $quoteRequestManager->sendConfirmRequestEmail($quoteRequest, $locale);
             $sendNewRequestEmail = $quoteRequestManager->sendNewRequestEmail($quoteRequest, $locale);
@@ -303,44 +303,44 @@ class SubscriptionController extends Controller
             return new JsonResponse(null, 400);
         }
     }
-
-    /**
-     * @Route("/{locale}/contract/{quoteId}", name="paprec_public_contract_confirm_email")
-     */
-    public function showContract(Request $request, $quoteId, $locale)
-    {
-        $quoteRequestManager = $this->get('paprec_commercial.quote_request_manager');
-        $quoteRequest = $quoteRequestManager->get($quoteId);
-        return $this->render('@PaprecCommercial/QuoteRequest/PDF/fr/printQuoteContract.html.twig',array(
-            'quoteRequest' => $quoteRequest,
-            'date' => new \DateTime()
-
-        ));
-    }
-
-    /**
-     * @Route("/{locale}/offer/{quoteId}", name="paprec_public_offer_confirm_email")
-     */
-    public function showOffer(Request $request, $quoteId, $locale)
-    {
-        $quoteRequestManager = $this->get('paprec_commercial.quote_request_manager');
-        $quoteRequest = $quoteRequestManager->get($quoteId);
-        return $this->render('@PaprecCommercial/QuoteRequest/PDF/printQuoteOffer.html.twig',array(
-            'quoteRequest' => $quoteRequest,
-            'date' => new \DateTime()
-        ));
-    }
-
-    /**
-     * @Route("/{locale}/pdf/contract/{quoteId}", name="paprec_public_confirm_pdf_confirm_email")
-     */
-    public function showContractPDF(Request $request, $quoteId, $locale)
-    {
-        $quoteRequestManager = $this->get('paprec_commercial.quote_request_manager');
-        $quoteRequest = $quoteRequestManager->get($quoteId);
-        $filename = $quoteRequestManager->generatePDF($quoteRequest, $locale);
-        return $this->render('@PaprecCommercial/QuoteRequest/showPDF.html.twig', array(
-            'filename' => $filename
-        ));
-    }
+//
+//    /**
+//     * @Route("/{locale}/contract/{quoteId}", name="paprec_public_contract_confirm_email")
+//     */
+//    public function showContract(Request $request, $quoteId, $locale)
+//    {
+//        $quoteRequestManager = $this->get('paprec_commercial.quote_request_manager');
+//        $quoteRequest = $quoteRequestManager->get($quoteId);
+//        return $this->render('@PaprecCommercial/QuoteRequest/PDF/fr/printQuoteContract.html.twig', array(
+//            'quoteRequest' => $quoteRequest,
+//            'date' => new \DateTime()
+//
+//        ));
+//    }
+//
+//    /**
+//     * @Route("/{locale}/offer/{quoteId}", name="paprec_public_offer_confirm_email")
+//     */
+//    public function showOffer(Request $request, $quoteId, $locale)
+//    {
+//        $quoteRequestManager = $this->get('paprec_commercial.quote_request_manager');
+//        $quoteRequest = $quoteRequestManager->get($quoteId);
+//        return $this->render('@PaprecCommercial/QuoteRequest/PDF/printQuoteOffer.html.twig', array(
+//            'quoteRequest' => $quoteRequest,
+//            'date' => new \DateTime()
+//        ));
+//    }
+//
+//    /**
+//     * @Route("/{locale}/pdf/contract/{quoteId}", name="paprec_public_confirm_pdf_confirm_email")
+//     */
+//    public function showContractPDF(Request $request, $quoteId, $locale)
+//    {
+//        $quoteRequestManager = $this->get('paprec_commercial.quote_request_manager');
+//        $quoteRequest = $quoteRequestManager->get($quoteId);
+//        $filename = $quoteRequestManager->generatePDF($quoteRequest, $locale);
+//        return $this->render('@PaprecCommercial/QuoteRequest/showPDF.html.twig', array(
+//            'filename' => $filename
+//        ));
+//    }
 }

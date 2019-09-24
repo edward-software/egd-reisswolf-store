@@ -256,6 +256,13 @@ class QuoteRequest
     private $frequencyInterval;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="customerId", type="string", length=255, nullable=true)
+     */
+    private $customerId;
+
+    /**
      * #################################
      *              Relations
      * #################################
@@ -1051,5 +1058,29 @@ class QuoteRequest
     public function getNumber()
     {
         return $this->number;
+    }
+
+    /**
+     * Set customerId.
+     *
+     * @param string|null $customerId
+     *
+     * @return QuoteRequest
+     */
+    public function setCustomerId($customerId = null)
+    {
+        $this->customerId = $customerId;
+
+        return $this;
+    }
+
+    /**
+     * Get customerId.
+     *
+     * @return string|null
+     */
+    public function getCustomerId()
+    {
+        return $this->customerId;
     }
 }

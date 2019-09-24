@@ -96,6 +96,12 @@
                                     </label>
                                 </div>
                                 <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Catalog.Product.SetUpPrice'| trans({}, "messages", app.request.locale) }}</label>
+                                    <label class="col-form-label col-md-8">
+                                        {{ product.setUpPrice|formatAmount('EUR', app.request.locale) }}
+                                    </label>
+                                </div>
+                                <div class="form-group row">
                                     <label class="col-md-4 col-form-label">{{ 'Catalog.Product.RentalUnitPrice'| trans({}, "messages", app.request.locale) }}</label>
                                     <label class="col-form-label col-md-8">
                                         {{ product.rentalUnitPrice|formatAmount('EUR', app.request.locale) }}

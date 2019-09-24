@@ -75,11 +75,12 @@
                                             {% endif %}
                                         {% endfor %}
                                         <select name=""
+                                                disabled="disabled"
                                                 class="quantityProductSelect ml-2"
                                                 data-url="{{ path('paprec_public_catalog_addContent', {locale: locale, cartUuid: cart.id}) }}"
                                                 data-product="{{ product.id }}"
                                                 id="quantityProductSelect_{{ product.id }}">
-                                            {% for i in 1..10 %}
+                                            {% for i in 0..10 %}
                                                 {% if i == qtty %}
                                                     <option value="{{ i }}"
                                                             selected="selected">{{ i }}</option>''
@@ -110,7 +111,7 @@
                 <div class="col-md-6 product">
                     <div class="row devis">
 
-                        <div class="col-xl-6">
+                        <div class="col-xl-5">
                             <div class="devis__products-container">
                                 <h3>{{ 'Public.Catalog.Quote'| trans({}, "messages", locale) }}</h3>
 
@@ -129,7 +130,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-6 devis__frequency-container">
+                        <div class="col-xl-7 devis__frequency-container">
                             <h3>{{ 'Public.Catalog.Collect-frequency'| trans({}, "messages", locale) }}</h3>
 
                             <div class="devis__frequency-container__content paprec-flex column">
@@ -137,7 +138,7 @@
                                 <div class="custom-control custom-radio">
                                     <input type="radio" class="custom-control-input" id="frequencyButton1"
                                            value="ponctual"
-                                           name="groupOfDefaultRadios" checked>
+                                           name="groupOfDefaultRadios">
                                     <label class="custom-control-label"
                                            for="frequencyButton1">{{ 'Public.Catalog.OnDemand'| trans({}, "messages", locale) }}</label>
                                 </div>
@@ -146,22 +147,30 @@
                                 <div class="custom-control custom-radio">
                                     <input type="radio" class="custom-control-input" id="frequencyButton2"
                                            value="regular"
+                                           checked
                                            name="groupOfDefaultRadios">
                                     <label class="custom-control-label"
                                            for="frequencyButton2">{{ 'Public.Catalog.Regular'| trans({}, "messages", locale) }}
                                         : </label>
                                 </div>
 
-                                <div class="devis__frequence">
-                                    <select disabled class="catalog-frequency-select"
-                                            id="catalog_frequency_times_select">
-                                        <option value="1" selected>1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                    </select>
-                                    {{ 'Public.Catalog.Times'| trans({}, "messages", locale) }}
-                                    <select disabled class="catalog-frequency-select"
+                                <div class="devis__frequence paprec-flex">
+                                    <div class="paprec-flex">
+                                        <button class="round-btn round-btn--blue devis__frequence__button mr-2"
+                                        id="addFrequencyButton">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+                                        <input class="catalog-frequency-select catalog-frequency-input"
+                                               disabled="disabled"
+                                               size="1"
+                                               id="catalog_frequency_times_select" value="1"/>
+                                        <button class="round-btn round-btn--blue devis__frequence__button round-btn--disable ml-2" disabled
+                                                id="removeFrequencyButton">
+                                            <i class="fas fa-minus"></i>
+                                        </button>
+                                    </div>
+                                    <span class="devis__frequence__times ml-2">{{ 'Public.Catalog.Times'| trans({}, "messages", locale) }}</span>
+                                    <select class="catalog-frequency-select ml-2"
                                             id="catalog_frequency_interval_select">
                                         <option value="week"
                                                 selected>{{ 'Public.Catalog.Week'| trans({}, "messages", locale) }}</option>

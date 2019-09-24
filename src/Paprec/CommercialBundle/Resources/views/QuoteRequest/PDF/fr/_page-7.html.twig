@@ -12,7 +12,7 @@
 
     <div class="flex space-between bold">
         <h2>ANNEXE 2</h2>
-        <p>N° de client (Reprise N° plus haut)</p>
+        <p>{% if quoteRequest.customerId is defined %}N°{{ quoteRequest.customerId }}{% endif %}</p>
     </div>
 
     <p class="mb-20">au contrat en date du {{ date|date('d/m/Y') }} conclu entre</p>

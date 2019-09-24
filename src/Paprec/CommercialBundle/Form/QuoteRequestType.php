@@ -84,6 +84,7 @@ class QuoteRequestType extends AbstractType
             ->add('salesmanComment', TextareaType::class)
             ->add('monthlyBudget')
             ->add('frequency')
+            ->add('customerId')
             ->add('userInCharge', EntityType::class, array(
                 'class' => User::class,
                 'multiple' => false,

@@ -53,8 +53,14 @@ class QuoteRequestLine
     /**
      * @var int
      *
-     * @ORM\Column(name="rentalUnitPrice", type="integer", nullable=true)
+     * @ORM\Column(name="setUpPrice", type="integer", nullable=true)
+     */
+    private $setUpPrice;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="rentalUnitPrice", type="integer", nullable=true)
      */
     private $rentalUnitPrice;
 
@@ -62,7 +68,6 @@ class QuoteRequestLine
      * @var int
      *
      * @ORM\Column(name="transportUnitPrice", type="integer", nullable=true)
-
      */
     private $transportUnitPrice;
 
@@ -70,7 +75,6 @@ class QuoteRequestLine
      * @var int
      *
      * @ORM\Column(name="treatmentUnitPrice", type="integer", nullable=true)
-
      */
     private $treatmentUnitPrice;
 
@@ -80,6 +84,28 @@ class QuoteRequestLine
      * @ORM\Column(name="traceabilityUnitPrice", type="integer", nullable=true)
      */
     private $traceabilityUnitPrice;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="transportRate", type="bigint", nullable=true)
+     */
+    private $transportRate;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="treatmentRate", type="bigint", nullable=true)
+     */
+    private $treatmentRate;
+
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="traceabilityRate", type="bigint", nullable=true)
+     */
+    private $traceabilityRate;
 
     /**
      * @var int
@@ -446,5 +472,101 @@ class QuoteRequestLine
     public function getTraceabilityUnitPrice()
     {
         return $this->traceabilityUnitPrice;
+    }
+
+    /**
+     * Set transportRate.
+     *
+     * @param int $transportRate
+     *
+     * @return QuoteRequestLine
+     */
+    public function setTransportRate($transportRate)
+    {
+        $this->transportRate = $transportRate;
+
+        return $this;
+    }
+
+    /**
+     * Get transportRate.
+     *
+     * @return int
+     */
+    public function getTransportRate()
+    {
+        return $this->transportRate;
+    }
+
+    /**
+     * Set treatmentRate.
+     *
+     * @param int $treatmentRate
+     *
+     * @return QuoteRequestLine
+     */
+    public function setTreatmentRate($treatmentRate)
+    {
+        $this->treatmentRate = $treatmentRate;
+
+        return $this;
+    }
+
+    /**
+     * Get treatmentRate.
+     *
+     * @return int
+     */
+    public function getTreatmentRate()
+    {
+        return $this->treatmentRate;
+    }
+
+    /**
+     * Set traceabilityRate.
+     *
+     * @param int $traceabilityRate
+     *
+     * @return QuoteRequestLine
+     */
+    public function setTraceabilityRate($traceabilityRate)
+    {
+        $this->traceabilityRate = $traceabilityRate;
+
+        return $this;
+    }
+
+    /**
+     * Get traceabilityRate.
+     *
+     * @return int
+     */
+    public function getTraceabilityRate()
+    {
+        return $this->traceabilityRate;
+    }
+
+    /**
+     * Set setUpPrice.
+     *
+     * @param int $setUpPrice
+     *
+     * @return QuoteRequestLine
+     */
+    public function setSetUpPrice($setUpPrice)
+    {
+        $this->setUpPrice = $setUpPrice;
+
+        return $this;
+    }
+
+    /**
+     * Get setUpPrice.
+     *
+     * @return int
+     */
+    public function getSetUpPrice()
+    {
+        return $this->setUpPrice;
     }
 }

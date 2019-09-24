@@ -86,6 +86,18 @@ class Product
      */
     private $isEnabled;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="setUpPrice", type="integer")
+     * @Assert\NotBlank()
+     * @Assert\Regex(
+     *     pattern="/^\d{1,6}((\.|\,)\d{1,2})?$/",
+     *     match=true,
+     *     message="la valeur doit être un nombre entre 0 et 999 999,99 ('.' autorisé)"
+     * )
+     */
+    private $setUpPrice;
 
     /**
      * @var int
@@ -696,5 +708,29 @@ class Product
     public function getFolderNumber()
     {
         return $this->folderNumber;
+    }
+
+    /**
+     * Set setUpPrice.
+     *
+     * @param int $setUpPrice
+     *
+     * @return Product
+     */
+    public function setSetUpPrice($setUpPrice)
+    {
+        $this->setUpPrice = $setUpPrice;
+
+        return $this;
+    }
+
+    /**
+     * Get setUpPrice.
+     *
+     * @return int
+     */
+    public function getSetUpPrice()
+    {
+        return $this->setUpPrice;
     }
 }

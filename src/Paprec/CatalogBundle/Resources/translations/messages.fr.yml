@@ -74,6 +74,7 @@ Catalog:
     CapacityUnit: Unité de volume
     Position: Position
     FolderNumber: Nombre de dossiers
+    SetUpPrice: PU mise en place
     RentalUnitPrice: PU de location
     TransportUnitPrice: PU de transport
     TreatmentUnitPrice: PU de traitement

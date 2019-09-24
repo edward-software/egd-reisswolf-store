@@ -138,7 +138,8 @@ class ProductController extends Controller
             ->setCellValue('J1', 'PU transport')
             ->setCellValue('K1', 'PU traitement')
             ->setCellValue('L1', 'PU traçabilité')
-            ->setCellValue('M1', 'Date création');
+            ->setCellValue('M1', 'PU mise en place')
+            ->setCellValue('N1', 'Date création');
 
 
         $phpExcelObject->getActiveSheet()->setTitle('Produits');
@@ -162,7 +163,8 @@ class ProductController extends Controller
                 ->setCellValue('J' . $i, $numberManager->denormalize($product->getTransportUnitPrice()))
                 ->setCellValue('K' . $i, $numberManager->denormalize($product->getTreatmentUnitPrice()))
                 ->setCellValue('L' . $i, $numberManager->denormalize($product->getTraceabilityUnitPrice()))
-                ->setCellValue('M' . $i, $product->getDateCreation()->format('Y-m-d'));
+                ->setCellValue('M' . $i, $numberManager->denormalize($product->getSetUpPrice()))
+                ->setCellValue('N' . $i, $product->getDateCreation()->format('Y-m-d'));
             $i++;
         }
 
@@ -269,6 +271,7 @@ class ProductController extends Controller
 
 
             $product->setRentalUnitPrice($numberManager->normalize($product->getRentalUnitPrice()));
+            $product->setSetUpPrice($numberManager->normalize($product->getSetUpPrice()));
             $product->setTransportUnitPrice($numberManager->normalize($product->getTransportUnitPrice()));
             $product->setTreatmentUnitPrice($numberManager->normalize($product->getTreatmentUnitPrice()));
             $product->setTraceabilityUnitPrice($numberManager->normalize($product->getTraceabilityUnitPrice()));
@@ -321,6 +324,7 @@ class ProductController extends Controller
         $language = $request->getLocale();
         $productLabel = $productManager->getProductLabelByProductAndLocale($product, strtoupper($language));
 
+        $product->setSetUpPrice($numberManager->denormalize($product->getSetUpPrice()));
         $product->setRentalUnitPrice($numberManager->denormalize($product->getRentalUnitPrice()));
         $product->setTransportUnitPrice($numberManager->denormalize($product->getTransportUnitPrice()));
         $product->setTreatmentUnitPrice($numberManager->denormalize($product->getTreatmentUnitPrice()));
@@ -342,7 +346,7 @@ class ProductController extends Controller
 
             $product = $form1->getData();
 
-            $product->setRentalUnitPrice($numberManager->normalize($product->getRentalUnitPrice()));
+            $product->setSetUpPrice($numberManager->normalize($product->getSetUpPrice()));
             $product->setTransportUnitPrice($numberManager->normalize($product->getTransportUnitPrice()));
             $product->setTreatmentUnitPrice($numberManager->normalize($product->getTreatmentUnitPrice()));
             $product->setTraceabilityUnitPrice($numberManager->normalize($product->getTraceabilityUnitPrice()));

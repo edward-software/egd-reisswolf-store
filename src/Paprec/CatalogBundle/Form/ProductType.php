@@ -31,6 +31,7 @@ class ProductType extends AbstractType
                 ),
                 "expanded" => true,
             ))
+            ->add('setUpPrice')
             ->add('rentalUnitPrice')
             ->add('transportUnitPrice')
             ->add('treatmentUnitPrice')

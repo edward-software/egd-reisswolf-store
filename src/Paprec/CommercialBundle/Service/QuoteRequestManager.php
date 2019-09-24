@@ -89,8 +89,9 @@ class QuoteRequestManager
      * @param null $user
      * @throws Exception
      */
-    public function addLine(QuoteRequest $quoteRequest, QuoteRequestLine $quoteRequestLine, $user = null)
+    public function addLine(QuoteRequest $quoteRequest, QuoteRequestLine $quoteRequestLine, $user = null, $doFlush = true)
     {
+        $numberManager = $this->container->get('paprec_catalog.number_manager');
 
         // On check s'il existe déjà une ligne pour ce produit, pour l'incrémenter
         $currentQuoteLine = $this->em->getRepository('PaprecCommercialBundle:QuoteRequestLine')->findOneBy(
@@ -112,11 +113,22 @@ class QuoteRequestManager
             $quoteRequestLine->setQuoteRequest($quoteRequest);
             $quoteRequest->addQuoteRequestLine($quoteRequestLine);
 
+            $quoteRequestLine->setSetUpPrice($quoteRequestLine->getProduct()->getSetUpPrice());
             $quoteRequestLine->setRentalUnitPrice($quoteRequestLine->getProduct()->getRentalUnitPrice());
             $quoteRequestLine->setTransportUnitPrice($quoteRequestLine->getProduct()->getTransportUnitPrice());
             $quoteRequestLine->setTreatmentUnitPrice($quoteRequestLine->getProduct()->getTreatmentUnitPrice());
             $quoteRequestLine->setTraceabilityUnitPrice($quoteRequestLine->getProduct()->getTraceabilityUnitPrice());
             $quoteRequestLine->setProductName($quoteRequestLine->getProduct()->getId());
+
+            if ($quoteRequest->getPostalCode()) {
+                $quoteRequestLine->setTransportRate($quoteRequest->getPostalCode()->getTransportRate());
+                $quoteRequestLine->setTreatmentRate($quoteRequest->getPostalCode()->getTreatmentRate());
+                $quoteRequestLine->setTraceabilityRate($quoteRequest->getPostalCode()->getTraceabilityRate());
+            } else {
+                $quoteRequestLine->setTransportRate($numberManager->normalize15(1));
+                $quoteRequestLine->setTreatmentRate($numberManager->normalize15(1));
+                $quoteRequestLine->setTraceabilityRate($numberManager->normalize15(1));
+            }
 
             $this->em->persist($quoteRequestLine);
 
@@ -130,7 +142,9 @@ class QuoteRequestManager
         $quoteRequest->setTotalAmount($total);
         $quoteRequest->setDateUpdate(new \DateTime());
         $quoteRequest->setUserUpdate($user);
-        $this->em->flush();
+        if ($doFlush) {
+            $this->em->flush();
+        }
     }
 
 
@@ -140,7 +154,7 @@ class QuoteRequestManager
      * @param $qtty
      * @throws Exception
      */
-    public function addLineFromCart(QuoteRequest $quoteRequest, $productId, $qtty)
+    public function addLineFromCart(QuoteRequest $quoteRequest, $productId, $qtty, $doFlush = true)
     {
         $productManager = $this->container->get('paprec_catalog.product_manager');
 
@@ -150,7 +164,7 @@ class QuoteRequestManager
 
             $quoteRequestLine->setProduct($product);
             $quoteRequestLine->setQuantity($qtty);
-            $this->addLine($quoteRequest, $quoteRequestLine);
+            $this->addLine($quoteRequest, $quoteRequestLine, null, $doFlush);
         } catch (Exception $e) {
             throw new Exception($e->getMessage(), $e->getCode());
         }
@@ -198,11 +212,7 @@ class QuoteRequestManager
         $productManager = $this->container->get('paprec_catalog.product_manager');
 
         return $numberManager->normalize(
-            $productManager->calculatePrice(
-                $quoteRequestLine->getProduct(),
-                $quoteRequestLine->getQuantity(),
-                $quoteRequestLine->getQuoteRequest()->getPostalCode()
-            )
+            $productManager->calculatePrice($quoteRequestLine)
         );
     }
 
@@ -287,15 +297,24 @@ class QuoteRequestManager
              *      si la demande est multisite alors on envoie au mail générique des demandes multisites
              *          sinon on envoie au mail générique de la région associée au code postal de la demande
              */
-            $rcptTo = ($quoteRequest->getUserInCharge())
-                ? $quoteRequest->getUserInCharge()->getEmail()
-                : ($quoteRequest->getIsMultisite())
-                    ? $this->container->getParameter('reisswolf_salesman_multisite_email')
-                    : $quoteRequest->getPostalCode()->getRegion()->getEmail();
+            $rcptTo = !is_null($quoteRequest->getUserInCharge()) ? $quoteRequest->getUserInCharge()->getEmail() :
+                (!is_null($quoteRequest->getIsMultisite()) ? $this->container->getParameter('reisswolf_salesman_multisite_email') : $quoteRequest->getPostalCode()->getRegion()->getEmail());
+
 
             if ($rcptTo == null || $rcptTo == '') {
                 return false;
             }
+
+            $pdfFilename = date('Y-m-d') . '-Reisswolf-Devis-' . $quoteRequest->getNumber() . '.pdf';
+
+            $pdfFile = $this->generatePDF($quoteRequest, $locale);
+
+            if (!$pdfFile) {
+                return false;
+            }
+
+            $attachment = \Swift_Attachment::newInstance(file_get_contents($pdfFile), $pdfFilename, 'application/pdf');
+
 
             $message = \Swift_Message::newInstance()
                 ->setSubject('Reisswolf E-shop : Nouvelle demande de devis' . ' N°' . $quoteRequest->getId())
@@ -310,8 +329,13 @@ class QuoteRequestManager
                         )
                     ),
                     'text/html'
-                );
+                )
+                ->attach($attachment);
+
             if ($this->container->get('mailer')->send($message)) {
+                if (file_exists($pdfFile)) {
+                    unlink($pdfFile);
+                }
                 return true;
             }
             return false;
@@ -433,7 +457,8 @@ class QuoteRequestManager
                         '@PaprecCommercial/QuoteRequest/PDF/printQuoteOffer.html.twig',
                         array(
                             'quoteRequest' => $quoteRequest,
-                            'date' => $today
+                            'date' => $today,
+                            'locale' => $locale
                         )
                     )
                 ),

@@ -35,9 +35,11 @@ Commercial:
     IsMultisite: Prestation multi-sites
     Comment: Commentaire
     OverallDiscount: Remise globale
+    CustomerId: Numéro client
     SalesmanComment: Commentaire commercial
     MonthlyBudget: Budget mensuel
     View: Vue du devis
+    Download-quote: Télécharger PDF
     Send-quote: Envoyer devis au client
     ProductsList: Liste des produits
     AddLine: Ajouter un produit
@@ -49,7 +51,7 @@ Commercial:
     Success:
       generatedQuoteSent:       Le devis a bien été généré et envoyé au client.
     Locale: Langue
-    Number: Numéro
+    Number: Numéro offre
 
   QuoteStatusList:
     CREATED: Créé
@@ -84,6 +86,11 @@ Commercial:
     ProductName: Nom du produit
     UnitPrice: Prix unitaire
     Quantity: Quantité
+    RentalPrice: Location
+    SetUpPrice: Mise en place
+    Transport: Transport
+    Treatment: Traitement
+    Traceability: Traçabilité
     TotalAmount: Montant total
     Add: Ajout d'un produit
     Product: Produit
@@ -93,7 +100,7 @@ Commercial:
     Title: Une nouvelle demande de devis vous a été affectée.
   ConfirmEmail:
     Title: Votre demande a bien été prise en compte et envoyée au service commercial de votre région.
-    Message1: Nous vous remercions de la confiance que vous nous portez. Notre équipe reviendra vers vous avec votre devis personnalisé. Cette opération peut prendre quelques jours. Notre
+    Message1: Merci pour votre demande du
     TechnicalService: service technique
     Message2: reste à votre disposition pendant ce temps là.
     Disclaimer:

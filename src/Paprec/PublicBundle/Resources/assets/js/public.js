@@ -4,41 +4,61 @@ $(function () {
      * CATALOG
      ***************************************/
 
-    $('.quantityProductSelect').change(function () {
-
-        $('button').prop("disabled", true); // On désactive tous les select
-        const productId = $(this).data('product');
-        const url = $(this).data('url');
-        const qtty = $(this).val();
-
-        $.ajax({
-            url: url,
-            type: "POST",
-            data: {
-                "productId": productId,
-                "quantity": qtty
-            },
-            success: function (response) {
-                // On récupère l'HTML du du produit ajouté et on l'insère dans le récap du devis (=panier)
-                var htmlToDisplay = response.trim();
-                $("#devis-recap-item-" + productId).remove();
-                $("#devis-recap").append(htmlToDisplay);
-                $('#quantityProductSelect_' + productId).val($('#devis-recap-item-' + productId).data('qtty'));
-                disableButtonsFromQuantity($('#quantityProductSelect_' + productId).val(), productId);
-            },
-            complete: function () {
-                $('button').prop("disabled", false);
-            }
-        });
-    });
+    // $('.quantityProductSelect').change(function () {
+    //
+    //     $('button').prop("disabled", true); // On désactive tous les select
+    //     const productId = $(this).data('product');
+    //     const url = $(this).data('url');
+    //     const qtty = $(this).val();
+    //
+    //     $.ajax({
+    //         url: url,
+    //         type: "POST",
+    //         data: {
+    //             "productId": productId,
+    //             "quantity": qtty
+    //         },
+    //         success: function (response) {
+    //             // On récupère l'HTML du du produit ajouté et on l'insère dans le récap du devis (=panier)
+    //             var htmlToDisplay = response.trim();
+    //             $("#devis-recap-item-" + productId).remove();
+    //             $("#devis-recap").append(htmlToDisplay);
+    //             $('#quantityProductSelect_' + productId).val($('#devis-recap-item-' + productId).data('qtty'));
+    //             disableButtonsFromQuantity($('#quantityProductSelect_' + productId).val(), productId);
+    //         },
+    //         complete: function () {
+    //             $('button').prop("disabled", false);
+    //         }
+    //     });
+    // });
 
 
     $('#frequencyButton2').on('click', function () {
         $('.catalog-frequency-select').prop("disabled", false);
+        initClassFrequencyButtons();
     });
 
     $('#frequencyButton1').on('click', function () {
         $('.catalog-frequency-select').prop("disabled", true);
+        $('.devis__frequence__button').prop("disabled", true);
+        $('.devis__frequence__button').addClass("round-btn--disable");
+
+    });
+
+    $('#addFrequencyButton').on('click', function () {
+        $('#catalog_frequency_times_select').val(function (i, oldval) {
+            return ++oldval;
+        });
+        initClassFrequencyButtons();
+    });
+
+    $('#removeFrequencyButton').on('click', function () {
+        if ($('#catalog_frequency_times_select').val() > 1) {
+            $('#catalog_frequency_times_select').val(function (i, oldval) {
+                return --oldval;
+            });
+            initClassFrequencyButtons();
+        }
     });
 
     $('#catalog_next_step_button').on('click', function () {
@@ -186,3 +206,18 @@ function disableButtonsFromQuantity(quantity, productId) {
     }
 }
 
+
+function initClassFrequencyButtons() {
+    const freq = $('#catalog_frequency_times_select').val();
+    console.dir(freq);
+    if (freq < 2) {
+        $('#removeFrequencyButton').addClass('round-btn--disable');
+        $('#removeFrequencyButton').prop("disabled", true);
+    } else {
+        $('#removeFrequencyButton').removeClass('round-btn--disable');
+        $('#removeFrequencyButton').prop("disabled", false);
+    }
+    $('#addFrequencyButton').removeClass('round-btn--disable');
+    $('#addFrequencyButton').prop("disabled", false);
+
+}
