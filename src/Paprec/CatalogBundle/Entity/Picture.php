@@ -47,6 +47,11 @@ class Picture
     private $product;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Paprec\CatalogBundle\Entity\CustomArea", inversedBy="pictures")
+     */
+    private $customArea;
+
+    /**
      * Get id.
      *
      * @return int
@@ -126,5 +131,29 @@ class Picture
     public function getProduct()
     {
         return $this->product;
+    }
+
+    /**
+     * Set customArea.
+     *
+     * @param \Paprec\CatalogBundle\Entity\CustomArea|null $customArea
+     *
+     * @return Picture
+     */
+    public function setCustomArea(\Paprec\CatalogBundle\Entity\CustomArea $customArea = null)
+    {
+        $this->customArea = $customArea;
+
+        return $this;
+    }
+
+    /**
+     * Get customArea.
+     *
+     * @return \Paprec\CatalogBundle\Entity\CustomArea|null
+     */
+    public function getCustomArea()
+    {
+        return $this->customArea;
     }
 }

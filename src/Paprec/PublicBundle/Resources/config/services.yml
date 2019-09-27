@@ -1,12 +1,20 @@
 services:
-#    paprec_public.example:
-#        class: PaprecPublicBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+  #    paprec_public.example:
+  #        class: PaprecPublicBundle\Example
+  #        arguments: ["@service_id", "plain_value", "%parameter%"]
   _defaults: { public: true }
 
   paprec.cart_manager:
     class: Paprec\PublicBundle\Service\CartManager
     arguments: ["@doctrine.orm.entity_manager", "@service_container"]
 
+  twig.paprec_customizable_area:
+    class: Paprec\PublicBundle\Twig\Extension\PaprecCustomizableAreaExtension
+    public: false
+    arguments: ["@service_container"]
+    tags:
+      - { name: twig.extension }
+
 parameters:
   paprec_commercial.data_tmp_directory: "%kernel.root_dir%/data/tmp"
+

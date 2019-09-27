@@ -112,3 +112,20 @@ Catalog:
     System-informations:        Informations système
     PostalCodes: Codes postaux
 
+  CustomArea:
+    CustomAreas: Zones personnalisables
+    List: Liste des zones personnalisables
+    Code: Code
+    Language: Langue
+    Content: Contenu
+    LeftContent: Bloc de contenu gauche
+    RightContent: Bloc de contenu droite
+    IsDisplayed: Affiché
+    Add: Ajouter une zone
+    View: Vue de la zone
+    Edit: Modifier zone
+    Remove: Supprimer zone
+    AddPictureLeft: Photo gauche
+    AddPictureRight: Photo droite
+    Informations: Informations
+    System-informations: Informations système

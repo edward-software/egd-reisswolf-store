@@ -18,16 +18,35 @@
                     <div class="divider"></div>
                 </div>
             </div>
-            {#<div class="row">
-                <div class="col-xl-6">
-                   <div class="mytext">reger</div>
-                   <div class="image"></div>
+            {% set customArea = paprec_customizable_area('catalog_top', locale) %}
+            {% if customArea is not null %}
+                <div class="row mb-5">
+                    <div class="col-xl-6">
+
+                        <div class="mytext">{% autoescape false %}{{ customArea.leftContent }}{% endautoescape %}</div>
+
+
+                        <div class="image">
+                            {% if customArea.leftPictures and customArea.leftPictures|length > 0 %}
+                                <img src="{{ asset('uploads/pictos/' ~ customArea.leftPictures[0].path) }}"
+                                     alt="Image block left">
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+
+                        <div class="mytext">{% autoescape false %}{{ customArea.rightContent }}{% endautoescape %}</div>
+
+
+                        <div class="image">
+                            {% if customArea.rightPictures and customArea.rightPictures|length > 0 %}
+                                <img src="{{ asset('uploads/pictos/' ~ customArea.rightPictures[0].path) }}"
+                                     alt="Image block left">
+                            {% endif %}
+                        </div>
+                    </div>
                 </div>
-                <div class="col-xl-6">
-                    <div class="mytext">ergre</div>
-                    <div class="image"></div>
-                </div>
-            </div>#}
+            {% endif %}
 
             <div class="row product-container">
                 {% for product in products %}
@@ -80,13 +99,12 @@
                                                 data-url="{{ path('paprec_public_catalog_addContent', {locale: locale, cartUuid: cart.id}) }}"
                                                 data-product="{{ product.id }}"
                                                 id="quantityProductSelect_{{ product.id }}">
-                                            {% for i in 0..10 %}
+                                            {% for i in 0..100 %}
                                                 {% if i == qtty %}
                                                     <option value="{{ i }}"
                                                             selected="selected">{{ i }}</option>''
                                                 {% else %}
                                                     <option value="{{ i }}">{{ i }}</option>
-
                                                 {% endif %}
                                             {% endfor %}
                                         </select>
@@ -157,14 +175,15 @@
                                 <div class="devis__frequence paprec-flex">
                                     <div class="paprec-flex">
                                         <button class="round-btn round-btn--blue devis__frequence__button mr-2"
-                                        id="addFrequencyButton">
+                                                id="addFrequencyButton">
                                             <i class="fas fa-plus"></i>
                                         </button>
                                         <input class="catalog-frequency-select catalog-frequency-input"
                                                disabled="disabled"
                                                size="1"
                                                id="catalog_frequency_times_select" value="1"/>
-                                        <button class="round-btn round-btn--blue devis__frequence__button round-btn--disable ml-2" disabled
+                                        <button class="round-btn round-btn--blue devis__frequence__button round-btn--disable ml-2"
+                                                disabled
                                                 id="removeFrequencyButton">
                                             <i class="fas fa-minus"></i>
                                         </button>

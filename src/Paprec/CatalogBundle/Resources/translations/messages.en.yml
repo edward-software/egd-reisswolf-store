@@ -111,3 +111,20 @@ Catalog:
     System-informations:        System information
     PostalCodes: Postal codes
 
+  CustomArea:
+    CustomAreas: Custom areas
+    List: Custom areas list
+    Code: Code
+    Language: Language
+    Content: Content
+    LeftContent: Left content block
+    RightContent: Right content block
+    IsDisplayed: Displayed
+    Add: Add area
+    View: View area
+    Edit: Edit area
+    Remove: Delete area
+    AddPictureLeft: Left picture
+    AddPictureRight: Right picture
+    Informations: Information
+    System-informations: System information

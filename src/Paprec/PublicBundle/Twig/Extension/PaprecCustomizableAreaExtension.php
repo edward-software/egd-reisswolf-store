@@ -28,15 +28,16 @@ class PaprecCustomizableAreaExtension extends \Twig_Extension
 
     /**
      * @param $code
-     * @return array|object[]|\Paprec\CatalogBundle\Entity\CustomizableArea[]
+     * @return array|object[]|\Paprec\CatalogBundle\Entity\CustomArea[]
      * @throws Exception
      */
-    public function customizableArea($code)
+    public function customizableArea($code, $locale)
     {
         try {
-            $customizableAreaManager = $this->container->get('paprec_catalog.customizable_area_manager');
+            $locale = strtoupper($locale);
+            $customAreaManager = $this->container->get('paprec_catalog.custom_area_manager');
 
-            return $customizableAreaManager->getByCode($code);
+            return $customAreaManager->getByCodeLocale($code, $locale);
         } catch (Exception $e) {
             throw new Exception($e->getMessage(), $e->getCode());
         }
