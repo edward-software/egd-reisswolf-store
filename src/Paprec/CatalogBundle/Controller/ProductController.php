@@ -30,7 +30,7 @@ class ProductController extends Controller
 
     /**
      * @Route("/product", name="paprec_catalog_product_index")
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_COMMERCIAL')")
      */
     public function indexAction()
     {
@@ -39,7 +39,7 @@ class ProductController extends Controller
 
     /**
      * @Route("/product/loadList", name="paprec_catalog_product_loadList")
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_COMMERCIAL')")
      */
     public function loadListAction(Request $request)
     {
@@ -100,7 +100,7 @@ class ProductController extends Controller
 
     /**
      * @Route("/product/export",  name="paprec_catalog_product_export")
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_COMMERCIAL')")
      */
     public function exportAction(Request $request)
     {
@@ -190,7 +190,7 @@ class ProductController extends Controller
 
     /**
      * @Route("/product/view/{id}",  name="paprec_catalog_product_view")
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_COMMERCIAL')")
      */
     public function viewAction(Request $request, Product $product)
     {
@@ -238,7 +238,7 @@ class ProductController extends Controller
 
     /**
      * @Route("/product/add",  name="paprec_catalog_product_add")
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_COMMERCIAL')")
      */
     public function addAction(Request $request)
     {
@@ -304,7 +304,7 @@ class ProductController extends Controller
 
     /**
      * @Route("/product/edit/{id}",  name="paprec_catalog_product_edit")
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_COMMERCIAL')")
      * @throws \Doctrine\ORM\EntityNotFoundException
      * @throws \Exception
      */
@@ -377,7 +377,7 @@ class ProductController extends Controller
 
     /**
      * @Route("/product/remove/{id}", name="paprec_catalog_product_remove")
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_COMMERCIAL')")
      */
     public function removeAction(Request $request, Product $product)
     {
@@ -400,7 +400,7 @@ class ProductController extends Controller
 
     /**
      * @Route("/product/removeMany/{ids}", name="paprec_catalog_product_removeMany")
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_COMMERCIAL')")
      */
     public function removeManyAction(Request $request)
     {
@@ -433,7 +433,7 @@ class ProductController extends Controller
 
     /**
      * @Route("/product/enableMany/{ids}", name="paprec_catalog_product_enableMany")
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_COMMERCIAL')")
      */
     public function enableManyAction(Request $request)
     {
@@ -459,7 +459,7 @@ class ProductController extends Controller
 
     /**
      * @Route("/product/disableMany/{ids}", name="paprec_catalog_product_disableMany")
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_COMMERCIAL')")
      */
     public function disableManyAction(Request $request)
     {
@@ -485,7 +485,7 @@ class ProductController extends Controller
 
     /**
      * @Route("/product/{id}/addProductLabel",  name="paprec_catalog_product_addProductLabel")
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_COMMERCIAL')")
      */
     public function addProductLabelAction(Request $request, Product $product)
     {
@@ -533,7 +533,7 @@ class ProductController extends Controller
 
     /**
      * @Route("/product/{id}/editProductLabel/{productLabelId}",  name="paprec_catalog_product_editProductLabel")
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_COMMERCIAL')")
      * @param Request $request
      * @param Product $product
      * @param $productLabelId
@@ -588,7 +588,7 @@ class ProductController extends Controller
 
     /**
      * @Route("/product/{id}/removeProductLabel/{productLabelId}",  name="paprec_catalog_product_removeProductLabel")
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_COMMERCIAL')")
      * @param Request $request
      * @param Product $product
      * @param $productLabelId
@@ -629,7 +629,7 @@ class ProductController extends Controller
     /**
      * @Route("/product/addPicture/{id}/{type}", name="paprec_catalog_product_addPicture")
      * @Method("POST")
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_COMMERCIAL')")
      */
     public function addPictureAction(Request $request, Product $product)
     {
@@ -676,7 +676,7 @@ class ProductController extends Controller
     /**
      * @Route("/product/editPicture/{id}/{pictureID}", name="paprec_catalog_product_editPicture")
      * @Method("POST")
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_COMMERCIAL')")
      */
     public function editPictureAction(Request $request, Product $product)
     {
@@ -728,7 +728,7 @@ class ProductController extends Controller
 
     /**
      * @Route("/product/removePicture/{id}/{pictureID}", name="paprec_catalog_product_removePicture")
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_COMMERCIAL')")
      */
     public function removePictureAction(Request $request, Product $product)
     {
@@ -755,7 +755,7 @@ class ProductController extends Controller
 
     /**
      * @Route("/product/setPilotPicture/{id}/{pictureID}", name="paprec_catalog_product_setPilotPicture")
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_COMMERCIAL')")
      */
     public function setPilotPictureAction(Request $request, Product $product)
     {
@@ -780,7 +780,7 @@ class ProductController extends Controller
 
     /**
      * @Route("/product/setPicture/{id}/{pictureID}", name="paprec_catalog_product_setPicture")
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_COMMERCIAL')")
      */
     public function setPictureAction(Request $request, Product $product)
     {

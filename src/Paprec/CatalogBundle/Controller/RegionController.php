@@ -17,7 +17,7 @@ class RegionController extends Controller
 
     /**
      * @Route("/region", name="paprec_catalog_region_index")
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_COMMERCIAL')")
      */
     public function indexAction()
     {
@@ -26,7 +26,7 @@ class RegionController extends Controller
 
     /**
      * @Route("/region/loadList", name="paprec_catalog_region_loadList")
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_COMMERCIAL')")
      */
     public function loadListAction(Request $request)
     {
@@ -78,7 +78,7 @@ class RegionController extends Controller
 
     /**
      * @Route("/region/export", name="paprec_catalog_region_export")
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_COMMERCIAL')")
      */
     public function exportAction(Request $request)
     {
@@ -138,7 +138,7 @@ class RegionController extends Controller
 
     /**
      * @Route("/region/view/{id}", name="paprec_catalog_region_view")
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_COMMERCIAL')")
      * @param Request $request
      * @param Region $region
      * @return \Symfony\Component\HttpFoundation\Response
@@ -156,7 +156,7 @@ class RegionController extends Controller
 
     /**
      * @Route("/region/add", name="paprec_catalog_region_add")
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_COMMERCIAL')")
      */
     public function addAction(Request $request)
     {
@@ -192,7 +192,7 @@ class RegionController extends Controller
 
     /**
      * @Route("/region/edit/{id}", name="paprec_catalog_region_edit")
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_COMMERCIAL')")
      * @param Request $request
      * @param Region $region
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
@@ -233,7 +233,7 @@ class RegionController extends Controller
 
     /**
      * @Route("/region/remove/{id}", name="paprec_catalog_region_remove")
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_COMMERCIAL')")
      */
     public function removeAction(Request $request, Region $region)
     {
@@ -252,7 +252,7 @@ class RegionController extends Controller
 
     /**
      * @Route("/region/removeMany/{ids}", name="paprec_catalog_region_removeMany")
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_COMMERCIAL')")
      */
     public function removeManyAction(Request $request)
     {

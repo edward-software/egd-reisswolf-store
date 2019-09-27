@@ -19,7 +19,7 @@ class UserController extends Controller
 
     /**
      * @Route("/", name="paprec_user_user_index")
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_COMMERCIAL')")
      */
     public function indexAction()
     {
@@ -28,7 +28,7 @@ class UserController extends Controller
 
     /**
      * @Route("/loadList", name="paprec_user_user_loadList")
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_COMMERCIAL')")
      */
     public function loadListAction(Request $request)
     {
@@ -85,7 +85,7 @@ class UserController extends Controller
 
     /**
      * @Route("/export", name="paprec_user_user_export")
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_COMMERCIAL')")
      */
     public function exportAction(Request $request)
     {
@@ -167,7 +167,7 @@ class UserController extends Controller
 
     /**
      * @Route("/view/{id}", name="paprec_user_user_view")
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_COMMERCIAL')")
      */
     public function viewAction(Request $request, User $user)
     {
@@ -182,7 +182,7 @@ class UserController extends Controller
 
     /**
      * @Route("/add", name="paprec_user_user_add")
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_COMMERCIAL')")
      */
     public function addAction(Request $request)
     {
@@ -227,7 +227,7 @@ class UserController extends Controller
 
     /**
      * @Route("/edit/{id}", name="paprec_user_user_edit")
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_COMMERCIAL')")
      */
     public function editAction(Request $request, User $user)
     {
@@ -312,7 +312,7 @@ class UserController extends Controller
 
     /**
      * @Route("/sendAccess/{id}", name="paprec_user_user_sendAccess")
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_COMMERCIAL')")
      */
     public function sendAccessAction(Request $request, User $user)
     {
@@ -355,7 +355,7 @@ class UserController extends Controller
 
     /**
      * @Route("/sendAccessMany/{ids}", name="paprec_user_user_sendAccessMany")
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_COMMERCIAL')")
      */
     public function sendAccessManyAction(Request $request)
     {
@@ -406,7 +406,7 @@ class UserController extends Controller
 
     /**
      * @Route("/remove/{id}", name="paprec_user_user_remove")
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_COMMERCIAL')")
      */
     public function removeAction(Request $request, User $user)
     {
@@ -421,7 +421,7 @@ class UserController extends Controller
 
     /**
      * @Route("/removeMany/{ids}", name="paprec_user_user_removeMany")
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_COMMERCIAL')")
      */
     public function removeManyAction(Request $request)
     {

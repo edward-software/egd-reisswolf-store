@@ -25,7 +25,7 @@ class QuoteRequestController extends Controller
 
     /**
      * @Route("/quoteRequest", name="paprec_commercial_quoteRequest_index")
-     * @Security("has_role('ROLE_ADMIN') or (has_role('ROLE_COMMERCIAL_DIVISION') and 'DI' in user.getDivisions())")
+     * @Security("has_role('ROLE_COMMERCIAL') or (has_role('ROLE_COMMERCIAL_DIVISION') and 'DI' in user.getDivisions())")
      */
     public function indexAction()
     {
@@ -34,7 +34,7 @@ class QuoteRequestController extends Controller
 
     /**
      * @Route("/quoteRequest/loadList", name="paprec_commercial_quoteRequest_loadList")
-     * @Security("has_role('ROLE_ADMIN') or (has_role('ROLE_COMMERCIAL_DIVISION') and 'DI' in user.getDivisions())")
+     * @Security("has_role('ROLE_COMMERCIAL') or (has_role('ROLE_COMMERCIAL_DIVISION') and 'DI' in user.getDivisions())")
      */
     public function loadListAction(Request $request)
     {
@@ -99,7 +99,7 @@ class QuoteRequestController extends Controller
 
     /**
      * @Route("/quoteRequest/export/{status}/{dateStart}/{dateEnd}", defaults={"status"=null, "dateStart"=null, "dateEnd"=null}, name="paprec_commercial_quoteRequest_export")
-     * @Security("has_role('ROLE_ADMIN') or (has_role('ROLE_COMMERCIAL_DIVISION') and 'DI' in user.getDivisions())")
+     * @Security("has_role('ROLE_COMMERCIAL') or (has_role('ROLE_COMMERCIAL_DIVISION') and 'DI' in user.getDivisions())")
      */
     public function exportAction(Request $request, $dateStart, $dateEnd, $status)
     {
@@ -200,7 +200,7 @@ class QuoteRequestController extends Controller
 
     /**
      * @Route("/quoteRequest/view/{id}", name="paprec_commercial_quoteRequest_view")
-     * @Security("has_role('ROLE_ADMIN') or (has_role('ROLE_COMMERCIAL_DIVISION') and 'DI' in user.getDivisions())")
+     * @Security("has_role('ROLE_COMMERCIAL') or (has_role('ROLE_COMMERCIAL_DIVISION') and 'DI' in user.getDivisions())")
      * @throws \Doctrine\ORM\EntityNotFoundException
      */
     public function viewAction(Request $request, QuoteRequest $quoteRequest)
@@ -215,7 +215,7 @@ class QuoteRequestController extends Controller
 
     /**
      * @Route("/quoteRequest/add", name="paprec_commercial_quoteRequest_add")
-     * @Security("has_role('ROLE_ADMIN') or (has_role('ROLE_COMMERCIAL_DIVISION') and 'DI' in user.getDivisions())")
+     * @Security("has_role('ROLE_COMMERCIAL') or (has_role('ROLE_COMMERCIAL_DIVISION') and 'DI' in user.getDivisions())")
      */
     public function addAction(Request $request)
     {
@@ -281,7 +281,7 @@ class QuoteRequestController extends Controller
 
     /**
      * @Route("/quoteRequest/edit/{id}", name="paprec_commercial_quoteRequest_edit")
-     * @Security("has_role('ROLE_ADMIN') or (has_role('ROLE_COMMERCIAL_DIVISION') and 'DI' in user.getDivisions())")
+     * @Security("has_role('ROLE_COMMERCIAL') or (has_role('ROLE_COMMERCIAL_DIVISION') and 'DI' in user.getDivisions())")
      * @throws \Doctrine\ORM\EntityNotFoundException
      * @throws \Exception
      */
@@ -359,7 +359,7 @@ class QuoteRequestController extends Controller
 
     /**
      * @Route("/quoteRequest/remove/{id}", name="paprec_commercial_quoteRequest_remove")
-     * @Security("has_role('ROLE_ADMIN') or (has_role('ROLE_COMMERCIAL_DIVISION') and 'DI' in user.getDivisions())")
+     * @Security("has_role('ROLE_COMMERCIAL') or (has_role('ROLE_COMMERCIAL_DIVISION') and 'DI' in user.getDivisions())")
      */
     public function removeAction(Request $request, QuoteRequest $quoteRequest)
     {
@@ -373,7 +373,7 @@ class QuoteRequestController extends Controller
 
     /**
      * @Route("/quoteRequest/removeMany/{ids}", name="paprec_commercial_quoteRequest_removeMany")
-     * @Security("has_role('ROLE_ADMIN') or (has_role('ROLE_COMMERCIAL_DIVISION') and 'DI' in user.getDivisions())")
+     * @Security("has_role('ROLE_COMMERCIAL') or (has_role('ROLE_COMMERCIAL_DIVISION') and 'DI' in user.getDivisions())")
      */
     public function removeManyAction(Request $request)
     {
@@ -400,7 +400,7 @@ class QuoteRequestController extends Controller
 
     /**
      * @Route("/quoteRequest/{id}/addLine", name="paprec_commercial_quoteRequest_addLine")
-     * @Security("has_role('ROLE_ADMIN') or (has_role('ROLE_COMMERCIAL_DIVISION') and 'DI' in user.getDivisions())")
+     * @Security("has_role('ROLE_COMMERCIAL') or (has_role('ROLE_COMMERCIAL_DIVISION') and 'DI' in user.getDivisions())")
      */
     public function addLineAction(Request $request, QuoteRequest $quoteRequest)
     {
@@ -441,7 +441,7 @@ class QuoteRequestController extends Controller
 
     /**
      * @Route("/quoteRequest/{id}/editLine/{quoteLineId}", name="paprec_commercial_quoteRequest_editLine")
-     * @Security("has_role('ROLE_ADMIN') or (has_role('ROLE_COMMERCIAL_DIVISION') and 'DI' in user.getDivisions())")
+     * @Security("has_role('ROLE_COMMERCIAL') or (has_role('ROLE_COMMERCIAL_DIVISION') and 'DI' in user.getDivisions())")
      * @ParamConverter("quoteRequest", options={"id" = "id"})
      * @ParamConverter("quoteRequestLine", options={"id" = "quoteLineId"})
      */
@@ -480,7 +480,7 @@ class QuoteRequestController extends Controller
 
     /**
      * @Route("/quoteRequest/{id}/removeLine/{quoteLineId}", name="paprec_commercial_quoteRequest_removeLine")
-     * @Security("has_role('ROLE_ADMIN') or (has_role('ROLE_COMMERCIAL_DIVISION') and 'DI' in user.getDivisions())")
+     * @Security("has_role('ROLE_COMMERCIAL') or (has_role('ROLE_COMMERCIAL_DIVISION') and 'DI' in user.getDivisions())")
      * @ParamConverter("quoteRequest", options={"id" = "id"})
      * @ParamConverter("quoteRequestLine", options={"id" = "quoteLineId"})
      */
@@ -513,7 +513,7 @@ class QuoteRequestController extends Controller
 
     /**
      * @Route("/quoteRequest/{id}/sendGeneratedQuote", name="paprec_commercial_quoteRequest_sendGeneratedQuote")
-     * @Security("has_role('ROLE_ADMIN') or (has_role('ROLE_COMMERCIAL_DIVISION') and 'DI' in user.getDivisions())")
+     * @Security("has_role('ROLE_COMMERCIAL') or (has_role('ROLE_COMMERCIAL_DIVISION') and 'DI' in user.getDivisions())")
      * @throws \Doctrine\ORM\EntityNotFoundException
      * @throws \Exception
      */
@@ -537,7 +537,7 @@ class QuoteRequestController extends Controller
 
     /**
      * @Route("/quoteRequest/{id}/downloadQuote", name="paprec_commercial_quote_request_download")
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_COMMERCIAL')")
      * @throws \Exception
      */
     public function downloadAssociatedInvoiceAction(QuoteRequest $quoteRequest)

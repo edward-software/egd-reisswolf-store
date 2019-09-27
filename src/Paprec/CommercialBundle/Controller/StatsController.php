@@ -11,7 +11,7 @@ class StatsController extends Controller
 {
     /**
      * @Route("/stats", name="paprec_commercial_stats_index")
-     * @Security("has_role('ROLE_ADMIN') or has_role('ROLE_COMMERCIAL')")
+     * @Security("has_role('ROLE_COMMERCIAL') or has_role('ROLE_COMMERCIAL')")
      */
     public function indexAction(Request $request)
     {
@@ -283,7 +283,7 @@ class StatsController extends Controller
      * Exporte uniquement les devis/commandes répondant aux critères de status et de dates si non nulls
      *
      * @Route("/stats/export/{type}/{status}/{dateStart}/{dateEnd}", defaults={"status"=null, "dateEnd"=null, "dateStart"=null}, name="paprec_commercial_stats_export")
-     * @Security("has_role('ROLE_ADMIN') or has_role('ROLE_COMMERCIAL_DIVISION')")
+     * @Security("has_role('ROLE_COMMERCIAL') or has_role('ROLE_COMMERCIAL_DIVISION')")
      */
     public function exportAction($type, $status, $dateStart, $dateEnd)
     {
