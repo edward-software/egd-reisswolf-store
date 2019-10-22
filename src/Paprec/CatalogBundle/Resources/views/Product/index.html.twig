@@ -91,7 +91,7 @@
                                 });
                                 var url = "{{ path("paprec_catalog_product_removeMany", {ids: '0000'}) }}".replace('0000', rowIds.join(','));
 
-                                Swal({
+                                Swal.fire({
                                     title: "{{ 'General.Confirm'|trans }}",
                                     text: "{{ 'General.Confirm-remove'|trans }}",
                                     showCancelButton: true,
@@ -116,7 +116,7 @@
                                 });
                                 var url = "{{ path("paprec_catalog_product_disableMany", {ids: '0000'}) }}".replace('0000', rowIds.join(','));
 
-                                Swal({
+                                Swal.fire({
                                     title: "{{ 'General.Confirm'|trans }}",
                                     text: "{{ 'General.Confirm-disable'|trans }}",
                                     showCancelButton: true,
@@ -141,7 +141,7 @@
                                 });
                                 var url = "{{ path("paprec_catalog_product_enableMany", {ids: '0000'}) }}".replace('0000', rowIds.join(','));
 
-                                Swal({
+                                Swal.fire({
                                     title: "{{ 'General.Confirm'|trans }}",
                                     text: "{{ 'General.Confirm-enable'|trans }}",
                                     showCancelButton: true,

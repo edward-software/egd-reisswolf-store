@@ -94,7 +94,7 @@
                                 });
                                 var url = "{{ path("paprec_commercial_quoteRequest_removeMany", {ids: '0000'}) }}".replace('0000', rowIds.join(','));
 
-                                Swal({
+                                Swal.fire({
                                     title: "{{ 'General.Confirm'|trans }}",
                                     text: "{{ 'General.Confirm-remove'|trans }}",
                                     showCancelButton: true,

@@ -339,30 +339,6 @@ class Product
     }
 
     /**
-     * Set availablePostalCodes.
-     *
-     * @param string|null $availablePostalCodes
-     *
-     * @return Product
-     */
-    public function setAvailablePostalCodes($availablePostalCodes = null)
-    {
-        $this->availablePostalCodes = $availablePostalCodes;
-
-        return $this;
-    }
-
-    /**
-     * Get availablePostalCodes.
-     *
-     * @return string|null
-     */
-    public function getAvailablePostalCodes()
-    {
-        return $this->availablePostalCodes;
-    }
-
-    /**
      * Set IsEnabled.
      *
      * @param bool IsEnabled

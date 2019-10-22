@@ -381,7 +381,7 @@
 
                     var url = "{{ path("paprec_catalog_product_remove", {id: product.id}) }}";
 
-                    Swal({
+                    Swal.fire({
                         title: "{{ 'General.Confirm'| trans({}, "messages", app.request.locale) }}",
                         text: "{{ 'General.Confirm-remove'| trans({}, "messages", app.request.locale) }}",
                         showCancelButton: true,
@@ -401,7 +401,7 @@
 
                     var url = "{{ path("paprec_catalog_product_removeProductLabel", {id: product.id, productLabelId: 'productLabelId'}) }}".replace('productLabelId', pLId);
 
-                    Swal({
+                    Swal.fire({
                         title: "{{ 'General.Confirm'| trans({}, "messages", app.request.locale) }}",
                         text: "{{ 'General.Confirm-remove'| trans({}, "messages", app.request.locale) }}",
                         showCancelButton: true,
@@ -480,7 +480,7 @@
 
                 $('.removePictureButton').on('click', function () {
                     picId = $(this).data('id');
-                    Swal({
+                    Swal.fire({
                         title: "{{ 'General.Confirm'| trans({}, "messages", app.request.locale) }}",
                         text: "{{ 'General.Confirm-remove'| trans({}, "messages", app.request.locale) }}",
                         showCancelButton: true,
@@ -499,7 +499,7 @@
                 // Change le type de la Picture en PilotPicture
                 $('.setPilotPictureButton').on('click', function () {
                     picId = $(this).data('id');
-                    Swal({
+                    Swal.fire({
                         title: "{{ 'General.Confirm'| trans({}, "messages", app.request.locale) }}",
                         text: "{{ 'Catalog.Product.Confirm-set_pilot'| trans({}, "messages", app.request.locale) }}",
                         showCancelButton: true,
@@ -517,7 +517,7 @@
                 // Change dle type de PilotPicture en Picture
                 $('.setPictureButton').on('click', function () {
                     picId = $(this).data('id');
-                    Swal({
+                    Swal.fire({
                         title: "{{ 'General.Confirm'| trans({}, "messages", app.request.locale) }}",
                         text: "{{ 'Catalog.Product.Confirm-set_picture'| trans({}, "messages", app.request.locale) }}",
                         showCancelButton: true,

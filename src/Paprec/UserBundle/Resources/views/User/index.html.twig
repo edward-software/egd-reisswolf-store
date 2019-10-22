@@ -108,7 +108,7 @@
                                 });
                                 var url = "{{ path("paprec_user_user_sendAccessMany", {ids: '0000'}) }}".replace('0000', rowIds.join(','));
 
-                                Swal({
+                                Swal.fire({
                                     title: "{{ 'General.Confirm'|trans }}",
                                     text: "{{ 'User.User.Confirm-send-access'|trans }}",
                                     showCancelButton: true,
@@ -134,7 +134,7 @@
                                 });
                                 var url = "{{ path("paprec_user_user_removeMany", {ids: '0000'}) }}".replace('0000', rowIds.join(','));
 
-                                Swal({
+                                Swal.fire({
                                     title: "{{ 'General.Confirm'|trans }}",
                                     text: "{{ 'General.Confirm-remove'|trans }}",
                                     showCancelButton: true,

@@ -105,7 +105,7 @@
 
                 var url = "{{ path("paprec_catalog_product_view", {id: product.id}) }}";
 
-                Swal({
+                Swal.fire({
                     title: "{{ 'General.Confirm'|trans }}",
                     text: "{{ 'General.Confirm-cancel'|trans }}",
                     showCancelButton: true,

@@ -133,12 +133,12 @@ class ProductController extends Controller
             ->setCellValue('E1', 'Unité Vol')
             ->setCellValue('F1', 'Dimensions')
             ->setCellValue('G1', 'Actif')
-            ->setCellValue('H1', 'Dispo géographique')
-            ->setCellValue('I1', 'PU location')
-            ->setCellValue('J1', 'PU transport')
-            ->setCellValue('K1', 'PU traitement')
-            ->setCellValue('L1', 'PU traçabilité')
-            ->setCellValue('M1', 'PU mise en place')
+            ->setCellValue('H1', 'PU location')
+            ->setCellValue('I1', 'PU transport')
+            ->setCellValue('J1', 'PU traitement')
+            ->setCellValue('K1', 'PU traçabilité')
+            ->setCellValue('L1', 'PU mise en place')
+            ->setCellValue('M1', 'Position')
             ->setCellValue('N1', 'Date création');
 
 
@@ -158,12 +158,12 @@ class ProductController extends Controller
                 ->setCellValue('E' . $i, $product->getCapacityUnit())
                 ->setCellValue('F' . $i, $product->getDimensions())
                 ->setCellValue('G' . $i, $product->getIsEnabled())
-                ->setCellValue('H' . $i, $product->getAvailablePostalCodes())
-                ->setCellValue('I' . $i, $numberManager->denormalize($product->getRentalUnitPrice()))
-                ->setCellValue('J' . $i, $numberManager->denormalize($product->getTransportUnitPrice()))
-                ->setCellValue('K' . $i, $numberManager->denormalize($product->getTreatmentUnitPrice()))
-                ->setCellValue('L' . $i, $numberManager->denormalize($product->getTraceabilityUnitPrice()))
-                ->setCellValue('M' . $i, $numberManager->denormalize($product->getSetUpPrice()))
+                ->setCellValue('H' . $i, $numberManager->denormalize($product->getRentalUnitPrice()))
+                ->setCellValue('I' . $i, $numberManager->denormalize($product->getTransportUnitPrice()))
+                ->setCellValue('J' . $i, $numberManager->denormalize($product->getTreatmentUnitPrice()))
+                ->setCellValue('K' . $i, $numberManager->denormalize($product->getTraceabilityUnitPrice()))
+                ->setCellValue('L' . $i, $numberManager->denormalize($product->getSetUpPrice()))
+                ->setCellValue('M' . $i, $product->getPosition())
                 ->setCellValue('N' . $i, $product->getDateCreation()->format('Y-m-d'));
             $i++;
         }
@@ -347,6 +347,7 @@ class ProductController extends Controller
             $product = $form1->getData();
 
             $product->setSetUpPrice($numberManager->normalize($product->getSetUpPrice()));
+            $product->setRentalUnitPrice($numberManager->normalize($product->getRentalUnitPrice()));
             $product->setTransportUnitPrice($numberManager->normalize($product->getTransportUnitPrice()));
             $product->setTreatmentUnitPrice($numberManager->normalize($product->getTreatmentUnitPrice()));
             $product->setTraceabilityUnitPrice($numberManager->normalize($product->getTraceabilityUnitPrice()));

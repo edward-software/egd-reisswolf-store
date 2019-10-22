@@ -8,6 +8,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -31,11 +32,11 @@ class ProductType extends AbstractType
                 ),
                 "expanded" => true,
             ))
-            ->add('setUpPrice')
-            ->add('rentalUnitPrice')
-            ->add('transportUnitPrice')
-            ->add('treatmentUnitPrice')
-            ->add('traceabilityUnitPrice')
+            ->add('setUpPrice', TextType::class)
+            ->add('rentalUnitPrice', TextType::class)
+            ->add('transportUnitPrice', TextType::class)
+            ->add('treatmentUnitPrice', TextType::class)
+            ->add('traceabilityUnitPrice', TextType::class)
             ->add('position')
             ;
     }

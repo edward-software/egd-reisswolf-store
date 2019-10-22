@@ -176,7 +176,7 @@
 
                         var url = "{{ path("paprec_user_user_remove", {id: user.id}) }}";
 
-                        Swal({
+                        Swal.fire({
                             title: "{{ 'General.Confirm'|trans }}",
                             text: "{{ 'General.Confirm-remove'|trans }}",
                             showCancelButton: true,
@@ -194,7 +194,7 @@
 
                         var url = "{{ path("paprec_user_user_sendAccess", {id: user.id}) }}";
 
-                        Swal({
+                        Swal.fire({
                             title: "{{ 'General.Confirm'|trans }}",
                             text: "{{ 'User.User.Confirm-send-access'|trans }}",
                             showCancelButton: true,

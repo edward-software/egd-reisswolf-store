@@ -104,7 +104,7 @@
 
                         var url = "{{ path("paprec_catalog_region_remove", {id: region.id}) }}";
 
-                        Swal({
+                        Swal.fire({
                             title: "{{ 'General.Confirm'|trans }}",
                             text: "{{ 'General.Confirm-remove'|trans }}",
                             showCancelButton: true,

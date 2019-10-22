@@ -161,6 +161,7 @@
                                                 {{ form_label(radio) }}
                                             </div>
                                         {% endfor %}
+                                        {{ form_errors(form1.isEnabled)}}
                                     </div>
                                 </div>
                             </div>
@@ -199,7 +200,7 @@
 
                 var url = "{{ path("paprec_catalog_product_index") }}";
 
-                Swal({
+                Swal.fire({
                     title: "{{ 'General.Confirm'|trans }}",
                     text: "{{ 'General.Confirm-cancel'|trans }}",
                     showCancelButton: true,

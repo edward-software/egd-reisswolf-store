@@ -90,7 +90,7 @@
 
                 var url = "{{ path("paprec_commercial_quoteRequest_view", { id: quoteRequest.id }) }}";
 
-                Swal({
+                Swal.fire({
                     title: "{{ 'General.Confirm'|trans }}",
                     text: "{{ 'General.Confirm-cancel'|trans }}",
                     showCancelButton: true,

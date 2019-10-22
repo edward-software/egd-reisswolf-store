@@ -340,7 +340,7 @@
 
                         var url = "{{ path("paprec_commercial_quoteRequest_remove", {id: quoteRequest.id}) }}";
 
-                        Swal({
+                        Swal.fire({
                             title: "{{ 'General.Confirm'|trans }}",
                             text: "{{ 'General.Confirm-remove'|trans }}",
                             showCancelButton: true,
@@ -358,7 +358,7 @@
                         var url = "{{ path("paprec_commercial_quoteRequest_removeLine", {id: quoteRequest.id, quoteLineId: 'quoteLineIdTmp'}) }}".replace('quoteLineIdTmp', quoteLineId);
 
 
-                        Swal({
+                        Swal.fire({
                             title: "{{ 'General.Confirm'|trans }}",
                             text: "{{ 'General.Confirm-remove'|trans }}",
                             showCancelButton: true,
@@ -375,7 +375,7 @@
                     $('#sendGeneratedQuoteButton').on('click', function () {
                         var url = "{{ path("paprec_commercial_quoteRequest_sendGeneratedQuote", {id: quoteRequest.id}) }}";
 
-                        Swal({
+                        Swal.fire({
                             title: "{{ 'General.Confirm'|trans }}",
                             text: "{{ 'Commercial.QuoteRequest.Confirm-send-quote'|trans }}",
                             showCancelButton: true,

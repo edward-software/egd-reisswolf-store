@@ -346,7 +346,7 @@
 
                 var url = "{{ path("paprec_catalog_custom_area_remove", {id: customArea.id}) }}";
 
-                Swal({
+                Swal.fire({
                     title: "{{ 'General.Confirm'|trans({}, "messages", app.request.locale) }}",
                     text: "{{ 'General.Confirm-remove'|trans({}, "messages", app.request.locale) }}",
                     showCancelButton: true,
@@ -415,7 +415,7 @@
 
         $('.removePictureButton').on('click', function () {
             picId = $(this).data('id');
-            Swal({
+            Swal.fire({
                 title: "{{ 'General.Confirm'| trans({}, "messages", app.request.locale) }}",
                 text: "{{ 'General.Confirm-remove'| trans({}, "messages", app.request.locale) }}",
                 showCancelButton: true,
