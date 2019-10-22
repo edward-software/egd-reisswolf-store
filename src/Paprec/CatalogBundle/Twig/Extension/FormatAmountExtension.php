@@ -33,6 +33,10 @@ class FormatAmountExtension extends \Twig_Extension
             return $formatManager->formatAmount15($amount, $locale);
         }
 
+        if ($type === 'DEC2') {
+            return  number_format($amount, 2);
+        }
+
         return $formatManager->formatAmount($amount, $currency, $locale);
 
     }

@@ -105,11 +105,13 @@ class PostalCodeController extends Controller
         $phpExcelObject->setActiveSheetIndex(0)
             ->setCellValue('A1', 'ID')
             ->setCellValue('B1', 'Code')
-            ->setCellValue('C1', 'Coef de transport')
-            ->setCellValue('D1', 'Coef de traitement')
-            ->setCellValue('E1', 'Coef de traçabilité')
-            ->setCellValue('F1', 'Commercial en charge')
-            ->setCellValue('G1', 'Région');
+            ->setCellValue('C1', 'Commune')
+            ->setCellValue('D1', 'Zone tarifaire')
+            ->setCellValue('E1', 'Coef de transport')
+            ->setCellValue('F1', 'Coef de traitement')
+            ->setCellValue('G1', 'Coef de traçabilité')
+            ->setCellValue('H1', 'Commercial en charge')
+            ->setCellValue('I1', 'Région');
 
         $phpExcelObject->getActiveSheet()->setTitle('Codes Postaux');
         $phpExcelObject->setActiveSheetIndex(0);
@@ -120,11 +122,13 @@ class PostalCodeController extends Controller
             $phpExcelObject->setActiveSheetIndex(0)
                 ->setCellValue('A' . $i, $postalCode->getId())
                 ->setCellValue('B' . $i, $postalCode->getCode())
-                ->setCellValue('C' . $i, $numberManager->denormalize15($postalCode->getTransportRate()))
-                ->setCellValue('D' . $i, $numberManager->denormalize15($postalCode->getTreatmentRate()))
-                ->setCellValue('E' . $i, $numberManager->denormalize15($postalCode->getTraceabilityRate()))
-                ->setCellValue('F' . $i, ($postalCode->getUserInCharge()) ? $postalCode->getUserInCharge()->getUsername() : '')
-                ->setCellValue('G' . $i, ($postalCode->getRegion()) ? $postalCode->getRegion()->getName() : '');
+                ->setCellValue('C' . $i, $postalCode->getCity())
+                ->setCellValue('D' . $i, $postalCode->getZone())
+                ->setCellValue('E' . $i, $numberManager->denormalize15($postalCode->getTransportRate()))
+                ->setCellValue('F' . $i, $numberManager->denormalize15($postalCode->getTreatmentRate()))
+                ->setCellValue('G' . $i, $numberManager->denormalize15($postalCode->getTraceabilityRate()))
+                ->setCellValue('H' . $i, ($postalCode->getUserInCharge()) ? $postalCode->getUserInCharge()->getUsername() : '')
+                ->setCellValue('I' . $i, ($postalCode->getRegion()) ? $postalCode->getRegion()->getName() : '');
             $i++;
         }
 

@@ -59,18 +59,21 @@
                             <select id="contact_staff_select" class="form-control">
                                 <option value="" selected disabled hidden></option>
                                 {% for opt in form.staff.vars.choices %}#}
-                                    <option value="{{ opt.value }}">{{ opt.label|trans({}, "messages", locale) }}</option>
+                                    <option value="{{ opt.value }}"
+                                            {% if form.staff.vars.data == opt.value %}selected{% endif %}>{{ opt.label|trans({}, "messages", locale) }}</option>
                                 {% endfor %}
                             </select>
+                            {{ form_errors(form.staff) }}
                         </div>
                         <div class="form-group">
                             <label>{{ 'Public.Contact.Access'| trans({}, "messages", locale) }}* :</label>
                             <select id="contact_access_select" class="form-control">
                                 <option value="" selected disabled hidden></option>
                                 {% for opt in form.access.vars.choices %}#}
-                                    <option value="{{ opt.value }}">{{ opt.label|trans({}, "messages", locale) }}</option>
+                                    <option value="{{ opt.value }}" {% if form.access.vars.data == opt.value %}selected{% endif %}>{{ opt.label|trans({}, "messages", locale) }}</option>
                                 {% endfor %}
                             </select>
+                            {{ form_errors(form.access) }}
                         </div>
                         {{ form_widget(form.staff, {'attr': {'class': 'contact_staff_input'}}) }}
                         {{ form_widget(form.access, {'attr': {'class': 'contact_access_input'}}) }}

@@ -193,6 +193,7 @@ class Product
      */
     private $productLabels;
 
+
     /**
      * Constructor
      */
@@ -515,7 +516,7 @@ class Product
     {
         return $this->productLabels;
     }
-    
+
 
     /**
      * Set capacity.

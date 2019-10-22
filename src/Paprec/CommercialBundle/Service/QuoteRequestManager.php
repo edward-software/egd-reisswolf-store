@@ -349,14 +349,12 @@ class QuoteRequestManager
 
     /**
      * Génération du numéro de l'offre
-     *
      * @param QuoteRequest $quoteRequest
-     * @return QuoteRequest
+     * @return int
      */
     public function generateNumber(QuoteRequest $quoteRequest)
     {
-        $quoteRequest->setNumber(time());
-        return $quoteRequest;
+        return time();
     }
 
 

@@ -101,7 +101,8 @@ class RegionController extends Controller
         $phpExcelObject->setActiveSheetIndex(0)
             ->setCellValue('A1', 'ID')
             ->setCellValue('B1', 'Nom')
-            ->setCellValue('C1', 'Date création');
+            ->setCellValue('C1', 'Contact email')
+            ->setCellValue('D1', 'Date création');
 
         $phpExcelObject->getActiveSheet()->setTitle('Régions');
         $phpExcelObject->setActiveSheetIndex(0);
@@ -112,7 +113,8 @@ class RegionController extends Controller
             $phpExcelObject->setActiveSheetIndex(0)
                 ->setCellValue('A' . $i, $region->getId())
                 ->setCellValue('B' . $i, $region->getName())
-                ->setCellValue('C' . $i, $region->getDateCreation()->format('Y-m-d'));
+                ->setCellValue('C' . $i, $region->getEmail())
+                ->setCellValue('D' . $i, $region->getDateCreation()->format('Y-m-d'));
             $i++;
         }
 

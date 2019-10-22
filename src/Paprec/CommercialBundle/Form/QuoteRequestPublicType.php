@@ -45,7 +45,7 @@ class QuoteRequestPublicType extends AbstractType
                 "choice_label" => function ($choiceValue, $key, $value) {
                     return 'Commercial.AccessList.' . $choiceValue;
                 },
-                'empty_data' => null,
+                'data' => 'stairs',
                 'required' => true
             ))
             ->add('staff', ChoiceType::class, array(
@@ -53,22 +53,26 @@ class QuoteRequestPublicType extends AbstractType
                 "choice_label" => function ($choiceValue, $key, $value) {
                     return 'Commercial.StaffList.' . $choiceValue;
                 },
-                'empty_data' => null
+                'data' => '19',
+                'required' => true
             ))
             ->add('lastName', TextType::class)
             ->add('firstName', TextType::class)
             ->add('email', TextType::class)
-            ->add('phone', TextType::class)
+            ->add('phone', TextType::class, array(
+                'invalid_message' => 'Public.Contact.PhoneError',
+            ))
             ->add('isMultisite', ChoiceType::class, array(
                 "choices" => array(0, 1),
                 "choice_label" => function ($choiceValue, $key, $value) {
                     return 'General.' . $choiceValue;
                 },
+                "data" => 0,
                 "expanded" => true,
             ))
             ->add('address', TextType::class)
             ->add('postalCode', TextType::class, array(
-                'invalid_message' => 'That is not a valid postal code. Choose from the results of the drop-down list'
+                'invalid_message' => 'Public.Contact.PostalCodeError'
             ))
             ->add('city', TextType::class)
             ->add('comment', TextareaType::class);

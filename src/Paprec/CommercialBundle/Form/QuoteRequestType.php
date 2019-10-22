@@ -70,7 +70,7 @@ class QuoteRequestType extends AbstractType
             ))
             ->add('address', TextType::class)
             ->add('postalCode', TextType::class, array(
-                'invalid_message' => 'That is not a valid postal code. Choose from the results of the drop-down list'
+                'invalid_message' => 'Public.Contact.PostalCodeError'
             ))
             ->add('city', TextType::class)
             ->add('comment', TextareaType::class)
@@ -113,7 +113,7 @@ class QuoteRequestType extends AbstractType
             'status' => null,
             'locales' => null,
             'staff' => null,
-            'access' => null
+            'access' => null,
         ));
     }
 

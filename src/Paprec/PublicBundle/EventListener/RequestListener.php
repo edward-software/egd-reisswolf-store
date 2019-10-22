@@ -41,5 +41,6 @@ class RequestListener
         }
 
         $request->setLocale($locale);
+        $this->container->get('translator')->setLocale($locale);
     }
 }

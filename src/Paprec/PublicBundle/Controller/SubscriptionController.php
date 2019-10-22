@@ -74,9 +74,11 @@ class SubscriptionController extends Controller
      */
     public function contactDetailAction(Request $request, $locale, $cartUuid)
     {
+
         $cartManager = $this->get('paprec.cart_manager');
         $quoteRequestManager = $this->get('paprec_commercial.quote_request_manager');
         $userManager = $this->get('paprec.user_manager');
+
 
         $cart = $cartManager->get($cartUuid);
 
@@ -101,21 +103,24 @@ class SubscriptionController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid() && $this->captchaVerify($request->get('g-recaptcha-response'))) {
+
             $quoteRequest = $form->getData();
             $quoteRequest->setQuoteStatus('CREATED');
+            $quoteRequest->setLocale($locale);
             $quoteRequest->setFrequency($cart->getFrequency());
             $quoteRequest->setFrequencyTimes($cart->getFrequencyTimes());
             $quoteRequest->setFrequencyInterval($cart->getFrequencyInterval());
+            $quoteRequest->setNumber($quoteRequestManager->generateNumber($quoteRequest));
 
-            $quoteRequest = $quoteRequestManager->generateNumber($quoteRequest);
+
 
             if ($quoteRequest->getIsMultisite()) {
                 // TODO : Ajouter un commercial par défaut si pas de code postal saisi car Multisite
             } else {
                 $quoteRequest->setUserInCharge($userManager->getUserInChargeByPostalCode($quoteRequest->getPostalCode()));
             }
-            $quoteRequest->setLocale($locale);
 
+            
             $em = $this->getDoctrine()->getManager();
             $em->persist($quoteRequest);
 
@@ -130,6 +135,7 @@ class SubscriptionController extends Controller
             $sendConfirmEmail = $quoteRequestManager->sendConfirmRequestEmail($quoteRequest, $locale);
             $sendNewRequestEmail = $quoteRequestManager->sendNewRequestEmail($quoteRequest, $locale);
 
+
             if ($sendConfirmEmail && $sendNewRequestEmail) {
                 return $this->redirectToRoute('paprec_public_confirm_index', array(
                     'locale' => $locale,
@@ -137,6 +143,8 @@ class SubscriptionController extends Controller
                     'quoteRequestId' => $quoteRequest->getId()
                 ));
             }
+            dump($quoteRequest);
+            exit;
         }
 
 

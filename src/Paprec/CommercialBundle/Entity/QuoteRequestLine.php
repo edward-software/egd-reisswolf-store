@@ -131,7 +131,7 @@ class QuoteRequestLine
      */
 
     /**
-     * @ORM\ManyToOne(targetEntity="Paprec\CatalogBundle\Entity\Product", inversedBy="quoteRequestLines")
+     * @ORM\ManyToOne(targetEntity="Paprec\CatalogBundle\Entity\Product")
      * @ORM\JoinColumn(name="productId", referencedColumnName="id", nullable=false)
      */
     private $product;

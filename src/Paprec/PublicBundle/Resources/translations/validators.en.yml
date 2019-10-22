@@ -1,0 +1,4 @@
+Public:
+  Contact:
+    PostalCodeError: That is not a valid postal code. Choose from the results of the drop-down list.
+    PhoneError: Phone number must be in french format (ex. +33601020304, 0601020304).

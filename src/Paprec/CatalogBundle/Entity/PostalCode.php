@@ -66,6 +66,7 @@ class PostalCode
     /**
      * @var text
      * @ORM\Column(name="code", type="string")
+     * @Assert\NotBlank()
      * @Assert\Regex(
      *     pattern="/^\d{2}(\*|(?:\d{2}))$/",
      *     match=true,
@@ -132,7 +133,7 @@ class PostalCode
     private $region;
 
     /**
-     * @ORM\OneToMany(targetEntity="Paprec\CommercialBundle\Entity\QuoteRequest", mappedBy="userInCharge")
+     * @ORM\OneToMany(targetEntity="Paprec\CommercialBundle\Entity\QuoteRequest", mappedBy="postalCode")
      */
     private $quoteRequests;
 

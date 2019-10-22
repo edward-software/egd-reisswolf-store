@@ -279,8 +279,8 @@
                                             </a>
                                         </td>
                                         <td>{{ quoteRequestLine.quantity }}</td>
-                                        <td>{{ quoteRequestLine.rentalUnitPrice|formatAmount('', app.request.locale) }}</td>
                                         <td>{{ quoteRequestLine.setUpPrice|formatAmount('', app.request.locale) }}</td>
+                                        <td>{{ quoteRequestLine.rentalUnitPrice|formatAmount('', app.request.locale) }}</td>
                                         <td>{{ quoteRequestLine.transportUnitPrice|formatAmount('', app.request.locale) }} * {{ quoteRequestLine.transportRate|formatAmount(null, app.request.locale, 'FORMAT15')|number_format(2, '.', ' ') }}</td>
                                         <td>{{ quoteRequestLine.treatmentUnitPrice|formatAmount('', app.request.locale) }} * {{ quoteRequestLine.treatmentRate|formatAmount(null, app.request.locale, 'FORMAT15')|number_format(2, '.', ' ') }}</td>
                                         <td>{{ quoteRequestLine.traceabilityUnitPrice|formatAmount('', app.request.locale) }} * {{ quoteRequestLine.traceabilityRate|formatAmount(null, app.request.locale, 'FORMAT15')|number_format(2, '.', ' ') }}</td>

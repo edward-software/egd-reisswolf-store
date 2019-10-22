@@ -178,7 +178,7 @@ $(function () {
 
     $('#paprec_catalogbundle_quote_request_public_postalCode').autocomplete({
         source: '' + $('#paprec_catalogbundle_quote_request_public_postalCode').data('url'),
-        minLength: 2
+        minLength: 1
     })
 
 });
