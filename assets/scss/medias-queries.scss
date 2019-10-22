@@ -44,7 +44,6 @@
   }
   .devis__frequency-container button {
     align-self: center !important;
-    margin-top: 50px !important;
   }
   .product__quantity {
     margin-bottom: 20px;
@@ -81,9 +80,8 @@
   }
 
   .devis__frequence {
-    button {
-      margin: 15px auto;
-
+    select {
+      max-height: 30px;
     }
   }
   footer {
@@ -137,3 +135,8 @@
   }
 }
 
+@media (max-width: 350px) {
+  .devis__frequency-container {
+    padding: 0;
+  }
+}
