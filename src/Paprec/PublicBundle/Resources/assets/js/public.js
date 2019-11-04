@@ -164,6 +164,7 @@ $(function () {
     var isContactDetailFormSubimitted = false;
     $('#contactDetailForm').submit(function (event) {
         if (!isContactDetailFormSubimitted) {
+            $('.overlay').addClass('active');
             isContactDetailFormSubimitted = true;
             event.preventDefault();
             const siteKey = $('#contactDetailFormSubmitButton').data('key');

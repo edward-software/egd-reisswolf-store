@@ -143,13 +143,15 @@
                                     <div class="card">
                                         <div class="card-header">
                                             {{ 'Catalog.Product.PilotPicture'| trans({}, "messages", app.request.locale) }}
-                                            <div class="float-right">
-                                                <button class="btn btn-sm btn-outline-primary"
-                                                        data-target="#uploadPictureModal" data-toggle="modal"
-                                                        data-type="PILOTPICTURE" id="openModalUploadPicture">
-                                                    <i class="fa fa-xs fa-plus"></i> {{ 'Catalog.Product.AddPicture'| trans({}, "messages", app.request.locale) }}
-                                                </button>
-                                            </div>
+                                            {% if product.pictures is empty %}
+                                                <div class="float-right">
+                                                    <button class="btn btn-sm btn-outline-primary"
+                                                            data-target="#uploadPictureModal" data-toggle="modal"
+                                                            data-type="PILOTPICTURE" id="openModalUploadPicture">
+                                                        <i class="fa fa-xs fa-plus"></i> {{ 'Catalog.Product.AddPicture'| trans({}, "messages", app.request.locale) }}
+                                                    </button>
+                                                </div>
+                                            {% endif %}
                                         </div>
                                         <div class="card-body">
                                             <div class="card-group">
@@ -175,11 +177,6 @@
                                                                                 data-type="PILOTPICTURE"
                                                                                 data-id="{{ picture.id }}">
                                                                             <i class="fa fa-xs fa-pencil-alt"></i> {{ 'General.Edit'| trans({}, "messages", app.request.locale) }}
-                                                                        </button>
-                                                                        <button data-id="{{ picture.id }}"
-                                                                                class="dropdown-item setPictureButton"
-                                                                                type="button">
-                                                                            <i class="fa fa-xs fa-exchange-alt"></i> {{ 'Catalog.Product.SetSecondaryPicture'| trans({}, "messages", app.request.locale) }}
                                                                         </button>
                                                                         <button data-id="{{ picture.id }}"
                                                                                 class="dropdown-item removePictureButton"
@@ -495,42 +492,6 @@
                     });
                 });
 
-
-                // Change le type de la Picture en PilotPicture
-                $('.setPilotPictureButton').on('click', function () {
-                    picId = $(this).data('id');
-                    Swal.fire({
-                        title: "{{ 'General.Confirm'| trans({}, "messages", app.request.locale) }}",
-                        text: "{{ 'Catalog.Product.Confirm-set_pilot'| trans({}, "messages", app.request.locale) }}",
-                        showCancelButton: true,
-                        confirmButtonText: "{{ 'General.Yes'| trans({}, "messages", app.request.locale) }}",
-                        cancelButtonText: "{{ 'General.No'| trans({}, "messages", app.request.locale) }}"
-                    }).then(function (result) {
-                        if (result.value) {
-                            var url = "{{ path("paprec_catalog_product_setPilotPicture", {id: product.id, pictureID: 'pictureTmp'}) }}";
-                            url = url.replace('pictureTmp', picId);
-                            $(location).attr('href', url);
-                        }
-                    });
-                });
-
-                // Change dle type de PilotPicture en Picture
-                $('.setPictureButton').on('click', function () {
-                    picId = $(this).data('id');
-                    Swal.fire({
-                        title: "{{ 'General.Confirm'| trans({}, "messages", app.request.locale) }}",
-                        text: "{{ 'Catalog.Product.Confirm-set_picture'| trans({}, "messages", app.request.locale) }}",
-                        showCancelButton: true,
-                        confirmButtonText: "{{ 'General.Yes'| trans({}, "messages", app.request.locale) }}",
-                        cancelButtonText: "{{ 'General.No'| trans({}, "messages", app.request.locale) }}"
-                    }).then(function (result) {
-                        if (result.value) {
-                            var url = "{{ path("paprec_catalog_product_setPicture", {id: product.id, pictureID: 'pictureTmp'}) }}";
-                            url = url.replace('pictureTmp', picId);
-                            $(location).attr('href', url);
-                        }
-                    });
-                });
 
                 $('#formAddPictureSubmitButton').on('click', function () {
                     $('#formAddPicture').submit();

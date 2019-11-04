@@ -128,10 +128,16 @@ class DataTable
         }
 
         $paginator = $this->container->get('knp_paginator');
+        /**
+         * Wrap-queries utilisé en suivant la doc
+         * " If you want to order your results by a column from a fetch joined t-many association, you have to set wrap-queries to true. Otherwise you will get an exception with this warning: "Cannot select distinct identifiers from query with LIMIT and ORDER BY on a column from a fetch joined to-many association. Use output walkers."
+         *  https://github.com/KnpLabs/knp-components/blob/master/doc/pager/config.md
+         */
         $pagination = $paginator->paginate(
             $queryBuilder,
             $start,
-            $pageSize
+            $pageSize,
+            ['wrap-queries' => true]
         );
 
         $recordsTotal = $pagination->getTotalItemCount();

@@ -38,6 +38,7 @@
                             <th>#</th>
                             <th>{{ 'Catalog.ProductLabel.Name'|trans }}</th>
                             <th>{{ 'Catalog.Product.Dimensions'|trans }}</th>
+                            <th>{{ 'Catalog.Product.IsEnabled.IsEnabled'|trans }}</th>
                             <th></th>
                         </tr>
                         </thead>
@@ -166,6 +167,7 @@
                     {"data": "id"},
                     {"data": "name"},
                     {"data": "dimensions"},
+                    {"data": "isEnabled"},
                     {"data": "id", "width": "10%", "bSortable": false}
                 ],
                 "columnDefs": [

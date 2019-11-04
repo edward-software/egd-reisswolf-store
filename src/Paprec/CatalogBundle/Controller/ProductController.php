@@ -57,11 +57,8 @@ class ProductController extends Controller
 
         $cols['id'] = array('label' => 'id', 'id' => 'p.id', 'method' => array('getId'));
         $cols['name'] = array('label' => 'name', 'id' => 'pL.name', 'method' => array(array('getProductLabels', 0), 'getName'));
-        $cols['dimensions'] = array(
-            'label' => 'dimensions',
-            'id' => 'p.dimensions',
-            'method' => array('getDimensions')
-        );
+        $cols['dimensions'] = array('label' => 'dimensions', 'id' => 'p.dimensions', 'method' => array('getDimensions'));
+        $cols['isEnabled'] = array('label' => 'isEnabled', 'id' => 'p.isEnabled', 'method' => array('getIsEnabled'));
 
 
         $queryBuilder = $this->getDoctrine()->getManager()->getRepository(Product::class)->createQueryBuilder('p');
@@ -80,13 +77,24 @@ class ProductController extends Controller
             } else {
                 $queryBuilder->andWhere($queryBuilder->expr()->orx(
                     $queryBuilder->expr()->like('pL.name', '?1'),
-                    $queryBuilder->expr()->like('p.dimensions', '?1')
+                    $queryBuilder->expr()->like('p.dimensions', '?1'),
+                    $queryBuilder->expr()->like('pL.isEnabled', '?1')
                 ))->setParameter(1, '%' . $search['value'] . '%');
             }
         }
 
         $datatable = $this->get('goondi_tools.datatable')->generateTable($cols, $queryBuilder, $pageSize, $start,
             $orders, $columns, $filters);
+
+        // Reformatage de certaines données
+        $tmp = array();
+        foreach ($datatable['data'] as $data) {
+            $line = $data;
+            $line['isEnabled'] = $data['isEnabled'] ? $this->get('translator')->trans('General.1') : $this->get('translator')->trans('General.0');
+            $tmp[] = $line;
+        }
+
+        $datatable['data'] = $tmp;
 
         $return['recordsTotal'] = $datatable['recordsTotal'];
         $return['recordsFiltered'] = $datatable['recordsTotal'];
@@ -148,12 +156,12 @@ class ProductController extends Controller
         $i = 2;
         foreach ($Products as $product) {
 
-            $productLabel =$productManager->getProductLabelByProductAndLocale($product, strtoupper($language));
+            $productLabel = $productManager->getProductLabelByProductAndLocale($product, strtoupper($language));
 
             $phpExcelObject->setActiveSheetIndex(0)
                 ->setCellValue('A' . $i, $product->getId())
-                ->setCellValue('B' . $i, $productLabel ->getname())
-                ->setCellValue('C' . $i, $productLabel ->getShortDescription())
+                ->setCellValue('B' . $i, $productLabel->getname())
+                ->setCellValue('C' . $i, $productLabel->getShortDescription())
                 ->setCellValue('D' . $i, $product->getCapacity())
                 ->setCellValue('E' . $i, $product->getCapacityUnit())
                 ->setCellValue('F' . $i, $product->getDimensions())
@@ -419,7 +427,7 @@ class ProductController extends Controller
             $Products = $em->getRepository('PaprecCatalogBundle:Product')->findById($ids);
             foreach ($Products as $product) {
                 foreach ($product->getPictures() as $picture) {
-                    $this->removeFile($this->getParameter('paprec_catalog.product.di.picto_path') . '/' . $picture->getPath());
+                    $this->removeFile($this->getParameter('paprec_catalog.product.picto_path') . '/' . $picture->getPath());
                     $product->removePicture($picture);
                 }
 

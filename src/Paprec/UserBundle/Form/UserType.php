@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class UserType extends AbstractType
 {
@@ -43,7 +44,7 @@ class UserType extends AbstractType
                 'invalid_message' => 'The password fields must match.',
                 'options' => array('attr' => array('class' => 'password-field')),
                 'required' => false,
-                'first_options'  => array('label' => 'Password'),
+                'first_options' => array('label' => 'Password'),
                 'second_options' => array('label' => 'Repeat Password'),
             ))
             ->add('enabled', ChoiceType::class, array(
@@ -55,13 +56,15 @@ class UserType extends AbstractType
             ))
             ->add('roles', ChoiceType::class, array(
                 "choices" => $options['roles'],
+                "required" => true,
+                "invalid_message" => 'Cannot be null',
                 "expanded" => true,
-                "multiple" => true
-            ))
-//            ->add('postalCodes', TextType::class)
+                "multiple" => true,
+                'constraints' => new NotBlank()
+            ))//            ->add('postalCodes', TextType::class)
         ;
     }
-    
+
     /**
      * @param OptionsResolver $resolver
      */

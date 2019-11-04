@@ -48,6 +48,7 @@ class CustomAreaController extends Controller
 
         $cols['id'] = array('label' => 'id', 'id' => 'r.id', 'method' => array('getId'));
         $cols['code'] = array('label' => 'code', 'id' => 'r.code', 'method' => array('getCode'));
+        $cols['isDisplayed'] = array('label' => 'isDisplayed', 'id' => 'r.isDisplayed', 'method' => array('getIsDisplayed'));
         $cols['language'] = array('label' => 'language', 'id' => 'r.language', 'method' => array('getLanguage'));
 
         $queryBuilder = $this->getDoctrine()->getManager()->getRepository(CustomArea::class)->createQueryBuilder('r');
@@ -64,6 +65,7 @@ class CustomAreaController extends Controller
             } else {
                 $queryBuilder->andWhere($queryBuilder->expr()->orx(
                     $queryBuilder->expr()->like('r.code', '?1'),
+                    $queryBuilder->expr()->like('r.isDisplayed', '?1'),
                     $queryBuilder->expr()->like('r.language', '?1')
                 ))->setParameter(1, '%' . $search['value'] . '%');
             }
@@ -71,6 +73,15 @@ class CustomAreaController extends Controller
 
         $datatable = $this->get('goondi_tools.datatable')->generateTable($cols, $queryBuilder, $pageSize, $start, $orders, $columns, $filters);
 
+        // Reformatage de certaines données
+        $tmp = array();
+        foreach ($datatable['data'] as $data) {
+            $line = $data;
+            $line['isDisplayed'] = $data['isDisplayed'] ? $this->get('translator')->trans('General.1') : $this->get('translator')->trans('General.0');
+            $tmp[] = $line;
+        }
+
+        $datatable['data'] = $tmp;
 
         $return['recordsTotal'] = $datatable['recordsTotal'];
         $return['recordsFiltered'] = $datatable['recordsTotal'];
@@ -261,12 +272,13 @@ class CustomAreaController extends Controller
         if (is_array($ids) && count($ids)) {
             $customAreas = $em->getRepository('PaprecCatalogBundle:CustomArea')->findById($ids);
             foreach ($customAreas as $customArea) {
-                $customArea->setDeleted(new \DateTime);
-                if ($customArea->getPostalCodes() && count($customArea->getPostalCodes())) {
-                    foreach ($customArea->getPostalCodes() as $postalCode) {
-                        $postalCode->setCustomArea();
-                    }
+                foreach ($customArea->getPictures() as $picture) {
+                    $this->removeFile($this->getParameter('paprec_catalog.product.picto_path') . '/' . $picture->getPath());
+                    $customArea->removePicture($picture);
                 }
+
+                $customArea->setDeleted(new \DateTime());
+                $customArea->setIsDisplayed(false);
             }
             $em->flush();
         }
