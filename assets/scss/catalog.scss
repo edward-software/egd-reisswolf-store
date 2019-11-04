@@ -204,3 +204,14 @@ select {
   }
 }
 
+
+.form-group {
+  ul {
+    padding: 0;
+
+    li {
+      list-style: none;
+      color: red;
+    }
+  }
+}

@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class QuoteRequestType extends AbstractType
@@ -82,8 +83,9 @@ class QuoteRequestType extends AbstractType
             ))
             ->add('overallDiscount')
             ->add('salesmanComment', TextareaType::class)
-            ->add('monthlyBudget')
+            ->add('annualBudget')
             ->add('frequency')
+            ->add('reference')
             ->add('customerId')
             ->add('userInCharge', EntityType::class, array(
                 'class' => User::class,
@@ -110,6 +112,13 @@ class QuoteRequestType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'Paprec\CommercialBundle\Entity\QuoteRequest',
+            'validation_groups' => function (FormInterface $form) {
+                $data = $form->getData();
+                if ($data->getIsMultisite() === 1) {
+                    return ['default', 'public'];
+                }
+                return ['default', 'public', 'public_multisite'];
+            },
             'status' => null,
             'locales' => null,
             'staff' => null,

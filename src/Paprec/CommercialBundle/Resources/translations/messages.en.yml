@@ -1,9 +1,9 @@
 Commercial:
 
 
-  Bundle-name:                    Gestion commerciale
-  QuoteRequests:                  Demandes de devis
-  Settings:                       Paramétrage
+  Bundle-name:                    Commercial Management
+  QuoteRequests:                  Quotation requests
+  Settings:                       Settings
 
   QuoteRequest:
     QuoteRequests: Quote requests
@@ -32,24 +32,25 @@ Commercial:
     week: week
     CoworkerNumber: Number of employees
     UserInCharge: Salesman in charge
+    Reference: Offer reference
     IsMultisite: Multi-site service
     Comment: Comment
-    OverallDiscount: Overall discount
+    OverallDiscount: Price adjustment (+/- in %)
     CustomerId: Customer number
     SalesmanComment: Salesman comment
-    MonthlyBudget: Monthly budget
+    AnnualBudget: Annual budget
     View: View quote
     Send-quote: Send quote to customer
     Download-quote: Download PDF
     ProductsList: Products list
     AddLine: Add product
-    Confirm-send-quote: Êtes-vous sûr de vouloir envoyer le devis au client ?
+    Confirm-send-quote: Are you sure you want to send the quote to the customer ?
     Edit: Edit quote
-    Ponctual: On demande
+    Ponctual: On demand
     Error:
-      generatedQuoteNotSent:    Erreur lors de la génération et l'envoi du devis.
+      generatedQuoteNotSent:    Error when generating and sending the quote.
     Success:
-      generatedQuoteSent:       Le devis a bien été généré et envoyé au client.
+      generatedQuoteSent:       The quote has been generated and sent to the customer
     Locale: Locale
     Number: Offer Number
 
@@ -58,7 +59,7 @@ Commercial:
     PENDING: Peding
     PROCESSING: Processing
     CLOSED: Closed
-    
+
   StaffList:
     19: From 1 to 9 employees
     1019: From 10 to 19 employees
@@ -82,6 +83,7 @@ Commercial:
     elevator: By elevator
     ground: Street level without steps
 
+
   QuoteRequestLine:
     ProductName: Procuct name
     SetUpPrice: Setup
@@ -90,6 +92,7 @@ Commercial:
     Transport: Transport
     Treatment: Treatment
     Traceability: Traceability
+    Access: Access
     Quantity: Quantity
     TotalAmount: Total amount
     Add: Add product
@@ -99,10 +102,15 @@ Commercial:
 
     Title: A new quote request has been assiged to you.
   ConfirmEmail:
-    Title: Your request has been taken into account and sent to the sales department of your region.
-    Message1: We thank you for the trust you have placed in us. Our team will come back to you with your personalized quote. This operation may take a few days. Our
-    TechnicalService: technical service
-    Message2: remains at your disposal during this time.
+    Dear:
+      M: Dear Mr.
+      Mrs: Dear Mrs.
+    Title: Your request has been taken into account and sent to the sales department in your region.
+    Message1: Thank you for your request of %date%. Thank you for your interest in REISSWOLF services.
+    TechnicalService: service technique
+    Message2: We will send you our offer for REISSWOLF services in the next few hours.
+    Regards: Best regards
+    Partner: Your partner Reisswolf
     Disclaimer:
       Message1: You have received this e-mail to inform you of important changes to the services
       Message2: you use

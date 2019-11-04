@@ -32,12 +32,13 @@ Commercial:
     week: semaine
     CoworkerNumber: Effectif
     UserInCharge: Commercial en charge
+    Reference: Référence de l'offre
     IsMultisite: Prestation multi-sites
     Comment: Commentaire
-    OverallDiscount: Remise globale
+    OverallDiscount: Ajustement prix (+/- en %)
     CustomerId: Numéro client
     SalesmanComment: Commentaire commercial
-    MonthlyBudget: Budget mensuel
+    AnnualBudget: Budget annuel
     View: Vue du devis
     Download-quote: Télécharger PDF
     Send-quote: Envoyer devis au client
@@ -81,7 +82,7 @@ Commercial:
     stairs: Par escalier
     elevator: Par ascenseur
     ground: Niveau rue sans marche
-
+Ò
   QuoteRequestLine:
     ProductName: Nom du produit
     UnitPrice: Prix unitaire
@@ -91,6 +92,7 @@ Commercial:
     Transport: Transport
     Treatment: Traitement
     Traceability: Traçabilité
+    Access: Accès
     TotalAmount: Montant total
     Add: Ajout d'un produit
     Product: Produit
@@ -99,10 +101,15 @@ Commercial:
 
     Title: Une nouvelle demande de devis vous a été affectée.
   ConfirmEmail:
+    Dear:
+      M: Cher Monsieur
+      Mrs: Chère Madame
     Title: Votre demande a bien été prise en compte et envoyée au service commercial de votre région.
-    Message1: Merci pour votre demande du
+    Message1: Merci pour votre demande du  %date%. Nous vous remercions de l'intérêt que vous portez aux services REISSWOLF.
     TechnicalService: service technique
-    Message2: reste à votre disposition pendant ce temps là.
+    Message2: Nous vous enverrons notre offre pour les services REISSWOLF dans les prochaines heures.
+    Regards: Bien cordialement
+    Partner: Votre partenaire Reisswolf
     Disclaimer:
       Message1: Vous avez reçu cet e-mail pour vous informer des modifications importantes appoetées aux services
       Message2: que vous utilisez

@@ -13,8 +13,9 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *
  * @ORM\Table(name="users")
  * @ORM\Entity(repositoryClass="Paprec\UserBundle\Repository\UserRepository")
- * @UniqueEntity("email")
- * @UniqueEntity("username")
+ * @UniqueEntity(fields={"email"}, repositoryMethod="isMailUnique")
+ * @UniqueEntity(fields={"username"}, repositoryMethod="isUsernameUnique")
+ * @UniqueEntity(fields={"usernameCanonical"}, repositoryMethod="isUsernameCanonicalUnique")
  */
 class User extends BaseUser
 {
@@ -45,7 +46,7 @@ class User extends BaseUser
      * @var string
      * @Assert\NotBlank()
      * @Assert\Email(
-     *      message = "L'email '{{ value }}' n'a pas un format valide",
+     *      message = "email_error",
      *      checkMX = true
      * )
      */

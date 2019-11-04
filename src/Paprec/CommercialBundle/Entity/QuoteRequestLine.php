@@ -88,6 +88,20 @@ class QuoteRequestLine
     /**
      * @var int
      *
+     * @ORM\Column(name="setUpRate", type="bigint")
+     */
+    private $setUpRate;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="rentalRate", type="bigint")
+     */
+    private $rentalRate;
+
+    /**
+     * @var int
+     *
      * @ORM\Column(name="transportRate", type="bigint", nullable=true)
      */
     private $transportRate;
@@ -106,6 +120,13 @@ class QuoteRequestLine
      * @ORM\Column(name="traceabilityRate", type="bigint", nullable=true)
      */
     private $traceabilityRate;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="accessPrice", type="integer")
+     */
+    private $accessPrice;
 
     /**
      * @var int
@@ -568,5 +589,77 @@ class QuoteRequestLine
     public function getSetUpPrice()
     {
         return $this->setUpPrice;
+    }
+
+    /**
+     * Set setUpRate.
+     *
+     * @param int $setUpRate
+     *
+     * @return QuoteRequestLine
+     */
+    public function setSetUpRate($setUpRate)
+    {
+        $this->setUpRate = $setUpRate;
+
+        return $this;
+    }
+
+    /**
+     * Get setUpRate.
+     *
+     * @return int
+     */
+    public function getSetUpRate()
+    {
+        return $this->setUpRate;
+    }
+
+    /**
+     * Set rentalRate.
+     *
+     * @param int $rentalRate
+     *
+     * @return QuoteRequestLine
+     */
+    public function setRentalRate($rentalRate)
+    {
+        $this->rentalRate = $rentalRate;
+
+        return $this;
+    }
+
+    /**
+     * Get rentalRate.
+     *
+     * @return int
+     */
+    public function getRentalRate()
+    {
+        return $this->rentalRate;
+    }
+
+    /**
+     * Set accessPrice.
+     *
+     * @param int $accessPrice
+     *
+     * @return QuoteRequestLine
+     */
+    public function setAccessPrice($accessPrice)
+    {
+        $this->accessPrice = $accessPrice;
+
+        return $this;
+    }
+
+    /**
+     * Get accessPrice.
+     *
+     * @return int
+     */
+    public function getAccessPrice()
+    {
+        return $this->accessPrice;
     }
 }

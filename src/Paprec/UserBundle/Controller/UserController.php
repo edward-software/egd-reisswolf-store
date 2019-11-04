@@ -412,6 +412,17 @@ class UserController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
+        /**
+         * On modifie l'email et l'username qui sont uniques dans FOSUser
+         * Ainsi on pourra de nouveau ajouté qqun avec le même username
+         */
+        $deletedUsername = substr($user->getUsernameCanonical() .  uniqid(), 0, 255);
+        $deletedEmail = substr($user->getEmail() .  uniqid(), 0, 255);
+        $user->setUsername($deletedUsername);
+        $user->setUsernameCanonical($deletedUsername);
+        $user->setEmail($deletedEmail);
+        $user->setEmailCanonical($deletedEmail);
+
         $user->setDeleted(new \DateTime);
         $user->setEnabled(false);
         $em->flush();
@@ -438,6 +449,17 @@ class UserController extends Controller
         if (is_array($ids) && count($ids)) {
             $users = $em->getRepository('PaprecUserBundle:User')->findById($ids);
             foreach ($users as $user) {
+                /**
+                 * On modifie l'email et l'username qui sont uniques dans FOSUser
+                 * Ainsi on pourra de nouveau ajouté qqun avec le même username
+                 */
+                $deletedUsername = substr($user->getUsernameCanonical() . uniqid(), 0, 255);
+                $deletedEmail = substr($user->getEmail() .  uniqid(), 0, 255);
+                $user->setUsername($deletedUsername);
+                $user->setUsernameCanonical($deletedUsername);
+                $user->setEmail($deletedEmail);
+                $user->setEmailCanonical($deletedEmail);
+
                 $user->setDeleted(new \DateTime);
                 $user->setEnabled(false);
             }

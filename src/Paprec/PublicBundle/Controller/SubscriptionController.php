@@ -103,7 +103,6 @@ class SubscriptionController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid() && $this->captchaVerify($request->get('g-recaptcha-response'))) {
-
             $quoteRequest = $form->getData();
             $quoteRequest->setQuoteStatus('CREATED');
             $quoteRequest->setLocale($locale);
@@ -112,6 +111,11 @@ class SubscriptionController extends Controller
             $quoteRequest->setFrequencyInterval($cart->getFrequencyInterval());
             $quoteRequest->setNumber($quoteRequestManager->generateNumber($quoteRequest));
 
+            $regionName = substr(iconv('UTF-8', 'ASCII//IGNORE', $quoteRequest->getPostalCode()->getRegion()->getName()), 0, 2);
+
+            $reference = strtoupper($regionName) . $quoteRequest->getDateCreation()->format('ymd');
+            $reference .= '-' . str_pad($quoteRequestManager->getCountByReference($reference), 2, '0', STR_PAD_LEFT);
+            $quoteRequest->setReference($reference);
 
 
             if ($quoteRequest->getIsMultisite()) {
@@ -120,7 +124,7 @@ class SubscriptionController extends Controller
                 $quoteRequest->setUserInCharge($userManager->getUserInChargeByPostalCode($quoteRequest->getPostalCode()));
             }
 
-            
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($quoteRequest);
 
@@ -351,4 +355,17 @@ class SubscriptionController extends Controller
 //            'filename' => $filename
 //        ));
 //    }
+
+    /**
+     * @Route("/{locale}/email/contract/{quoteId}", name="paprec_public_confirm_pdf_confirm_email")
+     */
+    public function showContractPDF(Request $request, $quoteId, $locale)
+    {
+        $quoteRequestManager = $this->get('paprec_commercial.quote_request_manager');
+        $quoteRequest = $quoteRequestManager->get($quoteId);
+        return $this->render('@PaprecCommercial/QuoteRequest/emails/confirmQuoteEmail.html.twig', array(
+            'quoteRequest' => $quoteRequest,
+            'locale' => $locale
+        ));
+    }
 }

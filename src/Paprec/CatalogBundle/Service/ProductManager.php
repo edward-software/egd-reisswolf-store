@@ -16,6 +16,7 @@ use Exception;
 use Paprec\CatalogBundle\Entity\PostalCode;
 use Paprec\CatalogBundle\Entity\Product;
 use Paprec\CatalogBundle\Entity\ProductLabel;
+use Paprec\CommercialBundle\Entity\QuoteRequest;
 use Paprec\CommercialBundle\Entity\QuoteRequestLine;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -145,13 +146,45 @@ class ProductManager
     {
         $numberManager = $this->container->get('paprec_catalog.number_manager');
 
-        return $numberManager->denormalize($quoteRequestLine->getSetUpPrice())
-            + ($numberManager->denormalize($quoteRequestLine->getRentalUnitPrice())
+        return ($numberManager->denormalize($quoteRequestLine->getSetUpPrice()) * $numberManager->denormalize15($quoteRequestLine->getSetUpRate())
+                + $numberManager->denormalize($quoteRequestLine->getRentalUnitPrice()) * $numberManager->denormalize15($quoteRequestLine->getRentalRate())
                 + $numberManager->denormalize($quoteRequestLine->getTransportUnitPrice()) * $numberManager->denormalize15($quoteRequestLine->getTransportRate())
                 + $numberManager->denormalize($quoteRequestLine->getTreatmentUnitPrice()) * $numberManager->denormalize15($quoteRequestLine->getTreatmentRate())
-                + $numberManager->denormalize($quoteRequestLine->getTraceabilityUnitPrice()) * $numberManager->denormalize15($quoteRequestLine->getTraceabilityRate()))
-            * $quoteRequestLine->getQuantity();
+                + $numberManager->denormalize($quoteRequestLine->getTraceabilityUnitPrice()) * $numberManager->denormalize15($quoteRequestLine->getTraceabilityRate())
+                + $this->getAccesPrice($quoteRequestLine->getQuoteRequest()))
+            * $quoteRequestLine->getQuantity()
+            * (1 - $numberManager->denormalize($quoteRequestLine->getQuoteRequest()->getOverallDiscount() / 100));
 
+    }
+
+    /**
+     * Renvoi un prix fixe en fonction des conditions d'accès
+     *
+     * @param QuoteRequestLine $quoteRequestLine
+     * @return int|mixed
+     */
+    public function getAccesPrice(QuoteRequest $quoteRequest)
+    {
+        if ($quoteRequest && $quoteRequest->getAccess()) {
+            $prices = array();
+            foreach ($this->container->getParameter('paprec_quote_access_price') as $p => $value) {
+                $prices[$p] = $value;
+            }
+            switch ($quoteRequest->getAccess()) {
+                case 'stairs':
+                    return $prices['stairs'];
+                    break;
+                case 'elevator':
+                    return $prices['elevator'];
+                    break;
+                case 'ground':
+                    return $prices['ground'];
+                    break;
+                default:
+                    return 0;
+            }
+        }
+        return 0;
     }
 
     public function getProductLabels($product)

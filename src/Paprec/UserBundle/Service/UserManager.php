@@ -12,6 +12,7 @@ namespace Paprec\UserBundle\Service;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityNotFoundException;
 use Exception;
+use Paprec\CatalogBundle\Entity\PostalCode;
 use Paprec\UserBundle\Entity\User;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -88,15 +89,15 @@ class UserManager
      * @return object|User|null
      * @throws Exception
      */
-    public function getUserInChargeByPostalCode($postalCode)
+    public function getUserInChargeByPostalCode(PostalCode $pc)
     {
         try {
-            if ($postalCode == null) {
+            if ($pc == null) {
                 return null;
             }
 
             $postalCode = $this->em->getRepository('PaprecCatalogBundle:PostalCode')->findOneBy(array(
-                'code' => $postalCode
+                'code' => $pc->getCode()
             ));
 
             $user = null;

@@ -10,4 +10,28 @@ namespace Paprec\UserBundle\Repository;
  */
 class UserRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    public function isMailUnique($params)
+    {
+        return $this->findBy(array(
+            'email' => $params['email'],
+            'deleted' => null
+        ));
+    }
+
+    public function isUsernameUnique($params)
+    {
+        return $this->findBy(array(
+            'username' => $params['username'],
+            'deleted' => null
+        ));
+    }
+
+    public function isUsernameCanonicalUnique($params)
+    {
+        return $this->findBy(array(
+            'usernameCanonical' => $params['usernameCanonical'],
+            'deleted' => null
+        ));
+    }
 }

@@ -38,6 +38,11 @@ parameters:
     - elevator
     - ground
 
+  paprec_quote_access_price:
+    stairs: 20
+    elevator: 10
+    ground: 0
+
   paprec_quote_staff:
     - '19'
     - '1019'

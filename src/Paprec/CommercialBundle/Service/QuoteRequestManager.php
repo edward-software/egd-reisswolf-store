@@ -56,6 +56,23 @@ class QuoteRequestManager
         }
     }
 
+    public function getCountByReference($reference)
+    {
+        $qb = $this->em->getRepository('PaprecCommercialBundle:QuoteRequest')->createQueryBuilder('qr')
+            ->select('count(qr)')
+            ->where('qr.reference LIKE :ref')
+            ->andWhere('qr.deleted IS NULL')
+            ->setParameter('ref', $reference . '%');
+
+        $count = $qb->getQuery()->getSingleScalarResult();
+
+        if ($count != null) {
+            return intval($count) + 1;
+        } else {
+            return 1;
+        }
+    }
+
     /**
      * Vérifie qu'à ce jour, le quoteRequest ce soit pas supprimé
      *
@@ -92,6 +109,7 @@ class QuoteRequestManager
     public function addLine(QuoteRequest $quoteRequest, QuoteRequestLine $quoteRequestLine, $user = null, $doFlush = true)
     {
         $numberManager = $this->container->get('paprec_catalog.number_manager');
+        $productManager = $this->container->get('paprec_catalog.product_manager');
 
         // On check s'il existe déjà une ligne pour ce produit, pour l'incrémenter
         $currentQuoteLine = $this->em->getRepository('PaprecCommercialBundle:QuoteRequestLine')->findOneBy(
@@ -105,7 +123,9 @@ class QuoteRequestManager
             $quantity = $quoteRequestLine->getQuantity() + $currentQuoteLine->getQuantity();
             $currentQuoteLine->setQuantity($quantity);
 
-            //On recalcule le montant total de la ligne ainsi que celui du devis complet
+            /**
+             * On recalcule le montant total de la ligne ainsi que celui du devis complet
+             */
             $totalLine = $this->calculateTotalLine($currentQuoteLine);
             $currentQuoteLine->setTotalAmount($totalLine);
             $this->em->flush();
@@ -120,19 +140,43 @@ class QuoteRequestManager
             $quoteRequestLine->setTraceabilityUnitPrice($quoteRequestLine->getProduct()->getTraceabilityUnitPrice());
             $quoteRequestLine->setProductName($quoteRequestLine->getProduct()->getId());
 
+            /**
+             * Si codePostal, on récupère tous les coefs de celui-ci et on les affecte au quoteRequestLine
+             */
             if ($quoteRequest->getPostalCode()) {
+                $quoteRequestLine->setSetUpRate($quoteRequest->getPostalCode()->getSetUpRate());
+                $quoteRequestLine->setRentalRate($quoteRequest->getPostalCode()->getRentalRate());
                 $quoteRequestLine->setTransportRate($quoteRequest->getPostalCode()->getTransportRate());
                 $quoteRequestLine->setTreatmentRate($quoteRequest->getPostalCode()->getTreatmentRate());
                 $quoteRequestLine->setTraceabilityRate($quoteRequest->getPostalCode()->getTraceabilityRate());
             } else {
+                /**
+                 * Si pas de code postal, on met tous les coefs à 1 par défaut
+                 */
+                $quoteRequestLine->setSetUpRate($numberManager->normalize15(1));
+                $quoteRequestLine->setRentalRate($numberManager->normalize15(1));
                 $quoteRequestLine->setTransportRate($numberManager->normalize15(1));
                 $quoteRequestLine->setTreatmentRate($numberManager->normalize15(1));
                 $quoteRequestLine->setTraceabilityRate($numberManager->normalize15(1));
             }
 
+            /**
+             * Si il y a une condition d'accès, on l'affecte au quoteRequestLine
+             */
+            if ($quoteRequest->getAccess()) {
+                $quoteRequestLine->setAccessPrice($numberManager->normalize($productManager->getAccesPrice($quoteRequest)));
+            } else {
+                /**
+                 * Sinon on lui met à 0 par défaut
+                 */
+                $quoteRequestLine->setAccessPrice(0);
+            }
+
             $this->em->persist($quoteRequestLine);
 
-            //On recalcule le montant total de la ligne ainsi que celui du devis complet
+            /**
+             * On recalcule le montant total de la ligne ainsi que celui du devis complet
+             */
             $totalLine = $this->calculateTotalLine($quoteRequestLine);
             $quoteRequestLine->setTotalAmount($totalLine);
             $this->em->flush();
@@ -182,6 +226,9 @@ class QuoteRequestManager
      */
     public function editLine(QuoteRequest $quoteRequest, QuoteRequestLine $quoteRequestLine, $user, $doFlush = true, $editQuoteRequest = true)
     {
+        $numberManager = $this->container->get('paprec_catalog.number_manager');
+        $productManager = $this->container->get('paprec_catalog.product_manager');
+
         $now = new \DateTime();
 
         $totalLine = $this->calculateTotalLine($quoteRequestLine);
@@ -193,6 +240,18 @@ class QuoteRequestManager
             $quoteRequest->setTotalAmount($total);
             $quoteRequest->setDateUpdate($now);
             $quoteRequest->setUserUpdate($user);
+        }
+
+        /**
+         * Si il y a une condition d'accès, on l'affecte au quoteRequestLine
+         */
+        if ($quoteRequest->getAccess()) {
+            $quoteRequestLine->setAccessPrice($numberManager->normalize($productManager->getAccesPrice($quoteRequest)));
+        } else {
+            /**
+             * Sinon on lui met à 0 par défaut
+             */
+            $quoteRequestLine->setAccessPrice(0);
         }
 
         if ($doFlush) {
@@ -232,7 +291,7 @@ class QuoteRequestManager
                 $totalAmount += $quoteRequestLine->getTotalAmount();
             }
         }
-        return $totalAmount * (1 - $numberManager->denormalize($quoteRequest->getOverallDiscount() / 100));
+        return $totalAmount;
     }
 
 

@@ -75,7 +75,7 @@ class Region
      * @ORM\Column(name="email", type="string", length=255, nullable=true)
      * @Assert\NotBlank()
      * @Assert\Email(
-     *      message = "L'email '{{ value }}' n'a pas un format valide"
+     *      message = "email_error"
      * )
      */
     private $email;

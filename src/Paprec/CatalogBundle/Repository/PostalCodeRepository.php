@@ -18,10 +18,24 @@ class PostalCodeRepository extends EntityRepository
             ->createQueryBuilder('p')
             ->where('p.code LIKE :code')
             ->andWhere('p.deleted IS NULL')
-            ->setParameter('code', $query.'%')
-            ->orderBy('p.code', 'ASC')
-        ;
+            ->setParameter('code', $query . '%')
+            ->orderBy('p.code', 'ASC');
 
         return $queryBuilder->getQuery()->getResult();
+    }
+
+
+    /**
+     * Vérifie s'il existe ddéjà un postalCode NON supprimé aec le même code
+     *
+     * @param $params
+     * @return array
+     */
+    public function isCodeUnique($params)
+    {
+        return $this->findBy(array(
+            'code' => $params['code'],
+            'deleted' => null
+        ));
     }
 }

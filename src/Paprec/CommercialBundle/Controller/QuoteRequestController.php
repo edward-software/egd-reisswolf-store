@@ -171,7 +171,7 @@ class QuoteRequestController extends Controller
                 ->setCellValue('M' . $i, $quoteRequest->getComment())
                 ->setCellValue('N' . $i, $quoteRequest->getCoworkerNumber())
                 ->setCellValue('O' . $i, $quoteRequest->getUserInCharge()->getFirstName() . ' ' . $quoteRequest->getUserInCharge()->getLastName())
-                ->setCellValue('P' . $i, $numberManager->denormalize($quoteRequest->getMonthlyBudget()))
+                ->setCellValue('P' . $i, $numberManager->denormalize($quoteRequest->getAnnualBudget()))
                 ->setCellValue('Q' . $i, $quoteRequest->getFrequency())
                 ->setCellValue('R' . $i, $quoteRequest->getDateCreation()->format('Y-m-d'));
 
@@ -259,7 +259,7 @@ class QuoteRequestController extends Controller
             $quoteRequest = $form->getData();
 
             $quoteRequest->setOverallDiscount($numberManager->normalize($quoteRequest->getOverallDiscount()));
-            $quoteRequest->setMonthlyBudget($numberManager->normalize($quoteRequest->getMonthlyBudget()));
+            $quoteRequest->setAnnualBudget($numberManager->normalize($quoteRequest->getAnnualBudget()));
 
             $quoteRequest->setUserCreation($user);
             @@
@@ -288,6 +288,7 @@ class QuoteRequestController extends Controller
     public function editAction(Request $request, QuoteRequest $quoteRequest)
     {
         $user = $this->getUser();
+        dump($user->getLang());
 
         $numberManager = $this->get('paprec_catalog.number_manager');
         $quoteRequestManager = $this->get('paprec_commercial.quote_request_manager');
@@ -314,7 +315,7 @@ class QuoteRequestController extends Controller
         }
 
         $quoteRequest->setOverallDiscount($numberManager->denormalize($quoteRequest->getOverallDiscount()));
-        $quoteRequest->setMonthlyBudget($numberManager->denormalize($quoteRequest->getMonthlyBudget()));
+        $quoteRequest->setAnnualBudget($numberManager->denormalize($quoteRequest->getAnnualBudget()));
 
         $form = $this->createForm(QuoteRequestType::class, $quoteRequest, array(
             'status' => $status,
@@ -329,7 +330,7 @@ class QuoteRequestController extends Controller
 
             $quoteRequest = $form->getData();
             $quoteRequest->setOverallDiscount($numberManager->normalize($quoteRequest->getOverallDiscount()));
-            $quoteRequest->setMonthlyBudget($numberManager->normalize($quoteRequest->getMonthlyBudget()));
+            $quoteRequest->setAnnualBudget($numberManager->normalize($quoteRequest->getAnnualBudget()));
 
             if ($quoteRequest->getQuoteRequestLines()) {
                 foreach ($quoteRequest->getQuoteRequestLines() as $line) {

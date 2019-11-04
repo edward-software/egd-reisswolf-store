@@ -183,14 +183,16 @@
                     <tr>
                         <td style="padding: 30px 15px 120px; text-align: left; font-size: 17px; mso-height-rule: exactly; line-height: 23px;">
                             <div style="margin: 0 25px !important; font-family: 'Arimo', 'Arial', sans-serif; font-size: 16px; line-height: 22px; color: #333333;">
-                                {% if quoteRequest.civility == 'M' %}Cher Monsieur{% elseif quoteRequest.civility == 'Mme' %} Chère madame{% endif %}
+                                {% if quoteRequest.civility == 'M' %}{{ 'Commercial.ConfirmEmail.Dear.M'|trans }}{% elseif quoteRequest.civility == 'Mme' %} {{ 'Commercial.ConfirmEmail.Dear.Mrs'|trans }}{% endif %}
                                 ,
-
-                                {{ 'Commercial.ConfirmEmail.Message1'| trans({}, "messages", locale) }}
-                                <a href="#" style="color: #2C4491; text-decoration: none; font-weight: 700;">
-                                    {{ 'Commercial.ConfirmEmail.TechnicalService'| trans({}, "messages", locale) }}
-                                </a>
+                                <br><br>
+                                {{ 'Commercial.ConfirmEmail.Message1'| trans({'%date%': quoteRequest.dateCreation|localizeddate('short', 'medium', locale)}, "messages", locale) }}
+                                <br><br>
                                 {{ 'Commercial.ConfirmEmail.Message2'| trans({}, "messages", locale) }}
+                                <br><br>
+                                {{ 'Commercial.ConfirmEmail.Regards'| trans({}, "messages", locale) }}
+                                <br><br>
+                                {{ 'Commercial.ConfirmEmail.Partner'| trans({}, "messages", locale) }}
                             </div>
                         </td>
                     </tr>

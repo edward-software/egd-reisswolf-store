@@ -125,8 +125,8 @@ class QuoteRequest
      * @ORM\Column(name="email", type="string", length=255, nullable=true)
      * @Assert\NotBlank(groups={"public"})
      * @Assert\Email(
-     *      groups={"public"},
-     *      message = "L'email '{{ value }}' n'a pas un format valide"
+     *     groups={"public"},
+     *      message = "email_error"
      * )
      */
     private $email;
@@ -230,9 +230,9 @@ class QuoteRequest
     /**
      * @var int
      *
-     * @ORM\Column(name="monthlyBudget", type="integer", nullable=true)
+     * @ORM\Column(name="annualBudget", type="integer", nullable=true)
      */
-    private $monthlyBudget;
+    private $annualBudget;
 
     /**
      * @var string
@@ -261,6 +261,13 @@ class QuoteRequest
      * @ORM\Column(name="customerId", type="string", length=255, nullable=true)
      */
     private $customerId;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="reference", type="string", length=255, nullable=true)
+     */
+    private $reference;
 
     /**
      * #################################
@@ -712,29 +719,7 @@ class QuoteRequest
         return $this->salesmanComment;
     }
 
-    /**
-     * Set monthlyBudget.
-     *
-     * @param int|null $monthlyBudget
-     *
-     * @return QuoteRequest
-     */
-    public function setMonthlyBudget($monthlyBudget = null)
-    {
-        $this->monthlyBudget = $monthlyBudget;
-
-        return $this;
-    }
-
-    /**
-     * Get monthlyBudget.
-     *
-     * @return int|null
-     */
-    public function getMonthlyBudget()
-    {
-        return $this->monthlyBudget;
-    }
+    
 
     /**
      * Set frequency.
@@ -1082,5 +1067,53 @@ class QuoteRequest
     public function getCustomerId()
     {
         return $this->customerId;
+    }
+
+    /**
+     * Set annualBudget.
+     *
+     * @param int|null $annualBudget
+     *
+     * @return QuoteRequest
+     */
+    public function setAnnualBudget($annualBudget = null)
+    {
+        $this->annualBudget = $annualBudget;
+
+        return $this;
+    }
+
+    /**
+     * Get annualBudget.
+     *
+     * @return int|null
+     */
+    public function getAnnualBudget()
+    {
+        return $this->annualBudget;
+    }
+
+    /**
+     * Set reference.
+     *
+     * @param string|null $reference
+     *
+     * @return QuoteRequest
+     */
+    public function setReference($reference = null)
+    {
+        $this->reference = $reference;
+
+        return $this;
+    }
+
+    /**
+     * Get reference.
+     *
+     * @return string|null
+     */
+    public function getReference()
+    {
+        return $this->reference;
     }
 }

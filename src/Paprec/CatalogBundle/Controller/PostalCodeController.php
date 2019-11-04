@@ -187,6 +187,8 @@ class PostalCodeController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
 
             $postalCode = $form->getData();
+            $postalCode->setSetUpRate($numberManager->normalize15($postalCode->getSetUpRate()));
+            $postalCode->setRentalRate($numberManager->normalize15($postalCode->getRentalRate()));
             $postalCode->setTransportRate($numberManager->normalize15($postalCode->getTransportRate()));
             $postalCode->setTreatmentRate($numberManager->normalize15($postalCode->getTreatmentRate()));
             $postalCode->setTraceabilityRate($numberManager->normalize15($postalCode->getTraceabilityRate()));
@@ -222,6 +224,8 @@ class PostalCodeController extends Controller
         $postalCodeManager = $this->get('paprec_catalog.postal_code_manager');
         $postalCodeManager->isDeleted($postalCode, true);
 
+        $postalCode->setSetUpRate($numberManager->denormalize15($postalCode->getSetUpRate()));
+        $postalCode->setRentalRate($numberManager->denormalize15($postalCode->getRentalRate()));
         $postalCode->setTransportRate($numberManager->denormalize15($postalCode->getTransportRate()));
         $postalCode->setTreatmentRate($numberManager->denormalize15($postalCode->getTreatmentRate()));
         $postalCode->setTraceabilityRate($numberManager->denormalize15($postalCode->getTraceabilityRate()));
@@ -233,6 +237,9 @@ class PostalCodeController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
 
             $postalCode = $form->getData();
+
+            $postalCode->setSetUpRate($numberManager->normalize15($postalCode->getSetUpRate()));
+            $postalCode->setRentalRate($numberManager->normalize15($postalCode->getRentalRate()));
             $postalCode->setTransportRate($numberManager->normalize15($postalCode->getTransportRate()));
             $postalCode->setTreatmentRate($numberManager->normalize15($postalCode->getTreatmentRate()));
             $postalCode->setTraceabilityRate($numberManager->normalize15($postalCode->getTraceabilityRate()));
@@ -308,12 +315,12 @@ class PostalCodeController extends Controller
 
         $entities = $em->getRepository(PostalCode::class)->createQueryBuilder('pC')
             ->where('pC.code LIKE :code')
-            ->setParameter('code', '%'.$term.'%')
+            ->andWhere('pC.deleted is NULL')
+            ->setParameter('code', '%' . $term . '%')
             ->getQuery()
             ->getResult();
 
-        foreach ($entities as $entity)
-        {
+        foreach ($entities as $entity) {
             $codes[] = $entity->getCode();
         }
 

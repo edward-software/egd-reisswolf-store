@@ -28,6 +28,8 @@ Catalog:
     Cancel:                     Cancel
     Confirm-cancel:             Etes-vous sûr de vouloir annuler ?
     Confirm-remove:             Etes-vous sûr de vouloir supprimer ce code postal ?
+    SetUpRate: Setup rate
+    RentalRate: Rental rate
     TransportRate: Transport rate
     TreatmentRate: Treatment rate
     TraceabilityRate: Traceability rate

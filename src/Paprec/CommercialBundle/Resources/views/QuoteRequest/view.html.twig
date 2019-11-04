@@ -33,7 +33,9 @@
                     <i class="fa fa-xs fa-quoteRequest"></i> {{ 'Commercial.QuoteRequest.View'|trans }}
                 </h4>
                 <div class="float-right">
-                    <a id="downloadGeneratedQuoteButton" href="{{ path("paprec_commercial_quote_request_download", {id: quoteRequest.id}) }}" class="btn btn-sm btn-secondary"><i
+                    <a id="downloadGeneratedQuoteButton"
+                       href="{{ path("paprec_commercial_quote_request_download", {id: quoteRequest.id}) }}"
+                       class="btn btn-sm btn-secondary"><i
                                 class="fa fa-xs fa-download"></i> {{ 'Commercial.QuoteRequest.Download-quote'|trans }}
                     </a>
                     <a id="sendGeneratedQuoteButton" href="javascript:void(0);" class="btn btn-sm btn-success"><i
@@ -201,23 +203,30 @@
                                     </label>
                                 </div>
                                 <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.Reference'|trans }}</label>
+                                    <label class="col-form-label">
+                                        {{ quoteRequest.reference }}
+                                    </label>
+                                </div>
+                                <div class="form-group row">
                                     <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.QuoteStatus'|trans }}</label>
                                     <label class="col-form-label">
                                         {{ ('Commercial.QuoteStatusList.' ~ quoteRequest.quoteStatus)|trans }}
                                     </label>
                                 </div>
+
+                            </div>
+                            <div class="col-md-6">
                                 <div class="form-group row">
                                     <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.OverallDiscount'|trans }}</label>
                                     <label class="col-form-label">
                                         {{ quoteRequest.overallDiscount|formatAmount('PERCENTAGE', app.request.locale) }}
                                     </label>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
                                 <div class="form-group row">
-                                    <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.MonthlyBudget'|trans }}</label>
+                                    <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.AnnualBudget'|trans }}</label>
                                     <label class="col-form-label">
-                                        {{ quoteRequest.monthlyBudget|formatAmount('EUR', app.request.locale) }}
+                                        {{ quoteRequest.annualBudget|formatAmount('EUR', app.request.locale) }}
                                     </label>
                                 </div>
                                 <div class="form-group row">
@@ -259,11 +268,17 @@
                                     <th>#</th>
                                     <th>{{ 'Commercial.QuoteRequestLine.ProductName'|trans }}</th>
                                     <th>{{ 'Commercial.QuoteRequestLine.Quantity'|trans }}</th>
-                                    <th>{{ 'Commercial.QuoteRequestLine.SetUpPrice'|trans }}</th>
-                                    <th>{{ 'Commercial.QuoteRequestLine.RentalPrice'|trans }}</th>
-                                    <th>{{ 'Commercial.QuoteRequestLine.Transport'|trans }} <span style="font-weight: 300;">(*coef.)</span></th>
-                                    <th>{{ 'Commercial.QuoteRequestLine.Treatment'|trans }} <span style="font-weight: 300;">(*coef.)</span></th>
-                                    <th>{{ 'Commercial.QuoteRequestLine.Traceability'|trans }} <span style="font-weight: 300;">(*coef.)</span></th>
+                                    <th>{{ 'Commercial.QuoteRequestLine.SetUpPrice'|trans }} <span
+                                                style="font-weight: 300;">(*coef.)</span></th>
+                                    <th>{{ 'Commercial.QuoteRequestLine.RentalPrice'|trans }} <span
+                                                style="font-weight: 300;">(*coef.)</span></th>
+                                    <th>{{ 'Commercial.QuoteRequestLine.Transport'|trans }} <span
+                                                style="font-weight: 300;">(*coef.)</span></th>
+                                    <th>{{ 'Commercial.QuoteRequestLine.Treatment'|trans }} <span
+                                                style="font-weight: 300;">(*coef.)</span></th>
+                                    <th>{{ 'Commercial.QuoteRequestLine.Traceability'|trans }} <span
+                                                style="font-weight: 300;">(*coef.)</span></th>
+                                    <th>{{ 'Commercial.QuoteRequestLine.Access'|trans }}</th>
                                     <th>{{ 'Commercial.QuoteRequestLine.TotalAmount'|trans }}</th>
 
                                     <th></th>
@@ -279,11 +294,17 @@
                                             </a>
                                         </td>
                                         <td>{{ quoteRequestLine.quantity }}</td>
-                                        <td>{{ quoteRequestLine.setUpPrice|formatAmount('', app.request.locale) }}</td>
-                                        <td>{{ quoteRequestLine.rentalUnitPrice|formatAmount('', app.request.locale) }}</td>
-                                        <td>{{ quoteRequestLine.transportUnitPrice|formatAmount('', app.request.locale) }} * {{ quoteRequestLine.transportRate|formatAmount(null, app.request.locale, 'FORMAT15')|number_format(2, '.', ' ') }}</td>
-                                        <td>{{ quoteRequestLine.treatmentUnitPrice|formatAmount('', app.request.locale) }} * {{ quoteRequestLine.treatmentRate|formatAmount(null, app.request.locale, 'FORMAT15')|number_format(2, '.', ' ') }}</td>
-                                        <td>{{ quoteRequestLine.traceabilityUnitPrice|formatAmount('', app.request.locale) }} * {{ quoteRequestLine.traceabilityRate|formatAmount(null, app.request.locale, 'FORMAT15')|number_format(2, '.', ' ') }}</td>
+                                        <td>{{ quoteRequestLine.setUpPrice|formatAmount('', app.request.locale) }}
+                                            * {{ quoteRequestLine.setUpRate|formatAmount(null, app.request.locale, 'FORMAT15')|number_format(2, '.', ' ') }}</td>
+                                        <td>{{ quoteRequestLine.rentalUnitPrice|formatAmount('', app.request.locale) }}
+                                            * {{ quoteRequestLine.rentalRate|formatAmount(null, app.request.locale, 'FORMAT15')|number_format(2, '.', ' ') }}</td>
+                                        <td>{{ quoteRequestLine.transportUnitPrice|formatAmount('', app.request.locale) }}
+                                            * {{ quoteRequestLine.transportRate|formatAmount(null, app.request.locale, 'FORMAT15')|number_format(2, '.', ' ') }}</td>
+                                        <td>{{ quoteRequestLine.treatmentUnitPrice|formatAmount('', app.request.locale) }}
+                                            * {{ quoteRequestLine.treatmentRate|formatAmount(null, app.request.locale, 'FORMAT15')|number_format(2, '.', ' ') }}</td>
+                                        <td>{{ quoteRequestLine.traceabilityUnitPrice|formatAmount('', app.request.locale) }}
+                                            * {{ quoteRequestLine.traceabilityRate|formatAmount(null, app.request.locale, 'FORMAT15')|number_format(2, '.', ' ') }}</td>
+                                        <td>{{ quoteRequestLine.accessPrice|formatAmount('', app.request.locale) }}</td>
                                         <td>{{ quoteRequestLine.totalAmount|formatAmount('', app.request.locale) }}</td>
                                         <td class="text-center">
                                             <a href="{{ path('paprec_commercial_quoteRequest_editLine', {id: quoteRequest.id, quoteLineId: quoteRequestLine.id}) }}"

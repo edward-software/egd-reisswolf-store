@@ -35,12 +35,12 @@ class RequestListener
         }
 
         $locale = strtolower($locale);
-
         if (!in_array($locale, $availableLocales)) {
             $locale = $defaultLocale;
         }
 
         $request->setLocale($locale);
         $this->container->get('translator')->setLocale($locale);
+
     }
 }

@@ -29,6 +29,8 @@ Catalog:
     Cancel:                     Annuler
     Confirm-cancel:             Etes-vous sûr de vouloir annuler ?
     Confirm-remove:             Etes-vous sûr de vouloir supprimer ce code postal ?
+    SetUpRate: Coef de mise en place
+    RentalRate: Coef de location
     TransportRate: Coef de transport
     TreatmentRate: Coef de traitement
     TraceabilityRate: Coef de traçabilité

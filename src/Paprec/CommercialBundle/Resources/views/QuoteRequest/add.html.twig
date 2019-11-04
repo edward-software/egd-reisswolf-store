@@ -184,12 +184,22 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
+                                        <label class="form-label">{{ 'Commercial.QuoteRequest.Reference'|trans }}</label>
+                                        <div class="form-content">
+                                            {{ form_widget(form.reference, {'attr': {'class': 'form-control'}}) }}
+                                            {{ form_errors(form.reference) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
                                         <label class="form-label">{{ 'Commercial.QuoteRequest.QuoteStatus'|trans }}</label>
                                         <div class="form-content">
                                             {{ form_widget(form.quoteStatus, {'attr': {'class': 'form-control'}}) }}
                                             {{ form_errors(form.quoteStatus) }}
                                         </div>
                                     </div>
+
+                                </div>
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-label">{{ 'Commercial.QuoteRequest.OverallDiscount'|trans }}</label>
                                         <div class="form-content">
@@ -197,13 +207,11 @@
                                             {{ form_errors(form.overallDiscount) }}
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="form-label">{{ 'Commercial.QuoteRequest.MonthlyBudget'|trans }}</label>
+                                        <label class="form-label">{{ 'Commercial.QuoteRequest.AnnualBudget'|trans }}</label>
                                         <div class="form-content">
-                                            {{ form_widget(form.monthlyBudget, {'attr': {'class': 'form-control'}}) }}
-                                            {{ form_errors(form.monthlyBudget) }}
+                                            {{ form_widget(form.annualBudget, {'attr': {'class': 'form-control'}}) }}
+                                            {{ form_errors(form.annualBudget) }}
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -260,7 +268,7 @@
                     showCancelButton: true,
                     confirmButtonText: "{{ 'General.Yes'|trans }}",
                     cancelButtonText: "{{ 'General.No'|trans }}"
-                }).then(function(result) {
+                }).then(function (result) {
                     if (result.value) {
                         $(location).attr('href', url);
                     }

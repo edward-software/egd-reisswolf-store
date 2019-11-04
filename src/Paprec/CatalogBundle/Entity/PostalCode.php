@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="postalCodes")
  * @ORM\Entity(repositoryClass="Paprec\CatalogBundle\Repository\PostalCodeRepository")
- * @UniqueEntity("code")
+ * @UniqueEntity(fields={"code"}, repositoryMethod="isCodeUnique")
  */
 class PostalCode
 {
@@ -74,6 +74,22 @@ class PostalCode
      * )
      */
     private $code;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="setUpRate", type="bigint")
+     * @Assert\NotBlank()
+     */
+    private $setUpRate;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="rentalRate", type="bigint")
+     * @Assert\NotBlank()
+     */
+    private $rentalRate;
 
     /**
      * @var int
@@ -501,5 +517,53 @@ class PostalCode
     public function getQuoteRequests()
     {
         return $this->quoteRequests;
+    }
+
+    /**
+     * Set setUpRate.
+     *
+     * @param int $setUpRate
+     *
+     * @return PostalCode
+     */
+    public function setSetUpRate($setUpRate)
+    {
+        $this->setUpRate = $setUpRate;
+
+        return $this;
+    }
+
+    /**
+     * Get setUpRate.
+     *
+     * @return int
+     */
+    public function getSetUpRate()
+    {
+        return $this->setUpRate;
+    }
+
+    /**
+     * Set rentalRate.
+     *
+     * @param int $rentalRate
+     *
+     * @return PostalCode
+     */
+    public function setRentalRate($rentalRate)
+    {
+        $this->rentalRate = $rentalRate;
+
+        return $this;
+    }
+
+    /**
+     * Get rentalRate.
+     *
+     * @return int
+     */
+    public function getRentalRate()
+    {
+        return $this->rentalRate;
     }
 }

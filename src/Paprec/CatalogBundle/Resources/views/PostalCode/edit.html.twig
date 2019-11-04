@@ -59,7 +59,20 @@
                                         {{ form_errors(form.zone) }}
                                     </div>
                                 </div>
-
+                                <div class="form-group">
+                                    <div class="form-label">{{ 'Catalog.PostalCode.SetUpRate'|trans }}</div>
+                                    <div class="form-content">
+                                        {{ form_widget(form.setUpRate, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_errors(form.setUpRate) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-label">{{ 'Catalog.PostalCode.RentalRate'|trans }}</div>
+                                    <div class="form-content">
+                                        {{ form_widget(form.rentalRate, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_errors(form.rentalRate) }}
+                                    </div>
+                                </div>
                                 <div class="form-group">
                                     <div class="form-label">{{ 'Catalog.PostalCode.TransportRate'|trans }}</div>
                                     <div class="form-content">
