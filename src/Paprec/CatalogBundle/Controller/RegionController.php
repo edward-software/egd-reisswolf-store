@@ -95,16 +95,16 @@ class RegionController extends Controller
 
         $phpExcelObject->getProperties()->setCreator("Reisswolf Shop")
             ->setLastModifiedBy("Reisswolf Shop")
-            ->setTitle("Reisswolf Shop - Régions")
-            ->setSubject("Extraction");
+            ->setTitle("Reisswolf Shop - Regions")
+            ->setSubject("Extract");
 
         $phpExcelObject->setActiveSheetIndex(0)
             ->setCellValue('A1', 'ID')
-            ->setCellValue('B1', 'Nom')
+            ->setCellValue('B1', 'Name')
             ->setCellValue('C1', 'Contact email')
-            ->setCellValue('D1', 'Date création');
+            ->setCellValue('D1', 'Creation Date');
 
-        $phpExcelObject->getActiveSheet()->setTitle('Régions');
+        $phpExcelObject->getActiveSheet()->setTitle('Regions');
         $phpExcelObject->setActiveSheetIndex(0);
 
         $i = 2;
@@ -120,7 +120,7 @@ class RegionController extends Controller
 
         $writer = $this->container->get('phpexcel')->createWriter($phpExcelObject, 'Excel2007');
 
-        $fileName = 'ReisswolfShop-Extraction-Regions-' . date('Y-m-d') . '.xlsx';
+        $fileName = 'ReisswolfShop-Extract-Regions-' . date('Y-m-d') . '.xlsx';
 
         // create the response
         $response = $this->container->get('phpexcel')->createStreamedResponse($writer);

@@ -100,21 +100,23 @@ class PostalCodeController extends Controller
 
         $phpExcelObject->getProperties()->setCreator("Reisswolf Shop")
             ->setLastModifiedBy("Reisswolf Shop")
-            ->setTitle("Reisswolf Shop - Codes Postaux")
-            ->setSubject("Extraction");
+            ->setTitle("Reisswolf Shop - Postal codes")
+            ->setSubject("Extract");
 
         $phpExcelObject->setActiveSheetIndex(0)
             ->setCellValue('A1', 'ID')
             ->setCellValue('B1', 'Code')
             ->setCellValue('C1', 'Commune')
-            ->setCellValue('D1', 'Zone tarifaire')
-            ->setCellValue('E1', 'Coef de transport')
-            ->setCellValue('F1', 'Coef de traitement')
-            ->setCellValue('G1', 'Coef de traçabilité')
-            ->setCellValue('H1', 'Commercial en charge')
-            ->setCellValue('I1', 'Région');
+            ->setCellValue('D1', 'Tariff zone')
+            ->setCellValue('E1', 'Setup rate')
+            ->setCellValue('F1', 'Rental rate')
+            ->setCellValue('G1', 'Transport rate')
+            ->setCellValue('H1', 'Treatment rate')
+            ->setCellValue('I1', 'Treacability rate')
+            ->setCellValue('J1', 'Salesman in charge')
+            ->setCellValue('K1', 'Region');
 
-        $phpExcelObject->getActiveSheet()->setTitle('Codes Postaux');
+        $phpExcelObject->getActiveSheet()->setTitle('Postal codes');
         $phpExcelObject->setActiveSheetIndex(0);
 
         $i = 2;
@@ -125,17 +127,19 @@ class PostalCodeController extends Controller
                 ->setCellValue('B' . $i, $postalCode->getCode())
                 ->setCellValue('C' . $i, $postalCode->getCity())
                 ->setCellValue('D' . $i, $postalCode->getZone())
-                ->setCellValue('E' . $i, $numberManager->denormalize15($postalCode->getTransportRate()))
-                ->setCellValue('F' . $i, $numberManager->denormalize15($postalCode->getTreatmentRate()))
-                ->setCellValue('G' . $i, $numberManager->denormalize15($postalCode->getTraceabilityRate()))
-                ->setCellValue('H' . $i, ($postalCode->getUserInCharge()) ? $postalCode->getUserInCharge()->getUsername() : '')
-                ->setCellValue('I' . $i, ($postalCode->getRegion()) ? $postalCode->getRegion()->getName() : '');
+                ->setCellValue('E' . $i, $numberManager->denormalize15($postalCode->getSetUpRate()))
+                ->setCellValue('F' . $i, $numberManager->denormalize15($postalCode->getRentalRate()))
+                ->setCellValue('G' . $i, $numberManager->denormalize15($postalCode->getTransportRate()))
+                ->setCellValue('H' . $i, $numberManager->denormalize15($postalCode->getTreatmentRate()))
+                ->setCellValue('I' . $i, $numberManager->denormalize15($postalCode->getTraceabilityRate()))
+                ->setCellValue('J' . $i, ($postalCode->getUserInCharge()) ? $postalCode->getUserInCharge()->getUsername() : '')
+                ->setCellValue('K' . $i, ($postalCode->getRegion()) ? $postalCode->getRegion()->getName() : '');
             $i++;
         }
 
         $writer = $this->container->get('phpexcel')->createWriter($phpExcelObject, 'Excel2007');
 
-        $fileName = 'ReisswolfShop-Extraction-Codes-Postaux-' . date('Y-m-d') . '.xlsx';
+        $fileName = 'ReisswolfShop-Extract-Postal-Codes-' . date('Y-m-d') . '.xlsx';
 
         // create the response
         $response = $this->container->get('phpexcel')->createStreamedResponse($writer);

@@ -104,6 +104,7 @@ class QuoteRequestController extends Controller
     public function exportAction(Request $request, $dateStart, $dateEnd, $status)
     {
         $numberManager = $this->get('paprec_catalog.number_manager');
+        $translator = $this->get('translator');
 
         $phpExcelObject = $this->container->get('phpexcel')->createPHPExcelObject();
 
@@ -131,23 +132,24 @@ class QuoteRequestController extends Controller
 
         $phpExcelObject->setActiveSheetIndex(0)
             ->setCellValue('A1', 'ID')
-            ->setCellValue('B1', 'Raison sociale')
+            ->setCellValue('B1', 'Business name')
             ->setCellValue('C1', 'Canton')
-            ->setCellValue('D1', 'Civilité')
-            ->setCellValue('E1', 'Nom')
-            ->setCellValue('F1', 'Prénom')
+            ->setCellValue('D1', 'Civility')
+            ->setCellValue('E1', 'Last name')
+            ->setCellValue('F1', 'First name')
             ->setCellValue('G1', 'Email')
-            ->setCellValue('H1', 'Téléphone')
-            ->setCellValue('I1', 'Adresse')
-            ->setCellValue('J1', 'Code postal')
-            ->setCellValue('K1', 'Ville')
-            ->setCellValue('L1', 'Statut')
-            ->setCellValue('M1', 'Comment. client')
-            ->setCellValue('N1', 'Nb collab.')
-            ->setCellValue('O1', 'Commercial en charge')
-            ->setCellValue('P1', 'Bduget mensuel')
-            ->setCellValue('Q1', 'Fréquence')
-            ->setCellValue('R1', 'Date création');
+            ->setCellValue('H1', 'Phone')
+            ->setCellValue('I1', 'Address')
+            ->setCellValue('J1', 'Postal code')
+            ->setCellValue('K1', 'City')
+            ->setCellValue('L1', 'Status')
+            ->setCellValue('M1', 'Customer comment')
+            ->setCellValue('N1', 'Staff')
+            ->setCellValue('O1', 'Access')
+            ->setCellValue('P1', 'Salesman in charge')
+            ->setCellValue('Q1', 'Annual budget')
+            ->setCellValue('R1', 'Frequency')
+            ->setCellValue('S1', 'Creation date');
 
         $phpExcelObject->getActiveSheet()->setTitle('Devis');
         $phpExcelObject->setActiveSheetIndex(0);
@@ -165,15 +167,16 @@ class QuoteRequestController extends Controller
                 ->setCellValue('G' . $i, $quoteRequest->getEmail())
                 ->setCellValue('H' . $i, $quoteRequest->getPhone())
                 ->setCellValue('I' . $i, $quoteRequest->getAddress())
-                ->setCellValue('J' . $i, $quoteRequest->getPostalCode())
+                ->setCellValue('J' . $i, ($quoteRequest->getPostalCode()) ? $quoteRequest->getPostalCode()->getCode() : '')
                 ->setCellValue('K' . $i, $quoteRequest->getCity())
                 ->setCellValue('L' . $i, $quoteRequest->getQuoteStatus())
                 ->setCellValue('M' . $i, $quoteRequest->getComment())
-                ->setCellValue('N' . $i, $quoteRequest->getCoworkerNumber())
-                ->setCellValue('O' . $i, $quoteRequest->getUserInCharge()->getFirstName() . ' ' . $quoteRequest->getUserInCharge()->getLastName())
-                ->setCellValue('P' . $i, $numberManager->denormalize($quoteRequest->getAnnualBudget()))
-                ->setCellValue('Q' . $i, $quoteRequest->getFrequency())
-                ->setCellValue('R' . $i, $quoteRequest->getDateCreation()->format('Y-m-d'));
+                ->setCellValue('N' . $i, $translator->trans('Commercial.StaffList.' . $quoteRequest->getStaff()))
+                ->setCellValue('O' . $i, $quoteRequest->getAccess())
+                ->setCellValue('P' . $i, ($quoteRequest->getUserInCharge()) ? $quoteRequest->getUserInCharge()->getFirstName() . ' ' . $quoteRequest->getUserInCharge()->getLastName() : '')
+                ->setCellValue('Q' . $i, $numberManager->denormalize($quoteRequest->getAnnualBudget()))
+                ->setCellValue('R' . $i, $quoteRequest->getFrequency())
+                ->setCellValue('S' . $i, $quoteRequest->getDateCreation()->format('Y-m-d'));
 
             $i++;
         }
@@ -419,7 +422,6 @@ class QuoteRequestController extends Controller
         $form = $this->createForm(QuoteRequestLineAddType::class, $quoteRequestLine);
 
 
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -587,9 +589,8 @@ class QuoteRequestController extends Controller
         // Set content disposition inline of the file
         $response->setContentDisposition(
             ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-            'Quote-' . $quoteRequest->getBusinessName() . '-' . $quoteRequest->getId()  . ' .pdf'
+            'Quote-' . $quoteRequest->getBusinessName() . '-' . $quoteRequest->getId() . ' .pdf'
         );
-
 
 
         return $response;

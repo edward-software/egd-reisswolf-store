@@ -104,50 +104,61 @@ class UserController extends Controller
 
         $phpExcelObject->getProperties()->setCreator("Reisswolf Shop")
             ->setLastModifiedBy("Reisswolf Shop")
-            ->setTitle("Reisswolf Shop - Utilisateurs")
-            ->setSubject("Extraction");
+            ->setTitle("Reisswolf Shop - USers")
+            ->setSubject("Extact");
 
         $phpExcelObject->setActiveSheetIndex(0)
             ->setCellValue('A1', 'ID')
-            ->setCellValue('B1', 'Société')
-            ->setCellValue('C1', 'Prénom')
-            ->setCellValue('D1', 'Nom')
-            ->setCellValue('E1', 'E-mail')
-            ->setCellValue('F1', 'Identifiant')
-            ->setCellValue('G1', 'Rôle')
-            ->setCellValue('H1', 'Activé')
-            ->setCellValue('I1', 'Date Création');
+            ->setCellValue('B1', 'Company')
+            ->setCellValue('C1', 'First name')
+            ->setCellValue('D1', 'Last name')
+            ->setCellValue('E1', 'Email')
+            ->setCellValue('F1', 'Username')
+            ->setCellValue('G1', 'Roles')
+            ->setCellValue('H1', 'Postal codes')
+            ->setCellValue('I1', 'Enabled')
+            ->setCellValue('J1', 'Creation date');
 
-        $phpExcelObject->getActiveSheet()->setTitle('Utilisateurs');
+        $phpExcelObject->getActiveSheet()->setTitle('Users');
         $phpExcelObject->setActiveSheetIndex(0);
 
         $i = 2;
-        foreach ($users as $user) {
 
-            $roles = array();
+        if ($users && is_iterable($users) && count($users)) {
+            foreach ($users as $user) {
+                $roles = array();
 
-            foreach ($user->getRoles() as $role) {
-                if ($role != 'ROLE_USER') {
-                    $roles[] = $translator->trans($role);
+                if ($user && is_iterable($user->getRoles()) && count($user->getRoles()))
+                    foreach ($user->getRoles() as $role) {
+                        if ($role != 'ROLE_USER') {
+                            $roles[] = $translator->trans($role);
+                        }
+                    }
+
+                $postalCodes = array();
+                if ($user && is_iterable($user->getPostalCodes()) && count($user->getPostalCodes()))
+                foreach ($user->getPostalCodes() as $pc) {
+                        $postalCodes[] = $pc->getCode();
                 }
-            }
 
-            $phpExcelObject->setActiveSheetIndex(0)
-                ->setCellValue('A' . $i, $user->getId())
-                ->setCellValue('B' . $i, $user->getCompanyName())
-                ->setCellValue('C' . $i, $user->getFirstName())
-                ->setCellValue('D' . $i, $user->getLastName())
-                ->setCellValue('E' . $i, $user->getEmail())
-                ->setCellValue('F' . $i, $user->getUsername())
-                ->setCellValue('G' . $i, implode(',', $roles))
-                ->setCellValue('H' . $i, $user->isEnabled())
-                ->setCellValue('I' . $i, $user->getDateCreation()->format('Y-m-d'));
-            $i++;
+                $phpExcelObject->setActiveSheetIndex(0)
+                    ->setCellValue('A' . $i, $user->getId())
+                    ->setCellValue('B' . $i, $user->getCompanyName())
+                    ->setCellValue('C' . $i, $user->getFirstName())
+                    ->setCellValue('D' . $i, $user->getLastName())
+                    ->setCellValue('E' . $i, $user->getEmail())
+                    ->setCellValue('F' . $i, $user->getUsername())
+                    ->setCellValue('G' . $i, implode(',', $roles))
+                    ->setCellValue('H' . $i, implode(',', $postalCodes))
+                    ->setCellValue('I' . $i, $translator->trans('General.' . $user->isEnabled()))
+                    ->setCellValue('J' . $i, $user->getDateCreation()->format('Y-m-d'));
+                $i++;
+            }
         }
 
         $writer = $this->container->get('phpexcel')->createWriter($phpExcelObject, 'Excel2007');
 
-        $fileName = 'ReisswolfShop-Extraction-Utilisateurs-' . date('Y-m-d') . '.xlsx';
+        $fileName = 'ReisswolfShop-Extract-Users-' . date('Y-m-d') . '.xlsx';
 
         // create the response
         $response = $this->container->get('phpexcel')->createStreamedResponse($writer);

@@ -82,7 +82,7 @@ Commercial:
     stairs: Par escalier
     elevator: Par ascenseur
     ground: Niveau rue sans marche
-Ò
+
   QuoteRequestLine:
     ProductName: Nom du produit
     UnitPrice: Prix unitaire

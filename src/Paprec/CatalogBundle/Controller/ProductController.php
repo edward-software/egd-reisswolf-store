@@ -130,27 +130,27 @@ class ProductController extends Controller
 
         $phpExcelObject->getProperties()->setCreator("Reisswolf Shop")
             ->setLastModifiedBy("Reisswolf Shop")
-            ->setTitle("Reisswolf Shop - Produits")
-            ->setSubject("Extraction");
+            ->setTitle("Reisswolf Shop - Products")
+            ->setSubject("Extract");
 
         $phpExcelObject->setActiveSheetIndex(0)
             ->setCellValue('A1', 'ID')
-            ->setCellValue('B1', 'Nom')
+            ->setCellValue('B1', 'Name')
             ->setCellValue('C1', 'Description')
-            ->setCellValue('D1', 'Volume')
-            ->setCellValue('E1', 'Unité Vol')
+            ->setCellValue('D1', 'Capacity')
+            ->setCellValue('E1', 'Capacity unit')
             ->setCellValue('F1', 'Dimensions')
-            ->setCellValue('G1', 'Actif')
-            ->setCellValue('H1', 'PU location')
-            ->setCellValue('I1', 'PU transport')
-            ->setCellValue('J1', 'PU traitement')
-            ->setCellValue('K1', 'PU traçabilité')
-            ->setCellValue('L1', 'PU mise en place')
+            ->setCellValue('G1', 'Enabled')
+            ->setCellValue('H1', 'Rental UP')
+            ->setCellValue('I1', 'Transport UP')
+            ->setCellValue('J1', 'Treatment UP')
+            ->setCellValue('K1', 'Treacability UP')
+            ->setCellValue('L1', 'Setup UP')
             ->setCellValue('M1', 'Position')
-            ->setCellValue('N1', 'Date création');
+            ->setCellValue('N1', 'Creation date');
 
 
-        $phpExcelObject->getActiveSheet()->setTitle('Produits');
+        $phpExcelObject->getActiveSheet()->setTitle('Products');
         $phpExcelObject->setActiveSheetIndex(0);
 
         $i = 2;
@@ -165,7 +165,7 @@ class ProductController extends Controller
                 ->setCellValue('D' . $i, $product->getCapacity())
                 ->setCellValue('E' . $i, $product->getCapacityUnit())
                 ->setCellValue('F' . $i, $product->getDimensions())
-                ->setCellValue('G' . $i, $product->getIsEnabled())
+                ->setCellValue('G' . $i, $translator->trans('General.' . $product->getIsEnabled()))
                 ->setCellValue('H' . $i, $numberManager->denormalize($product->getRentalUnitPrice()))
                 ->setCellValue('I' . $i, $numberManager->denormalize($product->getTransportUnitPrice()))
                 ->setCellValue('J' . $i, $numberManager->denormalize($product->getTreatmentUnitPrice()))
@@ -178,7 +178,7 @@ class ProductController extends Controller
 
         $writer = $this->container->get('phpexcel')->createWriter($phpExcelObject, 'Excel2007');
 
-        $fileName = 'ReisswolfShop-Extraction-Produits-' . date('Y-m-d') . '.xlsx';
+        $fileName = 'ReisswolfShop-Extraction-Products-' . date('Y-m-d') . '.xlsx';
 
         // create the response
         $response = $this->container->get('phpexcel')->createStreamedResponse($writer);
