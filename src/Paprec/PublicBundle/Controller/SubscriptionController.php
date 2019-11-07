@@ -147,7 +147,6 @@ class SubscriptionController extends Controller
                     'quoteRequestId' => $quoteRequest->getId()
                 ));
             }
-            dump($quoteRequest);
             exit;
         }
 

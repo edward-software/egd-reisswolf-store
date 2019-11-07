@@ -291,7 +291,6 @@ class QuoteRequestController extends Controller
     public function editAction(Request $request, QuoteRequest $quoteRequest)
     {
         $user = $this->getUser();
-        dump($user->getLang());
 
         $numberManager = $this->get('paprec_catalog.number_manager');
         $quoteRequestManager = $this->get('paprec_commercial.quote_request_manager');
