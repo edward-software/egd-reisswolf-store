@@ -1,0 +1,122 @@
+<style type="text/css">
+
+    .price > div {
+        width: 32%;
+    }
+</style>
+
+{#<pre>#}
+{#    {{ dump(data) }}#}
+{#</pre>#}
+<div class="contrat__content">
+
+    <div class="flex space-between bold">
+        <h2>ANNEXE 2</h2>
+        <p>{% if quoteRequest.customerId is defined %}N°{{ quoteRequest.customerId }}{% endif %}</p>
+    </div>
+
+    <p class="mb-20">au contrat en date du {{ date|date('d/m/Y') }} conclu entre</p>
+    <p>{{quoteRequest.businessName}}</p>
+    <p>et</p>
+    <p>Reisswolf Aktenvernichtungs-AG</p>
+
+    <h3 class="mt-30">CONDITIONS</h3>
+
+    <p>
+        Documents originaux confidentiels et listings confidentiels, copies, tirages papier de toutes sortes, anciens
+        documents et autres écrits confidentiels.
+    </p>
+    <p>
+        Mise à disposition de collecteurs de transport verrouillables. Enlèvement des collecteurs ou procédure de
+        transvidage faisant appel à notre véhicule compacteur spécial et destruction des écrits confidentiels dans le
+        respect de la protection des données, T.V.A. en sus :
+    </p>
+    <p>Mêmes prix que dans l’offre<br>
+        Prix forfaitaire pour transport et destruction, par vidage de collecteur</p>
+
+    <div style="width: 500px; margin: auto;">
+        <div class="flex space-between mt-20 price">
+            <div>
+                <p>RW 70 e.l.sy </p>
+                <p>RW 130 e.l.sy</p>
+                <p>RW 240 e.l.sy</p>
+                <p>RW 350 e.l.sy</p>
+                <p>RW 500 e.l.sy</p>
+            </div>
+            <div>
+                <p>par collecteur</p>
+                <p>par collecteur</p>
+                <p>par collecteur</p>
+                <p>par collecteur</p>
+                <p>par collecteur</p>
+            </div>
+            <div>
+                <p>CHF 30,00</p>
+                <p>CHF 37,00</p>
+                <p>CHF 44,00</p>
+                <p>CHF 63,00</p>
+                <p>CHF 84,00</p>
+            </div>
+        </div>
+
+        <p class="mt-20" style="text-decoration: underline;">Prix de chargement en étage</p>
+        <div class="flex space-between price">
+            <div>
+                <p>Par collecteur</p>
+            </div>
+            <div>
+                <p>Ascenseur :</p>
+                <p>Escalier :</p>
+            </div>
+            <div>
+                <p>CHF 10,00</p>
+                <p>CHF 20,00</p>
+            </div>
+        </div>
+
+
+        <p class="mt-20" style="text-decoration: underline">Location des collecteurs au mois :</p>
+        <div class="flex space-between price">
+            <div>
+                <p>RW 70 e.l.sy </p>
+                <p>RW 130 e.l.sy</p>
+                <p>RW 240 e.l.sy</p>
+                <p>RW 350 e.l.sy</p>
+                <p>RW 500 e.l.sy</p>
+            </div>
+            <div>
+                <p>par collecteur</p>
+                <p>par collecteur</p>
+                <p>par collecteur</p>
+                <p>par collecteur</p>
+                <p>par collecteur</p>
+            </div>
+            <div>
+                <p>CHF 15,00 *</p>
+                <p>CHF 15,00 *</p>
+                <p>CHF 15,00 *</p>
+                <p>CHF 15,00 *</p>
+                <p>CHF 10,00 *</p>
+            </div>
+        </div>
+        <p>* Programmation unique de la serrure e.l.sy : CHF 20,00</p>
+    </div>
+
+    <p class="mt-30">
+        Remise de la carte-badge pour collecteurs Reisswolf :
+    </p>
+    <ul>
+        <li>
+            lors de la remise d’une carte-badge pour les ouvertures d’urgence du collecteur de sécurité, aucuns frais de
+            dépôt ne doivent être payés
+        </li>
+        <li>
+            toutefois, en cas de perte de la carte, des frais de CHF 100,00 pour interventions diverses seront facturés.
+        </li>
+    </ul>
+
+    <p>
+        Tous les prix s’entendent T.V.A. en sus et sont valables jusqu’au 31 décembre 2019. Passé cette date, ils
+        pourront être ajustés selon les besoins.
+    </p>
+</div>

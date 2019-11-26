@@ -524,12 +524,13 @@ class QuoteRequestController extends Controller
         $quoteRequestManager = $this->get('paprec_commercial.quote_request_manager');
         $quoteRequestManager->isDeleted($quoteRequest, true);
 
-
-        $sendQuote = $quoteRequestManager->sendGeneratedQuoteEmail($quoteRequest, $quoteRequest->getLocale());
-        if ($sendQuote) {
-            $this->get('session')->getFlashBag()->add('success', 'generatedQuoteSent');
-        } else {
-            $this->get('session')->getFlashBag()->add('error', 'generatedQuoteNotSent');
+        if ($quoteRequest->getPostalCode() && $quoteRequest->getPostalCode()->getRegion()) {
+            $sendQuote = $quoteRequestManager->sendGeneratedQuoteEmail($quoteRequest, $quoteRequest->getLocale());
+            if ($sendQuote) {
+                $this->get('session')->getFlashBag()->add('success', 'generatedQuoteSent');
+            } else {
+                $this->get('session')->getFlashBag()->add('error', 'generatedQuoteNotSent');
+            }
         }
 
         return $this->redirectToRoute('paprec_commercial_quoteRequest_view', array(

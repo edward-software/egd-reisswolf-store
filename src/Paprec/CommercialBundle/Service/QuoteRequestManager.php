@@ -448,7 +448,7 @@ class QuoteRequestManager
 
 
             $message = \Swift_Message::newInstance()
-                ->setSubject('Reisswolf : Votre devis de prestation ponctuelle pour déchets non dangereux')
+                ->setSubject('Reisswolf : Votre devis')
                 ->setFrom($from)
                 ->setTo($rcptTo)
                 ->setBody(
@@ -504,6 +504,28 @@ class QuoteRequestManager
             $snappy->setOption('dpi', 72);
 //            $snappy->setOption('footer-html', $this->container->get('templating')->render('@PaprecCommercial/QuoteRequest/PDF/fr/_footer.html.twig'));
 
+            if ($quoteRequest->getPostalCode() && $quoteRequest->getPostalCode()->getRegion()) {
+                $templateDir = '@PaprecCommercial/QuoteRequest/PDF/';
+                switch (strtolower($quoteRequest->getPostalCode()->getRegion())) {
+                    case 'basel':
+                        $templateDir .= 'basel';
+                        break;
+                    case 'geneve':
+                        $templateDir .= 'geneve';
+                        break;
+                    case 'zurich':
+                    case 'zuerich':
+                        $templateDir .= 'zuerich';
+                        break;
+                    case 'luzern':
+                        $templateDir .= 'luzern';
+                        break;
+                }
+            }
+
+            if (!isset($templateDir) || !$templateDir || is_null($templateDir)) {
+                return false;
+            }
 
             /**
              * On génère la page d'offre
@@ -511,7 +533,7 @@ class QuoteRequestManager
             $snappy->generateFromHtml(
                 array(
                     $this->container->get('templating')->render(
-                        '@PaprecCommercial/QuoteRequest/PDF/printQuoteOffer.html.twig',
+                        $templateDir . '/printQuoteOffer.html.twig',
                         array(
                             'quoteRequest' => $quoteRequest,
                             'date' => $today,
@@ -529,7 +551,7 @@ class QuoteRequestManager
             $snappy->generateFromHtml(
                 array(
                     $this->container->get('templating')->render(
-                        '@PaprecCommercial/QuoteRequest/PDF/fr/printQuoteContract.html.twig',
+                        $templateDir . '/printQuoteContract.html.twig',
                         array(
                             'quoteRequest' => $quoteRequest,
                             'date' => $today

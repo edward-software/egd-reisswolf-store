@@ -342,18 +342,18 @@ class SubscriptionController extends Controller
 //        ));
 //    }
 //
-//    /**
-//     * @Route("/{locale}/pdf/contract/{quoteId}", name="paprec_public_confirm_pdf_confirm_email")
-//     */
-//    public function showContractPDF(Request $request, $quoteId, $locale)
-//    {
-//        $quoteRequestManager = $this->get('paprec_commercial.quote_request_manager');
-//        $quoteRequest = $quoteRequestManager->get($quoteId);
-//        $filename = $quoteRequestManager->generatePDF($quoteRequest, $locale);
-//        return $this->render('@PaprecCommercial/QuoteRequest/showPDF.html.twig', array(
-//            'filename' => $filename
-//        ));
-//    }
+    /**
+     * @Route("/{locale}/pdf/contract/{quoteId}", name="paprec_public_confirm_pdf_confirm_email")
+     */
+    public function showContractPDF(Request $request, $quoteId, $locale)
+    {
+        $quoteRequestManager = $this->get('paprec_commercial.quote_request_manager');
+        $quoteRequest = $quoteRequestManager->get($quoteId);
+        $filename = $quoteRequestManager->generatePDF($quoteRequest, $locale);
+        return $this->render('@PaprecCommercial/QuoteRequest/showPDF.html.twig', array(
+            'filename' => $filename
+        ));
+    }
 
 //    /**
 //     * @Route("/{locale}/email/contract/{quoteId}", name="paprec_public_confirm_pdf_confirm_email")
