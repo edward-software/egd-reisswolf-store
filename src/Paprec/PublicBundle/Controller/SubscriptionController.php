@@ -315,32 +315,32 @@ class SubscriptionController extends Controller
         }
     }
 //
-//    /**
-//     * @Route("/{locale}/contract/{quoteId}", name="paprec_public_contract_confirm_email")
-//     */
-//    public function showContract(Request $request, $quoteId, $locale)
-//    {
-//        $quoteRequestManager = $this->get('paprec_commercial.quote_request_manager');
-//        $quoteRequest = $quoteRequestManager->get($quoteId);
-//        return $this->render('@PaprecCommercial/QuoteRequest/PDF/fr/printQuoteContract.html.twig', array(
-//            'quoteRequest' => $quoteRequest,
-//            'date' => new \DateTime()
+    /**
+     * @Route("/{locale}/contract/{quoteId}", name="paprec_public_contract_confirm_email")
+     */
+    public function showContract(Request $request, $quoteId, $locale)
+    {
+        $quoteRequestManager = $this->get('paprec_commercial.quote_request_manager');
+        $quoteRequest = $quoteRequestManager->get($quoteId);
+        return $this->render('@PaprecCommercial/QuoteRequest/PDF/geneve/printQuoteContract.html.twig', array(
+            'quoteRequest' => $quoteRequest,
+            'date' => new \DateTime()
+
+        ));
+    }
 //
-//        ));
-//    }
-//
-//    /**
-//     * @Route("/{locale}/offer/{quoteId}", name="paprec_public_offer_confirm_email")
-//     */
-//    public function showOffer(Request $request, $quoteId, $locale)
-//    {
-//        $quoteRequestManager = $this->get('paprec_commercial.quote_request_manager');
-//        $quoteRequest = $quoteRequestManager->get($quoteId);
-//        return $this->render('@PaprecCommercial/QuoteRequest/PDF/printQuoteOffer.html.twig', array(
-//            'quoteRequest' => $quoteRequest,
-//            'date' => new \DateTime()
-//        ));
-//    }
+    /**
+     * @Route("/{locale}/offer/{quoteId}", name="paprec_public_offer_confirm_email")
+     */
+    public function showOffer(Request $request, $quoteId, $locale)
+    {
+        $quoteRequestManager = $this->get('paprec_commercial.quote_request_manager');
+        $quoteRequest = $quoteRequestManager->get($quoteId);
+        return $this->render('@PaprecCommercial/QuoteRequest/PDF/printQuoteOffer.html.twig', array(
+            'quoteRequest' => $quoteRequest,
+            'date' => new \DateTime()
+        ));
+    }
 //
     /**
      * @Route("/{locale}/pdf/contract/{quoteId}", name="paprec_public_confirm_pdf_confirm_email")

@@ -8,35 +8,34 @@
 
     <div class="flex space-between bold">
         <h2>ANNEXE 1 </h2>
-        <p>{% if quoteRequest.customerId is defined %}N°{{ quoteRequest.customerId }}{% endif %}</p>
+        <p class="bold mb-20">{% if quoteRequest.customerId is defined %}N° de client : R {{ quoteRequest.customerId }}{% endif %}</p>
+        {#<p>{% if quoteRequest.customerId is defined %}N°{{ quoteRequest.customerId }}{% endif %}</p>#}
     </div>
-
     <p class="mb-20">au contrat en date du {{ date|date('d/m/Y') }} conclu entre</p>
     <p>{{ quoteRequest.businessName }}</p>
     <p>et</p>
-    <p>REISSWOLF Aktenvernichtungs-AG</p>
+    <p class="bold mb-30">REISSWOLF Aktenvernichtungs-AG</p>
 
-    <h3 class="mt-30">INTERLOCUTEURS</h3>
+    <h3 style="margin-top: 60px;">INTERLOCUTEURS</h3>
 
     {#INTERLOCUTEUR 1#}
-    <p class="bold mt-20 mb-20">Reisswolf Aktenvernichtungs-AG</p>
-    <p class="bold">(interlocuteurs région RW)</p>
+    <p class="bold mt-20">Interlocuteurs en région :</p>
     <div class="flex">
-        <div class="w50">
-            <p>Nom (fonction)</p>
-            <p>Nom (fonction)</p>
+        <div style="margin-left: 30px; margin-right: 30px;">
+            <p>Mme. Emmanuelle Lugand (Resp. Administrative)</p>
+            <p>M. Pascal Laperrousaz (Directeur Général)</p>
         </div>
         <div>
-            <p>Tél. : +41 61</p>
-            <p>Tél. : +41 61</p>
-            <p>E-Mail : luzern@reisswolf.ch</p>
+            <p>Tél. : +41 22 552 62 62</p>
+            <p>Tél. : +41 22 552 62 62</p>
+            <p>E-Mail : geneve@reisswolf.ch</p>
         </div>
     </div>
 
     <p class="bold mt-20">Responsable de la protection des données :</p>
     <div class="flex">
-        <div class="w50">
-            <p>Frau Saskia Strahberger (DPO)</p>
+        <div style="margin-left: 30px; margin-right: 30px;">
+            <p>Mme Saskia Strahberger (DPO)</p>
         </div>
         <div>
             <p>Tél. : +41 61 511 25 38</p>
@@ -45,17 +44,16 @@
     </div>
 
     {#INTERLOCUTEUR 2#}
-    <p class="bold mt-20 mb-20">Muster AG</p>
+    <p class="bold mt-20 mb-20">Interlocuteur [Société Front Office]</p>
     {#ajouter dans le formulaire une possibilité de saisir le nom du signataire N°2)
     Et donc reprendre ici les deux signataires#}
     <div class="flex">
-        <div class="w50">
-            <p>Madame Muster</p>
+        <div style="margin-left: 30px; margin-right: 30px;">
+            <p>[Civilité en Fr] [Prénom] [Nom Front Office]</p>
         </div>
         <div>
-            <p>Tél. : +41 61</p>
-            <p>Tél. : +41 61</p>
-            <p>E-Mail : muster@reisswolf.com </p>
+            <p>Tél. : [Tel Front Office]</p>
+            <p>E-Mail : [Mail Front Office]</p>
         </div>
     </div>
 </div>

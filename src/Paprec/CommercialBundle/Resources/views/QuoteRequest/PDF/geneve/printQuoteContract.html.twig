@@ -73,8 +73,14 @@
             width: 50%;
         }
 
+        .mb-10 {
+            margin-bottom: 10px !important;
+        }
         .mb-20 {
             margin-bottom: 20px !important;
+        }
+        .mb-30 {
+            margin-bottom: 30px !important;
         }
         .mt-20 {
             margin-top:20px !important;
@@ -142,45 +148,45 @@
 
 {# Couverture + article 1er + article 2 #}
 <div class="contrat__container">
-    {% include("PaprecCommercialBundle:QuoteRequest/PDF/fr:_header.html.twig") %}
-    {% include("PaprecCommercialBundle:QuoteRequest/PDF/fr:_page-1.html.twig") %}
+    {% include("PaprecCommercialBundle:QuoteRequest/PDF/geneve:_header.html.twig") %}
+    {% include("PaprecCommercialBundle:QuoteRequest/PDF/geneve:_page-1.html.twig") %}
 </div>
 
 {# article 3 #}
 <div class="contrat__container" style="page-break-before:always;">
-    {% include("PaprecCommercialBundle:QuoteRequest/PDF/fr:_header.html.twig") %}
-    {% include("PaprecCommercialBundle:QuoteRequest/PDF/fr:_page-2.html.twig") %}
+    {% include("PaprecCommercialBundle:QuoteRequest/PDF/geneve:_header.html.twig") %}
+    {% include("PaprecCommercialBundle:QuoteRequest/PDF/geneve:_page-2.html.twig") %}
 </div>
 
 {# article 3-4 #}
 <div class="contrat__container" style="page-break-before:always;">
-    {% include("PaprecCommercialBundle:QuoteRequest/PDF/fr:_header.html.twig") %}
-    {% include("PaprecCommercialBundle:QuoteRequest/PDF/fr:_page-3.html.twig") %}
+    {% include("PaprecCommercialBundle:QuoteRequest/PDF/geneve:_header.html.twig") %}
+    {% include("PaprecCommercialBundle:QuoteRequest/PDF/geneve:_page-3.html.twig") %}
 </div>
 
 {# article 4-5-6-7 #}
 <div class="contrat__container" style="page-break-before:always;">
-    {% include("PaprecCommercialBundle:QuoteRequest/PDF/fr:_header.html.twig") %}
-    {% include("PaprecCommercialBundle:QuoteRequest/PDF/fr:_page-4.html.twig") %}
+    {% include("PaprecCommercialBundle:QuoteRequest/PDF/geneve:_header.html.twig") %}
+    {% include("PaprecCommercialBundle:QuoteRequest/PDF/geneve:_page-4.html.twig") %}
 </div>
 
 {# article 7-8-9-10 #}
 <div class="contrat__container" style="page-break-before:always;">
-    {% include("PaprecCommercialBundle:QuoteRequest/PDF/fr:_header.html.twig") %}
-    {% include("PaprecCommercialBundle:QuoteRequest/PDF/fr:_page-5.html.twig") %}
+    {% include("PaprecCommercialBundle:QuoteRequest/PDF/geneve:_header.html.twig") %}
+    {% include("PaprecCommercialBundle:QuoteRequest/PDF/geneve:_page-5.html.twig") %}
 </div>
 
 
 {# Annexe 1 #}
 <div class="contrat__container" style="page-break-before:always;">
-    {% include("PaprecCommercialBundle:QuoteRequest/PDF/fr:_header.html.twig") %}
-    {% include("PaprecCommercialBundle:QuoteRequest/PDF/fr:_page-6.html.twig") %}
+    {% include("PaprecCommercialBundle:QuoteRequest/PDF/geneve:_header.html.twig") %}
+    {% include("PaprecCommercialBundle:QuoteRequest/PDF/geneve:_page-6.html.twig") %}
 </div>
 
 {# Annexe 2 #}
 <div class="contrat__container" style="page-break-before:always;">
-    {% include("PaprecCommercialBundle:QuoteRequest/PDF/fr:_header.html.twig") %}
-    {% include("PaprecCommercialBundle:QuoteRequest/PDF/fr:_page-7.html.twig") %}
+    {% include("PaprecCommercialBundle:QuoteRequest/PDF/geneve:_header.html.twig") %}
+    {% include("PaprecCommercialBundle:QuoteRequest/PDF/geneve:_page-7.html.twig") %}
 </div>
 </body>
 </html>

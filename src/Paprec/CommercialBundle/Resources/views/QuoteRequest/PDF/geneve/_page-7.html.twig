@@ -3,6 +3,31 @@
     .price > div {
         width: 32%;
     }
+
+    table {
+        border-collapse: separate;
+        border-spacing: 0;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    table td {
+        font-size: 12px;
+        overflow: hidden;
+        word-break: normal;
+        text-align: center;
+        border: 1px solid #333333;
+        border-right: 0px;
+        border-bottom: 0px;
+        padding: 5px;
+    }
+    table tr:last-child td {
+        border-bottom: 1px solid #333333;
+    }
+    table td:last-child {
+        border-right: 1px solid #333333;
+    }
+
 </style>
 
 {#<pre>#}
@@ -12,29 +37,89 @@
 
     <div class="flex space-between bold">
         <h2>ANNEXE 2</h2>
-        <p>{% if quoteRequest.customerId is defined %}N°{{ quoteRequest.customerId }}{% endif %}</p>
+        <p class="bold mb-20">{% if quoteRequest.customerId is defined %}N° de client : R {{ quoteRequest.customerId }}{% endif %}</p>
+        {#<p>{% if quoteRequest.customerId is defined %}N°{{ quoteRequest.customerId }}{% endif %}</p>#}
     </div>
-
     <p class="mb-20">au contrat en date du {{ date|date('d/m/Y') }} conclu entre</p>
-    <p>{{quoteRequest.businessName}}</p>
+    <p>{{ quoteRequest.businessName }}</p>
     <p>et</p>
-    <p>Reisswolf Aktenvernichtungs-AG</p>
+    <p class="bold mb-30">REISSWOLF Aktenvernichtungs-AG</p>
 
-    <h3 class="mt-30">CONDITIONS</h3>
+    <h3 style="margin-top: 60px;">CONDITIONS</h3>
 
-    <p>
+    <p class="mb-20">
         Documents originaux confidentiels et listings confidentiels, copies, tirages papier de toutes sortes, anciens
-        documents et autres écrits confidentiels.
+        documents et autres écrits confidentiels
     </p>
-    <p>
+    <p class="mb-30">
         Mise à disposition de collecteurs de transport verrouillables. Enlèvement des collecteurs ou procédure de
         transvidage faisant appel à notre véhicule compacteur spécial et destruction des écrits confidentiels dans le
         respect de la protection des données, T.V.A. en sus :
     </p>
-    <p>Mêmes prix que dans l’offre<br>
-        Prix forfaitaire pour transport et destruction, par vidage de collecteur</p>
 
-    <div style="width: 500px; margin: auto;">
+    <p class="mb-10">Prix forfaitaire pour transport et destruction, par vidage de collecteur :</p>
+    <table>
+        <tbody>
+        <tr>
+            <td>
+                [Nom Produit Devis]
+            </td>
+            <td>
+                Par collecteur
+            </td>
+            <td>
+                CHF [Transport (*Coef)]
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <p class="mt-20 mb-10">Prix de chargement en étage :</p>
+    <table>
+        <tbody>
+        <tr>
+            <td rowspan="2" style="border-bottom: 1px solid #333333;">
+                Par collecteur
+            </td>
+            <td>
+                Ascenseur :
+            </td>
+            <td>
+                CHF 10.00
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Escalier :
+            </td>
+            <td>
+                CHF 20.00
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <p class="mt-20 mb-10">Location des collecteurs au mois :</p>
+    <table>
+        <tbody>
+        <tr>
+            <td>
+                [Nom Produit Devis]
+            </td>
+            <td>
+                Par collecteur
+            </td>
+            <td>
+                CHF [Location (*Coef)]
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <p>* Programmation unique de la serrure e.l.sy : CHF 20,00</p>
+
+
+    {#<div style="width: 500px; margin: auto;">
         <div class="flex space-between mt-20 price">
             <div>
                 <p>RW 70 e.l.sy </p>
@@ -100,7 +185,7 @@
             </div>
         </div>
         <p>* Programmation unique de la serrure e.l.sy : CHF 20,00</p>
-    </div>
+    </div>#}
 
     <p class="mt-30">
         Remise de la carte-badge pour collecteurs Reisswolf :
@@ -108,7 +193,7 @@
     <ul>
         <li>
             lors de la remise d’une carte-badge pour les ouvertures d’urgence du collecteur de sécurité, aucuns frais de
-            dépôt ne doivent être payés
+            dépôt ne doivent être payés.
         </li>
         <li>
             toutefois, en cas de perte de la carte, des frais de CHF 100,00 pour interventions diverses seront facturés.
@@ -116,7 +201,9 @@
     </ul>
 
     <p>
-        Tous les prix s’entendent T.V.A. en sus et sont valables jusqu’au 31 décembre 2019. Passé cette date, ils
+        Tous les prix s’entendent T.V.A. en sus et sont valables jusqu’au 31 décembre [ANNEE Date Mise à jour
+        Information Système SI le mois Date Mise à jour Information Système est Antérieur à juillet SI NON ANNEE Date
+        Mise à jour Information Système +1]. Passé cette date, ils
         pourront être ajustés selon les besoins.
     </p>
 </div>
