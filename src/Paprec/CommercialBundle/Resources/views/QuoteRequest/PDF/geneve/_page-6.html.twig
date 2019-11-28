@@ -8,10 +8,10 @@
 
     <div class="flex space-between bold">
         <h2>ANNEXE 1 </h2>
-        <p class="bold mb-20">{% if quoteRequest.customerId is defined %}N° de client : R {{ quoteRequest.customerId }}{% endif %}</p>
+        <p class="bold mb-20">N° de client : R{{ quoteRequest.postalCode.zone }} - {{ quoteRequest.customerId }}</p>
         {#<p>{% if quoteRequest.customerId is defined %}N°{{ quoteRequest.customerId }}{% endif %}</p>#}
     </div>
-    <p class="mb-20">au contrat en date du {{ date|date('d/m/Y') }} conclu entre</p>
+    <p class="mb-20">au contrat en date du {{ quoteRequest.dateUpdate|date('d/m/Y') }} conclu entre</p>
     <p>{{ quoteRequest.businessName }}</p>
     <p>et</p>
     <p class="bold mb-30">REISSWOLF Aktenvernichtungs-AG</p>
@@ -44,16 +44,16 @@
     </div>
 
     {#INTERLOCUTEUR 2#}
-    <p class="bold mt-20 mb-20">Interlocuteur [Société Front Office]</p>
+    <p class="bold mt-20 mb-20">Interlocuteur {{ quoteRequest.businessName }}</p>
     {#ajouter dans le formulaire une possibilité de saisir le nom du signataire N°2)
     Et donc reprendre ici les deux signataires#}
     <div class="flex">
         <div style="margin-left: 30px; margin-right: 30px;">
-            <p>[Civilité en Fr] [Prénom] [Nom Front Office]</p>
+            <p>{{quoteRequest.civility}} {{ quoteRequest.firstName }} {{ quoteRequest.lastName }}</p>
         </div>
         <div>
-            <p>Tél. : [Tel Front Office]</p>
-            <p>E-Mail : [Mail Front Office]</p>
+            <p>Tél. : {{quoteRequest.phone}}</p>
+            <p>E-Mail : {{ quoteRequest.email }}</p>
         </div>
     </div>
 </div>

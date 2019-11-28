@@ -487,7 +487,9 @@ class QuoteRequestManager
      */
     public function generatePDF(QuoteRequest $quoteRequest, $locale)
     {
+
         try {
+
             $pdfTmpFolder = $this->container->getParameter('paprec_commercial.data_tmp_directory');
 
             if (!is_dir($pdfTmpFolder)) {
@@ -544,6 +546,8 @@ class QuoteRequestManager
                 $filenameOffer
             );
 
+            $productManager = $this->container->get('paprec_catalog.product_manager');
+            $products = $productManager->getAvailableProducts();
 
             /**
              * On génère la page d'offre
@@ -554,7 +558,8 @@ class QuoteRequestManager
                         $templateDir . '/printQuoteContract.html.twig',
                         array(
                             'quoteRequest' => $quoteRequest,
-                            'date' => $today
+                            'date' => $today,
+                            'products' => $products
                         )
                     )
                 ),

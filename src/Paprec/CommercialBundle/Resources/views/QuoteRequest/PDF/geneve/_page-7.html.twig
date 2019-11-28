@@ -37,10 +37,9 @@
 
     <div class="flex space-between bold">
         <h2>ANNEXE 2</h2>
-        <p class="bold mb-20">{% if quoteRequest.customerId is defined %}N° de client : R {{ quoteRequest.customerId }}{% endif %}</p>
-        {#<p>{% if quoteRequest.customerId is defined %}N°{{ quoteRequest.customerId }}{% endif %}</p>#}
+        <p class="bold mb-20">N° de client : R{{ quoteRequest.postalCode.zone }} - {{ quoteRequest.customerId }}</p>
     </div>
-    <p class="mb-20">au contrat en date du {{ date|date('d/m/Y') }} conclu entre</p>
+    <p class="mb-20">au contrat en date du {{ quoteRequest.dateUpdate|date('d/m/Y') }} conclu entre</p>
     <p>{{ quoteRequest.businessName }}</p>
     <p>et</p>
     <p class="bold mb-30">REISSWOLF Aktenvernichtungs-AG</p>
@@ -60,17 +59,20 @@
     <p class="mb-10">Prix forfaitaire pour transport et destruction, par vidage de collecteur :</p>
     <table>
         <tbody>
+        {% for product in products %}
         <tr>
             <td>
-                [Nom Produit Devis]
+                {{product|productLabelTranslation('fr')}}
             </td>
             <td>
                 Par collecteur
             </td>
             <td>
-                CHF [Transport (*Coef)]
+
+                CHF {{((product.transportUnitPrice / 100 * quoteRequest.postalCode.transportRate)|formatAmount(null, app.request.locale, 'FORMAT15'))|formatAmount(null, app.request.locale, 'DEC2')}}
             </td>
         </tr>
+        {% endfor %}
         </tbody>
     </table>
 
@@ -102,18 +104,22 @@
     <p class="mt-20 mb-10">Location des collecteurs au mois :</p>
     <table>
         <tbody>
+        {% for product in products %}
+
         <tr>
             <td>
-                [Nom Produit Devis]
+                {{product|productLabelTranslation('fr')}}
             </td>
             <td>
                 Par collecteur
             </td>
             <td>
-                CHF [Location (*Coef)]
+                CHF {{((product.rentalUnitPrice / 100 * quoteRequest.postalCode.rentalRate)|formatAmount(null, app.request.locale, 'FORMAT15'))|formatAmount(null, app.request.locale, 'DEC2')}}
             </td>
         </tr>
+        {% endfor %}
         </tbody>
+
     </table>
 
     <p>* Programmation unique de la serrure e.l.sy : CHF 20,00</p>
@@ -201,9 +207,7 @@
     </ul>
 
     <p>
-        Tous les prix s’entendent T.V.A. en sus et sont valables jusqu’au 31 décembre [ANNEE Date Mise à jour
-        Information Système SI le mois Date Mise à jour Information Système est Antérieur à juillet SI NON ANNEE Date
-        Mise à jour Information Système +1]. Passé cette date, ils
+        Tous les prix s’entendent T.V.A. en sus et sont valables jusqu’au 31 décembre {% if quoteRequest.dateUpdate|date('m') < 7 %} {{ quoteRequest.dateUpdate|date('Y') }} {% else %} {{ quoteRequest.dateUpdate|date('Y') + 1 }}{% endif %}. Passé cette date, ils
         pourront être ajustés selon les besoins.
     </p>
 </div>

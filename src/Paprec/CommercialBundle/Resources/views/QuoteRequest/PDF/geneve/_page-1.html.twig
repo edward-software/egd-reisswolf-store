@@ -26,12 +26,11 @@
     <div class="contrat__ref">
         <h1>Contrat</h1>
         <p class="mb-20">Entre</p>
-        <p class="bold mb-20">N° de client : R [Numéro zone tarifaire en lien avec le CP] - [Numéro client Information
-            Back-office – Si à nul alors nul]</p>
+        <p class="bold mb-20">N° de client : R {{quoteRequest.postalCode.zone}} - {{ quoteRequest.customerId }}</p>
         <p>
-            {{ quoteRequest.firstName }} {{ quoteRequest.lastName }}<br>
-            [Adresse Front Office]<br>
-            CH- [Code postal Front Office] [Ville Front Office]
+            {{ quoteRequest.businessName }}<br>
+            {{quoteRequest.address}}<br>
+            CH-{{quoteRequest.postalCode.code}} {{ quoteRequest.city }}
         </p>
 
         {#<p>{% if quoteRequest.customerId is defined %}N°{{ quoteRequest.customerId }}{% endif %}</p>#}

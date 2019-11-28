@@ -321,10 +321,14 @@ class SubscriptionController extends Controller
     public function showContract(Request $request, $quoteId, $locale)
     {
         $quoteRequestManager = $this->get('paprec_commercial.quote_request_manager');
+        $productManager = $this->get('paprec_catalog.product_manager');
+        $products = $productManager->getAvailableProducts();
+
         $quoteRequest = $quoteRequestManager->get($quoteId);
         return $this->render('@PaprecCommercial/QuoteRequest/PDF/geneve/printQuoteContract.html.twig', array(
             'quoteRequest' => $quoteRequest,
-            'date' => new \DateTime()
+            'date' => new \DateTime(),
+            'products' => $products
 
         ));
     }

@@ -567,6 +567,7 @@ class QuoteRequestController extends Controller
         $quoteRequestManager = $this->get('paprec_commercial.quote_request_manager');
         $user = $this->getUser();
         $pdfTmpFolder = $pdfFolder . '/';
+
         $file = $quoteRequestManager->generatePDF($quoteRequest, $user->getLang());
 
         $filename = substr($file, strrpos($file, '/') + 1);

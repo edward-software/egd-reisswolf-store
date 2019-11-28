@@ -18,7 +18,7 @@
     <p class="center-text mb-20 mt-30">Article 9 – DURÉE DU CONTRAT</p>
     <div class="flex contrat__articles__item">
         <p>1°)</p>
-        <p class="mb-20">Le présent contrat entrera en vigueur le {{ date|date('d/m/Y') }} à sa signature intégrale par
+        <p class="mb-20">Le présent contrat entrera en vigueur le {{ quoteRequest.dateUpdate|date('d/m/Y') }} à sa signature intégrale par
             l’ensemble des parties. Il est conclu pour une durée d’une année. Si le contrat n’est pas résilié au bout
             d’une année, il se prolongera automatiquement pour une durée indéterminée. La résiliation du présent contrat
             requiert la forme écrit et pourra intervenir au plus tôt après une année et en respectant un délai de
@@ -79,16 +79,11 @@
     <div class="flex contrat__signature" style="margin-top: 60px;">
         <div>
             <p class="mb-30">Lieu et date de signature</p>
-            {% if quoteRequest.city %}
-                <p class="mb-30">{{ quoteRequest.city }} le [Date de signature]</p>
-            {% endif %}
             <p>{{ quoteRequest.businessName }}<br>
-                {{ quoteRequest.firstName }} {{ quoteRequest.lastName }}<br>
-                {#                Titre du client#}
             </p>
         </div>
         <div>
-            <p class="mb-30">Satigny, le [Date Mise à jour Information Système]</p>
+            <p class="mb-30">Satigny, le {{quoteRequest.dateUpdate|date('d/m/Y')}}</p>
             <p class="bold mb-30">REISSWOLF Aktenvernichtungs-AG</p>
             <p class="mb-30">Pascal Laperrousaz<br>
                 Directeur Général</p>

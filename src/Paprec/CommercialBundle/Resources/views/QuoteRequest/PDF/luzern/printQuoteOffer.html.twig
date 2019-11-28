@@ -108,6 +108,12 @@
         .mb-20 {
             margin-bottom: 20px;
         }
+        .mb-30 {
+            margin-bottom: 30px;
+        }
+        .mb-40 {
+            margin-bottom: 40px;
+        }
 
         /***** PAGE OFFRE *****/
 
@@ -206,6 +212,10 @@
             border-left: 0;
         }
 
+        table .table-footer1 td:last-child {
+            border-left: 0;
+        }
+
         table .table-footer1 td:nth-child(n+5):nth-child(-n+7) {
             border-bottom: 1px solid #333333;
         }
@@ -230,9 +240,31 @@
             padding: 0 0 10px 0;
         }
 
+        table .empty {
+            height: 30px;
+        }
+        table .empty td:last-child {
+            border-left: 0 !important;
+            border-right: 0 !important;
+        }
+
+        .check {
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            vertical-align: middle;
+            outline: 2px solid grey;
+            margin-left: 5px;
+            margin-bottom: 3px;
+        }
+        .check.active {
+            border: 2px solid white;
+            outline: 2px solid grey;
+            background-color: black;
+        }
 
         .offer__signature > div {
-            width: 30%;
+            width: 48%;
         }
 
         /*footer*/
@@ -261,11 +293,11 @@
                      alt="logo Reisswolf">
             </div>
             <div class="flex align-item-end illustrations">
-                <img src="{{ absolute_url(asset('build/static/IMG_2013_70.png')) }}" alt="illstration"
+                <img src="{{ absolute_url(asset('build/static/IMG_2013_70.png')) }}" alt="illustration"
                      style="max-height: 80px;">
-                <img src="{{ absolute_url(asset('build/static/IMG_2010_240.png')) }}" alt="illstration"
+                <img src="{{ absolute_url(asset('build/static/IMG_2010_240.png')) }}" alt="illustration"
                      style="max-height: 100px;">
-                <img src="{{ absolute_url(asset('build/static/IMG_2005_350.png')) }}" alt="illstration"
+                <img src="{{ absolute_url(asset('build/static/IMG_2005_350.png')) }}" alt="illustration"
                      style="max-height: 120px;">
             </div>
         </div>
@@ -274,7 +306,7 @@
     <div class="offer__content">
 
         <div class="offer__ref">
-            <h1>Offre LUSERN</h1>
+            <h1>Offre geneve</h1>
 
             <div class="flex space-between">
 
@@ -293,7 +325,7 @@
                             <p class="bold">Votre référence :</p>
                         </div>
                         <div>
-                            <p> {{ quoteRequest.civility }} {{ quoteRequest.firstName }} {{ quoteRequest.lastName }}</p>
+                            <p> {{ quoteRequest.firstName }} {{ quoteRequest.lastName }}</p>
                         </div>
                     </div>
 
@@ -323,7 +355,7 @@
                             <p class="bold">Date de l'offre :</p>
                         </div>
                         <div>
-                            <p>{{ date|date('d/m/Y') }}</p>
+                            <p>{{ quoteRequest.dateUpdate|date('d/m/Y') }}</p>
                         </div>
                     </div>
 
@@ -332,9 +364,7 @@
                             <p class="bold">Notre référence :</p>
                         </div>
                         <div>
-                            {% if quoteRequest.postalCode is defined %}
-                                <p> {{ quoteRequest.postalCode.region }}</p>
-                            {% endif %}
+                            Emmanuelle Lugand
                         </div>
                     </div>
 
@@ -356,7 +386,7 @@
                             <p class="bold"> Notre no. tel. :</p>
                         </div>
                         <div>
-                            <p>041 448 38 62 / 079 841 26 91</p>
+                            <p>022 552 62 62 / 079 841 26 91</p>
                         </div>
                     </div>
                 </div>
@@ -378,28 +408,26 @@
                     <th>
                         Programmation<br>
                         serrure e.l.sy<br>
-                        <span>unique/<br>
-                        par récipient</span>
+                        <span>Unique/<br>
+                        par conteneur</span>
                     </th>
                     <th>
                         Location<br>
                         <span>par mois/<br>
-                        par récipient<br></span>
+                        par conteneur<br></span>
                     </th>
                     <th>
                         Transport<br>
-                        <span>par récipient collecté</span>
+                        <span>par conteneur collecté</span>
                     </th>
                     <th>
                         Destruction et<br>
                         certificat
                     </th>
                     <th>
-                        Fréquence<br>
-                        Prévue
-                    </th>
-                    <th>
-                        Prix
+                        Nombre<br>
+                        conteneurs<br>
+                        planifiés
                     </th>
                 </tr>
                 <tr class="table-header">
@@ -407,8 +435,7 @@
                     <td>CHF / TVA excl.</td>
                     <td>CHF / TVA excl.</td>
                     <td>CHF / TVA excl.</td>
-                    <td>pc.</td>
-                    <td>CHF / TVA excl.</td>
+                    <td>Quantité</td>
                 </tr>
 
                 {% for line in quoteRequest.quoteRequestLines %}
@@ -416,95 +443,61 @@
                     <td class="bold">{{ line.product.capacity }}</td>
                     <td class="bold">{{ line.product|productLabelTranslation(locale,'lockType') }}</td>
                     <td class="bold">{{ line.setUpPrice|formatAmount('', app.request.locale) }}</td>
-                    <td class="bold">15,00</td>
-                    <td class="bold">30,00</td>
+                    <td class="bold">{{ line.rentalUnitPrice|formatAmount('', app.request.locale) }}</td>
+                    <td class="bold">{{ line.transportUnitPrice|formatAmount('', app.request.locale) }}</td>
                     <td>inclus</td>
-                    <td class="bold">1</td>
-                    <td class="bold">50</td>
+                    <td class="bold">{{ line.quantity }}</td>
                 </tr>
                 {% endfor %}
-{#                <tr>#}
-{#                    <td class="bold">130</td>#}
-{#                    <td class="bold">e.l.sy</td>#}
-{#                    <td class="bold">20.00</td>#}
-{#                    <td class="bold">15,00</td>#}
-{#                    <td class="bold">37,00</td>#}
-{#                    <td>inclus</td>#}
-{#                    <td class="bold">1</td>#}
-{#                    <td class="bold">50</td>#}
-{#                </tr>#}
-{#                <tr>#}
-{#                    <td class="bold">240</td>#}
-{#                    <td class="bold">e.l.sy</td>#}
-{#                    <td class="bold">20.00</td>#}
-{#                    <td class="bold">15,00</td>#}
-{#                    <td class="bold">44,00</td>#}
-{#                    <td>inclus</td>#}
-{#                    <td class="bold">1</td>#}
-{#                    <td class="bold">50</td>#}
-{#                </tr>#}
-{#                #}{#                <tr>#}
-{#                #}{#                    <td class="bold">350</td>#}
-{#                #}{#                    <td class="bold">e.l.sy</td>#}
-{#                #}{#                    <td class="bold">20.00</td>#}
-{#                #}{#                    <td class="bold">15,00</td>#}
-{#                #}{#                    <td class="bold">63,00</td>#}
-{#                #}{#                    <td>inclus</td>#}
-{#                #}{#                    <td class="bold">1</td>#}
-{#                #}{#                    <td class="bold">50</td>#}
-{#                #}{#                </tr>#}
-{#                <tr>#}
-{#                    <td class="bold">500</td>#}
-{#                    <td class="bold">e.l.sy</td>#}
-{#                    <td class="bold">20.00</td>#}
-{#                    <td class="bold">15,00</td>#}
-{#                    <td class="bold">84,00</td>#}
-{#                    <td>inclus</td>#}
-{#                    <td class="bold">1</td>#}
-{#                    <td class="bold">50</td>#}
-{#                </tr>#}
+                <tr class="empty">
+                    <td colspan="7"></td>
+                </tr>
                 <tr class="table-footer1">
                     <td colspan="2" class="bold">Chargement à l'étage</td>
-                    <td>par récipient</td>
+                    <td>par conteneur</td>
                     <td class="bold">Ascenseur :</td>
-                    <td class="bold">10.00</td>
+                    <td class="bold" style="padding: 10px 0;">10.00 <span class="check {% if quoteRequest.access == 'elevator' %}active{% endif %}"></span> </td>
                     <td rowspan="2"></td>
                     <td rowspan="2"></td>
-                    <td rowspan="2"></td>
+
                 </tr>
                 <tr class="table-footer2">
                     <td colspan="2"></td>
                     <td></td>
                     <td class="bold">Escalier :</td>
-                    <td class="bold">20,00</td>
+                    <td class="bold" style="padding: 10px 0;">20,00 <span class="check {% if quoteRequest.access == 'stairs' %}active{% endif %}"></span></td>
                 </tr>
                 </tbody>
             </table>
 
 
             <p class="mb-20">
-                Validité de l'offre: 30 jours dès la date de l'offre
+                Conformément à votre demande, vos conteurs sécurisés seront collectés : {% if quoteRequest.frequency == 'ponctual' %}
+                    À la demande
+                {% elseif quoteRequest.frequency == 'regular' %}
+                    {{ quoteRequest.frequencyTimes }} fois / {{ ('Commercial.QuoteRequest.' ~ quoteRequest.frequencyInterval)|trans }}
+                {% endif %}
             </p>
-            <p style="line-height: 20px;">
+            <p class="mb-20">
+                Validité de l'offre : 30 jours dès la date de l'offre.
+            </p>
+            <p class="mb-20">
                 Nous restons volontiers à votre disposition pour tout renseignement complémentaire.
-                En cas d'acceptation de notre proposition, nous vous remercions de nous retourner par voie postale le
-                projet de contrat ci après annexé.
+            </p>
+            <p class="mb-20" style="line-height: 20px;">
+                En cas d'acceptation de notre proposition, nous vous remercions de bien vouloir nous retourner par voie postale le contrat, ci-après annexé, dûment signé.
             </p>
             <p class="mb-20">Meilleures salutations,</p>
-            <h2>REISSWOLF AG</h2>
+            <h2 class="mb-40">Votre partenaire REISSWOLF</h2>
 
             <div class="flex offer__signature">
-                <div>
-                    <p>Mr/Mme</p>
-                    <p>Directeur</p>
+               <div>
+                    <p>Pascal Laperrousaz</p>
+                    <p>Directeur Général</p>
                 </div>
                 <div>
-                    <p>Mr/Mme</p>
-                    <p>Adminnistration</p>
-                </div>
-                <div>
-                    <p>Civilité, Prénom, Nom du client</p>
-                    <p>Directeur</p>
+                    <p>Emmanuelle Lugand</p>
+                    <p>Responsable Administrative</p>
                 </div>
             </div>
         </div>
@@ -515,15 +508,15 @@
         <div class="flex space-between">
             <div>
                 <p class="bold">REISSWOLF Aktenvernichtungs-AG</p>
-                <p>Zentralschweiz / italienische Schweiz</p>
+                <p>Romandie</p>
             </div>
             <div>
-                <p>Kantonsstrasse 5</p>
-                <p>CH-6033 Buchrain</p>
+                <p>Rue de la Bergère 26</p>
+                <p>CH-1242 Satigny</p>
             </div>
             <div>
-                <p>Tel.: 041 448 38 62</p>
-                <p>Mail: luzern@reisswolf.ch</p>
+                <p>Tel.: 022 552 62 62</p>
+                <p>Mail: geneve@reisswolf.ch</p>
             </div>
         </div>
     </div>
