@@ -336,9 +336,10 @@ class SubscriptionController extends Controller
     {
         $quoteRequestManager = $this->get('paprec_commercial.quote_request_manager');
         $quoteRequest = $quoteRequestManager->get($quoteId);
-        return $this->render('@PaprecCommercial/QuoteRequest/PDF/printQuoteOffer.html.twig', array(
+        return $this->render('@PaprecCommercial/QuoteRequest/PDF/geneve/printQuoteOffer.html.twig', array(
             'quoteRequest' => $quoteRequest,
-            'date' => new \DateTime()
+            'date' => new \DateTime(),
+            'locale' => $locale
         ));
     }
 //

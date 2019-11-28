@@ -325,7 +325,7 @@
                             <p class="bold">Votre référence :</p>
                         </div>
                         <div>
-                            <p> {{ quoteRequest.civility }} {{ quoteRequest.firstName }} {{ quoteRequest.lastName }}</p>
+                            <p> {{ quoteRequest.firstName }} {{ quoteRequest.lastName }}</p>
                         </div>
                     </div>
 
@@ -355,7 +355,7 @@
                             <p class="bold">Date de l'offre :</p>
                         </div>
                         <div>
-                            <p>{{ date|date('d/m/Y') }}</p>
+                            <p>{{ quoteRequest.dateUpdate|date('d/m/Y') }}</p>
                         </div>
                     </div>
 
@@ -364,9 +364,7 @@
                             <p class="bold">Notre référence :</p>
                         </div>
                         <div>
-                            {% if quoteRequest.postalCode is defined %}
-                                <p> {{ quoteRequest.postalCode.region }}</p>
-                            {% endif %}
+                            Emmanuelle Lugand
                         </div>
                     </div>
 
@@ -388,7 +386,7 @@
                             <p class="bold"> Notre no. tel. :</p>
                         </div>
                         <div>
-                            <p>041 448 38 62 / 079 841 26 91</p>
+                            <p>022 552 62 62 / 079 841 26 91</p>
                         </div>
                     </div>
                 </div>
@@ -445,52 +443,12 @@
                     <td class="bold">{{ line.product.capacity }}</td>
                     <td class="bold">{{ line.product|productLabelTranslation(locale,'lockType') }}</td>
                     <td class="bold">{{ line.setUpPrice|formatAmount('', app.request.locale) }}</td>
-                    <td class="bold">15,00</td>
-                    <td class="bold">30,00</td>
+                    <td class="bold">{{ line.rentalUnitPrice|formatAmount('', app.request.locale) }}</td>
+                    <td class="bold">{{ line.transportUnitPrice|formatAmount('', app.request.locale) }}</td>
                     <td>inclus</td>
-                    <td class="bold">1</td>
+                    <td class="bold">{{ line.quantity }}</td>
                 </tr>
                 {% endfor %}
-{#                <tr>#}
-{#                    <td class="bold">130</td>#}
-{#                    <td class="bold">e.l.sy</td>#}
-{#                    <td class="bold">20.00</td>#}
-{#                    <td class="bold">15,00</td>#}
-{#                    <td class="bold">37,00</td>#}
-{#                    <td>inclus</td>#}
-{#                    <td class="bold">1</td>#}
-{#                    <td class="bold">50</td>#}
-{#                </tr>#}
-{#                <tr>#}
-{#                    <td class="bold">240</td>#}
-{#                    <td class="bold">e.l.sy</td>#}
-{#                    <td class="bold">20.00</td>#}
-{#                    <td class="bold">15,00</td>#}
-{#                    <td class="bold">44,00</td>#}
-{#                    <td>inclus</td>#}
-{#                    <td class="bold">1</td>#}
-{#                    <td class="bold">50</td>#}
-{#                </tr>#}
-{#                #}{#                <tr>#}
-{#                #}{#                    <td class="bold">350</td>#}
-{#                #}{#                    <td class="bold">e.l.sy</td>#}
-{#                #}{#                    <td class="bold">20.00</td>#}
-{#                #}{#                    <td class="bold">15,00</td>#}
-{#                #}{#                    <td class="bold">63,00</td>#}
-{#                #}{#                    <td>inclus</td>#}
-{#                #}{#                    <td class="bold">1</td>#}
-{#                #}{#                    <td class="bold">50</td>#}
-{#                #}{#                </tr>#}
-{#                <tr>#}
-{#                    <td class="bold">500</td>#}
-{#                    <td class="bold">e.l.sy</td>#}
-{#                    <td class="bold">20.00</td>#}
-{#                    <td class="bold">15,00</td>#}
-{#                    <td class="bold">84,00</td>#}
-{#                    <td>inclus</td>#}
-{#                    <td class="bold">1</td>#}
-{#                    <td class="bold">50</td>#}
-{#                </tr>#}
                 <tr class="empty">
                     <td colspan="7"></td>
                 </tr>
@@ -498,7 +456,7 @@
                     <td colspan="2" class="bold">Chargement à l'étage</td>
                     <td>par conteneur</td>
                     <td class="bold">Ascenseur :</td>
-                    <td class="bold" style="padding: 10px 0;">10.00 <span class="check active"></span> </td>
+                    <td class="bold" style="padding: 10px 0;">10.00 <span class="check {% if quoteRequest.access == 'elevator' %}active{% endif %}"></span> </td>
                     <td rowspan="2"></td>
                     <td rowspan="2"></td>
 
@@ -507,14 +465,18 @@
                     <td colspan="2"></td>
                     <td></td>
                     <td class="bold">Escalier :</td>
-                    <td class="bold" style="padding: 10px 0;">20,00 <span class="check"></span></td>
+                    <td class="bold" style="padding: 10px 0;">20,00 <span class="check {% if quoteRequest.access == 'stairs' %}active{% endif %}"></span></td>
                 </tr>
                 </tbody>
             </table>
 
 
             <p class="mb-20">
-                Conformément à votre demande, vos conteurs sécurisés seront collectés : [Fréquence de collecte]
+                Conformément à votre demande, vos conteurs sécurisés seront collectés : {% if quoteRequest.frequency == 'ponctual' %}
+                    À la demande
+                {% elseif quoteRequest.frequency == 'regular' %}
+                    {{ quoteRequest.frequencyTimes }} fois / {{ ('Commercial.QuoteRequest.' ~ quoteRequest.frequencyInterval)|trans }}
+                {% endif %}
             </p>
             <p class="mb-20">
                 Validité de l'offre : 30 jours dès la date de l'offre.
