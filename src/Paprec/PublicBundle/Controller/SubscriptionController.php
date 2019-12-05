@@ -111,7 +111,10 @@ class SubscriptionController extends Controller
             $quoteRequest->setFrequencyInterval($cart->getFrequencyInterval());
             $quoteRequest->setNumber($quoteRequestManager->generateNumber($quoteRequest));
 
-            $regionName = substr(iconv('UTF-8', 'ASCII//IGNORE', $quoteRequest->getPostalCode()->getRegion()->getName()), 0, 2);
+            $regionName = 'CH';
+            if (!$quoteRequest->getIsMultisite() && $quoteRequest->getPostalCode()) {
+                $regionName = substr(iconv('UTF-8', 'ASCII//IGNORE', $quoteRequest->getPostalCode()->getRegion()->getName()), 0, 2);
+            }
 
             $reference = strtoupper($regionName) . $quoteRequest->getDateCreation()->format('ymd');
             $reference .= '-' . str_pad($quoteRequestManager->getCountByReference($reference), 2, '0', STR_PAD_LEFT);
@@ -360,16 +363,16 @@ class SubscriptionController extends Controller
         ));
     }
 
-//    /**
-//     * @Route("/{locale}/email/contract/{quoteId}", name="paprec_public_confirm_pdf_confirm_email")
-//     */
-//    public function showContractPDF(Request $request, $quoteId, $locale)
-//    {
-//        $quoteRequestManager = $this->get('paprec_commercial.quote_request_manager');
-//        $quoteRequest = $quoteRequestManager->get($quoteId);
-//        return $this->render('@PaprecCommercial/QuoteRequest/emails/confirmQuoteEmail.html.twig', array(
-//            'quoteRequest' => $quoteRequest,
-//            'locale' => $locale
-//        ));
-//    }
+    /**
+     * @Route("/{locale}/email/contract/{quoteId}", name="paprec_public_confirm_pdf_confirm_email")
+     */
+    public function showEmail(Request $request, $quoteId, $locale)
+    {
+        $quoteRequestManager = $this->get('paprec_commercial.quote_request_manager');
+        $quoteRequest = $quoteRequestManager->get($quoteId);
+        return $this->render('@PaprecCommercial/QuoteRequest/emails/newQuoteEmail.html.twig', array(
+            'quoteRequest' => $quoteRequest,
+            'locale' => $locale
+        ));
+    }
 }

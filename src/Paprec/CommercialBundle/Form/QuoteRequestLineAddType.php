@@ -28,7 +28,6 @@ class QuoteRequestLineAddType extends AbstractType
                         ->select(array('p', 'pL'))
                         ->leftJoin('p.productLabels', 'pL')
                         ->where('p.deleted IS NULL')
-                        ->andWhere('p.isEnabled = 1')
                         ->andWhere('pL.language = :language')
                         ->setParameter('language', 'EN');
                 },

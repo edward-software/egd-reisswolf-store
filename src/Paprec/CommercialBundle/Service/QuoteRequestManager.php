@@ -177,7 +177,7 @@ class QuoteRequestManager
             /**
              * On recalcule le montant total de la ligne ainsi que celui du devis complet
              */
-            $totalLine = $this->calculateTotalLine($quoteRequestLine);
+            $totalLine = 0 + $this->calculateTotalLine($quoteRequestLine);
             $quoteRequestLine->setTotalAmount($totalLine);
             $this->em->flush();
         }
@@ -231,7 +231,7 @@ class QuoteRequestManager
 
         $now = new \DateTime();
 
-        $totalLine = $this->calculateTotalLine($quoteRequestLine);
+        $totalLine = 0 + $this->calculateTotalLine($quoteRequestLine);
         $quoteRequestLine->setTotalAmount($totalLine);
         $quoteRequestLine->setDateUpdate($now);
 
@@ -271,7 +271,7 @@ class QuoteRequestManager
         $productManager = $this->container->get('paprec_catalog.product_manager');
 
         return $numberManager->normalize(
-            $productManager->calculatePrice($quoteRequestLine)
+            round($productManager->calculatePrice($quoteRequestLine))
         );
     }
 
@@ -311,9 +311,10 @@ class QuoteRequestManager
             if ($rcptTo == null || $rcptTo == '') {
                 return false;
             }
+            $translator = $this->container->get('translator');
 
             $message = \Swift_Message::newInstance()
-                ->setSubject('Reisswolf E-shop : Votre demande de devis' . ' N°' . $quoteRequest->getId())
+                ->setSubject('Reisswolf E-shop :' . $translator->trans('Commercial.ConfirmEmail.Object'))
                 ->setFrom($from)
                 ->setTo($rcptTo)
                 ->setBody(
@@ -395,6 +396,7 @@ class QuoteRequestManager
                 if (file_exists($pdfFile)) {
                     unlink($pdfFile);
                 }
+
                 return true;
             }
             return false;

@@ -326,10 +326,11 @@ class QuoteRequestController extends Controller
             'staff' => $staff
         ));
 
+        $savedCommercial = $quoteRequest->getUserInCharge();
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $quoteRequest = $form->getData();
             $quoteRequest->setOverallDiscount($numberManager->normalize($quoteRequest->getOverallDiscount()));
             $quoteRequest->setAnnualBudget($numberManager->normalize($quoteRequest->getAnnualBudget()));
@@ -343,6 +344,15 @@ class QuoteRequestController extends Controller
 
             $quoteRequest->setDateUpdate(new \DateTime());
             $quoteRequest->setUserUpdate($user);
+
+            /**
+             * Si le commercial en charge a changé, alors on envoie un mail au nouveau commercial
+             */
+            if ((!$savedCommercial && $quoteRequest->getUserInCharge())
+                || ($savedCommercial && $savedCommercial->getId() !== $quoteRequest->getUserInCharge()->getId())) {
+                $quoteRequestManager->sendNewRequestEmail($quoteRequest, $quoteRequest->getUserInCharge()->getLang());
+                $this->get('session')->getFlashBag()->add('success', 'newUserInChargeWarned');
+            }
 
 
             $em = $this->getDoctrine()->getManager();

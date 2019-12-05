@@ -47,7 +47,8 @@ class PostalCodeToStringTransformer implements DataTransformerInterface
 
         $postalCode = $this->entityManager
             ->getRepository(PostalCode::class)->findOneBy(array(
-                'code' => $postalCodeCode
+                'code' => $postalCodeCode,
+                'deleted' => null
             ));
 
         if (null === $postalCode) {

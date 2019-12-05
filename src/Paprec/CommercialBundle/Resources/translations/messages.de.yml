@@ -54,7 +54,7 @@ Commercial:
       generatedQuoteNotSent:    Erreur lors de la génération et l'envoi du devis.
     Success:
       generatedQuoteSent:       Le devis a bien été généré et envoyé au client.
-      newUserInChargeWarned: Un mail a été envoyé au nouveau commercial en charge
+      newUserInChargeWarned: Eine E-Mail wurde an den neuen zuständigen Vertriebsmitarbeiter gesendet.
     Locale: Langue
     Number: Numéro offre
 
@@ -102,26 +102,26 @@ Commercial:
     Product: Produit
 
   NewQuoteEmail:
-    Title: Une nouvelle demande de devis vous a été affectée.
-    Dear: Cher(ère) Collègue Reisswolf
-    Message1: Tu trouveras ci-joint une demande de vérification de l'offre pour la zone géographique ainsi que du contrat prévu.
-    Message2: Nous t’en remercions par avance.
-    Partner: Ton partenaire Reisswolf
+    Title: Ihnen wurde eine neue Angebotsanfrage zugeordnet.
+    Dear: Sehr geehrter Kollege Reisswolf
+    Message1: Anbei finden Sie eine Anfrage zur Überprüfung des Angebots für das geografische Gebiet sowie den geplanten Vertrag.
+    Message2: Wir danken Ihnen im Voraus.
+    Partner: Ihr Partner Reisswolf
 
   ConfirmEmail:
-    Object: Votre demande de devis
+    Object: Ihre Angebotsanfrage
     Dear:
-      M: Cher Monsieur
-      Mrs: Chère Madame
-    Title: Votre demande a bien été prise en compte et envoyée au service commercial de votre région.
-    Message1: Merci pour votre demande du  %date%. Nous vous remercions de l'intérêt que vous portez aux services REISSWOLF.
+      M: Sehr geehrter Herr
+      Mrs: Sehr geehrte Frau
+    Title: Ihre Anfrage wurde berücksichtigt und an den Vertrieb in Ihrer Region weitergeleitet.
+    Message1: Vielen Dank für Ihre Anfrage vom %date%. Es freut uns, dass Sie sich für die Dienstleistungen von REISSWOLF interessieren.
     TechnicalService: service technique
-    Message2: Nous vous enverrons notre offre pour les services REISSWOLF dans les prochaines heures.
-    Regards: Bien cordialement
-    Partner: Votre partenaire Reisswolf
+    Message2: Wir werden Ihnen in den kommenden Stunden unser Angebot für die Leistungen von REISSWOLF zusenden.
+    Regards: Mit freundlichen Grüssen.
+    Partner: Ihr Reisswolf-Partner
     Disclaimer:
-      Message1: Vous avez reçu cet e-mail pour vous informer des modifications importantes apportées aux services
-      Message2: que vous utilisez
+      Message1: Sie haben diese E-Mail erhalten, um Sie über wichtige Änderungen an den von Ihnen genutzten
+      Message2: -Diensten zu informieren.
 
 User:
   User:

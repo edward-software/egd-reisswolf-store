@@ -85,6 +85,44 @@ class QuoteRequestType extends AbstractType
             ->add('salesmanComment', TextareaType::class)
             ->add('annualBudget')
             ->add('frequency')
+            ->add('frequency', ChoiceType::class, array(
+                'choices' => array(
+                    'Regular' => 'regular',
+                    'Ponctual' => 'ponctual',
+                ),
+                "choice_label" => function ($choiceValue, $key, $value) {
+                    return 'Commercial.QuoteRequest.' . ucfirst($choiceValue);
+                },
+                'expanded' => true
+            ))
+            ->add('frequencyTimes', ChoiceType::class, array(
+                'choices' => array(
+                    '1' => '1',
+                    '2' => '2',
+                    '3' => '3',
+                    '4' => '4',
+                    '5' => '5',
+                    '6' => '6',
+                    '7' => '7',
+                    '8' => '8',
+                    '9' => '9',
+                    '10' => '10'
+                ),
+                'expanded' => false,
+                'multiple' => false
+            ))
+            ->add('frequencyInterval', ChoiceType::class, array(
+                'choices' => array(
+                    'week' => 'week',
+                    'quarter' => 'quarter',
+                    'year' => 'year'
+                ),
+                "choice_label" => function ($choiceValue, $key, $value) {
+                    return 'Public.Catalog.' . ucfirst($choiceValue);
+                },
+                'expanded' => false,
+                'multiple' => false
+            ))
             ->add('reference')
             ->add('customerId')
             ->add('userInCharge', EntityType::class, array(

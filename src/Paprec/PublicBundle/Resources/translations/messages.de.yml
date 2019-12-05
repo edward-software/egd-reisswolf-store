@@ -43,7 +43,6 @@ Public:
 
 
   Confirm:
-    Object: Votre demande de devis
     BreadcrumbTitle: Confirmation de la demande
     Title: Votre demande a bien été prise en compte et envoyée au service commercial de votre région.
     Message: Vous devriez recevoir un e-mail de confirmation, cette opération peut prendre plusieurs minutes. Si vous ne recevez pas la confirmation, vérifiez dans votre dossier à spam, sinon contactez notre

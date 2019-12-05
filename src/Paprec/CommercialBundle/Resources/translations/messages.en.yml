@@ -26,6 +26,8 @@ Commercial:
     Informations-BO: Back-Office information
     Informations-FO: Front-office information
     Frequency: Frequency
+    PassingFrequency: Passing frequency (if regular)
+    FrequencyTimes: Number of passages (if regular)
     month: month
     quarter: quarter
     year: year
@@ -47,6 +49,7 @@ Commercial:
     Confirm-send-quote: Are you sure you want to send the quote to the customer ?
     Edit: Edit quote
     Ponctual: On demand
+    Regular: Regular
     Error:
       generatedQuoteNotSent:    Error when generating and sending the quote.
     Success:

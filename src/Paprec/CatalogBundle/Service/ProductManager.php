@@ -153,7 +153,7 @@ class ProductManager
                 + $numberManager->denormalize($quoteRequestLine->getTraceabilityUnitPrice()) * $numberManager->denormalize15($quoteRequestLine->getTraceabilityRate())
                 + $this->getAccesPrice($quoteRequestLine->getQuoteRequest()))
             * $quoteRequestLine->getQuantity()
-            * (1 - $numberManager->denormalize($quoteRequestLine->getQuoteRequest()->getOverallDiscount() / 100));
+            * (1 + $numberManager->denormalize($quoteRequestLine->getQuoteRequest()->getOverallDiscount() / 100));
 
     }
 
