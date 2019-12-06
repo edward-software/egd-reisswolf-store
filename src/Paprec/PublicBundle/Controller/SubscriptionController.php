@@ -102,6 +102,7 @@ class SubscriptionController extends Controller
 
         $form->handleRequest($request);
 
+
         if ($form->isSubmitted() && $form->isValid() && $this->captchaVerify($request->get('g-recaptcha-response'))) {
             $quoteRequest = $form->getData();
             $quoteRequest->setQuoteStatus('CREATED');
@@ -115,6 +116,7 @@ class SubscriptionController extends Controller
             if (!$quoteRequest->getIsMultisite() && $quoteRequest->getPostalCode()) {
                 $regionName = substr(iconv('UTF-8', 'ASCII//IGNORE', $quoteRequest->getPostalCode()->getRegion()->getName()), 0, 2);
             }
+
 
             $reference = strtoupper($regionName) . $quoteRequest->getDateCreation()->format('ymd');
             $reference .= '-' . str_pad($quoteRequestManager->getCountByReference($reference), 2, '0', STR_PAD_LEFT);
@@ -141,7 +143,10 @@ class SubscriptionController extends Controller
 
             $sendConfirmEmail = $quoteRequestManager->sendConfirmRequestEmail($quoteRequest, $locale);
             $sendNewRequestEmail = $quoteRequestManager->sendNewRequestEmail($quoteRequest, $locale);
-
+            print_r($sendConfirmEmail);
+            print_r('|');
+            print_r($sendNewRequestEmail);
+            exit;
 
             if ($sendConfirmEmail && $sendNewRequestEmail) {
                 return $this->redirectToRoute('paprec_public_confirm_index', array(
@@ -318,6 +323,7 @@ class SubscriptionController extends Controller
         }
     }
 //
+
     /**
      * @Route("/{locale}/contract/{quoteId}", name="paprec_public_contract_confirm_email")
      */
@@ -336,6 +342,7 @@ class SubscriptionController extends Controller
         ));
     }
 //
+
     /**
      * @Route("/{locale}/offer/{quoteId}", name="paprec_public_offer_confirm_email")
      */
@@ -350,6 +357,7 @@ class SubscriptionController extends Controller
         ));
     }
 //
+
     /**
      * @Route("/{locale}/pdf/contract/{quoteId}", name="paprec_public_confirm_pdf_confirm_email")
      */

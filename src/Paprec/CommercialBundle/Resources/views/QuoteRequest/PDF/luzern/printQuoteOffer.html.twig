@@ -442,9 +442,9 @@
                 <tr>
                     <td class="bold">{{ line.product.capacity }}</td>
                     <td class="bold">{{ line.product|productLabelTranslation(locale,'lockType') }}</td>
-                    <td class="bold">{{ line.setUpPrice|formatAmount('', app.request.locale) }}</td>
-                    <td class="bold">{{ line.rentalUnitPrice|formatAmount('', app.request.locale) }}</td>
-                    <td class="bold">{{ line.transportUnitPrice|formatAmount('', app.request.locale) }}</td>
+                    <td class="bold">{{ line.setUpPrice|formatAmount('', app.request.locale)|round|number_format(2, '.', ',') }}</td>
+                    <td class="bold">{{ line.rentalUnitPrice|formatAmount('', app.request.locale)|round|number_format(2, '.', ',') }}</td>
+                    <td class="bold">{{ line.transportUnitPrice|formatAmount('', app.request.locale)|round|number_format(2, '.', ',') }}</td>
                     <td>inclus</td>
                     <td class="bold">{{ line.quantity }}</td>
                 </tr>
@@ -465,7 +465,7 @@
                     <td colspan="2"></td>
                     <td></td>
                     <td class="bold">Escalier :</td>
-                    <td class="bold" style="padding: 10px 0;">20,00 <span class="check {% if quoteRequest.access == 'stairs' %}active{% endif %}"></span></td>
+                    <td class="bold" style="padding: 10px 0;">20.00 <span class="check {% if quoteRequest.access == 'stairs' %}active{% endif %}"></span></td>
                 </tr>
                 </tbody>
             </table>

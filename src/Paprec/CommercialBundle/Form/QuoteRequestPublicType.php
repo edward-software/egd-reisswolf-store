@@ -4,6 +4,7 @@ namespace Paprec\CommercialBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -59,7 +60,7 @@ class QuoteRequestPublicType extends AbstractType
             ->add('lastName', TextType::class)
             ->add('firstName', TextType::class)
             ->add('email', TextType::class)
-            ->add('phone', TextType::class, array(
+            ->add('phone', TelType::class, array(
                 'invalid_message' => 'Public.Contact.PhoneError',
             ))
             ->add('isMultisite', ChoiceType::class, array(

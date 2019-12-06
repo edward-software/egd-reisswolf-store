@@ -358,7 +358,7 @@ class QuoteRequestManager
              *          sinon on envoie au mail générique de la région associée au code postal de la demande
              */
             $rcptTo = !is_null($quoteRequest->getUserInCharge()) ? $quoteRequest->getUserInCharge()->getEmail() :
-                (!is_null($quoteRequest->getIsMultisite()) ? $this->container->getParameter('reisswolf_salesman_multisite_email') : $quoteRequest->getPostalCode()->getRegion()->getEmail());
+                (($quoteRequest->getIsMultisite()) ? $this->container->getParameter('reisswolf_salesman_multisite_email') : $quoteRequest->getPostalCode()->getRegion()->getEmail());
 
 
             if ($rcptTo == null || $rcptTo == '') {

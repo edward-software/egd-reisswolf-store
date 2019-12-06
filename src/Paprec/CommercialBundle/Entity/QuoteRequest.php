@@ -139,9 +139,8 @@ class QuoteRequest
      * @Assert\NotBlank(groups={"public"})
      * @Assert\Regex(
      *     groups={"public"},
-     *     pattern="/^((\+)?33|0)[1-9](\d{2}){4}$/",
+     *     pattern="/^\+?(?:[0-9]){6,14}[0-9]$/",
      *     match=true,
-     *     message="Le n° de téléphone doit être au format français (ex: +33601020304, 0601020304)"
      * )
      */
     private $phone;
