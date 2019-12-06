@@ -143,10 +143,6 @@ class SubscriptionController extends Controller
 
             $sendConfirmEmail = $quoteRequestManager->sendConfirmRequestEmail($quoteRequest, $locale);
             $sendNewRequestEmail = $quoteRequestManager->sendNewRequestEmail($quoteRequest, $locale);
-            print_r($sendConfirmEmail);
-            print_r('|');
-            print_r($sendNewRequestEmail);
-            exit;
 
             if ($sendConfirmEmail && $sendNewRequestEmail) {
                 return $this->redirectToRoute('paprec_public_confirm_index', array(
@@ -359,7 +355,7 @@ class SubscriptionController extends Controller
 //
 
     /**
-     * @Route("/{locale}/pdf/contract/{quoteId}", name="paprec_public_confirm_pdf_confirm_email")
+     * @Route("/{locale}/pdf/contract/{quoteId}", name="paprec_public_confirm_pdf_show_contract")
      */
     public function showContractPDF(Request $request, $quoteId, $locale)
     {
@@ -372,7 +368,7 @@ class SubscriptionController extends Controller
     }
 
     /**
-     * @Route("/{locale}/email/contract/{quoteId}", name="paprec_public_confirm_pdf_confirm_email")
+     * @Route("/{locale}/email/contract/{quoteId}", name="paprec_public_confirm_email_show_contract")
      */
     public function showEmail(Request $request, $quoteId, $locale)
     {
