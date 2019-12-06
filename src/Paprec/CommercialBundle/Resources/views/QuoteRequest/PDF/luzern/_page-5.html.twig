@@ -3,6 +3,7 @@
     .contrat__signature > div {
         width: 50%;
     }
+
     .contrat__signature > div:last-child {
         border-left: 1px solid black;
         padding-left: 15px;
@@ -15,80 +16,70 @@
 <div class="contrat__content">
 
     <!-- article 9 -->
-    <p class="center-text mb-20 mt-30">Article 9 – DURÉE DU CONTRAT</p>
+    <p class="center-text mb-20 mt-30">§ 9 – VERTRAGSDAUER</p>
     <div class="flex contrat__articles__item">
         <p>1°)</p>
-        <p class="mb-20">Le présent contrat entrera en vigueur le {{ quoteRequest.dateUpdate|date('d/m/Y') }} à sa signature intégrale par
-            l’ensemble des parties. Il est conclu pour une durée d’une année. Si le contrat n’est pas résilié au bout
-            d’une année, il se prolongera automatiquement pour une durée indéterminée. La résiliation du présent contrat
-            requiert la forme écrit et pourra intervenir au plus tôt après une année et en respectant un délai de
-            préavis de trois mois.
+        <p class="mb-20">
+            Dieser Vertrag tritt am {{ quoteRequest.dateUpdate|date('d/m/Y') }} mit vollständiger Unterzeichnung
+            sämtlicher Parteien in Kraft und wird für die Dauer eines Jahres geschlossen. Wird der Vertrag nach einem
+            Jahr nicht gekündigt, so verlängert sich dieser automatisch auf eine unbefristete Zeit. Eine Kündigung
+            dieses Vertrages bedarf der Schriftform und kann frühestens nach einem Jahr und unter Beachtung einer
+            dreimonatigen Kündigungsfrist eingereicht werden.
         </p>
     </div>
     <div class="flex contrat__articles__item">
         <p>2°)</p>
-        <p>En cas de violation grave des conditions du présent contrat, notamment en ce qui concerne les dispositions de
-            la LPD et du respect du secret à propos du contenu des supports de données devant être détruits, ou en cas
-            d’entrave à la surveillance, une résiliation sans préavis tant par le client que par le prestataire est
-            possible.</p>
+        <p>Bei groben Verstössen gegen die Bedingungen dieses Vertrages, insbesondere in Bezug auf die Bestimmungen des
+            DSG und der Geheimhaltung über den Inhalt der zu vernichtenden Datenträger, oder bei Erschwerung der
+            Überwachung ist eine fristlose Kündigung sowohl durch den Auftraggeber als auch durch den Auftragnehmer
+            möglich.
+        </p>
     </div>
 
     <!-- article 10 -->
-    <p class="center-text mb-20 mt-30">Article 10 – AUTRES DISPOSITIONS</p>
+    <p class="center-text mb-20 mt-30">§ 10 – SONSTIGE BESTIMMUNGEN</p>
     <div class="flex contrat__articles__item">
         <p>1°)</p>
-        <p class="mb-20">Pour la durée de validité du présent contrat, le client, pour des raisons ayant trait au droit
-            des assurances et au droit de la responsabilité civile, chargera exclusivement le prestataire de
-            l’enlèvement et de la destruction de ses supports de données.</p>
+        <p class="mb-20">Für die Dauer der Gültigkeit dieses Vertrages beauftragt der Auftraggeber aus versicherungs- und haftpflichtrechtlichen Gründen ausschliesslich den Auftragnehmer mit der Abholung und Vernichtung seiner Datenträger.</p>
     </div>
     <div class="flex contrat__articles__item">
         <p>2°)</p>
-        <p class="mb-20">L’invalidité d’une disposition quelconque du présent contrat n’affecte pas la validité des
-            autres dispositions.</p>
+        <p class="mb-20">Durch die Ungültigkeit einzelner Bestimmungen dieses Vertrages wird die Gültigkeit der übrigen Bestimmungen nicht berührt.</p>
     </div>
     <div class="flex contrat__articles__item">
         <p>3°)</p>
-        <p class="mb-20">Si l’une des dispositions du présent contrat est dénuée de validité juridique et/ou que le
-            contrat présente une lacune, il sera en l’occurrence fait application de dispositions appropriées approchant
-            au plus près ce qui est voulu conformément au sens et à l’objectif du présent contrat.
-        </p>
+        <p class="mb-20">Falls eine Bestimmung dieses Vertrages der Rechtsgültigkeit entbehrt und/oder eine Lücke im Vertrag besteht, so sollen insoweit angemessene Regelungen gelten, die dem am nächsten kommen, was nach Sinn und Zweck dieses Vertrages gewollt ist.</p>
     </div>
     <div class="flex contrat__articles__item">
         <p>4°)</p>
-        <p class="mb-20">Tout(e) modification ou complément apporté(e) au présent contrat requiert la forme écrite.
-        </p>
+        <p class="mb-20">Änderungen und Ergänzungen dieses Vertrages bedürfen der Schriftform.</p>
     </div>
     <div class="flex contrat__articles__item">
         <p>5°)</p>
-        <p class="mb-20"><u>Le domicile de compétence est Zürich</u>. En cas de litige à propos de l’interprétation du présent
-            contrat, les parties rechercheront d’abord une solution amiable.
-        </p>
+        <p class="mb-20"><u>Gerichtsstand ist Zürich</u>. Bei Streitigkeiten über eine Auslegung dieses Vertrages wird zunächst eine gütliche Einigung angestrebt.</p>
     </div>
     <div class="flex contrat__articles__item">
         <p>6°)</p>
-        <p class="mb-20">Le produit final généré par la destruction des supports de données devient la propriété du
-            client.
-        </p>
+        <p class="mb-20">LDas nach erfolgter Vernichtung der Datenträger anfallende Endprodukt geht in das Eigentum des Auftragnehmers über.</p>
     </div>
     <div class="flex contrat__articles__item">
         <p>7°)</p>
-        <p>Le présent contrat remplace tous contrats et accords antérieurs existants.
-        </p>
+        <p>Der vorliegende Vertrag ersetzt sämtliche zuvor bestehenden Verträgen und Vereinbarungen.</p>
     </div>
 
     <div class="flex contrat__signature" style="margin-top: 60px;">
         <div>
-            <p class="mb-30">Lieu et date de signature</p>
+            <p class="mb-30">Ort und Datum</p>
             <p>{{ quoteRequest.businessName }}<br>
             </p>
         </div>
         <div>
-            <p class="mb-30">Satigny, le {{quoteRequest.dateUpdate|date('d/m/Y')}}</p>
+            <p class="mb-30">Buchrain, {{ quoteRequest.dateUpdate|date('d/m/Y') }}</p>
             <p class="bold mb-30">REISSWOLF Aktenvernichtungs-AG</p>
-            <p class="mb-30">Pascal Laperrousaz<br>
-                Directeur Général</p>
-            <p>Emmanuelle Lugand<br>
-                Responsable Administrative</p>
+            <p class="mb-30">André Nadler<br>
+                Geschäftsführer</p>
+            <p>Arminka Lezic<br>
+                Vertriebsberaterin</p>
         </div>
     </div>
 

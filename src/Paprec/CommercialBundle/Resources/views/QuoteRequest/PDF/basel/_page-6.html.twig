@@ -7,44 +7,44 @@
 <div class="contrat__content">
 
     <div class="flex space-between bold">
-        <h2>ANNEXE 1 </h2>
-        <p class="bold mb-20">N° de client : R{{ quoteRequest.postalCode.zone }} - {{ quoteRequest.customerId }}</p>
+        <h2>ANLAGE 1 </h2>
+        <p class="bold mb-20">Kunden-Nr : R{{ quoteRequest.postalCode.zone }} - {{ quoteRequest.customerId }}</p>
         {#<p>{% if quoteRequest.customerId is defined %}N°{{ quoteRequest.customerId }}{% endif %}</p>#}
     </div>
-    <p class="mb-20">au contrat en date du {{ quoteRequest.dateUpdate|date('d/m/Y') }} conclu entre</p>
+    <p class="mb-20">zum Vertrag vom {{ quoteRequest.dateUpdate|date('d/m/Y') }} zwischen der</p>
     <p>{{ quoteRequest.businessName }}</p>
-    <p>et</p>
+    <p>und</p>
     <p class="bold mb-30">REISSWOLF Aktenvernichtungs-AG</p>
 
-    <h3 style="margin-top: 60px;">INTERLOCUTEURS</h3>
+    <h3 style="margin-top: 60px;">ANSPRECHPARTNER</h3>
 
     {#INTERLOCUTEUR 1#}
-    <p class="bold mt-20">Interlocuteurs en région :</p>
+    <p class="bold mt-20">Reisswolf Aktenvernichtungs-AG :</p>
     <div class="flex">
         <div style="margin-left: 30px; margin-right: 30px;">
-            <p>Mme. Emmanuelle Lugand (Resp. Administrative)</p>
-            <p>M. Pascal Laperrousaz (Directeur Général)</p>
+            <p>Herr Florian Dolder (Vertriebsleiter)</p>
+            <p>Herr Romeo Albus (Innendienst)</p>
         </div>
         <div>
-            <p>Tél. : +41 22 552 62 62</p>
-            <p>Tél. : +41 22 552 62 62</p>
-            <p>E-Mail : geneve@reisswolf.ch</p>
+            <p>Tél. : +41 61 386 96 60</p>
+            <p>Tél. : +41 61 386 96 73</p>
+            <p>E-Mail : basel@reisswolf.ch</p>
         </div>
     </div>
 
-    <p class="bold mt-20">Responsable de la protection des données :</p>
+    <p class="bold mt-20">Datenschutzbeauftragter :</p>
     <div class="flex">
         <div style="margin-left: 30px; margin-right: 30px;">
-            <p>Mme Saskia Strahberger (DPO)</p>
+            <p>Frau Saskia Strahberger (DPO)</p>
         </div>
         <div>
-            <p>Tél. : +41 61 511 25 38</p>
+            <p>Tél. : +41 61 511 25 38</p>
             <p>E-Mail : dpo@reisswolf.ch</p>
         </div>
     </div>
 
     {#INTERLOCUTEUR 2#}
-    <p class="bold mt-20 mb-20">Interlocuteur {{ quoteRequest.businessName }}</p>
+    <p class="bold mt-20 mb-20">Ansprechpartner {{ quoteRequest.businessName }}</p>
     {#ajouter dans le formulaire une possibilité de saisir le nom du signataire N°2)
     Et donc reprendre ici les deux signataires#}
     <div class="flex">

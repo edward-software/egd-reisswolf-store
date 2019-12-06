@@ -24,13 +24,13 @@
 <div class="contrat__content">
 
     <div class="contrat__ref">
-        <h1>Contrat</h1>
-        <p class="mb-20">Entre</p>
-        <p class="bold mb-20">N° de client : R {{quoteRequest.postalCode.zone}} - {{ quoteRequest.customerId }}</p>
+        <h1>VERTRAG</h1>
+        <p class="mb-20">Zwischen</p>
+        <p class="bold mb-20">Kunden-Nr : R {{ quoteRequest.postalCode.zone }} - {{ quoteRequest.customerId }}</p>
         <p>
             {{ quoteRequest.businessName }}<br>
-            {{quoteRequest.address}}<br>
-            CH-{{quoteRequest.postalCode.code}} {{ quoteRequest.city }}
+            {{ quoteRequest.address }}<br>
+            CH-{{ quoteRequest.postalCode.code }} {{ quoteRequest.city }}
         </p>
 
         {#<p>{% if quoteRequest.customerId is defined %}N°{{ quoteRequest.customerId }}{% endif %}</p>#}
@@ -38,62 +38,60 @@
 
         {#        <p>SELON INFORMATIONS Formulaire</p>#}
 
-        <p class="mt-20 mb-20">(ci-après dénommé <span class="bold">« client »</span>)</p>
+        <p class="mt-20 mb-20">(im folgenden <span class="bold">Auftraggeber </span>genannt)</p>
 
         <p class="mt-30"><span class="bold">REISSWOLF Aktenvernichtungs-AG</span><br>
-            Site de Genève<br>
-            Rue de la Bergère 26<br>
-            CH-1242 Satigny
+            Betrieb Luzern<br>
+            Kantonstrasse 5<br>
+            CH-6033 Buchrain
         </p>
-        <p class="mt-20">(ci-après dénommé <span class="bold">« prestataire »</span>)</p>
-        <p class="mt-20">est conclu le contrat suivant :</p>
+        <p class="mt-20">(im folgenden <span class="bold">Auftragnehmer</span> genannt)</p>
+        <p class="mt-20">wird folgender Vertrag geschlossen :</p>
 
     </div>
 
     <div class="contrat__articles">
 
         <!-- article 1 -->
-        <p class="center-text mb-20">Article 1er – OBJET DU CONTRAT</p>
-        <p class="mb-30">Le présent contrat régit la prise en charge, le transport et le stockage conformes au mandat
-            confié contrat et en bonne et due forme, ainsi que la destruction par les soins du prestataire, avec retour
-            d’information garanti, de supports de données que le client a destinés à la destruction. Dans le détail, ces
-            supports de données sont les suivants :</p>
+        <p class="center-text mb-20">§ 1 – VERTRAGSGEGENSTAND</p>
+        <p class="mb-30">Der vorliegende Vertrag regelt die auftrags- und ordnungsgemässe Übernahme, Transport, Lagerung
+            und rückinformationssichere Vernichtung von Datenträgern durch den Auftragnehmer, die der Auftraggeber zur
+            Vernichtung bestimmt hat. Im Einzelnen sind das folgende Datenträger :</p>
         <div class="flex contrat__articles__item">
             <p>-</p>
-            <p class="mb-20">supports de données papier, tels que tirages papiers, documents y compris classeurs,
-                contenus de corbeilles à papier, etc., en format original (SYSTÈME AV) ;</p>
+            <p class="mb-20">Datenträger aus Papier, wie z.B. EDV-Ausdrucke, Aktenmaterial inkl. Aktenordnern,
+                Papierkorbabfälle etc. in Originalgrösse (SYSTEM AV)</p>
         </div>
         <div class="flex contrat__articles__item">
             <p>-</p>
-            <p class="mb-20">rubans carbone, bandes magnétiques, disquettes, cartes d’identité, disques durs,
-                ordinateurs, ordinateurs portables, tablettes, clés USB, téléphones portables, cartes bancaires, etc.,
-                avec représentation cryptée de l’information (SYSTÈME DV) ;</p>
+            <p class="mb-20">Karbonbänder, Magnetbänder, Disketten, Identitätskarten, Festplatten, Computer, Laptops,
+                Tablets, USB-Sticks, Handys, Scheckkarten, etc. mit verschlüsselter Informationsdarstellung (SYSTEM
+                DV)</p>
         </div>
         <div class="flex contrat__articles__item">
             <p>-</p>
-            <p>supports de données à représentation réduite, tels que microfilms et microfiches (SYSTÈME MV).</p>
+            <p>Datenträger mit verkleinerter Darstellung, wie z.B. Mikrofilme und –fichen (SYSTEM MV)</p>
         </div>
 
 
         <!-- article 2 -->
-        <p class="center-text mb-20 mt-30">Article 2 – PRISE EN CHARGE DES SUPPORTS DE DONNÉES</p>
+        <p class="center-text mb-20 mt-30">§ 2 – UEBERNAHME DER DATENTRAEGER</p>
         <div class="flex contrat__articles__item">
             <p>1°)</p>
-            <p class="mb-20">Vis-à-vis du client, la personne habilitée à la prise en charge justifiera de son identité
-                par la présentation d’un badge de sécurité revêtu d’une photographie et portant un numéro de pièce
-                d’identité.</p>
+            <p class="mb-20">Der zur Übernahme Berechtigte weist sich gegenüber dem Auftraggeber durch einen
+                Sicherheitsausweis mit Foto und Personalausweisnummer aus.</p>
         </div>
         <div class="flex contrat__articles__item">
             <p>2°)</p>
-            <p class="mb-20"> La personne habilitée à la prise en charge délivrera un procès-verbal préétabli – soit sur
-               support papier, soit en format électronique – dans lequel la remise et la prise en charge des supports de
-               données seront constatées par les deux parties contractuelles.</p>
+            <p class="mb-20">Der zur Übernahme Berechtigte übergibt ein vorgefertigtes Protokoll, entweder auf Papier
+                oder elektronisch, in dem die Übergabe, bzw. Übernahme durch beide Vertragsparteien festgehalten
+                wird.</p>
         </div>
         <div class="flex contrat__articles__item">
             <p>3°)</p>
-            <p>Le prestataire n’acquiert aucun droit sur les supports de données du client qu’il a pris en charge, ni
-                sur les données qu’ils contiennent. Les données ne seront ni consultées, ni transmises, ni
-                sauvegardées, ni traitées d’une autre manière que celle décrite à l’article 3.</p>
+            <p>Der Auftragnehmer erwirbt keine Rechte an den übernommenen Datenträgern des Auftraggebers und an den
+                darauf enthaltenen Daten. Die Daten werden nicht eingesehen, weitergegeben, gespeichert oder auf eine
+                andere Weise verarbeitet als unter §3 beschrieben.</p>
         </div>
     </div>
 </div>

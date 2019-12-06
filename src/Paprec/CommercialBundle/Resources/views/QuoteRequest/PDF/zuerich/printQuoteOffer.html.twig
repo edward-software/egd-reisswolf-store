@@ -152,11 +152,11 @@
         }
 
         .offer__ref-items > div:first-child {
-            width: 40%;
+            /*width: 40%;*/
         }
 
         .offer__ref-items > div:last-child {
-            width: 60%;
+            /*width: 60%;*/
             padding-right: 15px;
         }
 
@@ -306,14 +306,14 @@
     <div class="offer__content">
 
         <div class="offer__ref">
-            <h1>Offre geneve</h1>
+            <h1>Angebot</h1>
 
             <div class="flex space-between">
 
                 <div class="w50">
                     <div class="flex offer__ref-items">
-                        <div>
-                            <p class="bold">Votre demande du :</p>
+                        <div style="width: 40%;">
+                            <p class="bold">Ihre Anfrage vom :</p>
                         </div>
                         <div>
                             <p>{{ quoteRequest.dateCreation|date('d/m/Y') }}</p>
@@ -321,8 +321,8 @@
                     </div>
 
                     <div class="flex offer__ref-items">
-                        <div>
-                            <p class="bold">Votre référence :</p>
+                        <div style="width: 40%;">
+                            <p class="bold">Ihre Referenz :</p>
                         </div>
                         <div>
                             <p> {{ quoteRequest.firstName }} {{ quoteRequest.lastName }}</p>
@@ -330,8 +330,8 @@
                     </div>
 
                     <div class="flex offer__ref-items">
-                        <div>
-                            <p class="bold">Votre adresse email :</p>
+                        <div style="width: 40%;">
+                            <p class="bold">Ihre Email-Adresse :</p>
                         </div>
                         <div>
                             <p>{{ quoteRequest.email }}</p>
@@ -339,8 +339,8 @@
                     </div>
 
                     <div class="flex offer__ref-items">
-                        <div>
-                            <p class="bold">Votre no. tel. :</p>
+                        <div style="width: 40%;">
+                            <p class="bold">Ihre Telefonnummer :</p>
                         </div>
                         <div>
                             <p>{{ quoteRequest.phone }}</p>
@@ -351,8 +351,8 @@
 
                 <div class="w50">
                     <div class="flex offer__ref-items">
-                        <div>
-                            <p class="bold">Date de l'offre :</p>
+                        <div style="width: 44%;">
+                            <p class="bold">Angebots-Datum :</p>
                         </div>
                         <div>
                             <p>{{ quoteRequest.dateUpdate|date('d/m/Y') }}</p>
@@ -360,17 +360,17 @@
                     </div>
 
                     <div class="flex offer__ref-items">
-                        <div>
-                            <p class="bold">Notre référence :</p>
+                        <div style="width: 44%;">
+                            <p class="bold">Unsere Referenz :</p>
                         </div>
                         <div>
-                            Emmanuelle Lugand
+                            Bruno Röschli
                         </div>
                     </div>
 
                     <div class="flex offer__ref-items">
-                        <div>
-                            <p class="bold">Notre adresse email :</p>
+                        <div style="width: 44%;">
+                            <p class="bold">Unsere Email-Adresse :</p>
                         </div>
                         <div>
                             <p>
@@ -382,11 +382,11 @@
                     </div>
 
                     <div class="flex offer__ref-items">
-                        <div>
-                            <p class="bold"> Notre no. tel. :</p>
+                        <div style="width: 44%;">
+                            <p class="bold">Unsere Telefonnummer :</p>
                         </div>
                         <div>
-                            <p>022 552 62 62 / 079 841 26 91</p>
+                            <p>44 844 48 47</p>
                         </div>
                     </div>
                 </div>
@@ -396,66 +396,65 @@
         </div>
 
         <div class="offer__presta">
-            <p class="mb-20">Chère Madame, cher Monsieur,</p>
-            <p class="mb-20"> Nous vous remercions de votre demande et vous offrons nos prestations suivantes:</p>
-            <h2>Collecte et destruction de vos archives confidentielles </h2>
+            <p class="mb-20">Für Ihre Anfrage danken wir Ihnen bestens. Gerne bieten wir Ihnen unsere Dienstleistungen wie folgt an.</p>
+            <h2>Entsorgung und Vernichtung von Akten</h2>
 
             <table>
                 <tbody>
                 <tr>
-                    <th rowspan="2">Type RW</th>
-                    <th rowspan="2">Serrure</th>
+                    <th rowspan="2">Typ RW</th>
+                    <th rowspan="2">Schloss</th>
                     <th>
-                        Programmation<br>
-                        serrure e.l.sy<br>
-                        <span>Unique/<br>
-                        par conteneur</span>
+                        Programmierung<br>
+                        e.l.sy-Schloss<br>
+                        <span>einmalig/<br>
+                        pro Behälter</span>
                     </th>
                     <th>
-                        Location<br>
-                        <span>par mois/<br>
-                        par conteneur<br></span>
+                        Behältermiete<br>
+                        <span>pro Monat/<br>
+                        pro Behälter<br></span>
                     </th>
                     <th>
                         Transport<br>
-                        <span>par conteneur collecté</span>
+                        <span>pro abgeholte Behälte</span>
                     </th>
                     <th>
-                        Destruction et<br>
-                        certificat
+                        Vernichtung und<br>
+                        Zertifikat
                     </th>
                     <th>
-                        Nombre<br>
-                        conteneurs<br>
-                        planifiés
+                        Anzahl
+                        geplante<br>
+                        Behälter<br>
                     </th>
                 </tr>
                 <tr class="table-header">
-                    <td>CHF / TVA excl.</td>
-                    <td>CHF / TVA excl.</td>
-                    <td>CHF / TVA excl.</td>
-                    <td>CHF / TVA excl.</td>
-                    <td>Quantité</td>
+                    <td>CHF / exkl.<br>MWST</td>
+                    <td>CHF / exkl.<br>MWST</td>
+                    <td>CHF / exkl.<br>MWST</td>
+                    <td>CHF / exkl.<br>MWST</td>
+                    <td>Stk</td>
                 </tr>
 
                 {% for line in quoteRequest.quoteRequestLines %}
-                <tr>
-                    <td class="bold">{{ line.product.capacity }}</td>
-                    <td class="bold">{{ line.product|productLabelTranslation(locale,'lockType') }}</td>
-                    <td class="bold">{{ line.setUpPrice|formatAmount('', app.request.locale)|round|number_format(2, '.', ',') }}</td>
-                    <td class="bold">{{ line.rentalUnitPrice|formatAmount('', app.request.locale)|round|number_format(2, '.', ',') }}</td>
-                    <td class="bold">{{ line.transportUnitPrice|formatAmount('', app.request.locale)|round|number_format(2, '.', ',') }}</td>
-                    <td>inclus</td>
-                    <td class="bold">{{ line.quantity }}</td>
-                </tr>
+                    <tr>
+                        <td class="bold">{{ line.product.capacity }}</td>
+                        <td class="bold">{{ line.product|productLabelTranslation(locale,'lockType') }}</td>
+                        <td class="bold">{{ line.setUpPrice|formatAmount('', app.request.locale)|round|number_format(2, '.', ',') }}</td>
+                        <td class="bold">{{ line.rentalUnitPrice|formatAmount('', app.request.locale)|round|number_format(2, '.', ',') }}</td>
+                        <td class="bold">{{ line.transportUnitPrice|formatAmount('', app.request.locale)|round|number_format(2, '.', ',') }}</td>
+                        <td>inklusive</td>
+                        <td class="bold">{{ line.quantity }}</td>
+                    </tr>
                 {% endfor %}
                 <tr class="empty">
                     <td colspan="7"></td>
                 </tr>
                 <tr class="table-footer1">
-                    <td colspan="2" class="bold">Chargement à l'étage</td>
-                    <td>par conteneur</td>
-                    <td class="bold">Ascenseur :</td>
+                    <td colspan="2" class="bold">Verlad ab Stockwerk</td>
+                    <td>pro Behälter</td>
+                    <td class="bold">Aufzug :</td>
                     <td class="bold" style="padding: 10px 0;">10.00 <span class="check {% if quoteRequest.access == 'elevator' %}active{% endif %}"></span> </td>
                     <td rowspan="2"></td>
                     <td rowspan="2"></td>
@@ -464,7 +463,7 @@
                 <tr class="table-footer2">
                     <td colspan="2"></td>
                     <td></td>
-                    <td class="bold">Escalier :</td>
+                    <td class="bold">Treppe :</td>
                     <td class="bold" style="padding: 10px 0;">20.00 <span class="check {% if quoteRequest.access == 'stairs' %}active{% endif %}"></span></td>
                 </tr>
                 </tbody>
@@ -472,32 +471,32 @@
 
 
             <p class="mb-20">
-                Conformément à votre demande, vos conteurs sécurisés seront collectés : {% if quoteRequest.frequency == 'ponctual' %}
-                    À la demande
+                Ihre Sicherheitsbehälter werden gemäss Ihrem Wunsch abgeholt : {% if quoteRequest.frequency == 'ponctual' %}
+                    Auf Anfrage
                 {% elseif quoteRequest.frequency == 'regular' %}
-                    {{ quoteRequest.frequencyTimes }} fois / {{ ('Commercial.QuoteRequest.' ~ quoteRequest.frequencyInterval)|trans }}
+                    {{ quoteRequest.frequencyTimes }} zeiten / {{ ('Commercial.QuoteRequest.' ~ quoteRequest.frequencyInterval)|trans }}
                 {% endif %}
             </p>
             <p class="mb-20">
-                Validité de l'offre : 30 jours dès la date de l'offre.
+                Gültigkeit des Angebots: 30 Tage ab Angebots-Datum.
             </p>
             <p class="mb-20">
-                Nous restons volontiers à votre disposition pour tout renseignement complémentaire.
+                Für weitere Informationen stehen wir gerne zur Verfügung. Über einen Auftrag würden wir uns sehr freuen.
             </p>
             <p class="mb-20" style="line-height: 20px;">
-                En cas d'acceptation de notre proposition, nous vous remercions de bien vouloir nous retourner par voie postale le contrat, ci-après annexé, dûment signé.
+                Wenn Sie unser Angebot annehmen, senden Sie uns bitte den unterstehenden Vertrag, unterschrieben, per Post zurück.
             </p>
-            <p class="mb-20">Meilleures salutations,</p>
-            <h2 class="mb-40">Votre partenaire REISSWOLF</h2>
+            <p class="mb-20">Freundliche Grüsse,</p>
+            <h2 class="mb-40">Ihr REISSWOLF-Partner</h2>
 
             <div class="flex offer__signature">
-               <div>
-                    <p>Pascal Laperrousaz</p>
-                    <p>Directeur Général</p>
+                <div>
+                    <p>Ernst Hess</p>
+                    <p>Geschäftsführer</p>
                 </div>
                 <div>
-                    <p>Emmanuelle Lugand</p>
-                    <p>Responsable Administrative</p>
+                    <p>Bruno Röschli</p>
+                    <p>Vertriebsberaterin</p>
                 </div>
             </div>
         </div>
@@ -508,15 +507,15 @@
         <div class="flex space-between">
             <div>
                 <p class="bold">REISSWOLF Aktenvernichtungs-AG</p>
-                <p>Romandie</p>
+                <p>Zürich / Ostschweiz / Graubünden</p>
             </div>
             <div>
-                <p>Rue de la Bergère 26</p>
-                <p>CH-1242 Satigny</p>
+                <p>Lindenstr. 3</p>
+                <p>CH-8108 Dällikon</p>
             </div>
             <div>
-                <p>Tel.: 022 552 62 62</p>
-                <p>Mail: geneve@reisswolf.ch</p>
+                <p>Tel.: 044 844 48 47</p>
+                <p>Mail: zuerich@reisswolf.ch</p>
             </div>
         </div>
     </div>

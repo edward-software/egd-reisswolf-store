@@ -36,27 +36,25 @@
 <div class="contrat__content">
 
     <div class="flex space-between bold">
-        <h2>ANNEXE 2</h2>
-        <p class="bold mb-20">N° de client : R{{ quoteRequest.postalCode.zone }} - {{ quoteRequest.customerId }}</p>
+        <h2>ANLAGE 2</h2>
+        <p class="bold mb-20">Kunden-Nr : R{{ quoteRequest.postalCode.zone }} - {{ quoteRequest.customerId }}</p>
     </div>
-    <p class="mb-20">au contrat en date du {{ quoteRequest.dateUpdate|date('d/m/Y') }} conclu entre</p>
+    <p class="mb-20">zum Vertrag vom {{ quoteRequest.dateUpdate|date('d/m/Y') }} zwischen der</p>
     <p>{{ quoteRequest.businessName }}</p>
-    <p>et</p>
+    <p>und</p>
     <p class="bold mb-30">REISSWOLF Aktenvernichtungs-AG</p>
 
-    <h3 style="margin-top: 60px;">CONDITIONS</h3>
+    <h3 style="margin-top: 60px;">KONDITIONEN</h3>
 
     <p class="mb-20">
-        Documents originaux confidentiels et listings confidentiels, copies, tirages papier de toutes sortes, anciens
-        documents et autres écrits confidentiels
+        Vertrauliche Original- und Endlospapiere, Kopien, Ausdrucke aller Art, Altakten und anderes vertrauliches Schriftgut
     </p>
     <p class="mb-30">
-        Mise à disposition de collecteurs de transport verrouillables. Enlèvement des collecteurs ou procédure de
-        transvidage faisant appel à notre véhicule compacteur spécial et destruction des écrits confidentiels dans le
-        respect de la protection des données, T.V.A. en sus :
+        Gestellung von abschließbaren Transportbehältern. Abholung der Behälter oder Umleerver-fahren mit unserem Spezialpressfahrzeug
+        und datenschutzgerecht Vernichtung des vertraulichen Schriftguts, zuzüglich MwSt. :
     </p>
 
-    <p class="mb-10">Prix forfaitaire pour transport et destruction, par vidage de collecteur :</p>
+    <p class="mb-10">Pauschalpreis für Transport und Vernichtung, je Behälterleerung :</p>
     <table>
         <tbody>
         {% for product in products %}
@@ -65,7 +63,7 @@
                 {{product|productLabelTranslation('fr')}}
             </td>
             <td>
-                Par collecteur
+                Pro Behälter
             </td>
             <td>
 
@@ -76,15 +74,15 @@
         </tbody>
     </table>
 
-    <p class="mt-20 mb-10">Prix de chargement en étage :</p>
+    <p class="mt-20 mb-10">Preise für Verlad ab Stockwerk :</p>
     <table>
         <tbody>
         <tr>
             <td rowspan="2" style="border-bottom: 1px solid #333333;">
-                Par collecteur
+                Pro Behälter
             </td>
             <td>
-                Ascenseur :
+                Aufzug :
             </td>
             <td>
                 CHF 10.00
@@ -92,7 +90,7 @@
         </tr>
         <tr>
             <td>
-                Escalier :
+                Treppe :
             </td>
             <td>
                 CHF 20.00
@@ -101,7 +99,7 @@
         </tbody>
     </table>
 
-    <p class="mt-20 mb-10">Location des collecteurs au mois :</p>
+    <p class="mt-20 mb-10">Miete für Behälter pro Monat :</p>
     <table>
         <tbody>
         {% for product in products %}
@@ -111,7 +109,7 @@
                 {{product|productLabelTranslation('fr')}}
             </td>
             <td>
-                Par collecteur
+                Pro Behälter
             </td>
             <td>
                 CHF {{((product.rentalUnitPrice / 100 * quoteRequest.postalCode.rentalRate)|formatAmount(null, app.request.locale, 'FORMAT15'))|formatAmount(null, app.request.locale, 'DEC2')|round|number_format(2, '.', ',')}}
@@ -122,7 +120,7 @@
 
     </table>
 
-    <p>* Programmation unique de la serrure e.l.sy : CHF 20.00</p>
+    <p>* Einmalige Programmierung e.l.sy-Schloss : CHF 20.00</p>
 
 
     {#<div style="width: 500px; margin: auto;">
@@ -194,20 +192,18 @@
     </div>#}
 
     <p class="mt-30">
-        Remise de la carte-badge pour collecteurs Reisswolf :
+        Abgabe Badgekarte für Reisswolf-Behälter :
     </p>
     <ul>
         <li>
-            lors de la remise d’une carte-badge pour les ouvertures d’urgence du collecteur de sécurité, aucuns frais de
-            dépôt ne doivent être payés.
+            bei der Abgabe von einer Badgekarte für Notöffnungen des Sicherheitsbehälters sind keine Depot-Gebühren zu bezahlen.
         </li>
         <li>
-            toutefois, en cas de perte de la carte, des frais de CHF 100.00 pour interventions diverses seront facturés.
+            bei Verlust der Karte wird jedoch eine Gebühr für diverse Umtriebe von CHF 100.00 in Rechnung gestellt.
         </li>
     </ul>
 
     <p>
-        Tous les prix s’entendent T.V.A. en sus et sont valables jusqu’au 31 décembre {% if quoteRequest.dateUpdate|date('m') < 7 %} {{ quoteRequest.dateUpdate|date('Y') }} {% else %} {{ quoteRequest.dateUpdate|date('Y') + 1 }}{% endif %}. Passé cette date, ils
-        pourront être ajustés selon les besoins.
+        Alle Preise verstehen sich zuzgl. Mehrwertsteuer und sind bis am {% if quoteRequest.dateUpdate|date('m') < 7 %} {{ quoteRequest.dateUpdate|date('Y') }} {% else %} {{ quoteRequest.dateUpdate|date('Y') + 1 }}{% endif %}gültig. Danach können sie nach Bedarf angepasst werden.
     </p>
 </div>
