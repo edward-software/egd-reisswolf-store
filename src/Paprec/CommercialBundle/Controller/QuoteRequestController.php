@@ -2,12 +2,16 @@
 
 namespace Paprec\CommercialBundle\Controller;
 
+use Doctrine\ORM\QueryBuilder;
+use Paprec\CatalogBundle\Service\NumberManager;
 use Paprec\CommercialBundle\Entity\QuoteRequest;
 use Paprec\CommercialBundle\Entity\QuoteRequestLine;
 use Paprec\CommercialBundle\Form\QuoteRequestLineAddType;
 use Paprec\CommercialBundle\Form\QuoteRequestLineEditType;
 use Paprec\CommercialBundle\Form\QuoteRequestType;
 use Paprec\UserBundle\Entity\User;
+use Paprec\UserBundle\Service\UserManager;
+use PHPExcel_Style_Alignment;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -19,6 +23,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Translation\Translator;
 
 class QuoteRequestController extends Controller
 {
@@ -103,11 +108,16 @@ class QuoteRequestController extends Controller
      */
     public function exportAction(Request $request, $dateStart, $dateEnd, $status)
     {
+        /** @var NumberManager $numberManager */
         $numberManager = $this->get('paprec_catalog.number_manager');
+    
+        /** @var Translator $translator */
         $translator = $this->get('translator');
 
+        /** @var \PHPExcel $phpExcelObject */
         $phpExcelObject = $this->container->get('phpexcel')->createPHPExcelObject();
 
+        /** @var QueryBuilder $queryBuilder */
         $queryBuilder = $this->getDoctrine()->getManager()->createQueryBuilder();
 
         $queryBuilder->select(array('q'))
@@ -123,62 +133,118 @@ class QuoteRequestController extends Controller
                 ->setParameter('dateEnd', $dateEnd);
         }
 
+        /** @var QuoteRequest[] $quoteRequests */
         $quoteRequests = $queryBuilder->getQuery()->getResult();
 
         $phpExcelObject->getProperties()->setCreator("Paprec Easy Recyclage")
             ->setLastModifiedBy("Reisswolf Shop")
             ->setTitle("Paprec Easy Recyclage - Devis")
             ->setSubject("Extraction");
-
-        $phpExcelObject->setActiveSheetIndex(0)
-            ->setCellValue('A1', 'ID')
-            ->setCellValue('B1', 'Business name')
-            ->setCellValue('C1', 'Canton')
-            ->setCellValue('D1', 'Civility')
-            ->setCellValue('E1', 'Last name')
-            ->setCellValue('F1', 'First name')
-            ->setCellValue('G1', 'Email')
-            ->setCellValue('H1', 'Phone')
-            ->setCellValue('I1', 'Address')
-            ->setCellValue('J1', 'Postal code')
-            ->setCellValue('K1', 'City')
-            ->setCellValue('L1', 'Status')
-            ->setCellValue('M1', 'Customer comment')
-            ->setCellValue('N1', 'Staff')
-            ->setCellValue('O1', 'Access')
-            ->setCellValue('P1', 'Salesman in charge')
-            ->setCellValue('Q1', 'Annual budget')
-            ->setCellValue('R1', 'Frequency')
-            ->setCellValue('S1', 'Creation date');
-
-        $phpExcelObject->getActiveSheet()->setTitle('Devis');
-        $phpExcelObject->setActiveSheetIndex(0);
-
-        $i = 2;
+    
+        $sheet = $phpExcelObject->setActiveSheetIndex();
+        $sheet->setTitle('Devis');
+        
+        // Labels
+        $sheetLabels = [
+            'ID',
+            'Creation date',
+            'Update date',
+            'Deleted',
+            'User creation',
+            'User update',
+            'Locale',
+            'Number',
+            'Canton',
+            'Business name',
+            'Civility',
+            'Last name',
+            'First name',
+            'Email',
+            'Phone',
+            'is Multisite',
+            'Staff',
+            'Access',
+            'Address',
+            'City',
+            'Customer comment',
+            'Status',
+            'Total amount',
+            'Overall Discount',
+            'Salesman Comment',
+            'Annual Budget',
+            'Frequency',
+            'Frequency Times',
+            'Frequency Interval',
+            'Customer ID',
+            'Reference',
+            'User in charge',
+            'Postal Code',
+        ];
+    
+        $xAxe = 'A';
+        foreach ($sheetLabels as $label) {
+            $sheet->setCellValue($xAxe . 1, $label);
+            $xAxe++;
+        }
+        
+        $yAxe = 2;
         foreach ($quoteRequests as $quoteRequest) {
-
-            $phpExcelObject->setActiveSheetIndex(0)
-                ->setCellValue('A' . $i, $quoteRequest->getId())
-                ->setCellValue('B' . $i, $quoteRequest->getBusinessName())
-                ->setCellValue('C' . $i, $quoteRequest->getCanton())
-                ->setCellValue('D' . $i, $quoteRequest->getCivility())
-                ->setCellValue('E' . $i, $quoteRequest->getLastName())
-                ->setCellValue('F' . $i, $quoteRequest->getFirstName())
-                ->setCellValue('G' . $i, $quoteRequest->getEmail())
-                ->setCellValue('H' . $i, $quoteRequest->getPhone())
-                ->setCellValue('I' . $i, $quoteRequest->getAddress())
-                ->setCellValue('J' . $i, ($quoteRequest->getPostalCode()) ? $quoteRequest->getPostalCode()->getCode() : '')
-                ->setCellValue('K' . $i, $quoteRequest->getCity())
-                ->setCellValue('L' . $i, $quoteRequest->getQuoteStatus())
-                ->setCellValue('M' . $i, $quoteRequest->getComment())
-                ->setCellValue('N' . $i, $translator->trans('Commercial.StaffList.' . $quoteRequest->getStaff()))
-                ->setCellValue('O' . $i, $quoteRequest->getAccess())
-                ->setCellValue('P' . $i, ($quoteRequest->getUserInCharge()) ? $quoteRequest->getUserInCharge()->getFirstName() . ' ' . $quoteRequest->getUserInCharge()->getLastName() : '')
-                ->setCellValue('Q' . $i, $numberManager->denormalize($quoteRequest->getAnnualBudget()))
-                ->setCellValue('R' . $i, $quoteRequest->getFrequency())
-                ->setCellValue('S' . $i, $quoteRequest->getDateCreation()->format('Y-m-d'));
-
-            $i++;
+            
+            $getters = [
+                $quoteRequest->getId(),
+                $quoteRequest->getDateCreation()->format('Y-m-d'),
+                $quoteRequest->getDateUpdate() ? $quoteRequest->getDateUpdate()->format('Y-m-d') : '',
+                $quoteRequest->getDeleted() ? 'true' : 'false',
+                $quoteRequest->getUserCreation(),
+                $quoteRequest->getUserUpdate(),
+                $quoteRequest->getLocale(),
+                $numberManager->denormalize($quoteRequest->getNumber()),
+                $quoteRequest->getCanton(),
+                $quoteRequest->getBusinessName(),
+                $quoteRequest->getCivility(),
+                $quoteRequest->getLastName(),
+                $quoteRequest->getFirstName(),
+                $quoteRequest->getEmail(),
+                $quoteRequest->getPhone(),
+                $quoteRequest->getIsMultisite() ? 'true' : 'false',
+                $translator->trans('Commercial.StaffList.' . $quoteRequest->getStaff()),
+                $quoteRequest->getAccess(),
+                $quoteRequest->getAddress(),
+                $quoteRequest->getCity(),
+                $quoteRequest->getComment(),
+                $quoteRequest->getQuoteStatus(),
+                $quoteRequest->getTotalAmount(),
+                $quoteRequest->getOverallDiscount(),
+                $quoteRequest->getSalesmanComment(),
+                $numberManager->denormalize($quoteRequest->getAnnualBudget()),
+                $quoteRequest->getFrequency(),
+                $quoteRequest->getFrequencyTimes(),
+                $quoteRequest->getFrequencyInterval(),
+                $quoteRequest->getCustomerId(),
+                $quoteRequest->getReference(),
+                $quoteRequest->getUserInCharge() ? $quoteRequest->getUserInCharge()->getFirstName() . " " . $quoteRequest->getUserInCharge()->getLastName() : '',
+                $quoteRequest->getPostalCode() ? $quoteRequest->getPostalCode()->getCode() : '',
+            ];
+    
+            $xAxe = 'A';
+            foreach ($getters as $getter) {
+                $sheet->setCellValue($xAxe . $yAxe, (string) $getter);
+                $xAxe++;
+            }
+            $yAxe++;
+        }
+    
+        // Format
+        $sheet->getStyle(
+            "A1:" . $sheet->getHighestDataColumn() . 1)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER
+        );
+        $sheet->getStyle(
+            "A2:" . $sheet->getHighestDataColumn() . $sheet->getHighestDataRow())->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT
+        );
+    
+        // Resize columns
+        for ($i = 'A'; $i != $sheet->getHighestDataColumn(); $i++) {
+            $sheet->getColumnDimension($i)->setAutoSize(true);
         }
 
         $writer = $this->container->get('phpexcel')->createWriter($phpExcelObject, 'Excel2007');

@@ -253,13 +253,13 @@ class PostalCodeController extends Controller
 
             $em = $this->getDoctrine()->getManager();
             $em->flush();
-
+            
             return $this->redirectToRoute('paprec_catalog_postalCode_view', array(
                 'id' => $postalCode->getId()
             ));
 
         }
-
+        
         return $this->render('PaprecCatalogBundle:PostalCode:edit.html.twig', array(
             'form' => $form->createView(),
             'postalCode' => $postalCode

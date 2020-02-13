@@ -131,12 +131,13 @@ class QuoteRequestType extends AbstractType
                 'expanded' => false,
                 'placeholder' => '',
                 'empty_data' => null,
-                'choice_label' => function ($user) {
+                'choice_label' => function (User $user) {
                     return $user->getFirstName() . ' ' . $user->getLastName();
                 },
                 'query_builder' => function (UserRepository $er) {
                     return $er->createQueryBuilder('u')
-                        ->where('u.deleted IS NULL');
+                        ->where('u.deleted IS NULL')
+                        ->orderBy('u.firstName');
                 }
             ));
         $builder->get('postalCode')
