@@ -29,6 +29,7 @@ select {
     justify-content: center;
     align-items: center;
     transition: all .3s ease-in-out;
+    flex-direction: column;
 
     &:focus {
       outline: 0 !important;
@@ -96,6 +97,8 @@ select {
     &__image {
       //height: 100%;
       margin: auto;
+      width: 200px;
+      text-align: center;
 
       img {
         max-height: 200px;
