@@ -52,22 +52,27 @@ class PostalCodeType extends AbstractType
                 'multiple' => false,
                 'expanded' => false,
                 'query_builder' => function (RegionRepository $rr) {
-                    return $rr->createQueryBuilder('r')
-                        ->where('r.deleted IS NULL');
+                    return $rr
+                        ->createQueryBuilder('r')
+                        ->where('r.deleted IS NULL')
+                        ->orderBy('r.name');
                 }
             ))
             ->add('userInCharge', EntityType::class, array(
                 'class' => User::class,
-                'choice_label' => 'username',
-                'placeholder' => '',
-                'empty_data' => null,
-                'required' => false,
                 'multiple' => false,
                 'expanded' => false,
+                'placeholder' => '',
+                'empty_data' => null,
+                'choice_label' => function (User $user) {
+                    return $user->getFirstName() . ' ' . $user->getLastName();
+                },
+                'required' => false,
                 'query_builder' => function (UserRepository $ur) {
                     return $ur->createQueryBuilder('u')
                         ->where('u.deleted IS NULL')
-                        ->andWhere('u.roles LIKE \'%ROLE_COMMERCIAL%\'');
+                        ->andWhere('u.roles LIKE \'%ROLE_COMMERCIAL%\'')
+                        ->orderBy('u.firstName');
                 }
             ));
     }

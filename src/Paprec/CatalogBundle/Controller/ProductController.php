@@ -2,6 +2,7 @@
 
 namespace Paprec\CatalogBundle\Controller;
 
+use Doctrine\ORM\QueryBuilder;
 use Paprec\CatalogBundle\Entity\Picture;
 use Paprec\CatalogBundle\Entity\Product;
 use Paprec\CatalogBundle\Entity\ProductCategory;
@@ -12,6 +13,7 @@ use Paprec\CatalogBundle\Form\ProductLabelType;
 use Paprec\CatalogBundle\Form\ProductPackageType;
 use Paprec\CatalogBundle\Form\ProductType;
 use Paprec\CommercialBundle\Form\ProductCategoryEditType;
+use PHPExcel_Style_Alignment;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -118,64 +120,115 @@ class ProductController extends Controller
         $productManager = $this->container->get('paprec_catalog.product_manager');
         $numberManager = $this->container->get('paprec_catalog.number_manager');
 
+        /** @var \PHPExcel $phpExcelObject */
         $phpExcelObject = $this->container->get('phpexcel')->createPHPExcelObject();
 
+        /** @var QueryBuilder $queryBuilder */
         $queryBuilder = $this->getDoctrine()->getManager()->createQueryBuilder();
 
         $queryBuilder->select(array('p'))
             ->from('PaprecCatalogBundle:Product', 'p')
             ->where('p.deleted IS NULL');
 
-        $Products = $queryBuilder->getQuery()->getResult();
+        $products = $queryBuilder->getQuery()->getResult();
 
         $phpExcelObject->getProperties()->setCreator("Reisswolf Shop")
             ->setLastModifiedBy("Reisswolf Shop")
             ->setTitle("Reisswolf Shop - Products")
             ->setSubject("Extract");
 
-        $phpExcelObject->setActiveSheetIndex(0)
-            ->setCellValue('A1', 'ID')
-            ->setCellValue('B1', 'Name')
-            ->setCellValue('C1', 'Description')
-            ->setCellValue('D1', 'Capacity')
-            ->setCellValue('E1', 'Capacity unit')
-            ->setCellValue('F1', 'Dimensions')
-            ->setCellValue('G1', 'Enabled')
-            ->setCellValue('H1', 'Rental UP')
-            ->setCellValue('I1', 'Transport UP')
-            ->setCellValue('J1', 'Treatment UP')
-            ->setCellValue('K1', 'Treacability UP')
-            ->setCellValue('L1', 'Setup UP')
-            ->setCellValue('M1', 'Position')
-            ->setCellValue('N1', 'Creation date');
-
-
-        $phpExcelObject->getActiveSheet()->setTitle('Products');
-        $phpExcelObject->setActiveSheetIndex(0);
-
-        $i = 2;
-        foreach ($Products as $product) {
-
-            $productLabel = $productManager->getProductLabelByProductAndLocale($product, strtoupper($language));
-
-            $phpExcelObject->setActiveSheetIndex(0)
-                ->setCellValue('A' . $i, $product->getId())
-                ->setCellValue('B' . $i, $productLabel->getname())
-                ->setCellValue('C' . $i, $productLabel->getShortDescription())
-                ->setCellValue('D' . $i, $product->getCapacity())
-                ->setCellValue('E' . $i, $product->getCapacityUnit())
-                ->setCellValue('F' . $i, $product->getDimensions())
-                ->setCellValue('G' . $i, $translator->trans('General.' . $product->getIsEnabled()))
-                ->setCellValue('H' . $i, $numberManager->denormalize($product->getRentalUnitPrice()))
-                ->setCellValue('I' . $i, $numberManager->denormalize($product->getTransportUnitPrice()))
-                ->setCellValue('J' . $i, $numberManager->denormalize($product->getTreatmentUnitPrice()))
-                ->setCellValue('K' . $i, $numberManager->denormalize($product->getTraceabilityUnitPrice()))
-                ->setCellValue('L' . $i, $numberManager->denormalize($product->getSetUpPrice()))
-                ->setCellValue('M' . $i, $product->getPosition())
-                ->setCellValue('N' . $i, $product->getDateCreation()->format('Y-m-d'));
-            $i++;
+        $sheet = $phpExcelObject->setActiveSheetIndex();
+        $sheet->setTitle('Products');
+        
+        // Labels
+        $sheetLabels = [
+            'P. ID',
+            'Creation date',
+            'Update date',
+            'Deleted',
+            'Capacity',
+            'Capacity unit',
+            'Dimensions',
+            'is Enabled',
+            'Rental unit price',
+            'Transport UP',
+            'Treatment UP',
+            'Traceability UP',
+            'Position',
+            'User creation ID',
+            'User update ID',
+            'Folder number',
+            'Setup UP',
+            'PL. ID',
+            'Name',
+            'Short desc.',
+            'Language',
+            'Product version',
+            'Lock type',
+        ];
+        
+        $xAxe = 'A';
+        foreach ($sheetLabels as $label) {
+            $sheet->setCellValue($xAxe . 1, $label);
+            $xAxe++;
         }
+        
+        $yAxe = 2;
+        
+        /** @var Product $product */
+        foreach ($products as $product) {
 
+            /** @var ProductLabel $productLabel */
+            $productLabel = $productManager->getProductLabelByProductAndLocale($product, strtoupper($language));
+            
+            // Getters
+            $getters = [
+                $product->getId(),
+                $product->getDateCreation()->format('Y-m-d'),
+                $product->getDateUpdate()->format('Y-m-d'),
+                $product->getDeleted() ? 'true' : 'false',
+                $product->getCapacity(),
+                $product->getCapacityUnit(),
+                $product->getDimensions(),
+                $product->getIsEnabled(),
+                $numberManager->denormalize($product->getRentalUnitPrice()),
+                $numberManager->denormalize($product->getTransportUnitPrice()),
+                $numberManager->denormalize($product->getTreatmentUnitPrice()),
+                $numberManager->denormalize($product->getTraceabilityUnitPrice()),
+                $product->getPosition(),
+                $product->getUserCreation(),
+                $product->getUserUpdate(),
+                $product->getFolderNumber(),
+                $numberManager->denormalize($product->getSetUpPrice()),
+                $productLabel->getId(),
+                $productLabel->getName(),
+                $productLabel->getShortDescription(),
+                $productLabel->getLanguage(),
+                $productLabel->getVersion(),
+                $productLabel->getLockType(),
+            ];
+            
+            $xAxe = 'A';
+            foreach ($getters as $getter) {
+                $sheet->setCellValue($xAxe . $yAxe, (string) $getter);
+                $xAxe++;
+            }
+            $yAxe++;
+        }
+    
+        // Format
+        $sheet->getStyle(
+            "A1:" . $sheet->getHighestDataColumn() . 1)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER
+        );
+        $sheet->getStyle(
+            "A2:" . $sheet->getHighestDataColumn() . $sheet->getHighestDataRow())->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT
+        );
+    
+        // Resize columns
+        for ($i = 'A'; $i <= $sheet->getHighestDataColumn(); $i++) {
+            $sheet->getColumnDimension($i)->setAutoSize(true);
+        }
+    
         $writer = $this->container->get('phpexcel')->createWriter($phpExcelObject, 'Excel2007');
 
         $fileName = 'ReisswolfShop-Extraction-Products-' . date('Y-m-d') . '.xlsx';
@@ -424,8 +477,8 @@ class ProductController extends Controller
         $ids = explode(',', $ids);
 
         if (is_array($ids) && count($ids)) {
-            $Products = $em->getRepository('PaprecCatalogBundle:Product')->findById($ids);
-            foreach ($Products as $product) {
+            $products = $em->getRepository('PaprecCatalogBundle:Product')->findById($ids);
+            foreach ($products as $product) {
                 foreach ($product->getPictures() as $picture) {
                     $this->removeFile($this->getParameter('paprec_catalog.product.picto_path') . '/' . $picture->getPath());
                     $product->removePicture($picture);
@@ -457,8 +510,8 @@ class ProductController extends Controller
         $ids = explode(',', $ids);
 
         if (is_array($ids) && count($ids)) {
-            $Products = $em->getRepository('PaprecCatalogBundle:Product')->findById($ids);
-            foreach ($Products as $product) {
+            $products = $em->getRepository('PaprecCatalogBundle:Product')->findById($ids);
+            foreach ($products as $product) {
                 $product->setIsEnabled(true);
             }
             $em->flush();
@@ -483,8 +536,8 @@ class ProductController extends Controller
         $ids = explode(',', $ids);
 
         if (is_array($ids) && count($ids)) {
-            $Products = $em->getRepository('PaprecCatalogBundle:Product')->findById($ids);
-            foreach ($Products as $product) {
+            $products = $em->getRepository('PaprecCatalogBundle:Product')->findById($ids);
+            foreach ($products as $product) {
                 $product->setIsEnabled(false);
             }
             $em->flush();

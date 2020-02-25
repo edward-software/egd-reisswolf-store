@@ -7,7 +7,7 @@ framework:
         strict_requirements: true
     profiler: { only_exceptions: false }
     session:
-        save_path: /Applications/MAMP/tmp/php
+        save_path: /var/tmp/php
 
 web_profiler:
     toolbar: true

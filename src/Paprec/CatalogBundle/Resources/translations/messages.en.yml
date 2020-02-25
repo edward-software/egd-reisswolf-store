@@ -1,132 +1,128 @@
 Catalog:
 
-  Bundle-name:                    Catalog management
-  Products:                       Products
-  Settings:                       Settings
-
+  Bundle-name:              Catalog management
+  Products:                 Products
+  Settings:                 Settings
 
   PostalCode:
-
-    PostalCodes:                Postal codes
-    Name:                       Postal code
-    Date-crea:                  Crea. date
-    Date-creation:              Creation date
-    Date-update:                Last update
-    Informations:               Information
-    System-informations:        System information
-    List:                       Postal codes list
-    Add:                        Add postal code
-    Export:                     Export postal codes
-    Code:                       Code
-    City:                       City
-    Zone:                       Tariff zone
-    Rate:                       Rate
-    View:                       View postal code
-    Edit:                       Edit postal code
-    Remove:                     Delete postal code
-    Save:                       Save
-    Cancel:                     Cancel
-    Confirm-cancel:             Etes-vous sûr de vouloir annuler ?
-    Confirm-remove:             Etes-vous sûr de vouloir supprimer ce code postal ?
-    SetUpRate: Setup rate
-    RentalRate: Rental rate
-    TransportRate: Transport rate
-    TreatmentRate: Treatment rate
-    TraceabilityRate: Traceability rate
-    UserInCharge: Salesman in charge
-    Region: Region
-    System-information: System information
+    PostalCodes:            Postal codes
+    Name:                   Postal code
+    Date-crea:              Crea. date
+    Date-creation:          Creation date
+    Date-update:            Last update
+    Informations:           Information
+    System-informations:    System information
+    List:                   Postal codes list
+    Add:                    Add postal code
+    Export:                 Export postal codes
+    Code:                   Code
+    City:                   City
+    Zone:                   Tariff zone
+    Rate:                   Rate
+    View:                   View postal code
+    Edit:                   Edit postal code
+    Remove:                 Delete postal code
+    Save:                   Save
+    Cancel:                 Cancel
+    Confirm-cancel:         Etes-vous sûr de vouloir annuler ?
+    Confirm-remove:         Etes-vous sûr de vouloir supprimer ce code postal ?
+    SetUpRate:              Setup rate
+    RentalRate:             Rental rate
+    TransportRate:          Transport rate
+    TreatmentRate:          Treatment rate
+    TraceabilityRate:       Traceability rate
+    UserInCharge:           Salesman in charge
+    Region:                 Region
+    System-information:     System information
 
   Picture:
-    Path:                       Choose picture
-    Type:                       Photo type
-    AddPilotPicture:            Add main picture
-    AddPicto:                   Add picto
-    AddPicture:                 Add secondary picture
+    Path:                   Choose picture
+    Type:                   Photo type
+    AddPilotPicture:        Add main picture
+    AddPicto:               Add picto
+    AddPicture:             Add secondary picture
 
   Product:
-    View: View product
-    Products: Products
-    Add: Add product
-    Edit: Edit product
-    Remove: Delete
-    List: Products list
-    Information: Product information
-    Capacity: Capacity
-    Dimensions: Dimensions
-    AvailablePostalCodes: Available postal codes
+    View:                   View product
+    Products:               Products
+    Add:                    Add product
+    Edit:                   Edit product
+    Remove:                 Delete
+    List:                   Products list
+    Information:            Product information
+    Capacity:               Capacity
+    Dimensions:             Dimensions
+    AvailablePostalCodes:   Available postal codes
     IsEnabled:
-      IsEnabled: Active
-      Yes: Yes
-      No: No
-      Disable: Disable
-      Enable: Enable
-    Picto: Picto
-    AddPicture: Add picture
-    PilotPicture: Main picture
-    SetSecondaryPicture: Set as secondary picture
-    Pictures: Pictures
-    EditPicture: Replace picture
-    System-information: System information
-    Date-creation: Creation date
-    Date-update: Last update
-    Export: Export products
-    Details: Product details
-    CapacityUnit: Capacity unit
-    Position: Position
-    SetUpPrice: Setup price
-    RentalUnitPrice: Rental unit price
-    FolderNumber: Number of folders
-    TransportUnitPrice: Transport unit price
-    TreatmentUnitPrice: Treatment unit price
-    TraceabilityUnitPrice: Traceability unit price
-
+      IsEnabled:            Active
+      Yes:                  Yes
+      No:                   No
+      Disable:              Disable
+      Enable:               Enable
+    Picto:                  Picto
+    AddPicture:             Add picture
+    PilotPicture:           Main picture
+    SetSecondaryPicture:    Set as secondary picture
+    Pictures:               Pictures
+    EditPicture:            Replace picture
+    System-information:     System information
+    Date-creation:          Creation date
+    Date-update:            Last update
+    Export:                 Export products
+    Details:                Product details
+    CapacityUnit:           Capacity unit
+    Position:               Position
+    SetUpPrice:             Setup price
+    RentalUnitPrice:        Rental unit price
+    FolderNumber:           Number of folders
+    TransportUnitPrice:     Transport unit price
+    TreatmentUnitPrice:     Treatment unit price
+    TraceabilityUnitPrice:  Traceability unit price
 
   ProductLabel:
-    Add: Add translation
-    Edit: Edit translation
+    Add:                    Add translation
+    Edit:                   Edit translation
     Language:
-      Language: Locale
-      EN: English
-      FR: French
-      IT: Italian
-      DE: German
-    Name: Name
-    Short-description: Short description
-    Lock: Lock
-    Version: Version
-    Information: Information
-    Remove: Remove
-
+      Language:             Locale
+      EN:                   English
+      FR:                   French
+      IT:                   Italian
+      DE:                   German
+    Name:                   Name
+    Short-description:      Short description
+    Lock:                   Lock
+    Version:                Version
+    Information:            Information
+    Remove:                 Remove
 
   Region:
-    Regions: Regions
-    Name: Name
-    Email: Contact email
-    List: Regions list
-    Add: Add region
-    Export: Export regions
-    View: View region
-    Edit: Edit region
-    Remove: Delete region
-    Informations: Information
-    System-informations:        System information
-    PostalCodes: Postal codes
+    Regions:                Regions
+    Name:                   Name
+    Email:                  Contact email
+    List:                   Regions list
+    Add:                    Add region
+    Export:                 Export regions
+    View:                   View region
+    Edit:                   Edit region
+    Remove:                 Delete region
+    Informations:           Information
+    System-informations:    System information
+    PostalCodes:            Postal codes
 
   CustomArea:
-    CustomAreas: Custom areas
-    List: Custom areas list
-    Code: Code
-    Language: Language
-    Content: Content
-    LeftContent: Left content block
-    RightContent: Right content block
-    IsDisplayed: Displayed
-    Add: Add area
-    View: View area
-    Edit: Edit area
-    Remove: Delete area
-    AddPictureLeft: Left picture
-    AddPictureRight: Right picture
-    Informations: Information
-    System-informations: System information
+    CustomAreas:            Custom areas
+    List:                   Custom areas list
+    Code:                   Code
+    Language:               Language
+    Content:                Content
+    LeftContent:            Left content block
+    RightContent:           Right content block
+    IsDisplayed:            Displayed
+    Add:                    Add area
+    View:                   View area
+    Edit:                   Edit area
+    Remove:                 Delete area
+    AddPictureLeft:         Left picture
+    AddPictureRight:        Right picture
+    Informations:           Information
+    System-informations:    System information

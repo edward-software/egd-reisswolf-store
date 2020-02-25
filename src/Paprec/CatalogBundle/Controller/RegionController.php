@@ -2,8 +2,13 @@
 
 namespace Paprec\CatalogBundle\Controller;
 
+use Doctrine\ORM\QueryBuilder;
 use Paprec\CatalogBundle\Entity\Region;
 use Paprec\CatalogBundle\Form\RegionType;
+use Paprec\CatalogBundle\Service\NumberManager;
+use Paprec\UserBundle\Entity\User;
+use Paprec\UserBundle\Service\UserManager;
+use PHPExcel_Style_Alignment;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -82,40 +87,105 @@ class RegionController extends Controller
      */
     public function exportAction(Request $request)
     {
+        /** @var NumberManager $numberManager */
         $numberManager = $this->get('paprec_catalog.number_manager');
+        
+        /** @var UserManager $userManager */
+        $userManager = $this->container->get('paprec.user_manager');
 
+        /** @var \PHPExcel $phpExcelObject */
         $phpExcelObject = $this->container->get('phpexcel')->createPHPExcelObject();
 
+        /** @var QueryBuilder $queryBuilder */
         $queryBuilder = $this->getDoctrine()->getManager()->getRepository(Region::class)->createQueryBuilder('r');
 
         $queryBuilder->select(array('r'))
             ->where('r.deleted IS NULL');
 
+        /** @var Region[] $regions */
         $regions = $queryBuilder->getQuery()->getResult();
 
         $phpExcelObject->getProperties()->setCreator("Reisswolf Shop")
             ->setLastModifiedBy("Reisswolf Shop")
             ->setTitle("Reisswolf Shop - Regions")
             ->setSubject("Extract");
-
-        $phpExcelObject->setActiveSheetIndex(0)
-            ->setCellValue('A1', 'ID')
-            ->setCellValue('B1', 'Name')
-            ->setCellValue('C1', 'Contact email')
-            ->setCellValue('D1', 'Creation Date');
-
-        $phpExcelObject->getActiveSheet()->setTitle('Regions');
-        $phpExcelObject->setActiveSheetIndex(0);
-
-        $i = 2;
+    
+        $sheet = $phpExcelObject->setActiveSheetIndex();
+        $sheet->setTitle('Regions');
+    
+        $sheetLabels = [
+            'R. ID',
+            'R. Creation date',
+            'R. Update date',
+            'R. Deleted',
+            'User creation',
+            'User update',
+            'Name',
+            'Contact email',
+            'U. ID',
+            'U. Username',
+            'U. Email',
+            'U. Creation data',
+            'U. Update date',
+            'U. Deleted',
+            'U. Company name',
+            'U. Last name',
+            'U. First name',
+            'U. Language',
+        ];
+    
+        $xAxe = 'A';
+        foreach ($sheetLabels as $label) {
+            $sheet->setCellValue($xAxe . 1, $label);
+            $xAxe++;
+        }
+    
+        $yAxe = 2;
         foreach ($regions as $region) {
-
-            $phpExcelObject->setActiveSheetIndex(0)
-                ->setCellValue('A' . $i, $region->getId())
-                ->setCellValue('B' . $i, $region->getName())
-                ->setCellValue('C' . $i, $region->getEmail())
-                ->setCellValue('D' . $i, $region->getDateCreation()->format('Y-m-d'));
-            $i++;
+            
+            $user = $userManager->get($region->getUserCreation());
+            
+            // Getters
+            $getters = [
+                $region->getId(),
+                $region->getDateCreation()->format('Y-m-d'),
+                $region->getDateUpdate()->format('Y-m-d'),
+                $region->getDeleted() ? 'true' : 'false',
+                $region->getUserCreation(),
+                $region->getUserUpdate(),
+                $region->getName(),
+                $region->getEmail(),
+                $user->getId(),
+                $user->getUsername(),
+                $user->getEmail(),
+                $user->getDateCreation()->format('Y-m-d'),
+                $user->getDateUpdate()->format('Y-m-d'),
+                $user->getDeleted() ? 'true' : 'false',
+                $user->getCompanyName(),
+                $user->getLastName(),
+                $user->getFirstName(),
+                $user->getLang(),
+            ];
+    
+            $xAxe = 'A';
+            foreach ($getters as $getter) {
+                $sheet->setCellValue($xAxe . $yAxe, (string) $getter);
+                $xAxe++;
+            }
+            $yAxe++;
+        }
+    
+        // Format
+        $sheet->getStyle(
+            "A1:" . $sheet->getHighestDataColumn() . 1)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER
+        );
+        $sheet->getStyle(
+            "A2:" . $sheet->getHighestDataColumn() . $sheet->getHighestDataRow())->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT
+        );
+    
+        // Resize columns
+        for ($i = 'A'; $i <= $sheet->getHighestDataColumn(); $i++) {
+            $sheet->getColumnDimension($i)->setAutoSize(true);
         }
 
         $writer = $this->container->get('phpexcel')->createWriter($phpExcelObject, 'Excel2007');

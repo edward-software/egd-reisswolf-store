@@ -32,6 +32,15 @@
 
 .form-group {
   margin-bottom: .5rem;
+
+  ul {
+    padding: 0;
+
+    li {
+      list-style: none;
+      color: red;
+    }
+  }
 }
 
 .h4, h4 {

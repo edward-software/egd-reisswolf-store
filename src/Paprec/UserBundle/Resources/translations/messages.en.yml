@@ -1,5 +1,6 @@
 User:
   Bundle-name:                Users management
+
   User:
     Users:                    Users
     List:                     Users List
@@ -17,27 +18,27 @@ User:
     View:                     View user
     Edit:                     Edit user
     Remove:                   Delete user
-    Confirm-cancel:           Etes-vous sûr de vouloir annuler ?
-    Confirm-remove:           Etes-vous sûr de vouloir supprimer cet utilisateur ?
-    Save:                     Enregistrer
-    Cancel:                   Annuler
+    Confirm-cancel:           Are you sure you want to cancel?
+    Confirm-remove:           Are you sure you want to delete this user ?
+    Save:                     Save
+    Cancel:                   Cancel
     Username:                 Identifiant
-    Enabled:                  Activé
-    Confirm-send-access:      Etes-vous sûr de vouloir envoyer les accès ?
-    Send-access:              Envoyer les accès
-    Roles:                    Rôle de l'utilisateur
-    Postal-codes:              Code postaux
-    Password:                 Mot de passe
-    Edit-my-profile:          Modifier mon profil
+    Enabled:                  Enabled
+    Confirm-send-access:      Are you sure you want to send accesses ?
+    Send-access:              Send access
+    Roles:                    Roles
+    Postal-codes:             Postal code
+    Password:                 Password
+    Edit-my-profile:          Edit my profile
     Success:
-      accessHasBeenSent:    Les accès ont été correctement envoyés
+      accessHasBeenSent:      Accesses has been successfully sent
     Error:
-      accessCannotBeSent:   Les accès n'ont pu être envoyés
+      accessCannotBeSent:     Accesses hasn't been sent
 
-'Password':                       Mot de passe
-'Repeat Password':                Confirmation du mot de passe
-'No':                             Non
-'Yes':                            Oui
-'ROLE_ADMIN':                     Administrateur
-'ROLE_COMMERCIAL':       Commercial
-'ROLE_SUPER_ADMIN':               Super administrateur
+'Password':                   Password
+'Repeat Password':            Confirm password
+'No':                         No
+'Yes':                        Yes
+'ROLE_ADMIN':                 Administrator
+'ROLE_COMMERCIAL':            Commercial
+'ROLE_SUPER_ADMIN':           Super administrator

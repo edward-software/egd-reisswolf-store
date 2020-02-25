@@ -44,8 +44,7 @@ class QuoteRequest
      * @ORM\Column(name="deleted", type="datetime", nullable=true)
      */
     private $deleted;
-
-
+    
     /**
      * #################################
      *              SYSTEM USER ASSOCIATION
@@ -93,8 +92,7 @@ class QuoteRequest
      * @Assert\NotBlank(groups={"public"})
      */
     private $businessName;
-
-
+    
     /**
      * @var string
      *
@@ -118,8 +116,7 @@ class QuoteRequest
      * @Assert\NotBlank(groups={"public"})
      */
     private $firstName;
-
-
+    
     /**
      * @var string
      * @ORM\Column(name="email", type="string", length=255, nullable=true)
@@ -130,8 +127,7 @@ class QuoteRequest
      * )
      */
     private $email;
-
-
+    
     /**
      * @var string
      *
@@ -176,8 +172,7 @@ class QuoteRequest
      * @Assert\NotBlank(groups={"public_multisite"})
      */
     private $address;
-
-
+    
     /**
      * @var string
      *
@@ -185,8 +180,7 @@ class QuoteRequest
      * @Assert\NotBlank(groups={"public_multisite"})
      */
     private $city;
-
-
+    
     /**
      * "Commentaire client" rempli par l'utilisateur Front Office
      * @var string
@@ -194,16 +188,14 @@ class QuoteRequest
      * @ORM\Column(name="comment", type="text", nullable=true)
      */
     private $comment;
-
-
+    
     /**
      * @var string
      *
      * @ORM\Column(name="quoteStatus", type="string", length=255)
      */
     private $quoteStatus;
-
-
+    
     /**
      * @var int
      *
@@ -283,8 +275,7 @@ class QuoteRequest
      * @ORM\ManyToOne(targetEntity="Paprec\CatalogBundle\Entity\PostalCode", inversedBy="quoteRequests")
      */
     private $postalCode;
-
-
+    
     /**
      * @ORM\OneToMany(targetEntity="Paprec\CommercialBundle\Entity\QuoteRequestLine", mappedBy="quoteRequest")
      */
@@ -717,8 +708,6 @@ class QuoteRequest
     {
         return $this->salesmanComment;
     }
-
-    
 
     /**
      * Set frequency.

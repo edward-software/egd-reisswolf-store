@@ -13,16 +13,33 @@ General:
   Name:                     Name
   SystemError:              System Error !
   Users:                    Users
+  Save:                     Save
+  Cancel:                   Cancel
+  Confirm:                  Confirmation
+  Confirm-cancel:           Are you sure you want to cancel ?
+  Confirm-remove:           Do you confirm the deletion ?
+  Confirm-disable:          Are you sure you want to turn them all off ?
+  Confirm-enable:           Are you sure you want to turn them all on ?
+  In-progress:              In progress
+  Archiving:                Archiving
+  Mr:                       Monsieur
+  Mme:                      Madame
+  Date-update:              Update date
+  System-information:       System information
+  Information:              Informations
+  Date-creation:            Created on
+
   Datatable:
-    Records-per-page:                          _MENU_ records per page
-    Nothing-found:                             Nothing found - sorry
+    Records-per-page:       _MENU_ records per page
+    Nothing-found:          Nothing found - sorry
     #        Showing-page :                              Showing page _PAGE_ of _PAGES_
-    Showing-page:                              Showing _START_ to _END_ of _TOTAL_ entries
-    No-records-available:                      No records available
-    Search:                                    Search
-    Loading:                                   Loading...
-    Previous:                                  Previous
-    Next:                                      Next
+    Showing-page:           Showing _START_ to _END_ of _TOTAL_ entries
+    No-records-available:   No records available
+    Search:                 Search
+    Loading:                Loading...
+    Previous:               Previous
+    Next:                   Next
+
   Presence-error:           Presence error
 
   Menu:
@@ -32,7 +49,7 @@ General:
     Logout:                 Logout
     MyProfile:              My profile
     Customers:              Customers
-    My-profile:             My profil
+    My-profile:             My profile
 
   Form:
     Submit:                 Submit
@@ -52,16 +69,11 @@ General:
     Permissions:            Permissions
     Unlock:                 Unlock
     Name:                   Name
-    FirstName:              FirstName
-    LastName:               LastName
     Birthday:               Birthday
     Nationality:            Nationality
-    Email:                  Email
     FirstName:              First name
     LastName:               Last name
-    Birthday:               Birthday
     Address:                Address
     PostalCode:             Postal Code
     City:                   City
-    Email:                  Email
     Access-type:            Access type
