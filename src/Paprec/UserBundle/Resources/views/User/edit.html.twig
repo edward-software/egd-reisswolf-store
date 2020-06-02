@@ -83,19 +83,6 @@
                                             {{ form_errors(form.lang) }}
                                         </div>
                                     </div>
-                                    {% if is_granted('ROLE_ADMIN') %}
-
-                                        <div class="form-group ">
-                                            {{ form_label(form.plainPassword.first) }}
-                                            {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control'}}) }}
-                                            {{ form_errors(form.plainPassword.first) }}
-                                        </div>
-                                        <div class="form-group">
-                                            {{ form_label(form.plainPassword.second) }}
-                                            {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control'}}) }}
-                                            {{ form_errors(form.plainPassword.second) }}
-                                        </div>
-                                    {% endif %}
 
                                 </div>
                                 <div class="col-md-6">

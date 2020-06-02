@@ -28,8 +28,7 @@
                 <div class="col-md-7">
                     <div class="top-bar__top-contact">
                         <a href="/contact">
-                            <i class="fas fa-phone-alt"></i>Appelez-nous ou demandez-nous un devis sans
-                            engagement.
+                            <i class="fas fa-phone-alt"></i>{{ 'Public.HeaderTitle'| trans({}, "messages", locale) }}
                         </a>
                     </div>
                 </div>
@@ -71,7 +70,7 @@
                 <div class="col-md-3 col-lg-2 text-center">
                     <div class="top-bar__top-social-flags">
                         <ul>
-                            {% set loc = '/' ~ locale ~ '/'  %}
+                            {% set loc = '/' ~ locale ~ '/' %}
                             <li>
                                 <a href="{{ path(app.request.get('_route'),app.request.get('_route_params'))|replace({(loc): '/de/'}) }}">
                                     <img src="/build/static/de.gif" alt="Germany" title="">
@@ -83,13 +82,15 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ path(app.request.get('_route'),app.request.get('_route_params'))|replace({(loc): '/it/'}) }}">
-                                    <img src="/build/static/it.gif" alt="Italian" title="">
+                                <a>
+                                    <img src="/build/static/it.gif" class="top-bar__top-social-flags--disabled" alt="It"
+                                         title="">
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ path(app.request.get('_route'),app.request.get('_route_params'))|replace({(loc): '/en/'}) }}">
-                                    <img src="/build/static/en.gif" alt="English (UK)" title="">
+                                <a>
+                                    <img src="/build/static/en.gif" class="top-bar__top-social-flags--disabled" alt="En"
+                                         title="">
                                 </a>
                             </li>
                         </ul>
@@ -115,77 +116,74 @@
 
                 <ul class="navbar-nav ml-xl-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Accueil
+                        <a class="nav-link" href="#">{{ 'Public.Navbar.Home'| trans({}, "messages", locale) }}
                             <span class="sr-only">(current)</span>
                         </a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
-                            Types de destruction <i class="fas fa-plus"></i>
+                            {{ 'Public.Navbar.Menu1.Title'| trans({}, "messages", locale) }} <i class="fas fa-plus"></i>
                         </a>
                         <div class="dropdown-menu mt-0" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Destruction confidentielle documents</a>
-                            <a class="dropdown-item" href="#">Désarchivage</a>
-                            <a class="dropdown-item" href="#">Destruction des supports numériques</a>
-                            <a class="dropdown-item" href="#">Recyclage des Radiographies</a>
+                            <a class="dropdown-item"
+                               href="#">{{ 'Public.Navbar.Menu1.SubMenu1'| trans({}, "messages", locale) }}</a>
+                            <a class="dropdown-item"
+                               href="#">{{ 'Public.Navbar.Menu1.SubMenu2'| trans({}, "messages", locale) }}</a>
+                            <a class="dropdown-item"
+                               href="#">{{ 'Public.Navbar.Menu1.SubMenu3'| trans({}, "messages", locale) }}</a>
+                            <a class="dropdown-item"
+                               href="#">{{ 'Public.Navbar.Menu1.SubMenu4'| trans({}, "messages", locale) }}</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
-                            Procès <i class="fas fa-plus"></i>
+                            {{ 'Public.Navbar.Menu2.Title'| trans({}, "messages", locale) }} <i class="fas fa-plus"></i>
                         </a>
                         <div class="dropdown-menu mt-0" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Destruction standard</a>
-                            <a class="dropdown-item" href="#">Destruction mobile </a>
-                            <a class="dropdown-item" href="#">Destruction par camion broyeur</a>
+                            <a class="dropdown-item"
+                               href="#">{{ 'Public.Navbar.Menu2.SubMenu1'| trans({}, "messages", locale) }}</a>
+                            <a class="dropdown-item"
+                               href="#">{{ 'Public.Navbar.Menu2.SubMenu2'| trans({}, "messages", locale) }}</a>
+                            <a class="dropdown-item"
+                               href="#">{{ 'Public.Navbar.Menu2.SubMenu3'| trans({}, "messages", locale) }}</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
-                            Sécurité <i class="fas fa-plus"></i>
+                            {{ 'Public.Navbar.Menu3.Title'| trans({}, "messages", locale) }} <i class="fas fa-plus"></i>
                         </a>
                         <div class="dropdown-menu mt-0" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Conteneurs de transport sécurisés</a>
-                            <a class="dropdown-item" href="#">Verrou de sécurité elsy</a>
-                            <a class="dropdown-item" href="#">Norme DIN</a>
-                            <a class="dropdown-item" href="#">Destruction de documents - protection des données</a>
-                            <a class="dropdown-item" href="#">Certificats IQ NET et SQS</a>
+                            <a class="dropdown-item" href="#">{{ 'Public.Navbar.Menu3.SubMenu1'| trans({}, "messages", locale) }}</a>
+                            <a class="dropdown-item" href="#">{{ 'Public.Navbar.Menu3.SubMenu2'| trans({}, "messages", locale) }}</a>
+                            <a class="dropdown-item" href="#">{{ 'Public.Navbar.Menu3.SubMenu3'| trans({}, "messages", locale) }}</a>
+                            <a class="dropdown-item" href="#">{{ 'Public.Navbar.Menu3.SubMenu4'| trans({}, "messages", locale) }}</a>
+                            <a class="dropdown-item" href="#">{{ 'Public.Navbar.Menu3.SubMenu5'| trans({}, "messages", locale) }}</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
-                            La Société <i class="fas fa-plus"></i>
+                            {{ 'Public.Navbar.Menu4.Title'| trans({}, "messages", locale) }} <i class="fas fa-plus"></i>
                         </a>
                         <div class="dropdown-menu mt-0" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">À propos de Reisswolf</a>
-                            <a class="dropdown-item" href="#">Groupe Paprec</a>
-                            <a class="dropdown-item" href="#">Durabilité</a>
-                            <a class="dropdown-item" href="#">Direction</a>
+                            <a class="dropdown-item" href="#">{{ 'Public.Navbar.Menu4.SubMenu1'| trans({}, "messages", locale) }}</a>
+                            <a class="dropdown-item" href="#">{{ 'Public.Navbar.Menu4.SubMenu2'| trans({}, "messages", locale) }}</a>
+                            <a class="dropdown-item" href="#">{{ 'Public.Navbar.Menu4.SubMenu3'| trans({}, "messages", locale) }}</a>
+                            <a class="dropdown-item" href="#">{{ 'Public.Navbar.Menu4.SubMenu4'| trans({}, "messages", locale) }}</a>
+                            <a class="dropdown-item" href="#">{{ 'Public.Navbar.Menu4.SubMenu5'| trans({}, "messages", locale) }}</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
-                            Actualités et Service <i class="fas fa-plus"></i>
+                            {{ 'Public.Navbar.Menu5.Title'| trans({}, "messages", locale) }}  <i class="fas fa-plus"></i>
                         </a>
                         <div class="dropdown-menu mt-0" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Actualités</a>
-                            <a class="dropdown-item" href="#">Téléchargement</a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false">
-                            Contact <i class="fas fa-plus"></i>
-                        </a>
-                        <div class="dropdown-menu mt-0" aria-labelledby="navbarDropdown"
-                             style=" top: auto; left: -90px;">
-                            <a class="dropdown-item" href="#">Interlocuteurs</a>
-                            <a class="dropdown-item" href="#">Demander un devis</a>
+                            <a class="dropdown-item" href="#">{{ 'Public.Navbar.Menu5.SubMenu1'| trans({}, "messages", locale) }}</a>
+                            <a class="dropdown-item" href="#">{{ 'Public.Navbar.Menu5.SubMenu2'| trans({}, "messages", locale) }}</a>
                         </div>
                     </li>
 

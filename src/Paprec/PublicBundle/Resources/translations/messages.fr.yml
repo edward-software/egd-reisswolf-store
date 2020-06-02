@@ -1,55 +1,87 @@
 Public:
 
-  Bundle-name:                    Gestion devis
+    Bundle-name:                    Gestion devis
+
+    Navbar:
+        Home: Accueil
+        Menu1:
+            Title: Type de destruction
+            SubMenu1: Destruction confidentielle documents
+            SubMenu2: Désarchivage
+            SubMenu3: Destruction des supports numériques
+            SubMenu4: Recyclage des Radiographies
+        Menu2:
+            Title: Procédés
+            SubMenu1: Destruction standard
+            SubMenu2: Destruction mobile
+            SubMenu3: Destruction par camion broyeur
+        Menu3:
+            Title: Sécurité
+            SubMenu1: Conteneur de transport sécurisés
+            SubMenu2: Verrou de sécurité e.l.s.y
+            SubMenu3: Norme DIN
+            SubMenu4: Destruction de documents - protection des données
+            SubMenu5: Certificats IQ NET et SQS
+        Menu4:
+            Title: La Société
+            SubMenu1: À propos de Reisswolf
+            SubMenu2: Groupe Paprec
+            SubMenu3: Durabilité
+            SubMenu4: Direction
+            SubMenu5: Téléchargement
+        Menu5:
+            Title: Contact
+            SubMenu1: Interlocuteurs
+            SubMenu2: Demander un devis
+
+    Catalog:
+        BreadcrumbTitle: Offres de services
+        Title: Sélectionnez svp les conteneurs souhaités pour créer votre demande de devis en 3 étapes.
+        Quantity: Quantité
+        AddToQuote: Ajouter au devis
+        NextStep: Étape suivante
+        Quote: Devis
+        Collect-frequency: Fréquence de collecte
+        OnDemand: à la demande
+        Regular: régulière
+        Week: semaine
+        Times: fois par
+        Month: mois
+        Quarter: trimestre
+        Year: an
+        BreadcrumbContent: Offres de services
+
+    Contact:
+        BreadcrumbTitle: Coordonnées du client
+        Title: Entrez vos coordonnées pour être contacté et recevoir votre devis.
+        BusinessName: Nom société
+        Civility: Civilité
+        LastName: Nom
+        FirstName: Prénom
+        Canton: Canton
+        Email: E-mail
+        Phone: Téléphone
+        CoworkerNumber: Effectif
+        IsMultisite: Prestation multi-sites
+        Access: Accès
+        Staff: Effectif
+        Address: Adresse
+        PostalCode: Code postal
+        City: Ville
+        Comment: Message
+        SendRequest: Envoyer la demande
+        BreadcrumbContent: Coordonnées du client
 
 
-  Catalog:
-    BreadcrumbTitle: Catalogue de services
-    Title: Sélectionnez les produits souhaités pour créer votre demande de devis en 3 étapes.
-    Quantity: Quantité
-    AddToQuote: Ajouter au devis
-    NextStep: Étape suivante
+    Confirm:
+        Object: Votre demande de devis
+        BreadcrumbTitle: Confirmation de la demande
+        Title: Votre demande a bien été prise en compte et envoyée au service commercial de votre région.
+        Message: Vous devriez recevoir un e-mail de confirmation, cette opération peut prendre plusieurs minutes. Si vous ne recevez pas la confirmation, vérifiez dans votre dossier à spam, sinon contactez notre
+        TechnicalService: service technique
+        BreadcrumbContent: Confirmation de la demande
+
+
+    Home: Accueil
     Quote: Devis
-    Collect-frequency: Fréquence de collecte
-    OnDemand: à la demande
-    Regular: régulière
-    Week: semaine
-    Times: fois par
-    Month: mois
-    Quarter: trimestre
-    Year: an
-    BreadcrumbContent: Catalogue de services
-
-  Contact:
-    BreadcrumbTitle: Coordonnées du client
-    Title: Entrez vos coordonnées pour être contacté et recevoir votre devis.
-    BusinessName: Nom société
-    Civility: Civilité
-    LastName: Nom
-    FirstName: Prénom
-    Canton: Canton
-    Email: E-mail
-    Phone: Téléphone
-    CoworkerNumber: Effectif
-    IsMultisite: Prestation multi-sites
-    Access: Accès
-    Staff: Effectif
-    Address: Adresse
-    PostalCode: Code postal
-    City: Ville
-    Comment: Commentaire
-    SendRequest: Envoyer la demande
-    BreadcrumbContent: Coordonnées du client
-
-
-  Confirm:
-    Object: Votre demande de devis
-    BreadcrumbTitle: Confirmation de la demande
-    Title: Votre demande a bien été prise en compte et envoyée au service commercial de votre région.
-    Message: Vous devriez recevoir un e-mail de confirmation, cette opération peut prendre plusieurs minutes. Si vous ne recevez pas la confirmation, vérifiez dans votre dossier à spam, sinon contactez notre
-    TechnicalService: service technique
-    BreadcrumbContent: Confirmation de la demande
-
-
-  Home: Accueil
-  Quote: Devis
+    HeaderTitle: Appelez-nous ou demandez-nous un devis sans engagement

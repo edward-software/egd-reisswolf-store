@@ -73,7 +73,7 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav w-100">
 
-                {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_COMMERCIAL') %}
+                {% if is_granted('ROLE_ADMIN') %}
                     <li class="nav-item dropdown{% if app.request.get('_route')|slice(0, 'paprec_catalog'|length) == 'paprec_catalog' %} active{% endif %}">
                         <a href="#" class="dropdown-toggle nav-link" id="navbarDropdownCatalog" data-toggle="dropdown"
                            role="button" aria-haspopup="true" aria-expanded="false">{{ 'Catalog.Bundle-name'|trans }}
@@ -117,7 +117,7 @@
                     </li>
                 {% endif %}
 
-                {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_COMMERCIAL') %}
+                {% if is_granted('ROLE_ADMIN') %}
                     <li class="nav-item dropdown{% if app.request.get('_route')|slice(0, 'paprec_user'|length) == 'paprec_user' %} active{% endif %}">
                         <a href="#" class="dropdown-toggle nav-link" id="navbarDropdownUser" data-toggle="dropdown"
                            role="button" aria-haspopup="true" aria-expanded="false">{{ 'User.Bundle-name'|trans }}

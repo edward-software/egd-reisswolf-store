@@ -23,7 +23,7 @@ class CustomAreaController extends Controller
 
     /**
      * @Route("/customarea", name="paprec_catalog_custom_area_index")
-     * @Security("has_role('ROLE_COMMERCIAL')")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function indexAction()
     {
@@ -32,7 +32,7 @@ class CustomAreaController extends Controller
 
     /**
      * @Route("/customarea/loadList", name="paprec_catalog_custom_area_loadList")
-     * @Security("has_role('ROLE_COMMERCIAL')")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function loadListAction(Request $request)
     {
@@ -95,7 +95,7 @@ class CustomAreaController extends Controller
 
     /**
      * @Route("/customarea/view/{id}", name="paprec_catalog_custom_area_view")
-     * @Security("has_role('ROLE_COMMERCIAL')")
+     * @Security("has_role('ROLE_ADMIN')")
      * @param Request $request
      * @param CustomArea $customArea
      * @return \Symfony\Component\HttpFoundation\Response
@@ -129,7 +129,7 @@ class CustomAreaController extends Controller
 
     /**
      * @Route("/customarea/add", name="paprec_catalog_custom_area_add")
-     * @Security("has_role('ROLE_COMMERCIAL')")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function addAction(Request $request)
     {
@@ -179,7 +179,7 @@ class CustomAreaController extends Controller
 
     /**
      * @Route("/customarea/edit/{id}", name="paprec_catalog_custom_area_edit")
-     * @Security("has_role('ROLE_COMMERCIAL')")
+     * @Security("has_role('ROLE_ADMIN')")
      * @param Request $request
      * @param CustomArea $customArea
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
@@ -205,7 +205,7 @@ class CustomAreaController extends Controller
         $form = $this->createForm(CustomAreaType::class, $customArea, array(
             'languages' => $languages,
             'codes' => $codes,
-            'language' => strtoupper($request->getLocale())
+            'language' => strtoupper($customArea->getLanguage())
         ));
 
         $form->handleRequest($request);
@@ -234,7 +234,7 @@ class CustomAreaController extends Controller
 
     /**
      * @Route("/customarea/remove/{id}", name="paprec_catalog_custom_area_remove")
-     * @Security("has_role('ROLE_COMMERCIAL')")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function removeAction(Request $request, CustomArea $customArea)
     {
@@ -255,7 +255,7 @@ class CustomAreaController extends Controller
 
     /**
      * @Route("/customarea/removeMany/{ids}", name="paprec_catalog_custom_area_removeMany")
-     * @Security("has_role('ROLE_COMMERCIAL')")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function removeManyAction(Request $request)
     {
@@ -288,7 +288,7 @@ class CustomAreaController extends Controller
 
     /**
      * @Route("/customarea/addPicture/{id}/{type}", name="paprec_catalog_custom_area_addPicture")
-     * @Security("has_role('ROLE_COMMERCIAL')")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function addPictureAction(Request $request, CustomArea $customArea)
     {
@@ -336,7 +336,7 @@ class CustomAreaController extends Controller
 
     /**
      * @Route("/customarea/editPicture/{id}/{pictureID}", name="paprec_catalog_custom_area_editPicture")
-     * @Security("has_role('ROLE_COMMERCIAL')")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function editPictureAction(Request $request, CustomArea $customArea)
     {
@@ -387,7 +387,7 @@ class CustomAreaController extends Controller
 
     /**
      * @Route("/customarea/removePicture/{id}/{pictureID}", name="paprec_catalog_custom_area_removePicture")
-     * @Security("has_role('ROLE_COMMERCIAL')")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function removePictureAction(Request $request, CustomArea $customArea)
     {

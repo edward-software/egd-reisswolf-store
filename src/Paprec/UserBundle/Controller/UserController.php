@@ -2,6 +2,7 @@
 
 namespace Paprec\UserBundle\Controller;
 
+use Paprec\UserBundle\Form\UserEditType;
 use Paprec\UserBundle\Form\UserMyProfileType;
 use Paprec\UserBundle\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -19,7 +20,7 @@ class UserController extends Controller
 
     /**
      * @Route("/", name="paprec_user_user_index")
-     * @Security("has_role('ROLE_COMMERCIAL')")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function indexAction()
     {
@@ -28,7 +29,7 @@ class UserController extends Controller
 
     /**
      * @Route("/loadList", name="paprec_user_user_loadList")
-     * @Security("has_role('ROLE_COMMERCIAL')")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function loadListAction(Request $request)
     {
@@ -85,7 +86,7 @@ class UserController extends Controller
 
     /**
      * @Route("/export", name="paprec_user_user_export")
-     * @Security("has_role('ROLE_COMMERCIAL')")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function exportAction(Request $request)
     {
@@ -115,28 +116,27 @@ class UserController extends Controller
             ->setCellValue('E1', 'Email')
             ->setCellValue('F1', 'Username')
             ->setCellValue('G1', 'Roles')
-            ->setCellValue('H1', 'Postal codes')
-            ->setCellValue('I1', 'Enabled')
-            ->setCellValue('J1', 'Creation date');
+            ->setCellValue('H1', 'Enabled')
+            ->setCellValue('I1', 'Creation date');
 
         $phpExcelObject->getActiveSheet()->setTitle('Users');
         $phpExcelObject->setActiveSheetIndex(0);
 
         $i = 2;
 
-        if ($users && is_iterable($users) && count($users)) {
+        if ($users && is_array($users) && count($users)) {
             foreach ($users as $user) {
                 $roles = array();
 
-                if ($user && is_iterable($user->getRoles()) && count($user->getRoles()))
+                if ($user && is_array($user->getRoles()) && count($user->getRoles()))
                     foreach ($user->getRoles() as $role) {
-                        if ($role != 'ROLE_USER') {
+                        if ($role !== 'ROLE_USER') {
                             $roles[] = $translator->trans($role);
                         }
                     }
 
                 $postalCodes = array();
-                if ($user && is_iterable($user->getPostalCodes()) && count($user->getPostalCodes()))
+                if ($user && is_array($user->getPostalCodes()) && count($user->getPostalCodes()))
                 foreach ($user->getPostalCodes() as $pc) {
                         $postalCodes[] = $pc->getCode();
                 }
@@ -149,9 +149,8 @@ class UserController extends Controller
                     ->setCellValue('E' . $i, $user->getEmail())
                     ->setCellValue('F' . $i, $user->getUsername())
                     ->setCellValue('G' . $i, implode(',', $roles))
-                    ->setCellValue('H' . $i, implode(',', $postalCodes))
-                    ->setCellValue('I' . $i, $translator->trans('General.' . $user->isEnabled()))
-                    ->setCellValue('J' . $i, $user->getDateCreation()->format('Y-m-d'));
+                    ->setCellValue('H' . $i, $translator->trans('General.' . $user->isEnabled()))
+                    ->setCellValue('I' . $i, $user->getDateCreation()->format('Y-m-d'));
                 $i++;
             }
         }
@@ -178,7 +177,7 @@ class UserController extends Controller
 
     /**
      * @Route("/view/{id}", name="paprec_user_user_view")
-     * @Security("has_role('ROLE_COMMERCIAL')")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function viewAction(Request $request, User $user)
     {
@@ -193,7 +192,7 @@ class UserController extends Controller
 
     /**
      * @Route("/add", name="paprec_user_user_add")
-     * @Security("has_role('ROLE_COMMERCIAL')")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function addAction(Request $request)
     {
@@ -238,7 +237,7 @@ class UserController extends Controller
 
     /**
      * @Route("/edit/{id}", name="paprec_user_user_edit")
-     * @Security("has_role('ROLE_COMMERCIAL')")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function editAction(Request $request, User $user)
     {
@@ -256,7 +255,7 @@ class UserController extends Controller
             $languages[$language] = $language;
         }
 
-        $form = $this->createForm(UserType::class, $user, array(
+        $form = $this->createForm(UserEditType::class, $user, array(
             'roles' => $roles,
             'languages' => $languages
         ));
@@ -323,7 +322,7 @@ class UserController extends Controller
 
     /**
      * @Route("/sendAccess/{id}", name="paprec_user_user_sendAccess")
-     * @Security("has_role('ROLE_COMMERCIAL')")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function sendAccessAction(Request $request, User $user)
     {
@@ -366,7 +365,7 @@ class UserController extends Controller
 
     /**
      * @Route("/sendAccessMany/{ids}", name="paprec_user_user_sendAccessMany")
-     * @Security("has_role('ROLE_COMMERCIAL')")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function sendAccessManyAction(Request $request)
     {
@@ -417,7 +416,7 @@ class UserController extends Controller
 
     /**
      * @Route("/remove/{id}", name="paprec_user_user_remove")
-     * @Security("has_role('ROLE_COMMERCIAL')")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function removeAction(Request $request, User $user)
     {
@@ -443,7 +442,7 @@ class UserController extends Controller
 
     /**
      * @Route("/removeMany/{ids}", name="paprec_user_user_removeMany")
-     * @Security("has_role('ROLE_COMMERCIAL')")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function removeManyAction(Request $request)
     {

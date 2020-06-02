@@ -26,7 +26,7 @@ Commercial:
     Informations-BO: Informations Back-Office
     Informations-FO: Informations Front-Office
     Frequency: Fréquence
-    PassingFrequency: Fréquence de passage (si régulier)
+    PassingFrequency: Abholungsfrequenz (si régulier)
     FrequencyTimes : Nb de passages (si régulier)
     month: mois
     quarter: trimestre
@@ -65,27 +65,27 @@ Commercial:
     CLOSED: Fermé
 
   StaffList:
-    19: De 1 à 9 employés
-    1019: De 10 à 19 employés
-    2029: De 20 à 29 employés
-    3039: De 30 à 39 employés
-    4049: De 40 à 49 employés
-    5059: De 50 à 59 employés
-    6069: De 60 à 69 employés
-    7079: De 70 à 79 employés
-    8089: De 80 à 89 employés
-    9099: De 90 à 99 employés
-    100109: De 100 à 109 employés
-    110119: De 110 à 119 employés
-    120129: De 120 à 129 employés
-    130139: De 130 à 139 employés
-    140149: De 140 à 149 employés
-    150+: Plus de 150 employés
+    19: 1 - 9 Mitarbeiter
+    1019: 10 - 19 Mitarbeiter
+    2029: 20 - 29 Mitarbeiter
+    3039: 30 - 39 Mitarbeiter
+    4049: 40 - 49 Mitarbeiter
+    5059: 50 - 59 Mitarbeiter
+    6069: 60 - 69 Mitarbeiter
+    7079: 70 - 79 Mitarbeiter
+    8089: 80 - 89 Mitarbeiter
+    9099: 90 - 99 Mitarbeiter
+    100109: 100 - 109 Mitarbeiter
+    110119: 110 - 119 Mitarbeiter
+    120129: 120 - 129 Mitarbeiter
+    130139: 130 - 139 Mitarbeiter
+    140149: 140 - 149 Mitarbeiter
+    150+: Über 150 Mitarbeiter
 
   AccessList:
-    stairs: Par escalier
-    elevator: Par ascenseur
-    ground: Niveau rue sans marche
+    stairs: Treppe
+    elevator: Aufzug
+    ground: Strassenniveau ohne Treppe
 
   QuoteRequestLine:
     ProductName: Nom du produit
@@ -103,7 +103,7 @@ Commercial:
 
   NewQuoteEmail:
     Title: Ihnen wurde eine neue Angebotsanfrage zugeordnet.
-    Dear: Sehr geehrter Kollege Reisswolf
+    r: Sehr geehrter Kollege Reisswolf
     Message1: Anbei finden Sie eine Anfrage zur Überprüfung des Angebots für das geografische Gebiet sowie den geplanten Vertrag.
     Message2: Wir danken Ihnen im Voraus.
     Partner: Ihr Partner Reisswolf

@@ -1,0 +1,129 @@
+Catalog:
+
+  Bundle-name:              Gestion Catalogue
+  Products:                 Produits
+  Settings:                 Paramétrage
+
+  PostalCode:
+    PostalCodes:            Code postaux
+    Name:                   Code postal
+    Date-crea:              Date de créa.
+    Date-creation:          Date de création
+    Date-update:            Date de mise à jour
+    Informations:           Informations
+    System-informations:    Informations système
+    List:                   Liste des codes postaux
+    Add:                    Ajouter un code postal
+    Export:                 Exporter les codes postaux
+    Code:                   Code Postal
+    City:                   Commune
+    Zone:                   Zone tarifaire
+    Division:               Division
+    Rate:                   Coefficient
+    View:                   Vue du code postal
+    Edit:                   Modifier le code postal
+    Remove:                 Supprimer le code postal
+    Save:                   Enregistrer
+    Cancel:                 Annuler
+    Confirm-cancel:         Etes-vous sûr de vouloir annuler ?
+    Confirm-remove:         Etes-vous sûr de vouloir supprimer ce code postal ?
+    SetUpRate:              Coef de mise en place
+    RentalRate:             Coef de location
+    TransportRate:          Coef de transport
+    TreatmentRate:          Coef de traitement
+    TraceabilityRate:       Coef de traçabilité
+    UserInCharge:           Commercial en charge
+    Region:                 Région
+    System-information:     Informations système
+
+  Picture:
+    Path:                   Choisir photo
+    Type:                   Type de la photo
+    AddPilotPicture:        Ajouter une photo principale
+    AddPicto:               Ajouter un picto
+    AddPicture:             Ajouter une photo secondaire
+
+  Product:
+    View:                   Vue du produit
+    Products:               Liste des produits
+    Add:                    Ajouter un produit
+    Edit:                   Editer un produit
+    Remove:                 Supprimer
+    List:                   Liste des produits
+    Information:            Information du produit
+    Capacity:               Volumen
+    Dimensions:             Abmessungen
+    AvailablePostalCodes:   Disponibilités géographiques
+    IsEnabled:
+      IsEnabled:            Actif
+      Yes:                  Oui
+      No:                   Non
+      Disable:              Désactiver
+      Enable:               Activer
+    Picto:                  Picto
+    AddPicture:             Ajouter image
+    PilotPicture:           Image principale
+    SetSecondaryPicture:    Définir en image secondaire
+    Pictures:               Images
+    EditPicture:            Remplacer image
+    System-information:     Informations système
+    Date-creation:          Date de création
+    Date-update:            Date dernière modification
+    Export:                 Exporter les produits
+    Details:                Details du produit
+    CapacityUnit:           Unité de volume
+    Position:               Position
+    FolderNumber:           Anzahl Ordner
+    SetUpPrice:             PU mise en place
+    RentalUnitPrice:        PU de location
+    TransportUnitPrice:     PU de transport
+    TreatmentUnitPrice:     PU de traitement
+    TraceabilityUnitPrice:  PU de traçabilité
+
+  ProductLabel:
+    Add: Ajouter une traduction
+    Edit: Editer traduction
+    Language:
+      Language: Langue
+      EN: Anglais
+      FR: Français
+      IT: Italien
+      DE: Allemand
+    Name: Nom
+    Short-description: Description courte
+    Lock:  Schloss
+    Version: Version
+    Information: Informations
+    Remove: Supprimer
+
+  Region:
+    Regions: Régions
+    Name: Nom
+    Email: Email contact
+    List: Liste des régions
+    Add: Ajouter une région
+    Export: Exporter les régions
+    View: Vue de la région
+    Edit: Modifier région
+    Remove: Supprimer région
+    Informations: Informations
+    System-informations: Informations système
+    PostalCodes: Codes postaux
+
+  CustomArea:
+    CustomAreas: Zones personnalisables
+    List: Liste des zones personnalisables
+    Code: Code
+    Language: Langue
+    Content: Contenu
+    LeftContent: Bloc de contenu gauche
+    RightContent: Bloc de contenu droite
+    IsDisplayed: Affiché
+    Add: Ajouter une zone
+    View: Vue de la zone
+    Edit: Modifier zone
+    Remove: Supprimer zone
+    AddPictureLeft: Photo gauche
+    AddPictureRight: Photo droite
+    Informations: Informations
+    System-informations: Informations système

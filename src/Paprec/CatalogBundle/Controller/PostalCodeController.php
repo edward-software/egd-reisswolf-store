@@ -17,7 +17,7 @@ class PostalCodeController extends Controller
 
     /**
      * @Route("/postalCode", name="paprec_catalog_postalCode_index")
-     * @Security("has_role('ROLE_COMMERCIAL')")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function indexAction()
     {
@@ -26,7 +26,7 @@ class PostalCodeController extends Controller
 
     /**
      * @Route("/postalCode/loadList", name="paprec_catalog_postalCode_loadList")
-     * @Security("has_role('ROLE_COMMERCIAL')")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function loadListAction(Request $request)
     {
@@ -44,8 +44,8 @@ class PostalCodeController extends Controller
         $cols['id'] = array('label' => 'id', 'id' => 'pC.id', 'method' => array('getId'));
         $cols['code'] = array('label' => 'code', 'id' => 'pC.code', 'method' => array('getCode'));
         $cols['city'] = array('label' => 'city', 'id' => 'pC.city', 'method' => array('getCity'));
-        $cols['zone'] = array('label' => 'zone', 'id' => 'pC.zone', 'method' => array('getZone'));
         $cols['region'] = array('label' => 'region', 'id' => 'r.name', 'method' => array('getRegion', 'getName'));
+        $cols['zone'] = array('label' => 'zone', 'id' => 'pC.zone', 'method' => array('getZone'));
 
         $queryBuilder = $this->getDoctrine()->getManager()->getRepository(PostalCode::class)->createQueryBuilder('pC');
 
@@ -83,7 +83,7 @@ class PostalCodeController extends Controller
 
     /**
      * @Route("/postalCode/export", name="paprec_catalog_postalCode_export")
-     * @Security("has_role('ROLE_COMMERCIAL')")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function exportAction(Request $request)
     {
@@ -132,7 +132,7 @@ class PostalCodeController extends Controller
                 ->setCellValue('G' . $i, $numberManager->denormalize15($postalCode->getTransportRate()))
                 ->setCellValue('H' . $i, $numberManager->denormalize15($postalCode->getTreatmentRate()))
                 ->setCellValue('I' . $i, $numberManager->denormalize15($postalCode->getTraceabilityRate()))
-                ->setCellValue('J' . $i, ($postalCode->getUserInCharge()) ? $postalCode->getUserInCharge()->getUsername() : '')
+                ->setCellValue('J' . $i, ($postalCode->getUserInCharge()) ? $postalCode->getUserInCharge()->getEmail() : '')
                 ->setCellValue('K' . $i, ($postalCode->getRegion()) ? $postalCode->getRegion()->getName() : '');
             $i++;
         }
@@ -159,7 +159,7 @@ class PostalCodeController extends Controller
 
     /**
      * @Route("/postalCode/view/{id}", name="paprec_catalog_postalCode_view")
-     * @Security("has_role('ROLE_COMMERCIAL')")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function viewAction(Request $request, PostalCode $postalCode)
     {
@@ -173,7 +173,7 @@ class PostalCodeController extends Controller
 
     /**
      * @Route("/postalCode/add", name="paprec_catalog_postalCode_add")
-     * @Security("has_role('ROLE_COMMERCIAL')")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function addAction(Request $request)
     {
@@ -217,7 +217,7 @@ class PostalCodeController extends Controller
 
     /**
      * @Route("/postalCode/edit/{id}", name="paprec_catalog_postalCode_edit")
-     * @Security("has_role('ROLE_COMMERCIAL')")
+     * @Security("has_role('ROLE_ADMIN')")
      * @throws \Doctrine\ORM\EntityNotFoundException
      */
     public function editAction(Request $request, PostalCode $postalCode)
@@ -268,7 +268,7 @@ class PostalCodeController extends Controller
 
     /**
      * @Route("/postalCode/remove/{id}", name="paprec_catalog_postalCode_remove")
-     * @Security("has_role('ROLE_COMMERCIAL')")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function removeAction(Request $request, PostalCode $postalCode)
     {
@@ -282,7 +282,7 @@ class PostalCodeController extends Controller
 
     /**
      * @Route("/postalCode/removeMany/{ids}", name="paprec_catalog_postalCode_removeMany")
-     * @Security("has_role('ROLE_COMMERCIAL')")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function removeManyAction(Request $request)
     {

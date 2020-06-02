@@ -54,10 +54,33 @@ class QuoteRequestController extends Controller
         $columns = $request->get('columns');
 
         $cols['id'] = array('label' => 'id', 'id' => 'q.id', 'method' => array('getId'));
-        $cols['businessName'] = array('label' => 'businessName', 'id' => 'q.businessName', 'method' => array('getBusinessName'));
-        $cols['totalAmount'] = array('label' => 'totalAmount', 'id' => 'q.totalAmount', 'method' => array('getTotalAmount'));
-        $cols['quoteStatus'] = array('label' => 'quoteStatus', 'id' => 'q.quoteStatus', 'method' => array('getQuoteStatus'));
-        $cols['dateCreation'] = array('label' => 'dateCreation', 'id' => 'q.dateCreation', 'method' => array('getDateCreation'), 'filter' => array(array('name' => 'format', 'args' => array('Y-m-d H:i:s'))));
+        $cols['number'] = array(
+            'label' => 'number',
+            'id' => 'q.number',
+            'method' => array('getNumber')
+        );
+        $cols['businessName'] = array(
+            'label' => 'businessName',
+            'id' => 'q.businessName',
+            'method' => array('getBusinessName')
+        );
+        $cols['totalAmount'] = array(
+            'label' => 'totalAmount',
+            'id' => 'q.totalAmount',
+            'method' => array('getTotalAmount')
+        );
+
+        $cols['quoteStatus'] = array(
+            'label' => 'quoteStatus',
+            'id' => 'q.quoteStatus',
+            'method' => array('getQuoteStatus')
+        );
+        $cols['dateCreation'] = array(
+            'label' => 'dateCreation',
+            'id' => 'q.dateCreation',
+            'method' => array('getDateCreation'),
+            'filter' => array(array('name' => 'format', 'args' => array('Y-m-d H:i:s')))
+        );
 
 
         $queryBuilder = $this->getDoctrine()->getManager()->createQueryBuilder();
@@ -73,6 +96,7 @@ class QuoteRequestController extends Controller
                 ))->setParameter(1, substr($search['value'], 1));
             } else {
                 $queryBuilder->andWhere($queryBuilder->expr()->orx(
+                    $queryBuilder->expr()->like('q.number', '?1'),
                     $queryBuilder->expr()->like('q.businessName', '?1'),
                     $queryBuilder->expr()->like('q.totalAmount', '?1'),
                     $queryBuilder->expr()->like('q.quoteStatus', '?1'),
@@ -81,7 +105,8 @@ class QuoteRequestController extends Controller
             }
         }
 
-        $datatable = $this->get('goondi_tools.datatable')->generateTable($cols, $queryBuilder, $pageSize, $start, $orders, $columns, $filters);
+        $datatable = $this->get('goondi_tools.datatable')->generateTable($cols, $queryBuilder, $pageSize, $start,
+            $orders, $columns, $filters);
         // Reformatage de certaines données
         $tmp = array();
         foreach ($datatable['data'] as $data) {
@@ -110,7 +135,7 @@ class QuoteRequestController extends Controller
     {
         /** @var NumberManager $numberManager */
         $numberManager = $this->get('paprec_catalog.number_manager');
-    
+
         /** @var Translator $translator */
         $translator = $this->get('translator');
 
@@ -140,10 +165,10 @@ class QuoteRequestController extends Controller
             ->setLastModifiedBy("Reisswolf Shop")
             ->setTitle("Paprec Easy Recyclage - Devis")
             ->setSubject("Extraction");
-    
+
         $sheet = $phpExcelObject->setActiveSheetIndex();
         $sheet->setTitle('Devis');
-        
+
         // Labels
         $sheetLabels = [
             'ID',
@@ -180,16 +205,16 @@ class QuoteRequestController extends Controller
             'User in charge',
             'Postal Code',
         ];
-    
+
         $xAxe = 'A';
         foreach ($sheetLabels as $label) {
             $sheet->setCellValue($xAxe . 1, $label);
             $xAxe++;
         }
-        
+
         $yAxe = 2;
         foreach ($quoteRequests as $quoteRequest) {
-            
+
             $getters = [
                 $quoteRequest->getId(),
                 $quoteRequest->getDateCreation()->format('Y-m-d'),
@@ -198,7 +223,7 @@ class QuoteRequestController extends Controller
                 $quoteRequest->getUserCreation(),
                 $quoteRequest->getUserUpdate(),
                 $quoteRequest->getLocale(),
-                $numberManager->denormalize($quoteRequest->getNumber()),
+                $quoteRequest->getNumber(),
                 $quoteRequest->getCanton(),
                 $quoteRequest->getBusinessName(),
                 $quoteRequest->getCivility(),
@@ -213,8 +238,8 @@ class QuoteRequestController extends Controller
                 $quoteRequest->getCity(),
                 $quoteRequest->getComment(),
                 $quoteRequest->getQuoteStatus(),
-                $quoteRequest->getTotalAmount(),
-                $quoteRequest->getOverallDiscount(),
+                $numberManager->denormalize($quoteRequest->getTotalAmount()),
+                $numberManager->denormalize($quoteRequest->getOverallDiscount()) . '%',
                 $quoteRequest->getSalesmanComment(),
                 $numberManager->denormalize($quoteRequest->getAnnualBudget()),
                 $quoteRequest->getFrequency(),
@@ -225,15 +250,15 @@ class QuoteRequestController extends Controller
                 $quoteRequest->getUserInCharge() ? $quoteRequest->getUserInCharge()->getFirstName() . " " . $quoteRequest->getUserInCharge()->getLastName() : '',
                 $quoteRequest->getPostalCode() ? $quoteRequest->getPostalCode()->getCode() : '',
             ];
-    
+
             $xAxe = 'A';
             foreach ($getters as $getter) {
-                $sheet->setCellValue($xAxe . $yAxe, (string) $getter);
+                $sheet->setCellValue($xAxe . $yAxe, (string)$getter);
                 $xAxe++;
             }
             $yAxe++;
         }
-    
+
         // Format
         $sheet->getStyle(
             "A1:" . $sheet->getHighestDataColumn() . 1)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER
@@ -241,7 +266,7 @@ class QuoteRequestController extends Controller
         $sheet->getStyle(
             "A2:" . $sheet->getHighestDataColumn() . $sheet->getHighestDataRow())->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT
         );
-    
+
         // Resize columns
         for ($i = 'A'; $i != $sheet->getHighestDataColumn(); $i++) {
             $sheet->getColumnDimension($i)->setAutoSize(true);

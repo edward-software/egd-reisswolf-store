@@ -1,54 +1,86 @@
 Public:
 
-  Bundle-name:                    Gestion devis
+    Bundle-name:                    Gestion devis
+
+    Navbar:
+      Home: News
+      Menu1:
+        Title: Vernichtungsarten
+        SubMenu1: Aktenvernichtung
+        SubMenu2: Archivräumung
+        SubMenu3: Datenträgervernichtung
+        SubMenu4: Röntgenfilmvernichtung
+      Menu2:
+        Title: Prozesse
+        SubMenu1: Vernichtung Standard
+        SubMenu2: Vernichtung Mobile
+        SubMenu3: Vernichtung mit Pressfahrzeug
+      Menu3:
+        Title: Sicherheit
+        SubMenu1: Sicherheitstransportbehälter
+        SubMenu2: e.l.sy. Sicherheitschloss
+        SubMenu3: DIN-Norm
+        SubMenu4: Sicherheit und Datenschutz bei der Vernichtung
+        SubMenu5: Zertifikate IQ NET und SQS
+      Menu4:
+        Title: Unternehmen
+        SubMenu1: Über Reisswolf
+        SubMenu2: Paprec Gruppe
+        SubMenu3: Nachhaltigkeit
+        SubMenu4: Geschäftsleitung
+        SubMenu5: Downloadbereich
+      Menu5:
+        Title: Kontakt
+        SubMenu1: Ansprechpartner
+        SubMenu2: Angebot anfordern
+
+    Catalog:
+        BreadcrumbTitle: Service-Katalog
+        Title: Wählen Sie bitte die gewünschten Behältern aus, um Ihre Angebotsanfrage in 3 Schritten zu erstellen.
+        Quantity:  Anzahl
+        AddToQuote: Angebot hinzufügen
+        NextStep: Nächster Schritt
+        Quote: Anfrage
+        Collect-frequency: Abholungsfrequenz
+        OnDemand: auf Abruf
+        Regular: regelmässig
+        Week: Woche
+        Times: pro
+        Month: Monat
+        Quarter: Viertel
+        Year: Jahr
+        BreadcrumbContent: Service-Katalog
+
+    Contact:
+        BreadcrumbTitle: Angebot anfordern
+        Title: Geben Sie Ihre Daten ein, um kontaktiert zu werden und Ihr Angebot zu erhalten
+        BusinessName: Firmenname
+        Civility: Anrede
+        LastName: Nachname
+        FirstName: Vorname
+        Canton: Kanton
+        Email: E-mail
+        Phone: Telefonnummer
+        CoworkerNumber: Anzahl der Mitarbeiter
+        IsMultisite: Dienstleistungen in verschiedenen Standorten
+        Access: Zugang
+        Staff: Anzahl der Mitarbeiter
+        Address: Strasse
+        PostalCode: PLZ
+        City: Ort
+        Comment: Mitteilung
+        SendRequest: Anfrage absenden
+        BreadcrumbContent: Angebot anfordern
 
 
-  Catalog:
-    BreadcrumbTitle: Catalogue de services
-    Title: Sélectionnez les produits souhaités pour créer votre demande de devis en 3 étapes.
-    Quantity: Quantité
-    AddToQuote: Ajouter au devis
-    NextStep: Étape suivante
-    Quote: Devis
-    Collect-frequency: Fréquence de collecte
-    OnDemand: à la demande
-    Regular: régulière
-    Week: semaine
-    Times: fois par
-    Month: mois
-    Quarter: trimestre
-    Year: an
-    BreadcrumbContent: Catalogue de services
-
-  Contact:
-    BreadcrumbTitle: Coordonnées du client
-    Title: Entrez vos coordonnées pour être contacté et recevoir votre devis.
-    BusinessName: Nom société
-    Civility: Civilité
-    LastName: Nom
-    FirstName: Prénom
-    Canton: Canton
-    Email: E-mail
-    Phone: Téléphone
-    CoworkerNumber: Effectif
-    IsMultisite: Prestation multi-sites
-    Access: Accès
-    Staff: Effectif
-    Address: Adresse
-    PostalCode: Code postal
-    City: Ville
-    Comment: Commentaire
-    SendRequest: Envoyer la demande
-    BreadcrumbContent: Coordonnées du client
+    Confirm:
+        BreadcrumbTitle: Anfragebestätigung
+        Title: Ihre Anfrage wurde erhalten und zur Vertriebsabteilung Ihrer Region weitergeleitet
+        Message: Sie sollten eine E-Mail-Bestätigung erhalten; dieser Vorgang kann einige Minuten dauern. Wenn Sie keine Bestätigung erhalten, überprüfen Sie Ihren Spam-Ordner, andernfalls wenden Sie sich bitte an unsere
+        TechnicalService:  technische Abteilung
+        BreadcrumbContent: Anfragebestätigung
 
 
-  Confirm:
-    BreadcrumbTitle: Confirmation de la demande
-    Title: Votre demande a bien été prise en compte et envoyée au service commercial de votre région.
-    Message: Vous devriez recevoir un e-mail de confirmation, cette opération peut prendre plusieurs minutes. Si vous ne recevez pas la confirmation, vérifiez dans votre dossier à spam, sinon contactez notre
-    TechnicalService: service technique
-    BreadcrumbContent: Confirmation de la demande
-
-
-  Home: Accueil
-  Quote: Devis
+    Home: Startseite
+    Quote: Angebot
+    HeaderTitle: Rufen Sie uns an oder fordern Sie ein unverbindliches Angebot an

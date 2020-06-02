@@ -44,7 +44,8 @@ class QuoteRequestType extends AbstractType
                     'M' => 'M',
                     'Mme' => 'Mme',
                 ),
-                'expanded' => true
+                'expanded' => true,
+                'required' => true
             ))
             ->add('access', ChoiceType::class, array(
                 "choices" => $options['access'],
@@ -71,7 +72,8 @@ class QuoteRequestType extends AbstractType
             ))
             ->add('address', TextType::class)
             ->add('postalCode', TextType::class, array(
-                'invalid_message' => 'Public.Contact.PostalCodeError'
+                'invalid_message' => 'Public.Contact.PostalCodeError',
+                'required' => true
             ))
             ->add('city', TextType::class)
             ->add('comment', TextareaType::class)
@@ -84,7 +86,6 @@ class QuoteRequestType extends AbstractType
             ->add('overallDiscount')
             ->add('salesmanComment', TextareaType::class)
             ->add('annualBudget')
-            ->add('frequency')
             ->add('frequency', ChoiceType::class, array(
                 'choices' => array(
                     'Regular' => 'regular',

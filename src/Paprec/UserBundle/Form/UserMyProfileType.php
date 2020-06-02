@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class UserMyProfileType extends AbstractType
@@ -56,6 +57,9 @@ class UserMyProfileType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'Paprec\UserBundle\Entity\User',
+            'validation_groups' => function (FormInterface $form) {
+                return ['default', 'password'];
+            },
             'languages' => null
         ));
     }

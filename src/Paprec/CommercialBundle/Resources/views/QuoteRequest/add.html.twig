@@ -273,6 +273,14 @@
     <script>
         $(function () {
 
+            $('input[name*=isMultisite]').change(function () {
+                if (this.value === 1) {
+                    $('.address-field').prop("disabled", true);
+                } else if (this.value === 0) {
+                    $('.address-field').prop("disabled", false);
+                }
+            });
+
             $('.commercial-quoteRequest-save-button').on('click', function () {
                 $('#commercialQuoteRequestForm').submit();
             });

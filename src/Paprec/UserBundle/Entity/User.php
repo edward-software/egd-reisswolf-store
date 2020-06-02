@@ -36,7 +36,7 @@ class User extends BaseUser
 
     /**
      * Plain password. Used for model validation. Must not be persisted.
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(groups={"password"})
      * @var string
      */
     protected $plainPassword;
