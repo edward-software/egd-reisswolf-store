@@ -80,7 +80,7 @@ class ProductController extends Controller
                 $queryBuilder->andWhere($queryBuilder->expr()->orx(
                     $queryBuilder->expr()->like('pL.name', '?1'),
                     $queryBuilder->expr()->like('p.dimensions', '?1'),
-                    $queryBuilder->expr()->like('pL.isEnabled', '?1')
+                    $queryBuilder->expr()->like('p.isEnabled', '?1')
                 ))->setParameter(1, '%' . $search['value'] . '%');
             }
         }

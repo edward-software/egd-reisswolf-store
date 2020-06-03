@@ -103,9 +103,18 @@
                                 <label class="col-md-4 col-form-label">{{ 'Catalog.PostalCode.UserInCharge'|trans }}</label>
                                 <label class="col-form-label col-md-8">
                                     {% if postalCode.userInCharge %}
-                                        <a href="{{ path('paprec_user_user_view', {id: postalCode.userInCharge.id}) }}">
+                                        {% if postalCode.userInCharge.deleted is null %}
+                                            <a href="{{ path('paprec_user_user_view', {id: postalCode.userInCharge.id}) }}">
+                                                {{ postalCode.userInCharge.firstName }} {{ postalCode.userInCharge.lastName }}
+                                            </a>
+                                        {% else %}
                                             {{ postalCode.userInCharge.firstName }} {{ postalCode.userInCharge.lastName }}
-                                        </a>
+                                        {% endif %}
+                                        {% if postalCode.userInCharge.deleted is not null %}
+                                            {{ 'Catalog.PostalCode.DeletedUser'|trans }}
+                                        {% elseif not postalCode.userInCharge.enabled %}
+                                            {{ 'Catalog.PostalCode.DisabledUser'|trans }}
+                                        {% endif %}
                                     {% endif %}
                                 </label>
                             </div>
@@ -156,7 +165,7 @@
                             showCancelButton: true,
                             confirmButtonText: "{{ 'General.Yes'|trans }}",
                             cancelButtonText: "{{ 'General.No'|trans }}"
-                        }).then(function(result) {
+                        }).then(function (result) {
                             if (result.value) {
                                 $(location).attr('href', url);
                             }

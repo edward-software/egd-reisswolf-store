@@ -91,13 +91,16 @@ class QuoteRequestType extends AbstractType
                     'Regular' => 'regular',
                     'Ponctual' => 'ponctual',
                 ),
+                'empty_data' => 'ponctual',
                 "choice_label" => function ($choiceValue, $key, $value) {
                     return 'Commercial.QuoteRequest.' . ucfirst($choiceValue);
                 },
+                'required' => true,
                 'expanded' => true
             ))
             ->add('frequencyTimes', ChoiceType::class, array(
                 'choices' => array(
+                    '0' => '0',
                     '1' => '1',
                     '2' => '2',
                     '3' => '3',
@@ -107,7 +110,9 @@ class QuoteRequestType extends AbstractType
                     '7' => '7',
                     '8' => '8',
                     '9' => '9',
-                    '10' => '10'
+                    '10' => '10',
+                    '11' => '11',
+                    '12' => '12'
                 ),
                 'expanded' => false,
                 'multiple' => false
@@ -115,11 +120,12 @@ class QuoteRequestType extends AbstractType
             ->add('frequencyInterval', ChoiceType::class, array(
                 'choices' => array(
                     'week' => 'week',
+                    'month' => 'month',
                     'quarter' => 'quarter',
                     'year' => 'year'
                 ),
                 "choice_label" => function ($choiceValue, $key, $value) {
-                    return 'Public.Catalog.' . ucfirst($choiceValue);
+                    return ($choiceValue) ? 'Public.Catalog.' . ucfirst($choiceValue) : '';
                 },
                 'expanded' => false,
                 'multiple' => false
@@ -138,6 +144,8 @@ class QuoteRequestType extends AbstractType
                 'query_builder' => function (UserRepository $er) {
                     return $er->createQueryBuilder('u')
                         ->where('u.deleted IS NULL')
+                        ->andWhere('u.enabled = 1')
+                        ->andWhere('u.roles LIKE \'%ROLE_COMMERCIAL%\'')
                         ->orderBy('u.firstName');
                 }
             ));

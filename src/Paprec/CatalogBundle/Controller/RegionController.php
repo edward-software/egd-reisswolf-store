@@ -149,7 +149,7 @@ class RegionController extends Controller
             $getters = [
                 $region->getId(),
                 $region->getDateCreation()->format('Y-m-d'),
-                $region->getDateUpdate()->format('Y-m-d'),
+                ($region->getDateUpdate() !== null) ? $region->getDateUpdate()->format('Y-m-d') : '',
                 $region->getDeleted() ? 'true' : 'false',
                 $region->getUserCreation(),
                 $region->getUserUpdate(),

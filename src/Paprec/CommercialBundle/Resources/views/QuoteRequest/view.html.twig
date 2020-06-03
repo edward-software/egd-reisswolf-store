@@ -198,7 +198,18 @@
                                     <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.UserInCharge'|trans }}</label>
                                     <label class="col-form-label">
                                         {% if quoteRequest.userInCharge %}
-                                            <a href="{{ path('paprec_user_user_view', {id: quoteRequest.userInCharge.id}) }}">{{ quoteRequest.userInCharge }}</a>
+                                            {% if quoteRequest.userInCharge.deleted is null %}
+                                                <a href="{{ path('paprec_user_user_view', {id: quoteRequest.userInCharge.id}) }}">
+                                                    {{ quoteRequest.userInCharge.firstName }} {{ quoteRequest.userInCharge.lastName }}
+                                                </a>
+                                            {% else %}
+                                                {{ quoteRequest.userInCharge.firstName }} {{ quoteRequest.userInCharge.lastName }}
+                                            {% endif %}
+                                            {% if quoteRequest.userInCharge.deleted is not null %}
+                                                {{ 'Catalog.PostalCode.DeletedUser'|trans }}
+                                            {% elseif not quoteRequest.userInCharge.enabled %}
+                                                {{ 'Catalog.PostalCode.DisabledUser'|trans }}
+                                            {% endif %}
                                         {% endif %}
                                     </label>
                                 </div>

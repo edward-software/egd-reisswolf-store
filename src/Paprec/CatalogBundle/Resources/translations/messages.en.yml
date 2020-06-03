@@ -32,6 +32,8 @@ Catalog:
     TreatmentRate:          Treatment rate
     TraceabilityRate:       Traceability rate
     UserInCharge:           Salesman in charge
+    DisabledUser:           (Compte non actif)
+    DeletedUser:            (Compte supprimé)
     Region:                 Region
     System-information:     System information
 

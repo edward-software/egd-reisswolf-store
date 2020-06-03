@@ -38,7 +38,7 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>{{ 'Commercial.QuoteRequest.Number'|trans }}</th>
+{#                            <th>{{ 'Commercial.QuoteRequest.Number'|trans }}</th>#}
                             <th>{{ 'Commercial.QuoteRequest.BusinessName'|trans }}</th>
                             <th>{{ 'Commercial.QuoteRequest.TotalAmount'|trans }}</th>
                             <th>{{ 'Commercial.QuoteRequest.QuoteStatus'|trans }}</th>
@@ -118,7 +118,7 @@
                 "ajax": "{{ path('paprec_commercial_quoteRequest_loadList') }}",
                 "columns": [
                     {"data": "id"},
-                    {"data": "number", "width": "10%"},
+                    // {"data": "number", "width": "10%"},
                     {"data": "businessName"},
                     {"data": "totalAmount"},
                     {"data": "quoteStatus"},
