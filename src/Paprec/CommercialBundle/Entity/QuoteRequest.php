@@ -273,6 +273,7 @@ class QuoteRequest
 
     /**
      * @ORM\ManyToOne(targetEntity="Paprec\CatalogBundle\Entity\PostalCode", inversedBy="quoteRequests")
+     * @Assert\NotBlank(groups={"public_multisite"})
      */
     private $postalCode;
     

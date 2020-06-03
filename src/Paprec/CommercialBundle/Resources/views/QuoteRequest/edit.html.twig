@@ -47,21 +47,21 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="form-label">{{ 'Commercial.QuoteRequest.Canton'|trans }}</label>
+                                        <label class="form-label">{{ 'Commercial.QuoteRequest.Canton'|trans }}*</label>
                                         <div class="form-content">
                                             {{ form_widget(form.canton, {'attr': {'class': 'form-control'}}) }}
                                             {{ form_errors(form.canton) }}
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="form-label">{{ 'Commercial.QuoteRequest.BusinessName'|trans }}</label>
+                                        <label class="form-label">{{ 'Commercial.QuoteRequest.BusinessName'|trans }}*</label>
                                         <div class="form-content">
                                             {{ form_widget(form.businessName, {'attr': {'class': 'form-control'}}) }}
                                             {{ form_errors(form.businessName) }}
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="form-label">{{ 'Commercial.QuoteRequest.Civility'|trans }}</label>
+                                        <label class="form-label">{{ 'Commercial.QuoteRequest.Civility'|trans }}*</label>
                                         <div class="form-content">
                                             {% for radio in form.civility.children %}
                                                 <div class="form__check ml-4">
@@ -72,28 +72,28 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="form-label">{{ 'Commercial.QuoteRequest.LastName'|trans }}</label>
+                                        <label class="form-label">{{ 'Commercial.QuoteRequest.LastName'|trans }}*</label>
                                         <div class="form-content">
                                             {{ form_widget(form.lastName, {'attr': {'class': 'form-control'}}) }}
                                             {{ form_errors(form.lastName) }}
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="form-label">{{ 'Commercial.QuoteRequest.FirstName'|trans }}</label>
+                                        <label class="form-label">{{ 'Commercial.QuoteRequest.FirstName'|trans }}*</label>
                                         <div class="form-content">
                                             {{ form_widget(form.firstName, {'attr': {'class': 'form-control'}}) }}
                                             {{ form_errors(form.firstName) }}
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="form-label">{{ 'Commercial.QuoteRequest.Email'|trans }}</label>
+                                        <label class="form-label">{{ 'Commercial.QuoteRequest.Email'|trans }}*</label>
                                         <div class="form-content">
                                             {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
                                             {{ form_errors(form.email) }}
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="form-label">{{ 'Commercial.QuoteRequest.Phone'|trans }}</label>
+                                        <label class="form-label">{{ 'Commercial.QuoteRequest.Phone'|trans }}*</label>
                                         <div class="form-content">
                                             {{ form_widget(form.phone, {'attr': {'class': 'form-control'}}) }}
                                             {{ form_errors(form.phone) }}
@@ -116,7 +116,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="form-label">{{ 'Commercial.QuoteRequest.Frequency'|trans }}</label>
+                                        <label class="form-label">{{ 'Commercial.QuoteRequest.Frequency'|trans }}*</label>
                                         <div class="form-content">
                                             {% for radio in form.frequency.children %}
                                                 <div class="form__check ml-4">
@@ -160,7 +160,7 @@
                                     <div class="form-group">
                                         <label class="form-label">{{ 'Commercial.QuoteRequest.Address'|trans }}</label>
                                         <div class="form-content">
-                                            {{ form_widget(form.address, {'attr': {'class': 'form-control address-field'}}) }}
+                                            {{ form_widget(form.address, {'attr': {'class': 'form-control address-field '}}) }}
                                             {{ form_errors(form.address) }}
                                         </div>
                                     </div>
