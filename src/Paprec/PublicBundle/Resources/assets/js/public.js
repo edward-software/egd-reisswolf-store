@@ -142,6 +142,17 @@ $(function () {
      * CONTACT FORM
      ***************************************/
 
+    /**
+     * Affichage d'un message d'info au focus sur le numéro de téléphone
+     */
+    $('#paprec_catalogbundle_quote_request_public_phone').focus(function() {
+        $('#phone-number-info').show();
+    });
+
+    $('#paprec_catalogbundle_quote_request_public_phone').blur(function() {
+        $('#phone-number-info').hide();
+    });
+
     $('input[name*=isMultisite]').change(function () {
         if (this.value == 1) {
             $('.address-field').prop("disabled", true);

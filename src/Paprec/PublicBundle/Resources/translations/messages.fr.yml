@@ -61,6 +61,7 @@ Public:
         Canton: Canton
         Email: E-mail
         Phone: Téléphone
+        PhoneNumberInfo: "Suivre la mise en forme  : +41 01 234 56 78"
         CoworkerNumber: Effectif
         IsMultisite: Prestation multi-sites
         Access: Accès
