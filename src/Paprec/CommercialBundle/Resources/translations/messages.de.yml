@@ -1,68 +1,68 @@
 Commercial:
 
 
-  Bundle-name:                    Gestion commerciale
-  QuoteRequests:                  Demandes de devis
-  Settings:                       Paramétrage
+  Bundle-name:                    Verwaltung Aussendienst
+  QuoteRequests:                  Angebotsanfrage
+  Settings:                       Einstellungen
 
   QuoteRequest:
-    QuoteRequests: Demandes de devis
-    List: Liste des demandes de devis
-    Add: Ajout d'un devis
-    Export: Export des devis
-    BusinessName: Nom société
-    TotalAmount: Montant total
-    QuoteStatus: Status devis
-    Date-crea: Date créa.
-    Canton: Canton
-    Civility: Civilité
-    LastName: Nom
-    FirstName: Prénom
-    Email: Email
-    Phone: Téléphone
-    Address: Adresse
-    PostalCode: Code postal
-    City: Ville
-    Informations-BO: Informations Back-Office
-    Informations-FO: Informations Front-Office
-    Frequency: Fréquence
+    QuoteRequests: Angebotsanfrage
+    List: Liste der Angebotsanfrage
+    Add: Angebot hinzufügen
+    Export: Angebote exportieren
+    BusinessName: Firmenname
+    TotalAmount: Gesamtbetrag
+    QuoteStatus: Angebotstatus
+    Date-crea: Erstellungsdatum
+    Canton: Kanton
+    Civility: Anrede
+    LastName: Nachname
+    FirstName: Vorname
+    Email: E-Mail
+    Phone: Telefonnummer
+    Address: Strasse
+    PostalCode: PLZ
+    City: Ort
+    Informations-BO: Informationen BackOffice
+    Informations-FO: Informationen FrontOffice
+    Frequency: Abholungsfrequenz
     PassingFrequency: Abholungsfrequenz (si régulier)
-    FrequencyTimes : Nb de passages (si régulier)
-    month: mois
-    quarter: trimestre
-    year: an
-    week: semaine
-    CoworkerNumber: Effectif
-    UserInCharge: Commercial en charge
-    Reference: Référence de l'offre
-    IsMultisite: Prestation multi-sites
-    Comment: Commentaire
-    OverallDiscount: Ajustement prix (+/- en %)
-    CustomerId: Numéro client
-    SalesmanComment: Commentaire commercial
-    AnnualBudget: Budget annuel
-    View: Vue du devis
-    Download-quote: Télécharger PDF
-    Send-quote: Envoyer devis au client
-    ProductsList: Liste des produits
-    AddLine: Ajouter un produit
-    Confirm-send-quote: Êtes-vous sûr de vouloir envoyer le devis au client ?
-    Edit: Edition du devis
-    Ponctual: A la demande
-    Regular: Régulière
+    FrequencyTimes : Anzahl Abholugen (falls regelmässig)
+    month: Monat
+    quarter: Quartal
+    year: Jahr
+    week: Woche
+    CoworkerNumber: Anzahl Mitarbeiter
+    UserInCharge: Name Aussendienstmitarbeiter
+    Reference: Angebotsreferenz
+    IsMultisite: Dienstleistungen in verschiedenen Standorten
+    Comment: Bemerkung
+    OverallDiscount: Preisanpassung (+/- in %)
+    CustomerId: Kundennummer
+    SalesmanComment: Bemerkung Aussendienst
+    AnnualBudget: Jährliches Budget
+    View: Angebotsansicht
+    Download-quote: Angebot als PDF herunterladen
+    Send-quote: Angebot an den Kunden senden
+    ProductsList: Produkteverzeichnis
+    AddLine: Produkt hinzufügen
+    Confirm-send-quote: Versand des Angebots bestätigen ?
+    Edit: Angebotsbearbeitung
+    Ponctual: auf Abruf
+    Regular: regelmässig
     Error:
-      generatedQuoteNotSent:    Erreur lors de la génération et l'envoi du devis.
+      generatedQuoteNotSent:    Fehler bei der Erstellung und beim Versand des Angebots.
     Success:
-      generatedQuoteSent:       Le devis a bien été généré et envoyé au client.
-      newUserInChargeWarned: Eine E-Mail wurde an den neuen zuständigen Vertriebsmitarbeiter gesendet.
-    Locale: Langue
-    Number: Numéro offre
+      generatedQuoteSent:       Das Angebot wurde richtig erstellt und gesendet.
+      newUserInChargeWarned: Ein Mail wurde an den Aussendienst zugeschickt.
+    Locale: Sprache
+    Number: Angebotsnummer
 
   QuoteStatusList:
-    CREATED: Créé
-    PENDING: En attente
-    PROCESSING: En traitement
-    CLOSED: Fermé
+    CREATED: Erzeugt
+    PENDING: In Wartestellung
+    PROCESSING: In Bearbeitung
+    CLOSED: Geschlossen
 
   StaffList:
     19: 1 - 9 Mitarbeiter
@@ -88,18 +88,18 @@ Commercial:
     ground: Strassenniveau ohne Treppe
 
   QuoteRequestLine:
-    ProductName: Nom du produit
-    UnitPrice: Prix unitaire
-    Quantity: Quantité
-    RentalPrice: Location
-    SetUpPrice: Mise en place
-    Transport: Transport
-    Treatment: Traitement
-    Traceability: Traçabilité
-    Access: Accès
-    TotalAmount: Montant total
-    Add: Ajout d'un produit
-    Product: Produit
+    ProductName: Produktbezeichnung
+    UnitPrice: Einheitspreis
+    Quantity: Anzahl
+    RentalPrice: Behältermiete
+    SetUpPrice: Transportkomponente 1 (Programmierung Schloss)
+    Transport: Transportkomponente 2 (Transport)
+    Treatment: Transportkomponente 3 (Vernichtung)
+    Traceability: Transportkomponente 4 (Zertifikat)
+    Access: Zugang
+    TotalAmount: Maximal Betrag
+    Add: Produkt hinzufügen
+    Product: Produkt
 
   NewQuoteEmail:
     Title: Ihnen wurde eine neue Angebotsanfrage zugeordnet.
@@ -125,4 +125,4 @@ Commercial:
 
 User:
   User:
-    Lang: Langue
+    Lang: Sprache
