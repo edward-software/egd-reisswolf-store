@@ -10,25 +10,25 @@ General:
   1:                        Ja
   No:                       Nein
   0:                        Nein
-  Name:                     Nom
-  SystemError:              Erreur système
-  Users:                    Utilisateurs
-  Save:                     Enregistrer
-  Cancel:                   Annuler
-  Confirm:                  Confirmation
-  Confirm-cancel:           Êtes vous sûr de vouloir annuler ?
-  Confirm-remove:           Confirmez-vous la suppression ?
-  Confirm-disable:          Êtes-vous sûr de vouloir tous les désactiver ?
-  Confirm-enable:           Êtes-vous sûr de vouloir tous les activer ?
+  Name:                     Nachname
+  SystemError:              Systemfehler
+  Users:                    Benützer
+  Save:                     Speichern
+  Cancel:                   Stornieren
+  Confirm:                  Bestätigung
+  Confirm-cancel:           Sind Sie sicher, dass Sie stornieren möchten?
+  Confirm-remove:           Löschung bestätigen?
+  Confirm-disable:          Sind Sie sicher, dass Sie die Zugriffe versenden wollen?
+  Confirm-enable:           Sind Sie sicher, dass Sie sie alle aktivieren wollen?
   In-progress:              En cours
   Archiving:                Archivé
   M:                        Herr
   Mr:                       Herr
   Mme:                      Frau
-  Date-update:              Date de mise à jour
-  System-information:       Informations système
-  Information:              Informations
-  Date-creation:            Date de création
+  Date-update:              Aktualisierungsdatum
+  System-information:       Systeminformationen
+  Information:              Informationen
+  Date-creation:            Erstellungsdatum
 
   Datatable:
     Records-per-page :      _MENU_ enregistrements par page
@@ -36,47 +36,47 @@ General:
 #    Showing-page :                              Affichage page _PAGE_ sur _PAGES_
     Showing-page :          Affichage _START_ à _END_ sur un total de _TOTAL_ résultats
     No-records-available :  Aucun enregistrement trouvé
-    Search :                Recherche
+    Search :                Suche
     Loading :               Chargement...
-    Previous :              Précédent
-    Next :                  Suivant
+    Previous :              vorherige
+    Next :                  nächste
 
   Presence-error:           Presence d'erreur
 
   Menu:
-    Administration:         Administration
-    Users:                  Utilisateurs
-    Dashboard:              Tableau de bord
-    Logout:                 Se déconnecter
-    MyProfile:              Mon profil
-    Customers:              Clients
-    My-profile:             Mon profil
+    Administration:         Verwaltung
+    Users:                  Benutzer
+    Dashboard:              Dashboard
+    Logout:                 Abmelden
+    MyProfile:              Mein Profil
+    Customers:              Kunden
+    My-profile:             Mein Profil
 
   Form:
-    Submit:                 Soumettre
-    CreationDate:           Créé le
-    UpdatedDate:            Mis à jour le
+    Submit:                 Einreichen
+    CreationDate:           Erstellt am
+    UpdatedDate:            Aktualisiert am
     Status:                 Status
-    CreationUser:           Créé par
-    UpdatedUser:            Mis à jour par
-    NeverUpdated:           Jamais mis à jour
-    Password:               Mot de passe
-    RepeatPassword:         Répéter le mot de passe
-    Email:                  Email
-    Language:               Langage
-    Timezone:               Fuseau horaire
-    Enable:                 Activé
-    Username:               Identifiant
-    Roles:                  Roles
-    Permissions:            Permissions
-    Unlock:                 Déverouiller
-    Name:                   Nom
-    FirstName:              Prénom
-    LastName:               Nom de famille
-    Birthday:               Date de naissance
-    Nationality:            Nationalité
-    CountryOfResidence:     Pays
-    AddressLine:            Adresse
-    PostalCode:             Code postal
-    City:                   Ville
-    Access-type:            Type d'accès
+    CreationUser:           Erstellt von
+    UpdatedUser:            Aktualisiert von
+    NeverUpdated:           Nie aktualisiert
+    Password:               Passwort
+    RepeatPassword:         Passwort wiederholen
+    Email:                  E-mail
+    Language:               Sprache
+    Timezone:               Zeitzone
+    Enable:                 Aktiviert
+    Username:               User ID
+    Roles:                  Rollen
+    Permissions:            Genehmigungen
+    Unlock:                 freischalten
+    Name:                   Nachname
+    FirstName:              Vorname
+    LastName:               Nachname
+    Birthday:               Geburtsdatum
+    Nationality:            Staatsangehörigkeit
+    CountryOfResidence:     Staat
+    AddressLine:            Strasse
+    PostalCode:             PLZ
+    City:                   Ort
+    Access-type:            Art des Zugriffs

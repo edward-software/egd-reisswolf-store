@@ -1,0 +1,43 @@
+User:
+    Bundle-name:                  Benützer Verwaltung
+    User:
+        Users:                    Benützer
+        List:                     Benützerliste
+        Company-name:             Firma
+        Last-name:                Nachname
+        First-name:               Vorname
+        Email:                    E-mail
+        Date-creation:            Erstellungsdatum
+        Date-crea:                Erstellungsdatum
+        Date-update:              Aktualisierungsdatum
+        Informations:             Informationen
+        System-informations:      Systeminformationen
+        Add:                      Benützer hinzufügen
+        Export:                   Benützer exportieren
+        View:                     Visualiser l'utilisateur
+        Edit:                     Benützer ändern
+        Remove:                   Benützer löschen
+        Confirm-cancel:           Sind Sie sicher, dass Sie stornieren möchten?
+        Confirm-remove:           Löschung bestätigen?
+        Save:                     Speichern
+        Cancel:                   Stornieren
+        Username:                 User ID
+        Enabled:                  Aktiviert
+        Confirm-send-access:      Sind Sie sicher, dass Sie die Zugriffe versenden wollen?
+        Send-access:              Zugriffe versenden
+        Roles:                    Benützerrolle
+        Postal-codes:             PLZ
+        Password:                 Passwort
+        Edit-my-profile:          Profil ändern
+        Success:
+            accessHasBeenSent:    Les accès ont été correctement envoyés
+        Error:
+            accessCannotBeSent:   Les accès n'ont pu être envoyés
+
+'Password':                       Passwort
+'Repeat Password':                Passwort Bestätigung
+'No':                             Nein
+'Yes':                            Ja
+'ROLE_ADMIN':                     Admin
+'ROLE_COMMERCIAL':                Kommerziell
+'ROLE_SUPER_ADMIN':               Super admin

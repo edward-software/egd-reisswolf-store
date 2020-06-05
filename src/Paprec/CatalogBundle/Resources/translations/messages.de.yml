@@ -28,14 +28,14 @@ Catalog:
     Confirm-cancel:         Etes-vous sûr de vouloir annuler ?
     Confirm-remove:         Etes-vous sûr de vouloir supprimer ce code postal ?
     SetUpRate:              Coef de mise en place
-    RentalRate:             Coef de location
-    TransportRate:          Coef de transport
-    TreatmentRate:          Coef de traitement
-    TraceabilityRate:       Coef de traçabilité
+    RentalRate:             Mietfaktor
+    TransportRate:          Transportfaktor
+    TreatmentRate:          Bearbeitungsfaktor
+    TraceabilityRate:       Rückverfolgbarkeitsfaktor
     UserInCharge:           Commercial en charge
     DisabledUser:           (Inaktives Konto)
     DeletedUser:            (Gelöschtes Konto)
-    Region:                 Région
+    Region:                 Region
     System-information:     Informations système
 
   Picture:
@@ -57,11 +57,11 @@ Catalog:
     Dimensions:             Abmessungen
     AvailablePostalCodes:   Disponibilités géographiques
     IsEnabled:
-      IsEnabled:            Actif
+      IsEnabled:            aktiv
       Yes:                  Oui
       No:                   Non
       Disable:              Désactiver
-      Enable:               Activer
+      Enable:               deaktivieren
     Picto:                  Picto
     AddPicture:             Ajouter image
     PilotPicture:           Image principale
