@@ -320,7 +320,7 @@ class PostalCodeController extends Controller
         $entities = $em->getRepository(PostalCode::class)->createQueryBuilder('pC')
             ->where('pC.code LIKE :code')
             ->andWhere('pC.deleted is NULL')
-            ->setParameter('code', '%' . $term . '%')
+            ->setParameter('code', $term . '%')
             ->getQuery()
             ->getResult();
 

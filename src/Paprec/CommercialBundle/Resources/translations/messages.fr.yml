@@ -91,11 +91,12 @@ Commercial:
     ProductName: Nom du produit
     UnitPrice: Prix unitaire
     Quantity: Quantité
+    TmpLockProg: Programmation Serrure
     RentalPrice: Location
-    SetUpPrice: Mise en place
-    Transport: Transport
-    Treatment: Traitement
-    Traceability: Traçabilité
+    SetUpPrice: Transport 1
+    Transport: Transport 2
+    Treatment: Transport 3
+    Traceability: Transport 4
     Access: Accès
     TotalAmount: Montant total
     Add: Ajout d'un produit

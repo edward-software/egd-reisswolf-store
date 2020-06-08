@@ -27,11 +27,11 @@ Catalog:
     Cancel:                 Annuler
     Confirm-cancel:         Etes-vous sûr de vouloir annuler ?
     Confirm-remove:         Etes-vous sûr de vouloir supprimer ce code postal ?
-    SetUpRate:              Coef de mise en place
-    RentalRate:             Mietfaktor
-    TransportRate:          Transportfaktor
-    TreatmentRate:          Bearbeitungsfaktor
-    TraceabilityRate:       Rückverfolgbarkeitsfaktor
+    SetUpRate:              PreisVariable für Transport (komponente 1)
+    RentalRate:             PreisVariable für Behältermiete
+    TransportRate:          PreisVariable für Transport (komponente 2)
+    TreatmentRate:          PreisVariable für Transport (komponente 3)
+    TraceabilityRate:       PreisVariable für Transport (komponente 4)
     UserInCharge:           Commercial en charge
     DisabledUser:           (Inaktives Konto)
     DeletedUser:            (Gelöschtes Konto)
@@ -76,11 +76,11 @@ Catalog:
     CapacityUnit:           Unité de volume
     Position:               Position
     FolderNumber:           Anzahl Ordner
-    SetUpPrice:             PU mise en place
-    RentalUnitPrice:        PU de location
-    TransportUnitPrice:     PU de transport
-    TreatmentUnitPrice:     PU de traitement
-    TraceabilityUnitPrice:  PU de traçabilité
+    SetUpPrice:             Transportpreis (komponente 1)
+    RentalUnitPrice:        Mietpreis
+    TransportUnitPrice:     Transportpreis (komponente 2)
+    TreatmentUnitPrice:     Transportpreis (komponente 3)
+    TraceabilityUnitPrice:  Transportpreis (komponente 4)
 
   ProductLabel:
     Add: Ajouter une traduction

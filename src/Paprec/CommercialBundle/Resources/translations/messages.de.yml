@@ -1,128 +1,129 @@
 Commercial:
 
 
-  Bundle-name:                    Verwaltung Aussendienst
-  QuoteRequests:                  Angebotsanfrage
-  Settings:                       Einstellungen
+    Bundle-name:                    Verwaltung Aussendienst
+    QuoteRequests:                  Angebotsanfrage
+    Settings:                       Einstellungen
 
-  QuoteRequest:
-    QuoteRequests: Angebotsanfrage
-    List: Liste der Angebotsanfrage
-    Add: Angebot hinzufügen
-    Export: Angebote exportieren
-    BusinessName: Firmenname
-    TotalAmount: Gesamtbetrag
-    QuoteStatus: Angebotstatus
-    Date-crea: Erstellungsdatum
-    Canton: Kanton
-    Civility: Anrede
-    LastName: Nachname
-    FirstName: Vorname
-    Email: E-Mail
-    Phone: Telefonnummer
-    Address: Strasse
-    PostalCode: PLZ
-    City: Ort
-    Informations-BO: Informationen BackOffice
-    Informations-FO: Informationen FrontOffice
-    Frequency: Abholungsfrequenz
-    PassingFrequency: Abholungsfrequenz (si régulier)
-    FrequencyTimes : Anzahl Abholugen (falls regelmässig)
-    month: Monat
-    quarter: Quartal
-    year: Jahr
-    week: Woche
-    CoworkerNumber: Anzahl Mitarbeiter
-    UserInCharge: Name Aussendienstmitarbeiter
-    Reference: Angebotsreferenz
-    IsMultisite: Dienstleistungen in verschiedenen Standorten
-    Comment: Bemerkung
-    OverallDiscount: Preisanpassung (+/- in %)
-    CustomerId: Kundennummer
-    SalesmanComment: Bemerkung Aussendienst
-    AnnualBudget: Jährliches Budget
-    View: Angebotsansicht
-    Download-quote: Angebot als PDF herunterladen
-    Send-quote: Angebot an den Kunden senden
-    ProductsList: Produkteverzeichnis
-    AddLine: Produkt hinzufügen
-    Confirm-send-quote: Versand des Angebots bestätigen ?
-    Edit: Angebotsbearbeitung
-    Ponctual: auf Abruf
-    Regular: regelmässig
-    Error:
-      generatedQuoteNotSent:    Fehler bei der Erstellung und beim Versand des Angebots.
-    Success:
-      generatedQuoteSent:       Das Angebot wurde richtig erstellt und gesendet.
-      newUserInChargeWarned: Ein Mail wurde an den Aussendienst zugeschickt.
-    Locale: Sprache
-    Number: Angebotsnummer
+    QuoteRequest:
+        QuoteRequests: Angebotsanfrage
+        List: Liste der Angebotsanfrage
+        Add: Angebot hinzufügen
+        Export: Angebote exportieren
+        BusinessName: Firmenname
+        TotalAmount: Gesamtbetrag
+        QuoteStatus: Angebotstatus
+        Date-crea: Erstellungsdatum
+        Canton: Kanton
+        Civility: Anrede
+        LastName: Nachname
+        FirstName: Vorname
+        Email: E-Mail
+        Phone: Telefonnummer
+        Address: Strasse
+        PostalCode: PLZ
+        City: Ort
+        Informations-BO: Informationen BackOffice
+        Informations-FO: Informationen FrontOffice
+        Frequency: Abholungsfrequenz
+        PassingFrequency: Abholungsfrequenz (si régulier)
+        FrequencyTimes: Anzahl Abholugen (falls regelmässig)
+        month: Monat
+        quarter: Quartal
+        year: Jahr
+        week: Woche
+        CoworkerNumber: Anzahl Mitarbeiter
+        UserInCharge: Name Aussendienstmitarbeiter
+        Reference: Angebotsreferenz
+        IsMultisite: Dienstleistungen in verschiedenen Standorten
+        Comment: Bemerkung
+        OverallDiscount: Preisanpassung (+/- in %)
+        CustomerId: Kundennummer
+        SalesmanComment: Bemerkung Aussendienst
+        AnnualBudget: Jährliches Budget
+        View: Angebotsansicht
+        Download-quote: Angebot als PDF herunterladen
+        Send-quote: Angebot an den Kunden senden
+        ProductsList: Produkteverzeichnis
+        AddLine: Produkt hinzufügen
+        Confirm-send-quote: Versand des Angebots bestätigen ?
+        Edit: Angebotsbearbeitung
+        Ponctual: auf Abruf
+        Regular: regelmässig
+        Error:
+            generatedQuoteNotSent:    Fehler bei der Erstellung und beim Versand des Angebots.
+        Success:
+            generatedQuoteSent:       Das Angebot wurde richtig erstellt und gesendet.
+            newUserInChargeWarned: Ein Mail wurde an den Aussendienst zugeschickt.
+        Locale: Sprache
+        Number: Angebotsnummer
 
-  QuoteStatusList:
-    CREATED: Erzeugt
-    PENDING: In Wartestellung
-    PROCESSING: In Bearbeitung
-    CLOSED: Geschlossen
+    QuoteStatusList:
+        CREATED: Erzeugt
+        PENDING: In Wartestellung
+        PROCESSING: In Bearbeitung
+        CLOSED: Geschlossen
 
-  StaffList:
-    19: 1 - 9 Mitarbeiter
-    1019: 10 - 19 Mitarbeiter
-    2029: 20 - 29 Mitarbeiter
-    3039: 30 - 39 Mitarbeiter
-    4049: 40 - 49 Mitarbeiter
-    5059: 50 - 59 Mitarbeiter
-    6069: 60 - 69 Mitarbeiter
-    7079: 70 - 79 Mitarbeiter
-    8089: 80 - 89 Mitarbeiter
-    9099: 90 - 99 Mitarbeiter
-    100109: 100 - 109 Mitarbeiter
-    110119: 110 - 119 Mitarbeiter
-    120129: 120 - 129 Mitarbeiter
-    130139: 130 - 139 Mitarbeiter
-    140149: 140 - 149 Mitarbeiter
-    150+: Über 150 Mitarbeiter
+    StaffList:
+        19: 1 - 9 Mitarbeiter
+        1019: 10 - 19 Mitarbeiter
+        2029: 20 - 29 Mitarbeiter
+        3039: 30 - 39 Mitarbeiter
+        4049: 40 - 49 Mitarbeiter
+        5059: 50 - 59 Mitarbeiter
+        6069: 60 - 69 Mitarbeiter
+        7079: 70 - 79 Mitarbeiter
+        8089: 80 - 89 Mitarbeiter
+        9099: 90 - 99 Mitarbeiter
+        100109: 100 - 109 Mitarbeiter
+        110119: 110 - 119 Mitarbeiter
+        120129: 120 - 129 Mitarbeiter
+        130139: 130 - 139 Mitarbeiter
+        140149: 140 - 149 Mitarbeiter
+        150+: Über 150 Mitarbeiter
 
-  AccessList:
-    stairs: Treppe
-    elevator: Aufzug
-    ground: Strassenniveau ohne Treppe
+    AccessList:
+        stairs: Treppe
+        elevator: Aufzug
+        ground: Strassenniveau ohne Treppe
 
-  QuoteRequestLine:
-    ProductName: Produktbezeichnung
-    UnitPrice: Einheitspreis
-    Quantity: Anzahl
-    RentalPrice: Behältermiete
-    SetUpPrice: Transportkomponente 1 (Programmierung Schloss)
-    Transport: Transportkomponente 2 (Transport)
-    Treatment: Transportkomponente 3 (Vernichtung)
-    Traceability: Transportkomponente 4 (Zertifikat)
-    Access: Zugang
-    TotalAmount: Maximal Betrag
-    Add: Produkt hinzufügen
-    Product: Produkt
+    QuoteRequestLine:
+        ProductName: Produktbezeichnung
+        UnitPrice: Einheitspreis
+        Quantity: Anzahl
+        TmpLockProg: Programmierung Schloss
+        RentalPrice: Behältermiete
+        SetUpPrice: Transportkomponente 1
+        Transport: Transportkomponente 2
+        Treatment: Transportkomponente 3
+        Traceability: Transportkomponente 4
+        Access: Zugang
+        TotalAmount: Maximal Betrag
+        Add: Produkt hinzufügen
+        Product: Produkt
 
-  NewQuoteEmail:
-    Title: Ihnen wurde eine neue Angebotsanfrage zugeordnet.
-    r: Sehr geehrter Kollege Reisswolf
-    Message1: Anbei finden Sie eine Anfrage zur Überprüfung des Angebots für das geografische Gebiet sowie den geplanten Vertrag.
-    Message2: Wir danken Ihnen im Voraus.
-    Partner: Ihr Partner Reisswolf
+    NewQuoteEmail:
+        Title: Ihnen wurde eine neue Angebotsanfrage zugeordnet.
+        r: Sehr geehrter Kollege Reisswolf
+        Message1: Anbei finden Sie eine Anfrage zur Überprüfung des Angebots für das geografische Gebiet sowie den geplanten Vertrag.
+        Message2: Wir danken Ihnen im Voraus.
+        Partner: Ihr Partner Reisswolf
 
-  ConfirmEmail:
-    Object: Ihre Angebotsanfrage
-    Dear:
-      M: Sehr geehrter Herr
-      Mrs: Sehr geehrte Frau
-    Title: Ihre Anfrage wurde berücksichtigt und an den Vertrieb in Ihrer Region weitergeleitet.
-    Message1: Vielen Dank für Ihre Anfrage vom %date%. Es freut uns, dass Sie sich für die Dienstleistungen von REISSWOLF interessieren.
-    TechnicalService: service technique
-    Message2: Wir werden Ihnen in den kommenden Stunden unser Angebot für die Leistungen von REISSWOLF zusenden.
-    Regards: Mit freundlichen Grüssen.
-    Partner: Ihr Reisswolf-Partner
-    Disclaimer:
-      Message1: Sie haben diese E-Mail erhalten, um Sie über wichtige Änderungen an den von Ihnen genutzten
-      Message2: -Diensten zu informieren.
+    ConfirmEmail:
+        Object: Ihre Angebotsanfrage
+        Dear:
+            M: Sehr geehrter Herr
+            Mrs: Sehr geehrte Frau
+        Title: Ihre Anfrage wurde berücksichtigt und an den Vertrieb in Ihrer Region weitergeleitet.
+        Message1: Vielen Dank für Ihre Anfrage vom %date%. Es freut uns, dass Sie sich für die Dienstleistungen von REISSWOLF interessieren.
+        TechnicalService: service technique
+        Message2: Wir werden Ihnen in den kommenden Stunden unser Angebot für die Leistungen von REISSWOLF zusenden.
+        Regards: Mit freundlichen Grüssen.
+        Partner: Ihr Reisswolf-Partner
+        Disclaimer:
+            Message1: Sie haben diese E-Mail erhalten, um Sie über wichtige Änderungen an den von Ihnen genutzten
+            Message2: -Diensten zu informieren.
 
 User:
-  User:
-    Lang: Sprache
+    User:
+        Lang: Sprache

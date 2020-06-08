@@ -27,11 +27,11 @@ Catalog:
     Cancel:                 Annuler
     Confirm-cancel:         Etes-vous sûr de vouloir annuler ?
     Confirm-remove:         Etes-vous sûr de vouloir supprimer ce code postal ?
-    SetUpRate:              Coef de mise en place
-    RentalRate:             Coef de location
-    TransportRate:          Coef de transport
-    TreatmentRate:          Coef de traitement
-    TraceabilityRate:       Coef de traçabilité
+    SetUpRate:              Variable Transport Composante 1
+    RentalRate:             Variable Location
+    TransportRate:          Variable Transport Composante 2
+    TreatmentRate:          Variable Transport Composante 3
+    TraceabilityRate:       Variable Transport Composante 4
     UserInCharge:           Commercial en charge
     DisabledUser:           (Compte non actif)
     DeletedUser:            (Compte supprimé)
@@ -76,11 +76,11 @@ Catalog:
     CapacityUnit:           Unité de volume
     Position:               Position
     FolderNumber:           Nombre de dossiers
-    SetUpPrice:             PU mise en place
-    RentalUnitPrice:        PU de location
-    TransportUnitPrice:     PU de transport
-    TreatmentUnitPrice:     PU de traitement
-    TraceabilityUnitPrice:  PU de traçabilité
+    SetUpPrice:             PU Transport Composante 1
+    RentalUnitPrice:        PU location
+    TransportUnitPrice:     PU Transport Composante 2
+    TreatmentUnitPrice:     PU Transport Composante 3
+    TraceabilityUnitPrice:  PU Transport Composante 4
 
   ProductLabel:
     Add: Ajouter une traduction

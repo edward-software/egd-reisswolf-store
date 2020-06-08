@@ -302,8 +302,11 @@ class QuoteRequestController extends Controller
         $quoteRequestManager = $this->get('paprec_commercial.quote_request_manager');
         $quoteRequestManager->isDeleted($quoteRequest, true);
 
+        $tmpLockProg = $this->getParameter('tmp_lock_prog');
+
         return $this->render('PaprecCommercialBundle:QuoteRequest:view.html.twig', array(
-            'quoteRequest' => $quoteRequest
+            'quoteRequest' => $quoteRequest,
+            'tmpLockProg' => $tmpLockProg
         ));
     }
 

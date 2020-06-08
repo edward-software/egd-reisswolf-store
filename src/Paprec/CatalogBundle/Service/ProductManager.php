@@ -146,12 +146,16 @@ class ProductManager
     {
         $numberManager = $this->container->get('paprec_catalog.number_manager');
 
+        $tmpLockProg = $this->container->getParameter('tmp_lock_prog');
+
+
         return ($numberManager->denormalize($quoteRequestLine->getSetUpPrice()) * $numberManager->denormalize15($quoteRequestLine->getSetUpRate())
                 + $numberManager->denormalize($quoteRequestLine->getRentalUnitPrice()) * $numberManager->denormalize15($quoteRequestLine->getRentalRate())
                 + $numberManager->denormalize($quoteRequestLine->getTransportUnitPrice()) * $numberManager->denormalize15($quoteRequestLine->getTransportRate())
                 + $numberManager->denormalize($quoteRequestLine->getTreatmentUnitPrice()) * $numberManager->denormalize15($quoteRequestLine->getTreatmentRate())
                 + $numberManager->denormalize($quoteRequestLine->getTraceabilityUnitPrice()) * $numberManager->denormalize15($quoteRequestLine->getTraceabilityRate())
-                + $this->getAccesPrice($quoteRequestLine->getQuoteRequest()))
+                + $this->getAccesPrice($quoteRequestLine->getQuoteRequest())
+                + $tmpLockProg)
             * $quoteRequestLine->getQuantity()
             * (1 + $numberManager->denormalize($quoteRequestLine->getQuoteRequest()->getOverallDiscount() / 100));
 

@@ -279,9 +279,10 @@
                                     <th>#</th>
                                     <th>{{ 'Commercial.QuoteRequestLine.ProductName'|trans }}</th>
                                     <th>{{ 'Commercial.QuoteRequestLine.Quantity'|trans }}</th>
-                                    <th>{{ 'Commercial.QuoteRequestLine.SetUpPrice'|trans }} <span
-                                                style="font-weight: 300;">(*coef.)</span></th>
+                                    <th>{{ 'Commercial.QuoteRequestLine.TmpLockProg'|trans }}</th>
                                     <th>{{ 'Commercial.QuoteRequestLine.RentalPrice'|trans }} <span
+                                                style="font-weight: 300;">(*coef.)</span></th>
+                                    <th>{{ 'Commercial.QuoteRequestLine.SetUpPrice'|trans }} <span
                                                 style="font-weight: 300;">(*coef.)</span></th>
                                     <th>{{ 'Commercial.QuoteRequestLine.Transport'|trans }} <span
                                                 style="font-weight: 300;">(*coef.)</span></th>
@@ -305,10 +306,12 @@
                                             </a>
                                         </td>
                                         <td>{{ quoteRequestLine.quantity }}</td>
-                                        <td>{{ quoteRequestLine.setUpPrice|formatAmount('', app.request.locale) }}
-                                            * {{ quoteRequestLine.setUpRate|formatAmount(null, app.request.locale, 'FORMAT15')|number_format(2, '.', ' ') }}</td>
+                                        <td>{{ tmpLockProg }}</td>
                                         <td>{{ quoteRequestLine.rentalUnitPrice|formatAmount('', app.request.locale) }}
                                             * {{ quoteRequestLine.rentalRate|formatAmount(null, app.request.locale, 'FORMAT15')|number_format(2, '.', ' ') }}</td>
+                                        <td>{{ quoteRequestLine.setUpPrice|formatAmount('', app.request.locale) }}
+                                            * {{ quoteRequestLine.setUpRate|formatAmount(null, app.request.locale, 'FORMAT15')|number_format(2, '.', ' ') }}</td>
+
                                         <td>{{ quoteRequestLine.transportUnitPrice|formatAmount('', app.request.locale) }}
                                             * {{ quoteRequestLine.transportRate|formatAmount(null, app.request.locale, 'FORMAT15')|number_format(2, '.', ' ') }}</td>
                                         <td>{{ quoteRequestLine.treatmentUnitPrice|formatAmount('', app.request.locale) }}
