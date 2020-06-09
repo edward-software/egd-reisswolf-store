@@ -133,11 +133,6 @@ class QuoteRequest
      *
      * @ORM\Column(name="phone", type="string", length=255, nullable=true)
      * @Assert\NotBlank(groups={"public"})
-     * @Assert\Regex(
-     *     groups={"public"},
-     *     pattern="/^\+?(?:[0-9]){6,14}[0-9]$/",
-     *     match=true,
-     * )
      */
     private $phone;
 
