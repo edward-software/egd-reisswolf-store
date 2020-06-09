@@ -9,8 +9,6 @@ use Paprec\CommercialBundle\Entity\QuoteRequestLine;
 use Paprec\CommercialBundle\Form\QuoteRequestLineAddType;
 use Paprec\CommercialBundle\Form\QuoteRequestLineEditType;
 use Paprec\CommercialBundle\Form\QuoteRequestType;
-use Paprec\UserBundle\Entity\User;
-use Paprec\UserBundle\Service\UserManager;
 use PHPExcel_Style_Alignment;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -39,10 +37,14 @@ class QuoteRequestController extends Controller
 
     /**
      * @Route("/quoteRequest/loadList", name="paprec_commercial_quoteRequest_loadList")
-     * @Security("has_role('ROLE_COMMERCIAL') or (has_role('ROLE_COMMERCIAL_DIVISION') and 'DI' in user.getDivisions())")
+     * @Security("has_role('ROLE_COMMERCIAL')")
      */
     public function loadListAction(Request $request)
     {
+
+        $systemUser = $this->getUser();
+        $isAdmin = in_array('ROLE_ADMIN', $systemUser->getRoles());
+
         $numberManager = $this->get('paprec_catalog.number_manager');
         $return = array();
 
@@ -54,22 +56,26 @@ class QuoteRequestController extends Controller
         $columns = $request->get('columns');
 
         $cols['id'] = array('label' => 'id', 'id' => 'q.id', 'method' => array('getId'));
-        $cols['number'] = array(
-            'label' => 'number',
-            'id' => 'q.number',
-            'method' => array('getNumber')
+        $cols['reference'] = array(
+            'label' => 'reference',
+            'id' => 'q.reference',
+            'method' => array('getReference')
         );
         $cols['businessName'] = array(
             'label' => 'businessName',
             'id' => 'q.businessName',
             'method' => array('getBusinessName')
         );
+        $cols['isMultisite'] = array(
+            'label' => 'isMultisite',
+            'id' => 'q.isMultisite',
+            'method' => array('getIsMultisite')
+        );
         $cols['totalAmount'] = array(
             'label' => 'totalAmount',
             'id' => 'q.totalAmount',
             'method' => array('getTotalAmount')
         );
-
         $cols['quoteStatus'] = array(
             'label' => 'quoteStatus',
             'id' => 'q.quoteStatus',
@@ -81,6 +87,11 @@ class QuoteRequestController extends Controller
             'method' => array('getDateCreation'),
             'filter' => array(array('name' => 'format', 'args' => array('Y-m-d H:i:s')))
         );
+        $cols['userInCharge'] = array(
+            'label' => 'userInCharge',
+            'id' => 'q.userInCharge',
+            'method' => array('getUserInCharge', 'getFullName')
+        );
 
 
         $queryBuilder = $this->getDoctrine()->getManager()->createQueryBuilder();
@@ -88,6 +99,15 @@ class QuoteRequestController extends Controller
         $queryBuilder->select(array('q'))
             ->from('PaprecCommercialBundle:QuoteRequest', 'q')
             ->where('q.deleted IS NULL');
+
+        /**
+         * Si l'utilisateur n'est pas administrateur, alors on récupère uniquement les devis qui lui sont rattachés
+         */
+        if (!$isAdmin) {
+            $queryBuilder
+                ->andWhere('q.userInCharge = :userId')
+                ->setParameter('userId', $systemUser->getId());
+        }
 
         if (is_array($search) && isset($search['value']) && $search['value'] != '') {
             if (substr($search['value'], 0, 1) == '#') {
@@ -111,6 +131,7 @@ class QuoteRequestController extends Controller
         $tmp = array();
         foreach ($datatable['data'] as $data) {
             $line = $data;
+            $line['isMultisite'] = $data['isMultisite'] ? $this->get('translator')->trans('General.1') : $this->get('translator')->trans('General.0');
             $line['totalAmount'] = $numberManager->formatAmount($data['totalAmount'], 'EUR', $request->getLocale());
             $line['quoteStatus'] = $this->container->get('translator')->trans("Commercial.QuoteStatusList." . $data['quoteStatus']);
             $tmp[] = $line;

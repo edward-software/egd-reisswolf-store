@@ -287,6 +287,7 @@
             $('select[name*="paprec_catalogbundle_quote_request[isMultisite]"]').change(function () {
                 if (this.value == true) {
                     $('.address-field').prop("disabled", true);
+                    $('.address-field').val('');
                 } else if (this.value == false) {
                     $('.address-field').prop("disabled", false);
                 }

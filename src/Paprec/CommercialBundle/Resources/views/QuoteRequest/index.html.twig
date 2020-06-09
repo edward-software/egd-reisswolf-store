@@ -38,11 +38,13 @@
                         <thead>
                         <tr>
                             <th>#</th>
-{#                            <th>{{ 'Commercial.QuoteRequest.Number'|trans }}</th>#}
+                            <th>{{ 'Commercial.QuoteRequest.Reference'|trans }}</th>
                             <th>{{ 'Commercial.QuoteRequest.BusinessName'|trans }}</th>
+                            <th>{{ 'Commercial.QuoteRequest.IsMultisite'|trans }}</th>
                             <th>{{ 'Commercial.QuoteRequest.TotalAmount'|trans }}</th>
                             <th>{{ 'Commercial.QuoteRequest.QuoteStatus'|trans }}</th>
                             <th>{{ 'Commercial.QuoteRequest.Date-crea'|trans }}</th>
+                            <th>{{ 'Commercial.QuoteRequest.UserInCharge'|trans }}</th>
                             <th></th>
                         </tr>
                         </thead>
@@ -118,11 +120,14 @@
                 "ajax": "{{ path('paprec_commercial_quoteRequest_loadList') }}",
                 "columns": [
                     {"data": "id"},
+                    {"data": "reference"},
                     // {"data": "number", "width": "10%"},
                     {"data": "businessName"},
+                    {"data": "isMultisite"},
                     {"data": "totalAmount"},
                     {"data": "quoteStatus"},
                     {"data": "dateCreation"},
+                    {"data": "userInCharge", "bSortable": false},
                     {"data": "id", "width": "10%", "bSortable": false}
                 ],
                 columnDefs: [

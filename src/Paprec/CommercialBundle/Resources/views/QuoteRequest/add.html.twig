@@ -54,14 +54,16 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="form-label">{{ 'Commercial.QuoteRequest.BusinessName'|trans }}*</label>
+                                        <label class="form-label">{{ 'Commercial.QuoteRequest.BusinessName'|trans }}
+                                            *</label>
                                         <div class="form-content">
                                             {{ form_widget(form.businessName, {'attr': {'class': 'form-control'}}) }}
                                             {{ form_errors(form.businessName) }}
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="form-label">{{ 'Commercial.QuoteRequest.Civility'|trans }}*</label>
+                                        <label class="form-label">{{ 'Commercial.QuoteRequest.Civility'|trans }}
+                                            *</label>
                                         <div class="form-content">
                                             {% for radio in form.civility.children %}
                                                 <div class="form__check ml-4">
@@ -73,14 +75,16 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="form-label">{{ 'Commercial.QuoteRequest.LastName'|trans }}*</label>
+                                        <label class="form-label">{{ 'Commercial.QuoteRequest.LastName'|trans }}
+                                            *</label>
                                         <div class="form-content">
                                             {{ form_widget(form.lastName, {'attr': {'class': 'form-control'}}) }}
                                             {{ form_errors(form.lastName) }}
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="form-label">{{ 'Commercial.QuoteRequest.FirstName'|trans }}*</label>
+                                        <label class="form-label">{{ 'Commercial.QuoteRequest.FirstName'|trans }}
+                                            *</label>
                                         <div class="form-content">
                                             {{ form_widget(form.firstName, {'attr': {'class': 'form-control'}}) }}
                                             {{ form_errors(form.firstName) }}
@@ -117,7 +121,8 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="form-label">{{ 'Commercial.QuoteRequest.Frequency'|trans }}*</label>
+                                        <label class="form-label">{{ 'Commercial.QuoteRequest.Frequency'|trans }}
+                                            *</label>
                                         <div class="form-content">
                                             {% for radio in form.frequency.children %}
                                                 <div class="form__check ml-4">
@@ -281,6 +286,7 @@
             $('select[name*="paprec_catalogbundle_quote_request[isMultisite]"]').change(function () {
                 if (this.value == true) {
                     $('.address-field').prop("disabled", true);
+                    $('.address-field').val('');
                 } else if (this.value == false) {
                     $('.address-field').prop("disabled", false);
                 }

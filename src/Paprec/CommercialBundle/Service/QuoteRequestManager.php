@@ -106,8 +106,12 @@ class QuoteRequestManager
      * @param null $user
      * @throws Exception
      */
-    public function addLine(QuoteRequest $quoteRequest, QuoteRequestLine $quoteRequestLine, $user = null, $doFlush = true)
-    {
+    public function addLine(
+        QuoteRequest $quoteRequest,
+        QuoteRequestLine $quoteRequestLine,
+        $user = null,
+        $doFlush = true
+    ) {
         $numberManager = $this->container->get('paprec_catalog.number_manager');
         $productManager = $this->container->get('paprec_catalog.product_manager');
 
@@ -224,8 +228,13 @@ class QuoteRequestManager
      * @param bool $doFlush
      * @throws Exception
      */
-    public function editLine(QuoteRequest $quoteRequest, QuoteRequestLine $quoteRequestLine, $user, $doFlush = true, $editQuoteRequest = true)
-    {
+    public function editLine(
+        QuoteRequest $quoteRequest,
+        QuoteRequestLine $quoteRequestLine,
+        $user,
+        $doFlush = true,
+        $editQuoteRequest = true
+    ) {
         $numberManager = $this->container->get('paprec_catalog.number_manager');
         $productManager = $this->container->get('paprec_catalog.product_manager');
 
@@ -357,24 +366,37 @@ class QuoteRequestManager
              *      si la demande est multisite alors on envoie au mail générique des demandes multisites
              *          sinon on envoie au mail générique de la région associée au code postal de la demande
              */
-            $rcptTo = !is_null($quoteRequest->getUserInCharge()) ? $quoteRequest->getUserInCharge()->getEmail() :
-                (($quoteRequest->getIsMultisite()) ? $this->container->getParameter('reisswolf_salesman_multisite_email') : $quoteRequest->getPostalCode()->getRegion()->getEmail());
-
+            $rcptTo = null;
+            if ($quoteRequest->getUserInCharge()) {
+                $rcptTo = $quoteRequest->getUserInCharge()->getEmail();
+            } else {
+                if ($quoteRequest->getIsMultisite()) {
+                    $rcptTo = $this->container->getParameter('reisswolf_salesman_multisite_email');
+                } else {
+                    $quoteRequest->getPostalCode()->getRegion()->getEmail();
+                }
+            }
 
             if ($rcptTo == null || $rcptTo == '') {
                 return false;
             }
 
-            $pdfFilename = date('Y-m-d') . '-Reisswolf-Devis-' . $quoteRequest->getNumber() . '.pdf';
+            /**
+             * On génère le PDF seuleement si on N'est PAS en multisite
+             */
+            if ($quoteRequest->getIsMultisite()) {
+                $attachment = null;
+            } else {
+                $pdfFilename = date('Y-m-d') . '-Reisswolf-Devis-' . $quoteRequest->getNumber() . '.pdf';
 
-            $pdfFile = $this->generatePDF($quoteRequest, $locale);
+                $pdfFile = $this->generatePDF($quoteRequest, $locale);
 
-            if (!$pdfFile) {
-                return false;
+                if (!$pdfFile) {
+                    return false;
+                }
+                $attachment = \Swift_Attachment::newInstance(file_get_contents($pdfFile), $pdfFilename,
+                    'application/pdf');
             }
-
-            $attachment = \Swift_Attachment::newInstance(file_get_contents($pdfFile), $pdfFilename, 'application/pdf');
-
 
             $message = \Swift_Message::newInstance()
                 ->setSubject('Reisswolf E-shop : Nouvelle demande de devis' . ' N°' . $quoteRequest->getId())
@@ -389,11 +411,14 @@ class QuoteRequestManager
                         )
                     ),
                     'text/html'
-                )
-                ->attach($attachment);
+                );
+
+            if ($attachment) {
+                $message->attach($attachment);
+            }
 
             if ($this->container->get('mailer')->send($message)) {
-                if (file_exists($pdfFile)) {
+                if (isset($pdfFile) && file_exists($pdfFile)) {
                     unlink($pdfFile);
                 }
 
@@ -495,7 +520,9 @@ class QuoteRequestManager
             $pdfTmpFolder = $this->container->getParameter('paprec_commercial.data_tmp_directory');
 
             if (!is_dir($pdfTmpFolder)) {
-                mkdir($pdfTmpFolder, 0755, true);
+                if (!mkdir($pdfTmpFolder, 0755, true) && !is_dir($pdfTmpFolder)) {
+                    throw new \RuntimeException(sprintf('Directory "%s" was not created', $pdfTmpFolder));
+                }
             }
 
             $filenameOffer = $pdfTmpFolder . '/' . md5(uniqid()) . '.pdf';

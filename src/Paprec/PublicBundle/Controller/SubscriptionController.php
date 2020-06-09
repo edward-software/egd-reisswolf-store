@@ -114,7 +114,8 @@ class SubscriptionController extends Controller
 
             $regionName = 'CH';
             if (!$quoteRequest->getIsMultisite() && $quoteRequest->getPostalCode()) {
-                $regionName = substr(iconv('UTF-8', 'ASCII//IGNORE', $quoteRequest->getPostalCode()->getRegion()->getName()), 0, 2);
+                $regionName = substr(iconv('UTF-8', 'ASCII//IGNORE',
+                    $quoteRequest->getPostalCode()->getRegion()->getName()), 0, 2);
             }
 
 
@@ -125,10 +126,10 @@ class SubscriptionController extends Controller
 
             if ($quoteRequest->getIsMultisite()) {
                 // TODO : Ajouter un commercial par défaut si pas de code postal saisi car Multisite
+                $quoteRequest->setUserInCharge(null);
             } else {
                 $quoteRequest->setUserInCharge($userManager->getUserInChargeByPostalCode($quoteRequest->getPostalCode()));
             }
-
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($quoteRequest);
@@ -141,8 +142,12 @@ class SubscriptionController extends Controller
             }
             $em->flush();
 
+            /**
+             * On envoie le mail de confirmation à l'utilisateur
+             */
             $sendConfirmEmail = $quoteRequestManager->sendConfirmRequestEmail($quoteRequest, $locale);
             $sendNewRequestEmail = $quoteRequestManager->sendNewRequestEmail($quoteRequest, $locale);
+
 
             if ($sendConfirmEmail && $sendNewRequestEmail) {
                 return $this->redirectToRoute('paprec_public_confirm_index', array(
@@ -175,10 +180,12 @@ class SubscriptionController extends Controller
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_HEADER, 0);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, array(
-            "secret" => $this->getParameter('recaptcha_secret_key'), "response" => $recaptchaToken));
+            "secret" => $this->getParameter('recaptcha_secret_key'),
+            "response" => $recaptchaToken
+        ));
         $response = curl_exec($ch);
         curl_close($ch);
         $data = json_decode($response);

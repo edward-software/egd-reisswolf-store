@@ -212,6 +212,14 @@ class User extends BaseUser
     }
 
     /**
+     * Fonction manuelle pour afficher Prénom + Nom dans un tableau Goondi
+     */
+    public function getFullName()
+    {
+        return $this->firstName . ' ' . $this->getLastName();
+    }
+
+    /**
      * Set dateCreation.
      *
      * @param \DateTime $dateCreation
