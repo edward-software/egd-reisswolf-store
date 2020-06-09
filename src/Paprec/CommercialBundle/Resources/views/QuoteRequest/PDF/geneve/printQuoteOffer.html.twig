@@ -105,6 +105,10 @@
             width: 50%;
         }
 
+        .mb-14 {
+            margin-bottom: 14px;
+        }
+
         .mb-20 {
             margin-bottom: 20px;
         }
@@ -273,7 +277,7 @@
             border-top: 3px solid #2c4491;
             /*position: absolute;*/
             /*bottom: 0;*/
-            margin-top: 80px;
+            margin-top: 20px;
             width: 100%;
         }
 
@@ -438,15 +442,23 @@
                     <td>Quantité</td>
                 </tr>
 
-                {% for line in quoteRequest.quoteRequestLines %}
+                {% for product in products %}
                 <tr>
-                    <td class="bold">{{ line.product.capacity }}</td>
-                    <td class="bold">{{ line.product|productLabelTranslation(locale,'lockType') }}</td>
-                    <td class="bold">{{ line.setUpPrice|formatAmount('', app.request.locale)|round|number_format(2, '.', ',') }}</td>
-                    <td class="bold">{{ line.rentalUnitPrice|formatAmount('', app.request.locale)|round|number_format(2, '.', ',') }}</td>
-                    <td class="bold">{{ line.transportUnitPrice|formatAmount('', app.request.locale)|round|number_format(2, '.', ',') }}</td>
+                    <td class="bold">{{ product.capacity }}</td>
+                    <td class="bold">{{ product|productLabelTranslation(locale,'lockType') }}</td>
+                    <td class="bold">{{ product.setUpPrice|formatAmount('', app.request.locale)|round|number_format(2, '.', ',') }}</td>
+                    <td class="bold">{{ product.rentalUnitPrice|formatAmount('', app.request.locale)|round|number_format(2, '.', ',') }}</td>
+                    <td class="bold">{{ product.transportUnitPrice|formatAmount('', app.request.locale)|round|number_format(2, '.', ',') }}</td>
                     <td>inclus</td>
-                    <td class="bold">{{ line.quantity }}</td>
+                    <td class="bold">
+                        {% set quantity = 0 %}
+                        {% for line in quoteRequest.quoteRequestLines %}
+                            {% if line.product.id == product.id %}
+                                {% set quantity = line.quantity %}
+                            {% endif %}
+                        {% endfor %}
+                        {{ quantity }}
+                    </td>
                 </tr>
                 {% endfor %}
                 <tr class="empty">
@@ -471,24 +483,24 @@
             </table>
 
 
-            <p class="mb-20">
+            <p class="mb-14">
                 Conformément à votre demande, vos conteurs sécurisés seront collectés : {% if quoteRequest.frequency == 'ponctual' %}
                     À la demande
                 {% elseif quoteRequest.frequency == 'regular' %}
                     {{ quoteRequest.frequencyTimes }} fois / {{ ('Commercial.QuoteRequest.' ~ quoteRequest.frequencyInterval)|trans }}
                 {% endif %}
             </p>
-            <p class="mb-20">
+            <p class="mb-14">
                 Validité de l'offre : 30 jours dès la date de l'offre.
             </p>
-            <p class="mb-20">
+            <p class="mb-14">
                 Nous restons volontiers à votre disposition pour tout renseignement complémentaire.
             </p>
-            <p class="mb-20" style="line-height: 20px;">
+            <p class="mb-14" style="line-height: 20px;">
                 En cas d'acceptation de notre proposition, nous vous remercions de bien vouloir nous retourner par voie postale le contrat, ci-après annexé, dûment signé.
             </p>
-            <p class="mb-20">Meilleures salutations,</p>
-            <h2 class="mb-40">Votre partenaire REISSWOLF</h2>
+            <p class="mb-14">Meilleures salutations,</p>
+            <h2 class="mb-20">Votre partenaire REISSWOLF</h2>
 
             <div class="flex offer__signature">
                <div>

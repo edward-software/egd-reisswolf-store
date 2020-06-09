@@ -558,6 +558,9 @@ class QuoteRequestManager
                 return false;
             }
 
+            $productManager = $this->container->get('paprec_catalog.product_manager');
+            $products = $productManager->getAvailableProducts();
+
             /**
              * On génère la page d'offre
              */
@@ -568,15 +571,14 @@ class QuoteRequestManager
                         array(
                             'quoteRequest' => $quoteRequest,
                             'date' => $today,
-                            'locale' => $locale
+                            'locale' => $locale,
+                            'products' => $products
                         )
                     )
                 ),
                 $filenameOffer
             );
 
-            $productManager = $this->container->get('paprec_catalog.product_manager');
-            $products = $productManager->getAvailableProducts();
 
             /**
              * On génère la page d'offre
