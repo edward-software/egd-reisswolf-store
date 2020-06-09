@@ -14,7 +14,7 @@ User:
         System-informations:      Systeminformationen
         Add:                      Benützer hinzufügen
         Export:                   Benützer exportieren
-        View:                     Visualiser l'utilisateur
+        View:                     Benutzer anzeigen
         Edit:                     Benützer ändern
         Remove:                   Benützer löschen
         Confirm-cancel:           Sind Sie sicher, dass Sie stornieren möchten?
@@ -30,9 +30,9 @@ User:
         Password:                 Passwort
         Edit-my-profile:          Profil ändern
         Success:
-            accessHasBeenSent:    Les accès ont été correctement envoyés
+            accessHasBeenSent:    Die Zugriffe sind korrekt gesendet worden
         Error:
-            accessCannotBeSent:   Les accès n'ont pu être envoyés
+            accessCannotBeSent:   Die Zugriffe konnten nicht gesendet werden
 
 'Password':                       Passwort
 'Repeat Password':                Passwort Bestätigung

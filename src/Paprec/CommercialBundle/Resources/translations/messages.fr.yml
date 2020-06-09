@@ -1,129 +1,117 @@
 Commercial:
 
 
-  Bundle-name:                    Gestion commerciale
-  QuoteRequests:                  Demandes de devis
-  Settings:                       Paramétrage
+    Bundle-name:                    Gestion commerciale
+    QuoteRequests:                  Demandes de devis
+    Settings:                       Paramétrage
 
-  QuoteRequest:
-    QuoteRequests: Demandes de devis
-    List: Liste des demandes de devis
-    Add: Ajout d'un devis
-    Export: Export des devis
-    BusinessName: Nom société
-    TotalAmount: Montant total
-    QuoteStatus: Status devis
-    Date-crea: Date créa.
-    Canton: Canton
-    Civility: Civilité
-    LastName: Nom
-    FirstName: Prénom
-    Email: Email
-    Phone: Téléphone
-    Address: Adresse
-    PostalCode: Code postal
-    City: Ville
-    Informations-BO: Informations Back-Office
-    Informations-FO: Informations Front-Office
-    Frequency: Fréquence
-    PassingFrequency: Fréquence de passage (si régulier)
-    FrequencyTimes : Nb de passages (si régulier)
-    month: mois
-    quarter: trimestre
-    year: an
-    week: semaine
-    CoworkerNumber: Effectif
-    UserInCharge: Commercial en charge
-    Reference: Référence de l'offre
-    IsMultisite: Prestation multi-sites
-    Comment: Commentaire
-    OverallDiscount: Ajustement prix (+/- en %)
-    CustomerId: Numéro client
-    SalesmanComment: Commentaire commercial
-    AnnualBudget: Budget annuel
-    View: Vue du devis
-    Download-quote: Télécharger PDF
-    Send-quote: Envoyer devis au client
-    ProductsList: Liste des produits
-    AddLine: Ajouter un produit
-    Confirm-send-quote: Êtes-vous sûr de vouloir envoyer le devis au client ?
-    Edit: Edition du devis
-    Ponctual: A la demande
-    Regular: Régulière
-    Error:
-      generatedQuoteNotSent:    Erreur lors de la génération et l'envoi du devis.
-    Success:
-      generatedQuoteSent:       Le devis a bien été généré et envoyé au client.
-      newUserInChargeWarned: Un mail a été envoyé au nouveau commercial en charge
-    Locale: Langue
-    Number: Numéro offre
+    QuoteRequest:
+        QuoteRequests: Demandes de devis
+        List: Liste des demandes de devis
+        Add: Ajout d'un devis
+        Export: Export des devis
+        BusinessName: Nom société
+        TotalAmount: Montant total
+        QuoteStatus: Status devis
+        Date-crea: Date créa.
+        Canton: Canton
+        Civility: Civilité
+        LastName: Nom
+        FirstName: Prénom
+        Email: Email
+        Phone: Téléphone
+        Address: Adresse
+        PostalCode: Code postal
+        City: Ville
+        Informations-BO: Informations Back-Office
+        Informations-FO: Informations Front-Office
+        Frequency: Fréquence
+        PassingFrequency: Fréquence de passage (si régulier)
+        FrequencyTimes: Nb de passages (si régulier)
+        month: mois
+        quarter: trimestre
+        year: an
+        week: semaine
+        CoworkerNumber: Effectif
+        UserInCharge: Commercial en charge
+        Reference: Référence de l'offre
+        IsMultisite: Prestation multi-sites
+        Comment: Commentaire
+        OverallDiscount: Ajustement prix (+/- en %)
+        CustomerId: Numéro client
+        SalesmanComment: Commentaire commercial
+        AnnualBudget: Budget annuel
+        View: Vue du devis
+        Download-quote: Télécharger PDF
+        Send-quote: Envoyer devis au client
+        ProductsList: Liste des produits
+        AddLine: Ajouter un produit
+        Confirm-send-quote: Êtes-vous sûr de vouloir envoyer le devis au client ?
+        Edit: Edition du devis
+        Ponctual: A la demande
+        Regular: Régulière
+        Error:
+            generatedQuoteNotSent:    Erreur lors de la génération et l'envoi du devis.
+        Success:
+            generatedQuoteSent:       Le devis a bien été généré et envoyé au client.
+            newUserInChargeWarned: Un mail a été envoyé au nouveau commercial en charge
+        Locale: Langue
+        Number: Numéro offre
 
-  QuoteStatusList:
-    CREATED: Créé
-    PENDING: En attente
-    PROCESSING: En traitement
-    CLOSED: Fermé
+    QuoteStatusList:
+        CREATED: Créé
+        PENDING: En attente
+        PROCESSING: En traitement
+        CLOSED: Fermé
 
-  StaffList:
-    19: De 1 à 9 employés
-    1019: De 10 à 19 employés
-    2029: De 20 à 29 employés
-    3039: De 30 à 39 employés
-    4049: De 40 à 49 employés
-    5059: De 50 à 59 employés
-    6069: De 60 à 69 employés
-    7079: De 70 à 79 employés
-    8089: De 80 à 89 employés
-    9099: De 90 à 99 employés
-    100109: De 100 à 109 employés
-    110119: De 110 à 119 employés
-    120129: De 120 à 129 employés
-    130139: De 130 à 139 employés
-    140149: De 140 à 149 employés
-    150+: Plus de 150 employés
+    StaffList:
+        120: De 1 à 20 employés
+        2150: De 21 à 50 employés
+        51100: De 51 à 100 employés
+        100+: Plus de 100 employés
 
-  AccessList:
-    stairs: Par escalier
-    elevator: Par ascenseur
-    ground: Niveau rue sans marche
+    AccessList:
+        stairs: Par escalier
+        elevator: Par ascenseur
+        ground: Niveau rue sans marche
 
-  QuoteRequestLine:
-    ProductName: Nom du produit
-    UnitPrice: Prix unitaire
-    Quantity: Quantité
-    TmpLockProg: Programmation Serrure
-    RentalPrice: Location
-    SetUpPrice: Transport 1
-    Transport: Transport 2
-    Treatment: Transport 3
-    Traceability: Transport 4
-    Access: Accès
-    TotalAmount: Montant total
-    Add: Ajout d'un produit
-    Product: Produit
+    QuoteRequestLine:
+        ProductName: Nom du produit
+        UnitPrice: Prix unitaire
+        Quantity: Quantité
+        TmpLockProg: Programmation Serrure
+        RentalPrice: Location
+        SetUpPrice: Transport 1
+        Transport: Transport 2
+        Treatment: Transport 3
+        Traceability: Transport 4
+        Access: Accès
+        TotalAmount: Montant total
+        Add: Ajout d'un produit
+        Product: Produit
 
-  NewQuoteEmail:
-    Title: Une nouvelle demande de devis vous a été affectée.
-    Dear: Cher(ère) Collègue Reisswolf
-    Message1: Tu trouveras ci-joint une demande de vérification de l'offre pour la zone géographique ainsi que du contrat prévu.
-    Message2: Nous t’en remercions par avance.
-    Partner: Ton partenaire Reisswolf
+    NewQuoteEmail:
+        Title: Une nouvelle demande de devis vous a été affectée.
+        Dear: Cher(ère) Collègue Reisswolf
+        Message1: Tu trouveras ci-joint une demande de vérification de l'offre pour la zone géographique ainsi que du contrat prévu.
+        Message2: Nous t’en remercions par avance.
+        Partner: Ton partenaire Reisswolf
 
-  ConfirmEmail:
-    Object: Votre demande de devis
-    Dear:
-      M: Cher Monsieur
-      Mrs: Chère Madame
-    Title: Votre demande a bien été prise en compte et envoyée au service commercial de votre région.
-    Message1: Merci pour votre demande du  %date%. Nous vous remercions de l'intérêt que vous portez aux services REISSWOLF.
-    TechnicalService: service technique
-    Message2: Nous vous enverrons notre offre pour les services REISSWOLF dans les prochaines heures.
-    Regards: Bien cordialement
-    Partner: Votre partenaire Reisswolf
-    Disclaimer:
-      Message1: Vous avez reçu cet e-mail pour vous informer des modifications importantes apportées aux services
-      Message2: que vous utilisez
+    ConfirmEmail:
+        Object: Votre demande de devis
+        Dear:
+            M: Cher Monsieur
+            Mrs: Chère Madame
+        Title: Votre demande a bien été prise en compte et envoyée au service commercial de votre région.
+        Message1: Merci pour votre demande du  %date%. Nous vous remercions de l'intérêt que vous portez aux services REISSWOLF.
+        TechnicalService: service technique
+        Message2: Nous vous enverrons notre offre pour les services REISSWOLF dans les prochaines heures.
+        Regards: Bien cordialement
+        Partner: Votre partenaire Reisswolf
+        Disclaimer:
+            Message1: Vous avez reçu cet e-mail pour vous informer des modifications importantes apportées aux services
+            Message2: que vous utilisez
 
 User:
-  User:
-    Lang: Langue
+    User:
+        Lang: Langue

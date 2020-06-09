@@ -65,22 +65,10 @@ Commercial:
         CLOSED: Geschlossen
 
     StaffList:
-        19: 1 - 9 Mitarbeiter
-        1019: 10 - 19 Mitarbeiter
-        2029: 20 - 29 Mitarbeiter
-        3039: 30 - 39 Mitarbeiter
-        4049: 40 - 49 Mitarbeiter
-        5059: 50 - 59 Mitarbeiter
-        6069: 60 - 69 Mitarbeiter
-        7079: 70 - 79 Mitarbeiter
-        8089: 80 - 89 Mitarbeiter
-        9099: 90 - 99 Mitarbeiter
-        100109: 100 - 109 Mitarbeiter
-        110119: 110 - 119 Mitarbeiter
-        120129: 120 - 129 Mitarbeiter
-        130139: 130 - 139 Mitarbeiter
-        140149: 140 - 149 Mitarbeiter
-        150+: Über 150 Mitarbeiter
+        120: 1 - 20 Mitarbeiter
+        2150: 21 – 50 Mitarbeiter
+        51100: 51 – 100 Mitarbeiter
+        100+: '> 100 Mitarbeiter'
 
     AccessList:
         stairs: Treppe

@@ -31,17 +31,17 @@ General:
   Date-creation:            Erstellungsdatum
 
   Datatable:
-    Records-per-page :      _MENU_ enregistrements par page
-    Nothing-found :         Aucune donnée
+    Records-per-page :      _MENU_ Einträge pro Seite
+    Nothing-found :         Keine Daten
 #    Showing-page :                              Affichage page _PAGE_ sur _PAGES_
-    Showing-page :          Affichage _START_ à _END_ sur un total de _TOTAL_ résultats
-    No-records-available :  Aucun enregistrement trouvé
+    Showing-page :          Anzeige von _START_ bis _END_ von insgesamt _TOTAL_ Ergebnissen
+    No-records-available :  Keine Einträge gefunden
     Search :                Suche
-    Loading :               Chargement...
+    Loading :               Ladevorgang...
     Previous :              vorherige
     Next :                  nächste
 
-  Presence-error:           Presence d'erreur
+  Presence-error:           Vorliegen eines Fehlers
 
   Menu:
     Administration:         Verwaltung

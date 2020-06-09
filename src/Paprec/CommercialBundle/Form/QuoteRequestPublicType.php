@@ -58,7 +58,7 @@ class QuoteRequestPublicType extends AbstractType
                 "choice_label" => function ($choiceValue, $key, $value) {
                     return 'Commercial.StaffList.' . $choiceValue;
                 },
-                'data' => '19',
+                'data' => '120',
                 'required' => true
             ))
             ->add('lastName', TextType::class)

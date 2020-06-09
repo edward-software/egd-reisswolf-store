@@ -1,79 +1,79 @@
 Catalog:
 
   Bundle-name:              Benützer Verwaltung
-  Products:                 Produits
-  Settings:                 Paramétrage
+  Products:                 Produkte
+  Settings:                 Einstellungen
 
   PostalCode:
-    PostalCodes:            Code postaux
-    Name:                   Code postal
+    PostalCodes:            PLZ
+    Name:                   PLZ
     Date-crea:              Date de créa.
-    Date-creation:          Date de création
-    Date-update:            Date de mise à jour
-    Informations:           Informations
-    System-informations:    Informations système
-    List:                   Liste des codes postaux
-    Add:                    Ajouter un code postal
-    Export:                 Exporter les codes postaux
-    Code:                   Code Postal
-    City:                   Commune
-    Zone:                   Zone tarifaire
-    Division:               Division
-    Rate:                   Coefficient
-    View:                   Vue du code postal
-    Edit:                   Modifier le code postal
-    Remove:                 Supprimer le code postal
-    Save:                   Enregistrer
-    Cancel:                 Annuler
-    Confirm-cancel:         Etes-vous sûr de vouloir annuler ?
-    Confirm-remove:         Etes-vous sûr de vouloir supprimer ce code postal ?
+    Date-creation:          Erstellungsdatum
+    Date-update:            Aktualisierungsdatum
+    Informations:           Informationen
+    System-informations:    Systeminformationen
+    List:                   PLZ-Liste
+    Add:                    PLZ hinzufügen
+    Export:                 PLZ exportieren
+    Code:                   PLZ
+    City:                   Gemeinde
+    Zone:                   Tarifzone
+    Division:               Sparte
+    Rate:                   PreisVariable
+    View:                   PLZ Ansicht
+    Edit:                   PLZ ändern
+    Remove:                 PLZ löschen
+    Save:                   Speichern
+    Cancel:                 Stornieren
+    Confirm-cancel:         Sind Sie sicher, dass Sie stornieren möchten?
+    Confirm-remove:         Sind Sie sicher, dass Sie PLZ löschen möchten
     SetUpRate:              PreisVariable für Transport (komponente 1)
     RentalRate:             PreisVariable für Behältermiete
     TransportRate:          PreisVariable für Transport (komponente 2)
     TreatmentRate:          PreisVariable für Transport (komponente 3)
     TraceabilityRate:       PreisVariable für Transport (komponente 4)
-    UserInCharge:           Commercial en charge
+    UserInCharge:           Name Aussendienstmitarbeiter
     DisabledUser:           (Inaktives Konto)
     DeletedUser:            (Gelöschtes Konto)
     Region:                 Region
-    System-information:     Informations système
+    System-information:     Systeminformationen
 
   Picture:
-    Path:                   Choisir photo
-    Type:                   Type de la photo
-    AddPilotPicture:        Ajouter une photo principale
+    Path:                   Foto auswählen
+    Type:                   Fototyp
+    AddPilotPicture:        Hauptfoto hinzufügen
     AddPicto:               Ajouter un picto
-    AddPicture:             Ajouter une photo secondaire
+    AddPicture:             Sekundärfoto hinzufügen
 
   Product:
-    View:                   Vue du produit
-    Products:               Liste des produits
-    Add:                    Ajouter un produit
-    Edit:                   Editer un produit
-    Remove:                 Supprimer
-    List:                   Liste des produits
-    Information:            Information du produit
+    View:                   Produktansicht
+    Products:               Produktverzeichnis
+    Add:                    Produkt hinzufügen
+    Edit:                   Produkt bearbeiten
+    Remove:                 Löschen
+    List:                   Produktverzeichnis
+    Information:            Produktinformation
     Capacity:               Volumen
     Dimensions:             Abmessungen
-    AvailablePostalCodes:   Disponibilités géographiques
+    AvailablePostalCodes:   Geographische Verfügbarkeit
     IsEnabled:
       IsEnabled:            aktiv
-      Yes:                  Oui
-      No:                   Non
-      Disable:              Désactiver
-      Enable:               deaktivieren
+      Yes:                  Ja
+      No:                   Nein
+      Disable:              Deaktivieren
+      Enable:               Aktivieren
     Picto:                  Picto
-    AddPicture:             Ajouter image
-    PilotPicture:           Image principale
-    SetSecondaryPicture:    Définir en image secondaire
-    Pictures:               Images
-    EditPicture:            Remplacer image
-    System-information:     Informations système
-    Date-creation:          Date de création
-    Date-update:            Date dernière modification
-    Export:                 Exporter les produits
-    Details:                Details du produit
-    CapacityUnit:           Unité de volume
+    AddPicture:             Bild hinzufügen
+    PilotPicture:           Hauptbild hinzufügen
+    SetSecondaryPicture:    als Sekundärbild definieren
+    Pictures:               Bildern
+    EditPicture:            Bild ersetzen
+    System-information:     Systeminformationen
+    Date-creation:          Erstellungsdatum
+    Date-update:            Aktualisierungsdatum
+    Export:                 Produkte exportieren
+    Details:                Produktdetails
+    CapacityUnit:           Volumeneinheit
     Position:               Position
     FolderNumber:           Anzahl Ordner
     SetUpPrice:             Transportpreis (komponente 1)
@@ -83,49 +83,49 @@ Catalog:
     TraceabilityUnitPrice:  Transportpreis (komponente 4)
 
   ProductLabel:
-    Add: Ajouter une traduction
-    Edit: Editer traduction
+    Add: Übersetzung hinzufügen
+    Edit: Übersetzung bearbeiten
     Language:
-      Language: Langue
-      EN: Anglais
-      FR: Français
-      IT: Italien
-      DE: Allemand
-    Name: Nom
-    Short-description: Description courte
+      Language: Sprache
+      EN: Englisch
+      FR: Französisch
+      IT: Französisch
+      DE: Deutsch
+    Name: Name
+    Short-description: DKurze Beschreibung
     Lock:  Schloss
     Version: Version
     Information: Informations
     Remove: Supprimer
 
   Region:
-    Regions: Régions
-    Name: Nom
-    Email: Email contact
-    List: Liste des régions
-    Add: Ajouter une région
-    Export: Exporter les régions
-    View: Vue de la région
-    Edit: Modifier région
-    Remove: Supprimer région
-    Informations: Informations
-    System-informations: Informations système
-    PostalCodes: Codes postaux
+    Regions: Region
+    Name: Name
+    Email: E-Mail
+    List: Regionenliste
+    Add: Region hinzufügen
+    Export: Regionen exportieren
+    View: Regionansicht
+    Edit: Region ändern
+    Remove: Region löschen
+    Informations: Informationen
+    System-informations: Systeminformationen
+    PostalCodes: PLZ
 
   CustomArea:
-    CustomAreas: Zones personnalisables
-    List: Liste des zones personnalisables
-    Code: Code
-    Language: Langue
-    Content: Contenu
-    LeftContent: Bloc de contenu gauche
-    RightContent: Bloc de contenu droite
-    IsDisplayed: Affiché
-    Add: Ajouter une zone
-    View: Vue de la zone
-    Edit: Modifier zone
-    Remove: Supprimer zone
-    AddPictureLeft: Photo gauche
-    AddPictureRight: Photo droite
-    Informations: Informations
-    System-informations: Informations système
+    CustomAreas: Anpassbare Zonen
+    List: Verzeichnis Anpassbare Zonen
+    Code: Kode
+    Language: Sprache
+    Content: Inhalt
+    LeftContent: Linker Inhaltsblock
+    RightContent: Rechter Inhaltsblock
+    IsDisplayed: Angezeigt
+    Add: Zone hinzufügen
+    View: Zonenansicht
+    Edit: Zone ändern
+    Remove: Zone löschen
+    AddPictureLeft: Foto links
+    AddPictureRight: Foto rechts
+    Informations: Informationen
+    System-informations: Systeminformationen
