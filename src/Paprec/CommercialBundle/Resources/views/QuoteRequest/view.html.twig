@@ -280,16 +280,11 @@
                                     <th>{{ 'Commercial.QuoteRequestLine.ProductName'|trans }}</th>
                                     <th>{{ 'Commercial.QuoteRequestLine.Quantity'|trans }}</th>
                                     <th>{{ 'Commercial.QuoteRequestLine.TmpLockProg'|trans }}</th>
-                                    <th>{{ 'Commercial.QuoteRequestLine.RentalPrice'|trans }} <span
-                                                style="font-weight: 300;">(*coef.)</span></th>
-                                    <th>{{ 'Commercial.QuoteRequestLine.SetUpPrice'|trans }} <span
-                                                style="font-weight: 300;">(*coef.)</span></th>
-                                    <th>{{ 'Commercial.QuoteRequestLine.Transport'|trans }} <span
-                                                style="font-weight: 300;">(*coef.)</span></th>
-                                    <th>{{ 'Commercial.QuoteRequestLine.Treatment'|trans }} <span
-                                                style="font-weight: 300;">(*coef.)</span></th>
-                                    <th>{{ 'Commercial.QuoteRequestLine.Traceability'|trans }} <span
-                                                style="font-weight: 300;">(*coef.)</span></th>
+                                    <th>{{ 'Commercial.QuoteRequestLine.RentalPrice'|trans }}</th>
+                                    <th>{{ 'Commercial.QuoteRequestLine.SetUpPrice'|trans }}</th>
+                                    <th>{{ 'Commercial.QuoteRequestLine.Transport'|trans }}</th>
+                                    <th>{{ 'Commercial.QuoteRequestLine.Treatment'|trans }} </th>
+                                    <th>{{ 'Commercial.QuoteRequestLine.Traceability'|trans }}</th>
                                     <th>{{ 'Commercial.QuoteRequestLine.Access'|trans }}</th>
                                     <th>{{ 'Commercial.QuoteRequestLine.TotalAmount'|trans }}</th>
 
@@ -307,17 +302,24 @@
                                         </td>
                                         <td>{{ quoteRequestLine.quantity }}</td>
                                         <td>{{ tmpLockProg }}</td>
-                                        <td>{{ quoteRequestLine.rentalUnitPrice|formatAmount('', app.request.locale) }}
-                                            * {{ quoteRequestLine.rentalRate|formatAmount(null, app.request.locale, 'FORMAT15')|number_format(2, '.', ' ') }}</td>
-                                        <td>{{ quoteRequestLine.setUpPrice|formatAmount('', app.request.locale) }}
-                                            * {{ quoteRequestLine.setUpRate|formatAmount(null, app.request.locale, 'FORMAT15')|number_format(2, '.', ' ') }}</td>
+                                        <td>
+                                            {{ ((quoteRequestLine.rentalRate / 1000000000000000) + (quoteRequestLine.rentalUnitPrice / 100))|number_format(2, ',', ' ') }}
+                                        </td>
+                                        <td>
+                                            {{ ((quoteRequestLine.setUpRate / 1000000000000000) + (quoteRequestLine.setUpPrice / 100))|number_format(2, ',', ' ') }}
+                                        </td>
 
-                                        <td>{{ quoteRequestLine.transportUnitPrice|formatAmount('', app.request.locale) }}
-                                            * {{ quoteRequestLine.transportRate|formatAmount(null, app.request.locale, 'FORMAT15')|number_format(2, '.', ' ') }}</td>
-                                        <td>{{ quoteRequestLine.treatmentUnitPrice|formatAmount('', app.request.locale) }}
-                                            * {{ quoteRequestLine.treatmentRate|formatAmount(null, app.request.locale, 'FORMAT15')|number_format(2, '.', ' ') }}</td>
-                                        <td>{{ quoteRequestLine.traceabilityUnitPrice|formatAmount('', app.request.locale) }}
-                                            * {{ quoteRequestLine.traceabilityRate|formatAmount(null, app.request.locale, 'FORMAT15')|number_format(2, '.', ' ') }}</td>
+                                        <td>
+                                            {{ ((quoteRequestLine.transportRate / 1000000000000000) + (quoteRequestLine.transportUnitPrice / 100))|number_format(2, ',', ' ') }}
+
+                                        </td>
+                                        <td>
+                                            {{ ((quoteRequestLine.treatmentRate / 1000000000000000) + (quoteRequestLine.treatmentUnitPrice / 100))|number_format(2, ',', ' ') }}
+                                        </td>
+                                        <td>
+                                            {{ ((quoteRequestLine.traceabilityRate / 1000000000000000) + (quoteRequestLine.traceabilityUnitPrice / 100))|number_format(2, ',', ' ') }}
+
+                                        </td>
                                         <td>{{ quoteRequestLine.accessPrice|formatAmount('', app.request.locale) }}</td>
                                         <td>{{ quoteRequestLine.totalAmount|formatAmount('', app.request.locale) }}</td>
                                         <td class="text-center">
