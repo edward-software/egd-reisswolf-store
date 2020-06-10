@@ -334,7 +334,7 @@
                             <p class="bold">Ihre Referenz :</p>
                         </div>
                         <div>
-                            <p> {{ quoteRequest.firstName }} {{ quoteRequest.lastName }}</p>
+                            <p> {{ quoteRequest.firstName }}&nbsp;{{ quoteRequest.lastName }}</p>
                         </div>
                     </div>
 
@@ -373,7 +373,7 @@
                             <p class="bold">Unsere Referenz :</p>
                         </div>
                         <div>
-                            <p>Romeo Albus</p>
+                            <p>Romeo&nbsp;Albus</p>
                         </div>
                     </div>
 
@@ -495,7 +495,7 @@
                 abgeholt : {% if quoteRequest.frequency == 'ponctual' %}
                     Auf Anfrage
                 {% elseif quoteRequest.frequency == 'regular' %}
-                    {{ quoteRequest.frequencyTimes }} zeiten / {{ ('Commercial.QuoteRequest.' ~ quoteRequest.frequencyInterval)|trans }}
+                    {{ quoteRequest.frequencyTimes }} zeiten / {{ ('Commercial.QuoteRequest.' ~ quoteRequest.frequencyInterval)|trans([], null, 'DE') }}
                 {% endif %}
             </p>
             <p class="mb-14">
