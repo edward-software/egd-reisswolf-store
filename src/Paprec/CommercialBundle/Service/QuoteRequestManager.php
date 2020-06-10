@@ -383,28 +383,11 @@ class QuoteRequestManager
                 return false;
             }
 
-            /**
-             * On génère le PDF seuleement si on N'est PAS en multisite
-             */
-            if ($quoteRequest->getIsMultisite()) {
-                $attachment = null;
-            } else {
-                $pdfFilename = date('Y-m-d') . '-Reisswolf-Devis-' . $quoteRequest->getNumber() . '.pdf';
-
-                $pdfFile = $this->generatePDF($quoteRequest, $locale);
-
-                if (!$pdfFile) {
-                    return false;
-                }
-                $attachment = \Swift_Attachment::newInstance(file_get_contents($pdfFile), $pdfFilename,
-                    'application/pdf');
-            }
-
             $message = \Swift_Message::newInstance()
                 ->setSubject(
                     $translator->trans(
                         'Commercial.NewQuoteEmail.Object',
-                        array('%number' => $quoteRequest->getId())))
+                        array('%number%' => $quoteRequest->getId())))
                 ->setFrom($from)
                 ->setTo($rcptTo)
                 ->setBody(
@@ -418,15 +401,8 @@ class QuoteRequestManager
                     'text/html'
                 );
 
-            if ($attachment) {
-                $message->attach($attachment);
-            }
 
             if ($this->container->get('mailer')->send($message)) {
-                if (isset($pdfFile) && file_exists($pdfFile)) {
-                    unlink($pdfFile);
-                }
-
                 return true;
             }
             return false;
