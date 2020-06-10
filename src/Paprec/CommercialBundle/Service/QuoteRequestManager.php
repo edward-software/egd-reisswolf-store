@@ -507,8 +507,11 @@ class QuoteRequestManager
                 }
             }
 
-            $filenameOffer = $pdfTmpFolder . '/' . md5(uniqid('', true)) . '.pdf';
+
             $filename = $pdfTmpFolder . '/' . md5(uniqid('', true)) . '.pdf';
+            $filenameOffer = $pdfTmpFolder . '/' . md5(uniqid('', true)) . '.pdf';
+            $filenameContract = $pdfTmpFolder . '/' . md5(uniqid('', true)) . '.pdf';
+
 
             $today = new \DateTime();
 
@@ -561,6 +564,11 @@ class QuoteRequestManager
                 $filenameOffer
             );
 
+            /**
+             * Concaténation des notices
+             */
+            $pdfArray = array();
+            $pdfArray[] = $filenameOffer;
 
             if ($addContract) {
                 /**
@@ -577,17 +585,15 @@ class QuoteRequestManager
                             )
                         )
                     ),
-                    $filename
+                    $filenameContract
                 );
+
+                $pdfArray[] = $filenameContract;
+
             }
 
 
-            /**
-             * Concaténation des notices
-             */
-            $pdfArray = array();
-            $pdfArray[] = $filenameOffer;
-            $pdfArray[] = $filename;
+
 
 
             if (count($pdfArray)) {
@@ -596,10 +602,9 @@ class QuoteRequestManager
                 file_put_contents($filename, $merger->merge());
             }
 
-            if (file_exists($filenameOffer)) {
-                unlink($filenameOffer);
+            if (file_exists($filenameContract)) {
+                unlink($filenameContract);
             }
-
 
             if (!file_exists($filename)) {
                 return false;
