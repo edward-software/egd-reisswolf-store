@@ -91,14 +91,15 @@ Commercial:
         Product: Produkt
 
     NewQuoteEmail:
-        Title: Ihnen wurde eine neue Angebotsanfrage zugeordnet.
-        r: Sehr geehrter Kollege Reisswolf
-        Message1: Anbei finden Sie eine Anfrage zur Überprüfung des Angebots für das geografische Gebiet sowie den geplanten Vertrag.
-        Message2: Wir danken Ihnen im Voraus.
-        Partner: Ihr Partner Reisswolf
+        Object: Anbei eine neue Kundenanfrage N°%number%
+        Dear: Liebe (r) Reisswolf Kollegin (e)
+        Message1: Anbei erhältst Du eine Anfrage mit der Bitte, das Angebot auf die geographische Zone sowie den geplanten Vertrag zu überprüfen.
+        QuoteLink: Klicken Sie hier auf den Link, um auf die neue Kundenanfrage.
+        Message2: Danke im Voraus.
+        Partner: Dein Reisswolf-Partner
 
     ConfirmEmail:
-        Object: Ihre Angebotsanfrage
+        Object: Vielen Dank für Ihre Anfrage
         Dear:
             M: Sehr geehrter Herr
             Mrs: Sehr geehrte Frau
@@ -111,6 +112,18 @@ Commercial:
         Disclaimer:
             Message1: Sie haben diese E-Mail erhalten, um Sie über wichtige Änderungen an den von Ihnen genutzten
             Message2: -Diensten zu informieren.
+
+    GeneratedQuoteEmail:
+        Object: Dienstleistungsangebot der Firma Reisswolf
+        Dear:
+            M: Sehr geehrter Herr
+            Mrs: Sehr geehrte Frau
+        Message1: Vielen Dank für Ihre Anfrage vom %date%. Es freut uns, dass Sie sich für die Dienstleistungen von REISSWOLF interessieren.
+        Message2: Im Anhang finden Sie unser Angebot für die Leistungen von REISSWOLF. Diese können jederzeit, kurzfristig und unkompliziert an Ihre aktuellen Bedürfnisse angepasst werden. Wir garantieren dabei immer einen einwandfreien Service und die tagfertige Vernichtung Ihrer Akten und Datenträger.
+        Message3: Zögern Sie bitte nicht, uns bei weiteren Fragen zu kontaktieren. Wir freuen uns, bald für Sie tätig werden zu dürfen.
+        Message4: Falls Sie einverstanden sind, können Sie den Vertrag herunterladen, unterschreiben und per Post zurückschicken.
+        Regards: Mit freundlichen Grüssen.
+        Partner: Ihr Reisswolf-Partner
 
 User:
     User:

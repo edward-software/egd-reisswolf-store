@@ -19,203 +19,27 @@
     <![endif]-->
     <!-- Web Font / @font-face : END -->
 
-    <!-- CSS Reset -->
-    <style type="text/css">
-
-        /* What it does: Remove spaces around the email design added by some email clients. */
-        /* Beware: It can remove the padding / margin and add a background color to the compose a reply window. */
-        html,
-        body {
-            margin: 0 auto !important;
-            padding: 0 !important;
-            height: 100% !important;
-            width: 100% !important;
-            font-family: 'avenir', Arial, sans-serif !important;
-            color: #4A4A4A !important;
-        }
-
-        /* What it does: Stops email clients resizing small text. */
-        * {
-            -ms-text-size-adjust: 100%;
-            -webkit-text-size-adjust: 100%;
-        }
-
-        /* What is does: Centers email on Android 4.4 */
-        div[style*="margin: 16px 0"] {
-            margin: 0 !important;
-        }
-
-        /* What it does: Stops Outlook from adding extra spacing to tables. */
-        table,
-        td {
-            mso-table-lspace: 0pt !important;
-            mso-table-rspace: 0pt !important;
-        }
-
-        /* What it does: Fixes webkit padding issue. Fix for Yahoo mail table alignment bug. Applies table-layout to the first 2 tables then removes for anything nested deeper. */
-        table {
-            border-spacing: 0 !important;
-            border-collapse: collapse !important;
-            table-layout: fixed !important;
-            Margin: 0 auto !important;
-        }
-
-        table table table {
-            table-layout: auto;
-        }
-
-        /* What it does: Uses a better rendering method when resizing images in IE. */
-        img {
-            -ms-interpolation-mode: bicubic;
-        }
-
-        /* What it does: A work-around for iOS meddling in triggered links. */
-        .mobile-link--footer a,
-        a[x-apple-data-detectors] {
-            color: inherit !important;
-            text-decoration: underline !important;
-        }
-
-    </style>
-
-    <!-- Progressive Enhancements -->
-    <style>
-
-        /* Style email */
-        .logo {
-            text-align: center;
-        }
-
-        .btn {
-            font-family: 'avenir', Arial, sans-serif !important;
-            padding: 13px 25px 10px 25px;
-            font-size: 16px;
-            display: inline-block;
-            border-radius: 3px;
-            cursor: pointer;
-            border: none;
-            outline: 0;
-            text-transform: uppercase;
-        }
-
-        .btn-primary {
-            background-color: #072244;
-        }
-
-        .btn-secondary {
-            background-color: #DDE6FF;
-        }
-
-        .user img {
-            border: 1px solid #979797;
-            border-radius: 50px;
-        }
-
-        .workspace {
-            width: 80px;
-            height: 80px;
-            background-color: #072244;
-            border: 1px solid #D8D8D8;
-            border-radius: 50px;
-            color: #ffffff;
-            font-size: 30px;
-            font-weight: 300;
-        }
-
-        .organization img {
-            border: 1px solid #D8D8D8;
-            border-radius: 50px;
-        }
-
-        /* Media Queries */
-        @media only screen and (max-width: 480px) {
-
-            .email-container {
-                width: 100% !important;
-                margin: auto !important;
-            }
-
-
-            .mobile-padding-txt {
-                padding: 30px 15px 40px !important;
-                font-size: 17px !important;
-            }
-        }
-
-    </style>
 
 </head>
-<body bgcolor="#f2f3f7" width="100%" style="margin: 0 !important; padding: 0 !important;">
-<center style="width: 90%; margin: 10px auto 0;">
+<body>
 
-    <!-- Email Body : BEGIN -->
-    <table cellspacing="0" cellpadding="0" border="0" align="center" bgcolor="#ffffff" width="100%"
-           style="max-width: 600px; background-color:#F2F2F2;  border: 1px solid #D8D8D8; box-shadow: 0 3px 4px 0 rgba(0,0,0,0.2);"
-           class="email-container">
+{{ 'Commercial.NewQuoteEmail.Dear'|trans }},
+<br><br>
+{{ 'Commercial.NewQuoteEmail.Message1'| trans({}, "messages", locale) }}
+<br>
+<a href="{{ reisswolf_public_site_url }}/admin/commercial/quoteRequest/view/{{ quoteRequest.id }}">
+    {{ 'Commercial.NewQuoteEmail.QuoteLink'| trans({}, "messages", locale) }}
+</a>
+<br><br>
+{{ 'Commercial.NewQuoteEmail.Message2'| trans({}, "messages", locale) }}
+<br><br>
+{{ 'Commercial.ConfirmEmail.Partner'| trans({}, "messages", locale) }}
+<br><br>
+BALE, Schlachthofstrasse 18, CH-4056 Bâle, +41 61 386 96 70<br>
+LUCERNE, Kantonsstrasse 5, CH-6033 Buchrain, +41 41 448 38 62<br>
+ZURICH, Lindenstrasse 3, CH-8108 Dällikon, +41 44 844 24 04<br>
+ROMANDIE, Rue de la Bergère 26, CH-1242 Satigny, +41 22 552 62 62<br>
 
-        <tr>
-            <td>
-                <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%"
-                       style="max-width: 550px;  margin-bottom:15px !important;"
-                       class="email-container">
-                    <tr>
-                        <td class="logo" style="padding-top: 25px;">
-                            <img src="{{ absolute_url(asset('build/static/reisswolf_logo.png')) }}" alt="EDWARD"
-                                 border="0"
-                                 width="200"
-                                 align="center">
-                        </td>
-                    </tr>
-                </table>
-                <table style="background-color: #FFFFFF; margin: 25px 50px 25px 50px !important;">
-                    <tr>
-                        <td class="mobile-padding-txt"
-                            style="padding: 30px 80px 30px; text-align: center; text-transform: uppercase; font-size: 21px; mso-height-rule: exactly; line-height: 31px; font-family: 'Oswald', 'Arial', sans-serif">
-                            {{ 'Commercial.NewQuoteEmail.Title'| trans({}, "messages", locale) }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div style="width: 40px; height: 2px; background-color: #2C4491; margin: 0 45% !important; max-width: 40px"></div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 30px 15px 120px; text-align: left; font-size: 17px; mso-height-rule: exactly; line-height: 23px;">
-                            <div style="margin: 0 25px !important; font-family: 'Arimo', 'Arial', sans-serif; font-size: 16px; line-height: 22px; color: #333333;">
-                                {{ 'Commercial.NewQuoteEmail.Dear'|trans }},
-                                <br><br>
-                                {{ 'Commercial.NewQuoteEmail.Message1'| trans({}, "messages", locale) }}
-                                <br><br>
-                                {{ 'Commercial.NewQuoteEmail.Message2'| trans({}, "messages", locale) }}
-                                <br><br>
-                                {{ 'Commercial.ConfirmEmail.Partner'| trans({}, "messages", locale) }}
-                            </div>
-                        </td>
-                    </tr>
-
-                </table>
-                <table>
-                    <tr>
-                        <td>
-                            <table cellspacing="0" cellpadding="0" border="0" align="center"
-                                   style="max-width: 550px;">
-                                <tr>
-                                    <td style="padding: 30px 10px 40px; text-align: center; font-size: 13px;">
-                                        © 2019 Reisswolf.<br>
-                                        Zurich, Lindenstrasse 3, CH-8108 Dällikon, +41 44 844 24 04<br>
-                                        Bâle, Schlachthofstrasse 18, CH-4056 Bâle, +41 61 386 96 70<br>
-                                        Lucerne, Kantonsstrasse 5, CH-6033 Buchrain, +41 41 448 38 62<br>
-                                        Geneve, Rue de la Bergère 26, CH-1242 Satigny, +41 22 552 62 62<br>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-    </table>
-</center>
 </body>
 </html>
 

@@ -323,7 +323,7 @@ class QuoteRequestManager
             $translator = $this->container->get('translator');
 
             $message = \Swift_Message::newInstance()
-                ->setSubject('Reisswolf E-shop :' . $translator->trans('Commercial.ConfirmEmail.Object'))
+                ->setSubject($translator->trans('Commercial.ConfirmEmail.Object'))
                 ->setFrom($from)
                 ->setTo($rcptTo)
                 ->setBody(
@@ -359,6 +359,8 @@ class QuoteRequestManager
         try {
             $from = $this->container->getParameter('paprec_email_sender');
             $this->get($quoteRequest);
+
+            $translator = $this->container->get('translator');
 
             /**
              * Si la quoteRequest est associé à un commercial, on lui envoie le mail d'information de la création d'une nouvelle demande
@@ -399,7 +401,10 @@ class QuoteRequestManager
             }
 
             $message = \Swift_Message::newInstance()
-                ->setSubject('Reisswolf E-shop : Nouvelle demande de devis' . ' N°' . $quoteRequest->getId())
+                ->setSubject(
+                    $translator->trans(
+                        'Commercial.NewQuoteEmail.Object',
+                        array('%number' => $quoteRequest->getId())))
                 ->setFrom($from)
                 ->setTo($rcptTo)
                 ->setBody(
@@ -473,9 +478,10 @@ class QuoteRequestManager
 
             $attachment = \Swift_Attachment::newInstance(file_get_contents($pdfFile), $pdfFilename, 'application/pdf');
 
+            $translator = $this->container->get('translator');
 
             $message = \Swift_Message::newInstance()
-                ->setSubject('Reisswolf : Votre devis')
+                ->setSubject($translator->trans('Commercial.GeneratedQuoteEmail.Object'))
                 ->setFrom($from)
                 ->setTo($rcptTo)
                 ->setBody(

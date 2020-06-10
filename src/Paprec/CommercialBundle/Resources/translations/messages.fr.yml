@@ -91,14 +91,15 @@ Commercial:
         Product: Produit
 
     NewQuoteEmail:
-        Title: Une nouvelle demande de devis vous a été affectée.
+        Object: Voici une nouvelle demande client N°%number%
         Dear: Cher(ère) Collègue Reisswolf
         Message1: Tu trouveras ci-joint une demande de vérification de l'offre pour la zone géographique ainsi que du contrat prévu.
+        QuoteLink: Cliquer ici sur le lien pour accéder à la demande.
         Message2: Nous t’en remercions par avance.
         Partner: Ton partenaire Reisswolf
 
     ConfirmEmail:
-        Object: Votre demande de devis
+        Object: Nous vous remercions pour votre demande
         Dear:
             M: Cher Monsieur
             Mrs: Chère Madame
@@ -111,6 +112,18 @@ Commercial:
         Disclaimer:
             Message1: Vous avez reçu cet e-mail pour vous informer des modifications importantes apportées aux services
             Message2: que vous utilisez
+
+    GeneratedQuoteEmail:
+        Object: Offre de services Reisswolf
+        Dear:
+            M: Cher Monsieur
+            Mrs: Chère Madame
+        Message1: Merci pour votre demande du  %date%. Nous vous remercions de l'intérêt que vous portez aux services REISSWOLF.
+        Message2: Vous trouverez en annexe notre offre pour les services REISSWOLF. Ceux-ci peuvent être adaptés à vos besoins actuels à tout moment, rapidement et simplement. Nous garantissons toujours un service impeccable et la destruction quotidienne de vos fichiers et supports de données.
+        Message3: N'hésitez pas à nous contacter si vous avez d'autres questions. Nous nous réjouissons de travailler bientôt avec vous.
+        Message4: Si vous êtes d'accord, vous pouvez télécharger le contrat, le signer et le retourner par la poste.
+        Regards: Bien cordialement
+        Partner: Votre partenaire Reisswolf
 
 User:
     User:

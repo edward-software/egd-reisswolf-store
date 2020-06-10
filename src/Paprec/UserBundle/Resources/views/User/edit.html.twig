@@ -112,20 +112,18 @@
                                     </div>
 
                                     {#<div class="form-group">#}
-                                        {#<div class="form-label">{{ 'User.User.Postal-codes'|trans }}</div>#}
-                                        {#<div class="form-content">#}
-                                            {#<div class="form__check ml-4">#}
-                                                {#{{ form_widget(form.postalCodes, {'attr': {'class': 'form-control'}}) }}#}
-                                                {#{{ form_errors(form.postalCodes) }}#}
-                                            {#</div>#}
-                                        {#</div>#}
+                                    {#<div class="form-label">{{ 'User.User.Postal-codes'|trans }}</div>#}
+                                    {#<div class="form-content">#}
+                                    {#<div class="form__check ml-4">#}
+                                    {#{{ form_widget(form.postalCodes, {'attr': {'class': 'form-control'}}) }}#}
+                                    {#{{ form_errors(form.postalCodes) }}#}
+                                    {#</div>#}
+                                    {#</div>#}
                                     {#</div>#}
                                 </div>
                             </div>
                         </div>
                     </div>
-                    {# On render le password car si un manager modifie un admin, le cham ppassword ne s'affichera pas #}
-                    {% do form.plainPassword.setRendered() %}
                     {{ form_rest(form) }}
                 </div>
             </div>
@@ -164,7 +162,7 @@
                     showCancelButton: true,
                     confirmButtonText: "{{ 'General.Yes'|trans }}",
                     cancelButtonText: "{{ 'General.No'|trans }}"
-                }).then(function(result) {
+                }).then(function (result) {
                     if (result.value) {
                         $(location).attr('href', url);
                     }

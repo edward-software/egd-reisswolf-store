@@ -381,7 +381,7 @@ class SubscriptionController extends Controller
     {
         $quoteRequestManager = $this->get('paprec_commercial.quote_request_manager');
         $quoteRequest = $quoteRequestManager->get($quoteId);
-        return $this->render('@PaprecCommercial/QuoteRequest/emails/newQuoteEmail.html.twig', array(
+        return $this->render('@PaprecCommercial/QuoteRequest/emails/generatedQuoteEmail.html.twig', array(
             'quoteRequest' => $quoteRequest,
             'locale' => $locale
         ));
