@@ -105,15 +105,22 @@
             width: 50%;
         }
 
+        .mb-14 {
+            margin-bottom: 14px;
+        }
+
         .mb-20 {
             margin-bottom: 20px;
         }
+
         .mb-30 {
             margin-bottom: 30px;
         }
+
         .mb-40 {
             margin-bottom: 40px;
         }
+
 
         /***** PAGE OFFRE *****/
 
@@ -243,6 +250,7 @@
         table .empty {
             height: 30px;
         }
+
         table .empty td:last-child {
             border-left: 0 !important;
             border-right: 0 !important;
@@ -257,6 +265,7 @@
             margin-left: 5px;
             margin-bottom: 3px;
         }
+
         .check.active {
             border: 2px solid white;
             outline: 2px solid grey;
@@ -273,7 +282,7 @@
             border-top: 3px solid #2c4491;
             /*position: absolute;*/
             /*bottom: 0;*/
-            margin-top: 80px;
+            margin-top: 20px;
             width: 100%;
         }
 
@@ -364,7 +373,7 @@
                             <p class="bold">Unsere Referenz :</p>
                         </div>
                         <div>
-                            Romeo Albus
+                            <p>Romeo Albus</p>
                         </div>
                     </div>
 
@@ -396,7 +405,8 @@
         </div>
 
         <div class="offer__presta">
-            <p class="mb-20">Für Ihre Anfrage danken wir Ihnen bestens. Gerne bieten wir Ihnen unsere Dienstleistungen wie folgt an.</p>
+            <p class="mb-20">Für Ihre Anfrage danken wir Ihnen bestens. Gerne bieten wir Ihnen unsere Dienstleistungen
+                wie folgt an.</p>
             <h2>Entsorgung und Vernichtung von Akten</h2>
 
             <table>
@@ -437,15 +447,23 @@
                     <td>Stk</td>
                 </tr>
 
-                {% for line in quoteRequest.quoteRequestLines %}
+                {% for product in products %}
                     <tr>
-                        <td class="bold">{{ line.product.capacity }}</td>
-                        <td class="bold">{{ line.product|productLabelTranslation(locale,'lockType') }}</td>
-                        <td class="bold">{{ line.setUpPrice|formatAmount('', app.request.locale)|round|number_format(2, '.', ',') }}</td>
-                        <td class="bold">{{ line.rentalUnitPrice|formatAmount('', app.request.locale)|round|number_format(2, '.', ',') }}</td>
-                        <td class="bold">{{ line.transportUnitPrice|formatAmount('', app.request.locale)|round|number_format(2, '.', ',') }}</td>
-                        <td>inklusive</td>
-                        <td class="bold">{{ line.quantity }}</td>
+                        <td class="bold">{{ product.capacity }}</td>
+                        <td class="bold">{{ product|productLabelTranslation(locale,'lockType') }}</td>
+                        <td class="bold">{{ product.setUpPrice|formatAmount('', app.request.locale)|round|number_format(2, '.', ',') }}</td>
+                        <td class="bold">{{ product.rentalUnitPrice|formatAmount('', app.request.locale)|round|number_format(2, '.', ',') }}</td>
+                        <td class="bold">{{ product.transportUnitPrice|formatAmount('', app.request.locale)|round|number_format(2, '.', ',') }}</td>
+                        <td>inclus</td>
+                        <td class="bold">
+                            {% set quantity = 0 %}
+                            {% for line in quoteRequest.quoteRequestLines %}
+                                {% if line.product.id == product.id %}
+                                    {% set quantity = line.quantity %}
+                                {% endif %}
+                            {% endfor %}
+                            {{ quantity }}
+                        </td>
                     </tr>
                 {% endfor %}
                 <tr class="empty">
@@ -455,7 +473,8 @@
                     <td colspan="2" class="bold">Verlad ab Stockwerk</td>
                     <td>pro Behälter</td>
                     <td class="bold">Aufzug :</td>
-                    <td class="bold" style="padding: 10px 0;">10.00 <span class="check {% if quoteRequest.access == 'elevator' %}active{% endif %}"></span> </td>
+                    <td class="bold" style="padding: 10px 0;">10.00 <span
+                                class="check {% if quoteRequest.access == 'elevator' %}active{% endif %}"></span></td>
                     <td rowspan="2"></td>
                     <td rowspan="2"></td>
 
@@ -464,30 +483,33 @@
                     <td colspan="2"></td>
                     <td></td>
                     <td class="bold">Treppe :</td>
-                    <td class="bold" style="padding: 10px 0;">20.00 <span class="check {% if quoteRequest.access == 'stairs' %}active{% endif %}"></span></td>
+                    <td class="bold" style="padding: 10px 0;">20.00 <span
+                                class="check {% if quoteRequest.access == 'stairs' %}active{% endif %}"></span></td>
                 </tr>
                 </tbody>
             </table>
 
 
-            <p class="mb-20">
-                Ihre Sicherheitsbehälter werden gemäss Ihrem Wunsch abgeholt : {% if quoteRequest.frequency == 'ponctual' %}
+            <p class="mb-14">
+                Ihre Sicherheitsbehälter werden gemäss Ihrem Wunsch
+                abgeholt : {% if quoteRequest.frequency == 'ponctual' %}
                     Auf Anfrage
                 {% elseif quoteRequest.frequency == 'regular' %}
                     {{ quoteRequest.frequencyTimes }} zeiten / {{ ('Commercial.QuoteRequest.' ~ quoteRequest.frequencyInterval)|trans }}
                 {% endif %}
             </p>
-            <p class="mb-20">
+            <p class="mb-14">
                 Gültigkeit des Angebots: 30 Tage ab Angebots-Datum.
             </p>
-            <p class="mb-20">
+            <p class="mb-14">
                 Für weitere Informationen stehen wir gerne zur Verfügung. Über einen Auftrag würden wir uns sehr freuen.
             </p>
-            <p class="mb-20" style="line-height: 20px;">
-                Wenn Sie unser Angebot annehmen, senden Sie uns bitte den unterstehenden Vertrag, unterschrieben, per Post zurück.
+            <p class="mb-14" style="line-height: 20px;">
+                Wenn Sie unser Angebot annehmen, senden Sie uns bitte den unterstehenden Vertrag, unterschrieben, per
+                Post zurück.
             </p>
-            <p class="mb-20">Freundliche Grüsse,</p>
-            <h2 class="mb-40">Ihr REISSWOLF-Partner</h2>
+            <p class="mb-14">Freundliche Grüsse,</p>
+            <h2 class="mb-20">Ihr REISSWOLF-Partner</h2>
 
             <div class="flex offer__signature">
                 <div>

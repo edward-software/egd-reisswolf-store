@@ -519,7 +519,7 @@ class QuoteRequestManager
 
             if ($quoteRequest->getPostalCode() && $quoteRequest->getPostalCode()->getRegion()) {
                 $templateDir = '@PaprecCommercial/QuoteRequest/PDF/';
-                switch (strtolower($quoteRequest->getPostalCode()->getRegion())) {
+                switch (strtolower($quoteRequest->getPostalCode()->getRegion()->getName())) {
                     case 'basel':
                         $templateDir .= 'basel';
                         break;

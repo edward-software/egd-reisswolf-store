@@ -165,7 +165,7 @@
                                     <div class="form-group">
                                         <label class="form-label">{{ 'Commercial.QuoteRequest.Address'|trans }}</label>
                                         <div class="form-content">
-                                            {% if form.isMultisite %}
+                                            {% if quoteRequest.isMultisite %}
                                                 {{ form_widget(form.address, {'attr': {'class': 'form-control address-field ', 'disabled': 'disabled'}}) }}
                                             {% else %}
                                                 {{ form_widget(form.address, {'attr': {'class': 'form-control address-field '}}) }}
@@ -176,7 +176,7 @@
                                     <div class="form-group">
                                         <label class="form-label">{{ 'Commercial.QuoteRequest.PostalCode'|trans }}</label>
                                         <div class="form-content">
-                                            {% if form.isMultisite %}
+                                            {% if quoteRequest.isMultisite %}
                                                 {{ form_widget(form.postalCode, {'attr': {'class': 'form-control address-field', 'disabled': 'disabled', 'data-url': path('paprec_catalog_postalCode_autocomplete')}}) }}
                                             {% else %}
                                                 {{ form_widget(form.postalCode, {'attr': {'class': 'form-control address-field', 'data-url': path('paprec_catalog_postalCode_autocomplete')}}) }}
@@ -187,7 +187,7 @@
                                     <div class="form-group">
                                         <label class="form-label">{{ 'Commercial.QuoteRequest.City'|trans }}</label>
                                         <div class="form-content">
-                                            {% if form.isMultisite %}
+                                            {% if quoteRequest.isMultisite %}
                                                 {{ form_widget(form.city, {'attr': {'class': 'form-control address-field ', 'disabled': 'disabled'}}) }}
                                             {% else %}
                                                 {{ form_widget(form.city, {'attr': {'class': 'form-control address-field '}}) }}
