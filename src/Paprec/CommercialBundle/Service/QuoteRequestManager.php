@@ -426,7 +426,7 @@ class QuoteRequestManager
 
 
     /**
-     * Envoi de l'offre contrat généré au client
+     * Envoi de l'offre généré au client
      *
      * @param QuoteRequest $quoteRequest
      * @return bool
@@ -446,7 +446,7 @@ class QuoteRequestManager
 
             $pdfFilename = date('Y-m-d') . '-Reisswolf-Devis-' . $quoteRequest->getNumber() . '.pdf';
 
-            $pdfFile = $this->generatePDF($quoteRequest, $locale);
+            $pdfFile = $this->generatePDF($quoteRequest, $locale, false);
 
             if (!$pdfFile) {
                 return false;
@@ -494,7 +494,7 @@ class QuoteRequestManager
      * @return bool|string
      * @throws Exception
      */
-    public function generatePDF(QuoteRequest $quoteRequest, $locale)
+    public function generatePDF(QuoteRequest $quoteRequest, $locale, $addContract = true)
     {
 
         try {
@@ -507,8 +507,8 @@ class QuoteRequestManager
                 }
             }
 
-            $filenameOffer = $pdfTmpFolder . '/' . md5(uniqid()) . '.pdf';
-            $filename = $pdfTmpFolder . '/' . md5(uniqid()) . '.pdf';
+            $filenameOffer = $pdfTmpFolder . '/' . md5(uniqid('', true)) . '.pdf';
+            $filename = $pdfTmpFolder . '/' . md5(uniqid('', true)) . '.pdf';
 
             $today = new \DateTime();
 
@@ -562,22 +562,24 @@ class QuoteRequestManager
             );
 
 
-            /**
-             * On génère la page d'offre
-             */
-            $snappy->generateFromHtml(
-                array(
-                    $this->container->get('templating')->render(
-                        $templateDir . '/printQuoteContract.html.twig',
-                        array(
-                            'quoteRequest' => $quoteRequest,
-                            'date' => $today,
-                            'products' => $products
+            if ($addContract) {
+                /**
+                 * On génère la page de contract
+                 */
+                $snappy->generateFromHtml(
+                    array(
+                        $this->container->get('templating')->render(
+                            $templateDir . '/printQuoteContract.html.twig',
+                            array(
+                                'quoteRequest' => $quoteRequest,
+                                'date' => $today,
+                                'products' => $products
+                            )
                         )
-                    )
-                ),
-                $filename
-            );
+                    ),
+                    $filename
+                );
+            }
 
 
             /**
