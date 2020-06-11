@@ -78,9 +78,9 @@
                     },
                     "select": {
                         "rows": {
-                            _: "%d {{'General.Datatable.LinesSelected'|trans}}",
-                            0: "{{'General.Datatable.NoLineSelected'|trans}}",
-                            1: "{{'General.Datatable.OneLineSelected'|trans}}"
+                            _: "%d {{ 'General.Datatable.LinesSelected'|trans }}",
+                            0: "{{ 'General.Datatable.NoLineSelected'|trans }}",
+                            1: "{{ 'General.Datatable.OneLineSelected'|trans }}"
                         }
                     },
                 },
@@ -90,6 +90,10 @@
                         text: '{{ 'General.Remove'|trans }}',
                         className: 'btn-sm',
                         action: function (e, dt) {
+
+                            {% if is_granted('ROLE_ADMIN') %}
+
+
                             if (dt.rows({selected: true}).count() > 0) {
                                 var rowIds = [];
                                 $.each(dt.rows({selected: true}).data(), function () {
@@ -109,6 +113,17 @@
                                     }
                                 });
                             }
+
+                            {% else %}
+
+                            Swal.fire({
+                                title: "{{ 'General.CantRemove'|trans }}",
+                                text: "",
+                                showCancelButton: false,
+                                confirmButtonText: "{{ 'General.Cancel'|trans }}"
+                            });
+
+                            {% endif %}
                         }
                     },
                 ],

@@ -20,6 +20,7 @@ General:
     Confirm-remove:           Löschung bestätigen?
     Confirm-disable:          Sind Sie sicher, dass Sie die Zugriffe versenden wollen?
     Confirm-enable:           Sind Sie sicher, dass Sie sie alle aktivieren wollen?
+    CantRemove:               Löschen unmöglich
     In-progress:              En cours
     Archiving:                Archivé
     M:                        Herr

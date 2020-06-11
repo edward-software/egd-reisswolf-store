@@ -61,7 +61,8 @@ class UserType extends AbstractType
                 "invalid_message" => 'Cannot be null',
                 "expanded" => true,
                 "multiple" => true,
-                'constraints' => new NotBlank()
+                'constraints' => new NotBlank(),
+                'data' => ['ROLE_COMMERCIAL']
             ))//            ->add('postalCodes', TextType::class)
         ;
     }

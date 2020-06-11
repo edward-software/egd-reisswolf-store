@@ -142,7 +142,7 @@
                     cancelButtonText: "{{ 'General.No'|trans }}"
                 }).then(function(result) {
                     if (result.value) {
-                        $(location).attr('href', url);
+                        history.back();
                     }
                 });
 

@@ -114,8 +114,21 @@ class SubscriptionController extends Controller
 
             $regionName = 'CH';
             if (!$quoteRequest->getIsMultisite() && $quoteRequest->getPostalCode()) {
-                $regionName = substr(iconv('UTF-8', 'ASCII//IGNORE',
-                    $quoteRequest->getPostalCode()->getRegion()->getName()), 0, 2);
+                switch (strtolower($quoteRequest->getPostalCode()->getRegion()->getName())) {
+                    case 'basel':
+                        $regionName = 'BS';
+                        break;
+                    case 'geneve':
+                        $regionName = 'GE';
+                        break;
+                    case 'zurich':
+                    case 'zuerich':
+                        $regionName = 'ZH';
+                        break;
+                    case 'luzern':
+                        $regionName = 'LU';
+                        break;
+                }
             }
 
 
@@ -146,7 +159,8 @@ class SubscriptionController extends Controller
              * On envoie le mail de confirmation à l'utilisateur
              */
             $sendConfirmEmail = $quoteRequestManager->sendConfirmRequestEmail($quoteRequest, $locale);
-            $sendNewRequestEmail = $quoteRequestManager->sendNewRequestEmail($quoteRequest, $quoteRequest->getUserInCharge()->getLang());
+            $sendNewRequestEmail = $quoteRequestManager->sendNewRequestEmail($quoteRequest,
+                $quoteRequest->getUserInCharge()->getLang());
 
 
             if ($sendConfirmEmail && $sendNewRequestEmail) {

@@ -48,7 +48,12 @@ class UserController extends Controller
         $cols['lastName'] = array('label' => 'lastName', 'id' => 'u.lastName', 'method' => array('getLastName'));
         $cols['email'] = array('label' => 'email', 'id' => 'u.email', 'method' => array('getEmail'));
         $cols['enabled'] = array('label' => 'enabled', 'id' => 'u.enabled', 'method' => array('isEnabled'));
-        $cols['dateCreation'] = array('label' => 'dateCreation', 'id' => 'u.dateCreation', 'method' => array('getDateCreation'), 'filter' => array(array('name' => 'format', 'args' => array('Y-m-d H:i:s'))));
+        $cols['dateCreation'] = array(
+            'label' => 'dateCreation',
+            'id' => 'u.dateCreation',
+            'method' => array('getDateCreation'),
+            'filter' => array(array('name' => 'format', 'args' => array('Y-m-d H:i:s')))
+        );
 
         $queryBuilder = $this->getDoctrine()->getManager()->createQueryBuilder();
 
@@ -72,7 +77,8 @@ class UserController extends Controller
             }
         }
 
-        $datatable = $this->get('goondi_tools.datatable')->generateTable($cols, $queryBuilder, $pageSize, $start, $orders, $columns, $filters);
+        $datatable = $this->get('goondi_tools.datatable')->generateTable($cols, $queryBuilder, $pageSize, $start,
+            $orders, $columns, $filters);
 
         $return['recordsTotal'] = $datatable['recordsTotal'];
         $return['recordsFiltered'] = $datatable['recordsTotal'];
@@ -128,17 +134,19 @@ class UserController extends Controller
             foreach ($users as $user) {
                 $roles = array();
 
-                if ($user && is_array($user->getRoles()) && count($user->getRoles()))
+                if ($user && is_array($user->getRoles()) && count($user->getRoles())) {
                     foreach ($user->getRoles() as $role) {
                         if ($role !== 'ROLE_USER') {
                             $roles[] = $translator->trans($role);
                         }
                     }
+                }
 
                 $postalCodes = array();
-                if ($user && is_array($user->getPostalCodes()) && count($user->getPostalCodes()))
-                foreach ($user->getPostalCodes() as $pc) {
+                if ($user && is_array($user->getPostalCodes()) && count($user->getPostalCodes())) {
+                    foreach ($user->getPostalCodes() as $pc) {
                         $postalCodes[] = $pc->getCode();
+                    }
                 }
 
                 $phpExcelObject->setActiveSheetIndex(0)
@@ -219,6 +227,10 @@ class UserController extends Controller
 
             $user = $form->getData();
             $user->setDateCreation(new \DateTime);
+
+            if (count($user->getRoles()) === 1 && $user->getRoles()[0] === 'ROLE_USER') {
+                $user->addRole('ROLE_COMMERCIAL');
+            }
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
@@ -348,10 +360,11 @@ class UserController extends Controller
             ->setSubject('Easy-Recyclage : Identifiants')
             ->setFrom($this->getParameter('paprec_email_sender'))
             ->setTo($user->getEmail())
-            ->setBody($this->container->get('templating')->render('PaprecUserBundle:User:sendAccessEmail.html.twig', array(
-                'user' => $user,
-                'password' => $password,
-            )), 'text/html');
+            ->setBody($this->container->get('templating')->render('PaprecUserBundle:User:sendAccessEmail.html.twig',
+                array(
+                    'user' => $user,
+                    'password' => $password,
+                )), 'text/html');
 
         if ($this->container->get('mailer')->send($message)) {
             $this->get('session')->getFlashBag()->add('success', 'accessHasBeenSent');
@@ -395,16 +408,19 @@ class UserController extends Controller
                         ->setSubject('Easy-Recyclage : Identifiants')
                         ->setFrom($this->getParameter('paprec_email_sender'))
                         ->setTo($user->getEmail())
-                        ->setBody($this->container->get('templating')->render('PaprecUserBundle:User:sendAccessEmail.html.twig', array(
-                            'user' => $user,
-                            'password' => $password,
-                        )), 'text/html');
+                        ->setBody($this->container->get('templating')->render('PaprecUserBundle:User:sendAccessEmail.html.twig',
+                            array(
+                                'user' => $user,
+                                'password' => $password,
+                            )), 'text/html');
 
 
                     if ($this->container->get('mailer')->send($message)) {
-                        $this->get('session')->getFlashBag()->add('success', array('msg' => 'accessHasBeenSent', 'var' => $user->getEmail()));
+                        $this->get('session')->getFlashBag()->add('success',
+                            array('msg' => 'accessHasBeenSent', 'var' => $user->getEmail()));
                     } else {
-                        $this->get('session')->getFlashBag()->add('error', array('msg' => 'accessCannotBeSent', 'var' => $user->getEmail()));
+                        $this->get('session')->getFlashBag()->add('error',
+                            array('msg' => 'accessCannotBeSent', 'var' => $user->getEmail()));
                     }
                 }
 
@@ -426,8 +442,8 @@ class UserController extends Controller
          * On modifie l'email et l'username qui sont uniques dans FOSUser
          * Ainsi on pourra de nouveau ajouté qqun avec le même username
          */
-        $deletedUsername = substr($user->getUsernameCanonical() .  uniqid(), 0, 255);
-        $deletedEmail = substr($user->getEmail() .  uniqid(), 0, 255);
+        $deletedUsername = substr($user->getUsernameCanonical() . uniqid(), 0, 255);
+        $deletedEmail = substr($user->getEmail() . uniqid(), 0, 255);
         $user->setUsername($deletedUsername);
         $user->setUsernameCanonical($deletedUsername);
         $user->setEmail($deletedEmail);
@@ -464,7 +480,7 @@ class UserController extends Controller
                  * Ainsi on pourra de nouveau ajouté qqun avec le même username
                  */
                 $deletedUsername = substr($user->getUsernameCanonical() . uniqid(), 0, 255);
-                $deletedEmail = substr($user->getEmail() .  uniqid(), 0, 255);
+                $deletedEmail = substr($user->getEmail() . uniqid(), 0, 255);
                 $user->setUsername($deletedUsername);
                 $user->setUsernameCanonical($deletedUsername);
                 $user->setEmail($deletedEmail);

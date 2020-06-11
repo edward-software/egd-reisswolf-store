@@ -393,6 +393,8 @@
 
                     $('#commmecialQuoteRequestRemoveButton').on('click', function () {
 
+                        {% if is_granted('ROLE_ADMIN') %}
+
                         var url = "{{ path("paprec_commercial_quoteRequest_remove", {id: quoteRequest.id}) }}";
 
                         Swal.fire({
@@ -406,6 +408,15 @@
                                 $(location).attr('href', url);
                             }
                         });
+                        {% else %}
+                        Swal.fire({
+                            title: "{{ 'General.CantRemove'|trans }}",
+                            text: "",
+                            showCancelButton: false,
+                            confirmButtonText: "{{ 'General.Cancel'|trans }}"
+                        });
+                        {% endif %}
+
 
                     });
                     $('.commercialQuoteRequestLineRemoveButton').on('click', function () {

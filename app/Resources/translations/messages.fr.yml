@@ -20,6 +20,7 @@ General:
     Confirm-remove:           Confirmez-vous la suppression ?
     Confirm-disable:          Êtes-vous sûr de vouloir tous les désactiver ?
     Confirm-enable:           Êtes-vous sûr de vouloir tous les activer ?
+    CantRemove:               Suppression non possible
     In-progress:              En cours
     Archiving:                Archivé
     M:                       Monsieur
