@@ -43,6 +43,7 @@ Commercial:
         AnnualBudget: Budget annuel
         View: Vue du devis
         Download-quote: Télécharger PDF
+        DownloadedQuoteName: Contrat Reisswolf
         Send-quote: Envoyer devis au client
         ProductsList: Liste des produits
         AddLine: Ajouter un produit
@@ -114,6 +115,7 @@ Commercial:
             Message2: que vous utilisez
 
     GeneratedQuoteEmail:
+        FileName: Offre Reisswolf
         Object: Offre de services Reisswolf
         Dear:
             M: Cher Monsieur
@@ -121,7 +123,9 @@ Commercial:
         Message1: Merci pour votre demande du  %date%. Nous vous remercions de l'intérêt que vous portez aux services REISSWOLF.
         Message2: Vous trouverez en annexe notre offre pour les services REISSWOLF. Ceux-ci peuvent être adaptés à vos besoins actuels à tout moment, rapidement et simplement. Nous garantissons toujours un service impeccable et la destruction quotidienne de vos fichiers et supports de données.
         Message3: N'hésitez pas à nous contacter si vous avez d'autres questions. Nous nous réjouissons de travailler bientôt avec vous.
-        Message4: Si vous êtes d'accord, vous pouvez télécharger le contrat, le signer et le retourner par la poste.
+        Message4: Si vous êtes d'accord,
+        Message5: cliquer ici sur le lien pour demander le contrat de service.
+        ReplySubject: Demande contrat / ID Devis N°%id%
         Regards: Bien cordialement
         Partner: Votre partenaire Reisswolf
 

@@ -43,6 +43,7 @@ Commercial:
         AnnualBudget: Jährliches Budget
         View: Angebotsansicht
         Download-quote: Angebot als PDF herunterladen
+        DownloadedQuoteName: Vertrag Reisswolf
         Send-quote: Angebot an den Kunden senden
         ProductsList: Produkteverzeichnis
         AddLine: Produkt hinzufügen
@@ -114,6 +115,7 @@ Commercial:
             Message2: -Diensten zu informieren.
 
     GeneratedQuoteEmail:
+        FileName: Angebot Reisswolf
         Object: Dienstleistungsangebot der Firma Reisswolf
         Dear:
             M: Sehr geehrter Herr
@@ -121,7 +123,9 @@ Commercial:
         Message1: Vielen Dank für Ihre Anfrage vom %date%. Es freut uns, dass Sie sich für die Dienstleistungen von REISSWOLF interessieren.
         Message2: Im Anhang finden Sie unser Angebot für die Leistungen von REISSWOLF. Diese können jederzeit, kurzfristig und unkompliziert an Ihre aktuellen Bedürfnisse angepasst werden. Wir garantieren dabei immer einen einwandfreien Service und die tagfertige Vernichtung Ihrer Akten und Datenträger.
         Message3: Zögern Sie bitte nicht, uns bei weiteren Fragen zu kontaktieren. Wir freuen uns, bald für Sie tätig werden zu dürfen.
-        Message4: Falls Sie einverstanden sind, können Sie den Vertrag herunterladen, unterschreiben und per Post zurückschicken.
+        Message4: Falls Sie einverstanden sind,
+        Message5: Klicken Sie hier auf den Link, um den Vertrag anfordern.
+        ReplySubject: Vertrag anfordern / Angebot-ID N°%id%
         Regards: Mit freundlichen Grüssen.
         Partner: Ihr Reisswolf-Partner
 

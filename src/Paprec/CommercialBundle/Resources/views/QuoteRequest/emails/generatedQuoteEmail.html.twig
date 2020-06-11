@@ -34,6 +34,11 @@
 <br><br>
 {{ 'Commercial.GeneratedQuoteEmail.Message3'| trans({}, "messages", locale) }}
 <br><br>
+{{ 'Commercial.GeneratedQuoteEmail.Message4'| trans({}, "messages", locale) }}
+<a href="mailto:{{quoteRequest.userInCharge.email}}?subject={{ 'Commercial.GeneratedQuoteEmail.ReplySubject'| trans({'%id%': quoteRequest.id}, "messages", locale) }}">
+    {{ 'Commercial.GeneratedQuoteEmail.Message5'| trans({}, "messages", locale) }}
+</a>
+<br><br>
 {{ 'Commercial.GeneratedQuoteEmail.Regards'| trans({}, "messages", locale) }}
 <br><br>
 {{ 'Commercial.GeneratedQuoteEmail.Partner'| trans({}, "messages", locale) }}

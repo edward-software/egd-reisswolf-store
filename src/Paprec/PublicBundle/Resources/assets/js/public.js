@@ -35,10 +35,13 @@ $(function () {
 
     $('#frequencyButton2').on('click', function () {
         $('.catalog-frequency-select').prop("disabled", false);
+        $('#catalog_frequency_times_select').val(1);
         initClassFrequencyButtons();
     });
 
     $('#frequencyButton1').on('click', function () {
+        $('#catalog_frequency_times_select').val(0);
+        $('#catalog_frequency_interval_select').val('year');
         $('.catalog-frequency-select').prop("disabled", true);
         $('.devis__frequence__button').prop("disabled", true);
         $('.devis__frequence__button').addClass("round-btn--disable");

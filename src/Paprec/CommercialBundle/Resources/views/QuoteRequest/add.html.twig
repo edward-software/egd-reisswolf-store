@@ -126,7 +126,11 @@
                                         <div class="form-content">
                                             {% for radio in form.frequency.children %}
                                                 <div class="form__check ml-4">
-                                                    {{ form_widget(radio) }}
+                                                    {% if radio.vars.value == 'ponctual' %}
+                                                        {{ form_widget(radio, {'attr': {'checked': 'checked'}}) }}
+                                                    {% else %}
+                                                        {{ form_widget(radio) }}
+                                                    {% endif %}
                                                     {{ form_label(radio) }}
                                                 </div>
                                             {% endfor %}

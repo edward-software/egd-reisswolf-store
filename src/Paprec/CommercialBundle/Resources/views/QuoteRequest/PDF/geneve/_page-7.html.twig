@@ -69,7 +69,29 @@
             </td>
             <td>
 
-                CHF {{((product.transportUnitPrice / 100 * quoteRequest.postalCode.transportRate)|formatAmount(null, app.request.locale, 'FORMAT15'))|formatAmount(null, app.request.locale, 'DEC2')|round|number_format(2, '.', ',')}}
+                CHF
+                {% set val = 0 %}
+                {% for line in quoteRequest.quoteRequestLines %}
+                    {% if line.product.id == product.id %}
+                        {% if line.transportRate == 0 %}
+                        {% else %}
+                            {% set val = (((line.transportRate / 1000000000000000) + (line.transportUnitPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000)) %}
+                        {% endif %}
+                        {% if line.setUpRate == 0 %}
+                        {% else %}
+                            {% set val = val +  (((line.setUpRate / 1000000000000000) + (line.setUpPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000)) %}
+                        {% endif %}
+                        {% if line.treatmentRate == 0 %}
+                        {% else %}
+                            {% set val = val +  (((line.treatmentRate / 1000000000000000) + (line.treatmentUnitPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000)) %}
+                        {% endif %}
+                        {% if line.traceabilityRate == 0 %}
+                        {% else %}
+                            {% set val = val +  (((line.traceabilityRate / 1000000000000000) + (line.traceabilityUnitPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000)) %}
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+                {{ val|round|number_format(2, ',', ' ') }}
             </td>
         </tr>
         {% endfor %}
@@ -114,7 +136,16 @@
                 Par collecteur
             </td>
             <td>
-                CHF {{((product.rentalUnitPrice / 100 * quoteRequest.postalCode.rentalRate)|formatAmount(null, app.request.locale, 'FORMAT15'))|formatAmount(null, app.request.locale, 'DEC2')|round|number_format(2, '.', ',')}}
+                {% set val = 0 %}
+                {% for line in quoteRequest.quoteRequestLines %}
+                    {% if line.product.id == product.id %}
+                        {% if line.rentalRate == 0 %}
+                        {% else %}
+                            {% set val = (((line.rentalRate / 1000000000000000) + (line.rentalUnitPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000)) %}
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+                {{ val|round|number_format(2, ',', ' ') }}
             </td>
         </tr>
         {% endfor %}

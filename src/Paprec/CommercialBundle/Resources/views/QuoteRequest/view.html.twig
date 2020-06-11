@@ -89,7 +89,7 @@
                                 <div class="form-group row">
                                     <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.Civility'|trans }}</label>
                                     <label class="col-form-label">
-                                        {{ quoteRequest.civility }}
+                                        {{ ('General.' ~ quoteRequest.civility)|trans }}
                                     </label>
                                 </div>
                                 <div class="form-group row">
@@ -303,22 +303,40 @@
                                         <td>{{ quoteRequestLine.quantity }}</td>
                                         <td>{{ tmpLockProg }}</td>
                                         <td>
-                                            {{ ((quoteRequestLine.rentalRate / 1000000000000000) + (quoteRequestLine.rentalUnitPrice / 100))|number_format(2, ',', ' ') }}
+                                            {% if quoteRequestLine.rentalRate == 0 %}
+                                                0
+                                            {% else %}
+                                                {{ (((quoteRequestLine.rentalRate / 1000000000000000) + (quoteRequestLine.rentalUnitPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000))|number_format(2, ',', ' ') }}
+                                            {% endif %}
                                         </td>
                                         <td>
-                                            {{ ((quoteRequestLine.setUpRate / 1000000000000000) + (quoteRequestLine.setUpPrice / 100))|number_format(2, ',', ' ') }}
+                                            {% if quoteRequestLine.setUpRate == 0 %}
+                                                0
+                                            {% else %}
+                                                {{ (((quoteRequestLine.setUpRate / 1000000000000000) + (quoteRequestLine.setUpPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000))|number_format(2, ',', ' ') }}
+                                            {% endif %}
                                         </td>
 
                                         <td>
-                                            {{ ((quoteRequestLine.transportRate / 1000000000000000) + (quoteRequestLine.transportUnitPrice / 100))|number_format(2, ',', ' ') }}
-
+                                            {% if quoteRequestLine.transportRate == 0 %}
+                                                0
+                                            {% else %}
+                                                {{ (((quoteRequestLine.transportRate / 1000000000000000) + (quoteRequestLine.transportUnitPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000))|number_format(2, ',', ' ') }}
+                                            {% endif %}
                                         </td>
                                         <td>
-                                            {{ ((quoteRequestLine.treatmentRate / 1000000000000000) + (quoteRequestLine.treatmentUnitPrice / 100))|number_format(2, ',', ' ') }}
+                                            {% if quoteRequestLine.treatmentRate == 0 %}
+                                                0
+                                            {% else %}
+                                                {{ (((quoteRequestLine.treatmentRate / 1000000000000000) + (quoteRequestLine.treatmentUnitPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000))|number_format(2, ',', ' ') }}
+                                            {% endif %}
                                         </td>
                                         <td>
-                                            {{ ((quoteRequestLine.traceabilityRate / 1000000000000000) + (quoteRequestLine.traceabilityUnitPrice / 100))|number_format(2, ',', ' ') }}
-
+                                            {% if quoteRequestLine.traceabilityRate == 0 %}
+                                                0
+                                            {% else %}
+                                                {{ (((quoteRequestLine.traceabilityRate / 1000000000000000) + (quoteRequestLine.traceabilityUnitPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000))|number_format(2, ',', ' ') }}
+                                            {% endif %}
                                         </td>
                                         <td>{{ quoteRequestLine.accessPrice|formatAmount('', app.request.locale) }}</td>
                                         <td>{{ quoteRequestLine.totalAmount|formatAmount('', app.request.locale) }}</td>

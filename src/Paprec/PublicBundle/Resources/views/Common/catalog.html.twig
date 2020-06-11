@@ -8,7 +8,6 @@
 {% endblock %}
 {% block main_content %}
 
-
     <section class="page-section">
         <div class="container">
             <div class="row">
@@ -156,6 +155,7 @@
                                 <div class="custom-control custom-radio">
                                     <input type="radio" class="custom-control-input" id="frequencyButton1"
                                            value="ponctual"
+                                           checked
                                            name="groupOfDefaultRadios">
                                     <label class="custom-control-label"
                                            for="frequencyButton1">{{ 'Public.Catalog.OnDemand'| trans({}, "messages", locale) }}</label>
@@ -165,7 +165,6 @@
                                 <div class="custom-control custom-radio">
                                     <input type="radio" class="custom-control-input" id="frequencyButton2"
                                            value="regular"
-                                           checked
                                            name="groupOfDefaultRadios">
                                     <label class="custom-control-label"
                                            for="frequencyButton2">{{ 'Public.Catalog.Regular'| trans({}, "messages", locale) }}
@@ -174,14 +173,15 @@
 
                                 <div class="devis__frequence paprec-flex">
                                     <div class="paprec-flex">
-                                        <button class="round-btn round-btn--blue devis__frequence__button mr-2"
+                                        <button class="round-btn round-btn--blue devis__frequence__button round-btn--disable  mr-2"
+                                                disabled
                                                 id="addFrequencyButton">
                                             <i class="fas fa-plus"></i>
                                         </button>
                                         <input class="catalog-frequency-select catalog-frequency-input"
                                                disabled="disabled"
                                                size="1"
-                                               id="catalog_frequency_times_select" value="1"/>
+                                               id="catalog_frequency_times_select" value="0"/>
                                         <button class="round-btn round-btn--blue devis__frequence__button round-btn--disable ml-2"
                                                 disabled
                                                 id="removeFrequencyButton">
@@ -190,13 +190,14 @@
                                     </div>
                                     <span class="devis__frequence__times ml-2">{{ 'Public.Catalog.Times'| trans({}, "messages", locale) }}</span>
                                     <select class="catalog-frequency-select ml-2"
+                                            disabled
                                             id="catalog_frequency_interval_select">
                                         <option value="week"
                                                 selected>{{ 'Public.Catalog.Week'| trans({}, "messages", locale) }}</option>
-                                        <option value="month"
-                                                selected>{{ 'Public.Catalog.Month'| trans({}, "messages", locale) }}</option>
+                                        <option value="month">{{ 'Public.Catalog.Month'| trans({}, "messages", locale) }}</option>
                                         <option value="quarter">{{ 'Public.Catalog.Quarter'| trans({}, "messages", locale) }}</option>
-                                        <option value="year">{{ 'Public.Catalog.Year'| trans({}, "messages", locale) }}</option>
+                                        <option value="year"
+                                                selected>{{ 'Public.Catalog.Year'| trans({}, "messages", locale) }}</option>
                                     </select>
                                 </div>
 

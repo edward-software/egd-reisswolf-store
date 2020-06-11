@@ -21,18 +21,28 @@ class CustomAreaType extends AbstractType
         $builder
             ->add('leftContent', CKEditorType::class, array(
                 'config_name' => 'custom_config',
+                'config' => array(
+                    'language' => $options['language']
+                ),
                 'required' => true
             ))
             ->add('rightContent', CKEditorType::class, array(
                 'config_name' => 'custom_config',
+                'config' => array(
+                    'language' => $options['language']
+                ),
                 'required' => true
             ))
             ->add('isDisplayed', ChoiceType::class, array(
                 "choices" => array(
-                    'Non' => 0,
-                    'Oui' => 1
+                    0,
+                    1
                 ),
-                "expanded" => true
+                "choice_label" => function ($choiceValue, $key, $value) {
+                    return 'General.' . $choiceValue;
+                },
+                'data' => '1',
+                "expanded" => true,
             ))
             ->add('code', ChoiceType::class, array(
                 "choices" => $options['codes'],

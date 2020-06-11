@@ -69,6 +69,7 @@ class ProductController extends Controller
             ->leftJoin('p.productLabels', 'pL')
             ->where('p.deleted IS NULL')
             ->andWhere('pL.language = :language')
+            ->orderBy('p.position', 'ASC')
             ->setParameter('language', 'EN');
 
         if (is_array($search) && isset($search['value']) && $search['value'] != '') {
@@ -449,7 +450,7 @@ class ProductController extends Controller
          * Suppression des images
          */
         foreach ($product->getPictures() as $picture) {
-            $this->removeFile($this->getParameter('paprec_catalog.product.di.picto_path') . '/' . $picture->getPath());
+            $this->removeFile($this->getParameter('paprec_catalog.product.picto_path') . '/' . $picture->getPath());
             $product->removePicture($picture);
         }
 

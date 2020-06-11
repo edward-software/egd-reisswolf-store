@@ -116,6 +116,7 @@ class QuoteRequestController extends Controller
                 ))->setParameter(1, substr($search['value'], 1));
             } else {
                 $queryBuilder->andWhere($queryBuilder->expr()->orx(
+                    $queryBuilder->expr()->like('q.id', '?1'),
                     $queryBuilder->expr()->like('q.number', '?1'),
                     $queryBuilder->expr()->like('q.businessName', '?1'),
                     $queryBuilder->expr()->like('q.totalAmount', '?1'),
@@ -715,7 +716,7 @@ class QuoteRequestController extends Controller
         // Set content disposition inline of the file
         $response->setContentDisposition(
             ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-            'Quote-' . $quoteRequest->getBusinessName() . '-' . $quoteRequest->getId() . ' .pdf'
+            $quoteRequest->getReference() . '-' . $this->get('translator')->trans('Commercial.QuoteRequest.DownloadedQuoteName') . '-' . $quoteRequest->getBusinessName() . ' .pdf'
         );
 
 

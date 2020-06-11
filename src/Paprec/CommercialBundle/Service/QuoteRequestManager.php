@@ -444,7 +444,7 @@ class QuoteRequestManager
                 return false;
             }
 
-            $pdfFilename = date('Y-m-d') . '-Reisswolf-Devis-' . $quoteRequest->getNumber() . '.pdf';
+            $pdfFilename = $quoteRequest->getReference() . '-' . $this->container->get('translator')->trans('Commercial.GeneratedQuoteEmail.FileName') . '-' . $quoteRequest->getBusinessName() . '.pdf';
 
             $pdfFile = $this->generatePDF($quoteRequest, $locale, false);
 
@@ -555,6 +555,7 @@ class QuoteRequestManager
                         $templateDir . '/printQuoteOffer.html.twig',
                         array(
                             'quoteRequest' => $quoteRequest,
+                            'tmpLockProg' => $this->container->getParameter('tmp_lock_prog'),
                             'date' => $today,
                             'locale' => $locale,
                             'products' => $products

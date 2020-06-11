@@ -148,15 +148,15 @@ class ProductManager
 
         $tmpLockProg = $this->container->getParameter('tmp_lock_prog');
 
-        return ($numberManager->denormalize($quoteRequestLine->getSetUpPrice()) + $numberManager->denormalize15($quoteRequestLine->getSetUpRate())
-                + $numberManager->denormalize($quoteRequestLine->getRentalUnitPrice()) + $numberManager->denormalize15($quoteRequestLine->getRentalRate())
-                + $numberManager->denormalize($quoteRequestLine->getTransportUnitPrice()) + $numberManager->denormalize15($quoteRequestLine->getTransportRate())
-                + $numberManager->denormalize($quoteRequestLine->getTreatmentUnitPrice()) + $numberManager->denormalize15($quoteRequestLine->getTreatmentRate())
-                + $numberManager->denormalize($quoteRequestLine->getTraceabilityUnitPrice()) + $numberManager->denormalize15($quoteRequestLine->getTraceabilityRate())
+        return (
+                ((($quoteRequestLine->getSetUpRate() == 0) ? 0 : $numberManager->denormalize($quoteRequestLine->getSetUpPrice()) + $numberManager->denormalize15($quoteRequestLine->getSetUpRate())) * (1 + $numberManager->denormalize($quoteRequestLine->getQuoteRequest()->getOverallDiscount() / 100)))
+                + ((($quoteRequestLine->getRentalRate() == 0) ? 0 : $numberManager->denormalize($quoteRequestLine->getRentalUnitPrice()) + $numberManager->denormalize15($quoteRequestLine->getRentalRate())) * (1 + $numberManager->denormalize($quoteRequestLine->getQuoteRequest()->getOverallDiscount() / 100)))
+                + ((($quoteRequestLine->getTransportRate() == 0) ? 0 : $numberManager->denormalize($quoteRequestLine->getTransportUnitPrice()) + $numberManager->denormalize15($quoteRequestLine->getTransportRate())) * (1 + $numberManager->denormalize($quoteRequestLine->getQuoteRequest()->getOverallDiscount() / 100)))
+                + ((($quoteRequestLine->getTreatmentRate() == 0) ? 0 : $numberManager->denormalize($quoteRequestLine->getTreatmentUnitPrice()) + $numberManager->denormalize15($quoteRequestLine->getTreatmentRate())) * (1 + $numberManager->denormalize($quoteRequestLine->getQuoteRequest()->getOverallDiscount() / 100)))
+                + ((($quoteRequestLine->getTraceabilityRate() == 0) ? 0 : $numberManager->denormalize($quoteRequestLine->getTraceabilityUnitPrice()) + $numberManager->denormalize15($quoteRequestLine->getTraceabilityRate())) * (1 + $numberManager->denormalize($quoteRequestLine->getQuoteRequest()->getOverallDiscount() / 100)))
                 + $this->getAccesPrice($quoteRequestLine->getQuoteRequest())
                 + $tmpLockProg)
-            * $quoteRequestLine->getQuantity()
-            * (1 + $numberManager->denormalize($quoteRequestLine->getQuoteRequest()->getOverallDiscount() / 100));
+            * $quoteRequestLine->getQuantity();
 
     }
 

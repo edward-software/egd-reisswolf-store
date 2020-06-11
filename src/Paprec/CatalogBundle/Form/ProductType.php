@@ -27,9 +27,13 @@ class ProductType extends AbstractType
             ->add('dimensions', TextareaType::class)
             ->add('isEnabled', ChoiceType::class, array(
                 "choices" => array(
-                    'Non' => 0,
-                    'Oui' => 1
+                    0,
+                    1
                 ),
+                "choice_label" => function ($choiceValue, $key, $value) {
+                    return 'General.' . $choiceValue;
+                },
+                'data' => '1',
                 "expanded" => true,
             ))
             ->add('setUpPrice', TextType::class)

@@ -1,5 +1,6 @@
 knp_snappy:
-  pdf:
-    enabled:    true
-    binary: "%wkhtmltopdf_path%"
-    options:    []
+    pdf:
+        enabled:    true
+        binary: "%wkhtmltopdf_path%"
+        options:
+            page-size: A4

@@ -1,82 +1,85 @@
 General:
-  All:                      alle
-  List:                     Liste
-  Add:                      hinzufügen
-  Edit:                     bearbeiten
-  Remove:                   löschen
-  Close:                    schließen
-  View:                     Siehe
-  Yes:                      Ja
-  1:                        Ja
-  No:                       Nein
-  0:                        Nein
-  Name:                     Nachname
-  SystemError:              Systemfehler
-  Users:                    Benützer
-  Save:                     Speichern
-  Cancel:                   Stornieren
-  Confirm:                  Bestätigung
-  Confirm-cancel:           Sind Sie sicher, dass Sie stornieren möchten?
-  Confirm-remove:           Löschung bestätigen?
-  Confirm-disable:          Sind Sie sicher, dass Sie die Zugriffe versenden wollen?
-  Confirm-enable:           Sind Sie sicher, dass Sie sie alle aktivieren wollen?
-  In-progress:              En cours
-  Archiving:                Archivé
-  M:                        Herr
-  Mr:                       Herr
-  Mme:                      Frau
-  Date-update:              Aktualisierungsdatum
-  System-information:       Systeminformationen
-  Information:              Informationen
-  Date-creation:            Erstellungsdatum
+    All:                      alle
+    List:                     Liste
+    Add:                      hinzufügen
+    Edit:                     bearbeiten
+    Remove:                   löschen
+    Close:                    schließen
+    View:                     Siehe
+    Yes:                      Ja
+    1:                        Ja
+    No:                       Nein
+    0:                        Nein
+    Name:                     Nachname
+    SystemError:              Systemfehler
+    Users:                    Benützer
+    Save:                     Speichern
+    Cancel:                   Stornieren
+    Confirm:                  Bestätigung
+    Confirm-cancel:           Sind Sie sicher, dass Sie stornieren möchten?
+    Confirm-remove:           Löschung bestätigen?
+    Confirm-disable:          Sind Sie sicher, dass Sie die Zugriffe versenden wollen?
+    Confirm-enable:           Sind Sie sicher, dass Sie sie alle aktivieren wollen?
+    In-progress:              En cours
+    Archiving:                Archivé
+    M:                        Herr
+    Mr:                       Herr
+    Mme:                      Frau
+    Date-update:              Aktualisierungsdatum
+    System-information:       Systeminformationen
+    Information:              Informationen
+    Date-creation:            Erstellungsdatum
 
-  Datatable:
-    Records-per-page :      _MENU_ Einträge pro Seite
-    Nothing-found :         Keine Daten
-#    Showing-page :                              Affichage page _PAGE_ sur _PAGES_
-    Showing-page :          Anzeige von _START_ bis _END_ von insgesamt _TOTAL_ Ergebnissen
-    No-records-available :  Keine Einträge gefunden
-    Search :                Suche
-    Loading :               Ladevorgang...
-    Previous :              vorherige
-    Next :                  nächste
+    Datatable:
+        Records-per-page:      _MENU_ Einträge pro Seite
+        Nothing-found:         Keine Daten
+        #    Showing-page :                              Affichage page _PAGE_ sur _PAGES_
+        Showing-page:          Anzeige von _START_ bis _END_ von insgesamt _TOTAL_ Ergebnissen
+        No-records-available:  Keine Einträge gefunden
+        NoLineSelected:        keine Zeile ausgewählt
+        LinesSelected:         ausgewählte Zeilen
+        OneLineSelected:       1 ausgewählte Zeile
+        Search:                Suche
+        Loading:               Ladevorgang...
+        Previous:              vorherige
+        Next:                  nächste
 
-  Presence-error:           Vorliegen eines Fehlers
+    Presence-error:           Vorliegen eines Fehlers
 
-  Menu:
-    Administration:         Verwaltung
-    Users:                  Benutzer
-    Dashboard:              Dashboard
-    Logout:                 Abmelden
-    MyProfile:              Mein Profil
-    Customers:              Kunden
-    My-profile:             Mein Profil
+    Menu:
+        Administration:         Verwaltung
+        Users:                  Benutzer
+        Dashboard:              Dashboard
+        Logout:                 Abmelden
+        MyProfile:              Mein Profil
+        Customers:              Kunden
+        My-profile:             Mein Profil
 
-  Form:
-    Submit:                 Einreichen
-    CreationDate:           Erstellt am
-    UpdatedDate:            Aktualisiert am
-    Status:                 Status
-    CreationUser:           Erstellt von
-    UpdatedUser:            Aktualisiert von
-    NeverUpdated:           Nie aktualisiert
-    Password:               Passwort
-    RepeatPassword:         Passwort wiederholen
-    Email:                  E-mail
-    Language:               Sprache
-    Timezone:               Zeitzone
-    Enable:                 Aktiviert
-    Username:               User ID
-    Roles:                  Rollen
-    Permissions:            Genehmigungen
-    Unlock:                 freischalten
-    Name:                   Nachname
-    FirstName:              Vorname
-    LastName:               Nachname
-    Birthday:               Geburtsdatum
-    Nationality:            Staatsangehörigkeit
-    CountryOfResidence:     Staat
-    AddressLine:            Strasse
-    PostalCode:             PLZ
-    City:                   Ort
-    Access-type:            Art des Zugriffs
+    Form:
+        Submit:                 Einreichen
+        CreationDate:           Erstellt am
+        UpdatedDate:            Aktualisiert am
+        Status:                 Status
+        CreationUser:           Erstellt von
+        UpdatedUser:            Aktualisiert von
+        NeverUpdated:           Nie aktualisiert
+        Password:               Passwort
+        RepeatPassword:         Passwort wiederholen
+        Email:                  E-mail
+        Language:               Sprache
+        Timezone:               Zeitzone
+        Enable:                 Aktiviert
+        Username:               User ID
+        Roles:                  Rollen
+        Permissions:            Genehmigungen
+        Unlock:                 freischalten
+        Name:                   Nachname
+        FirstName:              Vorname
+        LastName:               Nachname
+        Birthday:               Geburtsdatum
+        Nationality:            Staatsangehörigkeit
+        CountryOfResidence:     Staat
+        AddressLine:            Strasse
+        PostalCode:             PLZ
+        City:                   Ort
+        Access-type:            Art des Zugriffs

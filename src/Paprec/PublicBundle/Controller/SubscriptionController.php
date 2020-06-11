@@ -146,7 +146,7 @@ class SubscriptionController extends Controller
              * On envoie le mail de confirmation à l'utilisateur
              */
             $sendConfirmEmail = $quoteRequestManager->sendConfirmRequestEmail($quoteRequest, $locale);
-            $sendNewRequestEmail = $quoteRequestManager->sendNewRequestEmail($quoteRequest, $locale);
+            $sendNewRequestEmail = $quoteRequestManager->sendNewRequestEmail($quoteRequest, $quoteRequest->getUserInCharge()->getLang());
 
 
             if ($sendConfirmEmail && $sendNewRequestEmail) {

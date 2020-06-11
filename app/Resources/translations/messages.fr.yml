@@ -37,6 +37,9 @@ General:
         #    Showing-page :                              Affichage page _PAGE_ sur _PAGES_
         Showing-page:          Affichage _START_ à _END_ sur un total de _TOTAL_ résultats
         No-records-available:  Aucun enregistrement trouvé
+        NoLineSelected:        Aucune ligne sélectionnée
+        LinesSelected:         lignes sélectionnées
+        OneLineSelected:       1 ligne sélectionnée
         Search:                Recherche
         Loading:               Chargement...
         Previous:              Précédent
