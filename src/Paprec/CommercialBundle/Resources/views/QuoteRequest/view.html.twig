@@ -33,6 +33,7 @@
                     <i class="fa fa-xs fa-quoteRequest"></i> {{ 'Commercial.QuoteRequest.View'|trans }}
                 </h4>
                 <div class="float-right">
+                    {% if not quoteRequest.isMultisite %}
                     <a id="downloadGeneratedQuoteButton"
                        href="{{ path("paprec_commercial_quote_request_download", {id: quoteRequest.id}) }}"
                        class="btn btn-sm btn-secondary"><i
@@ -41,6 +42,7 @@
                     <a id="sendGeneratedQuoteButton" href="javascript:void(0);" class="btn btn-sm btn-success"><i
                                 class="fa fa-xs fa-envelope"></i> {{ 'Commercial.QuoteRequest.Send-quote'|trans }}
                     </a>
+                    {% endif %}
                     <a href="{{ path("paprec_commercial_quoteRequest_edit", {id: quoteRequest.id}) }}"
                        class="btn btn-sm btn-warning"><i
                                 class="fa fa-xs fa-edit"></i> {{ 'Commercial.QuoteRequest.Edit'|trans }}</a>

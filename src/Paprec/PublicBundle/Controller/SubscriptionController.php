@@ -160,7 +160,7 @@ class SubscriptionController extends Controller
              */
             $sendConfirmEmail = $quoteRequestManager->sendConfirmRequestEmail($quoteRequest, $locale);
             $sendNewRequestEmail = $quoteRequestManager->sendNewRequestEmail($quoteRequest,
-                $quoteRequest->getUserInCharge()->getLang());
+                ($quoteRequest->getUserInCharge() ? $quoteRequest->getUserInCharge()->getLang() : 'de'));
 
 
             if ($sendConfirmEmail && $sendNewRequestEmail) {
