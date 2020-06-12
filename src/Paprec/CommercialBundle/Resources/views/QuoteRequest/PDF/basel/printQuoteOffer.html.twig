@@ -523,7 +523,7 @@
                 abgeholt : {% if quoteRequest.frequency == 'ponctual' %}
                     Auf Anfrage
                 {% elseif quoteRequest.frequency == 'regular' %}
-                    {{ quoteRequest.frequencyTimes }} mal / {{ ('Commercial.QuoteRequest.' ~ quoteRequest.frequencyInterval)|trans([], null, 'DE') }}
+                    {{ quoteRequest.frequencyTimes }} mal / {{ ('Commercial.QuoteRequest.' ~ quoteRequest.frequencyInterval)|trans({}, 'messages', 'de') }}
                 {% endif %}
             </p>
             <p class="mb-14">
