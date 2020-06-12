@@ -74,7 +74,7 @@
                     {% else %}
                         {% set val = (((quoteRequest.postalCode.transportRate / 1000000000000000) + (product.transportUnitPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000)) %}
                     {% endif %}
-                    {% if qproduct.setUpPrice == 0 %}
+                    {% if product.setUpPrice == 0 %}
                     {% else %}
                         {% set val = val +  (((quoteRequest.postalCode.setUpRate / 1000000000000000) + (product.setUpPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000)) %}
                     {% endif %}
