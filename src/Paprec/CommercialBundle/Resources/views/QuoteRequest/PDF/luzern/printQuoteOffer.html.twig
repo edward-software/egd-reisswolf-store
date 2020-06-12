@@ -514,7 +514,7 @@
                 Ihre Sicherheitsbehälter werden gemäss Ihrem Wunsch abgeholt : {% if quoteRequest.frequency == 'ponctual' %}
                     Auf Anfrage
                 {% elseif quoteRequest.frequency == 'regular' %}
-                    {{ quoteRequest.frequencyTimes }} mal / {{ ('Commercial.QuoteRequest.' ~ quoteRequest.frequencyInterval)|trans }}
+                    {{ quoteRequest.frequencyTimes }} mal / {{ ('Commercial.QuoteRequest.' ~ quoteRequest.frequencyInterval)|trans([], null, 'DE') }}
                 {% endif %}
             </p>
             <p class="mb-14">
