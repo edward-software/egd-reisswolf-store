@@ -70,19 +70,19 @@
                     CHF
                     {% set val = 0 %}
 
-                    {% if quoteRequest.postalCode.transportRate == 0 %}
+                    {% if quoteRequest.postalCode.transportUnitPrice == 0 %}
                     {% else %}
                         {% set val = (((quoteRequest.postalCode.transportRate / 1000000000000000) + (product.transportUnitPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000)) %}
                     {% endif %}
-                    {% if quoteRequest.postalCode.setUpRate == 0 %}
+                    {% if quoteRequest.postalCode.setUpPrice == 0 %}
                     {% else %}
                         {% set val = val +  (((quoteRequest.postalCode.setUpRate / 1000000000000000) + (product.setUpPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000)) %}
                     {% endif %}
-                    {% if quoteRequest.postalCode.treatmentRate == 0 %}
+                    {% if quoteRequest.postalCode.treatmentUnitPrice == 0 %}
                     {% else %}
                         {% set val = val +  (((quoteRequest.postalCode.treatmentRate / 1000000000000000) + (product.treatmentUnitPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000)) %}
                     {% endif %}
-                    {% if quoteRequest.postalCode.traceabilityRate == 0 %}
+                    {% if quoteRequest.postalCode.traceabilityUnitPrice == 0 %}
                     {% else %}
                         {% set val = val +  (((quoteRequest.postalCode.traceabilityRate / 1000000000000000) + (product.traceabilityUnitPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000)) %}
                     {% endif %}
@@ -133,7 +133,7 @@
             </td>
             <td>
                 {% set val = 0 %}
-                {% if quoteRequest.postalCode.rentalRate == 0 %}
+                {% if quoteRequest.postalCode.rentalUnitPrice == 0 %}
                 {% else %}
                     {% set val = (((quoteRequest.postalCode.rentalRate / 1000000000000000) + (product.rentalUnitPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000)) %}
                 {% endif %}

@@ -457,7 +457,7 @@
                             {% set val = 0 %}
                             {% for line in quoteRequest.quoteRequestLines %}
                                 {% if line.product.id == product.id %}
-                                    {% if line.rentalRate == 0 %}
+                                    {% if line.rentalUnitPrice == 0 %}
                                     {% else %}
                                         {% set val = (((line.rentalRate / 1000000000000000) + (line.rentalUnitPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000)) %}
                                     {% endif %}
@@ -469,11 +469,11 @@
                             {% set val = 0 %}
                             {% for line in quoteRequest.quoteRequestLines %}
                                 {% if line.product.id == product.id %}
-                                    {% if line.transportRate == 0 %}
+                                    {% if line.transportUnitPrice == 0 %}
                                     {% else %}
                                         {% set val = (((line.transportRate / 1000000000000000) + (line.transportUnitPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000)) %}
                                     {% endif %}
-                                    {% if line.setUpRate == 0 %}
+                                    {% if line.setUpPrice == 0 %}
                                     {% else %}
                                         {% set val = val +  (((line.setUpRate / 1000000000000000) + (line.setUpPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000)) %}
                                     {% endif %}
