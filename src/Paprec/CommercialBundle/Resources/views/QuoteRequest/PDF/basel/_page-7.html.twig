@@ -70,19 +70,19 @@
                     CHF
                     {% set val = 0 %}
 
-                    {% if quoteRequest.postalCode.transportUnitPrice == 0 %}
+                    {% if product.transportUnitPrice == 0 %}
                     {% else %}
                         {% set val = (((quoteRequest.postalCode.transportRate / 1000000000000000) + (product.transportUnitPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000)) %}
                     {% endif %}
-                    {% if quoteRequest.postalCode.setUpPrice == 0 %}
+                    {% if qproduct.setUpPrice == 0 %}
                     {% else %}
                         {% set val = val +  (((quoteRequest.postalCode.setUpRate / 1000000000000000) + (product.setUpPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000)) %}
                     {% endif %}
-                    {% if quoteRequest.postalCode.treatmentUnitPrice == 0 %}
+                    {% if product.treatmentUnitPrice == 0 %}
                     {% else %}
                         {% set val = val +  (((quoteRequest.postalCode.treatmentRate / 1000000000000000) + (product.treatmentUnitPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000)) %}
                     {% endif %}
-                    {% if quoteRequest.postalCode.traceabilityUnitPrice == 0 %}
+                    {% if product.traceabilityUnitPrice == 0 %}
                     {% else %}
                         {% set val = val +  (((quoteRequest.postalCode.traceabilityRate / 1000000000000000) + (product.traceabilityUnitPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000)) %}
                     {% endif %}
@@ -133,7 +133,7 @@
             </td>
             <td>
                 {% set val = 0 %}
-                {% if quoteRequest.postalCode.rentalUnitPrice == 0 %}
+                {% if product.rentalUnitPrice == 0 %}
                 {% else %}
                     {% set val = (((quoteRequest.postalCode.rentalRate / 1000000000000000) + (product.rentalUnitPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000)) %}
                 {% endif %}
