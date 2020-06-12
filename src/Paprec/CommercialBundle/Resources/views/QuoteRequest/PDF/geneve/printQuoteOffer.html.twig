@@ -112,9 +112,11 @@
         .mb-20 {
             margin-bottom: 20px;
         }
+
         .mb-30 {
             margin-bottom: 30px;
         }
+
         .mb-40 {
             margin-bottom: 40px;
         }
@@ -248,6 +250,7 @@
         table .empty {
             height: 30px;
         }
+
         table .empty td:last-child {
             border-left: 0 !important;
             border-right: 0 !important;
@@ -262,6 +265,7 @@
             margin-left: 5px;
             margin-bottom: 3px;
         }
+
         .check.active {
             border: 2px solid white;
             outline: 2px solid grey;
@@ -450,38 +454,31 @@
                         <td class="bold">{{ tmpLockProg }}</td>
                         <td class="bold">
                             {% set val = 0 %}
-                            {% for line in quoteRequest.quoteRequestLines %}
-                                {% if line.product.id == product.id %}
-                                    {% if line.rentalUnitPrice == 0 %}
-                                    {% else %}
-                                        {% set val = (((line.rentalRate / 1000000000000000) + (line.rentalUnitPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000)) %}
-                                    {% endif %}
-                                {% endif %}
-                            {% endfor %}
+                            {% if product.rentalUnitPrice == 0 %}
+                            {% else %}
+                                {% set val = (((quoteRequest.postalCode.rentalRate / 1000000000000000) + (product.rentalUnitPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000)) %}
+                            {% endif %}
+
                             {{ val|round|number_format(2, ',', ' ') }}
                         </td>
                         <td class="bold">
                             {% set val = 0 %}
-                            {% for line in quoteRequest.quoteRequestLines %}
-                                {% if line.product.id == product.id %}
-                                    {% if line.transportUnitPrice == 0 %}
-                                    {% else %}
-                                        {% set val = (((line.transportRate / 1000000000000000) + (line.transportUnitPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000)) %}
-                                    {% endif %}
-                                    {% if line.setUpPrice == 0 %}
-                                    {% else %}
-                                        {% set val = val +  (((line.setUpRate / 1000000000000000) + (line.setUpPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000)) %}
-                                    {% endif %}
-                                    {% if line.treatmentUnitPrice == 0 %}
-                                    {% else %}
-                                        {% set val = val +  (((line.treatmentRate / 1000000000000000) + (line.treatmentUnitPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000)) %}
-                                    {% endif %}
-                                    {% if line.traceabilityUnitPrice == 0 %}
-                                    {% else %}
-                                        {% set val = val +  (((line.traceabilityRate / 1000000000000000) + (line.traceabilityUnitPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000)) %}
-                                    {% endif %}
-                                {% endif %}
-                            {% endfor %}
+                            {% if product.transportUnitPrice == 0 %}
+                            {% else %}
+                                {% set val = (((quoteRequest.postalCode.transportRate / 1000000000000000) + (product.transportUnitPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000)) %}
+                            {% endif %}
+                            {% if product.setUpPrice == 0 %}
+                            {% else %}
+                                {% set val = val +  (((quoteRequest.postalCode.setUpRate / 1000000000000000) + (product.setUpPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000)) %}
+                            {% endif %}
+                            {% if product.treatmentUnitPrice == 0 %}
+                            {% else %}
+                                {% set val = val +  (((quoteRequest.postalCode.treatmentRate / 1000000000000000) + (product.treatmentUnitPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000)) %}
+                            {% endif %}
+                            {% if product.traceabilityUnitPrice == 0 %}
+                            {% else %}
+                                {% set val = val +  (((quoteRequest.postalCode.traceabilityRate / 1000000000000000) + (product.traceabilityUnitPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000)) %}
+                            {% endif %}
                             {{ val|round|number_format(2, ',', ' ') }}
                         </td>
                         <td>inclus</td>
@@ -503,7 +500,8 @@
                     <td colspan="2" class="bold">Chargement à l'étage</td>
                     <td>par conteneur</td>
                     <td class="bold">Ascenseur :</td>
-                    <td class="bold" style="padding: 10px 0;">10.00 <span class="check {% if quoteRequest.access == 'elevator' %}active{% endif %}"></span> </td>
+                    <td class="bold" style="padding: 10px 0;">10.00 <span
+                                class="check {% if quoteRequest.access == 'elevator' %}active{% endif %}"></span></td>
                     <td rowspan="2"></td>
                     <td rowspan="2"></td>
 
@@ -512,14 +510,16 @@
                     <td colspan="2"></td>
                     <td></td>
                     <td class="bold">Escalier :</td>
-                    <td class="bold" style="padding: 10px 0;">20.00 <span class="check {% if quoteRequest.access == 'stairs' %}active{% endif %}"></span></td>
+                    <td class="bold" style="padding: 10px 0;">20.00 <span
+                                class="check {% if quoteRequest.access == 'stairs' %}active{% endif %}"></span></td>
                 </tr>
                 </tbody>
             </table>
 
 
             <p class="mb-14">
-                Conformément à votre demande, vos conteurs sécurisés seront collectés : {% if quoteRequest.frequency == 'ponctual' %}
+                Conformément à votre demande, vos conteurs sécurisés seront
+                collectés : {% if quoteRequest.frequency == 'ponctual' %}
                     À la demande
                 {% elseif quoteRequest.frequency == 'regular' %}
                     {{ quoteRequest.frequencyTimes }} fois / {{ ('Commercial.QuoteRequest.' ~ quoteRequest.frequencyInterval)|trans }}
@@ -532,13 +532,14 @@
                 Nous restons volontiers à votre disposition pour tout renseignement complémentaire.
             </p>
             <p class="mb-14" style="line-height: 20px;">
-                En cas d'acceptation de notre proposition, nous vous remercions de bien vouloir nous retourner par voie postale le contrat, ci-après annexé, dûment signé.
+                En cas d'acceptation de notre proposition, nous vous remercions de bien vouloir nous retourner par voie
+                postale le contrat, ci-après annexé, dûment signé.
             </p>
             <p class="mb-14">Meilleures salutations,</p>
             <h2 class="mb-20">Votre partenaire REISSWOLF</h2>
 
             <div class="flex offer__signature">
-               <div>
+                <div>
                     <p>Pascal Laperrousaz</p>
                     <p>Directeur Général</p>
                 </div>

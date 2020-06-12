@@ -112,9 +112,11 @@
         .mb-20 {
             margin-bottom: 20px;
         }
+
         .mb-30 {
             margin-bottom: 30px;
         }
+
         .mb-40 {
             margin-bottom: 40px;
         }
@@ -248,6 +250,7 @@
         table .empty {
             height: 30px;
         }
+
         table .empty td:last-child {
             border-left: 0 !important;
             border-right: 0 !important;
@@ -262,6 +265,7 @@
             margin-left: 5px;
             margin-bottom: 3px;
         }
+
         .check.active {
             border: 2px solid white;
             outline: 2px solid grey;
@@ -401,7 +405,8 @@
         </div>
 
         <div class="offer__presta">
-            <p class="mb-20">Für Ihre Anfrage danken wir Ihnen bestens. Gerne bieten wir Ihnen unsere Dienstleistungen wie folgt an.</p>
+            <p class="mb-20">Für Ihre Anfrage danken wir Ihnen bestens. Gerne bieten wir Ihnen unsere Dienstleistungen
+                wie folgt an.</p>
             <h2>Entsorgung und Vernichtung von Akten</h2>
 
             <table>
@@ -449,38 +454,31 @@
                         <td class="bold">{{ tmpLockProg }}</td>
                         <td class="bold">
                             {% set val = 0 %}
-                            {% for line in quoteRequest.quoteRequestLines %}
-                                {% if line.product.id == product.id %}
-                                    {% if line.rentalUnitPrice == 0 %}
-                                    {% else %}
-                                        {% set val = (((line.rentalRate / 1000000000000000) + (line.rentalUnitPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000)) %}
-                                    {% endif %}
-                                {% endif %}
-                            {% endfor %}
+                            {% if product.rentalUnitPrice == 0 %}
+                            {% else %}
+                                {% set val = (((quoteRequest.postalCode.rentalRate / 1000000000000000) + (product.rentalUnitPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000)) %}
+                            {% endif %}
+
                             {{ val|round|number_format(2, ',', ' ') }}
                         </td>
                         <td class="bold">
                             {% set val = 0 %}
-                            {% for line in quoteRequest.quoteRequestLines %}
-                                {% if line.product.id == product.id %}
-                                    {% if line.transportUnitPrice == 0 %}
-                                    {% else %}
-                                        {% set val = (((line.transportRate / 1000000000000000) + (line.transportUnitPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000)) %}
-                                    {% endif %}
-                                    {% if line.setUpPrice == 0 %}
-                                    {% else %}
-                                        {% set val = val +  (((line.setUpRate / 1000000000000000) + (line.setUpPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000)) %}
-                                    {% endif %}
-                                    {% if line.treatmentUnitPrice == 0 %}
-                                    {% else %}
-                                        {% set val = val +  (((line.treatmentRate / 1000000000000000) + (line.treatmentUnitPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000)) %}
-                                    {% endif %}
-                                    {% if line.traceabilityUnitPrice == 0 %}
-                                    {% else %}
-                                        {% set val = val +  (((line.traceabilityRate / 1000000000000000) + (line.traceabilityUnitPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000)) %}
-                                    {% endif %}
-                                {% endif %}
-                            {% endfor %}
+                            {% if product.transportUnitPrice == 0 %}
+                            {% else %}
+                                {% set val = (((quoteRequest.postalCode.transportRate / 1000000000000000) + (product.transportUnitPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000)) %}
+                            {% endif %}
+                            {% if product.setUpPrice == 0 %}
+                            {% else %}
+                                {% set val = val +  (((quoteRequest.postalCode.setUpRate / 1000000000000000) + (product.setUpPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000)) %}
+                            {% endif %}
+                            {% if product.treatmentUnitPrice == 0 %}
+                            {% else %}
+                                {% set val = val +  (((quoteRequest.postalCode.treatmentRate / 1000000000000000) + (product.treatmentUnitPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000)) %}
+                            {% endif %}
+                            {% if product.traceabilityUnitPrice == 0 %}
+                            {% else %}
+                                {% set val = val +  (((quoteRequest.postalCode.traceabilityRate / 1000000000000000) + (product.traceabilityUnitPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000)) %}
+                            {% endif %}
                             {{ val|round|number_format(2, ',', ' ') }}
                         </td>
                         <td>inkl</td>
@@ -502,7 +500,8 @@
                     <td colspan="2" class="bold">Verlad ab Stockwerk</td>
                     <td>pro Behälter</td>
                     <td class="bold">Aufzug :</td>
-                    <td class="bold" style="padding: 10px 0;">10.00 <span class="check {% if quoteRequest.access == 'elevator' %}active{% endif %}"></span> </td>
+                    <td class="bold" style="padding: 10px 0;">10.00 <span
+                                class="check {% if quoteRequest.access == 'elevator' %}active{% endif %}"></span></td>
                     <td rowspan="2"></td>
                     <td rowspan="2"></td>
 
@@ -511,14 +510,16 @@
                     <td colspan="2"></td>
                     <td></td>
                     <td class="bold">Treppe :</td>
-                    <td class="bold" style="padding: 10px 0;">20.00 <span class="check {% if quoteRequest.access == 'stairs' %}active{% endif %}"></span></td>
+                    <td class="bold" style="padding: 10px 0;">20.00 <span
+                                class="check {% if quoteRequest.access == 'stairs' %}active{% endif %}"></span></td>
                 </tr>
                 </tbody>
             </table>
 
 
             <p class="mb-14">
-                Ihre Sicherheitsbehälter werden gemäss Ihrem Wunsch abgeholt : {% if quoteRequest.frequency == 'ponctual' %}
+                Ihre Sicherheitsbehälter werden gemäss Ihrem Wunsch
+                abgeholt : {% if quoteRequest.frequency == 'ponctual' %}
                     Auf Anfrage
                 {% elseif quoteRequest.frequency == 'regular' %}
                     {{ quoteRequest.frequencyTimes }} mal / {{ ('Commercial.QuoteRequest.' ~ quoteRequest.frequencyInterval)|trans }}
@@ -531,7 +532,8 @@
                 Für weitere Informationen stehen wir gerne zur Verfügung. Über einen Auftrag würden wir uns sehr freuen.
             </p>
             <p class="mb-14" style="line-height: 20px;">
-                Wenn Sie unser Angebot annehmen, senden Sie uns bitte den unterstehenden Vertrag, unterschrieben, per Post zurück.
+                Wenn Sie unser Angebot annehmen, senden Sie uns bitte den unterstehenden Vertrag, unterschrieben, per
+                Post zurück.
             </p>
             <p class="mb-14">Freundliche Grüsse,</p>
             <h2 class="mb-20">Ihr REISSWOLF-Partner</h2>

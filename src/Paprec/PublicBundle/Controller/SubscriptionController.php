@@ -369,11 +369,12 @@ class SubscriptionController extends Controller
         $quoteRequest = $quoteRequestManager->get($quoteId);
         $productManager = $this->container->get('paprec_catalog.product_manager');
         $products = $productManager->getAvailableProducts();
-        return $this->render('@PaprecCommercial/QuoteRequest/PDF/basel/printQuoteOffer.html.twig', array(
+        return $this->render('@PaprecCommercial/QuoteRequest/PDF/geneve/printQuoteOffer.html.twig', array(
             'quoteRequest' => $quoteRequest,
             'products' => $products,
             'date' => new \DateTime(),
-            'locale' => $locale
+            'locale' => $locale,
+            'tmpLockProg' => $this->getParameter('tmp_lock_prog')
         ));
     }
 //
