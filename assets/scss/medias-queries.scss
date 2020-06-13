@@ -2,14 +2,20 @@
 
 @media (min-width: 1200px) {
   .container {
-    max-width: 1230px;
+   // max-width: 1230px;
+  }
+}
+
+@media (min-width: 990px) and (max-width: 1200px) {
+  .navbar .navbar-nav {
+    justify-content: flex-end;
   }
 }
 
 @media (min-width: 990px) {
   .navbar-expand-md .navbar-nav .nav-link {
-    padding-right: 10px ;
-    padding-left: 10px ;
+    padding-right: 20px ;
+    padding-left: 20px ;
   }
 }
 
@@ -18,14 +24,6 @@
   /* Navigation */
 
   .navbar {
-    .navbar-brand {
-      margin: auto;
-    }
-
-    .menu {
-      align-items: flex-start;
-    }
-
     .nav-link i {
       display: none;
     }
@@ -50,10 +48,16 @@
   }
 }
 
+@media (max-width: 1200px) {
+  .navbar .navbar-nav {
+    justify-content: space-between;
+    width: 100%;
+  }
+}
+
 @media (max-width: 990px) {
-  .navbar-expand-md .navbar-nav .nav-link {
-    padding-right: 5px ;
-    padding-left: 5px ;
+  .footer__divider {
+    margin-top: 0 !important;
   }
 }
 
@@ -84,20 +88,34 @@
       max-height: 30px;
     }
   }
+
+  /* Header */
+
+  .navbar-brand {
+    img {
+      max-height: 60px;
+    }
+  }
+
+  /* footer */
+
   footer {
     margin-top: 15px;
+    .footer__sites {
+      margin-bottom: 30px;
+    }
   }
 
 }
 
 @media (max-width: 767px) {
-  .top-bar__top-contact a {
-    text-align: center;
+  .top-bar__top-contact {
+    span {
+      display: none;
+    }
   }
+
   /* Navigation */
-  .top-bar__top-social-icon, .top-bar__top-social-flags {
-    margin: 5px 0;
-  }
   .navbar {
     & .navbar-nav {
       margin: auto !important;
@@ -106,22 +124,35 @@
     & .nav-link {
       padding-top: 22px;
       padding-left: 15px !important;
-      background: #eee;
       margin: 5px 0;
+      text-align: center;
     }
     & .dropdown-menu {
       border: 0;
       box-shadow: none;
+      text-align: center;
     }
     & .dropdown-menu a {
       color: $darkgray;
+    }
+
+    .menu {
+      padding-top: 20px !important;
+      padding-bottom: 20px !important;
     }
   }
 }
 
 @media (max-width: 500px) {
-  .top-bar__top-social-icon, .top-bar__top-social-flags {
-    display: none;
+  .top-bar__top-social-flags ul li:last-child a {
+    margin-right: 10px !important;
+  }
+  .custom-toggler.navbar-toggler {
+    align-self: center;
+  }
+  .navbar .menu {
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
   }
 }
 

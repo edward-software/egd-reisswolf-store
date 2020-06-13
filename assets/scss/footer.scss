@@ -1,18 +1,17 @@
 /*FOOTER*/
 
 footer {
-  background-color: $lightgray;
+  background-color: #d9dde4;
   margin-top: 100px;
 
   .footer {
-    padding: 25px 0 45px;
+    padding-top: 30px;
     h3 {
       color: $primary;
-      font-size: 20px;
+      font-size: 24px;
       font-weight: $font-regular;
-      border-bottom: 1px solid $mdgray;
-      padding-bottom: 20px;
-      margin-top: 20px;
+      padding-bottom: 10px;
+      margin-top: 30px;
     }
 
     img {
@@ -26,33 +25,72 @@ footer {
 
     &__list {
       margin-left: 10px;
+      margin-bottom: 30px;
       li {
         position: relative;
         margin-left: 20px;
         list-style: none;
+        padding-bottom: 12px;
         i {
           position: absolute;
           left: -30px;
           top: 3px;
+          color: $secondary;
         }
       }
     }
+
+    &__sites {
+    margin-bottom: 60px;
+      a {
+        font-weight: $font-regular !important;
+        color: $secondary !important;
+        &:hover {
+          color: #1a2856 !important;
+          text-decoration: underline !important;
+        }
+      }
+    }
+
+    &__divider {
+      margin: 30px 0 30px 0;
+      border-bottom:1px solid #C3C1C2;
+      width:100%;
+      height:1px;
+    }
+
+    &__legal {
+      a {
+        color: $primary;
+        font-weight: $font-regular !important;
+        &:hover {
+          text-decoration: underline !important;
+          color: #1a2856 !important;
+        }
+      }
+    }
+
+    .btn {
+      margin-bottom: 20px;
+    }
+
   }
 
+
+
   .copyright {
-    font-family: $font-family-1;
-    font-weight: $font-light;
-    line-height: 28px;
+    font-family: $font-family-2;
     background-color: $secondary;
-    padding: 30px 0 40px;
-    color: $white;
-    font-size: 24px;
+    padding: 24px;
+    font-size: 18px;
     text-align: center;
 
     a {
       color: $white;
-      font-weight: $font-medium;
       text-decoration: underline;
+      &:hover {
+        text-decoration: underline !important;
+      }
     }
   }
 }

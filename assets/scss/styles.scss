@@ -76,10 +76,11 @@ a {
 /*BUTTON*/
 
 .btn {
-  border-radius: 4px;
+  border-radius: 0;
   font-size: 14px;
   height: auto;
-  transition: all .3s ease-in-out;
+  padding: 10px 25px;
+  transition: all .2s ease-in-out;
 
   &__large {
     padding-left: 25px;
@@ -92,11 +93,13 @@ a {
 
   &__blue {
     background-color: $secondary;
+    border: 1.5px solid #2c4491;
     color: $white;
 
     &:hover {
-      color: $white !important;
-      background-color: rgba(255, 196, 0, 0.8) !important;
+      background-color: #fff0;
+      border: 1.5px solid #2c4491;
+      //background-color: rgba(255, 196, 0, 0.8) !important;
     }
   }
 }
