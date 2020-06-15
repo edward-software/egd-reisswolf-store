@@ -118,12 +118,18 @@ class QuoteRequestController extends Controller
                 $queryBuilder->andWhere($queryBuilder->expr()->orx(
                     $queryBuilder->expr()->like('q.id', '?1'),
                     $queryBuilder->expr()->like('q.number', '?1'),
+                    $queryBuilder->expr()->like('q.reference', '?1'),
                     $queryBuilder->expr()->like('q.businessName', '?1'),
                     $queryBuilder->expr()->like('q.totalAmount', '?1'),
                     $queryBuilder->expr()->like('q.quoteStatus', '?1'),
                     $queryBuilder->expr()->like('q.dateCreation', '?1')
                 ))->setParameter(1, '%' . $search['value'] . '%');
             }
+        }
+
+        if (is_array($orders) && count($orders) && $orders[0]['column'] === '0') {
+            $queryBuilder->addOrderBy('q.quoteStatus', 'ASC');
+            $queryBuilder->addOrderBy('q.dateCreation', 'ASC');
         }
 
         $datatable = $this->get('goondi_tools.datatable')->generateTable($cols, $queryBuilder, $pageSize, $start,
