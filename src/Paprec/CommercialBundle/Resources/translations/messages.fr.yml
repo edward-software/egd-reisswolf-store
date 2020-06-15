@@ -91,6 +91,12 @@ Commercial:
         Add: Ajout d'un produit
         Product: Produit
 
+    GeneralEmail:
+        Address1: BALE, Schlachthofstrasse 18, CH-4056 Bâle, +41 61 386 96 70
+        Address2: LUCERNE, Kantonsstrasse 5, CH-6033 Buchrain, +41 41 448 38 62
+        Address3: ZURICH, Lindenstrasse 3, CH-8108 Dällikon, +41 44 844 24 04
+        Address4: ROMANDIE, Rue de la Bergère 26, CH-1242 Satigny, +41 22 552 62 62
+
     NewQuoteEmail:
         Object: Voici une nouvelle demande client N°%number%
         Dear: Cher(ère) Collègue Reisswolf
@@ -110,6 +116,7 @@ Commercial:
         Message2: Nous vous enverrons notre offre pour les services REISSWOLF dans les prochaines heures.
         Regards: Bien cordialement
         Partner: Votre partenaire Reisswolf
+        NoReply: Ne pas répondre à ce message; il a été envoyé à partir d'une boîte automatisée.
         Disclaimer:
             Message1: Vous avez reçu cet e-mail pour vous informer des modifications importantes apportées aux services
             Message2: que vous utilisez
