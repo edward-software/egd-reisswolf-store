@@ -444,7 +444,7 @@ class QuoteRequestManager
                 return false;
             }
 
-            $pdfFilename = $quoteRequest->getReference() . '-' . $this->container->get('translator')->trans('Commercial.GeneratedQuoteEmail.FileName') . '-' . $quoteRequest->getBusinessName() . '.pdf';
+            $pdfFilename = $quoteRequest->getReference() . '-' . $this->container->get('translator')->trans('Commercial.GeneratedQuoteEmail.FileName', array(), 'messages', $locale) . '-' . $quoteRequest->getBusinessName() . '.pdf';
 
             $pdfFile = $this->generatePDF($quoteRequest, $locale, false);
 

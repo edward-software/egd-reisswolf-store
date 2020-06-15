@@ -721,7 +721,7 @@ class QuoteRequestController extends Controller
         // Set content disposition inline of the file
         $response->setContentDisposition(
             ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-            $quoteRequest->getReference() . '-' . $this->get('translator')->trans('Commercial.QuoteRequest.DownloadedQuoteName') . '-' . $quoteRequest->getBusinessName() . '.pdf'
+            $quoteRequest->getReference() . '-' . $this->get('translator')->trans('Commercial.QuoteRequest.DownloadedQuoteName', array(), 'messages', $locale) . '-' . $quoteRequest->getBusinessName() . '.pdf'
         );
 
 
