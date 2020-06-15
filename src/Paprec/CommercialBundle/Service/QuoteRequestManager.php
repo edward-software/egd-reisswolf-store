@@ -395,7 +395,7 @@ class QuoteRequestManager
                         '@PaprecCommercial/QuoteRequest/emails/newQuoteEmail.html.twig',
                         array(
                             'quoteRequest' => $quoteRequest,
-                            'locale' => $locale
+                            'locale' => strtolower($locale)
                         )
                     ),
                     'text/html'

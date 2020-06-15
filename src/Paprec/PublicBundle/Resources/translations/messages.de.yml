@@ -3,7 +3,7 @@ Public:
     Bundle-name:                    Gestion devis
 
     Navbar:
-      Home: News
+      Home: Home
       Menu1:
         Title: Vernichtungsarten
         SubMenu1: Aktenvernichtung
