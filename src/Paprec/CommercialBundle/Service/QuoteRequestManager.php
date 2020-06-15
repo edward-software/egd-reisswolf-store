@@ -444,7 +444,12 @@ class QuoteRequestManager
                 return false;
             }
 
-            $pdfFilename = $quoteRequest->getReference() . '-' . $this->container->get('translator')->trans('Commercial.GeneratedQuoteEmail.FileName', array(), 'messages', $locale) . '-' . $quoteRequest->getBusinessName() . '.pdf';
+            $localeFilename = 'DE';
+            if (strtolower($quoteRequest->getPostalCode()->getRegion()->getName()) === 'geneve') {
+                $localeFilename = 'FR';
+            }
+
+            $pdfFilename = $quoteRequest->getReference() . '-' . $this->container->get('translator')->trans('Commercial.GeneratedQuoteEmail.FileName', array(), 'messages', $localeFilename) . '-' . $quoteRequest->getBusinessName() . '.pdf';
 
             $pdfFile = $this->generatePDF($quoteRequest, $locale, false);
 
