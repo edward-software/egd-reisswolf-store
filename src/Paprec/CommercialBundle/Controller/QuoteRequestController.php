@@ -724,7 +724,6 @@ class QuoteRequestController extends Controller
             $quoteRequest->getReference() . '-' . $this->get('translator')->trans('Commercial.QuoteRequest.DownloadedQuoteName', array(), 'messages', $locale) . '-' . $quoteRequest->getBusinessName() . '.pdf'
         );
 
-
         return $response;
     }
 }
