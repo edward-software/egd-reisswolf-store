@@ -457,7 +457,8 @@ class QuoteRequestManager
             $translator = $this->container->get('translator');
 
             $message = \Swift_Message::newInstance()
-                ->setSubject($translator->trans('Commercial.GeneratedQuoteEmail.Object'))
+                ->setSubject($translator->trans('Commercial.GeneratedQuoteEmail.Object',
+                    array(), 'messages', strtolower($quoteRequest->getLocale())))
                 ->setFrom($from)
                 ->setTo($rcptTo)
                 ->setBody(
