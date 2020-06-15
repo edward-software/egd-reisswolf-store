@@ -694,7 +694,10 @@ class QuoteRequestController extends Controller
         $user = $this->getUser();
         $pdfTmpFolder = $pdfFolder . '/';
 
-w
+        $locale = 'DE';
+        if (strtolower($quoteRequest->getPostalCode()->getRegion()->getName()) === 'geneve') {
+            $locale = 'FR';
+        }
 
         $file = $quoteRequestManager->generatePDF($quoteRequest, $locale);
 
