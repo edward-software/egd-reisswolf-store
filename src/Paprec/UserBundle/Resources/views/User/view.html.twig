@@ -131,7 +131,9 @@
                                 <label class="col-md-4 col-form-label">{{ 'User.User.Postal-codes'|trans }}</label>
                                 <label class="col-form-label">
                                     {% for postalCode in user.postalCodes %}
-                                        <a href="{{ path('paprec_catalog_postalCode_view', {id: postalCode.id}) }}">{{ postalCode.code }}</a>
+                                        {% if postalCode.deleted is null %}
+                                            <a href="{{ path('paprec_catalog_postalCode_view', {id: postalCode.id}) }}">{{ postalCode.code }}</a>
+                                        {% endif %}
                                     {% endfor %}
                                 </label>
                             </div>
@@ -182,7 +184,7 @@
                             showCancelButton: true,
                             confirmButtonText: "{{ 'General.Yes'|trans }}",
                             cancelButtonText: "{{ 'General.No'|trans }}"
-                        }).then(function(result) {
+                        }).then(function (result) {
                             if (result.value) {
                                 $(location).attr('href', url);
                             }
@@ -200,7 +202,7 @@
                             showCancelButton: true,
                             confirmButtonText: "{{ 'General.Yes'|trans }}",
                             cancelButtonText: "{{ 'General.No'|trans }}"
-                        }).then(function(result) {
+                        }).then(function (result) {
                             if (result.value) {
                                 $(location).attr('href', url);
                             }
