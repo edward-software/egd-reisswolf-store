@@ -50,7 +50,7 @@ class QuoteRequestPublicType extends AbstractType
                 "choice_label" => function ($choiceValue, $key, $value) {
                     return 'Commercial.AccessList.' . $choiceValue;
                 },
-                'data' => 'stairs',
+                'data' => 'ground',
                 'required' => true
             ))
             ->add('staff', ChoiceType::class, array(
