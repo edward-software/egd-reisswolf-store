@@ -23,7 +23,7 @@
 </head>
 <body>
 
-{{ 'Commercial.NewQuoteEmail.Dear'|trans }},
+{{ 'Commercial.NewQuoteEmail.Dear'|trans({}, "messages", locale) }},
 <br><br>
 {{ 'Commercial.NewQuoteEmail.Message1'| trans({}, "messages", locale) }}
 <br>

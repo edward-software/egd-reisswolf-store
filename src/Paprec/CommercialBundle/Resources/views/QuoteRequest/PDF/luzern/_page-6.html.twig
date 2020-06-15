@@ -21,7 +21,7 @@
     {#INTERLOCUTEUR 1#}
     <p class="bold mt-20">Reisswolf Aktenvernichtungs-AG :</p>
     <div class="flex">
-        <div style="margin-right: 30px;"><p>Frau Arminka Lezic (Vertriebsleiter)</p>
+        <div style="margin-right: 30px;"><p>Frau Arminka Lezic (Vertriebsleiterin)</p>
             <p>Herr André Nadler (Geschäftsführer)</p>
         </div>
         <div>
@@ -48,9 +48,9 @@
     <div class="flex">
         <div style="margin-right: 30px;">
             <p>{% if quoteRequest.civility == 'M' %}
-                    {{ 'General.M'|trans([], null, 'DE') }}
+                    {{ 'General.M'|trans({}, 'messages', 'de') }}
                 {% elseif quoteRequest.civility == 'Mme' %}
-                    {{ 'General.Mme'|trans([], null, 'DE') }}
+                    {{ 'General.Mme'|trans({}, 'messages', 'de') }}
                 {% endif %}  {{ quoteRequest.firstName }} {{ quoteRequest.lastName }}</p>
         </div>
         <div>

@@ -449,33 +449,34 @@
                         <td class="bold">{{ tmpLockProg }}</td>
                         <td class="bold">
                             {% set val = 0 %}
-                            {% for line in quoteRequest.quoteRequestLines %}
-                                {% if line.product.id == product.id %}
-                                    {% if line.rentalUnitPrice == 0 %}
-                                    {% else %}
-                                        {% set val = (((line.rentalRate / 1000000000000000) + (line.rentalUnitPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000)) %}
-                                    {% endif %}
-                                {% endif %}
-                            {% endfor %}
+                            {% if product.rentalUnitPrice == 0 %}
+                            {% else %}
+                                {% set val = (((quoteRequest.postalCode.rentalRate / 1000000000000000) + (product.rentalUnitPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000)) %}
+                            {% endif %}
+
                             {{ val|round|number_format(2, ',', ' ') }}
                         </td>
                         <td class="bold">
                             {% set val = 0 %}
-                            {% for line in quoteRequest.quoteRequestLines %}
-                                {% if line.product.id == product.id %}
-                                    {% if line.transportUnitPrice == 0 %}
-                                    {% else %}
-                                        {% set val = (((line.transportRate / 1000000000000000) + (line.transportUnitPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000)) %}
-                                    {% endif %}
-                                    {% if line.setUpPrice == 0 %}
-                                    {% else %}
-                                        {% set val = val +  (((line.setUpRate / 1000000000000000) + (line.setUpPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000)) %}
-                                    {% endif %}
-                                {% endif %}
-                            {% endfor %}
+                            {% if product.transportUnitPrice == 0 %}
+                            {% else %}
+                                {% set val = (((quoteRequest.postalCode.transportRate / 1000000000000000) + (product.transportUnitPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000)) %}
+                            {% endif %}
+                            {% if product.setUpPrice == 0 %}
+                            {% else %}
+                                {% set val = val +  (((quoteRequest.postalCode.setUpRate / 1000000000000000) + (product.setUpPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000)) %}
+                            {% endif %}
+                            {% if product.treatmentUnitPrice == 0 %}
+                            {% else %}
+                                {% set val = val +  (((quoteRequest.postalCode.treatmentRate / 1000000000000000) + (product.treatmentUnitPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000)) %}
+                            {% endif %}
+                            {% if product.traceabilityUnitPrice == 0 %}
+                            {% else %}
+                                {% set val = val +  (((quoteRequest.postalCode.traceabilityRate / 1000000000000000) + (product.traceabilityUnitPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000)) %}
+                            {% endif %}
                             {{ val|round|number_format(2, ',', ' ') }}
                         </td>
-                        <td>inkl</td>
+                        <td>inkl.</td>
                         <td class="bold">
                             {% set quantity = 0 %}
                             {% for line in quoteRequest.quoteRequestLines %}
@@ -513,7 +514,7 @@
                 Ihre Sicherheitsbehälter werden gemäss Ihrem Wunsch abgeholt : {% if quoteRequest.frequency == 'ponctual' %}
                     Auf Anfrage
                 {% elseif quoteRequest.frequency == 'regular' %}
-                    {{ quoteRequest.frequencyTimes }} mal / {{ ('Commercial.QuoteRequest.' ~ quoteRequest.frequencyInterval)|trans }}
+                    {{ quoteRequest.frequencyTimes }} mal / {{ ('Commercial.QuoteRequest.' ~ quoteRequest.frequencyInterval)|trans({}, 'messages', 'DE') }}
                 {% endif %}
             </p>
             <p class="mb-14">
@@ -535,7 +536,7 @@
                 </div>
                 <div>
                     <p>Arminka Lezic</p>
-                    <p>Vertriebsleiter</p>
+                    <p>Vertriebsleiterin</p>
                 </div>
             </div>
         </div>

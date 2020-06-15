@@ -387,7 +387,7 @@ class QuoteRequestManager
                 ->setSubject(
                     $translator->trans(
                         'Commercial.NewQuoteEmail.Object',
-                        array('%number%' => $quoteRequest->getId())))
+                        array('%number%' => $quoteRequest->getId()), 'messages', strtolower($locale)))
                 ->setFrom($from)
                 ->setTo($rcptTo)
                 ->setBody(
