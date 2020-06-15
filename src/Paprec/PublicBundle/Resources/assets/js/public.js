@@ -159,6 +159,7 @@ $(function () {
     $('input[name*=isMultisite]').change(function () {
         if (this.value == 1) {
             $('.address-field').prop("disabled", true);
+            $('.address-field').val('');
         } else if (this.value == 0) {
             $('.address-field').prop("disabled", false);
         }
