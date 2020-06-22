@@ -136,7 +136,6 @@
                 "columns": [
                     {"data": "id"},
                     {"data": "reference"},
-                    // {"data": "number", "width": "10%"},
                     {"data": "businessName"},
                     {"data": "isMultisite"},
                     {"data": "totalAmount"},
@@ -144,6 +143,10 @@
                     {"data": "dateCreation"},
                     {"data": "userInCharge", "bSortable": false},
                     {"data": "id", "width": "10%", "bSortable": false}
+                ],
+                "order": [
+                    [5, "ASC"],
+                    [6, "ASC"],
                 ],
                 columnDefs: [
                     {"width": "250px", "targets": 1},

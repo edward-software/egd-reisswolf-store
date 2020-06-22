@@ -127,11 +127,6 @@ class QuoteRequestController extends Controller
             }
         }
 
-        if (is_array($orders) && count($orders) && $orders[0]['column'] === '0') {
-            $queryBuilder->addOrderBy('q.quoteStatus', 'ASC');
-            $queryBuilder->addOrderBy('q.dateCreation', 'ASC');
-        }
-
         $datatable = $this->get('goondi_tools.datatable')->generateTable($cols, $queryBuilder, $pageSize, $start,
             $orders, $columns, $filters);
         // Reformatage de certaines données
@@ -727,7 +722,8 @@ class QuoteRequestController extends Controller
         // Set content disposition inline of the file
         $response->setContentDisposition(
             ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-            $quoteRequest->getReference() . '-' . $this->get('translator')->trans('Commercial.QuoteRequest.DownloadedQuoteName', array(), 'messages', $locale) . '-' . $quoteRequest->getBusinessName() . '.pdf'
+            $quoteRequest->getReference() . '-' . $this->get('translator')->trans('Commercial.QuoteRequest.DownloadedQuoteName',
+                array(), 'messages', $locale) . '-' . $quoteRequest->getBusinessName() . '.pdf'
         );
 
         return $response;
