@@ -467,7 +467,7 @@ class QuoteRequestController extends Controller
              */
             if ((!$savedCommercial && $quoteRequest->getUserInCharge())
                 || ($savedCommercial && $savedCommercial->getId() !== $quoteRequest->getUserInCharge()->getId())) {
-                $quoteRequestManager->sendNewRequestEmail($quoteRequest, $quoteRequest->getUserInCharge()->getLang());
+                $quoteRequestManager->sendNewRequestEmail($quoteRequest);
                 $this->get('session')->getFlashBag()->add('success', 'newUserInChargeWarned');
             }
 
@@ -652,7 +652,7 @@ class QuoteRequestController extends Controller
         $quoteRequestManager->isDeleted($quoteRequest, true);
 
         if ($quoteRequest->getPostalCode() && $quoteRequest->getPostalCode()->getRegion()) {
-            $sendQuote = $quoteRequestManager->sendGeneratedQuoteEmail($quoteRequest, $quoteRequest->getLocale());
+            $sendQuote = $quoteRequestManager->sendGeneratedQuoteEmail($quoteRequest);
             if ($sendQuote) {
                 $this->get('session')->getFlashBag()->add('success', 'generatedQuoteSent');
             } else {

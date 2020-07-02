@@ -41,6 +41,7 @@ class SubscriptionController extends Controller
         $em = $this->getDoctrine()->getManager();
         $cartManager = $this->get('paprec.cart_manager');
         $productManager = $this->get('paprec_catalog.product_manager');
+        $otherNeedsManager = $this->get('paprec_catalog.other_need_manager');
 
         if (!$cartUuid) {
             $cart = $cartManager->create(90);
@@ -55,12 +56,15 @@ class SubscriptionController extends Controller
 
             $products = $productManager->getAvailableProducts();
 
+            $otherNeeds = $otherNeedsManager->getByLocale($locale);
+
         }
 
         return $this->render('@PaprecPublic/Common/catalog.html.twig', array(
             'locale' => $locale,
             'cart' => $cart,
-            'products' => $products
+            'products' => $products,
+            'otherNeeds' => $otherNeeds
         ));
     }
 
@@ -158,9 +162,8 @@ class SubscriptionController extends Controller
             /**
              * On envoie le mail de confirmation à l'utilisateur
              */
-            $sendConfirmEmail = $quoteRequestManager->sendConfirmRequestEmail($quoteRequest, $locale);
-            $sendNewRequestEmail = $quoteRequestManager->sendNewRequestEmail($quoteRequest,
-                ($quoteRequest->getUserInCharge() ? $quoteRequest->getUserInCharge()->getLang() : 'de'));
+            $sendConfirmEmail = $quoteRequestManager->sendConfirmRequestEmail($quoteRequest);
+            $sendNewRequestEmail = $quoteRequestManager->sendNewRequestEmail($quoteRequest);
 
 
             if ($sendConfirmEmail && $sendNewRequestEmail) {

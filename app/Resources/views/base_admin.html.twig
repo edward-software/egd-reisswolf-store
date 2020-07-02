@@ -98,6 +98,8 @@
                                        href="{{ path('paprec_catalog_region_index') }}">{{ 'Catalog.Region.Regions'|trans }}</a>
                                     <a class="dropdown-item{% if app.request.get('_route')|slice(0, 'paprec_catalog_custom_area'|length) == 'paprec_catalog_custom_area' %} active{% endif %}"
                                        href="{{ path('paprec_catalog_custom_area_index') }}">{{ 'Catalog.CustomArea.CustomAreas'|trans }}</a>
+                                    <a class="dropdown-item{% if app.request.get('_route')|slice(0, 'paprec_catalog_other_need'|length) == 'paprec_catalog_other_need' %} active{% endif %}"
+                                       href="{{ path('paprec_catalog_other_need_index') }}">{{ 'Catalog.OtherNeed.OtherNeeds'|trans }}</a>
                                 </div>
                             </div>
                         </div>

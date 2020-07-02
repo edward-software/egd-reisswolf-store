@@ -33,6 +33,52 @@ $(function () {
     // });
 
 
+    /*****************************
+     *  Gestion du bouton flottant en bas de page
+     *****************************/
+
+    if ($('.product-container').is('div')) {
+
+
+        var navbarOffset = $('.navbar')[0].getBoundingClientRect().top;
+        var productOffset = $('.product-container')[0].getBoundingClientRect().top;
+        var otherNeedsOffset = $('.other-needs-container')[0].getBoundingClientRect().top;
+        var otherNeedsHeight = $('.other-needs-container').height();
+        var duration = 350;
+
+        $(window).scroll(function () {
+                const scrollTop = $(this).scrollTop();
+                if (scrollTop <= navbarOffset) {
+                    $('#define-need-button').fadeOut(duration);
+                    $('#other-needs-button').fadeOut(duration);
+                } else if (scrollTop > navbarOffset && scrollTop < productOffset) {
+                    $('#define-need-button').fadeIn(duration);
+                    $('#other-needs-button').fadeOut(duration);
+
+                } else if (scrollTop >= productOffset && scrollTop <= ($(document).height() - $(window).height() - (otherNeedsHeight / 2))) {
+                    $('#define-need-button').fadeOut(duration);
+                    $('#other-needs-button').fadeIn(duration);
+                } else if (scrollTop > ($(document).height() - $(window).height() - (otherNeedsHeight / 2))) {
+                    $('#other-needs-button').fadeOut(duration);
+                }
+            }
+        );
+
+        $('#define-need-button').on('click', function (e) {
+            e.preventDefault();
+            $('html, body').animate({
+                scrollTop: productOffset
+            }, 750);
+        });
+
+        $('#other-needs-button').on('click', function (e) {
+            e.preventDefault();
+            $('html, body').animate({
+                scrollTop: otherNeedsOffset
+            }, 750);
+        });
+    }
+
     $('#frequencyButton2').on('click', function () {
         $('.catalog-frequency-select').prop("disabled", false);
         $('#catalog_frequency_times_select').val(1);
@@ -148,14 +194,16 @@ $(function () {
     /**
      * Affichage d'un message d'info au focus sur le numéro de téléphone
      */
-    $('#paprec_catalogbundle_quote_request_public_phone').focus(function() {
+    $('#paprec_catalogbundle_quote_request_public_phone').focus(function () {
         $('#phone-number-info').show();
     });
 
-    $('#paprec_catalogbundle_quote_request_public_phone').blur(function() {
+    $('#paprec_catalogbundle_quote_request_public_phone').blur(function () {
         $('#phone-number-info').hide();
     });
 
+    // Désactivation des champs d'adresses quand on sélecitonne multisite
+    /*
     $('input[name*=isMultisite]').change(function () {
         if (this.value == 1) {
             $('.address-field').prop("disabled", true);
@@ -163,7 +211,7 @@ $(function () {
         } else if (this.value == 0) {
             $('.address-field').prop("disabled", false);
         }
-    });
+    });*/
 
     $('#contact_staff_select').change(function () {
         $('.contact_staff_input').val(this.value);

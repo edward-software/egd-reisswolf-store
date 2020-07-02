@@ -18,6 +18,7 @@ select {
 
 .product-container {
 
+  margin-bottom: 40px;
 
   .round-btn {
     height: 25px;
@@ -216,5 +217,37 @@ select {
       list-style: none;
       color: red;
     }
+  }
+}
+
+
+/**
+* Bouton Flottant en bas de step0
+*/
+.floating-bottom-button {
+  position: fixed;
+  bottom: 1em;
+  left: 50%;
+  transform: translate(-50%, 0);
+  text-decoration: none;
+  color: $white;
+  background-color: rgba(44, 68, 145, 0.9);
+  cursor: pointer;
+  padding: 10px 50px;
+  display: none;
+}
+
+/**
+* Other needs
+ */
+.other-needs-image {
+  margin: 5px;
+  text-align: center;
+  background-color: $lightgray;
+  padding: 30px;
+
+  img {
+    max-height: 300px;
+    width: 100%;
   }
 }

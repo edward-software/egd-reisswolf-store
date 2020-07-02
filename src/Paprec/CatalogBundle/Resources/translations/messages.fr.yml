@@ -129,3 +129,17 @@ Catalog:
     AddPictureRight: Photo droite
     Informations: Informations
     System-informations: Informations système
+
+  OtherNeed:
+    OtherNeeds: Autres besoins
+    List: Liste des besoins
+    Name: Titre
+    Language: Langue
+    IsDisplayed: Affiché
+    Add: Ajouter un besoin
+    View: Vue du besoin
+    Edit: Modifier le besoin
+    Remove: Supprimer besoin
+    AddPicture: Photo
+    Informations: Informations
+    System-informations: Informations système

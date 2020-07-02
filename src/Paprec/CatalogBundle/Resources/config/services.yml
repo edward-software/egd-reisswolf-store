@@ -14,6 +14,10 @@ services:
     class: Paprec\CatalogBundle\Service\CustomAreaManager
     arguments: ["@doctrine.orm.entity_manager", "@service_container"]
 
+  paprec_catalog.other_need_manager:
+    class: Paprec\CatalogBundle\Service\OtherNeedManager
+    arguments: ["@doctrine.orm.entity_manager", "@service_container"]
+
   paprec_catalog.product_manager:
     class: Paprec\CatalogBundle\Service\ProductManager
     arguments: ["@doctrine.orm.entity_manager", "@service_container"]
@@ -64,6 +68,10 @@ parameters:
   paprec_custom_area_types_picture:
     - LEFT
     - RIGHT
+
+  paprec_other_need_types_picture:
+    - PICTURE
+
 
   paprec_languages:
     - DE

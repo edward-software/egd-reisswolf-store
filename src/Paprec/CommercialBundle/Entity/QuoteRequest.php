@@ -164,7 +164,7 @@ class QuoteRequest
      * @var string
      *
      * @ORM\Column(name="address", type="text", nullable=true)
-     * @Assert\NotBlank(groups={"public_multisite"})
+     * @Assert\NotBlank(groups={"public"})
      */
     private $address;
     
@@ -172,7 +172,7 @@ class QuoteRequest
      * @var string
      *
      * @ORM\Column(name="city", type="string", length=255, nullable=true, nullable=true)
-     * @Assert\NotBlank(groups={"public_multisite"})
+     * @Assert\NotBlank(groups={"public"})
      */
     private $city;
     
@@ -268,7 +268,7 @@ class QuoteRequest
 
     /**
      * @ORM\ManyToOne(targetEntity="Paprec\CatalogBundle\Entity\PostalCode", inversedBy="quoteRequests")
-     * @Assert\NotBlank(groups={"public_multisite"})
+     * @Assert\NotBlank(groups={"public"})
      */
     private $postalCode;
     

@@ -50,6 +50,8 @@ Public:
         Quarter: trimestre
         Year: an
         BreadcrumbContent: Offres de services
+        Define-Need: Définir son besoin
+        Other-Needs: Autres besoins
 
     Contact:
         BreadcrumbTitle: Coordonnées du client
@@ -77,7 +79,7 @@ Public:
     Confirm:
         Object: Votre demande de devis
         BreadcrumbTitle: Confirmation de la demande
-        Title: Votre demande a bien été prise en compte et envoyée au service commercial de votre région.
+        Title: Votre demande a bien été prise en compte et envoyée au service commercial de votre région. Il reprendra contact avec vous dans les prochaines heures
         Message: Vous devriez recevoir un e-mail de confirmation, cette opération peut prendre plusieurs minutes. Si vous ne recevez pas la confirmation, vérifiez dans votre dossier à spam, sinon contactez notre
         TechnicalService: service technique
         BreadcrumbContent: Confirmation de la demande

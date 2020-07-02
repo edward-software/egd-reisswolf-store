@@ -3,36 +3,36 @@ Public:
     Bundle-name:                    Gestion devis
 
     Navbar:
-      Home: Home
-      Menu1:
-        Title: Vernichtungsarten
-        SubMenu1: Aktenvernichtung
-        SubMenu2: Archivräumung
-        SubMenu3: Datenträgervernichtung
-        SubMenu4: Röntgenfilmvernichtung
-      Menu2:
-        Title: Prozesse
-        SubMenu1: Vernichtung Standard
-        SubMenu2: Vernichtung Mobile
-        SubMenu3: Vernichtung mit Pressfahrzeug
-      Menu3:
-        Title: Sicherheit
-        SubMenu1: Sicherheitstransportbehälter
-        SubMenu2: e.l.sy. Sicherheitschloss
-        SubMenu3: DIN-Norm
-        SubMenu4: Sicherheit und Datenschutz bei der Vernichtung
-        SubMenu5: Zertifikate IQ NET und SQS
-      Menu4:
-        Title: Unternehmen
-        SubMenu1: Über Reisswolf
-        SubMenu2: Paprec Gruppe
-        SubMenu3: Nachhaltigkeit
-        SubMenu4: Geschäftsleitung
-        SubMenu5: Downloadbereich
-      Menu5:
-        Title: Kontakt
-        SubMenu1: Ansprechpartner
-        SubMenu2: Angebot anfordern
+        Home: Home
+        Menu1:
+            Title: Vernichtungsarten
+            SubMenu1: Aktenvernichtung
+            SubMenu2: Archivräumung
+            SubMenu3: Datenträgervernichtung
+            SubMenu4: Röntgenfilmvernichtung
+        Menu2:
+            Title: Prozesse
+            SubMenu1: Vernichtung Standard
+            SubMenu2: Vernichtung Mobile
+            SubMenu3: Vernichtung mit Pressfahrzeug
+        Menu3:
+            Title: Sicherheit
+            SubMenu1: Sicherheitstransportbehälter
+            SubMenu2: e.l.sy. Sicherheitschloss
+            SubMenu3: DIN-Norm
+            SubMenu4: Sicherheit und Datenschutz bei der Vernichtung
+            SubMenu5: Zertifikate IQ NET und SQS
+        Menu4:
+            Title: Unternehmen
+            SubMenu1: Über Reisswolf
+            SubMenu2: Paprec Gruppe
+            SubMenu3: Nachhaltigkeit
+            SubMenu4: Geschäftsleitung
+            SubMenu5: Downloadbereich
+        Menu5:
+            Title: Kontakt
+            SubMenu1: Ansprechpartner
+            SubMenu2: Angebot anfordern
 
     Catalog:
         BreadcrumbTitle: Dienstleistungen
@@ -50,6 +50,8 @@ Public:
         Quarter: Quartal
         Year: Jahr
         BreadcrumbContent: Dienstleistungen
+        Define-Need: Den eigenen Bedarf definieren
+        Other-Needs: Andere Bedürfnisse
 
     Contact:
         BreadcrumbTitle: Angebot anfordern
@@ -76,7 +78,7 @@ Public:
 
     Confirm:
         BreadcrumbTitle: Anfragebestätigung
-        Title: Ihre Anfrage wurde erhalten und zur Vertriebsabteilung Ihrer Region weitergeleitet
+        Title: Ihre Anfrage wurde erhalten und zur Vertriebsabteilung Ihrer Region weitergeleitet. Er wird sich in den nächsten Stunden bei Ihnen melden.
         Message: Sie sollten eine E-Mail-Bestätigung erhalten; dieser Vorgang kann einige Minuten dauern. Wenn Sie keine Bestätigung erhalten, überprüfen Sie Ihren Spam-Ordner, andernfalls wenden Sie sich bitte an unsere
         TechnicalService:  technische Abteilung
         BreadcrumbContent: Anfragebestätigung

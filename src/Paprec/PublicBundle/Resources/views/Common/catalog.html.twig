@@ -214,9 +214,26 @@
                 </div>
 
             </div>
-
-        </div>
-
+            <div class="">
+                <div class="row">
+                    <div class="col-md-12 col-lg-6 col-12">
+                        <h2>{{ 'Public.Catalog.Other-Needs'| trans({}, "messages", locale) }} </h2>
+                    </div>
+                </div>
+                <div class="row other-needs-container">
+                    {% for otherNeed in otherNeeds %}
+                        {% if otherNeed.pictures and otherNeed.pictures|length > 0 %}
+                            <div class="col other-needs-image">
+                                <img src="{{ asset('/uploads/pictos/' ~ otherNeed.pictures[0].path) }}">
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
         </div>
     </section>
+    <div id="define-need-button"
+         class="floating-bottom-button">{{ 'Public.Catalog.Define-Need'| trans({}, "messages", locale) }}</div>
+    <div id="other-needs-button"
+         class="floating-bottom-button">{{ 'Public.Catalog.Other-Needs'| trans({}, "messages", locale) }}</div>
 {% endblock %}

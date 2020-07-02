@@ -308,7 +308,7 @@ class QuoteRequestManager
      * Envoie un mail à la personne ayant fait une demande de devis
      * @throws Exception
      */
-    public function sendConfirmRequestEmail(QuoteRequest $quoteRequest, $locale)
+    public function sendConfirmRequestEmail(QuoteRequest $quoteRequest)
     {
 
         try {
@@ -320,6 +320,12 @@ class QuoteRequestManager
             if ($rcptTo == null || $rcptTo == '') {
                 return false;
             }
+
+            $locale = 'DE';
+            if (strtolower($quoteRequest->getPostalCode()->getRegion()->getName()) === 'geneve') {
+                $locale = 'FR';
+            }
+
             $translator = $this->container->get('translator');
 
             $message = \Swift_Message::newInstance()
@@ -353,7 +359,7 @@ class QuoteRequestManager
      * Envoie un mail au commercial associé lui indiquant la nouvelle demande de devis créée
      * @throws Exception
      */
-    public function sendNewRequestEmail(QuoteRequest $quoteRequest, $locale)
+    public function sendNewRequestEmail(QuoteRequest $quoteRequest)
     {
 
         try {
@@ -381,6 +387,11 @@ class QuoteRequestManager
 
             if ($rcptTo == null || $rcptTo == '') {
                 return false;
+            }
+
+            $locale = 'DE';
+            if (strtolower($quoteRequest->getPostalCode()->getRegion()->getName()) === 'geneve') {
+                $locale = 'FR';
             }
 
             $message = \Swift_Message::newInstance()
@@ -432,7 +443,7 @@ class QuoteRequestManager
      * @return bool
      * @throws Exception
      */
-    public function sendGeneratedQuoteEmail(QuoteRequest $quoteRequest, $locale)
+    public function sendGeneratedQuoteEmail(QuoteRequest $quoteRequest)
     {
         try {
             $from = $this->container->getParameter('paprec_email_sender');
@@ -451,7 +462,7 @@ class QuoteRequestManager
 
             $pdfFilename = $quoteRequest->getReference() . '-' . $this->container->get('translator')->trans('Commercial.GeneratedQuoteEmail.FileName', array(), 'messages', $localeFilename) . '-' . $quoteRequest->getBusinessName() . '.pdf';
 
-            $pdfFile = $this->generatePDF($quoteRequest, $locale, false);
+            $pdfFile = $this->generatePDF($quoteRequest, $localeFilename, false);
 
             if (!$pdfFile) {
                 return false;
@@ -471,7 +482,7 @@ class QuoteRequestManager
                         '@PaprecCommercial/QuoteRequest/emails/generatedQuoteEmail.html.twig',
                         array(
                             'quoteRequest' => $quoteRequest,
-                            'locale' => $locale
+                            'locale' => $localeFilename
                         )
                     ),
                     'text/html'
