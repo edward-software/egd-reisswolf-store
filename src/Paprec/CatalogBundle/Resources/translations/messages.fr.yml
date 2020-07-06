@@ -131,15 +131,15 @@ Catalog:
     System-informations: Informations système
 
   OtherNeed:
-    OtherNeeds: Autres besoins
-    List: Liste des besoins
+    OtherNeeds: Autres produits possibles
+    List: Liste des autres produits
     Name: Titre
     Language: Langue
     IsDisplayed: Affiché
-    Add: Ajouter un besoin
-    View: Vue du besoin
-    Edit: Modifier le besoin
-    Remove: Supprimer besoin
+    Add: Ajouter un autre produit
+    View: Vue de l’autre produit
+    Edit: Modifier autre produit
+    Remove: Supprimer autre produit
     AddPicture: Photo
     Informations: Informations
     System-informations: Informations système

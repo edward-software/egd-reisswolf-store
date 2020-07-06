@@ -132,15 +132,15 @@ Catalog:
 
 
   OtherNeed:
-    OtherNeeds: Autres besoins
-    List: Verzeichnis der Anforderungen
+    OtherNeeds: Weitere mögliche Produkte
+    List: Liste weiterer Produkte
     Name: Titel
     Language: Sprache
     IsDisplayed: Angezeigt
-    Add: Anforderung hinzufügen
-    View: Anforderungenansicht
-    Edit: Anforderung ändern
-    Remove: Anforderung löschen
+    Add: Weiteres Produkt hinzufügen
+    View: Ansicht des weiteren Produktes
+    Edit: Weiteres Produkt modifizieren
+    Remove: Weiteres Produkt löschen
     AddPicture: Foto
     Informations: Informationen
     System-informations: Systeminformationen

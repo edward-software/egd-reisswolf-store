@@ -152,6 +152,19 @@ class QuoteRequestType extends AbstractType
                         ->andWhere('u.roles LIKE \'%ROLE_COMMERCIAL%\'')
                         ->orderBy('u.firstName');
                 }
+            ))
+            ->add('signatoryFirstName1')
+            ->add('signatoryLastName1')
+            ->add('signatoryTitle1')
+            ->add('signatoryFirstName2')
+            ->add('signatoryLastName2')
+            ->add('signatoryTitle2')
+            ->add('isSingleSignatory', ChoiceType::class, array(
+                "choices" => array(0, 1),
+                "choice_label" => function ($choiceValue, $key, $value) {
+                    return 'General.' . $choiceValue;
+                },
+                "expanded" => false,
             ));
         $builder->get('postalCode')
             ->addModelTransformer($this->transformer);

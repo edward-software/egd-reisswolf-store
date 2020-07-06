@@ -75,6 +75,9 @@ Public:
         SendRequest: Anfrage absenden
         BreadcrumbContent: Angebot anfordern
 
+    Signatory:
+        BreadcrumbTitle:            Definition der Unterzeichner
+        BreadcrumbContent:          Definition der Unterzeichner
 
     Confirm:
         BreadcrumbTitle: Anfragebestätigung

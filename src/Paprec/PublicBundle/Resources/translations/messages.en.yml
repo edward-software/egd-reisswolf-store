@@ -41,6 +41,7 @@ Public:
     BreadcrumbContent: Customer details
 
 
+
   Confirm:
     BreadcrumbTitle: Confirmation of the request
     Title: Your request has been taken into account and sent to the sales department in your region.

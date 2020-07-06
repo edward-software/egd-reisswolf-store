@@ -102,13 +102,18 @@ class OtherNeed
     private $pictures;
 
     /**
+     * @ORM\ManyToMany(targetEntity="Paprec\PublicBundle\Entity\Cart", inversedBy="otherNeeds")
+     */
+    private $carts;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->dateCreation = new \DateTime();
         $this->pictures = new ArrayCollection();
-
+        $this->carts = new ArrayCollection();
     }
 
     /**
@@ -371,5 +376,41 @@ class OtherNeed
     public function getPictures()
     {
         return $this->pictures;
+    }
+
+    /**
+     * Add cart.
+     *
+     * @param \Paprec\PublicBundle\Entity\Cart $cart
+     *
+     * @return OtherNeed
+     */
+    public function addCart(\Paprec\PublicBundle\Entity\Cart $cart)
+    {
+        $this->carts[] = $cart;
+
+        return $this;
+    }
+
+    /**
+     * Remove cart.
+     *
+     * @param \Paprec\PublicBundle\Entity\Cart $cart
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeCart(\Paprec\PublicBundle\Entity\Cart $cart)
+    {
+        return $this->carts->removeElement($cart);
+    }
+
+    /**
+     * Get carts.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCarts()
+    {
+        return $this->carts;
     }
 }

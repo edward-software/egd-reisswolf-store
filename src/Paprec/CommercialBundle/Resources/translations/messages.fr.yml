@@ -58,6 +58,13 @@ Commercial:
             newUserInChargeWarned: Un mail a été envoyé au nouveau commercial en charge
         Locale: Langue
         Number: Numéro offre
+        SignatoryFirstName1: Prénom signataire 1
+        SignatoryLastName1: Nom signataire 1
+        SignatoryTitle1: Titre signataire 1
+        SignatoryFirstName2: Prénom signataire 2
+        SignatoryLastName2: Nom signataire 2
+        SignatoryTitle2: Titre signataire 2
+        IsSingleSignatory: Signataire unique
 
     QuoteStatusList:
         CREATED: Créé

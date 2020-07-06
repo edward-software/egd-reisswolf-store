@@ -58,6 +58,13 @@ Commercial:
             newUserInChargeWarned: Ein Mail wurde an den Aussendienst zugeschickt.
         Locale: Sprache
         Number: Angebotsnummer
+        SignatoryFirstName1: Vorname des Unterzeichners 1
+        SignatoryLastName1: Nachname des Unterzeichners 1
+        SignatoryTitle1: Titel des Unterzeichners 1
+        SignatoryFirstName2: Vorname des Unterzeichners 2
+        SignatoryLastName2: Nachname des Unterzeichners 2
+        SignatoryTitle2: Titel des Unterzeichners 2
+        IsSingleSignatory: Einzelner Unterzeichner
 
     QuoteStatusList:
         CREATED: Erzeugt

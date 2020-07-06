@@ -79,6 +79,26 @@ $(function () {
         });
     }
 
+    /*****************************
+     *  Gestion otherNeed
+     *****************************/
+
+    $('.other-needs-image').click(function () {
+        var url = $(this).data('url');
+        const that = $(this);
+        $.ajax({
+            type: "POST",
+            url: url,
+            success: function (response) {
+                if (that.hasClass('active')) {
+                    that.removeClass('active');
+                } else {
+                    that.addClass('active');
+                }
+            }
+        })
+    });
+
     $('#frequencyButton2').on('click', function () {
         $('.catalog-frequency-select').prop("disabled", false);
         $('#catalog_frequency_times_select').val(1);

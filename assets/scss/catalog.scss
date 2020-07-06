@@ -245,9 +245,31 @@ select {
   text-align: center;
   background-color: $lightgray;
   padding: 30px;
+  cursor: pointer;
+
+  .fa-check {
+    display: none;
+  }
+
+  &.active {
+    -webkit-box-shadow: 0 0 5px 2px rgba(44, 68, 145, 0.37);
+    -moz-box-shadow: 0 0 5px 2px rgba(44, 68, 145, 0.37);
+    box-shadow: 0 0 5px 2px rgba(44, 68, 145, 0.37);
+
+    .fa-check {
+      display: block;
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      font-size: 28px;
+      color: green;
+    }
+  }
 
   img {
     max-height: 300px;
     width: 100%;
   }
+
+
 }

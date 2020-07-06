@@ -465,8 +465,8 @@ class QuoteRequestController extends Controller
             /**
              * Si le commercial en charge a changé, alors on envoie un mail au nouveau commercial
              */
-            if ((!$savedCommercial && $quoteRequest->getUserInCharge())
-                || ($savedCommercial && $savedCommercial->getId() !== $quoteRequest->getUserInCharge()->getId())) {
+            if ($quoteRequest->getUserInCharge() && ((!$savedCommercial && $quoteRequest->getUserInCharge())
+                || ($savedCommercial && $savedCommercial->getId() !== $quoteRequest->getUserInCharge()->getId()))) {
                 $quoteRequestManager->sendNewRequestEmail($quoteRequest);
                 $this->get('session')->getFlashBag()->add('success', 'newUserInChargeWarned');
             }

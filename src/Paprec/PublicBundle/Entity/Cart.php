@@ -4,6 +4,7 @@ namespace Paprec\PublicBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\Uuid;
 
 /**
  * Cart
@@ -80,13 +81,23 @@ class Cart
      */
     private $content;
 
+    /******************************
+     * RELATIONS
+     */
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Paprec\CatalogBundle\Entity\OtherNeed", mappedBy="carts")
+     */
+    private $otherNeeds;
 
     public function __construct()
     {
         $this->dateCreation = new \DateTime();
         $this->content = array();
+        $this->otherNeeds = new ArrayCollection();
     }
-    
+
+
 
     /**
      * Get id.
@@ -288,5 +299,41 @@ class Cart
     public function getFrequencyInterval()
     {
         return $this->frequencyInterval;
+    }
+
+    /**
+     * Add otherNeed.
+     *
+     * @param \Paprec\CatalogBundle\Entity\OtherNeed $otherNeed
+     *
+     * @return Cart
+     */
+    public function addOtherNeed(\Paprec\CatalogBundle\Entity\OtherNeed $otherNeed)
+    {
+        $this->otherNeeds[] = $otherNeed;
+
+        return $this;
+    }
+
+    /**
+     * Remove otherNeed.
+     *
+     * @param \Paprec\CatalogBundle\Entity\OtherNeed $otherNeed
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeOtherNeed(\Paprec\CatalogBundle\Entity\OtherNeed $otherNeed)
+    {
+        return $this->otherNeeds->removeElement($otherNeed);
+    }
+
+    /**
+     * Get otherNeeds.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOtherNeeds()
+    {
+        return $this->otherNeeds;
     }
 }

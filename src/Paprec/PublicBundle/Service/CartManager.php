@@ -12,6 +12,7 @@ namespace Paprec\PublicBundle\Service;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityNotFoundException;
 use \Exception;
+use Paprec\CatalogBundle\Entity\OtherNeed;
 use Paprec\CatalogBundle\Entity\Product;
 use Paprec\PublicBundle\Entity\Cart;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -227,32 +228,96 @@ class CartManager
      * @param $id
      * @param $productId
      * @param $quantity
-     * @return object|Cart|null
+     * @return string
      * @throws Exception
      */
     public function removeOneProduct($id, $productId)
     {
-        $cart = $this->get($id);
-        $qtty = '0';
-        $content = $cart->getContent();
-        if ($content && count($content)) {
-            foreach ($content as $key => $product) {
-                if ($product['pId'] == $productId) {
-                    $qtty = strval(intval($product['qtty']) - 1);
-                    unset($content[$key]);
+        try {
+
+            $cart = $this->get($id);
+            $qtty = '0';
+            $content = $cart->getContent();
+            if ($content && count($content)) {
+                foreach ($content as $key => $product) {
+                    if ($product['pId'] == $productId) {
+                        $qtty = strval(intval($product['qtty']) - 1);
+                        unset($content[$key]);
+                    }
                 }
             }
-        }
 
-        if ($qtty !== '0') {
-            $product = ['pId' => $productId, 'qtty' => $qtty];
-            $content[] = $product;
-        }
+            if ($qtty !== '0') {
+                $product = ['pId' => $productId, 'qtty' => $qtty];
+                $content[] = $product;
+            }
 
-        $cart->setContent($content);
-        $this->em->persist($cart);
-        $this->em->flush();
-        return $qtty;
+            $cart->setContent($content);
+            $this->em->persist($cart);
+            $this->em->flush();
+
+            return $qtty;
+        } catch (Exception $e) {
+        }
     }
 
+
+    /**
+     * Ajout d'un OtherNeed au cart
+     *
+     * @param $id
+     * @param $otherNeed
+     * @return object|Cart|null
+     */
+    public function addOrRemoveOtherNeed($id, OtherNeed $otherNeed)
+    {
+        try {
+            $cart = $this->get($id);
+            $cartOtherNeeds = $cart->getOtherNeeds();
+
+            $found = false;
+
+            if ($cartOtherNeeds && count($cartOtherNeeds)) {
+                foreach ($cartOtherNeeds as $cartOtherNeed) {
+                    if ($cartOtherNeed->getId() === $otherNeed->getId()) {
+                        $found = true;
+                    }
+                }
+            }
+
+            if ($found) {
+                $cart->removeOtherNeed($otherNeed);
+                $otherNeed->removeCart($cart);
+
+            } else {
+                $cart = $cart->addOtherNeed($otherNeed);
+                $otherNeed->addCart($cart);
+            }
+
+            $this->em->flush();
+
+            return $cart;
+        } catch (Exception $e) {
+        }
+    }
+
+    /**
+     * Suppression d'un OtherNeed au cart
+     * @param $id
+     * @param $otherNeed
+     * @return object|Cart|null
+     */
+    public function removeOtherNeed($id, $otherNeed)
+    {
+        try {
+            $cart = $this->get($id);
+
+            $cart->removeOtherNeed($otherNeed);
+
+            $this->em->flush();
+
+            return $cart;
+        } catch (Exception $e) {
+        }
+    }
 }

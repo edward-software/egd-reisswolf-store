@@ -190,6 +190,59 @@
                                     </div>
 
                                 </div>
+                                <div class="col-md-6 mt-4">
+                                    <div class="form-group">
+                                        <label class="form-label">{{ 'Commercial.QuoteRequest.SignatoryFirstName1'|trans }}</label>
+                                        <div class="form-content">
+                                            {{ form_widget(form.signatoryFirstName1, {'attr': {'class': 'form-control'}}) }}
+                                            {{ form_errors(form.signatoryFirstName1) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">{{ 'Commercial.QuoteRequest.SignatoryLastName1'|trans }}</label>
+                                        <div class="form-content">
+                                            {{ form_widget(form.signatoryLastName1, {'attr': {'class': 'form-control'}}) }}
+                                            {{ form_errors(form.signatoryLastName1) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">{{ 'Commercial.QuoteRequest.SignatoryTitle1'|trans }}</label>
+                                        <div class="form-content">
+                                            {{ form_widget(form.signatoryTitle1, {'attr': {'class': 'form-control'}}) }}
+                                            {{ form_errors(form.signatoryTitle1) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">{{ 'Commercial.QuoteRequest.IsSingleSignatory'|trans }}</label>
+                                        <div class="form-content">
+                                            {{ form_widget(form.isSingleSignatory, {'attr': {'class': 'form-control'}}) }}
+                                            {{ form_errors(form.isSingleSignatory) }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mt-4">
+                                    <div class="form-group">
+                                        <label class="form-label">{{ 'Commercial.QuoteRequest.SignatoryFirstName2'|trans }}</label>
+                                        <div class="form-content">
+                                            {{ form_widget(form.signatoryFirstName2, {'attr': {'class': 'form-control signatory2-field'}}) }}
+                                            {{ form_errors(form.signatoryFirstName2) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">{{ 'Commercial.QuoteRequest.SignatoryLastName2'|trans }}</label>
+                                        <div class="form-content">
+                                            {{ form_widget(form.signatoryLastName2, {'attr': {'class': 'form-control signatory2-field'}}) }}
+                                            {{ form_errors(form.signatoryLastName2) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">{{ 'Commercial.QuoteRequest.SignatoryTitle2'|trans }}</label>
+                                        <div class="form-content">
+                                            {{ form_widget(form.signatoryTitle2, {'attr': {'class': 'form-control signatory2-field'}}) }}
+                                            {{ form_errors(form.signatoryTitle2) }}
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -293,6 +346,18 @@
                     $('.address-field').val('');
                 } else if (this.value == false) {
                     $('.address-field').prop("disabled", false);
+                }
+            });
+
+            /*
+             * Désactivation des champs Signataires 2 en Signataire unique vrai
+            */
+            $('select[name*="paprec_catalogbundle_quote_request[isSingleSignatory]"]').change(function () {
+                if (this.value == true) {
+                    $('.signatory2-field').prop("disabled", true);
+                    $('.signatory2-field').val('');
+                } else if (this.value == false) {
+                    $('.signatory2-field').prop("disabled", false);
                 }
             });
 
