@@ -79,8 +79,11 @@
     <div class="flex contrat__signature" style="margin-top: 60px;">
         <div>
             <p class="mb-30">Lieu et date de signature</p>
-            <p><strong>{{ quoteRequest.businessName }}</strong><br>
-            </p>
+            <p class="bold mb-30">{{ quoteRequest.businessName }}</p>
+            <p class="mb-30">{{ quoteRequest.signatoryFirstName1 }} {{ quoteRequest.signatoryLastName1 }}<br>
+                {{ quoteRequest.signatoryTitle1 }}</p>
+            <p >{{ quoteRequest.signatoryFirstName2 }} {{ quoteRequest.signatoryLastName2 }}<br>
+                {{ quoteRequest.signatoryTitle2 }}</p>
         </div>
         <div>
             <p class="mb-30">Satigny, le {{quoteRequest.dateUpdate|date('d/m/Y')}}</p>
