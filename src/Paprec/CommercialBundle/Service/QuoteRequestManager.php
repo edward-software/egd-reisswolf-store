@@ -577,7 +577,7 @@ class QuoteRequestManager
                         '@PaprecCommercial/QuoteRequest/emails/generatedQuoteEmail.html.twig',
                         array(
                             'quoteRequest' => $quoteRequest,
-                            'locale' => $localeFilename
+                            'locale' => strtolower($localeFilename)
                         )
                     ),
                     'text/html'
