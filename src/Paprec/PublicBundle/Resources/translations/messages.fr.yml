@@ -89,8 +89,7 @@ Public:
         IsSingleSignatory: Signataire unique
 
     SignatoryConfirm:
-        Title: Nous avons bien pris en compte ces informations et vous allez prochainement recevoir votre contrat pour signature.
-        Message: Nous vous remercions pour votre confiance
+        Title: Nous avons bien pris en compte ces informations et vous allez prochainement recevoir votre contrat pour signature. Nous vous remercions pour votre confiance
 
 
     Confirm:

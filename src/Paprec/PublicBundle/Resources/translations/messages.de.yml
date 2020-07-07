@@ -89,8 +89,7 @@ Public:
         IsSingleSignatory: Einzelner Unterzeichner
 
     SignatoryConfirm:
-        Title: Wir haben diese informationen berücksichtigt und sie werden bald ihren vertrag zur unterschrift erhalten.
-        Message: Wir danken ihnen für ihr vertrauen.
+        Title: Wir haben diese informationen berücksichtigt und sie werden bald ihren vertrag zur unterschrift erhalten. Wir danken ihnen für ihr vertrauen.
 
     Confirm:
         BreadcrumbTitle: Anfragebestätigung
