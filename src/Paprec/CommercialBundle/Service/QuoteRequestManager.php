@@ -555,7 +555,7 @@ class QuoteRequestManager
             }
 
             $pdfFilename = $quoteRequest->getReference() . '-' . $this->container->get('translator')->trans('Commercial.GeneratedQuoteEmail.FileName',
-                    array(), 'messages', $localeFilename) . '-' . $quoteRequest->getBusinessName() . '.pdf';
+                    array(), 'messages', strtolower($localeFilename)) . '-' . $quoteRequest->getBusinessName() . '.pdf';
 
             $pdfFile = $this->generatePDF($quoteRequest, strtolower($localeFilename), false);
 
