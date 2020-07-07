@@ -557,7 +557,7 @@ class QuoteRequestManager
             $pdfFilename = $quoteRequest->getReference() . '-' . $this->container->get('translator')->trans('Commercial.GeneratedQuoteEmail.FileName',
                     array(), 'messages', $localeFilename) . '-' . $quoteRequest->getBusinessName() . '.pdf';
 
-            $pdfFile = $this->generatePDF($quoteRequest, $localeFilename, false);
+            $pdfFile = $this->generatePDF($quoteRequest, strtolower($localeFilename), false);
 
             if (!$pdfFile) {
                 return false;
@@ -569,7 +569,7 @@ class QuoteRequestManager
 
             $message = \Swift_Message::newInstance()
                 ->setSubject($translator->trans('Commercial.GeneratedQuoteEmail.Object',
-                    array(), 'messages', strtolower($quoteRequest->getLocale())))
+                    array(), 'messages', strtolower($localeFilename)))
                 ->setFrom($from)
                 ->setTo($rcptTo)
                 ->setBody(
@@ -638,7 +638,7 @@ class QuoteRequestManager
 
             $message = \Swift_Message::newInstance()
                 ->setSubject($translator->trans('Commercial.GeneratedContractEmail.Object',
-                    array(), 'messages', strtolower($quoteRequest->getLocale())))
+                    array(), 'messages', strtolower($localeFilename)))
                 ->setFrom($from)
                 ->setTo($rcptTo)
                 ->setBody(
