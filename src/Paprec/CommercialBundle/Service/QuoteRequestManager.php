@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\ORM\ORMException;
 use DoctrineExtensions\Query\Mysql\Date;
 use Exception;
+use Hackzilla\PasswordGenerator\Generator\ComputerPasswordGenerator;
 use iio\libmergepdf\Merger;
 use Knp\Snappy\Pdf;
 use Paprec\CommercialBundle\Entity\ProductDIQuote;
@@ -56,6 +57,61 @@ class QuoteRequestManager
         }
     }
 
+    /**
+     * Création d'une QuoteRequest avec un Token
+     *
+     * @param bool $doFlush
+     * @return QuoteRequest
+     * @throws Exception
+     */
+    public function add($doFlush = true)
+    {
+
+        try {
+
+            /**
+             * Génération d'un token
+             */
+            $token = $this->generateToken();
+
+            $quoteRequest = new QuoteRequest();
+            $this->em->persist($quoteRequest);
+
+            $quoteRequest->setToken($token);
+
+            if ($doFlush) {
+                $this->em->flush();
+            }
+
+            return $quoteRequest;
+
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage(), $e->getCode());
+        }
+    }
+
+    /**
+     * Generate token with $size length
+     *
+     * @param $size
+     *
+     * @return string
+     */
+    public function generateToken($size = 32)
+    {
+        $generator = new ComputerPasswordGenerator();
+
+        $generator
+            ->setUppercase()
+            ->setLowercase()
+            ->setNumbers()
+            ->setSymbols(false)
+            ->setLength($size);
+
+        return $generator->generatePassword();
+
+    }
+
     public function getCountByReference($reference)
     {
         $qb = $this->em->getRepository('PaprecCommercialBundle:QuoteRequest')->createQueryBuilder('qr')
@@ -74,7 +130,45 @@ class QuoteRequestManager
     }
 
     /**
-     * Vérifie qu'à ce jour, le quoteRequest ce soit pas supprimé
+     * Récupération d'une QuoteRequest valide par l'id et le token
+     *
+     * @param $quoteRequest
+     * @param $token
+     * @return object|QuoteRequest
+     * @throws Exception
+     */
+    public function getActiveByIdAndToken($quoteRequest, $token)
+    {
+        $id = $quoteRequest;
+        if ($quoteRequest instanceof QuoteRequest) {
+            $id = $quoteRequest->getId();
+        }
+        try {
+
+            $quoteRequest = $this->em->getRepository('PaprecCommercialBundle:QuoteRequest')->findOneBy(
+                array(
+                    'id' => $id,
+                    'token' => $token
+                ));
+
+            /**
+             * Vérification que le quoteRequest existe ou ne soit pas supprimée
+             */
+            if ($quoteRequest === null || $this->isDeleted($quoteRequest)) {
+                throw new EntityNotFoundException('quoteRequestNotFound');
+            }
+
+
+            return $quoteRequest;
+
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage(), $e->getCode());
+
+        }
+    }
+
+    /**
+     * Vérifie qu'à ce jour, le quoteRequest ce soit pas supprimée
      *
      * @param QuoteRequest $quoteRequestl
      * @param bool $throwException
@@ -460,7 +554,8 @@ class QuoteRequestManager
                 $localeFilename = 'FR';
             }
 
-            $pdfFilename = $quoteRequest->getReference() . '-' . $this->container->get('translator')->trans('Commercial.GeneratedQuoteEmail.FileName', array(), 'messages', $localeFilename) . '-' . $quoteRequest->getBusinessName() . '.pdf';
+            $pdfFilename = $quoteRequest->getReference() . '-' . $this->container->get('translator')->trans('Commercial.GeneratedQuoteEmail.FileName',
+                    array(), 'messages', $localeFilename) . '-' . $quoteRequest->getBusinessName() . '.pdf';
 
             $pdfFile = $this->generatePDF($quoteRequest, $localeFilename, false);
 
@@ -499,6 +594,159 @@ class QuoteRequestManager
 
         } catch (ORMException $e) {
             throw new Exception('unableToSendGeneratedQuote', 500);
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage(), $e->getCode());
+        }
+    }
+
+    /**
+     * Envoi du contrat généré au client
+     *
+     * @param QuoteRequest $quoteRequest
+     * @return bool
+     * @throws Exception
+     */
+    public function sendGeneratedContractEmail(QuoteRequest $quoteRequest)
+    {
+        try {
+            $from = $this->container->getParameter('paprec_email_sender');
+
+
+            $rcptTo = $quoteRequest->getEmail();
+
+            if ($rcptTo == null || $rcptTo == '') {
+                return false;
+            }
+
+            $localeFilename = 'DE';
+            if (strtolower($quoteRequest->getPostalCode()->getRegion()->getName()) === 'geneve') {
+                $localeFilename = 'FR';
+            }
+
+            $pdfFilename = $quoteRequest->getReference() . '-' . $this->container->get('translator')->trans('Commercial.GeneratedContractEmail.FileName',
+                    array(), 'messages', $localeFilename) . '-' . $quoteRequest->getBusinessName() . '.pdf';
+
+            $pdfFile = $this->generatePDF($quoteRequest, $localeFilename, true);
+
+            if (!$pdfFile) {
+                return false;
+            }
+
+            $attachment = \Swift_Attachment::newInstance(file_get_contents($pdfFile), $pdfFilename, 'application/pdf');
+
+            $translator = $this->container->get('translator');
+
+            $message = \Swift_Message::newInstance()
+                ->setSubject($translator->trans('Commercial.GeneratedContractEmail.Object',
+                    array(), 'messages', strtolower($quoteRequest->getLocale())))
+                ->setFrom($from)
+                ->setTo($rcptTo)
+                ->setBody(
+                    $this->container->get('templating')->render(
+                        '@PaprecCommercial/QuoteRequest/emails/generatedContractEmail.html.twig',
+                        array(
+                            'quoteRequest' => $quoteRequest,
+                            'locale' => $localeFilename
+                        )
+                    ),
+                    'text/html'
+                )
+                ->attach($attachment);
+
+            if ($this->container->get('mailer')->send($message)) {
+                if (file_exists($pdfFile)) {
+                    unlink($pdfFile);
+                }
+                return true;
+            }
+            return false;
+
+        } catch (ORMException $e) {
+            throw new Exception('unableToSendGeneratedContract', 500);
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage(), $e->getCode());
+        }
+    }
+
+    /**
+     * Envoi du contrat généré au commercial pour l'informer que l'utilisateur a reçu son contrat
+     *
+     * @param QuoteRequest $quoteRequest
+     * @return bool
+     * @throws Exception
+     */
+    public function sendNewContractEmail(QuoteRequest $quoteRequest)
+    {
+        try {
+            $from = $this->container->getParameter('paprec_email_sender');
+
+
+            /**
+             * Si la quoteRequest est associé à un commercial, on lui envoie le mail
+             * Sinon,
+             *      si la demande est multisite alors on envoie au mail générique des demandes multisites
+             *          sinon on envoie au mail générique de la région associée au code postal de la demande
+             */
+            $rcptTo = null;
+            if ($quoteRequest->getUserInCharge()) {
+                $rcptTo = $quoteRequest->getUserInCharge()->getEmail();
+            } else {
+                if ($quoteRequest->getIsMultisite()) {
+                    $rcptTo = $this->container->getParameter('reisswolf_salesman_multisite_email');
+                } else {
+                    $quoteRequest->getPostalCode()->getRegion()->getEmail();
+                }
+            }
+
+            if ($rcptTo == null || $rcptTo == '') {
+                return false;
+            }
+
+            $localeFilename = 'DE';
+            if (strtolower($quoteRequest->getPostalCode()->getRegion()->getName()) === 'geneve') {
+                $localeFilename = 'FR';
+            }
+
+            $pdfFilename = $quoteRequest->getReference() . '-' . $this->container->get('translator')->trans('Commercial.NewContractEmail.FileName',
+                    array(), 'messages', $localeFilename) . '-' . $quoteRequest->getBusinessName() . '.pdf';
+
+            $pdfFile = $this->generatePDF($quoteRequest, $localeFilename, true);
+
+            if (!$pdfFile) {
+                return false;
+            }
+
+            $attachment = \Swift_Attachment::newInstance(file_get_contents($pdfFile), $pdfFilename, 'application/pdf');
+
+            $translator = $this->container->get('translator');
+
+            $message = \Swift_Message::newInstance()
+                ->setSubject($translator->trans('Commercial.NewContractEmail.Object',
+                    array('%number%' => $quoteRequest->getId()), 'messages', strtolower($quoteRequest->getLocale())))
+                ->setFrom($from)
+                ->setTo($rcptTo)
+                ->setBody(
+                    $this->container->get('templating')->render(
+                        '@PaprecCommercial/QuoteRequest/emails/newContractEmail.html.twig',
+                        array(
+                            'quoteRequest' => $quoteRequest,
+                            'locale' => $localeFilename
+                        )
+                    ),
+                    'text/html'
+                )
+                ->attach($attachment);
+
+            if ($this->container->get('mailer')->send($message)) {
+                if (file_exists($pdfFile)) {
+                    unlink($pdfFile);
+                }
+                return true;
+            }
+            return false;
+
+        } catch (ORMException $e) {
+            throw new Exception('unableToSendGeneratedContract', 500);
         } catch (Exception $e) {
             throw new Exception($e->getMessage(), $e->getCode());
         }
@@ -609,9 +857,6 @@ class QuoteRequestManager
                 $pdfArray[] = $filenameContract;
 
             }
-
-
-
 
 
             if (count($pdfArray)) {

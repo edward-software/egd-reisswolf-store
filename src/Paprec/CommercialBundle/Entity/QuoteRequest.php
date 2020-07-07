@@ -44,7 +44,7 @@ class QuoteRequest
      * @ORM\Column(name="deleted", type="datetime", nullable=true)
      */
     private $deleted;
-    
+
     /**
      * #################################
      *              SYSTEM USER ASSOCIATION
@@ -62,6 +62,13 @@ class QuoteRequest
      * @ORM\JoinColumn(name="userUpdateId", referencedColumnName="id", nullable=true)
      */
     private $userUpdate;
+
+    /**
+     * @ORM\Column(type="string", length=500)
+     * @Assert\Length(max=500, payload="tokenStringLengthNotValid")
+     * @Assert\NotBlank(payload="tokenNotValid")
+     */
+    private $token;
 
     /**
      * @var string
@@ -92,7 +99,7 @@ class QuoteRequest
      * @Assert\NotBlank(groups={"public"})
      */
     private $businessName;
-    
+
     /**
      * @var string
      *
@@ -116,7 +123,7 @@ class QuoteRequest
      * @Assert\NotBlank(groups={"public"})
      */
     private $firstName;
-    
+
     /**
      * @var string
      * @ORM\Column(name="email", type="string", length=255, nullable=true)
@@ -127,7 +134,7 @@ class QuoteRequest
      * )
      */
     private $email;
-    
+
     /**
      * @var string
      *
@@ -167,7 +174,7 @@ class QuoteRequest
      * @Assert\NotBlank(groups={"public"})
      */
     private $address;
-    
+
     /**
      * @var string
      *
@@ -175,7 +182,7 @@ class QuoteRequest
      * @Assert\NotBlank(groups={"public"})
      */
     private $city;
-    
+
     /**
      * "Commentaire client" rempli par l'utilisateur Front Office
      * @var string
@@ -183,14 +190,14 @@ class QuoteRequest
      * @ORM\Column(name="comment", type="text", nullable=true)
      */
     private $comment;
-    
+
     /**
      * @var string
      *
      * @ORM\Column(name="quoteStatus", type="string", length=255)
      */
     private $quoteStatus;
-    
+
     /**
      * @var int
      *
@@ -306,7 +313,7 @@ class QuoteRequest
     /**
      * @var boolean
      *
-     * @ORM\Column(name="isSingleSignatory", type="boolean")
+     * @ORM\Column(name="isSingleSignatory", type="boolean", nullable=true)
      * @Assert\NotBlank(groups={"signatory"})
      */
     private $isSingleSignatory;
@@ -327,11 +334,16 @@ class QuoteRequest
      * @Assert\NotBlank(groups={"public"})
      */
     private $postalCode;
-    
+
     /**
      * @ORM\OneToMany(targetEntity="Paprec\CommercialBundle\Entity\QuoteRequestLine", mappedBy="quoteRequest")
      */
     private $quoteRequestLines;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Paprec\CatalogBundle\Entity\OtherNeed", mappedBy="quoteRequests")
+     */
+    private $otherNeeds;
 
     /**
      * Get id.
@@ -350,6 +362,7 @@ class QuoteRequest
     {
         $this->dateCreation = new \DateTime();
         $this->quoteRequestLines = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->otherNeeds = new \Doctrine\Common\Collections\ArrayCollection();
         $this->overallDiscount = 0;
     }
 
@@ -1323,5 +1336,86 @@ class QuoteRequest
     public function getIsSingleSignatory()
     {
         return $this->isSingleSignatory;
+    }
+
+    /**
+     * Retoune true si le signataires sont correctement définis, false sinon
+     *
+     * @return bool
+     */
+    public function hasValidSignatories()
+    {
+        if ($this->isSingleSignatory) {
+            return ($this->signatoryLastName1
+                && $this->signatoryFirstName1
+                && $this->signatoryTitle1);
+        }
+
+        return ($this->signatoryLastName1
+            && $this->signatoryFirstName1
+            && $this->signatoryTitle1
+            && $this->signatoryLastName2
+            && $this->signatoryFirstName2
+            && $this->signatoryTitle2);
+    }
+
+    /**
+     * Add otherNeed.
+     *
+     * @param \Paprec\CatalogBundle\Entity\OtherNeed $otherNeed
+     *
+     * @return QuoteRequest
+     */
+    public function addOtherNeed(\Paprec\CatalogBundle\Entity\OtherNeed $otherNeed)
+    {
+        $this->otherNeeds[] = $otherNeed;
+
+        return $this;
+    }
+
+    /**
+     * Remove otherNeed.
+     *
+     * @param \Paprec\CatalogBundle\Entity\OtherNeed $otherNeed
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeOtherNeed(\Paprec\CatalogBundle\Entity\OtherNeed $otherNeed)
+    {
+        return $this->otherNeeds->removeElement($otherNeed);
+    }
+
+    /**
+     * Get otherNeeds.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOtherNeeds()
+    {
+        return $this->otherNeeds;
+    }
+
+    /**
+     * Set token.
+     *
+     * @param string $token
+     *
+     * @return QuoteRequest
+     */
+    public function setToken($token)
+    {
+        $this->token = $token;
+
+        return $this;
+    }
+
+    /**
+     * Get token.
+     *
+     * @return string
+     */
+    public function getToken()
+    {
+        return $this->token;
     }
 }

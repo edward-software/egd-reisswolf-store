@@ -12,17 +12,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class QuoteRequestSignatoryType extends AbstractType
 {
 
-    private $transformer;
-
-    /**
-     * QuoteRequestPublicType constructor.
-     * @param $transformer
-     */
-    public function __construct(PostalCodeToStringTransformer $transformer)
-    {
-        $this->transformer = $transformer;
-    }
-
     /**
      * {@inheritdoc}
      */

@@ -9,6 +9,7 @@ use GuzzleHttp\Middleware;
 use GuzzleHttp\RequestOptions;
 use Paprec\CommercialBundle\Entity\QuoteRequest;
 use Paprec\CommercialBundle\Form\QuoteRequestPublicType;
+use Paprec\CommercialBundle\Form\QuoteRequestSignatoryType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -96,7 +97,7 @@ class SubscriptionController extends Controller
             $staff[$s] = $s;
         }
 
-        $quoteRequest = new QuoteRequest();
+        $quoteRequest = $quoteRequestManager->add(false);
 
         $form = $this->createForm(QuoteRequestPublicType::class, $quoteRequest, array(
             'access' => $access,
@@ -116,23 +117,28 @@ class SubscriptionController extends Controller
             $quoteRequest->setFrequencyInterval($cart->getFrequencyInterval());
             $quoteRequest->setNumber($quoteRequestManager->generateNumber($quoteRequest));
 
-            $regionName = 'CH';
-            if (!$quoteRequest->getIsMultisite() && $quoteRequest->getPostalCode()) {
-                switch (strtolower($quoteRequest->getPostalCode()->getRegion()->getName())) {
-                    case 'basel':
-                        $regionName = 'BS';
-                        break;
-                    case 'geneve':
-                        $regionName = 'GE';
-                        break;
-                    case 'zurich':
-                    case 'zuerich':
-                        $regionName = 'ZH';
-                        break;
-                    case 'luzern':
-                        $regionName = 'LU';
-                        break;
+            if ($cart->getOtherNeeds() && count($cart->getOtherNeeds())) {
+                foreach ($cart->getOtherNeeds() as $otherNeed) {
+                    $quoteRequest->addOtherNeed($otherNeed);
+                    $otherNeed->addQuoteRequest($quoteRequest);
                 }
+            }
+
+            $regionName = 'CH';
+            switch (strtolower($quoteRequest->getPostalCode()->getRegion()->getName())) {
+                case 'basel':
+                    $regionName = 'BS';
+                    break;
+                case 'geneve':
+                    $regionName = 'GE';
+                    break;
+                case 'zurich':
+                case 'zuerich':
+                    $regionName = 'ZH';
+                    break;
+                case 'luzern':
+                    $regionName = 'LU';
+                    break;
             }
 
 
@@ -141,12 +147,8 @@ class SubscriptionController extends Controller
             $quoteRequest->setReference($reference);
 
 
-            if ($quoteRequest->getIsMultisite()) {
-                // TODO : Ajouter un commercial par défaut si pas de code postal saisi car Multisite
-                $quoteRequest->setUserInCharge(null);
-            } else {
-                $quoteRequest->setUserInCharge($userManager->getUserInChargeByPostalCode($quoteRequest->getPostalCode()));
-            }
+            $quoteRequest->setUserInCharge($userManager->getUserInChargeByPostalCode($quoteRequest->getPostalCode()));
+
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($quoteRequest);
@@ -370,67 +372,92 @@ class SubscriptionController extends Controller
         }
     }
 
-//    /**
-//     * @Route("/{locale}/contract/{quoteId}", name="paprec_public_contract_confirm_email")
-//     */
-//    public function showContract(Request $request, $quoteId, $locale)
-//    {
-//        $quoteRequestManager = $this->get('paprec_commercial.quote_request_manager');
-//        $productManager = $this->get('paprec_catalog.product_manager');
-//        $products = $productManager->getAvailableProducts();
-//
-//        $quoteRequest = $quoteRequestManager->get($quoteId);
-//        return $this->render('@PaprecCommercial/QuoteRequest/PDF/zuerich/printQuoteContract.html.twig', array(
-//            'quoteRequest' => $quoteRequest,
-//            'date' => new \DateTime(),
-//            'products' => $products
-//
-//        ));
-//    }
-////
-//
-//    /**
-//     * @Route("/{locale}/offer/{quoteId}", name="paprec_public_offer_confirm_email")
-//     */
-//    public function showOffer(Request $request, $quoteId, $locale)
-//    {
-//        $quoteRequestManager = $this->get('paprec_commercial.quote_request_manager');
-//        $quoteRequest = $quoteRequestManager->get($quoteId);
-//        $productManager = $this->container->get('paprec_catalog.product_manager');
-//        $products = $productManager->getAvailableProducts();
-//        return $this->render('@PaprecCommercial/QuoteRequest/PDF/zuerich/printQuoteOffer.html.twig', array(
-//            'quoteRequest' => $quoteRequest,
-//            'products' => $products,
-//            'date' => new \DateTime(),
-//            'locale' => $locale,
-//            'tmpLockProg' => $this->getParameter('tmp_lock_prog')
-//        ));
-//    }
-////
-//
-//    /**
-//     * @Route("/{locale}/pdf/contract/{quoteId}", name="paprec_public_confirm_pdf_show_contract")
-//     */
-//    public function showContractPDF(Request $request, $quoteId, $locale)
-//    {
-//        $quoteRequestManager = $this->get('paprec_commercial.quote_request_manager');
-//        $quoteRequest = $quoteRequestManager->get($quoteId);
-//        $filename = $quoteRequestManager->generatePDF($quoteRequest, $locale);
-//        return $this->render('@PaprecCommercial/QuoteRequest/showPDF.html.twig', array(
-//            'filename' => $filename
-//        ));
-//    }
-//
-//    /**
-//     * @Route("/{locale}/email/contract/{quoteId}", name="paprec_public_confirm_email_show_contract")
-//     */
-//    public function showEmail(Request $request, $quoteId, $locale)
-//    {
-//        $quoteRequestManager = $this->get('paprec_commercial.quote_request_manager');
-//        $quoteRequest = $quoteRequestManager->get($quoteId);
-//        return $this->render('@PaprecCommercial/QuoteRequest/emails/generatedQuoteEmail.html.twig', array(
-//            'quoteRequest' => $quoteRequest,
-//            'locale' => $locale
-//        ));
-//    }
+
+    /**
+     * @Route("/{locale}/signatory/{quoteRequestId}/{token}",  name="paprec_public_signatory_index")
+     * @param Request $request
+     * @param $locale
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
+     */
+    public function signatoryAction(Request $request, $locale, $quoteRequestId, $token)
+    {
+        try {
+            $quoteRequestManager = $this->get('paprec_commercial.quote_request_manager');
+
+            $quoteRequest = $quoteRequestManager->get($quoteRequestId);
+
+            $quoteRequestManager->getActiveByIdAndToken($quoteRequestId, $token);
+
+            $form = $this->createForm(QuoteRequestSignatoryType::class, $quoteRequest, array(
+                'locale' => $locale
+            ));
+
+            $form->handleRequest($request);
+
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $quoteRequest = $form->getData();
+                $quoteRequest->setQuoteStatus('CREATED');
+
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($quoteRequest);
+
+                $em->flush();
+
+                /**
+                 * On envoie le mail de confirmation à l'utilisateur
+                 */
+                $sendConfirmEmail = $quoteRequestManager->sendGeneratedContractEmail($quoteRequest);
+                $sendNewRequestEmail = $quoteRequestManager->sendNewContractEmail($quoteRequest);
+
+
+                if ($sendConfirmEmail && $sendNewRequestEmail) {
+                    return $this->redirectToRoute('paprec_public_signatory_confirm_index', array(
+                        'locale' => $locale,
+                        'quoteRequestId' => $quoteRequest->getId(),
+                        'token' => $token
+                    ));
+                }
+                exit;
+            }
+
+
+            return $this->render('@PaprecPublic/Common/signatory.html.twig', array(
+                'locale' => $locale,
+                'form' => $form->createView()
+            ));
+        } catch (\Exception $e) {
+            throw $this->createNotFoundException('Not found');
+        }
+    }
+
+    /**
+     * @Route("/{locale}/signatory/confirm/{quoteRequestId}/{token}",  name="paprec_public_signatory_confirm_index")
+     * @param Request $request
+     * @param $locale
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
+     */
+    public function signatoryConfirmAction(Request $request, $locale, $quoteRequestId, $token)
+    {
+        try {
+            $quoteRequestManager = $this->get('paprec_commercial.quote_request_manager');
+
+            $quoteRequest = $quoteRequestManager->get($quoteRequestId);
+
+            $quoteRequestManager->getActiveByIdAndToken($quoteRequestId, $token);
+
+
+            return $this->render('@PaprecPublic/Common/signatory-confirm.html.twig', array(
+                'locale' => $locale,
+                'quoteRequest' => $quoteRequest
+            ));
+
+        } catch (\Exception $e) {
+            throw $this->createNotFoundException('Not found');
+        }
+    }
+
 }

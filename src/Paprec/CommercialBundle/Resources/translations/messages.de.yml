@@ -45,16 +45,20 @@ Commercial:
         Download-quote: Angebot als PDF herunterladen
         DownloadedQuoteName: Vertrag Reisswolf
         Send-quote: Angebot an den Kunden senden
+        Send-contract: Vertrag an den Kunden senden
         ProductsList: Produkteverzeichnis
         AddLine: Produkt hinzufügen
         Confirm-send-quote: Versand des Angebots bestätigen ?
+        Confirm-send-contract: Versand des Vertrag bestätigen ?
         Edit: Angebotsbearbeitung
         Ponctual: auf Abruf
         Regular: regelmässig
         Error:
             generatedQuoteNotSent:    Fehler bei der Erstellung und beim Versand des Angebots.
+            generatedContractNotSent:   Fehler bei der Erstellung und beim Versand des Vertrag.
         Success:
             generatedQuoteSent:       Das Angebot wurde richtig erstellt und gesendet.
+            generatedContractSent:       Das Vertrag wurde richtig erstellt und gesendet.
             newUserInChargeWarned: Ein Mail wurde an den Aussendienst zugeschickt.
         Locale: Sprache
         Number: Angebotsnummer
@@ -138,9 +142,30 @@ Commercial:
         Message2: Im Anhang finden Sie unser Angebot für die Leistungen von REISSWOLF. Diese können jederzeit, kurzfristig und unkompliziert an Ihre aktuellen Bedürfnisse angepasst werden. Wir garantieren dabei immer einen einwandfreien Service und die tagfertige Vernichtung Ihrer Akten und Datenträger.
         Message3: Zögern Sie bitte nicht, uns bei weiteren Fragen zu kontaktieren. Wir freuen uns, bald für Sie tätig werden zu dürfen.
         Message4: Falls Sie einverstanden sind,
-        Message5: Klicken Sie hier auf den Link, um den Vertrag anfordern.
+        Message5: Klicken Sie hier auf den Link, um die Unterzeichner des Dienstleistungsvertrags zu informieren.
         ReplySubject: Vertrag anfordern / Angebot-ID N°%id%
         Regards: Mit freundlichen Grüssen.
+        Partner: Ihr Reisswolf-Partner
+
+    GeneratedContractEmail:
+        FileName: Vertrag Reisswolf
+        Object: Vertrag für die Leistungen der REISSWOLF
+        Dear:
+            M: Sehr geehrter Herr
+            Mrs: Sehr geehrte Frau
+        Message1: Es freut uns, dass Sie sich für die Dienstleistungen der REISSWOLF AG entschieden haben.
+        Message2: Im Anhang erhalten Sie unseren Vertrag für die Leistungen der REISSWOLF AG.
+        Message3: Wir bitten Sie 2 Exemplare auszudrücken, zu unterschreiben und an die oben erwähnte Reisswolf Adresse zu senden.
+        Message4: Nach Erhalt werden Sie innerhalb der nächsten Tage eine von uns unterschriebene Version erhalten.
+        Message5: Zögern Sie bitte nicht, uns bei weiteren Fragen zu kontaktieren. Wir freuen uns, bald für Sie tätig werden zu dürfen.
+        Regards: Mit freundlichen Grüssen.
+        Partner: Ihr Reisswolf-Partner
+
+    NewContractEmail:
+        FileName: Vertrag Reisswolf
+        Object: Vertragsaktualisierung N°%number%
+        Dear: Liebe (r) Reisswolf Kollegin (e),
+        Message1: Zur Information erhältst Du anbei einen Vertrag, den der Kunde umgehend unterschrieben an uns zurücksenden sollte.
         Partner: Ihr Reisswolf-Partner
 
 User:

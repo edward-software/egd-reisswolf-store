@@ -21,6 +21,8 @@
   },
   "require": {
     "php": ">=5.5.9",
+    "ext-curl": "*",
+    "ext-iconv": "*",
     "ext-json": "*",
     "ext-zip": "*",
     "beberlei/DoctrineExtensions": "^1.1",
@@ -29,6 +31,7 @@
     "egeloen/ckeditor-bundle": "^6.0",
     "friendsofsymfony/user-bundle": "~2.0",
     "guzzlehttp/guzzle": "^6.3",
+    "hackzilla/password-generator-bundle": "^4.0",
     "iio/libmergepdf": "^4.0",
     "incenteev/composer-parameter-handler": "^2.0",
     "knplabs/knp-paginator-bundle": "^2.8",
@@ -45,9 +48,7 @@
     "symfony/symfony": "3.4.*",
     "symfony/translation": "^4.1",
     "twig/extensions": "^1.5",
-    "twig/twig": "^1.0||^2.0",
-    "ext-curl": "*",
-    "ext-iconv": "*"
+    "twig/twig": "^1.0||^2.0"
   },
   "require-dev": {
     "doctrine/doctrine-fixtures-bundle": "^3.0",

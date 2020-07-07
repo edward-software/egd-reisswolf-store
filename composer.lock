@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4589004dec8c50d363d9eb406a2b360e",
+    "content-hash": "2f330af72519ea82bdfd3928abe4b86a",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -1590,6 +1590,96 @@
             "time": "2019-07-01T23:21:34+00:00"
         },
         {
+            "name": "hackzilla/password-generator",
+            "version": "1.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hackzilla/password-generator.git",
+                "reference": "22c7af49ef46d349d60af0fa30f61dd4dec53330"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hackzilla/password-generator/zipball/22c7af49ef46d349d60af0fa30f61dd4dec53330",
+                "reference": "22c7af49ef46d349d60af0fa30f61dd4dec53330",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7.0|^8.0|^9.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Hackzilla\\PasswordGenerator\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daniel Platt",
+                    "email": "github@ofdan.co.uk",
+                    "homepage": "http://www.hackzilla.org"
+                }
+            ],
+            "description": "Password Generator Library",
+            "time": "2020-04-06T15:47:25+00:00"
+        },
+        {
+            "name": "hackzilla/password-generator-bundle",
+            "version": "4.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hackzilla/password-generator-bundle.git",
+                "reference": "4bff71288db9589d3b09239b27cd194ebf27d667"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hackzilla/password-generator-bundle/zipball/4bff71288db9589d3b09239b27cd194ebf27d667",
+                "reference": "4bff71288db9589d3b09239b27cd194ebf27d667",
+                "shasum": ""
+            },
+            "require": {
+                "hackzilla/password-generator": "^1.3",
+                "php": "^7.1",
+                "symfony/form": "^3.0|^4.0|^5.0",
+                "symfony/framework-bundle": "^3.0|^4.0|^5.0"
+            },
+            "require-dev": {
+                "php-coveralls/php-coveralls": "^2.0",
+                "phpunit/phpunit": "^7.0|^8.0|^9.0",
+                "symfony/phpunit-bridge": "^3.0|^4.0|^5.0"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Hackzilla\\Bundle\\PasswordGeneratorBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daniel Platt",
+                    "email": "github@ofdan.co.uk",
+                    "homepage": "http://www.hackzilla.org"
+                }
+            ],
+            "description": "Password Generator Bundle",
+            "time": "2020-04-07T09:27:19+00:00"
+        },
+        {
             "name": "iio/libmergepdf",
             "version": "4.0.3",
             "source": {
@@ -2004,7 +2094,7 @@
             "time": "2019-12-30T16:19:53+00:00"
         },
         {
-            "name": "liuggio/excelbundle",
+            "name": "liuggio/ExcelBundle",
             "version": "v2.1.0",
             "source": {
                 "type": "git",
@@ -4686,7 +4776,6 @@
                 }
             ],
             "description": "This bundle generates code for you",
-            "abandoned": true,
             "time": "2017-12-07T15:36:41+00:00"
         },
         {
@@ -4762,10 +4851,10 @@
     "prefer-lowest": false,
     "platform": {
         "php": ">=5.5.9",
-        "ext-json": "*",
-        "ext-zip": "*",
         "ext-curl": "*",
-        "ext-iconv": "*"
+        "ext-iconv": "*",
+        "ext-json": "*",
+        "ext-zip": "*"
     },
     "platform-dev": []
 }

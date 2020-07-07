@@ -9,112 +9,55 @@
             <div class="row">
                 <div class="col-md-12 col-lg-6 col-12">
                     <h2>
-                        {{ 'Public.Contact.Title'| trans({}, "messages", locale) }}
+                        {{ 'Public.Signatory.Title'| trans({}, "messages", locale) }}
                     </h2>
                     <div class="divider"></div>
                 </div>
             </div>
-            <form id="contactDetailForm" action="" method="post">
+            <form id="signatoryForm" action="" method="post">
                 <div class="row form-container">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>{{ 'Public.Contact.BusinessName'| trans({}, "messages", locale) }}* :</label>
-                            {{ form_widget(form.businessName, {'attr': {'class': 'form-control'}}) }}
-                            {{ form_errors(form.businessName) }}
-                            <div class="invalid-feedback">
-                                Champ non renseigné
-                            </div>
+                            <label>{{ 'Public.Signatory.SignatoryFirstName1'| trans({}, "messages", locale) }}* :</label>
+                            {{ form_widget(form.signatoryFirstName1, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.signatoryFirstName1) }}
                         </div>
                         <div class="form-group select-container">
-                            <label>{{ 'Public.Contact.Canton'| trans({}, "messages", locale) }}* :</label>
-                            {{ form_widget(form.canton, {'attr': {'class': 'form-control'}}) }}
-                            {{ form_errors(form.canton) }}
+                            <label>{{ 'Public.Signatory.SignatoryLastName1'| trans({}, "messages", locale) }}* :</label>
+                            {{ form_widget(form.signatoryLastName1, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.signatoryLastName1) }}
                         </div>
                         <div class="form-group">
-                            <label>{{ 'Public.Contact.Civility'| trans({}, "messages", locale) }}* :</label>
-                            {{ form_widget(form.civility, {'attr': {'class': 'form-check form-check-inline radio-form'}}) }}
-                            {{ form_errors(form.civility) }}
+                            <label>{{ 'Public.Signatory.SignatoryTitle1'| trans({}, "messages", locale) }}* :</label>
+                            {{ form_widget(form.signatoryTitle1, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.signatoryTitle1) }}
                         </div>
                         <div class="form-group">
-                            <label>{{ 'Public.Contact.LastName'| trans({}, "messages", locale) }}* :</label>
-                            {{ form_widget(form.lastName, {'attr': {'class': 'form-control'}}) }}
-                            {{ form_errors(form.lastName) }}
+                            <label>{{ 'Public.Signatory.IsSingleSignatory'| trans({}, "messages", locale) }}* :</label>
+                            {{ form_widget(form.isSingleSignatory, {'attr': {'class': 'form-check form-check-inline radio-form'}}) }}
+                            {{ form_errors(form.isSingleSignatory) }}
                         </div>
-                        <div class="form-group">
-                            <label>{{ 'Public.Contact.FirstName'| trans({}, "messages", locale) }}* :</label>
-                            {{ form_widget(form.firstName, {'attr': {'class': 'form-control'}}) }}
-                            {{ form_errors(form.firstName) }}
-                        </div>
-                        <div class="form-group">
-                            <label>{{ 'Public.Contact.Email'| trans({}, "messages", locale) }}* :</label>
-                            {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
-                            {{ form_errors(form.email) }}
-                        </div>
-                        <div class="form-group">
-                            <label>{{ 'Public.Contact.Phone'| trans({}, "messages", locale) }}* :</label>
-                            {{ form_widget(form.phone, {'attr': {'class': 'form-control'}}) }}
-                            {{ form_errors(form.phone) }}
-                            <span id="phone-number-info">
-                                {{ 'Public.Contact.PhoneNumberInfo'| trans({}, "messages", locale) }}
-                            </span>
-                        </div>
-                        <div class="form-group">
-                            <label>{{ 'Public.Contact.Staff'| trans({}, "messages", locale) }}* :</label>
-                            <select id="contact_staff_select" class="form-control">
-                                <option value="" selected disabled hidden></option>
-                                {% for opt in form.staff.vars.choices %}#}
-                                    <option value="{{ opt.value }}"
-                                            {% if form.staff.vars.data == opt.value %}selected{% endif %}>{{ opt.label|trans({}, "messages", locale) }}</option>
-                                {% endfor %}
-                            </select>
-                            {{ form_errors(form.staff) }}
-                        </div>
-                        <div class="form-group">
-                            <label>{{ 'Public.Contact.Access'| trans({}, "messages", locale) }}* :</label>
-                            <select id="contact_access_select" class="form-control">
-                                <option value="" selected disabled hidden></option>
-                                {% for opt in form.access.vars.choices %}#}
-                                    <option value="{{ opt.value }}"
-                                            {% if form.access.vars.data == opt.value %}selected{% endif %}>{{ opt.label|trans({}, "messages", locale) }}</option>
-                                {% endfor %}
-                            </select>
-                            {{ form_errors(form.access) }}
-                        </div>
-                        {{ form_widget(form.staff, {'attr': {'class': 'contact_staff_input'}}) }}
-                        {{ form_widget(form.access, {'attr': {'class': 'contact_access_input'}}) }}
                     </div>
                     <div class="col-md-6">
-
-
                         <div class="form-group">
-                            <label>{{ 'Public.Contact.IsMultisite'| trans({}, "messages", locale) }}* :</label>
-                            {{ form_widget(form.isMultisite, {'attr': {'class': 'form-check form-check-inline radio-form'}}) }}
-                            {{ form_errors(form.isMultisite) }}
+                            <label>{{ 'Public.Signatory.SignatoryFirstName2'| trans({}, "messages", locale) }}* :</label>
+                            {{ form_widget(form.signatoryFirstName2, {'attr': {'class': 'form-control signatory2-field'}}) }}
+                            {{ form_errors(form.signatoryFirstName2) }}
+                        </div>
+                        <div class="form-group select-container">
+                            <label>{{ 'Public.Signatory.SignatoryLastName2'| trans({}, "messages", locale) }}* :</label>
+                            {{ form_widget(form.signatoryLastName2, {'attr': {'class': 'form-control signatory2-field'}}) }}
+                            {{ form_errors(form.signatoryLastName2) }}
                         </div>
                         <div class="form-group">
-                            <label>{{ 'Public.Contact.Address'| trans({}, "messages", locale) }}* :</label>
-                            {{ form_widget(form.address, {'attr': {'class': 'form-control address-field'}}) }}
-                            {{ form_errors(form.address) }}
-                        </div>
-                        <div class="form-group">
-                            <label>{{ 'Public.Contact.PostalCode'| trans({}, "messages", locale) }}* :</label>
-                            {{ form_widget(form.postalCode, {'attr': {'class': 'form-control address-field', 'data-url': path('paprec_catalog_postalCode_autocomplete') }}) }}
-                            {{ form_errors(form.postalCode) }}
-                        </div>
-                        <div class="form-group">
-                            <label>{{ 'Public.Contact.City'| trans({}, "messages", locale) }}* :</label>
-                            {{ form_widget(form.city, {'attr': {'class': 'form-control address-field'}}) }}
-                            {{ form_errors(form.city) }}
-                        </div>
-                        <div class="form-group">
-                            <label>{{ 'Public.Contact.Comment'| trans({}, "messages", locale) }}* :</label>
-                            {{ form_widget(form.comment, {'attr': {'class': 'form-control', 'rows': '11'}}) }}
-                            {{ form_errors(form.comment) }}
+                            <label>{{ 'Public.Signatory.SignatoryTitle2'| trans({}, "messages", locale) }}* :</label>
+                            {{ form_widget(form.signatoryTitle2, {'attr': {'class': 'form-control signatory2-field'}}) }}
+                            {{ form_errors(form.signatoryTitle2) }}
                         </div>
                         <button type="submit"
-                                id="contactDetailFormSubmitButton"
+                                id="signatoryFormSubmitButton"
                                 data-key="{{ recaptcha_site_key }}"
-                                class="btn valid">{{ 'Public.Contact.SendRequest'| trans({}, "messages", locale) }}</button>
+                                class="btn valid">{{ 'General.Send'| trans({}, "messages", locale) }}</button>
                     </div>
                 </div>
                 {{ form_rest(form) }}
@@ -125,9 +68,5 @@
     <div class="overlay"></div>
 {% endblock %}
 {% block javascripts %}
-    <script src="https://www.google.com/recaptcha/api.js?render={{ recaptcha_site_key }}"></script>
-    <script>
-
-    </script>
 {% endblock %}
 

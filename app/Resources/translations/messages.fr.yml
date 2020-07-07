@@ -14,6 +14,7 @@ General:
     SystemError:              Erreur système
     Users:                    Utilisateurs
     Save:                     Enregistrer
+    Send:                     Envoyer
     Cancel:                   Annuler
     Confirm:                  Confirmation
     Confirm-cancel:           Êtes vous sûr de vouloir annuler ?

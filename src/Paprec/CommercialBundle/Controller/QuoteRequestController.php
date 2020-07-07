@@ -342,8 +342,9 @@ class QuoteRequestController extends Controller
         $user = $this->getUser();
 
         $numberManager = $this->get('paprec_catalog.number_manager');
+        $quoteRequestManager = $this->get('paprec_commercial.quote_request_manager');
 
-        $quoteRequest = new QuoteRequest();
+        $quoteRequest = $quoteRequestManager->add(false);
 
         $status = array();
         foreach ($this->getParameter('paprec_quote_status') as $s) {
@@ -382,7 +383,7 @@ class QuoteRequestController extends Controller
             $quoteRequest->setAnnualBudget($numberManager->normalize($quoteRequest->getAnnualBudget()));
 
             $quoteRequest->setUserCreation($user);
-            @@
+
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($quoteRequest);
@@ -657,6 +658,31 @@ class QuoteRequestController extends Controller
                 $this->get('session')->getFlashBag()->add('success', 'generatedQuoteSent');
             } else {
                 $this->get('session')->getFlashBag()->add('error', 'generatedQuoteNotSent');
+            }
+        }
+
+        return $this->redirectToRoute('paprec_commercial_quoteRequest_view', array(
+            'id' => $quoteRequest->getId()
+        ));
+    }
+
+    /**
+     * @Route("/quoteRequest/{id}/sendGeneratedContract", name="paprec_commercial_quoteRequest_sendGeneratedContract")
+     * @Security("has_role('ROLE_COMMERCIAL') or (has_role('ROLE_COMMERCIAL_DIVISION') and 'DI' in user.getDivisions())")
+     * @throws \Doctrine\ORM\EntityNotFoundException
+     * @throws \Exception
+     */
+    public function sendGeneratedContractAction(QuoteRequest $quoteRequest)
+    {
+        $quoteRequestManager = $this->get('paprec_commercial.quote_request_manager');
+        $quoteRequestManager->isDeleted($quoteRequest, true);
+
+        if ($quoteRequest->getPostalCode() && $quoteRequest->getPostalCode()->getRegion()) {
+            $sendContract = $quoteRequestManager->sendGeneratedContractEmail($quoteRequest);
+            if ($sendContract) {
+                $this->get('session')->getFlashBag()->add('success', 'generatedContractSent');
+            } else {
+                $this->get('session')->getFlashBag()->add('error', 'generatedContractNotSent');
             }
         }
 

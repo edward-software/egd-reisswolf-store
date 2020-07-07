@@ -52,6 +52,7 @@ Public:
         BreadcrumbContent: Dienstleistungen
         Define-Need: Den eigenen Bedarf definieren
         Other-Needs: Andere Bedürfnisse
+        Other-Needs-Info: Klicken Sie auf ein Produkt, um es auszuwählen
 
     Contact:
         BreadcrumbTitle: Angebot anfordern
@@ -78,6 +79,26 @@ Public:
     Signatory:
         BreadcrumbTitle:            Definition der Unterzeichner
         BreadcrumbContent:          Definition der Unterzeichner
+        Title: Definieren Sie die Unterzeichner des Vertrags, um ihn automatisch per E-Mail zu erhalten
+        SignatoryFirstName1: Vorname des Unterzeichners 1
+        SignatoryLastName1: Nachname des Unterzeichners 1
+        SignatoryTitle1: Titel des Unterzeichners 1
+        SignatoryFirstName2: Vorname des Unterzeichners 2
+        SignatoryLastName2: Nachname des Unterzeichners 2
+        SignatoryTitle2: Titel des Unterzeichners 2
+        IsSingleSignatory: Einzelner Unterzeichner
+
+    SignatoryConfirm:
+        BreadcrumbTitle: Definition der Unterzeichner
+        BreadcrumbContent: Definition der Unterzeichner
+        Title: Definieren Sie die Unterzeichner des Vertrags, um ihn automatisch per E-Mail zu erhalten
+        SignatoryFirstName1: Vorname des Unterzeichners 1
+        SignatoryLastName1: Nachname des Unterzeichners 1
+        SignatoryTitle1: Titel des Unterzeichners 1
+        SignatoryFirstName2: Vorname des Unterzeichners 2
+        SignatoryLastName2: Nachname des Unterzeichners 2
+        SignatoryTitle2: Titel des Unterzeichners 2
+        IsSingleSignatory: Einzelner Unterzeichner
 
     Confirm:
         BreadcrumbTitle: Anfragebestätigung

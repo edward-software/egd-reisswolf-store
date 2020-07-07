@@ -86,15 +86,17 @@ $(function () {
     $('.other-needs-image').click(function () {
         var url = $(this).data('url');
         const that = $(this);
+        if (that.hasClass('active')) {
+            that.removeClass('active');
+        } else {
+            that.addClass('active');
+        }
+
         $.ajax({
             type: "POST",
             url: url,
             success: function (response) {
-                if (that.hasClass('active')) {
-                    that.removeClass('active');
-                } else {
-                    that.addClass('active');
-                }
+              
             }
         })
     });
@@ -263,7 +265,23 @@ $(function () {
     $('#paprec_catalogbundle_quote_request_public_postalCode').autocomplete({
         source: '' + $('#paprec_catalogbundle_quote_request_public_postalCode').data('url'),
         minLength: 1
-    })
+    });
+
+    /****************************************
+     * SIGNATORY FORM
+     ***************************************/
+    /*
+    * Désactivation des champs Signataires 2 en Signataire unique vrai
+    */
+    $('input[name*="paprec_catalogbundle_quote_request_public[isSingleSignatory]"]').change(function () {
+
+        if (this.value == true) {
+            $('.signatory2-field').prop("disabled", true);
+            $('.signatory2-field').val('');
+        } else if (this.value == false) {
+            $('.signatory2-field').prop("disabled", false);
+        }
+    });
 
 });
 

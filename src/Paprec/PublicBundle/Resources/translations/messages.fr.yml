@@ -52,6 +52,7 @@ Public:
         BreadcrumbContent: Offres de services
         Define-Need: Définir son besoin
         Other-Needs: Autres besoins
+        Other-Needs-Info: Cliquez sur une produit pour le sélectionner
 
     Contact:
         BreadcrumbTitle: Coordonnées du client
@@ -75,6 +76,17 @@ Public:
         SendRequest: Envoyer la demande
         BreadcrumbContent: Coordonnées du client
 
+    Signatory:
+        BreadcrumbTitle:            Définition des signataires
+        BreadcrumbContent:          Définition des signataires
+        Title: Définissez les signataires du contrat afin de le recevoir automatiquement par email
+        SignatoryFirstName1: Prénom signataire 1
+        SignatoryLastName1: Nom signataire 1
+        SignatoryTitle1: Titre signataire 1
+        SignatoryFirstName2: Prénom signataire 2
+        SignatoryLastName2: Nom signataire 2
+        SignatoryTitle2: Titre signataire 2
+        IsSingleSignatory: Signataire unique
 
     Confirm:
         Object: Votre demande de devis

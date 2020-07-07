@@ -45,16 +45,20 @@ Commercial:
         Download-quote: Télécharger PDF
         DownloadedQuoteName: Contrat Reisswolf
         Send-quote: Envoyer devis au client
+        Send-contract: Envoyer contrat au client
         ProductsList: Liste des produits
         AddLine: Ajouter un produit
         Confirm-send-quote: Êtes-vous sûr de vouloir envoyer le devis au client ?
+        Confirm-send-contract: Êtes-vous sûr de vouloir envoyer le contrat au client ?
         Edit: Edition du devis
         Ponctual: A la demande
         Regular: Régulière
         Error:
             generatedQuoteNotSent:    Erreur lors de la génération et l'envoi du devis.
+            generatedContractNotSent:    Erreur lors de la génération et l'envoi du contrat.
         Success:
             generatedQuoteSent:       Le devis a bien été généré et envoyé au client.
+            generatedContractSent:       Le contrat a bien été généré et envoyé au client.
             newUserInChargeWarned: Un mail a été envoyé au nouveau commercial en charge
         Locale: Langue
         Number: Numéro offre
@@ -138,11 +142,31 @@ Commercial:
         Message2: Vous trouverez en annexe notre offre pour les services REISSWOLF. Ceux-ci peuvent être adaptés à vos besoins actuels à tout moment, rapidement et simplement. Nous garantissons toujours un service impeccable et la destruction quotidienne de vos fichiers et supports de données.
         Message3: N'hésitez pas à nous contacter si vous avez d'autres questions. Nous nous réjouissons de travailler bientôt avec vous.
         Message4: Si vous êtes d'accord,
-        Message5: cliquer ici sur le lien pour demander le contrat de service.
+        Message5: cliquer ici sur le lien pour renseigner les signataires du contrat de service
         ReplySubject: Demande contrat / ID Devis N°%id%
         Regards: Bien cordialement
         Partner: Votre partenaire Reisswolf
 
+    GeneratedContractEmail:
+        FileName: Contrat Reisswolf
+        Object: Contrat de services Reisswolf
+        Dear:
+            M: Cher Monsieur
+            Mrs: Chère Madame
+        Message1: Nous vous remercions d’avoir choisi les services de REISSWOLF SA.
+        Message2: Vous trouverez en annexe notre contrat pour les services de REISSWOLF SA.
+        Message3: Nous vous prions de bien vouloir imprimer 2 exemplaires, les signer et les envoyer à l’adresse Reisswolf en haut du contrat.
+        Message4: Dès réception, vous recevrez quelques jours plus tard une version signée par nos soins.
+        Message5: N'hésitez pas à nous contacter si vous avez d'autres questions. Nous nous réjouissons de travailler bientôt avec vous.
+        Regards: Bien cordialement
+        Partner: Votre partenaire Reisswolf
+
+    NewContractEmail:
+        FileName: Contrat Reisswolf
+        Object: Contrat Reisswolf N°%number%
+        Dear: Cher (ère) Collègue Reisswolf,
+        Message1: Pour information, tu trouveras ci-joint un contrat que le client devrait rapidement nous renvoyer signé.
+        Partner: Ton partenaire Reisswolf
 User:
     User:
         Lang: Langue

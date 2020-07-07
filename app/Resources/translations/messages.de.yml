@@ -14,6 +14,7 @@ General:
     SystemError:              Systemfehler
     Users:                    Benützer
     Save:                     Speichern
+    Send:                     Senden
     Cancel:                   Stornieren
     Confirm:                  Bestätigung
     Confirm-cancel:           Sind Sie sicher, dass Sie stornieren möchten?
