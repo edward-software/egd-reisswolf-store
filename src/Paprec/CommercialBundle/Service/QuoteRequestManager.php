@@ -624,9 +624,9 @@ class QuoteRequestManager
             }
 
             $pdfFilename = $quoteRequest->getReference() . '-' . $this->container->get('translator')->trans('Commercial.GeneratedContractEmail.FileName',
-                    array(), 'messages', $localeFilename) . '-' . $quoteRequest->getBusinessName() . '.pdf';
+                    array(), 'messages', strtolower($localeFilename)) . '-' . $quoteRequest->getBusinessName() . '.pdf';
 
-            $pdfFile = $this->generatePDF($quoteRequest, $localeFilename, true);
+            $pdfFile = $this->generatePDF($quoteRequest, strtolower($localeFilename), true);
 
             if (!$pdfFile) {
                 return false;
@@ -646,7 +646,7 @@ class QuoteRequestManager
                         '@PaprecCommercial/QuoteRequest/emails/generatedContractEmail.html.twig',
                         array(
                             'quoteRequest' => $quoteRequest,
-                            'locale' => $localeFilename
+                            'locale' => strtolower($localeFilename)
                         )
                     ),
                     'text/html'
@@ -708,9 +708,9 @@ class QuoteRequestManager
             }
 
             $pdfFilename = $quoteRequest->getReference() . '-' . $this->container->get('translator')->trans('Commercial.NewContractEmail.FileName',
-                    array(), 'messages', $localeFilename) . '-' . $quoteRequest->getBusinessName() . '.pdf';
+                    array(), 'messages', strtolower($localeFilename)) . '-' . $quoteRequest->getBusinessName() . '.pdf';
 
-            $pdfFile = $this->generatePDF($quoteRequest, $localeFilename, true);
+            $pdfFile = $this->generatePDF($quoteRequest, strtolower($localeFilename), true);
 
             if (!$pdfFile) {
                 return false;
@@ -722,7 +722,7 @@ class QuoteRequestManager
 
             $message = \Swift_Message::newInstance()
                 ->setSubject($translator->trans('Commercial.NewContractEmail.Object',
-                    array('%number%' => $quoteRequest->getId()), 'messages', strtolower($quoteRequest->getLocale())))
+                    array('%number%' => $quoteRequest->getId()), 'messages', strtolower($localeFilename)))
                 ->setFrom($from)
                 ->setTo($rcptTo)
                 ->setBody(
@@ -730,7 +730,7 @@ class QuoteRequestManager
                         '@PaprecCommercial/QuoteRequest/emails/newContractEmail.html.twig',
                         array(
                             'quoteRequest' => $quoteRequest,
-                            'locale' => $localeFilename
+                            'locale' => strtolower($localeFilename)
                         )
                     ),
                     'text/html'
