@@ -43,10 +43,8 @@
                                     class="fa fa-xs fa-envelope"></i> {{ 'Commercial.QuoteRequest.Send-quote'|trans }}
                         </a>
                     {% endif %}
-                    {% if quoteRequest.hasValidSignatories %}
-                    <a id="sendGeneratedContractButton" href="javascript:void(0);" class="btn btn-sm btn-success  mr-1"><i
+                    <a id="sendGeneratedContractButton" href="javascript:void(0);" class="btn btn-sm btn-success mr-1 {% if not quoteRequest.hasValidSignatories %}btn-disabled{% endif %}"><i
                                 class="fa fa-xs fa-envelope"></i> {{ 'Commercial.QuoteRequest.Send-contract'|trans }}
-                        {% endif %}
                         <a href="{{ path("paprec_commercial_quoteRequest_edit", {id: quoteRequest.id}) }}"
                            class="btn btn-sm btn-warning"><i
                                     class="fa fa-xs fa-edit"></i> {{ 'Commercial.QuoteRequest.Edit'|trans }}</a>
@@ -523,19 +521,21 @@
                 });
 
                 $('#sendGeneratedContractButton').on('click', function () {
-                    var url = "{{ path("paprec_commercial_quoteRequest_sendGeneratedContract", {id: quoteRequest.id}) }}";
+                    if (!$(this).hasClass('btn-disabled')) {
+                        var url = "{{ path("paprec_commercial_quoteRequest_sendGeneratedContract", {id: quoteRequest.id}) }}";
 
-                    Swal.fire({
-                        title: "{{ 'General.Confirm'|trans }}",
-                        text: "{{ 'Commercial.QuoteRequest.Confirm-send-contract'|trans }}",
-                        showCancelButton: true,
-                        confirmButtonText: "{{ 'General.Yes'|trans }}",
-                        cancelButtonText: "{{ 'General.No'|trans }}"
-                    }).then(function (result) {
-                        if (result.value) {
-                            $(location).attr('href', url);
-                        }
-                    });
+                        Swal.fire({
+                            title: "{{ 'General.Confirm'|trans }}",
+                            text: "{{ 'Commercial.QuoteRequest.Confirm-send-contract'|trans }}",
+                            showCancelButton: true,
+                            confirmButtonText: "{{ 'General.Yes'|trans }}",
+                            cancelButtonText: "{{ 'General.No'|trans }}"
+                        }).then(function (result) {
+                            if (result.value) {
+                                $(location).attr('href', url);
+                            }
+                        });
+                    }
                 });
 
             });

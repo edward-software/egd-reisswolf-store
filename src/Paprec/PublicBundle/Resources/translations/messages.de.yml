@@ -89,16 +89,8 @@ Public:
         IsSingleSignatory: Einzelner Unterzeichner
 
     SignatoryConfirm:
-        BreadcrumbTitle: Definition der Unterzeichner
-        BreadcrumbContent: Definition der Unterzeichner
-        Title: Definieren Sie die Unterzeichner des Vertrags, um ihn automatisch per E-Mail zu erhalten
-        SignatoryFirstName1: Vorname des Unterzeichners 1
-        SignatoryLastName1: Nachname des Unterzeichners 1
-        SignatoryTitle1: Titel des Unterzeichners 1
-        SignatoryFirstName2: Vorname des Unterzeichners 2
-        SignatoryLastName2: Nachname des Unterzeichners 2
-        SignatoryTitle2: Titel des Unterzeichners 2
-        IsSingleSignatory: Einzelner Unterzeichner
+        Title: Wir haben diese informationen berücksichtigt und sie werden bald ihren vertrag zur unterschrift erhalten.
+        Message: Wir danken ihnen für ihr vertrauen.
 
     Confirm:
         BreadcrumbTitle: Anfragebestätigung

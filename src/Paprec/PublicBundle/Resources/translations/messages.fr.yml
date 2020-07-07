@@ -88,6 +88,11 @@ Public:
         SignatoryTitle2: Titre signataire 2
         IsSingleSignatory: Signataire unique
 
+    SignatoryConfirm:
+        Title: Nous avons bien pris en compte ces informations et vous allez prochainement recevoir votre contrat pour signature.
+        Message: Nous vous remercions pour votre confiance
+
+
     Confirm:
         Object: Votre demande de devis
         BreadcrumbTitle: Confirmation de la demande

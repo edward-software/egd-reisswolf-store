@@ -147,3 +147,8 @@ a:hover {
 .navbar-dark .navbar-toggler {
   margin-left: auto;
 }
+
+.btn-disabled {
+  cursor: default !important;
+  opacity: 50%;
+}

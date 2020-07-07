@@ -449,7 +449,6 @@ class SubscriptionController extends Controller
 
             $quoteRequestManager->getActiveByIdAndToken($quoteRequestId, $token);
 
-
             return $this->render('@PaprecPublic/Common/signatory-confirm.html.twig', array(
                 'locale' => $locale,
                 'quoteRequest' => $quoteRequest

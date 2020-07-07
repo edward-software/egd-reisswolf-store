@@ -96,7 +96,7 @@ $(function () {
             type: "POST",
             url: url,
             success: function (response) {
-              
+
             }
         })
     });
