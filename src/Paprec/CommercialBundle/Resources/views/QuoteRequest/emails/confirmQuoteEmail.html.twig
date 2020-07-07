@@ -22,9 +22,9 @@
 </head>
 <body>
 {% if quoteRequest.civility == 'M' %}
-    {{ 'Commercial.ConfirmEmail.Dear.M'|trans }}
+    {{ 'Commercial.ConfirmEmail.Dear.M'|trans({}, "messages", locale) }}
 {% elseif quoteRequest.civility == 'Mme' %}
-    {{ 'Commercial.ConfirmEmail.Dear.Mrs'|trans }}
+    {{ 'Commercial.ConfirmEmail.Dear.Mrs'|trans({}, "messages", locale) }}
 {% endif %} {{ quoteRequest.firstName }} {{ quoteRequest.lastName }},<br><br>
 
 {{ 'Commercial.ConfirmEmail.Message1'| trans({'%date%': quoteRequest.dateCreation|localizeddate('short', 'medium', locale)}, "messages", locale) }}
