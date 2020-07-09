@@ -119,8 +119,10 @@ class SubscriptionController extends Controller
 
             if ($cart->getOtherNeeds() && count($cart->getOtherNeeds())) {
                 foreach ($cart->getOtherNeeds() as $otherNeed) {
-                    $quoteRequest->addOtherNeed($otherNeed);
-                    $otherNeed->addQuoteRequest($quoteRequest);
+                    if (strtolower($otherNeed->getLanguage()) === strtolower($locale)) {
+                        $quoteRequest->addOtherNeed($otherNeed);
+                        $otherNeed->addQuoteRequest($quoteRequest);
+                    }
                 }
             }
 

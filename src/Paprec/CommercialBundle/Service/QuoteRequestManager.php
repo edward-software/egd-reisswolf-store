@@ -423,7 +423,8 @@ class QuoteRequestManager
             $translator = $this->container->get('translator');
 
             $message = \Swift_Message::newInstance()
-                ->setSubject($translator->trans('Commercial.ConfirmEmail.Object'))
+                ->setSubject($translator->trans('Commercial.ConfirmEmail.Object',
+                    array(), 'messages', strtolower($locale)))
                 ->setFrom($from)
                 ->setTo($rcptTo)
                 ->setBody(
@@ -431,7 +432,7 @@ class QuoteRequestManager
                         '@PaprecCommercial/QuoteRequest/emails/confirmQuoteEmail.html.twig',
                         array(
                             'quoteRequest' => $quoteRequest,
-                            'locale' => $locale
+                            'locale' => strtolower($locale)
                         )
                     ),
                     'text/html'

@@ -115,7 +115,9 @@
                                 <label>{{ 'Public.Catalog.Other-Needs'| trans({}, "messages", locale) }}</label>
                                 <ul>
                                     {% for otherNeed in cart.otherNeeds %}
-                                        <li class="ml-2 contact-other-need">- {{ otherNeed.name }}</li>
+                                        {% if otherNeed.language|lower == locale|lower %}
+                                            <li class="ml-2 contact-other-need">- {{ otherNeed.name }}</li>
+                                        {% endif %}
                                     {% endfor %}
                                 </ul>
                             </div>
