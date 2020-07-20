@@ -5,5 +5,6 @@ twig:
   cache: false
   globals:
     reisswolf_public_site_url: "%reisswolf_public_site_url%"
+    reisswolf_public_store_url: "%reisswolf_public_store_url%"
     reisswolf_public_technical_service: "%reisswolf_public_technical_service%"
 

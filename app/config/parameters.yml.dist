@@ -21,6 +21,7 @@ parameters:
     paprec_email_sender: digital@eggers-conseil.com
     wkhtmltopdf_path: /usr/local/bin/wkhtmltopdf
     reisswolf_public_site_url: 'http://dev.easyrecyclage-suisse.com'
+    reisswolf_public_store_url: 'http://dev.easyrecyclage-suisse.com'
     reisswolf_public_technical_service: 'contact@reisswolf.ch'
     reisswolf_salesman_multisite_email: 'digital@eggers-digital.com'
     recaptcha_site_key: 6LeLarcUAAAAAP0bX_qrqmJj2UAjmObQVE_BlRNn

@@ -215,6 +215,29 @@ class SubscriptionController extends Controller
     }
 
     /**
+     * @Route("/postalCode/autocomplete", name="paprec_public_postalCode_autocomplete")
+     * @throws \Exception
+     */
+    public function autocompleteAction(Request $request)
+    {
+        $codes = array();
+        $code = trim(strip_tags($request->get('term')));
+
+        $postalCodeManager = $this->get('paprec_catalog.postal_code_manager');
+
+        $entities = $postalCodeManager->getActivesFromCode($code);
+
+        foreach ($entities as $entity) {
+            $codes[] = $entity->getCode();
+        }
+
+        $response = new JsonResponse();
+        $response->setData($codes);
+
+        return $response;
+    }
+
+    /**
      * @Route("/{locale}/step2/{cartUuid}/{quoteRequestId}", name="paprec_public_confirm_index")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response

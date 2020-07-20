@@ -97,7 +97,7 @@
                         </div>
                         <div class="form-group">
                             <label>{{ 'Public.Contact.PostalCode'| trans({}, "messages", locale) }}* :</label>
-                            {{ form_widget(form.postalCode, {'attr': {'class': 'form-control address-field', 'data-url': path('paprec_catalog_postalCode_autocomplete') }}) }}
+                            {{ form_widget(form.postalCode, {'attr': {'class': 'form-control address-field', 'data-url': path('paprec_public_postalCode_autocomplete') }}) }}
                             {{ form_errors(form.postalCode) }}
                         </div>
                         <div class="form-group">

@@ -70,4 +70,29 @@ class PostalCodeManager
         }
         return false;
     }
+
+
+    /**
+     * Retourne les codes postaux donc le code commence par le term en param
+     *
+     * @param $code
+     * @return mixed
+     * @throws Exception
+     */
+    public function getActivesFromCode($code)
+    {
+
+        try {
+
+            return $this->em->getRepository(PostalCode::class)->createQueryBuilder('pC')
+                ->where('pC.code LIKE :code')
+                ->andWhere('pC.deleted is NULL')
+                ->setParameter('code', $code . '%')
+                ->getQuery()
+                ->getResult();
+
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage(), $e->getCode());
+        }
+    }
 }

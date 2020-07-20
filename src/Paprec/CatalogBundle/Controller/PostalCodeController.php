@@ -309,20 +309,16 @@ class PostalCodeController extends Controller
 
     /**
      * @Route("/postalCode/autocomplete", name="paprec_catalog_postalCode_autocomplete")
+     * @throws \Exception
      */
     public function autocompleteAction(Request $request)
     {
         $codes = array();
-        $term = trim(strip_tags($request->get('term')));
+        $code = trim(strip_tags($request->get('term')));
 
-        $em = $this->getDoctrine()->getManager();
+        $postalCodeManager = $this->get('paprec_catalog.postal_code_manager');
 
-        $entities = $em->getRepository(PostalCode::class)->createQueryBuilder('pC')
-            ->where('pC.code LIKE :code')
-            ->andWhere('pC.deleted is NULL')
-            ->setParameter('code', $term . '%')
-            ->getQuery()
-            ->getResult();
+        $entities = $postalCodeManager->getActivesFromCode($code);
 
         foreach ($entities as $entity) {
             $codes[] = $entity->getCode();
