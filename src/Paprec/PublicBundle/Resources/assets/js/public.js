@@ -255,7 +255,6 @@ $(function () {
             const siteKey = $('#contactDetailFormSubmitButton').data('key');
             grecaptcha.ready(function () {
                 grecaptcha.execute(siteKey, {action: 'homepage'}).then(function (token) {
-                    alert('test');
                     $('#contactDetailForm').prepend('<input type="hidden" name="g-recaptcha-response" value="' + token + '">')
                     $('#contactDetailForm').submit();
                 });
