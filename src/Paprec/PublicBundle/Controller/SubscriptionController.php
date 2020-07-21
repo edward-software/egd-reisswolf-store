@@ -20,6 +20,17 @@ class SubscriptionController extends Controller
 {
 
     /**
+     * @Route("/", name="paprec_public_devis_index")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function redirectToIndex0Action(Request $request)
+    {
+        return $this->redirectToRoute('paprec_public_catalog_index', array('locale' => 'fr'));
+
+    }
+
+    /**
      * @Route("/{locale}", name="paprec_public_devis_home")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
