@@ -783,6 +783,7 @@ class QuoteRequestManager
 
             $snappy = new Pdf($this->container->getParameter('wkhtmltopdf_path'));
             $snappy->setOption('javascript-delay', 3000);
+            $snappy->setTimeout(600);
             $snappy->setOption('dpi', 72);
 //            $snappy->setOption('footer-html', $this->container->get('templating')->render('@PaprecCommercial/QuoteRequest/PDF/fr/_footer.html.twig'));
 
