@@ -78,12 +78,12 @@
                         <ul>
                             {% set loc = '/' ~ locale ~ '/' %}
                             <li>
-                                <a href="{{ path(app.request.get('_route'),app.request.get('_route_params'))|replace({(loc): '/de/'}) }}">
+                                <a href="{% if app.request.get('_route') %}{{ path(app.request.get('_route'),app.request.get('_route_params'))|replace({(loc): '/de/'}) }}{% endif %}">
                                     <img src="{{ absolute_url(asset('/build/static/de.gif'))}}" alt="Germany" title="">
                                 </a>
                             </li>
                             <li class="lang-active">
-                                <a href="{{ path(app.request.get('_route'),app.request.get('_route_params'))|replace({(loc): '/fr/'}) }}">
+                                <a href="{% if app.request.get('_route') %}{{ path(app.request.get('_route'),app.request.get('_route_params'))|replace({(loc): '/fr/'}) }}{% endif %}">
                                     <img src="{{ absolute_url(asset('/build/static/fr.gif'))}}" alt="French" title="">
                                 </a>
                             </li>
