@@ -134,7 +134,7 @@ class QuoteRequestController extends Controller
         foreach ($datatable['data'] as $data) {
             $line = $data;
             $line['isMultisite'] = $data['isMultisite'] ? $this->get('translator')->trans('General.1') : $this->get('translator')->trans('General.0');
-            $line['totalAmount'] = $numberManager->formatAmount($data['totalAmount'], 'EUR', $request->getLocale());
+            $line['totalAmount'] = $numberManager->formatAmount($data['totalAmount'], 'CHF', $request->getLocale());
             $line['quoteStatus'] = $this->container->get('translator')->trans("Commercial.QuoteStatusList." . $data['quoteStatus']);
             $tmp[] = $line;
         }
