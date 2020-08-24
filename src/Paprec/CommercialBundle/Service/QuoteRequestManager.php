@@ -530,6 +530,35 @@ class QuoteRequestManager
         return time();
     }
 
+    /**
+     * Génération de la référence de l'offre
+     * @param QuoteRequest $quoteRequest
+     */
+    public function generateReference(QuoteRequest $quoteRequest) {
+        $regionName = 'CH';
+        switch (strtolower($quoteRequest->getPostalCode()->getRegion()->getName())) {
+            case 'basel':
+                $regionName = 'BS';
+                break;
+            case 'geneve':
+                $regionName = 'GE';
+                break;
+            case 'zurich':
+            case 'zuerich':
+                $regionName = 'ZH';
+                break;
+            case 'luzern':
+                $regionName = 'LU';
+                break;
+        }
+
+
+        $reference = strtoupper($regionName) . $quoteRequest->getDateCreation()->format('ymd');
+        $reference .= '-' . str_pad($this->getCountByReference($reference), 2, '0', STR_PAD_LEFT);
+
+        return $reference;
+    }
+
 
     /**
      * Envoi de l'offre généré au client
