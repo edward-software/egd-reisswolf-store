@@ -384,6 +384,9 @@ class QuoteRequestController extends Controller
 
             $quoteRequest->setUserCreation($user);
 
+            $reference = $quoteRequestManager->generateReference($quoteRequest);
+            $quoteRequest->setReference($reference);
+
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($quoteRequest);
