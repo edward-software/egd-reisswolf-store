@@ -1,15 +1,15 @@
 <style type="text/css">
 </style>
 
-{#<pre>#}
-{#    {{ dump(data) }}#}
-{#</pre>#}
+{# <pre> #}
+{# {{ dump(data) }} #}
+{# </pre> #}
 <div class="contrat__content">
 
     <div class="flex space-between bold">
         <h2>ANLAGE 1 </h2>
         <p class="bold mb-20">Kunden-Nr : R{{ quoteRequest.postalCode.zone }} - {{ quoteRequest.customerId }}</p>
-        {#<p>{% if quoteRequest.customerId is defined %}N°{{ quoteRequest.customerId }}{% endif %}</p>#}
+        {# <p>{% if quoteRequest.customerId is defined %}N°{{ quoteRequest.customerId }}{% endif %}</p> #}
     </div>
     <p class="mb-20">zum Vertrag vom {{ quoteRequest.dateUpdate|date('d/m/Y') }} zwischen der</p>
     <p><strong>{{ quoteRequest.businessName }}</strong></p>
@@ -18,11 +18,11 @@
 
     <h3 style="margin-top: 60px;">ANSPRECHPARTNER</h3>
 
-    {#INTERLOCUTEUR 1#}
+    {# INTERLOCUTEUR 1 #}
     <p class="bold mt-20">Reisswolf Aktenvernichtungs-AG :</p>
     <div class="flex">
         <div style="margin-right: 30px;"><p>Frau Arminka Lezic (Vertriebsberaterin)</p>
-            <p>Herr André Nadler (Geschäftsführer)</p>
+            <p style="text-align: left;">Herr André Nadler (Geschäftsführer)</p>
         </div>
         <div>
             <p>E-Mail : luzern@reisswolf.ch</p>
@@ -33,7 +33,8 @@
 
     <p class="bold mt-20">Datenschutzbeauftragter :</p>
     <div class="flex">
-        <div style="margin-right: 30px;"><p>Frau Saskia Strahberger (DPO)</p>
+        <div style="margin-right: 30px;">
+            <p style="text-align: left;">Frau Saskia Strahberger (DPO)</p>
         </div>
         <div>
             <p>E-Mail : dpo@reisswolf.ch</p>
@@ -41,21 +42,23 @@
         </div>
     </div>
 
-    {#INTERLOCUTEUR 2#}
+    {# INTERLOCUTEUR 2 #}
     <p class="bold mt-20 mb-20">Ansprechpartner {{ quoteRequest.businessName }}</p>
-    {#ajouter dans le formulaire une possibilité de saisir le nom du signataire N°2)
-    Et donc reprendre ici les deux signataires#}
+    {# ajouter dans le formulaire une possibilité de saisir le nom du signataire N°2)
+    Et donc reprendre ici les deux signataires #}
     <div class="flex">
         <div style="margin-right: 30px;">
-            <p>{% if quoteRequest.civility == 'M' %}
+            <p style="text-align: left;">
+                {% if quoteRequest.civility == 'M' %}
                     {{ 'General.M'|trans({}, 'messages', 'de') }}
                 {% elseif quoteRequest.civility == 'Mme' %}
                     {{ 'General.Mme'|trans({}, 'messages', 'de') }}
-                {% endif %}  {{ quoteRequest.firstName }} {{ quoteRequest.lastName }}</p>
+                {% endif %}  {{ quoteRequest.firstName }} {{ quoteRequest.lastName }}
+            </p>
         </div>
         <div>
             <p>E-Mail : {{ quoteRequest.email }}</p>
-            <p>Tél. : {{quoteRequest.phone}}</p>
+            <p>Tél. : {{ quoteRequest.phone }}</p>
         </div>
     </div>
 </div>

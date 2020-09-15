@@ -1,15 +1,15 @@
 <style type="text/css">
 </style>
 
-{#<pre>#}
-{#    {{ dump(data) }}#}
-{#</pre>#}
+{# <pre> #}
+{# {{ dump(data) }} #}
+{# </pre> #}
 <div class="contrat__content">
 
     <div class="flex space-between bold">
         <h2>ANNEXE 1 </h2>
         <p class="bold mb-20">N° de client : R{{ quoteRequest.postalCode.zone }} - {{ quoteRequest.customerId }}</p>
-        {#<p>{% if quoteRequest.customerId is defined %}N°{{ quoteRequest.customerId }}{% endif %}</p>#}
+        {# <p>{% if quoteRequest.customerId is defined %}N°{{ quoteRequest.customerId }}{% endif %}</p> #}
     </div>
     <p class="mb-20">au contrat en date du {{ quoteRequest.dateUpdate|date('d/m/Y') }} conclu entre</p>
     <p><strong>{{ quoteRequest.businessName }}</strong></p>
@@ -18,11 +18,11 @@
 
     <h3 style="margin-top: 60px;">INTERLOCUTEURS</h3>
 
-    {#INTERLOCUTEUR 1#}
+    {# INTERLOCUTEUR 1 #}
     <p class="bold mt-20">Interlocuteurs en région :</p>
     <div class="flex">
         <div style="margin-right: 30px;"><p>Mme. Emmanuelle Lugand (Resp. Administrative)</p>
-            <p>M. Pascal Laperrousaz (Directeur Général)</p>
+            <p style="text-align: left;">M. Pascal Laperrousaz (Directeur Général)</p>
         </div>
         <div>
             <p>E-Mail : geneve@reisswolf.ch</p>
@@ -33,7 +33,8 @@
 
     <p class="bold mt-20">Responsable de la protection des données :</p>
     <div class="flex">
-        <div style="margin-right: 30px;"><p>Mme Saskia Strahberger (DPO)</p>
+        <div style="margin-right: 30px;">
+            <p style="text-align: left;">Mme Saskia Strahberger (DPO)</p>
         </div>
         <div>
             <p>E-Mail : dpo@reisswolf.ch</p>
@@ -41,21 +42,23 @@
         </div>
     </div>
 
-    {#INTERLOCUTEUR 2#}
+    {# INTERLOCUTEUR 2 #}
     <p class="bold mt-20 mb-20">Interlocuteur {{ quoteRequest.businessName }}</p>
-    {#ajouter dans le formulaire une possibilité de saisir le nom du signataire N°2)
-    Et donc reprendre ici les deux signataires#}
+    {# ajouter dans le formulaire une possibilité de saisir le nom du signataire N°2)
+    Et donc reprendre ici les deux signataires #}
     <div class="flex">
         <div style="margin-right: 30px;">
-            <p>{% if quoteRequest.civility == 'M' %}
+            <p style="text-align: left;">
+                {% if quoteRequest.civility == 'M' %}
                     {{ 'General.M'|trans([], null, 'FR') }}
                 {% elseif quoteRequest.civility == 'Mme' %}
                     {{ 'General.Mme'|trans([], null, 'FR') }}
-                {% endif %}  {{ quoteRequest.firstName }} {{ quoteRequest.lastName }}</p>
+                {% endif %}  {{ quoteRequest.firstName }} {{ quoteRequest.lastName }}
+            </p>
         </div>
         <div>
             <p>E-Mail : {{ quoteRequest.email }}</p>
-            <p>Tél. : {{quoteRequest.phone}}</p>
+            <p>Tél. : {{ quoteRequest.phone }}</p>
         </div>
     </div>
 </div>

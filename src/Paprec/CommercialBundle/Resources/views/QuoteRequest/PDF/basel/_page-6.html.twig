@@ -21,7 +21,8 @@
     {#INTERLOCUTEUR 1#}
     <p class="bold mt-20">Reisswolf Aktenvernichtungs-AG :</p>
     <div class="flex">
-        <div style="margin-right: 30px;"><p>Herr Florian Dolder (Vertriebsleiter)</p>
+        <div style="margin-right: 30px;">
+            <p style="text-align: left;">Herr Florian Dolder (Vertriebsleiter)</p>
             <p>Herr Romeo Albus (Innendienst)</p>
         </div>
         <div>
@@ -33,7 +34,8 @@
 
     <p class="bold mt-20">Datenschutzbeauftragter :</p>
     <div class="flex">
-        <div style="margin-right: 30px;"><p>Frau Saskia Strahberger (DPO)</p>
+        <div style="margin-right: 30px;">
+            <p style="text-align: left;">Frau Saskia Strahberger (DPO)</p>
         </div>
         <div>
             <p>E-Mail : dpo@reisswolf.ch</p>
@@ -47,11 +49,13 @@
     Et donc reprendre ici les deux signataires#}
     <div class="flex">
         <div style="margin-right: 30px;">
-            <p>{% if quoteRequest.civility == 'M' %}
+            <p  style="text-align: left;">
+                {% if quoteRequest.civility == 'M' %}
                 {{ 'General.M'|trans({}, 'messages', 'de') }}
                 {% elseif quoteRequest.civility == 'Mme' %}
                 {{ 'General.Mme'|trans({}, 'messages', 'de') }}
-                {% endif %}  {{ quoteRequest.firstName }} {{ quoteRequest.lastName }}</p>
+                {% endif %}  {{ quoteRequest.firstName }} {{ quoteRequest.lastName }}
+            </p>
         </div>
         <div>
             <p>E-Mail : {{ quoteRequest.email }}</p>

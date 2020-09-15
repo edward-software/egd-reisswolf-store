@@ -234,9 +234,7 @@
     </ul>
 
     <p>
-        Tous les prix s’entendent T.V.A. en sus et sont valables jusqu’au 31
-        décembre {% if quoteRequest.dateUpdate|date('m') < 7 %} {{ quoteRequest.dateUpdate|date('Y') }} {% else %} {{ quoteRequest.dateUpdate|date('Y') + 1 }}{% endif %}
-        . Passé cette date, ils
+        Tous les prix s’entendent T.V.A. en sus et sont valables jusqu’au {{ dateEndOffer|date('d/m/Y') }}. Passé cette date, ils
         pourront être ajustés selon les besoins.
     </p>
 </div>

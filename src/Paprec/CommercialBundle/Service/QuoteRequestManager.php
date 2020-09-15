@@ -779,7 +779,12 @@ class QuoteRequestManager
             $filenameContract = $pdfTmpFolder . '/' . md5(uniqid('', true)) . '.pdf';
 
 
+            $dateEndOffer = clone (($quoteRequest->getDateUpdate()) ?: $quoteRequest->getDateCreation());
+            $dateEndOffer = $dateEndOffer->modify('+1 year');
+            $dateEndOffer = $dateEndOffer->modify('-1 day');
+
             $today = new \DateTime();
+
 
             $snappy = new Pdf($this->container->getParameter('wkhtmltopdf_path'));
             $snappy->setOption('javascript-delay', 3000);
@@ -849,6 +854,7 @@ class QuoteRequestManager
                             array(
                                 'quoteRequest' => $quoteRequest,
                                 'date' => $today,
+                                'dateEndOffer' => $dateEndOffer,
                                 'products' => $products
                             )
                         )

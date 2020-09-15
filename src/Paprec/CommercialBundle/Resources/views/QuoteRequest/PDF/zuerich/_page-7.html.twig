@@ -229,6 +229,6 @@
     </ul>
 
     <p>
-        Alle Preise verstehen sich zuzgl. Mehrwertsteuer und sind bis am {% if quoteRequest.dateUpdate|date('m') < 7 %} {{ quoteRequest.dateUpdate|date('Y') }} {% else %} {{ quoteRequest.dateUpdate|date('Y') + 1 }}{% endif %}gültig. Danach können sie nach Bedarf angepasst werden.
+        Alle Preise verstehen sich zuzgl. Mehrwertsteuer und sind bis am {{ dateEndOffer|date('d/m/Y') }} gültig. Danach können sie nach Bedarf angepasst werden.
     </p>
 </div>
