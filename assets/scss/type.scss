@@ -7,27 +7,37 @@
 
 .type {
   margin-bottom: 30px;
-  padding-right: 30px;
 
   &__block {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background-color: #F2F2F2;
-    padding: 30px;
-    min-height: 350px !important;
+    height: 100%;
+    &__body {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background-color: #F2F2F2;
+      padding: 30px;
+      height: 100%;
+    }
   }
 
   &__button {
     max-width: 175px;
   }
 
-  ul, li {
-    list-style: disc !important;
+  h3 {
+    text-transform: initial;
+    color: #444444;
   }
 
-  li {
-    margin-left: 30px !important;
+  ul {
+    margin-left: 15px;
+    li {
+      list-style: disc !important;
+      padding-left: 10px;
+    }
   }
 
+  .flex-1 {
+    flex: 1;
+  }
 }
