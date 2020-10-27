@@ -1,9 +1,9 @@
 Commercial:
 
 
-    Bundle-name:                    Gestion commerciale
-    QuoteRequests:                  Demandes de devis
-    Settings:                       Paramétrage
+    Bundle-name: Gestion commerciale
+    QuoteRequests: Demandes de devis
+    Settings: Paramétrage
 
     QuoteRequest:
         QuoteRequests: Demandes de devis
@@ -54,11 +54,11 @@ Commercial:
         Ponctual: A la demande
         Regular: Régulière
         Error:
-            generatedQuoteNotSent:    Erreur lors de la génération et l'envoi du devis.
-            generatedContractNotSent:    Erreur lors de la génération et l'envoi du contrat.
+            generatedQuoteNotSent: Erreur lors de la génération et l'envoi du devis.
+            generatedContractNotSent: Erreur lors de la génération et l'envoi du contrat.
         Success:
-            generatedQuoteSent:       Le devis a bien été généré et envoyé au client.
-            generatedContractSent:       Le contrat a bien été généré et envoyé au client.
+            generatedQuoteSent: Le devis a bien été généré et envoyé au client.
+            generatedContractSent: Le contrat a bien été généré et envoyé au client.
             newUserInChargeWarned: Un mail a été envoyé au nouveau commercial en charge
         Locale: Langue
         Number: Numéro offre
@@ -91,6 +91,34 @@ Commercial:
         ARCHIVE_CLEARING: Désarchivage
         HARD_DRIVE_DESTRUCTION: Destrution de supports numériques
         RADIOGRAPHIC_FILM_DESTRUCTION: Destruction des radiographies
+
+    Cantons:
+        AG: Argovie
+        AI: Appenzell Rhodes-Intérieures
+        AR: Appenzell Rhodes-Extérieures
+        BE: Berne
+        BL: Bâle-Campagne
+        BS: Bâle-Ville
+        FR: Fribourg
+        GE: Genève
+        GL: Glaris
+        GR: Grisons
+        JU: Jura
+        LU: Lucerne
+        NE: Neuchâtel
+        NW: Nidwald
+        OW: Obwald
+        SG: Saint-Gall
+        SH: Schaffhouse
+        SO: Soleure
+        SZ: Schwytz
+        TG: Thurgovie
+        TI: Tessin
+        UR: Uri
+        VD: Vaud
+        VS: Valais
+        ZG: Zoug
+        ZH: Zurich
 
     AccessList:
         stairs: Par escalier

@@ -160,12 +160,18 @@ class SubscriptionController extends Controller
             $destructionType[$d] = $d;
         }
 
+        $cantons = array();
+        foreach ($this->getParameter('paprec_quote_cantons') as $c) {
+            $cantons[$c] = $c;
+        }
+
         $quoteRequest = $quoteRequestManager->add(false);
 
         $form = $this->createForm(QuoteRequestPublicType::class, $quoteRequest, array(
             'access' => $access,
             'staff' => $staff,
             'destructionType' => $destructionType,
+            'cantons' => $cantons,
             'locale' => $locale
         ));
 

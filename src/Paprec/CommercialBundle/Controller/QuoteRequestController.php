@@ -377,12 +377,18 @@ class QuoteRequestController extends Controller
             $destructionType[$d] = $d;
         }
 
+        $cantons = array();
+        foreach ($this->getParameter('paprec_quote_cantons') as $c) {
+            $cantons[$c] = $c;
+        }
+
         $form = $this->createForm(QuoteRequestType::class, $quoteRequest, array(
             'status' => $status,
             'locales' => $locales,
             'access' => $access,
             'staff' => $staff,
-            'destructionType' => $destructionType
+            'destructionType' => $destructionType,
+            'cantons' => $cantons
         ));
 
         $form->handleRequest($request);
@@ -454,6 +460,11 @@ class QuoteRequestController extends Controller
             $destructionType[$d] = $d;
         }
 
+        $cantons = array();
+        foreach ($this->getParameter('paprec_quote_cantons') as $c) {
+            $cantons[$c] = $c;
+        }
+
         $quoteRequest->setOverallDiscount($numberManager->denormalize($quoteRequest->getOverallDiscount()));
         $quoteRequest->setAnnualBudget($numberManager->denormalize($quoteRequest->getAnnualBudget()));
 
@@ -462,7 +473,8 @@ class QuoteRequestController extends Controller
             'locales' => $locales,
             'access' => $access,
             'staff' => $staff,
-            'destructionType' => $destructionType
+            'destructionType' => $destructionType,
+            'cantons' => $cantons
         ));
 
         $savedCommercial = $quoteRequest->getUserInCharge();

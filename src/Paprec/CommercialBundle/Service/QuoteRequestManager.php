@@ -855,6 +855,7 @@ class QuoteRequestManager
                     $templateDir .= '/ponctual';
                     $addContract = false;
                 }
+
             }
 
             if (!isset($templateDir) || !$templateDir || is_null($templateDir)) {

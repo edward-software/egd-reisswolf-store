@@ -32,7 +32,14 @@ class QuoteRequestPublicType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('canton')
+            ->add('canton', ChoiceType::class, array(
+                "choices" => $options['cantons'],
+                "choice_label" => function ($choiceValue, $key, $value) {
+                    return 'Commercial.Cantons.' . $choiceValue;
+                },
+                'data' => null,
+                'required' => true
+            ))
             ->add('businessName')
             ->add('civility', ChoiceType::class, array(
                 'choices' => array(
@@ -66,7 +73,7 @@ class QuoteRequestPublicType extends AbstractType
                 "choice_label" => function ($choiceValue, $key, $value) {
                     return 'Commercial.DestructionType.' . $choiceValue;
                 },
-                'data' => 'DOCUMENT_DESTRUCTION',
+                'data' => 'ARCHIVE_CLEARING',
                 'required' => true
             ))
             ->add('lastName', TextType::class)
@@ -111,6 +118,7 @@ class QuoteRequestPublicType extends AbstractType
             'access' => null,
             'staff' => null,
             'destructionType' => null,
+            'cantons' => null,
             'locale' => null
         ));
     }

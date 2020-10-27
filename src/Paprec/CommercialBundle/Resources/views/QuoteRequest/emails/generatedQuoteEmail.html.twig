@@ -34,11 +34,13 @@
 <br><br>
 {{ 'Commercial.GeneratedQuoteEmail.Message3'| trans({}, "messages", locale) }}
 <br><br>
+{% if quoteRequest.type != 'PONCTUAL' %}
 {{ 'Commercial.GeneratedQuoteEmail.Message4'| trans({}, "messages", locale) }}
 <a href="{{ absolute_url(path("paprec_public_signatory_index", {locale: locale, quoteRequestId: quoteRequest.id, token: quoteRequest.token})) }}">
     {{ 'Commercial.GeneratedQuoteEmail.Message5'| trans({}, "messages", locale) }}
 </a>
 <br><br>
+{% endif %}
 {{ 'Commercial.GeneratedQuoteEmail.Regards'| trans({}, "messages", locale) }}
 <br><br>
 {{ 'Commercial.GeneratedQuoteEmail.Partner'| trans({}, "messages", locale) }}

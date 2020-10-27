@@ -37,7 +37,14 @@ class QuoteRequestType extends AbstractType
             ->add('locale', ChoiceType::class, array(
                 'choices' => $options['locales']
             ))
-            ->add('canton')
+            ->add('canton', ChoiceType::class, array(
+                "choices" => $options['cantons'],
+                "choice_label" => function ($choiceValue, $key, $value) {
+                    return 'Commercial.Cantons.' . $choiceValue;
+                },
+                'data' => null,
+                'required' => true
+            ))
             ->add('businessName')
             ->add('civility', ChoiceType::class, array(
                 'choices' => array(
@@ -68,7 +75,6 @@ class QuoteRequestType extends AbstractType
                 "choice_label" => function ($choiceValue, $key, $value) {
                     return 'Commercial.DestructionType.' . $choiceValue;
                 },
-                'data' => 'DOCUMENT_DESTRUCTION',
                 'required' => true
             ))
             ->add('lastName', TextType::class)
@@ -197,6 +203,7 @@ class QuoteRequestType extends AbstractType
             'staff' => null,
             'access' => null,
             'destructionType' => null,
+            'cantons' => null,
         ));
     }
 
