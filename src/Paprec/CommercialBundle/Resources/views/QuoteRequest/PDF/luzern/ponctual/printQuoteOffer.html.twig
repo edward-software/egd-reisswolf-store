@@ -1,0 +1,565 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//FR"
+        "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <title>PDF Paprec Offer</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <style type="text/css">
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            font-weight: 500;
+            font-size: 12px;
+            color: #333333;
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+        }
+
+        h1 {
+            color: #2c4491;
+            font-size: 20px;
+            text-transform: uppercase;
+            font-weight: 900;
+            margin: 0;
+        }
+
+        h2 {
+            color: #2c4491;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        p {
+            margin: 5px 0;
+        }
+
+        .bold {
+            font-weight: bold;
+        }
+
+        .offer__container {
+            width: 800px;
+            /*height: 1280px;*/
+            margin: auto;
+            /*margin-bottom: 50px;*/
+            position: relative;
+        }
+
+
+        /* FLEXBOX */
+
+        .flex {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: -moz-box;
+            display: box;
+            display: flex;
+        }
+
+        .align-item-center {
+            -webkit-box-align: center;
+            -moz-box-align: center;
+            -ms-flex-align: center;
+            -webkit-align-items: center;
+            box-align: center;
+            align-items: center;
+        }
+
+        .align-item-end {
+            -webkit-box-align: end;
+            -moz-box-align: end;
+            -ms-flex-align: end;
+            -webkit-align-items: end;
+            box-align: end;
+            align-items: flex-end;
+        }
+
+        .justify-center {
+            -webkit-box-pack: center;
+            box-pack: center;
+            justify-content: center;
+        }
+
+        .justify-end {
+            -webkit-box-pack: end;
+            box-pack: end;
+            justify-content: flex-end;
+        }
+
+        .space-between {
+            -webkit-box-pack: justify;
+            box-pack: justify;
+            justify-content: space-between;
+        }
+
+        .w50 {
+            width: 50%;
+        }
+
+        .mb-14 {
+            margin-bottom: 14px;
+        }
+
+        .mb-20 {
+            margin-bottom: 20px;
+        }
+        .mb-30 {
+            margin-bottom: 30px;
+        }
+        .mb-40 {
+            margin-bottom: 40px;
+        }
+
+        /***** PAGE OFFRE *****/
+
+        /*header*/
+
+        .offer__header {
+            border-bottom: 3px solid #2c4491;
+            padding-bottom: 20px;
+        }
+
+        .illustrations {
+            margin-left: 350px;
+            margin-top: 50px;
+        }
+
+        .illustrations img {
+            max-height: 120px;
+            max-width: 100%;
+        }
+
+        /*content*/
+
+        .offer__content {
+            padding: 30px 0;
+        }
+
+
+        .offer__ref {
+            padding-bottom: 15px;
+            border-bottom: 1px solid #2c4491;
+            font-size: 12px;
+        }
+
+        .offer__ref h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .offer__ref-items > div:first-child {
+            /*width: 40%;*/
+        }
+
+        .offer__ref-items > div:last-child {
+            /*width: 60%;*/
+            padding-right: 15px;
+        }
+
+
+        .offer__presta {
+            padding-top: 10px;
+        }
+
+        table {
+            border-collapse: separate;
+            border-spacing: 0;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        table td, table th {
+            font-size: 12px;
+            overflow: hidden;
+            word-break: normal;
+            text-align: center;
+            border: 1px solid #333333;
+            border-right: 0px;
+            border-bottom: 0px;
+        }
+
+        table th {
+            padding: 5px 10px;
+            vertical-align: top;
+        }
+
+        table td {
+            padding: 12px 5px;
+        }
+
+        table span {
+            font-weight: normal;
+        }
+
+        table tr:last-child > td {
+            border-bottom: 1px solid #333333;
+        }
+
+        table tr > td:last-child, table tr > th:last-child {
+            border-right: 1px solid #333333;
+        }
+
+        table .table-header td {
+            padding: 0;
+            border-top: 0;
+        }
+
+        table .table-footer1 td:nth-child(n+2):nth-child(-n+3) {
+            border-left: 0;
+        }
+
+        table .table-footer1 td:last-child {
+            border-left: 0;
+        }
+
+        table .table-footer1 td:nth-child(n+5):nth-child(-n+7) {
+            border-bottom: 1px solid #333333;
+        }
+
+        table .table-footer1 td {
+            padding: 10px 0 5px 0;
+        }
+
+        table .table-footer2 td:nth-child(n+2):nth-child(-n+3) {
+            border-left: 0;
+        }
+
+        table .table-footer2 td:nth-child(-n+4) {
+            border-top: 0;
+        }
+
+        table .table-footer2 td:last-child {
+            border-right: 0;
+        }
+
+        table .table-footer2 td {
+            padding: 0 0 10px 0;
+        }
+
+        table .empty {
+            height: 30px;
+        }
+        table .empty td:last-child {
+            border-left: 0 !important;
+            border-right: 0 !important;
+        }
+
+        .check {
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            vertical-align: middle;
+            outline: 2px solid grey;
+            margin-left: 5px;
+            margin-bottom: 3px;
+        }
+        .check.active {
+            border: 2px solid white;
+            outline: 2px solid grey;
+            background-color: black;
+        }
+
+        .offer__signature > div {
+            width: 48%;
+        }
+
+        /*footer*/
+        .offer__footer {
+            padding-top: 20px;
+            border-top: 3px solid #2c4491;
+            /*position: absolute;*/
+            /*bottom: 0;*/
+            margin-top: 10px;
+            width: 100%;
+        }
+
+    </style>
+
+</head>
+<body>
+<div class="offer__container">
+    <div class="offer__header">
+        <div class="flex logo">
+            <!--<img src="/build/static/privacia_logo_blanc.png" alt="logo Reisswolf">-->
+            <div>
+                <img src="{{ absolute_url(asset('build/static/reisswolf_logo_pdf.png')) }}" alt="logo Reisswolf">
+            </div>
+            <div>
+                <img src="{{ absolute_url(asset('build/static/pug.png')) }}" style="width: 80px; margin-left: 10px;"
+                     alt="logo Reisswolf">
+            </div>
+            <div class="flex align-item-end illustrations">
+                <img src="{{ absolute_url(asset('build/static/IMG_2013_70.png')) }}" alt="illustration"
+                     style="max-height: 80px;">
+                <img src="{{ absolute_url(asset('build/static/IMG_2010_240.png')) }}" alt="illustration"
+                     style="max-height: 100px;">
+                <img src="{{ absolute_url(asset('build/static/IMG_2005_350.png')) }}" alt="illustration"
+                     style="max-height: 120px;">
+            </div>
+        </div>
+    </div>
+
+    <div class="offer__content">
+
+        <div class="offer__ref">
+            <h1>Angebot</h1>
+
+            <div class="flex space-between">
+
+                <div class="w50">
+                    <div class="flex offer__ref-items">
+                        <div style="width: 40%;">
+                            <p class="bold">Ihre Anfrage vom :</p>
+                        </div>
+                        <div>
+                            <p>{{ quoteRequest.dateCreation|date('d/m/Y') }}</p>
+                        </div>
+                    </div>
+
+                    <div class="flex offer__ref-items">
+                        <div style="width: 40%;">
+                            <p class="bold">Ihre Referenz :</p>
+                        </div>
+                        <div>
+                            <p> {{ quoteRequest.firstName }}&nbsp;{{ quoteRequest.lastName }}</p>
+                        </div>
+                    </div>
+
+                    <div class="flex offer__ref-items">
+                        <div style="width: 40%;">
+                            <p class="bold">Ihre Email-Adresse :</p>
+                        </div>
+                        <div>
+                            <p>{{ quoteRequest.email }}</p>
+                        </div>
+                    </div>
+
+                    <div class="flex offer__ref-items">
+                        <div style="width: 40%;">
+                            <p class="bold">Ihre Telefonnummer :</p>
+                        </div>
+                        <div>
+                            <p>{{ quoteRequest.phone }}</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="w50">
+                    <div class="flex offer__ref-items">
+                        <div style="width: 44%;">
+                            <p class="bold">Angebots-Datum :</p>
+                        </div>
+                        <div>
+                            <p>{{ quoteRequest.dateUpdate|date('d/m/Y') }}</p>
+                        </div>
+                    </div>
+
+                    <div class="flex offer__ref-items">
+                        <div style="width: 44%;">
+                            <p class="bold">Unsere Referenz :</p>
+                        </div>
+                        <div>
+                            <p>Arminka&nbsp;Lezic</p>
+                        </div>
+                    </div>
+
+                    <div class="flex offer__ref-items">
+                        <div style="width: 44%;">
+                            <p class="bold">Unsere Email-Adresse :</p>
+                        </div>
+                        <div>
+                            <p>
+                                {% if quoteRequest.postalCode is defined %}
+                                    {{ quoteRequest.postalCode.region.email }}
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flex offer__ref-items">
+                        <div style="width: 44%;">
+                            <p class="bold">Unsere Telefonnummer :</p>
+                        </div>
+                        <div>
+                            <p>041 448 38 66</p>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class="offer__presta">
+            <p class="mb-20">Für Ihre Anfrage danken wir Ihnen bestens. Gerne bieten wir Ihnen unsere Dienstleistungen wie folgt an.</p>
+            <h2>Entsorgung und Vernichtung von Akten</h2>
+
+            <table>
+                <tbody>
+                <tr>
+                    <th rowspan="2">Typ RW</th>
+                    <th rowspan="2">Schloss</th>
+                    <th>
+                        Programmierung<br>
+                        e.l.sy-Schloss<br>
+                        <span>einmalig/<br>
+                        pro Behälter</span>
+                    </th>
+                    <th>
+                        Behältermiete<br>
+                        <span>pro Monat/<br>
+                        pro Behälter<br></span>
+                    </th>
+                    <th>
+                        Transport<br>
+                        <span>pro abgeholte Behälter</span>
+                    </th>
+                    <th>
+                        Vernichtung und<br>
+                        Zertifikat
+                    </th>
+                    <th>
+                        Anzahl
+                        geplante<br>
+                        Behälter<br>
+                    </th>
+                </tr>
+                <tr class="table-header">
+                    <td>CHF / exkl.<br>MWST</td>
+                    <td>CHF / exkl.<br>MWST</td>
+                    <td>CHF / exkl.<br>MWST</td>
+                    <td>CHF / exkl.<br>MWST</td>
+                    <td>Stk</td>
+                </tr>
+
+                {% for product in products %}
+                    <tr>
+                        <td class="bold">{{ product.capacity }}</td>
+                        <td class="bold">{{ product|productLabelTranslation(locale,'lockType') }}</td>
+                        <td class="bold">{{ tmpLockProg }}</td>
+                        <td class="bold">
+                            {% set val = 0 %}
+                            {% if product.rentalUnitPrice == 0 %}
+                            {% else %}
+                                {% set val = (((quoteRequest.postalCode.rentalRate / 1000000000000000) + (product.rentalUnitPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000)) %}
+                            {% endif %}
+
+                            {{ val|round|number_format(2, ',', ' ') }}
+                        </td>
+                        <td class="bold">
+                            {% set val = 0 %}
+                            {% if product.transportUnitPrice == 0 %}
+                            {% else %}
+                                {% set val = (((quoteRequest.postalCode.transportRate / 1000000000000000) + (product.transportUnitPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000)) %}
+                            {% endif %}
+                            {% if product.setUpPrice == 0 %}
+                            {% else %}
+                                {% set val = val +  (((quoteRequest.postalCode.setUpRate / 1000000000000000) + (product.setUpPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000)) %}
+                            {% endif %}
+                            {% if product.treatmentUnitPrice == 0 %}
+                            {% else %}
+                                {% set val = val +  (((quoteRequest.postalCode.treatmentRate / 1000000000000000) + (product.treatmentUnitPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000)) %}
+                            {% endif %}
+                            {% if product.traceabilityUnitPrice == 0 %}
+                            {% else %}
+                                {% set val = val +  (((quoteRequest.postalCode.traceabilityRate / 1000000000000000) + (product.traceabilityUnitPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000)) %}
+                            {% endif %}
+                            {{ val|round|number_format(2, ',', ' ') }}
+                        </td>
+                        <td>inkl.</td>
+                        <td class="bold">
+                            {% set quantity = 0 %}
+                            {% for line in quoteRequest.quoteRequestLines %}
+                                {% if line.product.id == product.id %}
+                                    {% set quantity = line.quantity %}
+                                {% endif %}
+                            {% endfor %}
+                            {{ quantity }}
+                        </td>
+                    </tr>
+                {% endfor %}
+                <tr class="empty">
+                    <td colspan="7"></td>
+                </tr>
+                <tr class="table-footer1">
+                    <td colspan="2" class="bold">Verlad ab Stockwerk</td>
+                    <td>pro Behälter</td>
+                    <td class="bold">Aufzug :</td>
+                    <td class="bold" style="padding: 10px 0;">10.00 <span class="check {% if quoteRequest.access == 'elevator' %}active{% endif %}"></span> </td>
+                    <td rowspan="2"></td>
+                    <td rowspan="2"></td>
+
+                </tr>
+                <tr class="table-footer2">
+                    <td colspan="2"></td>
+                    <td></td>
+                    <td class="bold">Treppe :</td>
+                    <td class="bold" style="padding: 10px 0;">20.00 <span class="check {% if quoteRequest.access == 'stairs' %}active{% endif %}"></span></td>
+                </tr>
+                </tbody>
+            </table>
+
+
+            <p class="mb-14">
+                Ihre Sicherheitsbehälter werden gemäss Ihrem Wunsch abgeholt : {% if quoteRequest.frequency == 'ponctual' %}
+                    Auf Anfrage
+                {% elseif quoteRequest.frequency == 'regular' %}
+                    {{ quoteRequest.frequencyTimes }} mal / {{ ('Commercial.QuoteRequest.' ~ quoteRequest.frequencyInterval)|trans({}, 'messages', 'de') }}
+                {% endif %}
+            </p>
+            <p class="mb-14">
+                Gültigkeit des Angebots: 30 Tage ab Angebots-Datum.
+            </p>
+            <p class="mb-14">
+                Für weitere Informationen stehen wir gerne zur Verfügung. Über einen Auftrag würden wir uns sehr freuen.
+            </p>
+            <p class="mb-14" style="line-height: 20px;">
+                Wenn Sie unser Angebot annehmen, senden Sie uns bitte den unterstehenden Vertrag, unterschrieben, per Post zurück.
+            </p>
+            <p class="mb-14">Freundliche Grüsse,</p>
+            <h2 class="mb-20">Ihr REISSWOLF-Partner</h2>
+
+            <div class="flex offer__signature">
+               <div>
+                    <p>André Nadler</p>
+                    <p>Geschäftsführer</p>
+                </div>
+                <div>
+                    <p>Arminka Lezic</p>
+                    <p>Vertriebsberaterin</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="offer__footer">
+        <div class="flex space-between">
+            <div>
+                <p class="bold">REISSWOLF Aktenvernichtungs-AG</p>
+                <p>Zentralschweiz / italienische Schweiz</p>
+            </div>
+            <div>
+                <p>Kantonsstrasse 5</p>
+                <p>CH-6033 Buchrain</p>
+            </div>
+            <div>
+                <p>Tel.: 041 448 38 62</p>
+                <p>Mail: luzern@reisswolf.ch</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

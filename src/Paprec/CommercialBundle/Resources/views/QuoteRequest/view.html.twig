@@ -43,15 +43,17 @@
                                     class="fa fa-xs fa-envelope"></i> {{ 'Commercial.QuoteRequest.Send-quote'|trans }}
                         </a>
                     {% endif %}
+
                     <a id="sendGeneratedContractButton" href="javascript:void(0);"
-                       class="btn btn-sm btn-success mr-1 {% if not quoteRequest.hasValidSignatories %}btn-disabled{% endif %}"><i
+                       class="btn btn-sm btn-success mr-1 {% if not quoteRequest.hasValidSignatories or quoteRequest.type == 'PONCTUAL'%}btn-disabled{% endif %}"><i
                                 class="fa fa-xs fa-envelope"></i> {{ 'Commercial.QuoteRequest.Send-contract'|trans }}
-                        <a href="{{ path("paprec_commercial_quoteRequest_edit", {id: quoteRequest.id}) }}"
-                           class="btn btn-sm btn-warning"><i
-                                    class="fa fa-xs fa-edit"></i> {{ 'Commercial.QuoteRequest.Edit'|trans }}</a>
-                        <a id="commmecialQuoteRequestRemoveButton" href="javascript:void(0);"
-                           class="btn btn-sm btn-danger"><i
-                                    class="fa fa-xs fa-trash"></i> {{ 'General.Remove'|trans }}</a>
+                    </a>
+                    <a href="{{ path("paprec_commercial_quoteRequest_edit", {id: quoteRequest.id}) }}"
+                       class="btn btn-sm btn-warning"><i
+                                class="fa fa-xs fa-edit"></i> {{ 'Commercial.QuoteRequest.Edit'|trans }}</a>
+                    <a id="commmecialQuoteRequestRemoveButton" href="javascript:void(0);"
+                       class="btn btn-sm btn-danger"><i
+                                class="fa fa-xs fa-trash"></i> {{ 'General.Remove'|trans }}</a>
                 </div>
                 <div class="float-left">
                     <a href="{{ path('paprec_commercial_quoteRequest_index') }}" class="btn btn-sm btn-default"><i

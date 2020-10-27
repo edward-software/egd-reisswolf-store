@@ -849,9 +849,11 @@ class QuoteRequestManager
                 }
                 /**
                  * On modifie l'URI en fonction du tupe de quoteRequest
+                 * On profite pour mettre $addContract à false
                  */
                 if ($quoteRequest->getType() === 'PONCTUAL') {
                     $templateDir .= '/ponctual';
+                    $addContract = false;
                 }
             }
 
@@ -886,6 +888,20 @@ class QuoteRequestManager
              */
             $pdfArray = array();
             $pdfArray[] = $filenameOffer;
+
+            if ($quoteRequest->getType() === 'PONCTUAL') {
+                $ponctualFileNames = $this->container->getParameter('paprec_commercial.ponctual_file_names');
+                $ponctualFileDirectory = $this->container->getParameter('paprec_commercial.ponctual_files_directory');
+
+                if (is_array($ponctualFileNames) && count($ponctualFileNames)) {
+                    foreach ($ponctualFileNames as $ponctualFileName) {
+                        $noticeFilename = $ponctualFileDirectory . '/' . $ponctualFileName .'_' . $locale . '.pdf';
+                        if (file_exists($noticeFilename)) {
+                            $pdfArray[] = $noticeFilename;
+                        }
+                    }
+                }
+            }
 
             if ($addContract) {
                 /**
