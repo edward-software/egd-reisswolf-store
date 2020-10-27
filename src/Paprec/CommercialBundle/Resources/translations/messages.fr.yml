@@ -65,7 +65,7 @@ Commercial:
         Type:
             Type: Type
             Regular: Service régulier
-            Single: Désarchivage unique
+            Ponctual: Désarchivage unique
         SignatoryFirstName1: Prénom signataire 1
         SignatoryLastName1: Nom signataire 1
         SignatoryTitle1: Titre signataire 1

@@ -64,7 +64,7 @@ Commercial:
         Number: Angebotsnummer
         Type:
             Type: Art
-            Single: Einmalige Archivräumung
+            Ponctual: Einmalige Archivräumung
             Regular: Regelmässige Dienstleistung
         SignatoryFirstName1: Vorname des Unterzeichners 1
         SignatoryLastName1: Nachname des Unterzeichners 1
