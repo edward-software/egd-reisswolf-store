@@ -162,6 +162,14 @@ class QuoteRequest
     /**
      * @var string
      *
+     * @ORM\Column(name="destructionType", type="text")
+     * @Assert\NotBlank(groups={"public"})
+     */
+    private $destructionType;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="access", type="text")
      * @Assert\NotBlank(groups={"public"})
      */
@@ -247,6 +255,13 @@ class QuoteRequest
      * @ORM\Column(name="frequencyInterval", type="string", length=255, nullable=true)
      */
     private $frequencyInterval;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="type", type="string", length=255, nullable=true)
+     */
+    private $type;
 
     /**
      * @var string
@@ -979,6 +994,24 @@ class QuoteRequest
     }
 
     /**
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param string $type
+     * @return QuoteRequest
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+        return $this;
+    }
+
+    /**
      * Set locale.
      *
      * @param string|null $locale
@@ -1025,6 +1058,25 @@ class QuoteRequest
     {
         return $this->staff;
     }
+
+    /**
+     * @return string
+     */
+    public function getDestructionType()
+    {
+        return $this->destructionType;
+    }
+
+    /**
+     * @param string $destructionType
+     * @return QuoteRequest
+     */
+    public function setDestructionType($destructionType)
+    {
+        $this->destructionType = $destructionType;
+        return $this;
+    }
+
 
     /**
      * Set access.

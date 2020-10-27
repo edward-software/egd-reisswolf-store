@@ -6,7 +6,6 @@ namespace Paprec\CommercialBundle\Service;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\ORM\ORMException;
-use DoctrineExtensions\Query\Mysql\Date;
 use Exception;
 use Hackzilla\PasswordGenerator\Generator\ComputerPasswordGenerator;
 use iio\libmergepdf\Merger;
@@ -534,7 +533,8 @@ class QuoteRequestManager
      * Génération de la référence de l'offre
      * @param QuoteRequest $quoteRequest
      */
-    public function generateReference(QuoteRequest $quoteRequest) {
+    public function generateReference(QuoteRequest $quoteRequest)
+    {
         $regionName = 'CH';
         switch (strtolower($quoteRequest->getPostalCode()->getRegion()->getName())) {
             case 'basel':
@@ -596,6 +596,15 @@ class QuoteRequestManager
             $attachment = \Swift_Attachment::newInstance(file_get_contents($pdfFile), $pdfFilename, 'application/pdf');
 
             $translator = $this->container->get('translator');
+
+            /**
+             * Génération du Token de la quoteRequest s'il n'y en a pas
+             */
+            if (!$quoteRequest->getToken()) {
+                $token = $this->generateToken();
+                $quoteRequest->setToken($token);
+                $this->em->flush();
+            }
 
             $message = \Swift_Message::newInstance()
                 ->setSubject($translator->trans('Commercial.GeneratedQuoteEmail.Object',
@@ -808,7 +817,7 @@ class QuoteRequestManager
             $filenameContract = $pdfTmpFolder . '/' . md5(uniqid('', true)) . '.pdf';
 
 
-            $dateEndOffer = clone (($quoteRequest->getDateUpdate()) ?: $quoteRequest->getDateCreation());
+            $dateEndOffer = clone(($quoteRequest->getDateUpdate()) ?: $quoteRequest->getDateCreation());
             $dateEndOffer = $dateEndOffer->modify('+1 year');
             $dateEndOffer = $dateEndOffer->modify('-1 day');
 
@@ -837,6 +846,12 @@ class QuoteRequestManager
                     case 'luzern':
                         $templateDir .= 'luzern';
                         break;
+                }
+                /**
+                 * On modifie l'URI en fonction du tupe de quoteRequest
+                 */
+                if ($quoteRequest->getType() === 'PONCTUAL') {
+                    $templateDir .= '/ponctual';
                 }
             }
 

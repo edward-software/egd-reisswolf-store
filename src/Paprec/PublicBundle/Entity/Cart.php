@@ -73,6 +73,12 @@ class Cart
      */
     private $frequencyInterval;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="type", type="string", length=255, nullable=true)
+     */
+    private $type;
 
     /**
      * @var array|null
@@ -299,6 +305,24 @@ class Cart
     public function getFrequencyInterval()
     {
         return $this->frequencyInterval;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param string $type
+     * @return Cart
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+        return $this;
     }
 
     /**

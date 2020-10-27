@@ -366,11 +366,17 @@ class QuoteRequestController extends Controller
             $staff[$s] = $s;
         }
 
+        $destructionType = array();
+        foreach ($this->getParameter('paprec_quote_destruction_type') as $d) {
+            $destructionType[$d] = $d;
+        }
+
         $form = $this->createForm(QuoteRequestType::class, $quoteRequest, array(
             'status' => $status,
             'locales' => $locales,
             'access' => $access,
-            'staff' => $staff
+            'staff' => $staff,
+            'destructionType' => $destructionType
         ));
 
         $form->handleRequest($request);
@@ -437,6 +443,11 @@ class QuoteRequestController extends Controller
             $staff[$s] = $s;
         }
 
+        $destructionType = array();
+        foreach ($this->getParameter('paprec_quote_destruction_type') as $d) {
+            $destructionType[$d] = $d;
+        }
+
         $quoteRequest->setOverallDiscount($numberManager->denormalize($quoteRequest->getOverallDiscount()));
         $quoteRequest->setAnnualBudget($numberManager->denormalize($quoteRequest->getAnnualBudget()));
 
@@ -444,7 +455,8 @@ class QuoteRequestController extends Controller
             'status' => $status,
             'locales' => $locales,
             'access' => $access,
-            'staff' => $staff
+            'staff' => $staff,
+            'destructionType' => $destructionType
         ));
 
         $savedCommercial = $quoteRequest->getUserInCharge();
@@ -663,6 +675,10 @@ class QuoteRequestController extends Controller
                 $this->get('session')->getFlashBag()->add('error', 'generatedQuoteNotSent');
             }
         }
+
+        $quoteRequest->setQuoteStatus('PROCESSING');
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();
 
         return $this->redirectToRoute('paprec_commercial_quoteRequest_view', array(
             'id' => $quoteRequest->getId()

@@ -202,7 +202,13 @@
                                             {{ form_errors(form.comment) }}
                                         </div>
                                     </div>
-
+                                    <div class="form-group">
+                                        <label class="form-label">{{ 'Public.Contact.DestructionType'|trans }}</label>
+                                        <div class="form-content">
+                                            {{ form_widget(form.destructionType, {'attr': {'class': 'form-control'}}) }}
+                                            {{ form_errors(form.destructionType) }}
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-md-6 mt-4">
                                     <div class="form-group">

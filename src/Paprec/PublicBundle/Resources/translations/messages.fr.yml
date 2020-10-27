@@ -34,6 +34,26 @@ Public:
             SubMenu1: Interlocuteurs
             SubMenu2: Demander un devis
 
+    Type:
+        BreadcrumbTitle: Définition des besoins
+        BreadcrumbContent: Définition des besoins
+        Title: Les sociétés Reisswolf éliminent et détruisent les fichiers et supports de données confidentiels dans toute la Suisse selon des critères de sécurité uniformes.
+        Solution1:
+            Title: 'Solution 1 : PRESTATION REGULIÈRE'
+            Message1: 'Notre offre de prestations comprend notamment :'
+            Message2: 'Mise à disposition de conteneurs de collecte verrouillables'
+            Message3: 'Remplacement ou vidange sur place à la demande ou régulièrement'
+            Message4: 'Transport avec des véhicules spéciaux'
+            Message5: 'Destruction des données'
+            Message6: 'Nous offrons un service régulier qui peut être adapté avec souplesse en cours de contrat.'
+        Solution2:
+            Title: 'Solution 2 : DÉSARCHIVAGE PONCTUEL'
+            Message1: 'Notre offre de prestations comprend notamment :'
+            Message2: "Élimination des fichiers et des supports de données conformément à la période d'archivage et à la loi sur la protection des données"
+            Message3: 'Transport avec des véhicules spéciaux'
+            Message4: 'Destruction des donnéesn'
+            Message5: "Nous offrons également un service complet allant de l'emballage à la destruction finale (emballage, tri, destruction par broyage)."
+
     Catalog:
         BreadcrumbTitle: Offres de services
         Title: Sélectionnez svp les conteneurs souhaités pour créer votre demande de devis en 3 étapes.
@@ -69,6 +89,7 @@ Public:
         IsMultisite: Prestation multi-sites
         Access: Accès
         Staff: Effectif
+        DestructionType: Type de destruction
         Address: Adresse
         PostalCode: Code postal
         City: Ville

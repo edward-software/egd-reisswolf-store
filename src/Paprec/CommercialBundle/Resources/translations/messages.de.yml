@@ -62,6 +62,10 @@ Commercial:
             newUserInChargeWarned: Ein Mail wurde an den Aussendienst zugeschickt.
         Locale: Sprache
         Number: Angebotsnummer
+        Type:
+            Type: Art
+            Single: Einmalige Archivräumung
+            Regular: Regelmässige Dienstleistung
         SignatoryFirstName1: Vorname des Unterzeichners 1
         SignatoryLastName1: Nachname des Unterzeichners 1
         SignatoryTitle1: Titel des Unterzeichners 1
@@ -81,6 +85,13 @@ Commercial:
         2150: 21 – 50 Mitarbeiter
         51100: 51 – 100 Mitarbeiter
         100+: '> 100 Mitarbeiter'
+
+    DestructionType:
+        DOCUMENT_DESTRUCTION: Aktenvernichtung
+        ARCHIVE_CLEARING: Archivräumung
+        HARD_DRIVE_DESTRUCTION: Datenträgervernichtung
+        RADIOGRAPHIC_FILM_DESTRUCTION: Röntgenfilmvernichtung
+
 
     AccessList:
         stairs: Treppe

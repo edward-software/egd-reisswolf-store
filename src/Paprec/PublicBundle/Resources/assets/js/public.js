@@ -243,6 +243,10 @@ $(function () {
         $('.contact_access_input').val(this.value);
     });
 
+    $('#contact_destruction_type_select').change(function () {
+        $('.contact_destruction_type_input').val(this.value);
+    });
+
     /**
      * Ajout du token du captcha dans le formulaire
      */

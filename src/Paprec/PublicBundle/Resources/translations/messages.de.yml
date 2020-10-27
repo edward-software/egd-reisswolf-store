@@ -34,6 +34,26 @@ Public:
             SubMenu1: Ansprechpartner
             SubMenu2: Angebot anfordern
 
+    Type:
+        BreadcrumbTitle: Bedarf definieren
+        BreadcrumbContent: Bedarf definieren
+        Title: Die Reisswolf-Betriebe entsorgen und vernichten in allen Teilen der Schweiz vertrauliche Akten und Datenträger nach einheitlichen Sicherheitskriterien.
+        Solution1:
+            Title: 'Lösung 1: REGELMÄSSIGE DIENSTLEISTUNG'
+            Message1: 'Unser Dienstleistungspaket umfasst unter anderem:'
+            Message2: 'Bereitstellen von abschliessbaren Sammelbehältern'
+            Message3: 'Austausch oder Leerung vor Ort auf Abruf oder regelmässig'
+            Message4: 'Transport mit speziellen Fahrzeugen'
+            Message5: 'Vernichtung der Daten'
+            Message6: 'Wir bieten eine regelmässige Dienstleistung, die im Laufe des Vertrages flexibel angepasst werden kann.'
+        Solution2:
+            Title: 'Lösung 2: EINMALIGE ARCHIVRÄUMUNG'
+            Message1: 'Unser Dienstleistungspaket umfasst unter anderem:'
+            Message2: 'Entsorgung von Akten und Datenträger nach Archivierungsfrist und Datenschutzgesetz'
+            Message3: 'Transport mit speziellen Fahrzeugen'
+            Message4: 'Vernichtung der Daten'
+            Message5: 'Wir bieten auch eine Gesamtleistung an von der Räumung bis zu der endgültigen Vernichtung (Packung, Sortierung, Vernichtung durch Zerkleinerung).'
+
     Catalog:
         BreadcrumbTitle: Dienstleistungen
         Title: Wählen Sie bitte die gewünschten Behältern aus, um Ihre Angebotsanfrage in 3 Schritten zu erstellen.
@@ -69,6 +89,7 @@ Public:
         IsMultisite: Dienstleistungen in verschiedenen Standorten
         Access: Zugang
         Staff: Anzahl der Mitarbeiter
+        DestructionType: Vernichtungsart wählen
         Address: Strasse
         PostalCode: PLZ
         City: Ort

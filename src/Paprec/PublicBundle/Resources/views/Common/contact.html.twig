@@ -81,10 +81,20 @@
                         </div>
                         {{ form_widget(form.staff, {'attr': {'class': 'contact_staff_input'}}) }}
                         {{ form_widget(form.access, {'attr': {'class': 'contact_access_input'}}) }}
+                        {{ form_widget(form.destructionType, {'attr': {'class': 'contact_destruction_type_input'}}) }}
                     </div>
                     <div class="col-md-6">
-
-
+                        <div class="form-group">
+                            <label>{{ 'Public.Contact.DestructionType'| trans({}, "messages", locale) }}* :</label>
+                            <select id="contact_destruction_type_select" class="form-control">
+                                <option value="" selected disabled hidden></option>
+                                {% for opt in form.destructionType.vars.choices %}#}
+                                    <option value="{{ opt.value }}"
+                                            {% if form.staff.vars.data == opt.value %}selected{% endif %}>{{ opt.label|trans({}, "messages", locale) }}</option>
+                                {% endfor %}
+                            </select>
+                            {{ form_errors(form.destructionType) }}
+                        </div>
                         <div class="form-group">
                             <label>{{ 'Public.Contact.IsMultisite'| trans({}, "messages", locale) }}* :</label>
                             {{ form_widget(form.isMultisite, {'attr': {'class': 'form-check form-check-inline radio-form'}}) }}

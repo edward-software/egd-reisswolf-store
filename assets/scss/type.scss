@@ -1,0 +1,33 @@
+/***** Page séleciton du type de besoin REGULIER ou PONCTUAL ******/
+
+.type-container {
+  margin-bottom: 40px;
+}
+
+
+.type {
+  margin-bottom: 30px;
+  padding-right: 30px;
+
+  &__block {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #F2F2F2;
+    padding: 30px;
+    min-height: 350px !important;
+  }
+
+  &__button {
+    max-width: 175px;
+  }
+
+  ul, li {
+    list-style: disc !important;
+  }
+
+  li {
+    margin-left: 30px !important;
+  }
+
+}

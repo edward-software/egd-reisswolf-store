@@ -38,6 +38,10 @@ parameters:
         - elevator
         - ground
 
+    paprec_quote_type:
+        - REGULAR
+        - PONCTUAL
+
     paprec_quote_access_price:
         stairs: 20
         elevator: 10
@@ -50,3 +54,9 @@ parameters:
         - '2150'
         - '51100'
         - '100+'
+
+    paprec_quote_destruction_type:
+        - DOCUMENT_DESTRUCTION
+        - ARCHIVE_CLEARING
+        - HARD_DRIVE_DESTRUCTION
+        - RADIOGRAPHIC_FILM_DESTRUCTION

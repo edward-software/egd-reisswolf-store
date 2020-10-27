@@ -62,6 +62,10 @@ Commercial:
             newUserInChargeWarned: Un mail a été envoyé au nouveau commercial en charge
         Locale: Langue
         Number: Numéro offre
+        Type:
+            Type: Type
+            Regular: Service régulier
+            Single: Désarchivage unique
         SignatoryFirstName1: Prénom signataire 1
         SignatoryLastName1: Nom signataire 1
         SignatoryTitle1: Titre signataire 1
@@ -81,6 +85,12 @@ Commercial:
         2150: De 21 à 50 employés
         51100: De 51 à 100 employés
         100+: Plus de 100 employés
+
+    DestructionType:
+        DOCUMENT_DESTRUCTION: Destruction confidentielle de documents
+        ARCHIVE_CLEARING: Désarchivage
+        HARD_DRIVE_DESTRUCTION: Destrution de supports numériques
+        RADIOGRAPHIC_FILM_DESTRUCTION: Destruction des radiographies
 
     AccessList:
         stairs: Par escalier
