@@ -14,7 +14,7 @@
             font-family: Arial, sans-serif;
             font-weight: 500;
             font-size: 12px;
-            color: #333333;
+            color: #2c4491;
         }
 
         * {
@@ -25,7 +25,6 @@
         h1 {
             color: #2c4491;
             font-size: 20px;
-            text-transform: uppercase;
             font-weight: 900;
             margin: 0;
         }
@@ -43,6 +42,14 @@
 
         .bold {
             font-weight: bold;
+        }
+
+        .text-left {
+            text-align: left;
+        }
+
+        .text-right {
+            text-align: right;
         }
 
         .offer__container {
@@ -112,9 +119,11 @@
         .mb-20 {
             margin-bottom: 20px;
         }
+
         .mb-30 {
             margin-bottom: 30px;
         }
+
         .mb-40 {
             margin-bottom: 40px;
         }
@@ -157,11 +166,11 @@
         }
 
         .offer__ref-items > div:first-child {
-            /*width: 40%;*/
+            width: 40%;
         }
 
         .offer__ref-items > div:last-child {
-            /*width: 60%;*/
+            width: 60%;
             padding-right: 15px;
         }
 
@@ -182,7 +191,7 @@
             overflow: hidden;
             word-break: normal;
             text-align: center;
-            border: 1px solid #333333;
+            border: 1px solid #2c4491;
             border-right: 0px;
             border-bottom: 0px;
         }
@@ -193,7 +202,7 @@
         }
 
         table td {
-            padding: 12px 5px;
+            padding: 5px;
         }
 
         table span {
@@ -201,11 +210,11 @@
         }
 
         table tr:last-child > td {
-            border-bottom: 1px solid #333333;
+            border-bottom: 1px solid #2c4491;
         }
 
         table tr > td:last-child, table tr > th:last-child {
-            border-right: 1px solid #333333;
+            border-right: 1px solid #2c4491;
         }
 
         table .table-header td {
@@ -222,11 +231,11 @@
         }
 
         table .table-footer1 td:nth-child(n+5):nth-child(-n+7) {
-            border-bottom: 1px solid #333333;
+            border-bottom: 1px solid #2c4491;
         }
 
         table .table-footer1 td {
-            padding: 10px 0 5px 0;
+            padding: 2px 0;
         }
 
         table .table-footer2 td:nth-child(n+2):nth-child(-n+3) {
@@ -242,12 +251,13 @@
         }
 
         table .table-footer2 td {
-            padding: 0 0 10px 0;
+            padding: 0 0 2px 0;
         }
 
         table .empty {
-            height: 30px;
+            height: 15px;
         }
+
         table .empty td:last-child {
             border-left: 0 !important;
             border-right: 0 !important;
@@ -255,13 +265,14 @@
 
         .check {
             display: inline-block;
-            width: 15px;
-            height: 15px;
+            width: 10px;
+            height: 10px;
             vertical-align: middle;
             outline: 2px solid grey;
             margin-left: 5px;
             margin-bottom: 3px;
         }
+
         .check.active {
             border: 2px solid white;
             outline: 2px solid grey;
@@ -270,6 +281,30 @@
 
         .offer__signature > div {
             width: 48%;
+        }
+
+        /* simple-table */
+
+        table.simple-table tr:not(:first-child) td {
+            border-top: 0 !important;
+        }
+
+        table.simple-table td {
+            padding: 2px 5px;
+        }
+
+        table.simple-table tr td:first-child {
+            width: 250px;
+            padding-right: 30px;
+        }
+
+        table.simple-table tr td:nth-child(2) {
+            width: 150px;
+            border-left: 0;
+        }
+
+        table.simple-table tr td:nth-child(3) {
+            width: 100px;
         }
 
         /*footer*/
@@ -311,13 +346,13 @@
     <div class="offer__content">
 
         <div class="offer__ref">
-            <h1>Angebot</h1>
+            <h1>Angebot einmaliger Räumung</h1>
 
             <div class="flex space-between">
 
                 <div class="w50">
                     <div class="flex offer__ref-items">
-                        <div style="width: 40%;">
+                        <div>
                             <p class="bold">Ihre Anfrage vom :</p>
                         </div>
                         <div>
@@ -326,7 +361,7 @@
                     </div>
 
                     <div class="flex offer__ref-items">
-                        <div style="width: 40%;">
+                        <div>
                             <p class="bold">Ihre Referenz :</p>
                         </div>
                         <div>
@@ -335,7 +370,7 @@
                     </div>
 
                     <div class="flex offer__ref-items">
-                        <div style="width: 40%;">
+                        <div>
                             <p class="bold">Ihre Email-Adresse :</p>
                         </div>
                         <div>
@@ -344,7 +379,7 @@
                     </div>
 
                     <div class="flex offer__ref-items">
-                        <div style="width: 40%;">
+                        <div>
                             <p class="bold">Ihre Telefonnummer :</p>
                         </div>
                         <div>
@@ -356,7 +391,7 @@
 
                 <div class="w50">
                     <div class="flex offer__ref-items">
-                        <div style="width: 44%;">
+                        <div>
                             <p class="bold">Angebots-Datum :</p>
                         </div>
                         <div>
@@ -365,16 +400,16 @@
                     </div>
 
                     <div class="flex offer__ref-items">
-                        <div style="width: 44%;">
+                        <div>
                             <p class="bold">Unsere Referenz :</p>
                         </div>
                         <div>
-                            <p>Arminka&nbsp;Lezic</p>
+                            <p>Arminka Lezic</p>
                         </div>
                     </div>
 
                     <div class="flex offer__ref-items">
-                        <div style="width: 44%;">
+                        <div>
                             <p class="bold">Unsere Email-Adresse :</p>
                         </div>
                         <div>
@@ -387,11 +422,11 @@
                     </div>
 
                     <div class="flex offer__ref-items">
-                        <div style="width: 44%;">
-                            <p class="bold">Unsere Telefonnummer :</p>
+                        <div>
+                            <p class="bold"> Unsere Telefonnummer :</p>
                         </div>
                         <div>
-                            <p>041 448 38 66</p>
+                            <p>041 448 38 62</p>
                         </div>
                     </div>
                 </div>
@@ -401,7 +436,8 @@
         </div>
 
         <div class="offer__presta">
-            <p class="mb-20">Für Ihre Anfrage danken wir Ihnen bestens. Gerne bieten wir Ihnen unsere Dienstleistungen wie folgt an.</p>
+            <p class="mb-20">Für Ihre Anfrage einer einmaligen Räumung danken wir Ihnen bestens. Gerne bieten wir Ihnen
+                unsere Dienstleistungen wie folgt an.</p>
             <h2>Entsorgung und Vernichtung von Akten</h2>
 
             <table>
@@ -410,15 +446,8 @@
                     <th rowspan="2">Typ RW</th>
                     <th rowspan="2">Schloss</th>
                     <th>
-                        Programmierung<br>
-                        e.l.sy-Schloss<br>
-                        <span>einmalig/<br>
-                        pro Behälter</span>
-                    </th>
-                    <th>
                         Behältermiete<br>
-                        <span>pro Monat/<br>
-                        pro Behälter<br></span>
+                        <span>pro Monat /pro Behälter</span>
                     </th>
                     <th>
                         Transport<br>
@@ -429,24 +458,21 @@
                         Zertifikat
                     </th>
                     <th>
-                        Anzahl
-                        geplante<br>
-                        Behälter<br>
+                        Anzahl geplante<br>
+                        Behälter
                     </th>
                 </tr>
                 <tr class="table-header">
-                    <td>CHF / exkl.<br>MWST</td>
-                    <td>CHF / exkl.<br>MWST</td>
-                    <td>CHF / exkl.<br>MWST</td>
-                    <td>CHF / exkl.<br>MWST</td>
-                    <td>Stk</td>
+                    <td>CHF / exkl. MWST</td>
+                    <td>CHF / exkl. MWST</td>
+                    <td>CHF / exkl. MWST</td>
+                    <td>Stk.</td>
                 </tr>
 
                 {% for product in products %}
                     <tr>
                         <td class="bold">{{ product.capacity }}</td>
-                        <td class="bold">{{ product|productLabelTranslation(locale,'lockType') }}</td>
-                        <td class="bold">{{ tmpLockProg }}</td>
+                        <td>{{ product|productLabelTranslation(locale,'lockType') }} <br>oder<br>Schlüssel</td>
                         <td class="bold">
                             {% set val = 0 %}
                             {% if product.rentalUnitPrice == 0 %}
@@ -476,7 +502,7 @@
                             {% endif %}
                             {{ val|round|number_format(2, ',', ' ') }}
                         </td>
-                        <td>inkl.</td>
+                        <td>inklusive</td>
                         <td class="bold">
                             {% set quantity = 0 %}
                             {% for line in quoteRequest.quoteRequestLines %}
@@ -494,8 +520,9 @@
                 <tr class="table-footer1">
                     <td colspan="2" class="bold">Verlad ab Stockwerk</td>
                     <td>pro Behälter</td>
-                    <td class="bold">Aufzug :</td>
-                    <td class="bold" style="padding: 10px 0;">10.00 <span class="check {% if quoteRequest.access == 'elevator' %}active{% endif %}"></span> </td>
+                    <td class="bold">Aufzug</td>
+                    <td class="bold" style="padding: 4px 0;">10.00 <span
+                                class="check {% if quoteRequest.access == 'elevator' %}active{% endif %}"></span></td>
                     <td rowspan="2"></td>
                     <td rowspan="2"></td>
 
@@ -503,62 +530,94 @@
                 <tr class="table-footer2">
                     <td colspan="2"></td>
                     <td></td>
-                    <td class="bold">Treppe :</td>
-                    <td class="bold" style="padding: 10px 0;">20.00 <span class="check {% if quoteRequest.access == 'stairs' %}active{% endif %}"></span></td>
+                    <td class="bold">Treppe</td>
+                    <td class="bold" style="padding-top: 2px;">20.00 <span
+                                class="check {% if quoteRequest.access == 'stairs' %}active{% endif %}"></span></td>
                 </tr>
                 </tbody>
             </table>
 
+            <p class="mb-14">
+                Mieten werden keine berechnet, sofern die Behälter weniger als 15 Tage beim Kunden bleiben.
+            </p>
+            <p class="mb-14">
+                Für <b>Menge über 1 Tonne</b> werden die zu vernichtenden Akten nach Gewicht verrechnet. Dazu wird
+                eine Transportpauschale berechnet, sofern die Akten nicht vom Ihnen zugeführt werden können.
+            </p>
+
+            {# Table 2 #}
+            <table class="simple-table">
+                <tbody>
+                <tr>
+                    <td class="bold text-left">Chauffeur inkl. LKW</td>
+                    <td></td>
+                    <td class="bold text-right">160.00</td>
+                    <td>CHF pro Std. / exkl. MWST</td>
+                </tr>
+                <tr>
+                    <td class="bold text-left">Zusätzliche Reisswolfperson</td>
+                    <td>-bei Bedarf-</td>
+                    <td class="bold text-right">80.00</td>
+                    <td>CHF pro Std. / exkl. MWST</td>
+                </tr>
+                <tr>
+                    <td class="bold text-left">Papiervernichtung</td>
+                    <td></td>
+                    <td class="bold text-right">260.00</td>
+                    <td>CHF pro Tonne / exkl. MWST</td>
+                </tr>
+                </tbody>
+            </table>
 
             <p class="mb-14">
-                Ihre Sicherheitsbehälter werden gemäss Ihrem Wunsch abgeholt : {% if quoteRequest.frequency == 'ponctual' %}
-                    Auf Anfrage
-                {% elseif quoteRequest.frequency == 'regular' %}
-                    {{ quoteRequest.frequencyTimes }} mal / {{ ('Commercial.QuoteRequest.' ~ quoteRequest.frequencyInterval)|trans({}, 'messages', 'de') }}
-                {% endif %}
+                Die <b>Datenträger</b> werden pro Kilogramm oder Stück verrechnet.
             </p>
-            <p class="mb-14">
-                Gültigkeit des Angebots: 30 Tage ab Angebots-Datum.
-            </p>
-            <p class="mb-14">
-                Für weitere Informationen stehen wir gerne zur Verfügung. Über einen Auftrag würden wir uns sehr freuen.
-            </p>
-            <p class="mb-14" style="line-height: 20px;">
-                Wenn Sie unser Angebot annehmen, senden Sie uns bitte den unterstehenden Vertrag, unterschrieben, per Post zurück.
-            </p>
-            <p class="mb-14">Freundliche Grüsse,</p>
-            <h2 class="mb-20">Ihr REISSWOLF-Partner</h2>
 
-            <div class="flex offer__signature">
-               <div>
-                    <p>André Nadler</p>
-                    <p>Geschäftsführer</p>
-                </div>
-                <div>
-                    <p>Arminka Lezic</p>
-                    <p>Vertriebsberaterin</p>
-                </div>
-            </div>
+            {# Table 3 #}
+            <table class="simple-table">
+                <tbody>
+                <tr>
+                    <td class="text-left" style="padding-bottom: 12px;">Disketten, CDs, DVDs, Videobänder,
+                        Speicherkarten, Röntgenbilder
+                    </td>
+                    <td class="bold text-left" style="padding-bottom: 12px;">ohne grosse Metallteile</td>
+                    <td class="bold text-right">3.00</td>
+                    <td>CHF pro kg. / exkl. MWST</td>
+                </tr>
+                <tr>
+                    <td class="text-left">Festplatten, Bänder mit Metallplatte</td>
+                    <td class="bold text-left">mit grossen Metallteilen</td>
+                    <td class="bold text-right" style="padding-top: 0;">5.00</td>
+                    <td style="padding-top: 0;">CHF pro Stk. / exkl. MWST</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <p class="mb-14">
+                Die Sicherheitsbehälter bzw. Ware werden gemäss Ihrem Wunsch abgeholt: auf Abruf.
+            </p>
+            <p class="mb-14">
+                Gültigkeit des Angebots: 60 Tage ab Angebots-Datum.
+            </p>
         </div>
-
     </div>
 
-    <div class="offer__footer">
+    {# <div class="offer__footer">
         <div class="flex space-between">
             <div>
                 <p class="bold">REISSWOLF Aktenvernichtungs-AG</p>
-                <p>Zentralschweiz / italienische Schweiz</p>
+                <p>Romandie</p>
             </div>
             <div>
-                <p>Kantonsstrasse 5</p>
-                <p>CH-6033 Buchrain</p>
+                <p>Rue de la Bergère 26</p>
+                <p>CH-1242 Satigny</p>
             </div>
             <div>
-                <p>Tel.: 041 448 38 62</p>
-                <p>Mail: luzern@reisswolf.ch</p>
+                <p>Tel.: 022 552 62 62</p>
+                <p>Mail: geneve@reisswolf.ch</p>
             </div>
         </div>
-    </div>
+    </div> #}
 </div>
 
 </body>

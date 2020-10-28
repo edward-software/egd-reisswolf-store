@@ -34,6 +34,14 @@ class QuoteRequestType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('type', ChoiceType::class, array(
+                "choices" => $options['types'],
+                "choice_label" => function ($choiceValue, $key, $value) {
+                    return 'Commercial.QuoteRequest.Type.' . ucfirst(strtolower($choiceValue));
+                },
+                'required' => true,
+                'expanded' => true
+            ))
             ->add('locale', ChoiceType::class, array(
                 'choices' => $options['locales']
             ))
@@ -202,6 +210,7 @@ class QuoteRequestType extends AbstractType
             'locales' => null,
             'staff' => null,
             'access' => null,
+            'types' => null,
             'destructionType' => null,
             'cantons' => null,
         ));

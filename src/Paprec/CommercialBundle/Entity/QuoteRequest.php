@@ -260,6 +260,7 @@ class QuoteRequest
      * @var string
      *
      * @ORM\Column(name="type", type="string", length=255, nullable=true)
+     * @Assert\NotBlank()
      */
     private $type;
 

@@ -362,6 +362,11 @@ class QuoteRequestController extends Controller
             $locales[$language] = strtolower($language);
         }
 
+        $types = array();
+        foreach ($this->getParameter('paprec_quote_type') as $t) {
+            $types[$t] = $t;
+        }
+
         $access = array();
         foreach ($this->getParameter('paprec_quote_access') as $a) {
             $access[$a] = $a;
@@ -387,6 +392,7 @@ class QuoteRequestController extends Controller
             'locales' => $locales,
             'access' => $access,
             'staff' => $staff,
+            'types' => $types,
             'destructionType' => $destructionType,
             'cantons' => $cantons
         ));
@@ -450,6 +456,11 @@ class QuoteRequestController extends Controller
             $access[$a] = $a;
         }
 
+        $types = array();
+        foreach ($this->getParameter('paprec_quote_type') as $t) {
+            $types[$t] = $t;
+        }
+
         $staff = array();
         foreach ($this->getParameter('paprec_quote_staff') as $s) {
             $staff[$s] = $s;
@@ -473,6 +484,7 @@ class QuoteRequestController extends Controller
             'locales' => $locales,
             'access' => $access,
             'staff' => $staff,
+            'types' => $types,
             'destructionType' => $destructionType,
             'cantons' => $cantons
         ));

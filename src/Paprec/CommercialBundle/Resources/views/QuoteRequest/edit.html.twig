@@ -40,6 +40,19 @@
                             <div class="card-body row">
                                 <div class="col-md-6">
                                     <div class="form-group">
+                                        <label class="form-label">{{ 'Commercial.QuoteRequest.Type.Type'|trans }}
+                                            *</label>
+                                        <div class="form-content">
+                                            {% for radio in form.type.children %}
+                                                <div class="form__check ml-4">
+                                                    {{ form_widget(radio) }}
+                                                    {{ form_label(radio) }}
+                                                </div>
+                                            {% endfor %}
+                                            {{ form_errors(form.type) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
                                         <label class="form-label">{{ 'Commercial.QuoteRequest.Locale'|trans }}</label>
                                         <div class="form-content">
                                             {{ form_widget(form.locale, {'attr': {'class': 'form-control'}}) }}
