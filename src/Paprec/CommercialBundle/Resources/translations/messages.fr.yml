@@ -89,7 +89,7 @@ Commercial:
     DestructionType:
         DOCUMENT_DESTRUCTION: Destruction confidentielle de documents
         ARCHIVE_CLEARING: Désarchivage
-        HARD_DRIVE_DESTRUCTION: Destrution de supports numériques
+        HARD_DRIVE_DESTRUCTION: Destruction de supports numériques
         RADIOGRAPHIC_FILM_DESTRUCTION: Destruction des radiographies
 
     Cantons:

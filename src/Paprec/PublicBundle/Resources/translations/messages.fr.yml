@@ -51,7 +51,7 @@ Public:
             Message1: 'Notre offre de prestations comprend notamment :'
             Message2: "Élimination des fichiers et des supports de données conformément à la période d'archivage et à la loi sur la protection des données"
             Message3: 'Transport avec des véhicules spéciaux'
-            Message4: 'Destruction des donnéesn'
+            Message4: 'Destruction des données'
             Message5: "Nous offrons également un service complet allant de l'emballage à la destruction finale (emballage, tri, destruction par broyage)."
 
     Catalog:
