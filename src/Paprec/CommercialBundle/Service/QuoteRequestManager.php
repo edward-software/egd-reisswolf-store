@@ -830,20 +830,26 @@ class QuoteRequestManager
             $snappy->setOption('dpi', 72);
 //            $snappy->setOption('footer-html', $this->container->get('templating')->render('@PaprecCommercial/QuoteRequest/PDF/fr/_footer.html.twig'));
 
+            $region = '';
+
             if ($quoteRequest->getPostalCode() && $quoteRequest->getPostalCode()->getRegion()) {
                 $templateDir = '@PaprecCommercial/QuoteRequest/PDF/';
                 switch (strtolower($quoteRequest->getPostalCode()->getRegion()->getName())) {
                     case 'basel':
+                        $region = 'basel';
                         $templateDir .= 'basel';
                         break;
                     case 'geneve':
+                        $region = 'geneve';
                         $templateDir .= 'geneve';
                         break;
                     case 'zurich':
                     case 'zuerich':
-                        $templateDir .= 'zuerich';
+                    $region = 'zuerich';
+                    $templateDir .= 'zuerich';
                         break;
                     case 'luzern':
+                        $region = 'luzern';
                         $templateDir .= 'luzern';
                         break;
                 }
@@ -890,13 +896,16 @@ class QuoteRequestManager
             $pdfArray = array();
             $pdfArray[] = $filenameOffer;
 
+            /**
+             * Pour un désarchivage ponctuel
+             */
             if ($quoteRequest->getType() === 'PONCTUAL') {
                 $ponctualFileNames = $this->container->getParameter('paprec_commercial.ponctual_file_names');
                 $ponctualFileDirectory = $this->container->getParameter('paprec_commercial.ponctual_files_directory');
 
                 if (is_array($ponctualFileNames) && count($ponctualFileNames)) {
                     foreach ($ponctualFileNames as $ponctualFileName) {
-                        $noticeFilename = $ponctualFileDirectory . '/' . $ponctualFileName .'_' . $locale . '.pdf';
+                        $noticeFilename = $ponctualFileDirectory . '/' . $ponctualFileName .'_' . $region . '.pdf';
                         if (file_exists($noticeFilename)) {
                             $pdfArray[] = $noticeFilename;
                         }
