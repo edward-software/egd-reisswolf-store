@@ -905,7 +905,12 @@ class QuoteRequestManager
 
                 if (is_array($ponctualFileNames) && count($ponctualFileNames)) {
                     foreach ($ponctualFileNames as $ponctualFileName) {
+                        if ($ponctualFileName === 'offer_page2') {
                         $noticeFilename = $ponctualFileDirectory . '/' . $ponctualFileName .'_' . $region . '.pdf';
+                        } else {
+                            $noticeFilename = $ponctualFileDirectory . '/' . $ponctualFileName .'_' . $locale . '.pdf';
+
+                        }
                         if (file_exists($noticeFilename)) {
                             $pdfArray[] = $noticeFilename;
                         }
