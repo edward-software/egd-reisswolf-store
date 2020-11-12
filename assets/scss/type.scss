@@ -11,7 +11,6 @@
   &__block {
     height: 100%;
     &__body {
-      display: flex;
       flex-direction: column;
       justify-content: space-between;
       background-color: #F2F2F2;
@@ -39,5 +38,9 @@
 
   .flex-1 {
     flex: 1;
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
   }
 }
