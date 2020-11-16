@@ -56,7 +56,7 @@ Public:
 
     Catalog:
         BreadcrumbTitle: Offres de services
-        Title: Sélectionnez svp les conteneurs souhaités pour créer votre demande de devis en 3 étapes.
+        Title: Sélectionnez les conteneurs de votre devis en 3 étapes
         Quantity: Quantité
         AddToQuote: Ajouter au devis
         NextStep: Étape suivante
