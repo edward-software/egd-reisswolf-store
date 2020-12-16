@@ -38,7 +38,7 @@ class SubscriptionController extends Controller
     /**
      * Page de sélection du type de besoin: Régulier ou archivage unique
      *
-     * @Route("/{locale}/step0", name="paprec_public_type_index")
+     * @Route("/{locale}/type", name="paprec_public_type_index")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
@@ -55,7 +55,7 @@ class SubscriptionController extends Controller
      * - Regular => redirige vers la page Catalog
      * - Single => redirige vers la page Contact
      *
-     * @Route("/{locale}/defineType/{type}", name="paprec_public_define_type")
+     * @Route("/{locale}/type/{type}", name="paprec_public_define_type")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
@@ -65,13 +65,21 @@ class SubscriptionController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         try {
+            $type = strtoupper($type);
             $cart = $cartManager->create(90);
             $em->persist($cart);
             $cart->setType($type);
             $em->flush();
 
             if ($type === 'PONCTUAL') {
-                return $this->redirectToRoute('paprec_public_contact_index', array(
+                return $this->redirectToRoute('paprec_public_contact_ponctual_index', array(
+                    'locale' => $locale,
+                    'cartUuid' => $cart->getId()
+                ));
+            }
+
+            if ($type === 'INFO') {
+                return $this->redirectToRoute('paprec_public_contact_info_index', array(
                     'locale' => $locale,
                     'cartUuid' => $cart->getId()
                 ));
@@ -89,7 +97,7 @@ class SubscriptionController extends Controller
 
 
     /**
-     * @Route("/{locale}/step1/{cartUuid}", defaults={"cartUuid"=null}, name="paprec_public_catalog_index")
+     * @Route("/{locale}/regular/catalog/{cartUuid}", defaults={"cartUuid"=null}, name="paprec_public_catalog_index")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      * @throws \Exception
@@ -129,6 +137,9 @@ class SubscriptionController extends Controller
 
     /**
      * @Route("/{locale}/step2/{cartUuid}",  name="paprec_public_contact_index")
+     * @Route("/{locale}/info/contact/{cartUuid}",  name="paprec_public_contact_info_index")
+     * @Route("/{locale}/regular/contact/{cartUuid}",  name="paprec_public_contact_regular_index")
+     * @Route("/{locale}/ponctual/contact/{cartUuid}",  name="paprec_public_contact_ponctual_index")
      * @param Request $request
      * @param $locale
      * @param $cartUuid
@@ -290,7 +301,7 @@ class SubscriptionController extends Controller
     }
 
     /**
-     * @Route("/{locale}/step3/{cartUuid}/{quoteRequestId}", name="paprec_public_confirm_index")
+     * @Route("/{locale}/confirm/{cartUuid}/{quoteRequestId}", name="paprec_public_confirm_index")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      * @throws \Exception

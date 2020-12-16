@@ -41,6 +41,7 @@ parameters:
     paprec_quote_type:
         - REGULAR
         - PONCTUAL
+        - INFO
 
     paprec_quote_access_price:
         stairs: 20
