@@ -137,7 +137,7 @@
                 "columns": [
                     {"data": "id"},
                     {"data": "reference"},
-                    {"data": "type"},
+                    {"data": "type", "class": "col-type"},
                     {"data": "businessName"},
                     {"data": "isMultisite"},
                     {"data": "totalAmount"},
@@ -147,8 +147,7 @@
                     {"data": "id", "width": "10%", "bSortable": false}
                 ],
                 "order": [
-                    [5, "ASC"],
-                    [6, "ASC"],
+                    [0, "DESC"]
                 ],
                 columnDefs: [
                     {"width": "250px", "targets": 1},
@@ -165,6 +164,9 @@
 
                     $(nRow).find(':last-child').html('<a href="' + viewUrl + '" data-toggle="tooltip" title="Voir" class="btn btn-sm btn-primary btn-sm"><i class="fa fa-xs fa-eye"></i></a> <a href="' + editUrl + '" data-toggle="tooltip" title="Editer" class="btn btn-sm btn-warning btn-sm"><i class="fa fa-xs fa-edit"></i></a>');
 
+                    if (aData.isInfo) {
+                        $(nRow).find('.col-type').css('color', 'red');
+                    }
                 },
             });
 

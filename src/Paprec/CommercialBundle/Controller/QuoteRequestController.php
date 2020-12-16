@@ -103,6 +103,8 @@ class QuoteRequestController extends Controller
 
         $queryBuilder->select(array('q'))
             ->from('PaprecCommercialBundle:QuoteRequest', 'q')
+            ->leftJoin('q.postalCode', 'pC')
+            ->leftJoin('pC.region', 'r')
             ->where('q.deleted IS NULL');
 
         /**
@@ -127,7 +129,9 @@ class QuoteRequestController extends Controller
                     $queryBuilder->expr()->like('q.businessName', '?1'),
                     $queryBuilder->expr()->like('q.totalAmount', '?1'),
                     $queryBuilder->expr()->like('q.quoteStatus', '?1'),
-                    $queryBuilder->expr()->like('q.dateCreation', '?1')
+                    $queryBuilder->expr()->like('q.dateCreation', '?1'),
+                    $queryBuilder->expr()->like('pC.code', '?1'),
+                    $queryBuilder->expr()->like('r.name', '?1')
                 ))->setParameter(1, '%' . $search['value'] . '%');
             }
         }
@@ -139,6 +143,7 @@ class QuoteRequestController extends Controller
         foreach ($datatable['data'] as $data) {
             $line = $data;
             $line['type'] = $data['type'] ? $this->get('translator')->trans('Commercial.QuoteRequest.Type.' . ucfirst(strtolower( $line['type']))) : '';
+            $line['isInfo'] = ($data['type'] && $data['type'] === 'INFO');
             $line['isMultisite'] = $data['isMultisite'] ? $this->get('translator')->trans('General.1') : $this->get('translator')->trans('General.0');
             $line['totalAmount'] = $numberManager->formatAmount($data['totalAmount'], 'CHF', $request->getLocale());
             $line['quoteStatus'] = $this->container->get('translator')->trans("Commercial.QuoteStatusList." . $data['quoteStatus']);
