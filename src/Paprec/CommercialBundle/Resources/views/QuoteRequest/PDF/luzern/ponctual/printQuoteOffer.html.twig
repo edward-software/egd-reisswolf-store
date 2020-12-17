@@ -472,7 +472,7 @@
                             {% set val = 0 %}
                             {% if product.rentalUnitPrice == 0 %}
                             {% else %}
-                                {% set val = (((quoteRequest.postalCode.rentalRate / 1000000000000000) + (product.rentalUnitPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000)) %}
+                                {% set val = (((quoteRequest.postalCode.rentalRate / 1000000000000000) + (product.rentalUnitPrice / 100))) %}
                             {% endif %}
 
                             {{ val|round|number_format(2, ',', ' ') }}

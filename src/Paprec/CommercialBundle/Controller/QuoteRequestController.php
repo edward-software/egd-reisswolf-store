@@ -105,6 +105,7 @@ class QuoteRequestController extends Controller
             ->from('PaprecCommercialBundle:QuoteRequest', 'q')
             ->leftJoin('q.postalCode', 'pC')
             ->leftJoin('pC.region', 'r')
+            ->leftJoin('pC.userInCharge', 'u')
             ->where('q.deleted IS NULL');
 
         /**
@@ -131,7 +132,9 @@ class QuoteRequestController extends Controller
                     $queryBuilder->expr()->like('q.quoteStatus', '?1'),
                     $queryBuilder->expr()->like('q.dateCreation', '?1'),
                     $queryBuilder->expr()->like('pC.code', '?1'),
-                    $queryBuilder->expr()->like('r.name', '?1')
+                    $queryBuilder->expr()->like('r.name', '?1'),
+                    $queryBuilder->expr()->like('u.username', '?1'),
+                    $queryBuilder->expr()->like('u.lastName', '?1')
                 ))->setParameter(1, '%' . $search['value'] . '%');
             }
         }

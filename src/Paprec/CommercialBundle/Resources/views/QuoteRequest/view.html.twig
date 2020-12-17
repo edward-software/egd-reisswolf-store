@@ -389,7 +389,7 @@
                                             {% if quoteRequestLine.rentalUnitPrice == 0 %}
                                                 0
                                             {% else %}
-                                                {{ (((quoteRequestLine.rentalRate / 1000000000000000) + (quoteRequestLine.rentalUnitPrice / 100)) * (1 + quoteRequest.overallDiscount / 10000))|round }}
+                                                {{ (((quoteRequestLine.rentalRate / 1000000000000000) + (quoteRequestLine.rentalUnitPrice / 100)))|round }}
                                             {% endif %}
                                         </td>
                                         <td>
