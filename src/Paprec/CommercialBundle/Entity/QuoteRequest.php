@@ -203,6 +203,7 @@ class QuoteRequest
      * @var string
      *
      * @ORM\Column(name="quoteStatus", type="string", length=255)
+     * @Assert\NotBlank(groups={"status"})
      */
     private $quoteStatus;
 

@@ -8,6 +8,7 @@ use Paprec\CommercialBundle\Entity\QuoteRequest;
 use Paprec\CommercialBundle\Entity\QuoteRequestLine;
 use Paprec\CommercialBundle\Form\QuoteRequestLineAddType;
 use Paprec\CommercialBundle\Form\QuoteRequestLineEditType;
+use Paprec\CommercialBundle\Form\QuoteRequestStatusType;
 use Paprec\CommercialBundle\Form\QuoteRequestType;
 use PHPExcel_Style_Alignment;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -145,7 +146,7 @@ class QuoteRequestController extends Controller
         $tmp = array();
         foreach ($datatable['data'] as $data) {
             $line = $data;
-            $line['type'] = $data['type'] ? $this->get('translator')->trans('Commercial.QuoteRequest.Type.' . ucfirst(strtolower( $line['type']))) : '';
+            $line['type'] = $data['type'] ? $this->get('translator')->trans('Commercial.QuoteRequest.Type.' . ucfirst(strtolower($line['type']))) : '';
             $line['isInfo'] = ($data['type'] && $data['type'] === 'INFO');
             $line['isMultisite'] = $data['isMultisite'] ? $this->get('translator')->trans('General.1') : $this->get('translator')->trans('General.0');
             $line['totalAmount'] = $numberManager->formatAmount($data['totalAmount'], 'CHF', $request->getLocale());
@@ -341,9 +342,19 @@ class QuoteRequestController extends Controller
 
         $tmpLockProg = $this->getParameter('tmp_lock_prog');
 
+        $status = array();
+        foreach ($this->getParameter('paprec_quote_status') as $s) {
+            $status[$s] = $s;
+        }
+
+        $formEditStatus = $this->createForm(QuoteRequestStatusType::class, $quoteRequest, array(
+            'status' => $status
+        ));
+
         return $this->render('PaprecCommercialBundle:QuoteRequest:view.html.twig', array(
             'quoteRequest' => $quoteRequest,
-            'tmpLockProg' => $tmpLockProg
+            'tmpLockProg' => $tmpLockProg,
+            'formEditStatus' => $formEditStatus->createView()
         ));
     }
 
@@ -520,7 +531,7 @@ class QuoteRequestController extends Controller
              * Si le commercial en charge a changé, alors on envoie un mail au nouveau commercial
              */
             if ($quoteRequest->getUserInCharge() && ((!$savedCommercial && $quoteRequest->getUserInCharge())
-                || ($savedCommercial && $savedCommercial->getId() !== $quoteRequest->getUserInCharge()->getId()))) {
+                    || ($savedCommercial && $savedCommercial->getId() !== $quoteRequest->getUserInCharge()->getId()))) {
                 $quoteRequestManager->sendNewRequestEmail($quoteRequest);
                 $this->get('session')->getFlashBag()->add('success', 'newUserInChargeWarned');
             }
@@ -538,6 +549,48 @@ class QuoteRequestController extends Controller
         return $this->render('PaprecCommercialBundle:QuoteRequest:edit.html.twig', array(
             'form' => $form->createView(),
             'quoteRequest' => $quoteRequest
+        ));
+    }
+
+    /**
+     * @Route("/quoteRequest/edit_status/{id}", name="paprec_commercial_quoteRequest_edit_status")
+     * @Security("has_role('ROLE_COMMERCIAL') or (has_role('ROLE_COMMERCIAL_DIVISION') and 'DI' in user.getDivisions())")
+     * @throws \Doctrine\ORM\EntityNotFoundException
+     * @throws \Exception
+     */
+    public function editStatusAction(Request $request, QuoteRequest $quoteRequest)
+    {
+
+        $tmpLockProg = $this->getParameter('tmp_lock_prog');
+
+        $status = array();
+        foreach ($this->getParameter('paprec_quote_status') as $s) {
+            $status[$s] = $s;
+        }
+
+        $formEditStatus = $this->createForm(QuoteRequestStatusType::class, $quoteRequest, array(
+            'status' => $status
+        ));
+
+        $em = $this->getDoctrine()->getManager();
+
+        $formEditStatus->handleRequest($request);
+
+        if ($formEditStatus->isSubmitted() &&$formEditStatus->isValid()) {
+
+            $quoteRequest->setDateUpdate(new \DateTime());
+            $quoteRequest->setQuoteStatus($formEditStatus->getData()->getQuoteStatus());
+            $em->flush();
+
+            return $this->redirectToRoute('paprec_commercial_quoteRequest_view', array(
+                'id' => $quoteRequest->getId()
+            ));
+        }
+
+        return $this->render('PaprecCommercialBundle:QuoteRequest:view.html.twig', array(
+            'quoteRequest' => $quoteRequest,
+            'tmpLockProg' => $tmpLockProg,
+            'formEditStatus' => $formEditStatus->createView()
         ));
     }
 
