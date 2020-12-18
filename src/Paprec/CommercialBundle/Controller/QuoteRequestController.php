@@ -94,7 +94,7 @@ class QuoteRequestController extends Controller
         );
         $cols['userInCharge'] = array(
             'label' => 'userInCharge',
-            'id' => 'q.userInCharge',
+            'id' => 'u.email',
             'method' => array('getUserInCharge', 'getFullName')
         );
 
