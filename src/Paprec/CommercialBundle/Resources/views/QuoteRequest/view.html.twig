@@ -136,8 +136,10 @@
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.Email'|trans }}</label>
-                                        <label class="col-form-label">
-                                            {{ quoteRequest.email }}
+                                        <label class="col-form-label flex" onclick="copyEmailToClipboard()">
+                                            {{ quoteRequest.email }} <i class="fas fa-copy"></i>
+                                            <input type="text" value="{{ quoteRequest.email }}" id="emailInput"
+                                                   style="visibility: hidden; opacity: 0; width: 0; height: 0">
                                         </label>
                                     </div>
                                     <div class="form-group row">
@@ -575,5 +577,20 @@
             $('#paprec_catalogbundle_quote_request_status_quoteStatus').on('change', function () {
                 $('#formEditStatus').submit();
             });
+
+            function copyEmailToClipboard() {
+                /* Get the text field */
+                var copyText = document.getElementById("emailInput");
+
+                /* Select the text field */
+                copyText.select();
+                copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+                /* Copy the text inside the text field */
+                document.execCommand("copy");
+
+                /* Alert the copied text */
+                alert("Copied the text: " + copyText.value);
+            }
         </script>
     {% endblock %}
