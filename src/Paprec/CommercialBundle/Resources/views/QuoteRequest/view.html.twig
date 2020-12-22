@@ -35,12 +35,16 @@
                     <div class="float-right">
                         {% if quoteRequest.postalCode %}
                             <a id="downloadGeneratedQuoteButton"
-                               href="{{ path("paprec_commercial_quote_request_download", {id: quoteRequest.id}) }}"
-                               class="btn btn-sm btn-secondary"><i
+                                    {% if quoteRequest.type == 'PONCTUAL' or quoteRequest.type == 'REGULAR' %}
+                                        href="{{ path("paprec_commercial_quote_request_download", {id: quoteRequest.id}) }}"
+                                        {% else %}
+                                        href="javascript:void(0);"
+                                    {% endif %}
+                               class="btn btn-sm btn-secondary {% if  quoteRequest.type == 'INFO' %} btn-disabled{% endif %}"><i
                                         class="fa fa-xs fa-download"></i> {{ 'Commercial.QuoteRequest.Download-quote'|trans }}
                             </a>
                             <a id="sendGeneratedQuoteButton" href="javascript:void(0);"
-                               class="btn btn-sm btn-success"><i
+                               class="btn btn-sm btn-success {% if  quoteRequest.type == 'INFO'%} btn-disabled{% endif %}"><i
                                         class="fa fa-xs fa-envelope"></i> {{ 'Commercial.QuoteRequest.Send-quote'|trans }}
                             </a>
                         {% endif %}
@@ -90,9 +94,9 @@
                                         </label>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.Number'|trans }}</label>
+                                        <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.Reference'|trans }}</label>
                                         <label class="col-form-label">
-                                            {{ quoteRequest.number }}
+                                            {{ quoteRequest.reference }}
                                         </label>
                                     </div>
 
@@ -136,10 +140,8 @@
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-md-4 col-form-label">{{ 'Commercial.QuoteRequest.Email'|trans }}</label>
-                                        <label class="col-form-label flex" onclick="copyEmailToClipboard()">
-                                            {{ quoteRequest.email }} <i class="fas fa-copy"></i>
-                                            <input type="text" value="{{ quoteRequest.email }}" id="emailInput"
-                                                   style="visibility: hidden; opacity: 0; width: 0; height: 0">
+                                        <label class="col-form-label flex">
+                                            <a href="mailto:{{ quoteRequest.email }}:">{{ quoteRequest.email }}</a>
                                         </label>
                                     </div>
                                     <div class="form-group row">
@@ -539,19 +541,22 @@
                 });
 
                 $('#sendGeneratedQuoteButton').on('click', function () {
-                    var url = "{{ path("paprec_commercial_quoteRequest_sendGeneratedQuote", {id: quoteRequest.id}) }}";
+                    if (!$(this).hasClass('btn-disabled')) {
 
-                    Swal.fire({
-                        title: "{{ 'General.Confirm'|trans }}",
-                        text: "{{ 'Commercial.QuoteRequest.Confirm-send-quote'|trans }}",
-                        showCancelButton: true,
-                        confirmButtonText: "{{ 'General.Yes'|trans }}",
-                        cancelButtonText: "{{ 'General.No'|trans }}"
-                    }).then(function (result) {
-                        if (result.value) {
-                            $(location).attr('href', url);
-                        }
-                    });
+                        var url = "{{ path("paprec_commercial_quoteRequest_sendGeneratedQuote", {id: quoteRequest.id}) }}";
+
+                        Swal.fire({
+                            title: "{{ 'General.Confirm'|trans }}",
+                            text: "{{ 'Commercial.QuoteRequest.Confirm-send-quote'|trans }}",
+                            showCancelButton: true,
+                            confirmButtonText: "{{ 'General.Yes'|trans }}",
+                            cancelButtonText: "{{ 'General.No'|trans }}"
+                        }).then(function (result) {
+                            if (result.value) {
+                                $(location).attr('href', url);
+                            }
+                        });
+                    }
                 });
 
                 $('#sendGeneratedContractButton').on('click', function () {

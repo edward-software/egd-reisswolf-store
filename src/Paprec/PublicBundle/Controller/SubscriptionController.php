@@ -564,4 +564,21 @@ class SubscriptionController extends Controller
             'tmpLockProg' => $this->getParameter('tmp_lock_prog')
         ));
     }
+
+    /**
+     * @Route("/{locale}/contract/{quoteId}", name="paprec_public_contract_show")
+     */
+    public function showContract(Request $request, $quoteId, $locale)
+    {
+        $quoteRequestManager = $this->get('paprec_commercial.quote_request_manager');
+        $quoteRequest = $quoteRequestManager->get($quoteId);
+        $productManager = $this->container->get('paprec_catalog.product_manager');
+        $products = $productManager->getAvailableProducts();
+        return $this->render('@PaprecCommercial/QuoteRequest/PDF/zuerich/printQuoteContract.html.twig', array(
+            'quoteRequest' => $quoteRequest,
+            'date' => new \DateTime(),
+            'dateEndOffer' => new \DateTime(),
+            'products' => $products
+        ));
+    }
 }
