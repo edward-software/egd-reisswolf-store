@@ -547,38 +547,38 @@ class SubscriptionController extends Controller
         }
     }
 
-    /**
-     * @Route("/{locale}/offer/{quoteId}", name="paprec_public_offer_show")
-     */
-    public function showOffer(Request $request, $quoteId, $locale)
-    {
-        $quoteRequestManager = $this->get('paprec_commercial.quote_request_manager');
-        $quoteRequest = $quoteRequestManager->get($quoteId);
-        $productManager = $this->container->get('paprec_catalog.product_manager');
-        $products = $productManager->getAvailableProducts();
-        return $this->render('@PaprecCommercial/QuoteRequest/PDF/geneve/ponctual/printQuoteOffer.html.twig', array(
-            'quoteRequest' => $quoteRequest,
-            'products' => $products,
-            'date' => new \DateTime(),
-            'locale' => $locale,
-            'tmpLockProg' => $this->getParameter('tmp_lock_prog')
-        ));
-    }
-
-    /**
-     * @Route("/{locale}/contract/{quoteId}", name="paprec_public_contract_show")
-     */
-    public function showContract(Request $request, $quoteId, $locale)
-    {
-        $quoteRequestManager = $this->get('paprec_commercial.quote_request_manager');
-        $quoteRequest = $quoteRequestManager->get($quoteId);
-        $productManager = $this->container->get('paprec_catalog.product_manager');
-        $products = $productManager->getAvailableProducts();
-        return $this->render('@PaprecCommercial/QuoteRequest/PDF/zuerich/printQuoteContract.html.twig', array(
-            'quoteRequest' => $quoteRequest,
-            'date' => new \DateTime(),
-            'dateEndOffer' => new \DateTime(),
-            'products' => $products
-        ));
-    }
+//    /**
+//     * @Route("/{locale}/offer/{quoteId}", name="paprec_public_offer_show")
+//     */
+//    public function showOffer(Request $request, $quoteId, $locale)
+//    {
+//        $quoteRequestManager = $this->get('paprec_commercial.quote_request_manager');
+//        $quoteRequest = $quoteRequestManager->get($quoteId);
+//        $productManager = $this->container->get('paprec_catalog.product_manager');
+//        $products = $productManager->getAvailableProducts();
+//        return $this->render('@PaprecCommercial/QuoteRequest/PDF/geneve/ponctual/printQuoteOffer.html.twig', array(
+//            'quoteRequest' => $quoteRequest,
+//            'products' => $products,
+//            'date' => new \DateTime(),
+//            'locale' => $locale,
+//            'tmpLockProg' => $this->getParameter('tmp_lock_prog')
+//        ));
+//    }
+//
+//    /**
+//     * @Route("/{locale}/contract/{quoteId}", name="paprec_public_contract_show")
+//     */
+//    public function showContract(Request $request, $quoteId, $locale)
+//    {
+//        $quoteRequestManager = $this->get('paprec_commercial.quote_request_manager');
+//        $quoteRequest = $quoteRequestManager->get($quoteId);
+//        $productManager = $this->container->get('paprec_catalog.product_manager');
+//        $products = $productManager->getAvailableProducts();
+//        return $this->render('@PaprecCommercial/QuoteRequest/PDF/zuerich/printQuoteContract.html.twig', array(
+//            'quoteRequest' => $quoteRequest,
+//            'date' => new \DateTime(),
+//            'dateEndOffer' => new \DateTime(),
+//            'products' => $products
+//        ));
+//    }
 }
