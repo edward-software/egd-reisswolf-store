@@ -76,7 +76,8 @@ Public:
 
     Contact:
         BreadcrumbTitle: Coordonnées du client
-        Title: Entrez vos coordonnées pour être contacté et recevoir votre devis.
+        BreadcrumbContent: Coordonnées du client
+        Title: Entrez vos coordonnées pour être contacté ou recevoir les informations/devis demandés.
         BusinessName: Nom société
         Civility: Civilité
         LastName: Nom
@@ -95,7 +96,6 @@ Public:
         City: Ville
         Comment: Message
         SendRequest: Envoyer la demande
-        BreadcrumbContent: Coordonnées du client
 
     Signatory:
         BreadcrumbTitle:            Définition des signataires

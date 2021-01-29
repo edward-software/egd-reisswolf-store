@@ -1,6 +1,6 @@
 Public:
 
-    Bundle-name:                    Gestion devis
+    Bundle-name: Gestion devis
 
     Navbar:
         Home: Home
@@ -75,8 +75,9 @@ Public:
         Other-Needs-Info: Klicken Sie auf ein Produkt, um es auszuwählen
 
     Contact:
-        BreadcrumbTitle: Angebot anfordern
-        Title: Geben Sie Ihre Daten ein, um kontaktiert zu werden und Ihr Angebot zu erhalten
+        BreadcrumbTitle: Kundenkontaktinformationen
+        BreadcrumbContent: Kundenkontaktinformationen
+        Title: geben sie ihre daten ein, um kontaktiert zu werden oder um die gewünschten informationen/angebote zu erhalten
         BusinessName: Firmenname
         Civility: Anrede
         LastName: Nachname
@@ -95,11 +96,10 @@ Public:
         City: Ort
         Comment: Mitteilung
         SendRequest: Anfrage absenden
-        BreadcrumbContent: Angebot anfordern
 
     Signatory:
-        BreadcrumbTitle:            Definition der Unterzeichner
-        BreadcrumbContent:          Definition der Unterzeichner
+        BreadcrumbTitle: Definition der Unterzeichner
+        BreadcrumbContent: Definition der Unterzeichner
         Title: Definieren Sie die Unterzeichner des Vertrags, um ihn automatisch per E-Mail zu erhalten
         SignatoryFirstName1: Vorname des Unterzeichners 1
         SignatoryLastName1: Nachname des Unterzeichners 1
@@ -116,7 +116,7 @@ Public:
         BreadcrumbTitle: Anfragebestätigung
         Title: Ihre Anfrage wurde erhalten und zur Vertriebsabteilung Ihrer Region weitergeleitet. Er wird sich in den nächsten Stunden bei Ihnen melden.
         Message: Sie sollten eine E-Mail-Bestätigung erhalten; dieser Vorgang kann einige Minuten dauern. Wenn Sie keine Bestätigung erhalten, überprüfen Sie Ihren Spam-Ordner, andernfalls wenden Sie sich bitte an unsere
-        TechnicalService:  technische Abteilung
+        TechnicalService: technische Abteilung
         BreadcrumbContent: Anfragebestätigung
 
 
